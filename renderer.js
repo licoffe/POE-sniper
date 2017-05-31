@@ -6,8 +6,6 @@
 var fs               = require( "fs" );
 var async            = require( "async" );
 var request          = require( "request" );
-var Logger           = require( "./modules/logger.js" );
-var logger           = new Logger();
 var config           = require( "./config.json" );
 var itemTypes        = require( "./itemTypes.json" );
 var dns              = require( "dns" ),
@@ -17,8 +15,6 @@ dnscache = require( "dnscache" )({
     "cachesize" : 1000
 });
 
-logger.set_use_timestamp( true );
-logger.set_file_path( "./log.txt" );
 var mu = require( 'mu2' );
 mu.root = __dirname + '/templates';
 const notifier = require('node-notifier');
