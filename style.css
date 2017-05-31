@@ -1,0 +1,308 @@
+body {
+    font-size: 0.9em !important;
+    color: white;
+}
+
+label, input {
+    font-size: 1.3em !important;
+    color: white;
+}
+
+form {
+    font-size: 0.7em;
+}
+
+.btn {
+    top: 8px!important;
+    font-size: 0.9em!important;
+    text-transform: none!important;
+}
+
+#snipe {
+    position: relative;
+    left: -40px;
+}
+
+.material-icons {
+    position: relative;
+    top: 8px;
+}
+
+#filters .material-icons {
+    position: relative;
+    top: 0px;
+}
+
+.select-wrapper input.select-dropdown, input {
+    border-bottom: 1px dotted white!important;
+    padding-left: 0!important;
+}
+
+.caret {
+    color: white!important;
+}
+
+.progress {
+    position: absolute!important;
+    top: 240px;
+}
+
+span.title {
+    font-size: 1.3em!important;
+    font-weight: 300!important;
+}
+
+li.collection-item {
+    border: none!important;
+    background-color: rgba( 0, 0, 0, 0 )!important;
+    transition: background-color 0.2s linear;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+li.collection-item:hover {
+    background-color: rgba( 0, 200, 200, 0.1 )!important;
+    transition: background-color 0.2s linear;
+}
+
+.currency {
+    font-weight: bold;
+    color: rgba(220, 187, 127, 1);
+}
+
+.item {
+    font-weight: bold;
+    /*color: orange;*/
+}
+
+.timestamp {
+    color: grey;
+}
+
+.account {
+    color: rgba( 0, 200, 200, 1 );
+}
+
+li.collection-item {
+    line-height: 0.5rem!important;
+}
+
+#current-change-id {
+    position: relative;
+    left: 10px;
+}
+
+.implicit, .explicit {
+    color: rgb(132, 183, 255);;
+}
+
+.implicit {
+    border-bottom: 1px dotted grey;
+}
+
+.crafted {
+    color: rgba(181, 229, 250, 1);
+}
+
+.enchant {
+    color: rgba(180, 180, 255, 1);
+}
+
+.corrupted {
+    color: rgba(210, 0, 0, 1);
+    font-weight: bold;
+}
+
+div.title {
+    font-size: 1.3em;
+    padding-bottom: 10px;
+}
+
+.details {
+    border-top: 1px dotted grey;
+    font-size: 1.3em;
+    padding-top: 10px;
+}
+
+ul .row {
+    margin-bottom: 0!important;
+}
+
+.autocomplete-content {
+    position: absolute!important;
+    top: 40px;
+    width: 95%!important;
+}
+
+.dropdown-content li > a, .dropdown-content li > span {
+    font-size: 1.3em!important;
+    background: black!important;
+    color: white!important;
+}
+
+.dropdown-content li > a, .dropdown-content li > span:hover {
+    font-size: 1.3em;
+    background: rgba( 50, 50, 50, 1 )!important;
+    color: white;
+}
+
+.dropdown-content li.selected > a, .dropdown-content li.selected > span, .dropdown-content li.active > span {
+    font-size: 1.3em;
+    background: rgba( 100, 100, 100, 1 );
+    color: white;
+}
+
+.select-wrapper input.select-dropdown, input {
+    border-bottom: 1px dotted white!important;
+    padding-left: 0!important;
+}
+
+span.highlight {
+    color: rgb(38, 166, 154) !important;
+}
+
+img.right.circle {
+    width: auto !important;
+}
+
+.property-title {
+    color: grey;
+    font-weight: bold;
+}
+
+.property-value {
+    color: grey;
+}
+
+#affixes-list {
+    position: absolute;
+    top: 100px;
+    font-size: 1.3em;
+    overflow-y: scroll;
+    max-height: 110px;
+}
+
+.affix-value {
+    color: orange
+}
+
+.affix-item {
+    cursor: pointer;
+}
+
+.filter-corrupted {
+    padding-right: 10px;
+    color: rgba(210, 0, 0, 1);
+    font-weight: bold;
+}
+
+.filter-enchanted {
+    padding-right: 10px;
+    color: rgba(180, 180, 255, 1);
+    font-weight: bold;
+}
+
+.filter-crafted {
+    padding-right: 10px;
+    color: rgba(181, 229, 250, 1);
+    font-weight: bold;
+}
+
+.filter-links {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.filter-sockets {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.filter-property {
+    padding-right: 10px;
+    color: grey;
+}
+
+.filter-affix {
+    padding-right: 10px;
+    color: rgba(135, 135, 254, 1);
+}
+
+input {
+    height: 1.5rem!important;
+}
+
+.magic {
+    color: rgba(135, 135, 254, 1);
+}
+
+.rare {
+    color: rgba(243, 243, 113, 1);
+}
+
+.unique {
+    color: rgba(175, 96, 37, 1);
+}
+
+.gem {
+    color: rgba(0, 255, 0, 1);
+}
+
+.divination {
+    color: rgba(0, 200, 200, 1);
+}
+
+.prophecy {
+    color: rgba(181, 75, 255, 1);
+}
+
+.currency {
+    color: rgba(170, 158, 130, 1);
+}
+
+.legacy {
+    color: rgba(72, 144, 68, 1);
+}
+
+.item-stats {
+    color: rgba(0, 200, 200, 1);
+}
+
+[type="checkbox"].filled-in:checked+label:after {
+    border: 2px solid rgba(96, 125, 139, 1)!important;
+    background-color: rgba(96, 125, 139, 1)!important;
+}
+
+input:not(.select-dropdown) {
+    color: rgba(34, 255, 147, 1)!important;
+}
+
+input:active {
+    color: white;
+}
+
+#cancel-filter {
+    opacity: 100;
+}
+
+#preference-pane {
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.preference-title {
+    font-size: 1.3em;
+}
+
+.item-stats span {
+    padding-right: 10px;
+}
+
+#poe-trade-output {
+    display: none;
+}

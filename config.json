@@ -1,0 +1,5 @@
+{
+    "sound": "sound2.mp3",
+    "volume": 0.5,
+    "message": "@<account> Hi <account>, I would like to buy your '<item>' in <league> for <price> in stash '<stash>'. Is it still available? :)"
+}
