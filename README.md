@@ -24,6 +24,7 @@ Here is the set of features currently supported:
     - Price
 - Notification support (both visual and sound)
 - Contact sellers by clicking on an item entry or toggle automatic copy to the clipboard.
+- Item price recommendation based on poe.trade
 
 ### Technologies
 The app is written in [Node.js](https://nodejs.org/en/) and packaged as a native application using the [Electron](https://electron.atom.io/) framework.
