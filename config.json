@@ -12,5 +12,6 @@
     "leagues": [
         "Standard", "Hardcore", "Legacy", "Hardcore Legacy"
     ],
-    "defaultLeagueIndex": 2
+    "defaultLeagueIndex": 2,
+    "showStatusBar": false
 }

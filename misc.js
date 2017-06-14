@@ -40,6 +40,12 @@ class Misc {
         str     = str.replace( "<price>",    data.originalPrice );
         cb( str );
     }
+
+    static publishStatusMessage( message ) {
+        $( "#status-message" ).removeClass( "fadedText" );
+        $( "#status-message" ).html( "<b>Status:</b> " + message );
+        $( "#status-message" ).addClass( "fadedText" );
+    }
 }
 
 module.exports = Misc;

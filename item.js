@@ -153,7 +153,8 @@ class Item {
      */
     static parseProperties( item, callback ) {
         var itemProperties = {};
-        async.each( item.properties, function( property, cbProperty ) {
+        var newItem = item;
+        async.each( newItem.properties, function( property, cbProperty ) {
             if ( property.values.length === 0 ) {
                 itemProperties[property.name] = null;
             } else if ( property.values.length === 1 ) {
@@ -166,7 +167,33 @@ class Item {
             if ( err ) {
                 console.log( err );
             }
-            callback( itemProperties );
+            async.each( newItem.additionalProperties, function( addProperty, cbAddProperty ) {
+                if ( addProperty.name === "Experience" ) {
+                    itemProperties[addProperty.name] = addProperty.progress;
+                    newItem.properties.push({
+                        name: "Experience",
+                        values: [[addProperty.progress]]
+                    });
+                } else {
+                    if ( addProperty.values.length === 0 ) {
+                        itemProperties[addProperty.name] = null;
+                    } else if ( addProperty.values.length === 1 ) {
+                        itemProperties[addProperty.name] = addProperty.values[0][0];
+                    } else if ( addProperty.values.length === 2 ) {
+                        itemProperties[addProperty.name] = [ addProperty.values[0][0], addProperty.values[1][0]];
+                    }
+                    newItem.properties.push({
+                        name: addProperty.name,
+                        values: [[itemProperties[addProperty.name]]]
+                    });
+                }
+                cbAddProperty();
+            }, function( err ) {
+                if ( err ) {
+                    console.log( err );
+                }
+                callback( newItem, itemProperties );
+            });
         });
     }
 

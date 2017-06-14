@@ -8,6 +8,7 @@
 
 var async   = require( "async" );
 var config  = require( "./config.json" );
+var Misc    = require( "./misc.js" );
 var leagues = config.leagues;
 var currencyLookupTable = {
     "Exalted Orb":           "exa",
@@ -39,7 +40,8 @@ class Currency {
      * @return return rates through callback
      */
     static getLastRates( callback ) {
-        console.log( "Downloading last rates" );
+        console.log( "Downloading last rates from poe-rates.com" );
+        Misc.publishStatusMessage( "Downloading last rates from poe-rates.com" );
         var shortRates = {};
         // For each league
         async.each( leagues, function( league, cbLeague ) {

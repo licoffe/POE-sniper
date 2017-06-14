@@ -44,6 +44,7 @@ $( document).ready( function() {
 
     // Interface - actions binding
     // ------------------------------------------------------------------------
+    // Cancel editing when 'Cancel filter' is clicked
     $( "#cancel-filter" ).click( function() {
         cancelEditAction();
     });
@@ -51,6 +52,11 @@ $( document).ready( function() {
     // When clicking on 'Add filter', add filter
     $( "#add-filter" ).click( function() {
         addFilterAction();
+    });
+
+    // When typing in the item filter input
+    $( "#item-filter" ).keyup( function() {
+        filterResultListAction();
     });
 
     // Actions
@@ -63,6 +69,20 @@ $( document).ready( function() {
             scrollTop: 0
         }, config.SCROLL_BACK_TOP_SPEED );
         return false;
+    };
+
+    var filterResultListAction = function() {
+        var text = $( "#item-filter" ).val();
+        $( ".results .collection-item" ).each( function() {
+            if ( text === "" ) {
+                $( this ).show();
+            } else {
+                var itemName = $( this ).find( ".item" ).text();
+                if ( itemName.indexOf( text ) === -1 ) {
+                    $( this ).hide();
+                }
+            }
+        });
     };
 
     // When clicking on 'Cancel editing'
@@ -508,6 +528,7 @@ $( document).ready( function() {
 
     var poeTradeStats = function( filters ) {
         console.log( "Refreshing stats" );
+        Misc.publishStatusMessage( "Fetching item stats from poe.trade" );
         async.each( filters.filterList, function( filter, cbFilter ) {
             var str = "";
             $.post( "http://poe.trade/search", { name: filter.item, league: filter.league, online: "x", has_buyout: "1" }, function( data ) {
@@ -678,13 +699,13 @@ $( document).ready( function() {
                         filter.check( item, stash.stash, stash.lastCharacterName, currencyRates, function( item ) {
                             if ( item ) {
                                 // If item has not already been added
-                                var foundIndex = resultsId.indexOf( item.id );
+                                var foundIndex = resultsId.indexOf( item.itemId );
                                 if ( foundIndex !== -1 ) {
-                                    $( "li#" + entryLookup[item.id]).css( "opacity", "0.3" );
+                                    $( "li#" + entryLookup[item.itemId]).css( "opacity", "0.3" );
                                 }
-                                entryLookup[item.id] = item.id;
+                                entryLookup[item.itemId] = item.id;
                                 results.push( item );
-                                resultsId.push( item.id );
+                                resultsId.push( item.itemId );
                                 var generated = "";
                                 mu.compileAndRender( "entry.html", item )
                                 .on( "data", function ( data ) {
@@ -797,6 +818,7 @@ $( document).ready( function() {
         Chunk.download( chunkID, parseData );
 
         var done = function( data ) {
+            filterResultListAction();
             var nextID = data.next_change_id;
 
             if ( interrupt ) {
@@ -822,5 +844,10 @@ $( document).ready( function() {
     setInterval( Currency.getLastRates, config.RATES_REFRESH_INTERVAL, function( rates ) {
         currencyRates = rates;
     });
+
+    // If user decided not to show status bar, hide it
+    if ( !config.showStatusBar ) {
+        $( "#status-bar" ).hide();
+    }
 
 });

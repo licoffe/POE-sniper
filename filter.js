@@ -250,6 +250,7 @@ class Filter {
      * @return Formatted item through callback
      */
     formatItem( item, name, prices, characterName, callback ) {
+        // console.log( item );
         var time = this.formatTime();
         var guid = Misc.guidGenerator();
         var implicit   = "";
@@ -281,7 +282,8 @@ class Filter {
         properties += "<span class=\"property\"><span class=\"col s5 property-title\">Item Level</span><span class=\"col s7 property-value\">" + item.ilvl + "</span></span><br>";
 
         async.each( item.properties, function( property, cbProperty ) {
-            if ( property.values.length > 0 &&  property.values[0].length > 0 ) {
+            // console.log( property );
+            if ( property.values.length > 0 && property.values[0].length > 0 ) {
                 properties += "<span class=\"property\"><span class=\"col s5 property-title\">" + property.name + "</span><span class=\"col s7 property-value\">" + property.values[0][0] + "</span></span><br>";
             }
             cbProperty();
@@ -372,8 +374,8 @@ class Filter {
                     // Compare mods
                     self.compareMods( item, parsedMods, function( passed ) {
                         if ( passed ) {
-                            Item.parseProperties( item, function( parsedProperties ) {
-
+                            Item.parseProperties( item, function( newItem, parsedProperties ) {
+                                // console.log( newItem );
                                 // If we have an attack per second property, compute DPS
                                 if ( parsedProperties["Attacks per Second"]) {
                                     var dps = Item.computeDPS( parsedProperties );
@@ -381,10 +383,11 @@ class Filter {
                                 }
 
                                 // Compare properties
-                                self.compareProperties( item, parsedProperties, function( equal ) {
+                                self.compareProperties( newItem, parsedProperties, function( equal ) {
+                                    // console.log( newItem );
                                     if ( equal ) {
-                                        self.formatItem( item, name, prices, characterName, function( item ) {
-                                            callback( item );
+                                        self.formatItem( newItem, name, prices, characterName, function( newItem ) {
+                                            callback( newItem );
                                         });
                                     // Item does not have the required properties
                                     } else {

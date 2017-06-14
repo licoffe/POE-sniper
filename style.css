@@ -1,5 +1,5 @@
 body {
-    font-size: 0.9em !important;
+    font-size: 0.85em !important;
     color: white;
 }
 
@@ -318,3 +318,23 @@ input[type=range] {
     position: relative;
     top: -10px;
 }
+
+#status-bar {
+    position: fixed;
+    bottom: 0;
+    height: 40px;
+    padding-top: 10px;
+    padding-left: 10px;
+    background: black;
+    color: rgba(34, 255, 147, 1);
+    width: 100%;
+    font-size: 0.9em;
+    opacity: 1;
+    transition: 5s opacity;
+}
+
+.fadedText {
+    opacity: 0;
+    transition: 5s opacity;
+}
+
