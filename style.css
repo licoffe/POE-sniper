@@ -293,10 +293,11 @@ input:active {
     left: 10%;
     border-radius: 5px;
     padding: 20px;
+    z-index: 999;
 }
 
 .preference-title {
-    font-size: 1.3em;
+    font-size: 1.4em;
 }
 
 .item-stats span {
@@ -305,4 +306,15 @@ input:active {
 
 #poe-trade-output {
     display: none;
+}
+
+input[type=range] {
+    border: none!important;
+    position: relative;
+    top: -35px;
+}
+
+.volume-label {
+    position: relative;
+    top: -10px;
 }

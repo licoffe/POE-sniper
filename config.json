@@ -1,5 +1,16 @@
 {
     "sound": "sound2.mp3",
     "volume": 0.5,
-    "message": "@<account> Hi <account>, I would like to buy your '<item>' in <league> for <price> in stash '<stash>'. Is it still available? :)"
+    "message": "@<account> Hi <account>, I would like to buy your '<item>' in <league> for <price> in stash '<stash>'. Is it still available? :)",
+    "RATES_REFRESH_INTERVAL":   10000,
+    "POE_TRADE_STATS_INTERVAL": 60000,
+    "CHUNK_RETRY_INTERVAL":     1000,
+    "CHUNK_DOWNLOAD_INTERVAL":  500,
+    "STREAM_TOP_WAIT_INTERVAL": 2000,
+    "SCROLL_BACK_TOP_SPEED":    500,
+    "writeChunkStats":          false,
+    "leagues": [
+        "Standard", "Hardcore", "Legacy", "Hardcore Legacy"
+    ],
+    "defaultLeagueIndex": 2
 }
