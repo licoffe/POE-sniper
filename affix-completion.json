@@ -216,5 +216,6 @@
   "Cast level # Consecrate when you deal a Critical Strike": null,
   "#% increased Rarity of Items Dropped by Enemies killed with a Critical Strike": null,
   "#% increased Damage while on Consecrated Ground": null,
-  "#% additional Block Chance while on Consecrated Ground": null
+  "#% additional Block Chance while on Consecrated Ground": null,
+  "+# to maximum Life (Pseudo mod)": null
 }
