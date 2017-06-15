@@ -127,10 +127,10 @@ class Filter {
     /**
      * Update item entry with dps values
      *
-     * @params Item, DPS
-     * @return Item with DPS values
+     * @params Item, DPS, callback
+     * @return Item with DPS values through callback
      */
-    insertDPSValues( item, dps ) {
+    insertDPSValues( item, dps, callback ) {
         if ( dps.pDPS ) {
             item.properties.push({
                 name: "pDPS",
@@ -149,7 +149,7 @@ class Filter {
                 values: [[dps.DPS]]
             });
         }
-        return item;
+        callback( item );
     }
 
     /**
@@ -208,7 +208,7 @@ class Filter {
         if (( this.evasion === "" || parseInt( this.evasion ) <= parseInt( parsedProperties["Evasion Rating"])) &&
             ( this.es      === "" || parseInt( this.es )      <= parseInt( parsedProperties["Energy Shield"])) && 
             ( this.armor   === "" || parseInt( this.armor )   <= parseInt( parsedProperties.Armour )) &&
-            ( this.dps === "" || parseFloat( this.dps ) <= dps ) &&
+            ( this.dps === "" || parseFloat( this.dps ) <= parseFloat( parsedProperties.DPS )) &&
             ( this.quality   === "" || parsedProperties.Quality !== undefined &&
             parseInt( this.quality ) <= parseInt( parsedProperties.Quality.replace( /[\+\%]/g, "" ))) &&
             ( this.tier   === "" || ( parsedProperties["Map Tier"] !== undefined && (
@@ -379,21 +379,35 @@ class Filter {
                                 // If we have an attack per second property, compute DPS
                                 if ( parsedProperties["Attacks per Second"]) {
                                     var dps = Item.computeDPS( parsedProperties );
-                                    // self.insertDPSValues( item, dps );
-                                }
-
-                                // Compare properties
-                                self.compareProperties( newItem, parsedProperties, function( equal ) {
-                                    // console.log( newItem );
-                                    if ( equal ) {
-                                        self.formatItem( newItem, name, prices, characterName, function( newItem ) {
-                                            callback( newItem );
+                                    parsedProperties.DPS = dps.DPS;
+                                    self.insertDPSValues( item, dps, function( item ) {
+                                        // Compare properties
+                                        self.compareProperties( item, parsedProperties, function( equal ) {
+                                            // console.log( newItem );
+                                            if ( equal ) {
+                                                self.formatItem( item, name, prices, characterName, function( newItem ) {
+                                                    callback( newItem );
+                                                });
+                                            // Item does not have the required properties
+                                            } else {
+                                                callback( false );
+                                            }
                                         });
-                                    // Item does not have the required properties
-                                    } else {
-                                        callback( false );
-                                    }
-                                });
+                                    });
+                                } else {
+                                    // Compare properties
+                                    self.compareProperties( item, parsedProperties, function( equal ) {
+                                        // console.log( newItem );
+                                        if ( equal ) {
+                                            self.formatItem( item, name, prices, characterName, function( newItem ) {
+                                                callback( newItem );
+                                            });
+                                        // Item does not have the required properties
+                                        } else {
+                                            callback( false );
+                                        }
+                                    });
+                                }
                             });
                         // Item does not have the required mods
                         } else {

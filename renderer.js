@@ -72,13 +72,13 @@ $( document).ready( function() {
     };
 
     var filterResultListAction = function() {
-        var text = $( "#item-filter" ).val();
+        var text = $( "#item-filter" ).val().toLowerCase();
         $( ".results .collection-item" ).each( function() {
             if ( text === "" ) {
                 $( this ).show();
             } else {
                 var itemName = $( this ).find( ".item" ).text();
-                if ( itemName.indexOf( text ) === -1 ) {
+                if ( itemName.toLowerCase().indexOf( text ) === -1 ) {
                     $( this ).hide();
                 }
             }
@@ -762,25 +762,29 @@ $( document).ready( function() {
                                     if ( displayPrice === "Negociate price" ) {
                                         displayPrice = "barter";
                                     }
-                                    notifier.notify({
-                                        title: "Sniped " + item.name,
-                                        message: item.name + " for " + displayPrice
-                                    }, function ( err ) {
-                                        if ( err ) {
-                                            console.log( err );
-                                        }
-                                        // Response is response from notification
-                                        var audio = new Audio( __dirname + '/' + config.sound );
-                                        audio.volume = config.volume;
-                                        audio.play();
-                                    });
-                                    // If copy to clipboard enabled, do it
-                                    if ( filter.clipboard ) {
-                                        Misc.formatMessage( item, function( str ) {
-                                            console.log( item );
-                                            ncp.copy( str, function() {
-                                            });
+                                    // Only notify if the item is new in the list
+                                    if ( foundIndex === -1 ) {
+                                        notifier.notify({
+                                            title: "Sniped " + item.name,
+                                            message: item.name + " for " + displayPrice
+                                        }, function ( err ) {
+                                            if ( err ) {
+                                                console.log( err );
+                                            }
+                                            // Response is response from notification
+                                            var audio = new Audio( __dirname + '/' + config.sound );
+                                            audio.volume = config.volume;
+                                            audio.play();
                                         });
+                                        
+                                        // If copy to clipboard enabled, do it
+                                        if ( filter.clipboard ) {
+                                            Misc.formatMessage( item, function( str ) {
+                                                console.log( item );
+                                                ncp.copy( str, function() {
+                                                });
+                                            });
+                                        }
                                     }
                                 });
                                 callbackItem();
