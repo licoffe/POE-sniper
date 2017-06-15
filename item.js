@@ -172,7 +172,7 @@ class Item {
                     itemProperties[addProperty.name] = addProperty.progress;
                     newItem.properties.push({
                         name: "Experience",
-                        values: [[addProperty.progress]]
+                        values: [[Math.round( addProperty.progress * 10000 ) / 100]]
                     });
                 } else {
                     if ( addProperty.values.length === 0 ) {

@@ -380,7 +380,7 @@ class Filter {
                                 if ( parsedProperties["Attacks per Second"]) {
                                     var dps = Item.computeDPS( parsedProperties );
                                     parsedProperties.DPS = dps.DPS;
-                                    self.insertDPSValues( item, dps, function( item ) {
+                                    self.insertDPSValues( newItem, dps, function( item ) {
                                         // Compare properties
                                         self.compareProperties( item, parsedProperties, function( equal ) {
                                             // console.log( newItem );
@@ -396,10 +396,10 @@ class Filter {
                                     });
                                 } else {
                                     // Compare properties
-                                    self.compareProperties( item, parsedProperties, function( equal ) {
+                                    self.compareProperties( newItem, parsedProperties, function( equal ) {
                                         // console.log( newItem );
                                         if ( equal ) {
-                                            self.formatItem( item, name, prices, characterName, function( newItem ) {
+                                            self.formatItem( newItem, name, prices, characterName, function( newItem ) {
                                                 callback( newItem );
                                             });
                                         // Item does not have the required properties
