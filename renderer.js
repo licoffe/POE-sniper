@@ -106,6 +106,7 @@ $( document).ready( function() {
         $( "#identified").material_select();
         $( "#level" ).val( "" );
         $( "#tier" ).val( "" );
+        $( "#experience" ).val( "" );
         $( "#quality" ).val( "" );
         $( "#rarity" ).val( "any" );
         $( "#rarity").material_select();
@@ -196,6 +197,9 @@ $( document).ready( function() {
             }
             if ( formData.tier !== "" ) {
                 title += "<span class=\"filter-property\">Tier>=" + formData.tier + "</span>";
+            }
+            if ( formData.experience !== "" ) {
+                title += "<span class=\"filter-property\">Experience>=" + formData.experience + "%</span>";
             }
             if ( formData.affixesDis.length > 0 ) {
                 title += "<span class=\"filter-affix\">" + formData.affixesDis.join( ", " ) + "</span>";
@@ -295,6 +299,7 @@ $( document).ready( function() {
         data.identified = $( "#identified" ).val();
         data.level      = $( "#level" ).val();
         data.tier       = $( "#tier" ).val();
+        data.experience = $( "#experience" ).val();
         data.quality    = $( "#quality" ).val();
         data.rarity     = $( "#rarity" ).val();
         data.armor      = $( "#armor" ).val();
@@ -468,6 +473,7 @@ $( document).ready( function() {
                     $( "#identified").material_select();
                     $( "#level" ).val( filter.level );
                     $( "#tier" ).val( filter.tier );
+                    $( "#experience" ).val( filter.experience );
                     $( "#quality" ).val( filter.quality );
                     $( "#rarity" ).val( filter.rarity );
                     $( "#rarity").material_select();
@@ -776,7 +782,7 @@ $( document).ready( function() {
                                             audio.volume = config.volume;
                                             audio.play();
                                         });
-                                        
+
                                         // If copy to clipboard enabled, do it
                                         if ( filter.clipboard ) {
                                             Misc.formatMessage( item, function( str ) {

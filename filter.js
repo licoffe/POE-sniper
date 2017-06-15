@@ -33,6 +33,7 @@ class Filter {
         this.identified = obj.identified,
         this.level      = obj.level,
         this.tier       = obj.tier,
+        this.experience = obj.experience,
         this.quality    = obj.quality,
         this.rarity     = obj.rarity,
         this.armor      = obj.armor,   
@@ -214,6 +215,7 @@ class Filter {
             ( this.tier   === "" || ( parsedProperties["Map Tier"] !== undefined && (
             parseInt( this.tier ) === parseInt( parsedProperties["Map Tier"]) || 
             parseInt( this.tier ) === item.talismanTier ))) &&
+            ( this.experience === "" || parseFloat( this.experience ) <= parseFloat( parsedProperties.Experience )) &&
             ( item.frameType !== 4 || this.level  === "" || (
                 item.frameType === 4 && parsedProperties.Level !== undefined &&
                 parseInt( this.level ) <= parseInt( parsedProperties.Level )))) {

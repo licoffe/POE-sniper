@@ -169,7 +169,7 @@ class Item {
             }
             async.each( newItem.additionalProperties, function( addProperty, cbAddProperty ) {
                 if ( addProperty.name === "Experience" ) {
-                    itemProperties[addProperty.name] = addProperty.progress;
+                    itemProperties[addProperty.name] = Math.round( addProperty.progress * 10000 ) / 100;
                     newItem.properties.push({
                         name: "Experience",
                         values: [[Math.round( addProperty.progress * 10000 ) / 100]]
