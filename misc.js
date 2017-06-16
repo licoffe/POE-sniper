@@ -39,6 +39,9 @@ class Misc {
         str     = str.replace( "<league>",   data.league );
         str     = str.replace( "<stash>",    data.stashName );
         str     = str.replace( "<price>",    data.originalPrice );
+        str     = str.replace( "<stashTab>", data.stashTab );
+        str     = str.replace( "<left>",     data.left );
+        str     = str.replace( "<top>",      data.top );
         cb( str );
     }
 

@@ -119,7 +119,7 @@ $( document).ready( function() {
 
     // When clicking on 'Cancel editing'
     var cancelEditAction = function() {
-        $( "#league" ).val( config.leagues[config.defaultLeague]);
+        $( "#league" ).val( config.leagues[config.defaultLeagueIndex]);
         $( "#league").material_select();
         $( "#item" ).val( "" );
         $( "#price" ).val( "" );
@@ -161,16 +161,16 @@ $( document).ready( function() {
 
     // When adding a new filter
     var addFilterAction = function() {
-        console.log( "Adding filter" );
+        // console.log( "Adding filter" );
         fetchFormData( function( formData ) {
-            console.log( formData );
+            // console.log( formData );
             // var re         = /([0-9.]+)/g;
             $( ".affix-item" ).each( function() {
                 data = $( this ).data( "data-item" );
                 formData.affixes[data.title] = [data.min, data.max];
                 var count = ( data.title.match( /#/g ) || []).length;
-                console.log( data.title );
-                console.log( count );
+                // console.log( data.title );
+                // console.log( count );
                 var affix = "";
                 if ( count > 1 ) {
                     affix = data.title.replace( "#", data.min );
@@ -242,9 +242,9 @@ $( document).ready( function() {
 
             formData.title = title;
             var filter = new Filter( formData );
-            console.log( filter );
+            // console.log( filter );
             if ( $( "#add-filter" ).text() === "Add filter" ) {
-                console.log( filters );
+                // console.log( filters );
                 filters.add( filter );
                 filters.save();
                 filter.render( function( generated ) {
@@ -318,7 +318,7 @@ $( document).ready( function() {
      * @return return collected data through callback
      */
     var fetchFormData = function( callback ) {
-        var data = {};
+        var data        = {};
         data.league     = $( "#league" ).val();
         data.item       = $( "#item" ).val();
         data.budget     = $( "#price" ).val();
@@ -396,7 +396,7 @@ $( document).ready( function() {
                     console.log( err );
                 }
                 filters = new Filters( newFilters );
-                console.log( filters );
+                // console.log( filters );
                 updateFilterAmount( id );
                 filters.save();
             });
@@ -454,7 +454,7 @@ $( document).ready( function() {
         }
         // Color item name depending on rarity
         colorRarity( filter );
-        console.log( filter.buyout );
+        // console.log( filter.buyout );
         if ( filter.buyout ) {
             $( "#" + filter.id ).parent().parent().find( ".buyout" ).hide();
         }
@@ -565,7 +565,7 @@ $( document).ready( function() {
     };
 
     var poeTradeStats = function( filters ) {
-        console.log( "Refreshing stats" );
+        console.log( "Refreshing poe.trade stats" );
         Misc.publishStatusMessage( "Fetching item stats from poe.trade" );
         async.each( filters.filterList, function( filter, cbFilter ) {
             var str = "";
