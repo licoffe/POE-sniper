@@ -81,7 +81,8 @@ class Misc {
                         callback({
                             version:   data.tag_name,
                             date:      data.published_at,
-                            changelog: data.body
+                            changelog: data.body,
+                            author:    data.author.login
                         });
                     } else {
                         console.log( "You have the last update" );

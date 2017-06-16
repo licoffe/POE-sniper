@@ -887,7 +887,7 @@ $( document).ready( function() {
             $( ".filter-results" ).addClass( "blurred" );
             // Set update information
             $( ".update-title" ).html( "POE-Sniper - v" + data.version );
-            $( ".update-date" ).html( new Date( data.date ).toLocaleString() + " by <b>Licoffe</b>"  );
+            $( ".update-date" ).html( new Date( data.date ).toLocaleString() + " by <b>" + data.author + "</b>"  );
             $( ".update-body" ).html( marked( data.changelog ));
             $( ".new-update" ).fadeIn( "fast" );
 
