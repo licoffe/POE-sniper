@@ -437,3 +437,22 @@ input[type=range] {
 .new-update {
     display: none;
 }
+
+#fold-filters {
+    position: relative;
+    left: 10px;
+    font-weight: bold;
+    color: #607d8b;
+    cursor: pointer;
+    transition: transform 0.2s linear;
+    /*transform: rotate(0deg);*/
+}
+
+.folded {
+    transition: transform 0.2s linear;
+    transform: rotate(-90deg);
+}
+
+::selection {
+  background: rgba(0,0,0,0); /* WebKit/Blink Browsers */
+}

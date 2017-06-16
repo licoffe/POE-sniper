@@ -61,8 +61,23 @@ $( document).ready( function() {
         filterResultListAction();
     });
 
+    // Fold/unfold filter list when clicking on the arrow
+    $( "#fold-filters" ).click( function() {
+        foldFilters();
+    });
+
     // Actions
     // ------------------------------------------------------------------------
+
+    // Fold/unfold filter list action
+    var foldFilters = function() {
+        $( "#fold-filters" ).toggleClass( "folded" );
+        if ( $( "#fold-filters" ).hasClass( "folded" )) {
+            $( "#filters" ).slideUp();
+        } else {
+            $( "#filters" ).slideDown();
+        }
+    };
 
     // View setup when dismissing a new update
     var dismissUpdate = function() {
@@ -719,7 +734,10 @@ $( document).ready( function() {
                 async.each( data.stashes, function( stash, callbackStash ) {
                     totalItems += stash.items.length;
                     async.each( stash.items, function( item, callbackItem ) {
-                        filter.check( item, stash.stash, stash.lastCharacterName, currencyRates, function( item ) {
+                        item.stashTab          = stash.stash;
+                        item.lastCharacterName = stash.lastCharacterName;
+                        item.accountName       = stash.accountName;
+                        filter.check( item, currencyRates, function( item ) {
                             if ( item ) {
                                 // If item has not already been added
                                 var foundIndex = resultsId.indexOf( item.itemId );

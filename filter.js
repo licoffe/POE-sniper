@@ -68,10 +68,10 @@ class Filter {
     /**
      * Compute item price
      *
-     * @params Item, stashName, currencyRates
+     * @params Item, currencyRates
      * @return Price
      */
-    computePrice( item, stashName, currencyRates ) {
+    computePrice( item, currencyRates ) {
         // Default currency is chaos
         var currency = "chaos";
         var originalPrice = "";
@@ -79,7 +79,7 @@ class Filter {
         var convertedPriceChaos;
 
         // The price is the name of the stash
-        var price = stashName;
+        var price = item.stashTab;
         // If item has a note, the price is the note instead
         if ( item.note ) {
             price = item.note;
@@ -248,10 +248,10 @@ class Filter {
     /**
      * Format item to display in the results
      *
-     * @params Item, item name, prices, char name and callback
+     * @params Item, item name, prices and callback
      * @return Formatted item through callback
      */
-    formatItem( item, name, prices, characterName, callback ) {
+    formatItem( item, name, prices, callback ) {
         // console.log( item );
         var time = this.formatTime();
         var guid = Misc.guidGenerator();
@@ -304,7 +304,7 @@ class Filter {
             }
             callback({
                 time:          time,
-                account:       characterName,
+                account:       item.lastCharacterName,
                 item:          name,
                 frameType:     item.frameType,
                 price:         prices.convertedPrice,
@@ -319,7 +319,10 @@ class Filter {
                 enchant:       enchant,
                 properties:    properties,
                 links:         item.linkAmount,
-                league:        item.league
+                league:        item.league,
+                stashTab:      item.stashTab,
+                left:          item.x,
+                top:           item.y
             });
         });
     }
@@ -327,10 +330,10 @@ class Filter {
     /**
      * Check if item match the filter
      *
-     * @params Item to check against, currency rates, character name, callback
+     * @params Item to check against, currency rates, callback
      * @return Boolean through callback
      */
-    check( item, stashName, characterName, currencyRates, callback ) {
+    check( item, currencyRates, callback ) {
         var self = this;
         // Clean up the item name and typeLine
         var itemName = item.name.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
@@ -364,7 +367,7 @@ class Filter {
             ( this.itemType === "any" || itemTypes[this.itemType].types.indexOf( item.typeLine ) !== -1 )
             ) {
 
-            var prices = this.computePrice( item, stashName, currencyRates );
+            var prices = this.computePrice( item, currencyRates );
             
             // Convert filter price to chaos and check if the item is within budget
             if (( prices.convertedPrice && 
@@ -387,7 +390,7 @@ class Filter {
                                         self.compareProperties( item, parsedProperties, function( equal ) {
                                             // console.log( newItem );
                                             if ( equal ) {
-                                                self.formatItem( item, name, prices, characterName, function( newItem ) {
+                                                self.formatItem( item, name, prices, function( newItem ) {
                                                     callback( newItem );
                                                 });
                                             // Item does not have the required properties
@@ -401,7 +404,7 @@ class Filter {
                                     self.compareProperties( newItem, parsedProperties, function( equal ) {
                                         // console.log( newItem );
                                         if ( equal ) {
-                                            self.formatItem( newItem, name, prices, characterName, function( newItem ) {
+                                            self.formatItem( newItem, name, prices, function( newItem ) {
                                                 callback( newItem );
                                             });
                                         // Item does not have the required properties
