@@ -369,6 +369,8 @@ $( document).ready( function() {
             $( "#" + filter.id ).parent().parent().find( ".item" ).addClass( "prophecy" );
         } else if ( filter.rarity === "9" ) {
             $( "#" + filter.id ).parent().parent().find( ".item" ).addClass( "legacy" );
+        } else if ( filter.rarity === "not-unique" ) {
+            $( "#" + filter.id ).parent().parent().find( ".item" ).addClass( "not-unique" );
         }
     };
 

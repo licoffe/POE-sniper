@@ -266,6 +266,12 @@ input {
     color: rgba(72, 144, 68, 1);
 }
 
+.not-unique {
+    background: -webkit-linear-gradient(#eee, #828282);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .item-stats {
     color: rgba(0, 200, 200, 1);
 }

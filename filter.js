@@ -363,7 +363,7 @@ class Filter {
             (( this.crafted    == 'true' ) === item.crafted    || this.crafted    === "any" ) &&
             (( this.identified == 'true' ) === item.identified || this.identified === "any" ) &&
             ( this.level === "" || item.frameType === 4 || ( item.frameType !== 4 && this.level <= item.ilvl )) && 
-            ( this.rarity === "any" || this.rarity == item.frameType ) &&
+            ( this.rarity === "any" || this.rarity == item.frameType || ( this.rarity === "not-unique" && item.frameType !== 3 )) &&
             ( this.itemType === "any" || itemTypes[this.itemType].types.indexOf( item.typeLine ) !== -1 )
             ) {
 
