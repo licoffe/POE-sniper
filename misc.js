@@ -6,7 +6,8 @@
  * @return Misc object
  */
 
-var config = require( "./config.json" );
+var request = require( "request" );
+var config  = require( "./config.json" );
 
 class Misc {
 
@@ -41,10 +42,57 @@ class Misc {
         cb( str );
     }
 
+    /**
+     * Send messages to the status bar
+     *
+     * @params Message to display
+     * @return Nothing
+     */
     static publishStatusMessage( message ) {
         $( "#status-message" ).removeClass( "fadedText" );
         $( "#status-message" ).html( "<b>Status:</b> " + message );
         $( "#status-message" ).addClass( "fadedText" );
+    }
+
+    /**
+     * Check if a new release is available using the GitHub API
+     *
+     * @params callback
+     * @return False or last release data through callback
+     */
+    static checkUpdate( callback ) {
+        var packageInfo    = require( "./package.json" );
+        var currentVersion = packageInfo.version;
+        // Fetch last release information using GitHub API
+        request({ 
+                "url": "https://api.github.com/repos/licoffe/POE-sniper/releases/latest", 
+                "gzip": true, 
+                "headers": { "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36" }
+            },
+            function( error, response, body ) {
+                // If there is an error, retry dowloading after delay
+                if ( error ) {
+                    console.log( "Error occured, retrying: " + error );
+                }
+                try {
+                    var data = JSON.parse( body, 'utf8' );
+                    if ( data.tag_name && currentVersion !== data.tag_name ) {
+                        console.log( "New update available" );
+                        callback({
+                            version:   data.tag_name,
+                            date:      data.published_at,
+                            changelog: data.body
+                        });
+                    } else {
+                        console.log( "You have the last update" );
+                        callback( false );
+                    }
+                } catch ( err ) {
+                    console.log( err );
+                    callback( false );
+                }
+            }
+        );
     }
 }
 

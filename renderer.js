@@ -5,6 +5,8 @@
 // Requirements
 var fs               = require( "fs" );
 var async            = require( "async" );
+var marked           = require( "marked" );
+var open             = require( "open" );
 var config           = require( "./config.json" );
 var itemTypes        = require( "./itemTypes.json" );
 var Item             = require( "./item.js" );
@@ -61,6 +63,21 @@ $( document).ready( function() {
 
     // Actions
     // ------------------------------------------------------------------------
+
+    // View setup when dismissing a new update
+    var dismissUpdate = function() {
+        // Unblur everything
+        $( ".filter-form" ).removeClass( "blurred" );
+        $( ".filter-interaction" ).removeClass( "blurred" );
+        $( ".filter-list" ).removeClass( "blurred" );
+        $( ".filter-results" ).removeClass( "blurred" );
+        $( ".new-update" ).fadeOut( "fast" );
+    };
+
+    // Action when the download button is pressed
+    var downloadUpdate = function( version ) {
+        open( "https://github.com/licoffe/POE-sniper/releases/" + version );
+    };
 
     // Animate scroll to the top of the page
     var scrollToTopAction = function() {
@@ -859,5 +876,30 @@ $( document).ready( function() {
     if ( !config.showStatusBar ) {
         $( "#status-bar" ).hide();
     }
+
+    Misc.checkUpdate( function( data ) {
+        // If there is an update
+        if ( data ) {
+            // Blur everything
+            $( ".filter-form" ).addClass( "blurred" );
+            $( ".filter-interaction" ).addClass( "blurred" );
+            $( ".filter-list" ).addClass( "blurred" );
+            $( ".filter-results" ).addClass( "blurred" );
+            // Set update information
+            $( ".update-title" ).html( "POE-Sniper - v" + data.version );
+            $( ".update-date" ).html( new Date( data.date ).toLocaleString() + " by <b>Licoffe</b>"  );
+            $( ".update-body" ).html( marked( data.changelog ));
+            $( ".new-update" ).fadeIn( "fast" );
+
+            $( "#download-update" ).click( function() {
+                downloadUpdate( data.version );
+            });
+
+            $( "#dismiss-update" ).click( function() {
+                console.log( "test" );
+                dismissUpdate();
+            });
+        }
+    });
 
 });

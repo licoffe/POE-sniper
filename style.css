@@ -401,3 +401,39 @@ input[type=range] {
     left: 61px;
     top: 145px;
 }
+
+.blurred {
+    transform: translateZ(0);
+    transition: 0.5s filter linear;
+    filter: blur(5px);
+}
+
+.new-update {
+    position: fixed;
+    left: 40%;
+    top: 30%;
+    filter: blur(0px);
+    z-index: 999;
+}
+
+.update-title {
+    font-size: 2em;
+    color: rgba(34, 255, 147, 1);
+    border-bottom: 1px dotted white;
+}
+
+.update-date {
+    padding-top: 10px;
+}
+
+.update-body h3 {
+    font-size: 1.5em;
+}
+
+.update-body ul:not(.browser-default) li {
+    list-style: square inside!important;
+}
+
+.new-update {
+    display: none;
+}
