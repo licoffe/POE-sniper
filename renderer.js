@@ -819,9 +819,8 @@ $( document).ready( function() {
                                         });
 
                                         // If copy to clipboard enabled, do it
-                                        if ( filter.clipboard ) {
+                                        if ( filter.clipboard || $( "#global-clipboard" ).prop( "checked" )) {
                                             Misc.formatMessage( item, function( str ) {
-                                                console.log( item );
                                                 ncp.copy( str, function() {
                                                 });
                                             });
@@ -919,5 +918,8 @@ $( document).ready( function() {
             });
         }
     });
+
+    // Setup global clipboard
+    $( "#global-clipboard" ).prop( "checked", config.globalClipboard );
 
 });

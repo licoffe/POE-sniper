@@ -453,6 +453,6 @@ input[type=range] {
     transform: rotate(-90deg);
 }
 
-::selection {
+#fold-filters::selection {
   background: rgba(0,0,0,0); /* WebKit/Blink Browsers */
 }
