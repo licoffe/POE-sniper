@@ -45,7 +45,7 @@ class Chunk {
      * @return unparsed JSON body through callback
      */
     static download( chunkID, callback ) {
-        console.time( "Downloading chunk " + chunkID );
+        // console.time( "Downloading chunk " + chunkID );
         var begin = Date.now();
         var dataSize = 0;
         var chunkStats;
@@ -54,7 +54,7 @@ class Chunk {
                 function( error, response, body ) {
                     // If there is an error, retry dowloading after delay
                     if ( error ) {
-                        console.timeEnd( "Downloading chunk " + chunkID );
+                        // console.timeEnd( "Downloading chunk " + chunkID );
                         console.log( "Error occured, retrying: " + error );
                         var end = Date.now();
                         if ( config.writeChunkStats ) {
@@ -64,7 +64,7 @@ class Chunk {
                         setTimeout( Chunk.download, config.CHUNK_RETRY_INTERVAL, chunkID, callback );
                     } else {
                         var end = Date.now();
-                        console.timeEnd( "Downloading chunk " + chunkID );
+                        // console.timeEnd( "Downloading chunk " + chunkID );
                         if ( config.writeChunkStats ) {
                             chunkStats = chunkID + "," + ( end - begin ) + "," + dataSize + ",passed\n";
                             writeChunkStats( chunkStats );
@@ -94,7 +94,7 @@ class Chunk {
                 console.log( "Top reached, waiting" );
                 setTimeout( Chunk.download, config.STREAM_TOP_WAIT_INTERVAL, chunkID, callback );
             } else {
-                console.log( "Next ID: " + data.next_change_id );
+                // console.log( "Next ID: " + data.next_change_id );
                 callback( data );
             }
         // } catch ( e ) {

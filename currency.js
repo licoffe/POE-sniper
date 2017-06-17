@@ -40,7 +40,7 @@ class Currency {
      * @return return rates through callback
      */
     static getLastRates( callback ) {
-        console.log( "Downloading last rates from poe-rates.com" );
+        // console.log( "Downloading last rates from poe-rates.com" );
         Misc.publishStatusMessage( "Downloading last rates from poe-rates.com" );
         var shortRates = {};
         // For each league

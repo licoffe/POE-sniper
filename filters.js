@@ -15,6 +15,53 @@ class Filters {
     constructor( filterList ) {
         this.filterList = filterList;
         this.length     = filterList.length;
+        this.sort();
+    }
+
+    /**
+     * Sort filter list alphabetically
+     *
+     * @params Nothing
+     * @return Filters in place
+     */
+    sort() {
+        this.filterList.sort( function( a, b ) {
+            var alc = a.item.toLowerCase();
+            var blc = b.item.toLowerCase();
+            if ( alc < blc ) {
+                return -1;
+            } else if ( alc > blc ) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+    }
+
+    /**
+     * Find the sorted index of a specific filter in the lsit
+     *
+     * @params Filter to be found
+     * @return Index through callback
+     */
+    findFilterIndex( filter, callback ) {
+        var self = this;
+        var index = 0;
+        var found = false;
+        async.each( this.filterList, function( f, cbFilter ) {
+            if ( !found && JSON.stringify( filter ) === JSON.stringify( f )) {
+                found = true;
+            }
+            if ( !found ) {
+                index++;
+            }
+            cbFilter();
+        }, function( err ) {
+            if ( err ) {
+                console.log( err );
+            }
+            callback({ found: found, index: index });
+        });
     }
 
     /**
@@ -26,6 +73,7 @@ class Filters {
     add( filter ) {
         this.filterList.push( filter );
         this.length = this.filterList.length;
+        this.sort();
     }
 
     /**
@@ -50,6 +98,7 @@ class Filters {
             }
             self.filterList = filters;
             self.length     = filterList.length;
+            self.sort();
             callback();
         });
     }
@@ -76,6 +125,7 @@ class Filters {
                 console.log( err );
             }
             self.filterList = filters;
+            self.sort();
             callback();
         });
     }

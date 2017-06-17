@@ -246,14 +246,18 @@ $( document).ready( function() {
             if ( $( "#add-filter" ).text() === "Add filter" ) {
                 // console.log( filters );
                 filters.add( filter );
-                filters.save();
-                filter.render( function( generated ) {
-                    postRender( filter, generated );
+                filters.findFilterIndex( filter, function( res ) {
+                    filters.save();
+                    filter.render( function( generated ) {
+                        postRender( filter, generated , res.index );
+                    });
                 });
             } else {
                 filters.update( filter, function() {
                     filter.render( function( generated ) {
-                        postRender( filter, generated );
+                        filters.findFilterIndex( filter, function( res ) {
+                            postRender( filter, generated, res.index );
+                        });
                     });
                 });
                 filters.save();
@@ -414,41 +418,49 @@ $( document).ready( function() {
         async.each( filterData, function( filter, cbFilter ) {
             filter = new Filter( filter );
             filters.add( filter );
-            filter.render( function( generated ) {
-                $( "#filters ul" ).append( generated );
-                // Color item name depending on rarity
-                colorRarity( filter );
-                if ( filter.buyout ) {
-                    $( "#" + filter.id ).parent().parent().find( ".buyout" ).hide();
-                }
-                if ( !filter.clipboard ) {
-                    $( "#" + filter.id ).parent().parent().find( ".clipboard" ).hide();
-                }
-                bindFilterEdit( filter.id );
-                updateFilterAmount( filter.id );
-                cbFilter();
-            });
+            cbFilter();
         }, function( err ) {
             if ( err ) {
                 console.log( err );
             }
-            poeTradeStats( filters );
+            console.log( filters );
+            async.each( filters.filterList, function( filter, cbSorted ) {
+                filter.render( function( generated ) {
+                    $( "#filters ul" ).append( generated );
+                    // Color item name depending on rarity
+                    colorRarity( filter );
+                    if ( filter.buyout ) {
+                        $( "#" + filter.id ).parent().parent().find( ".buyout" ).hide();
+                    }
+                    if ( !filter.clipboard ) {
+                        $( "#" + filter.id ).parent().parent().find( ".clipboard" ).hide();
+                    }
+                    bindFilterEdit( filter.id );
+                    updateFilterAmount( filter.id );
+                    cbSorted();
+                });
+            }, function( err ) {
+                if ( err ) {
+                    console.log( err );
+                }
+                poeTradeStats( filters );
+            });
         });
     };
 
     /**
-     * short description
+     * View update after creating a new filter
      *
-     * long description
-     * @params params
-     * @return return
+     * @params Filter object, generated HTML code and position
+     * @return Nothing
      */
-    var postRender = function( filter, generated ) {
+    var postRender = function( filter, generated, position ) {
         if ( $( "#add-filter" ).text() === "Add filter" ) {
-            $( "#filters ul" ).append( generated );
+            $( generated ).insertBefore( $( "#filters ul li" )[position] );
         } else {
             $( "#filters ul li" ).has( "#" + editingFilter ).remove();
-            $( "#filters ul" ).append( generated );
+            // $( "#filters ul" ).append( generated );
+            $( generated ).insertBefore( $( "#filters ul li" )[position] );
             editingFilter = "";
             $( "#add-filter" ).text( "Add filter" );
             $( "#cancel-filter" ).text( "Clear filter" );
