@@ -413,7 +413,7 @@ $( document).ready( function() {
     var bindRemoveFilter = function( id ) {
         $( "#" + id + ".remove-filter" ).click( function() {
             // Remove this entry
-            $( this ).parent().parent().remove();
+            $( this ).parent().parent().parent().parent().remove();
             var newFilters = [];
             var id         = $( this ).attr( "id" );
             // console.log( id );
