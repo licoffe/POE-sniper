@@ -459,6 +459,7 @@ $( document).ready( function() {
                     if ( !filter.clipboard ) {
                         $( "#" + filter.id ).parent().parent().find( ".clipboard" ).hide();
                     }
+                    bindFilterToggleState( filter.id );
                     bindFilterEdit( filter.id );
                     updateFilterAmount( filter.id );
                     cbSorted();
@@ -512,6 +513,7 @@ $( document).ready( function() {
         if ( !filter.clipboard ) {
             $( "#" + filter.id ).parent().parent().find( ".clipboard" ).hide();
         }
+        bindFilterToggleState( filter.id );
         bindFilterEdit( filter.id );
         updateFilterAmount( filter.id );
         poeTradeStats( filters );
@@ -529,8 +531,14 @@ $( document).ready( function() {
         filters.save();
     };
 
+    var bindFilterToggleState = function( id ) {
+        $( "#enable-filter-" + id ).click( function() {
+            filters.toggle( id );
+        });
+    };
+
     var bindFilterEdit = function( id ) {
-        $( "#filters ul li" ).has( "#" + id ).click( function() {
+        $( ".filter-detail#filter-detail-" + id ).click( function() {
             scrollToTopAction(); // Scroll back to top
             editingFilter = id;
             // Search for filter with the corresponding id
@@ -778,129 +786,131 @@ $( document).ready( function() {
             // Store last chunk ID
             console.time( "Total search time" );
             async.each( filters.filterList, function( filter, callbackFilter ) {
-                // console.time( "Searching in " + nextChunkId + " for " + filter.item );
-                // For each stashes in the new data file
-                var begin = Date.now();
-                var totalItems = 0;
-                async.each( data.stashes, function( stash, callbackStash ) {
-                    totalItems += stash.items.length;
-                    async.each( stash.items, function( item, callbackItem ) {
-                        item.stashTab          = stash.stash;
-                        item.lastCharacterName = stash.lastCharacterName;
-                        item.accountName       = stash.accountName;
-                        filter.check( item, currencyRates, function( item ) {
-                            if ( item ) {
-                                // If item has not already been added
-                                var foundIndex = resultsId.indexOf( item.itemId );
-                                if ( foundIndex !== -1 ) {
-                                    $( "li#" + entryLookup[item.itemId]).css( "opacity", "0.3" );
-                                }
-                                entryLookup[item.itemId] = item.id;
-                                results.push( item );
-                                resultsId.push( item.itemId );
-                                var generated = "";
-                                mu.compileAndRender( "entry.html", item )
-                                .on( "data", function ( data ) {
-                                    generated += data.toString();
-                                })
-                                .on( "end", function () {
-                                    $( "#results ul" ).prepend( generated );
-                                    updateResultsAmount();
-                                    item.accountName = stash.lastCharacterName;
-                                    item.name = item.item;
-                                    
-                                    item.price = price;
-                                    item.stashName = stash.stash;
-                                    $( "#" + item.id ).data( "item", item );
-                                    // Add proper coloring
-                                    if ( item.frameType === 1 ) {
-                                        $( "#" + item.id + " .item" ).addClass( "magic" );
-                                    } else if ( item.frameType === 2 ) {
-                                        $( "#" + item.id + " .item" ).addClass( "rare" );
-                                    } else if ( item.frameType === 3 ) {
-                                        $( "#" + item.id + " .item" ).addClass( "unique" );
-                                    } else if ( item.frameType === 4 ) {
-                                        $( "#" + item.id + " .item" ).addClass( "gem" );
-                                    } else if ( item.frameType === 5 ) {
-                                        $( "#" + item.id + " .item" ).addClass( "currency" );
-                                    } else if ( item.frameType === 6 ) {
-                                        $( "#" + item.id + " .item" ).addClass( "divination" );
-                                    } else if ( item.frameType === 8 ) {
-                                        $( "#" + item.id + " .item" ).addClass( "prophecy" );
-                                    } else if ( item.frameType === 9 ) {
-                                        $( "#" + item.id + " .item" ).addClass( "legacy" );
-                                    } 
-                                    bindClickEntry( item.id );
-                                    $( "#" + item.id + " .implicit-container" ).html( item.implicit );
-                                    $( "#" + item.id + " .enchant-container" ).html( item.enchant );
-                                    $( "#" + item.id + " .explicit-container" ).html( item.explicit );
-                                    $( "#" + item.id + " .crafted-container" ).html( item.crafted );
-                                    if ( item.implicit === "" ) {
-                                        $( "#" + item.id + " .implicit-container" ).hide();
+                if ( !filter.active ) {
+                    callbackFilter();
+                } else {
+                    // For each stashes in the new data file
+                    var totalItems = 0;
+                    async.each( data.stashes, function( stash, callbackStash ) {
+                        totalItems += stash.items.length;
+                        async.each( stash.items, function( item, callbackItem ) {
+                            item.stashTab          = stash.stash;
+                            item.lastCharacterName = stash.lastCharacterName;
+                            item.accountName       = stash.accountName;
+                            filter.check( item, currencyRates, function( item ) {
+                                if ( item ) {
+                                    // If item has not already been added
+                                    var foundIndex = resultsId.indexOf( item.itemId );
+                                    if ( foundIndex !== -1 ) {
+                                        $( "li#" + entryLookup[item.itemId]).css( "opacity", "0.3" );
                                     }
-                                    if ( item.enchant === "" ) {
-                                        $( "#" + item.id + " .enchant-container" ).hide();
-                                    }
-                                    if ( item.crafted === "" ) {
-                                        $( "#" + item.id + " .crafted-container" ).hide();
-                                    }
-                                    if ( !item.corrupted ) {
-                                        $( "#" + item.id + " .corrupted" ).hide();
-                                    }
-                                    $( "#" + item.id + " .properties-container" ).html( item.properties );
-                                    // Send notification
-                                    // notifier.notify('Message');
-                                    var displayPrice = item.originalPrice;
-                                    if ( displayPrice === "Negociate price" ) {
-                                        displayPrice = "barter";
-                                    }
-                                    // Only notify if the item is new in the list
-                                    if ( foundIndex === -1 ) {
-                                        notifier.notify({
-                                            title: "Sniped " + item.name,
-                                            message: item.name + " for " + displayPrice
-                                        }, function ( err ) {
-                                            if ( err ) {
-                                                console.log( err );
-                                            }
-                                            // Response is response from notification
-                                            var audio = new Audio( __dirname + '/' + config.sound );
-                                            audio.volume = config.volume;
-                                            audio.play();
-                                        });
-
-                                        // If copy to clipboard enabled, do it
-                                        if ( filter.clipboard || $( "#global-clipboard" ).prop( "checked" )) {
-                                            Misc.formatMessage( item, function( str ) {
-                                                ncp.copy( str, function() {
-                                                });
-                                            });
+                                    entryLookup[item.itemId] = item.id;
+                                    results.push( item );
+                                    resultsId.push( item.itemId );
+                                    var generated = "";
+                                    mu.compileAndRender( "entry.html", item )
+                                    .on( "data", function ( data ) {
+                                        generated += data.toString();
+                                    })
+                                    .on( "end", function () {
+                                        $( "#results ul" ).prepend( generated );
+                                        updateResultsAmount();
+                                        item.accountName = stash.lastCharacterName;
+                                        item.name = item.item;
+                                        
+                                        item.price = price;
+                                        item.stashName = stash.stash;
+                                        $( "#" + item.id ).data( "item", item );
+                                        // Add proper coloring
+                                        if ( item.frameType === 1 ) {
+                                            $( "#" + item.id + " .item" ).addClass( "magic" );
+                                        } else if ( item.frameType === 2 ) {
+                                            $( "#" + item.id + " .item" ).addClass( "rare" );
+                                        } else if ( item.frameType === 3 ) {
+                                            $( "#" + item.id + " .item" ).addClass( "unique" );
+                                        } else if ( item.frameType === 4 ) {
+                                            $( "#" + item.id + " .item" ).addClass( "gem" );
+                                        } else if ( item.frameType === 5 ) {
+                                            $( "#" + item.id + " .item" ).addClass( "currency" );
+                                        } else if ( item.frameType === 6 ) {
+                                            $( "#" + item.id + " .item" ).addClass( "divination" );
+                                        } else if ( item.frameType === 8 ) {
+                                            $( "#" + item.id + " .item" ).addClass( "prophecy" );
+                                        } else if ( item.frameType === 9 ) {
+                                            $( "#" + item.id + " .item" ).addClass( "legacy" );
+                                        } 
+                                        bindClickEntry( item.id );
+                                        $( "#" + item.id + " .implicit-container" ).html( item.implicit );
+                                        $( "#" + item.id + " .enchant-container" ).html( item.enchant );
+                                        $( "#" + item.id + " .explicit-container" ).html( item.explicit );
+                                        $( "#" + item.id + " .crafted-container" ).html( item.crafted );
+                                        if ( item.implicit === "" ) {
+                                            $( "#" + item.id + " .implicit-container" ).hide();
                                         }
-                                    }
-                                });
-                                callbackItem();
-                            } else {
-                                callbackItem();
+                                        if ( item.enchant === "" ) {
+                                            $( "#" + item.id + " .enchant-container" ).hide();
+                                        }
+                                        if ( item.crafted === "" ) {
+                                            $( "#" + item.id + " .crafted-container" ).hide();
+                                        }
+                                        if ( !item.corrupted ) {
+                                            $( "#" + item.id + " .corrupted" ).hide();
+                                        }
+                                        $( "#" + item.id + " .properties-container" ).html( item.properties );
+                                        // Send notification
+                                        // notifier.notify('Message');
+                                        var displayPrice = item.originalPrice;
+                                        if ( displayPrice === "Negociate price" ) {
+                                            displayPrice = "barter";
+                                        }
+                                        // Only notify if the item is new in the list
+                                        if ( foundIndex === -1 ) {
+                                            notifier.notify({
+                                                title: "Sniped " + item.name,
+                                                message: item.name + " for " + displayPrice
+                                            }, function ( err ) {
+                                                if ( err ) {
+                                                    console.log( err );
+                                                }
+                                                // Response is response from notification
+                                                var audio = new Audio( __dirname + '/' + config.sound );
+                                                audio.volume = config.volume;
+                                                audio.play();
+                                            });
+
+                                            // If copy to clipboard enabled, do it
+                                            if ( filter.clipboard || $( "#global-clipboard" ).prop( "checked" )) {
+                                                Misc.formatMessage( item, function( str ) {
+                                                    ncp.copy( str, function() {
+                                                    });
+                                                });
+                                            }
+                                        }
+                                    });
+                                    callbackItem();
+                                } else {
+                                    callbackItem();
+                                }
+                            });
+                        }, function( err ) {
+                            if ( err ) {
+                                console.log( err );
                             }
+                            // console.log( "Done with item" );
+                            callbackStash();
                         });
                     }, function( err ) {
                         if ( err ) {
                             console.log( err );
                         }
-                        // console.log( "Done with item" );
-                        callbackStash();
+                        // console.log( "Searched among " + totalItems + " items" );
+                        // var end = Date.now();
+                        // var filterStats = filter.id + "," + (end - begin) + "," + totalItems + "\n";
+                        // writeFilterStats( filterStats );
+                        // console.timeEnd( "Searching in " + nextChunkId + " for " + filter.item );
+                        callbackFilter();
                     });
-                }, function( err ) {
-                    if ( err ) {
-                        console.log( err );
-                    }
-                    // console.log( "Searched among " + totalItems + " items" );
-                    var end = Date.now();
-                    // var filterStats = filter.id + "," + (end - begin) + "," + totalItems + "\n";
-                    // writeFilterStats( filterStats );
-                    // console.timeEnd( "Searching in " + nextChunkId + " for " + filter.item );
-                    callbackFilter();
-                });
+                }
             }, function( err ) {
                 if ( err ) {
                     console.log( err );

@@ -39,6 +39,28 @@ class Filters {
     }
 
     /**
+     * Activate/deactivate filter
+     *
+     * @params Filter id, callback
+     * @return Nothing
+     */
+    toggle( id, callback ) {
+        var self = this;
+        async.each( this.filterList, function( filter, cbFilter ) {
+            if ( filter.id === id ) {
+                filter.active = !filter.active;
+                console.log( "Toggled filter " + filter.item );
+                cbFilter();
+            }
+        }, function( err ) {
+            if ( err ) {
+                console.log( err );
+            }
+            callback();
+        });
+    }
+
+    /**
      * Find the sorted index of a specific filter in the lsit
      *
      * @params Filter to be found

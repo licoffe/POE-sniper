@@ -60,7 +60,7 @@ li.collection-item {
     cursor: pointer;
 }
 
-li.collection-item:hover {
+li.collection-item {
     background-color: rgba( 0, 200, 200, 0.1 )!important;
     transition: background-color 0.2s linear;
 }
@@ -471,4 +471,38 @@ input[type=range] {
 #filter-filter {
     position: relative;
     top: 6px;
+}
+
+.filter-list .collection {
+    padding-top: 10px!important;
+    margin: 0;
+}
+
+.filter-list .collection-item {
+    padding-top: 0!important;
+    margin: 0;
+}
+
+.filter-detail {
+    border: none!important;
+    background-color: rgba( 0, 0, 0, 0 )!important;
+    transition: background-color 0.2s linear;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    top: -9px;
+}
+
+.filter-detail:hover {
+    background-color: rgba( 0, 200, 200, 0.1 )!important;
+    transition: background-color 0.2s linear;
+}
+
+.filter-detail .title {
+    position: relative;
+    top: 9px;
+}
+
+.filter-entry {
+    padding: 0!important;
 }

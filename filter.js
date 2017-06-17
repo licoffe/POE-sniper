@@ -45,7 +45,8 @@ class Filter {
         this.buyout     = obj.buyout,
         this.clipboard  = obj.clipboard,
         this.itemType   = obj.itemType,
-        this.title      = obj.title
+        this.title      = obj.title,
+        this.active     = true
     }
 
     /**
