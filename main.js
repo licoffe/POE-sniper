@@ -1,11 +1,13 @@
-const electron = require('electron')
+const electron      = require('electron')
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
+var fs              = require( "fs" );
 
 const path = require('path')
 const url = require('url')
+var config = require( "./config.json" );
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -13,7 +15,10 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1440, height: 900})
+  mainWindow = new BrowserWindow({
+    width:  config.windowWidth, 
+    height: config.windowHeight
+  })
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -21,6 +26,8 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }))
+
+  mainWindow.setPosition( config.x, config.y );
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -32,6 +39,29 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+
+  mainWindow.on( "resize", function() {
+    var size = mainWindow.getSize();
+    config.windowWidth  = size[0];
+    config.windowHeight = size[1];
+    fs.writeFile( __dirname + "/config.json", JSON.stringify( config ), function( err ) {
+        if ( err ) {
+            console.log( err );
+        }
+    });
+  });
+
+  mainWindow.on( "move", function() {
+    var pos = mainWindow.getPosition();
+    config.x = pos[0];
+    config.y = pos[1];
+    fs.writeFile( __dirname + "/config.json", JSON.stringify( config ), function( err ) {
+        if ( err ) {
+            console.log( err );
+        }
+    });
+  });
+
 }
 
 // This method will be called when Electron has finished

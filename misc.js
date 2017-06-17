@@ -79,7 +79,7 @@ class Misc {
                 }
                 try {
                     var data = JSON.parse( body, 'utf8' );
-                    if ( data.tag_name && currentVersion !== data.tag_name ) {
+                    if ( data.tag_name && currentVersion < data.tag_name ) {
                         console.log( "New update available" );
                         callback({
                             version:   data.tag_name,
