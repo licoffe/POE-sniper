@@ -91,6 +91,7 @@ $( document).ready( function() {
         $( ".filter-interaction" ).removeClass( "blurred" );
         $( ".filter-list" ).removeClass( "blurred" );
         $( ".filter-results" ).removeClass( "blurred" );
+        $( ".progress" ).removeClass( "blurred" );
         $( ".new-update" ).fadeOut( "fast" );
     };
 
@@ -965,6 +966,7 @@ $( document).ready( function() {
             $( ".filter-interaction" ).addClass( "blurred" );
             $( ".filter-list" ).addClass( "blurred" );
             $( ".filter-results" ).addClass( "blurred" );
+            $( ".progress" ).addClass( "blurred" );
             // Set update information
             $( ".update-title" ).html( "POE-Sniper - v" + data.version );
             $( ".update-date" ).html( new Date( data.date ).toLocaleString() + " by <b>" + data.author + "</b>"  );

@@ -416,8 +416,9 @@ input[type=range] {
 
 .new-update {
     position: fixed;
-    left: 40%;
+    left: 30%;
     top: 30%;
+    width: 40%;
     filter: blur(0px);
     z-index: 999;
 }
