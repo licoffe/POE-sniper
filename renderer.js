@@ -56,7 +56,12 @@ $( document).ready( function() {
         addFilterAction();
     });
 
-    // When typing in the item filter input
+    // When typing in the filter filter input text field
+    $( "#filter-filter" ).keyup( function() {
+        filterFilterListAction();
+    });
+
+    // When typing in the item filter input text field
     $( "#item-filter" ).keyup( function() {
         filterResultListAction();
     });
@@ -103,6 +108,7 @@ $( document).ready( function() {
         return false;
     };
 
+    // Action when the user is typing in the filter items text field
     var filterResultListAction = function() {
         var text = $( "#item-filter" ).val().toLowerCase();
         $( ".results .collection-item" ).each( function() {
@@ -115,6 +121,22 @@ $( document).ready( function() {
                 }
             }
         });
+    };
+
+    // Action when the user is typing in the filter filters text field
+    var filterFilterListAction = function() {
+        var text = $( "#filter-filter" ).val().toLowerCase();
+        $( "#filters .collection-item" ).each( function() {
+            if ( text === "" ) {
+                $( this ).show();
+            } else {
+                var itemName = $( this ).find( ".item" ).text();
+                if ( itemName.toLowerCase().indexOf( text ) === -1 ) {
+                    $( this ).hide();
+                }
+            }
+        });
+        $( "#filters-amount" ).text( $( "#filters .collection-item:visible" ).length );
     };
 
     // When clicking on 'Cancel editing'
@@ -256,6 +278,7 @@ $( document).ready( function() {
                 filters.update( filter, function() {
                     filter.render( function( generated ) {
                         filters.findFilterIndex( filter, function( res ) {
+                            console.log( res );
                             postRender( filter, generated, res.index );
                         });
                     });
@@ -379,7 +402,8 @@ $( document).ready( function() {
     };
 
     var updateFilterAmount = function( id ) {
-        $( "#filters-amount" ).text( filters.length );
+        // $( "#filters-amount" ).text( filters.length );
+        $( "#filters-amount" ).text( $( "#filters .collection-item:visible" ).length );
         bindRemoveFilter( id );
     };
 
@@ -455,12 +479,25 @@ $( document).ready( function() {
      * @return Nothing
      */
     var postRender = function( filter, generated, position ) {
+        var last = false;
+        // If new item, is the last in the list
+        if (( $( "#filters ul li" ).length > 0 && position + 1 > $( "#filters ul li" ).length - 1 ) || ( position + 1 > $( "#filters ul li" ).length )) {
+            last = true;
+            console.log( "Last in list" );
+        }
         if ( $( "#add-filter" ).text() === "Add filter" ) {
-            $( generated ).insertBefore( $( "#filters ul li" )[position] );
+            if ( last ) {
+                $( "#filters ul" ).append( generated );
+            } else {
+                $( generated ).insertBefore( $( "#filters ul li" )[position] );
+            }
         } else {
             $( "#filters ul li" ).has( "#" + editingFilter ).remove();
-            // $( "#filters ul" ).append( generated );
-            $( generated ).insertBefore( $( "#filters ul li" )[position] );
+            if ( last ) {
+                $( "#filters ul" ).append( generated );
+            } else {
+                $( generated ).insertBefore( $( "#filters ul li" )[position] );
+            }
             editingFilter = "";
             $( "#add-filter" ).text( "Add filter" );
             $( "#cancel-filter" ).text( "Clear filter" );

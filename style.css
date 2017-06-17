@@ -462,3 +462,13 @@ input[type=range] {
 #fold-filters::selection {
   background: rgba(0,0,0,0); /* WebKit/Blink Browsers */
 }
+
+#item-filter {
+    position: relative;
+    top:-3px;
+}
+
+#filter-filter {
+    position: relative;
+    top: 6px;
+}
