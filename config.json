@@ -1,18 +1,1 @@
-{
-    "sound": "sound2.mp3",
-    "volume": 0.5,
-    "message": "@<account> Hi, I would like to buy your <item> listed for <price> in <league> (stash tab \"<stashTab>\"; position: left <left>, top <top>)",
-    "RATES_REFRESH_INTERVAL":   10000,
-    "POE_TRADE_STATS_INTERVAL": 3600000,
-    "CHUNK_RETRY_INTERVAL":     1000,
-    "CHUNK_DOWNLOAD_INTERVAL":  500,
-    "STREAM_TOP_WAIT_INTERVAL": 2000,
-    "SCROLL_BACK_TOP_SPEED":    500,
-    "writeChunkStats":          false,
-    "globalClipboard":          false,
-    "leagues": [
-        "Standard", "Hardcore", "Legacy", "Hardcore Legacy"
-    ],
-    "defaultLeagueIndex": 2,
-    "showStatusBar": false
-}
+{"sound":"sound2.mp3","volume":0.5,"message":"@<account> Hi, I would like to buy your <item> listed for <price> in <league> (stash tab \"<stashTab>\"; position: left <left>, top <top>)","RATES_REFRESH_INTERVAL":10000,"POE_TRADE_STATS_INTERVAL":3600000,"CHUNK_RETRY_INTERVAL":1000,"CHUNK_DOWNLOAD_INTERVAL":500,"STREAM_TOP_WAIT_INTERVAL":2000,"SCROLL_BACK_TOP_SPEED":500,"writeChunkStats":false,"globalClipboard":false,"leagues":["Standard","Hardcore","Legacy","Hardcore Legacy"],"defaultLeagueIndex":2,"showStatusBar":false,"windowWidth":1436,"windowHeight":865,"x":3,"y":23}

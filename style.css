@@ -54,15 +54,15 @@ span.title {
 
 li.collection-item {
     border: none!important;
-    background-color: rgba( 0, 0, 0, 0 )!important;
-    transition: background-color 0.2s linear;
-    border-radius: 3px;
-    cursor: pointer;
+    /*background-color: rgba( 0, 0, 0, 0 )!important;*/
+    /*transition: background-color 0.2s linear;*/
+    /*border-radius: 3px;*/
+    /*cursor: pointer;*/
 }
 
 li.collection-item {
-    background-color: rgba( 0, 200, 200, 0.1 )!important;
-    transition: background-color 0.2s linear;
+    /*background-color: rgba( 0, 200, 200, 0.1 )!important;*/
+    /*transition: background-color 0.2s linear;*/
 }
 
 .currency {
@@ -483,7 +483,7 @@ input[type=range] {
     margin: 0;
 }
 
-.filter-detail {
+.filter-detail, .entry {
     border: none!important;
     background-color: rgba( 0, 0, 0, 0 )!important;
     transition: background-color 0.2s linear;
@@ -493,7 +493,7 @@ input[type=range] {
     top: -9px;
 }
 
-.filter-detail:hover {
+.filter-detail:hover, .entry:hover {
     background-color: rgba( 0, 200, 200, 0.1 )!important;
     transition: background-color 0.2s linear;
 }
