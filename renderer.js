@@ -262,7 +262,8 @@ $( document).ready( function() {
             var filterId = editingFilter !== "" ? editingFilter : Misc.guidGenerator();
             formData.id = filterId;
 
-            formData.title = title;
+            formData.title  = title;
+            formData.active = true;
             var filter = new Filter( formData );
             // console.log( filter );
             if ( $( "#add-filter" ).text() === "Add filter" ) {
@@ -534,6 +535,7 @@ $( document).ready( function() {
     var bindFilterToggleState = function( id ) {
         $( "#enable-filter-" + id ).click( function() {
             filters.toggle( id );
+            filters.save();
         });
     };
 

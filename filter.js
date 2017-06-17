@@ -46,7 +46,8 @@ class Filter {
         this.clipboard  = obj.clipboard,
         this.itemType   = obj.itemType,
         this.title      = obj.title,
-        this.active     = true
+        this.active     = obj.active,
+        this.checked    = obj.active ? "checked" : ""
     }
 
     /**
