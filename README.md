@@ -1,5 +1,5 @@
-### Disclaimer
-Make sure to have unlimited connection plan and a good bandwidth since the tool downloads currently around 1.5 MB of JSON data every second.
+#### Releases
+Grab the latest release [here](https://github.com/licoffe/POE-sniper/releases)
 
 ### Introduction
 This tool lets you run live searches by parsing the latest item data from the Path of Exile API.
@@ -46,5 +46,5 @@ Within a terminal:
 - Change to the cloned location and run `npm install` to install all dependencies
 - Finally, run `npm start` to start the indexer
 
-#### Releases
-You can fetch releases [here](https://github.com/licoffe/POE-sniper/releases)
+### Disclaimer
+Make sure to have unlimited connection plan and a good bandwidth since the tool downloads currently around 1.5 MB of JSON data every second.
