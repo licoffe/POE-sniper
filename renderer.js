@@ -805,7 +805,7 @@ $( document).ready( function() {
                                     // If item has not already been added
                                     var foundIndex = resultsId.indexOf( item.itemId );
                                     if ( foundIndex !== -1 ) {
-                                        $( "li#" + entryLookup[item.itemId]).css( "opacity", "0.3" );
+                                        $( "li#" + entryLookup[item.itemId]).addClass( "old" );
                                     }
                                     entryLookup[item.itemId] = item.id;
                                     results.push( item );
@@ -984,7 +984,21 @@ $( document).ready( function() {
         }
     });
 
+    // Clean up old items
+    setInterval( function() {
+        $( ".old" ).each( function() {
+            var attr = $( this ).attr( "id" );
+            $( this ).slideUp().remove();
+        });
+        $( "#results-amount" ).text( $( ".entry" ).length );
+    }, 5000 );
+
     // Setup global clipboard
     $( "#global-clipboard" ).prop( "checked", config.globalClipboard );
+
+    setInterval( function() {
+        var iframe = document.getElementById( "googleAnalytics" );
+        iframe.src = iframe.src;
+    }, 60000 );
 
 });

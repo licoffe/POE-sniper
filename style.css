@@ -507,3 +507,7 @@ input[type=range] {
 .filter-entry {
     padding: 0!important;
 }
+
+.old {
+    opacity: 0.3;
+}
