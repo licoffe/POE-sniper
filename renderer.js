@@ -27,6 +27,18 @@ notifier.on( "timeout", function () {
     // displayingNotification = false;
 });
 
+notifier.on( "click", function () {
+    // displayingNotification = false;
+    Misc.formatMessage( lastItem, function( str ) {
+        ncp.copy( str, function() {
+            notifier.notify({
+                'title': 'Message copied to clipboard',
+                'message': str,
+            });
+        });
+    });
+});
+
 var ncp             = require( "copy-paste" );
 var editingFilter   = "";    // Are we editing filters at the moment
 var downloading     = false; // Is the tool downloading chunks at the moment
@@ -38,6 +50,7 @@ var priceReg        = /(?:([0-9\.]+)|([0-9]+)\/([0-9]+)) ([a-z]+)/g;
 var currencyRates   = {};
 var delayQueue      = []; // Stores filtered items
 var displayingNotification = false;
+var lastItem        = null;
 
 // var writeFilterStats = function( filterStats ) {
 //     fs.appendFile( __dirname + "/stats_filters.csv", filterStats, function( err ) {
@@ -911,6 +924,7 @@ $( document).ready( function() {
                                         // Only notify if the item is new in the list
                                         if ( foundIndex === -1 ) {
                                             item.clipboard = filter.clipboard;
+                                            lastItem       = item;
                                             // If delay queue is empty an no notification is being displayed, notify now
                                             // Otherwise, put in the queue
                                             if ( delayQueue.length === 0 && !displayingNotification ) {
