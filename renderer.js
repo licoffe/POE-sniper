@@ -23,6 +23,10 @@ var filters         = new Filters([]);
 var mu              = require( 'mu2' );
 mu.root             = __dirname + '/templates';
 const notifier      = require('node-notifier');
+notifier.on( "timeout", function () {
+    // displayingNotification = false;
+});
+
 var ncp             = require( "copy-paste" );
 var editingFilter   = "";    // Are we editing filters at the moment
 var downloading     = false; // Is the tool downloading chunks at the moment
@@ -32,6 +36,8 @@ var entryLookup     = {};
 // Price regexp
 var priceReg        = /(?:([0-9\.]+)|([0-9]+)\/([0-9]+)) ([a-z]+)/g;
 var currencyRates   = {};
+var delayQueue      = []; // Stores filtered items
+var displayingNotification = false;
 
 // var writeFilterStats = function( filterStats ) {
 //     fs.appendFile( __dirname + "/stats_filters.csv", filterStats, function( err ) {
@@ -773,6 +779,42 @@ $( document).ready( function() {
     });
 
     /**
+     * Send notification and format message
+     *
+     * @params Item
+     * @return Nothing
+     */
+    var notifyNewItem = function( item ) {
+        displayingNotification = true;
+        var audio = new Audio( __dirname + '/' + config.sound );
+        audio.volume = config.volume;
+        audio.play();
+        var displayName = item.name;
+        console.log( item );
+        if ( item.typeLine && ( item.frameType > 0 && item.frameType < 4 )) {
+            displayName += " (" + item.typeLine + ")";
+        }
+        notifier.notify({
+            title:   displayName,
+            message: "Price: " + item.displayPrice,
+            wait:    true
+        }, function ( err ) {
+            if ( err ) {
+                console.log( err );
+            }
+            displayingNotification = false;
+        });
+
+        // If copy to clipboard enabled, do it
+        if ( item.clipboard || $( "#global-clipboard" ).prop( "checked" )) {
+            Misc.formatMessage( item, function( str ) {
+                ncp.copy( str, function() {
+                });
+            });
+        }
+    };
+
+    /**
      * Download all public stashes starting with input chunk ID.
      *
      * Download chunk from POE stash API using wget command with compression.
@@ -862,31 +904,19 @@ $( document).ready( function() {
                                         $( "#" + item.id + " .properties-container" ).html( item.properties );
                                         // Send notification
                                         // notifier.notify('Message');
-                                        var displayPrice = item.originalPrice;
-                                        if ( displayPrice === "Negociate price" ) {
-                                            displayPrice = "barter";
+                                        item.displayPrice = item.originalPrice;
+                                        if ( item.displayPrice === "Negociate price" ) {
+                                            item.displayPrice = "barter";
                                         }
                                         // Only notify if the item is new in the list
                                         if ( foundIndex === -1 ) {
-                                            notifier.notify({
-                                                title: "Sniped " + item.name,
-                                                message: item.name + " for " + displayPrice
-                                            }, function ( err ) {
-                                                if ( err ) {
-                                                    console.log( err );
-                                                }
-                                                // Response is response from notification
-                                                var audio = new Audio( __dirname + '/' + config.sound );
-                                                audio.volume = config.volume;
-                                                audio.play();
-                                            });
-
-                                            // If copy to clipboard enabled, do it
-                                            if ( filter.clipboard || $( "#global-clipboard" ).prop( "checked" )) {
-                                                Misc.formatMessage( item, function( str ) {
-                                                    ncp.copy( str, function() {
-                                                    });
-                                                });
+                                            item.clipboard = filter.clipboard;
+                                            // If delay queue is empty an no notification is being displayed, notify now
+                                            // Otherwise, put in the queue
+                                            if ( delayQueue.length === 0 && !displayingNotification ) {
+                                                notifyNewItem( item );
+                                            } else {
+                                                delayQueue.push( item );
                                             }
                                         }
                                     });
@@ -996,9 +1026,18 @@ $( document).ready( function() {
     // Setup global clipboard
     $( "#global-clipboard" ).prop( "checked", config.globalClipboard );
 
+    // Google analytics keep alive
     setInterval( function() {
-        var iframe = document.getElementById( "googleAnalytics" );
+        var iframe = document.getElementById( "google-analytics" );
         iframe.src = iframe.src;
     }, 60000 );
+
+    // Pop filtered result queue at given interval
+    setInterval( function() {
+        var item = delayQueue.shift();
+        if ( item ) {
+            notifyNewItem( item );
+        }
+    }, config.NOTIFICATION_QUEUE_INTERVAL );
 
 });

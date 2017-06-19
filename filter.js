@@ -324,7 +324,8 @@ class Filter {
                 league:        item.league,
                 stashTab:      item.stashTab,
                 left:          item.x,
-                top:           item.y
+                top:           item.y,
+                typeLine:      item.typeLine
             });
         });
     }
