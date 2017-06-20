@@ -205,8 +205,7 @@ class Filter {
      */
     compareProperties( item, parsedProperties, callback ) {
         var self = this;
-        console.log( this );
-        console.log( parsedProperties );
+
         // If:
         // ( no evasion filter OR filter evasion <= item evasion ) AND
         // ... ES ...

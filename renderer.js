@@ -883,7 +883,6 @@ $( document).ready( function() {
     };
 
     var renderSockets = function( item ) {
-        console.log( item );
         var rsc = {
             "D": "./media/socket_dex.png",
             "S": "./media/socket_str.png",
