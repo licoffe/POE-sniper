@@ -348,64 +348,68 @@ input[type=range] {
 
 .sockets {
     position: absolute;
+    display: none;
 }
 
 .socket1 {
+    top: 50px;
     left: 33px;
 }
 
 .socket2 {
+    top: 50px;
     left: 80px;
 }
 
 .socket3 {
-    top: 85px;
-    left: 33px;
-}
-
-.socket4 {
-    top: 85px;
+    top: 97px;
     left: 80px;
 }
 
+.socket4 {
+    top: 97px;
+    left: 33px;
+}
+
 .socket5 {
-    top: 130px;
+    top: 144px;
     left: 33px;
 }
 
 .socket6 {
-    top: 130px;
+    top: 144px;
     left: 80px;
 }
 
 .links {
     position: absolute;
     z-index: 999;
+    display: none;
 }
 
 .link1 {
     left: 61px;
-    top: 54px;
+    top: 66px;
 }
 
 .link2 {
     left: 95px;
-    top: 66px;
+    top: 79px;
 }
 
 .link3 {
-    left: 100px;
-    top: 61px;
+    left: 61px;
+    top: 112px;
 }
 
 .link4 {
     left: 48px;
-    top: 112px;
+    top: 126px;
 }
 
 .link5 {
     left: 61px;
-    top: 145px;
+    top: 159px;
 }
 
 .blurred {
@@ -521,4 +525,9 @@ input[type=range] {
     z-index: 998;
     background: rgba( 0, 0, 0, 0.5 );
     display: none;
+}
+
+.typeLine {
+    color: #c7c7c7;
+    padding-left: 10px;
 }

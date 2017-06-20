@@ -20,6 +20,7 @@ class Item {
         var groups      = {};
         var groupColors = {};
         var colors      = [];
+        var colorCount  = {};
         // For each sockets in the item
         async.each( item.sockets, function( socket, cb ) {
             // If we have a new socket group
@@ -31,6 +32,10 @@ class Item {
                 groups[socket.group]++;
                 groupColors[socket.group].push( socket.attr );
             }
+            if ( !colorCount[socket.attr]) {
+                colorCount[socket.attr] = 0;
+            }
+            colorCount[socket.attr]++;
             colors.push( socket.attr );
             cb();
         }, function( err ) {
@@ -48,7 +53,11 @@ class Item {
                     }
                 }
             }
-            callback({ "linkAmount": linkAmount, "colors": colors, "linkedColors": linkColors });
+            callback({ "linkAmount":   linkAmount, 
+                       "colors":       colors, 
+                       "linkedColors": linkColors,
+                       "colorCount":   colorCount
+            });
         });
     }
 

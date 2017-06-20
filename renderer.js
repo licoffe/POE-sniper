@@ -170,7 +170,11 @@ $( document).ready( function() {
         $( "#currency").material_select();
         $( "#links" ).val( "any" );
         $( "#links").material_select();
-        $( "#sockets" ).val( "" );
+        $( "#sockets-total" ).val( "" );
+        $( "#sockets-red" ).val( "" );
+        $( "#sockets-green" ).val( "" );
+        $( "#sockets-blue" ).val( "" );
+        $( "#sockets-white" ).val( "" );
         $( "#corrupted" ).val( "any" );
         $( "#corrupted").material_select();
         $( "#crafted" ).val( "any" );
@@ -189,6 +193,7 @@ $( document).ready( function() {
         $( "#es" ).val( "" );
         $( "#evasion" ).val( "" );
         $( "#dps" ).val( "" );
+        $( "#pdps" ).val( "" );
         $( "#price-bo" ).prop( "checked", true );
         $( "#clipboard" ).prop( "checked", false );
         $( "#affixes-list" ).empty();
@@ -249,9 +254,47 @@ $( document).ready( function() {
             if ( formData.links !== "0" && formData.links !== "any" ) {
                 title += "<span class=\"filter-links\">" + formData.links + "L</span>";
             }
-            if ( formData.sockets !== "" && formData.sockets !== 0 ) {
-                title += "<span class=\"filter-sockets\">" + formData.sockets + "S</span>";
+            var total;
+            if ( formData.socketsTotal === "" ) {
+                total = 0;
+            } else {
+                total = formData.socketsTotal;
             }
+            var string       = "";
+            var detailSocket = "";
+            if ( formData.socketsRed !== "" && formData.socketsRed !== 0 ) {
+                if ( formData.socketsTotal === "" ) {
+                    total  += parseInt( formData.socketsRed );
+                }
+                detailSocket += formData.socketsRed + "R ";
+            }
+            if ( formData.socketsGreen !== "" && formData.socketsGreen !== 0 ) {
+                if ( formData.socketsTotal === "" ) {
+                    total  += parseInt( formData.socketsGreen );
+                }
+                detailSocket += formData.socketsGreen + "G ";
+            }
+            if ( formData.socketsBlue !== "" && formData.socketsBlue !== 0 ) {
+                if ( formData.socketsTotal === "" ) {
+                    total  += parseInt( formData.socketsBlue );
+                }
+                detailSocket += formData.socketsBlue + "B ";
+            }
+            if ( formData.socketsWhite !== "" && formData.socketsWhite !== 0 ) {
+                if ( formData.socketsTotal === "" ) {
+                    total  += parseInt( formData.socketsWhite );
+                }
+                detailSocket += formData.socketsWhite + "W ";
+            }
+            if ( detailSocket !== "" ) {
+                string = total + "S ( " + detailSocket + ")";
+            } else {
+                string = total + "S";
+            }
+            if ( total > 0 ) {
+                title += "<span class=\"filter-sockets\">" + string + "</span>";
+            }
+
             if ( formData.armor !== "" ) {
                 title += "<span class=\"filter-property\">Armor>=" + formData.armor + "</span>";
             }
@@ -263,6 +306,9 @@ $( document).ready( function() {
             }
             if ( formData.dps !== "" ) {
                 title += "<span class=\"filter-property\">DPS>=" + formData.dps + "</span>";
+            }
+            if ( formData.pdps !== "" ) {
+                title += "<span class=\"filter-property\">PDPS>=" + formData.pdps + "</span>";
             }
             if ( formData.quality !== "" ) {
                 title += "<span class=\"filter-property\">quality>=" + formData.quality + "%</span>";
@@ -367,31 +413,36 @@ $( document).ready( function() {
      * @return return collected data through callback
      */
     var fetchFormData = function( callback ) {
-        var data        = {};
-        data.league     = $( "#league" ).val();
-        data.item       = $( "#item" ).val();
-        data.budget     = $( "#price" ).val();
-        data.currency   = $( "#currency" ).val();
-        data.links      = $( "#links" ).val();
-        data.sockets    = $( "#sockets" ).val();
-        data.corrupted  = $( "#corrupted" ).val();
-        data.crafted    = $( "#crafted" ).val();
-        data.enchanted  = $( "#enchanted" ).val();
-        data.identified = $( "#identified" ).val();
-        data.level      = $( "#level" ).val();
-        data.tier       = $( "#tier" ).val();
-        data.experience = $( "#experience" ).val();
-        data.quality    = $( "#quality" ).val();
-        data.rarity     = $( "#rarity" ).val();
-        data.armor      = $( "#armor" ).val();
-        data.es         = $( "#es" ).val();
-        data.evasion    = $( "#evasion" ).val();
-        data.dps        = $( "#dps" ).val();
-        data.buyout     = $( "#price-bo" ).is(":checked");
-        data.clipboard  = $( "#clipboard" ).is(":checked");
-        data.itemType   = $( "#item-type" ).val();
-        data.affixesDis = [];
-        data.affixes    = {};
+        var data          = {};
+        data.league       = $( "#league" ).val();
+        data.item         = $( "#item" ).val();
+        data.budget       = $( "#price" ).val();
+        data.currency     = $( "#currency" ).val();
+        data.links        = $( "#links" ).val();
+        data.socketsTotal = $( "#sockets-total" ).val();
+        data.socketsRed   = $( "#sockets-red" ).val();
+        data.socketsGreen = $( "#sockets-green" ).val();
+        data.socketsBlue  = $( "#sockets-blue" ).val();
+        data.socketsWhite = $( "#sockets-white" ).val();
+        data.corrupted    = $( "#corrupted" ).val();
+        data.crafted      = $( "#crafted" ).val();
+        data.enchanted    = $( "#enchanted" ).val();
+        data.identified   = $( "#identified" ).val();
+        data.level        = $( "#level" ).val();
+        data.tier         = $( "#tier" ).val();
+        data.experience   = $( "#experience" ).val();
+        data.quality      = $( "#quality" ).val();
+        data.rarity       = $( "#rarity" ).val();
+        data.armor        = $( "#armor" ).val();
+        data.es           = $( "#es" ).val();
+        data.evasion      = $( "#evasion" ).val();
+        data.dps          = $( "#dps" ).val();
+        data.pdps         = $( "#pdps" ).val();
+        data.buyout       = $( "#price-bo" ).is(":checked");
+        data.clipboard    = $( "#clipboard" ).is(":checked");
+        data.itemType     = $( "#item-type" ).val();
+        data.affixesDis   = [];
+        data.affixes      = {};
         callback( data );
     };
 
@@ -469,7 +520,6 @@ $( document).ready( function() {
             if ( err ) {
                 console.log( err );
             }
-            console.log( filters );
             async.each( filters.filterList, function( filter, cbSorted ) {
                 filter.render( function( generated ) {
                     $( "#filters ul" ).append( generated );
@@ -506,7 +556,7 @@ $( document).ready( function() {
         // If new item, is the last in the list
         if (( $( "#filters ul li" ).length > 0 && position + 1 > $( "#filters ul li" ).length - 1 ) || ( position + 1 > $( "#filters ul li" ).length )) {
             last = true;
-            console.log( "Last in list" );
+            // console.log( "Last in list" );
         }
         if ( $( "#add-filter" ).text() === "Add filter" ) {
             if ( last ) {
@@ -576,7 +626,11 @@ $( document).ready( function() {
                     $( "#currency").material_select();
                     $( "#links" ).val( filter.links );
                     $( "#links").material_select();
-                    $( "#sockets" ).val( filter.sockets );
+                    $( "#sockets-total" ).val( filter.socketsTotal );
+                    $( "#sockets-red" ).val( filter.socketsRed );
+                    $( "#sockets-green" ).val( filter.socketsGreen );
+                    $( "#sockets-blue" ).val( filter.socketsBlue );
+                    $( "#sockets-white" ).val( filter.socketsWhite );
                     $( "#corrupted" ).val( filter.corrupted );
                     $( "#corrupted").material_select();
                     $( "#crafted" ).val( filter.crafted );
@@ -595,6 +649,7 @@ $( document).ready( function() {
                     $( "#es" ).val( filter.es );
                     $( "#evasion" ).val( filter.evasion );
                     $( "#dps" ).val( filter.dps );
+                    $( "#pdps" ).val( filter.pdps );
                     $( "#price-bo" ).prop( "checked", filter.buyout );
                     $( "#clipboard" ).prop( "checked", filter.clipboard );
                     $( "#add-filter" ).text( "Update filter" );
@@ -804,7 +859,6 @@ $( document).ready( function() {
         audio.volume = config.volume;
         audio.play();
         var displayName = item.name;
-        console.log( item );
         if ( item.typeLine && ( item.frameType > 0 && item.frameType < 4 )) {
             displayName += " (" + item.typeLine + ")";
         }
@@ -826,6 +880,30 @@ $( document).ready( function() {
                 });
             });
         }
+    };
+
+    var renderSockets = function( item ) {
+        console.log( item );
+        var rsc = {
+            "D": "./media/socket_dex.png",
+            "S": "./media/socket_str.png",
+            "I": "./media/socket_int.png",
+            "G": "./media/socket_white.png"
+        };
+        var currentGroup = -1;
+        var lastGroup    = -1;
+        var socketIndex  = 0;
+        async.each( item.sockets, function( socket, cbSocket ) {
+            socketIndex++;
+            currentGroup = socket.group;
+            // Change image ressource associated to socket type and reveal
+            $( "li#" + item.id + " .socket" + socketIndex ).attr( "src", rsc[socket.attr]).show();
+            // If we are still in the same group, draw a link
+            if ( currentGroup === lastGroup && socketIndex > 1 ) {
+                $( "li#" + item.id + " .link" + ( socketIndex - 1 )).show();
+            }
+            lastGroup = socket.group;
+        });
     };
 
     /**
@@ -922,6 +1000,9 @@ $( document).ready( function() {
                                         if ( item.displayPrice === "Negociate price" ) {
                                             item.displayPrice = "barter";
                                         }
+
+                                        renderSockets( item );
+
                                         // Only notify if the item is new in the list
                                         if ( foundIndex === -1 ) {
                                             item.clipboard = filter.clipboard;

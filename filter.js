@@ -7,7 +7,8 @@
  */
 
 var async    = require( "async" );
-var mu       = require( 'mu2' );
+var mu       = require( "mu2" );
+var fs       = require( "fs" );
 mu.root      = __dirname + '/templates';
 var config   = require( "./config.json" );
 // Item price RegExp
@@ -19,35 +20,40 @@ var itemTypes = require( "./itemTypes.json" );
 class Filter {
 
     constructor( obj ) {
-        this.league     = obj.league,
-        this.item       = obj.item,
-        this.title      = obj.title,
-        this.budget     = obj.budget,
-        this.currency   = obj.currency,
-        this.links      = obj.links,
-        this.sockets    = obj.sockets,
-        this.id         = obj.id,
-        this.corrupted  = obj.corrupted,
-        this.crafted    = obj.crafted,
-        this.enchanted  = obj.enchanted,
-        this.identified = obj.identified,
-        this.level      = obj.level,
-        this.tier       = obj.tier,
-        this.experience = obj.experience,
-        this.quality    = obj.quality,
-        this.rarity     = obj.rarity,
-        this.armor      = obj.armor,   
-        this.es         = obj.es,      
-        this.evasion    = obj.evasion, 
-        this.dps        = obj.dps,
-        this.affixes    = obj.affixes,
-        this.affixesDis = obj.affixesDis,
-        this.buyout     = obj.buyout,
-        this.clipboard  = obj.clipboard,
-        this.itemType   = obj.itemType,
-        this.title      = obj.title,
-        this.active     = obj.active,
-        this.checked    = obj.active ? "checked" : ""
+        this.league       = obj.league,
+        this.item         = obj.item,
+        this.title        = obj.title,
+        this.budget       = obj.budget,
+        this.currency     = obj.currency,
+        this.links        = obj.links,
+        this.socketsTotal = obj.socketsTotal,
+        this.socketsRed   = obj.socketsRed,
+        this.socketsGreen = obj.socketsGreen,
+        this.socketsBlue  = obj.socketsBlue,
+        this.socketsWhite = obj.socketsWhite,
+        this.id           = obj.id,
+        this.corrupted    = obj.corrupted,
+        this.crafted      = obj.crafted,
+        this.enchanted    = obj.enchanted,
+        this.identified   = obj.identified,
+        this.level        = obj.level,
+        this.tier         = obj.tier,
+        this.experience   = obj.experience,
+        this.quality      = obj.quality,
+        this.rarity       = obj.rarity,
+        this.armor        = obj.armor,   
+        this.es           = obj.es,      
+        this.evasion      = obj.evasion, 
+        this.dps          = obj.dps,
+        this.pdps         = obj.pdps,
+        this.affixes      = obj.affixes,
+        this.affixesDis   = obj.affixesDis,
+        this.buyout       = obj.buyout,
+        this.clipboard    = obj.clipboard,
+        this.itemType     = obj.itemType,
+        this.title        = obj.title,
+        this.active       = obj.active,
+        this.checked      = obj.active ? "checked" : ""
     }
 
     /**
@@ -199,6 +205,8 @@ class Filter {
      */
     compareProperties( item, parsedProperties, callback ) {
         var self = this;
+        console.log( this );
+        console.log( parsedProperties );
         // If:
         // ( no evasion filter OR filter evasion <= item evasion ) AND
         // ... ES ...
@@ -211,7 +219,8 @@ class Filter {
         if (( this.evasion === "" || parseInt( this.evasion ) <= parseInt( parsedProperties["Evasion Rating"])) &&
             ( this.es      === "" || parseInt( this.es )      <= parseInt( parsedProperties["Energy Shield"])) && 
             ( this.armor   === "" || parseInt( this.armor )   <= parseInt( parsedProperties.Armour )) &&
-            ( this.dps === "" || parseFloat( this.dps ) <= parseFloat( parsedProperties.DPS )) &&
+            ( this.dps     === "" || parseFloat( this.dps )   <= parseFloat( parsedProperties.DPS )) &&
+            ( this.pdps    === "" || parseFloat( this.pdps )  <= parseFloat( parsedProperties.pDPS )) &&
             ( this.quality   === "" || parsedProperties.Quality !== undefined &&
             parseInt( this.quality ) <= parseInt( parsedProperties.Quality.replace( /[\+\%]/g, "" ))) &&
             ( this.tier   === "" || ( parsedProperties["Map Tier"] !== undefined && (
@@ -224,8 +233,14 @@ class Filter {
             // Check the amount of links
             Item.getLinksAmountAndColor( item, function( res ) {
                 item.linkAmount = res.linkAmount;
-                // If there is no link filter or item links >= filter links
-                callback( res.linkAmount >= self.links || self.links === "any" );
+                // If there is no link filter or item links >= filter links AND
+                callback(
+                    ( res.linkAmount >= self.links || self.links === "any" ) && 
+                    ( self.socketsRed   === "" || ( res.colorCount.S >= parseInt( self.socketsRed )))   &&
+                    ( self.socketsGreen === "" || ( res.colorCount.D >= parseInt( self.socketsGreen ))) &&
+                    ( self.socketsBlue  === "" || ( res.colorCount.I >= parseInt( self.socketsBlue )))  &&
+                    ( self.socketsWhite === "" || ( res.colorCount.G >= parseInt( self.socketsWhite )))
+                );
             });
         } else {
             callback( false );
@@ -254,7 +269,6 @@ class Filter {
      * @return Formatted item through callback
      */
     formatItem( item, name, prices, callback ) {
-        // console.log( item );
         var time = this.formatTime();
         var guid = Misc.guidGenerator();
         var implicit   = "";
@@ -318,6 +332,7 @@ class Filter {
                 implicit:      implicit,
                 explicit:      explicit,
                 crafted:       crafted,
+                corrupted:     item.corrupted,
                 enchant:       enchant,
                 properties:    properties,
                 links:         item.linkAmount,
@@ -325,7 +340,8 @@ class Filter {
                 stashTab:      item.stashTab,
                 left:          item.x,
                 top:           item.y,
-                typeLine:      item.typeLine
+                typeLine:      item.typeLine,
+                sockets:       item.sockets
             });
         });
     }
@@ -360,7 +376,7 @@ class Filter {
         // ( no item type filter OR item types are the same )
         if (( this.item    === ""    || itemName === this.item || typeLine === this.item ) &&
             ( this.league  === "any" || item.league === this.league ) &&
-            ( this.sockets === ""    || this.sockets <= item.sockets.length ) && 
+            ( this.socketsTotal === ""    || this.socketsTotal <= item.sockets.length ) && 
             (( this.corrupted  == 'true' ) === item.corrupted  || this.corrupted  === "any" ) &&
             (( this.enchanted  == 'true' ) === item.enchanted  || this.enchanted  === "any" ) &&
             (( this.crafted    == 'true' ) === item.crafted    || this.crafted    === "any" ) &&
@@ -388,16 +404,17 @@ class Filter {
                                 if ( parsedProperties["Attacks per Second"]) {
                                     var dps = Item.computeDPS( parsedProperties );
                                     parsedProperties.DPS = dps.DPS;
+                                    parsedProperties.pDPS = dps.pDPS;
                                     self.insertDPSValues( newItem, dps, function( item ) {
                                         // Compare properties
                                         self.compareProperties( item, parsedProperties, function( equal ) {
-                                            // console.log( newItem );
                                             if ( equal ) {
                                                 self.formatItem( item, name, prices, function( newItem ) {
                                                     callback( newItem );
                                                 });
                                             // Item does not have the required properties
                                             } else {
+                                                // fs.appendFileSync( __dirname + "/log.txt", name + " (" + typeLine + "): Not the right properties\n" );
                                                 callback( false );
                                             }
                                         });
@@ -412,6 +429,7 @@ class Filter {
                                             });
                                         // Item does not have the required properties
                                         } else {
+                                            // fs.appendFileSync( __dirname + "/log.txt", name + " (" + typeLine + "): Not the right properties\n" );
                                             callback( false );
                                         }
                                     });
@@ -419,6 +437,7 @@ class Filter {
                             });
                         // Item does not have the required mods
                         } else {
+                            // fs.appendFileSync( __dirname + "/log.txt", name + " (" + typeLine + "): Not the right mods\n" );
                             // console.log( "Item didn't have sufficient mods" );
                             callback( false );
                         }
@@ -426,10 +445,12 @@ class Filter {
                 });
             // Item is not within the budget
             } else {
+                // fs.appendFileSync( __dirname + "/log.txt", name + " (" + typeLine + "): Not within budget\n" );
                 callback( false );
             }
         // Item does not match the first tests
         } else {
+            // fs.appendFileSync( __dirname + "/log.txt", name + " (" + typeLine + "): Failed first tests\n" );
             callback( false );
         }
     }
