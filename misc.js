@@ -34,6 +34,12 @@ class Misc {
      */
     static formatMessage( data, cb ) {
         var str = config.message;
+        if ( data.originalPrice === "Negociate price" ) {
+            str = config.barter;
+        }
+        if ( data.name !== data.typeLine ) {
+            data.name += " " + data.typeLine;
+        }
         str     = str.replace( /<account>/g, data.accountName );
         str     = str.replace( "<item>",     data.name );
         str     = str.replace( "<league>",   data.league );
@@ -88,7 +94,7 @@ class Misc {
                             author:    data.author.login
                         });
                     } else {
-                        console.log( "You have the last update" );
+                        // console.log( "You have the last update" );
                         callback( false );
                     }
                 } catch ( err ) {
