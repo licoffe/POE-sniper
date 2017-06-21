@@ -916,6 +916,8 @@ $( document).ready( function() {
      */
     var downloadChunk = function( chunkID, callback ) {
 
+        var begin = Date.now();
+
         $( "#current-change-id" ).text( chunkID );
 
         var parseData = function( data ) {
@@ -1053,12 +1055,14 @@ $( document).ready( function() {
         var done = function( data ) {
             filterResultListAction();
             var nextID = data.next_change_id;
+            var end = Date.now();
+            var waitInterval = config.CHUNK_DOWNLOAD_INTERVAL - ( end - begin );
 
             if ( interrupt ) {
                 console.log( "Stopped sniper" );
             } else {
                 if ( !interrupt ) {
-                    setTimeout( callback, config.CHUNK_DOWNLOAD_INTERVAL, nextID, callback );
+                    setTimeout( callback, waitInterval, nextID, callback );
                     // callback( nextID, callback );
                 }
             }
