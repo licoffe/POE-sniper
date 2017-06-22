@@ -160,7 +160,7 @@ $( document).ready( function() {
         $( "#filters-amount" ).text( $( "#filters .collection-item:visible" ).length );
     };
 
-    // When clicking on 'Cancel editing'
+    // When clicking on 'Clear Filter'
     var cancelEditAction = function() {
         $( "#league" ).val( config.leagues[config.defaultLeagueIndex]);
         $( "#league").material_select();
@@ -200,10 +200,12 @@ $( document).ready( function() {
         $( "#item-type" ).val( "any" );
         $( "#item-type").material_select();
 
+        // If we are editing and the button is 'Clear Filter'
         if ( $( this ).text() !== "Clear filter" ) {
             $( "#add-filter" ).text( "Add filter" );
             $( "#cancel-filter" ).text( "Clear filter" );
             $( "#cancel-filter" ).removeClass( "red" ).addClass( "blue-grey" );
+            editingFilter = "";
         }
     };
 
@@ -1139,5 +1141,9 @@ $( document).ready( function() {
             notifyNewItem( item );
         }
     }, config.NOTIFICATION_QUEUE_INTERVAL );
+
+    // setInterval( function() {
+    //     console.log( "editingFilter: " + editingFilter );
+    // }, 1000 );
 
 });
