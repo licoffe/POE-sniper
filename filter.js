@@ -317,6 +317,19 @@ class Filter {
             if ( item.linkAmount > 4 ) {
                 name += " " + item.linkAmount + "L";
             }
+            var itemType = item.typeLine;
+            if ( itemType === name ) {
+                if ( item.frameType === 4 ) {
+                    itemType = "Gem";
+                } else if ( item.frameType === 5 ) {
+                    itemType = "Currency";
+                } else if ( item.frameType === 6 ) {
+                    itemType = "Divination Card";
+                } else if ( item.frameType === 8 ) {
+                    itemType = "Prophecy";
+                }
+            }
+            
             callback({
                 time:          time,
                 account:       item.lastCharacterName,
@@ -340,7 +353,8 @@ class Filter {
                 left:          item.x,
                 top:           item.y,
                 typeLine:      item.typeLine,
-                sockets:       item.sockets
+                sockets:       item.sockets,
+                type:          itemType
             });
         });
     }
