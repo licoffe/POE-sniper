@@ -42,9 +42,10 @@ notifier.on( "click", function () {
 var ncp             = require( "copy-paste" );
 var editingFilter   = "";    // Are we editing filters at the moment
 var downloading     = false; // Is the tool downloading chunks at the moment
-var results         = [];
+var results         = {};
 var resultsId       = [];
 var entryLookup     = {};
+var itemInStash     = {};
 // Price regexp
 var priceReg        = /(?:([0-9\.]+)|([0-9]+)\/([0-9]+)) ([a-z]+)/g;
 var currencyRates   = {};
@@ -764,7 +765,6 @@ $( document).ready( function() {
             $( ".progress" ).fadeIn();
             $( "#snipe" ).text( "Stop" );
             Chunk.getLastChangeId( function( entry ) {
-                console.log( entry );
                 downloadChunk( entry, downloadChunk );
             });
         } else {
@@ -776,22 +776,22 @@ $( document).ready( function() {
     });
 
     var updateResultsAmount = function() {
-        $( "#results-amount" ).text( results.length );
+        $( "#results-amount" ).text( Object.keys( results ).length );
     };
 
     // When clicking on share entries icon
-    $( "#share-entries" ).click( function() {
-        fs.writeFile( __dirname + "/export.json", JSON.stringify( results ), function( err ) {
-            if ( err ) {
-                console.log( err );
-            }
-        });
-    });
+    // $( "#share-entries" ).click( function() {
+    //     fs.writeFile( __dirname + "/export.json", JSON.stringify( results ), function( err ) {
+    //         if ( err ) {
+    //             console.log( err );
+    //         }
+    //     });
+    // });
 
     // When clicking on clear entries icon
     $( "#clear-entries" ).click( function() {
         $( "#results ul" ).empty();
-        results   = [];
+        results   = {};
         resultsId = [];
         updateResultsAmount();
     });
@@ -939,13 +939,21 @@ $( document).ready( function() {
                             item.accountName       = stash.accountName;
                             filter.check( item, currencyRates, function( item ) {
                                 if ( item ) {
+                                    if ( !itemInStash[stash.id]) {
+                                        itemInStash[stash.id] = {
+                                            previousItems: [],
+                                            items: []
+                                        };
+                                    }
+                                    itemInStash[stash.id].items.push( item.itemId );
+                                    console.log( itemInStash );
                                     // If item has not already been added
                                     var foundIndex = resultsId.indexOf( item.itemId );
                                     if ( foundIndex !== -1 ) {
                                         $( "li#" + entryLookup[item.itemId]).addClass( "old" );
                                     }
                                     entryLookup[item.itemId] = item.id;
-                                    results.push( item );
+                                    results[item.id] = item;
                                     resultsId.push( item.itemId );
                                     var generated = "";
                                     mu.compileAndRender( "entry.html", item )
@@ -1028,19 +1036,37 @@ $( document).ready( function() {
                             if ( err ) {
                                 console.log( err );
                             }
+                            // Remove sold/displaced items
+                            if ( itemInStash[stash.id] ) {
+                                async.each( itemInStash[stash.id].previousItems, function( previousItem, cbPreviousItem ) {
+                                    if ( itemInStash[stash.id].items.indexOf( previousItem ) === -1 ) {
+                                        console.log( previousItem + " was sold" );
+                                        $( "li#" + entryLookup[previousItem] ).addClass( "old" );
+                                        delete results[entryLookup[previousItem]];
+                                    }
+                                    cbPreviousItem();
+                                }, function( err ) {
+                                    itemInStash[stash.id].previousItems = itemInStash[stash.id].items;
+                                    itemInStash[stash.id].items = [];
+                                    callbackStash();
+                                });
+                            } else {
+                                callbackStash();
+                            }
+                            
                             // console.log( "Done with item" );
-                            callbackStash();
                         });
                     }, function( err ) {
                         if ( err ) {
                             console.log( err );
                         }
+                        callbackFilter();
                         // console.log( "Searched among " + totalItems + " items" );
                         // var end = Date.now();
                         // var filterStats = filter.id + "," + (end - begin) + "," + totalItems + "\n";
                         // writeFilterStats( filterStats );
                         // console.timeEnd( "Searching in " + nextChunkId + " for " + filter.item );
-                        callbackFilter();
+                        
                     });
                 }
             }, function( err ) {
