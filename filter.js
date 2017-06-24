@@ -100,13 +100,13 @@ class Filter {
             // and if the price is a fraction
             if ( match[1] === undefined ) {
                 // Compute the fraction: 1/2 exa -> 0.5 exa
-                originalPrice = ( match[2] / match[3] ) + " " + match[4];
+                originalPrice = Math.round( match[2] / match[3] * 100 ) / 100 + " " + match[4];
                 // Same but convert to chaos: 1/2 exa -> 0.5 x chaos_rate(exa)
                 convertedPrice = ( match[2] / match[3] ) * currencyRates[this.league][match[4]];
             // Otherwise
         } else {
                 // Same thing as above without divisions
-                originalPrice  = match[1] + " " + match[4];
+                originalPrice  = Math.round( match[1] * 100 ) / 100 + " " + match[4];
                 convertedPrice = match[1] * currencyRates[this.league][match[4]];
             }
             
