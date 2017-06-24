@@ -4,6 +4,9 @@ Grab the latest release [here](https://github.com/licoffe/POE-sniper/releases)
 ### Introduction
 This tool lets you run live searches by parsing the latest item data from the Path of Exile API.
 
+### Video
+[Here](https://youtu.be/-R8lXIVEd-k) is a 5 min video showcasing some of the features of this tool :)
+
 ![alt text](./sniper.png "Tool preview")
 ### Features
 Here is the set of features currently supported:
