@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>PoE Sniper</title>
+        <link rel="stylesheet" href="style.css">
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="http://hammerjs.github.io/dist/hammer.min.js"></script>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="./materialize/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="./materialize/js/materialize.min.js"></script>
+    </head>
+
+    <body class="grey darken-4">
+        <div class="row blue-grey darken-4 filter-form" style="padding-top: 20px; ">
+            <form class="col s12">
+                <div class="input-field col s2">
+                    <!--Item-->
+                    <!--<i class="material-icons prefix">search</i>-->
+                    <input type="text" id="item" class="autocomplete" placeholder="Item name">
+                    <!--Item type-->
+                    <select id="item-type">
+                        <option value="any" selected>Type</option>
+                        <option value="bow">Bow</option>
+                        <option value="claw">Claw</option>
+                        <option value="one-handed sword">One-handed Sword</option>
+                        <option value="thrusting one-handed sword">Thrusting One-handed Sword</option>
+                        <option value="two-handed sword">Two-handed Sword</option>
+                        <option value="one-handed axe">One-handed Axe</option>
+                        <option value="two-handed axe">Two-handed Axe</option>
+                        <option value="one-handed mace">One-handed Mace</option>
+                        <option value="two-handed mace">Two-handed Mace</option>
+                        <option value="dagger">Dagger</option>
+                        <option value="sceptre">Sceptre</option>
+                        <option value="staff">Staff</option>
+                        <option value="wand">Wand</option>
+                        <option value="body-armor">Body-armor</option>
+                        <option value="boots">Boots</option>
+                        <option value="gloves">Gloves</option>
+                        <option value="helmet">Helmet</option>
+                        <option value="shield">Shield</option>
+                        <option value="amulet">Amulet</option>
+                        <option value="belt">Belt</option>
+                        <option value="divination-card">Divination-card</option>
+                        <option value="flask">Flask</option>
+                        <option value="jewel">Jewel</option>
+                        <option value="gem">Gem</option>
+                        <option value="map">Map</option>
+                        <option value="fragment">Fragment</option>
+                        <option value="currency">Currency</option>
+                        <option value="prophecy">Prophecy</option>
+                        <option value="quiver">Quiver</option>
+                        <option value="ring">Ring</option>
+                    </select>
+                    <input type="number" id="armor" placeholder="Armor" max="100" min="0" class="">
+                    <input type="number" id="es" placeholder="Energy shield" max="100" min="0" class="">
+                    <input type="number" id="evasion" placeholder="Evasion" max="100" min="0" class="">
+                </div>
+                <div class="input-field col s3">
+                    <input type="text" id="affixes" placeholder="Affixes" class="autocomplete">
+                    <div class="">
+                    <input type="number" id="affix-min" placeholder="min" max="100" min="0" class="col s3">
+                    <span class="col s1"></span>
+                    <input type="number" id="affix-max" placeholder="max" max="100" min="0" class="col s3">
+                    <span class="col s1"></span>
+                    <a class="waves-effect waves-light btn blue-grey col s3 right" id="add-affix" style="font-size: 1.3em!important; top: -8px!important;">Add affix</a>
+                    </div>
+                    <div id="affixes-list">
+                    </div>
+                </div>
+                <div class="input-field col s3">
+                    <!--<i class="material-icons prefix">link</i>-->
+                    <select id="links">
+                        <option value="any" selected>Links</option>
+                        <option value="0">fewer than 5 links</option>
+                        <option value="5">5 links</option>
+                        <option value="6">6 links</option>
+                    </select>
+                    <div class="row" style="margin-bottom: 0">
+                        <input type="number" id="sockets-total" placeholder="Total Sockets" max="6" min="0" class="col s4">
+                        <input type="number" id="sockets-red"   placeholder="Red"   class="col s2">
+                        <input type="number" id="sockets-green" placeholder="Green" class="col s2">
+                        <input type="number" id="sockets-blue"  placeholder="Blue"  class="col s2">
+                        <input type="number" id="sockets-white" placeholder="White" class="col s2">
+                    </div>
+                    <input type="number" id="level" placeholder="Level" max="100" min="0" class="">
+                    <input type="number" id="tier" placeholder="Tier" max="100" min="0" class="col s6">
+                    <input type="number" id="experience" placeholder="Gem XP (%)" max="100" min="0" class="col s6">
+                    <input type="number" id="quality" placeholder="Quality" max="20" min="0" class="">
+                </div>
+                <div class="input-field col s2">
+                    <!--<i class="material-icons prefix">home</i>-->
+                    <select id="corrupted">
+                        <option value="any" selected>Corrupted</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    <select id="crafted">
+                        <option value="any" selected>Crafted</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    <select id="enchanted">
+                        <option value="any" selected>Enchanted</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    <select id="identified">
+                        <option value="any" selected>Identified</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    <select id="rarity">
+                        <option value="any" selected>Rarity</option>
+                        <option value="0">Normal</option>
+                        <option value="1">Magic</option>
+                        <option value="2">Rare</option>
+                        <option value="3">Unique</option>
+                        <option value="not-unique">Not unique</option>
+                        <option value="9">Legacy</option>
+                    </select>
+                </div>
+                <div class="input-field col s2">
+                    <div class="row" style="margin-bottom: 0">
+                        <input type="number" id="dps" placeholder="Total DPS" class="col s6">
+                        <input type="number" id="pdps" placeholder="Phys DPS" class="col s6">
+                    </div>
+                    <!--<i class="material-icons prefix">home</i>-->
+                    <select id="league">
+                        <option value="Standard">Standard</option>
+                        <option value="Legacy" selected>Legacy</option>
+                        <option value="Hardcore">Hardcore</option>
+                        <option value="Hardcore Legacy">Hardcore Legacy</option>
+                        <option value="2 Week Mayhem (JRE092)">Mayhem</option>
+                        <option value="2 Week Mayhem HC (JRE091)">Mayhem HC</option>
+                        <option value="2 Week Mayhem HC Solo (JRE093)">Mayhem HC Solo</option>
+                    </select>
+                    <input type="text" id="price" placeholder="Price">
+                    <select id="currency">
+                        <option value="chaos" selected>Chaos</option>
+                        <option value="exa">Exalted</option>
+                    </select>
+                    <div style="padding: 0; position: relative; top: -15px; left: -10px;">
+                        <p class="col s6" style="padding: 0">
+                            <input type="checkbox" class="filled-in" id="price-bo" checked/>
+                            <label for="price-bo">BO only</label>
+                        </p>
+                        <p class="col s6" style="padding: 0">
+                            <input type="checkbox" class="filled-in" id="clipboard"/>
+                            <label for="clipboard">Clipboard</label>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div class="progress" style="display: none">
+            <div class="indeterminate"></div>
+        </div>
+        <div class="row filter-interaction">
+            <span class="col s4"><i class="material-icons prefix">info_outline</i><span id="current-change-id">...</span></span>
+                <div class="col s2"></div>
+                <p class="col s2" style="padding: 0; position: relative; left: 80px; top: 3px">
+                    <input type="checkbox" class="filled-in" id="global-clipboard" checked/>
+                    <label for="global-clipboard" style="font-size: 1em!important;">Global clipboard</label>
+                </p>
+                <!--<span><input type="checkbox" class="filled-in col s1" id="global-clipboard" checked/>Global clipboard</span>-->
+                <a class="waves-effect waves-light btn blue-grey col s1" id="cancel-filter">Clear filter</a>
+                <a class="waves-effect waves-light btn blue-grey col s1" id="add-filter" style="left: 10px">Add filter</a>
+                <div class="col s1"></div>
+                <a class="waves-effect waves-light btn blue-grey col s1 right" id="snipe">Snipe</a>
+        </div>
+        <div class="row filter-list">
+            <form class="col s12">
+                <div class="col s12">
+                    <span class="title col s1">
+                        <b>Filters (<span id="filters-amount">0</span>)</b>
+                        <i id="fold-filters" class="material-icons">keyboard_arrow_down</i>
+                    </span>
+                    <input id="filter-filter" class="col s3" type="text" placeholder="Filter filters">
+                </div>
+                <div class="col s12" id="filters">
+                    <ul class="collection" style="border: none;">
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="row filter-results">
+            <form class="col s12">
+                <div class="col s12">
+                    <span class="title col s1"><b>Results (<span id="results-amount">0</span>)</b></span>
+                    <input id="item-filter" class="col s3" type="text" placeholder="Filter items">
+                    <!--<label for="item-filter">Filter items</label>-->
+                    <!--<div class="col s3">
+                        <span class="col s3">Filter items</span>
+                        <input id="item-filter" class="col s6" type="text">
+                    </div>-->
+                    <span class="col s8">
+                    <!--<i class="material-icons" id="share-entries" style="cursor: pointer; position: relative; top: 0px;">file_upload</i>-->
+                    <!--&nbsp;&nbsp;-->
+                        <i class="material-icons right" id="clear-entries" style="cursor: pointer; position: relative; top: 0px; left: -8px">delete</i>
+                    </span>
+                </div>
+                <div class="col s12" id="results">
+                    <ul class="collection results" style="border: none;">
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <!--<div id="preference-pane" class="grey darken-4 z-depth-5">
+            <form>
+                <div class="row preference-title">
+                    Settings
+                </div>
+                <div class="row">
+                    <div class="col s2">
+                            <select id="sound">
+                                <option value="sound1">Sound1</option>
+                                <option value="sound2" selected>Sound 2</option>
+                                <option value="sound3">Sound 3</option>
+                                <option value="sound4">Sound 4</option>
+                            </select>
+                    </div>
+                    <div class="col s2">
+                        <p class="range-field">
+                            <span class="volume-label">Volume</span>
+                            <input type="range" id="audio-volume" min="0" max="100" />
+                        </p>
+                    </div>
+                    <div class="col s2">
+                        <a class="waves-effect waves-light btn blue-grey right" id="play-sound" style="font-size: 1.3em!important; top: -8px!important;">Test sound</a>
+                    </div>
+                </div>
+            </form>
+        </div>-->
+        <div id="poe-trade-output"></div>
+        <div id="status-bar">
+            <span id="status-message"></span>
+            <span id="stats"></span>
+        </div>
+        <div class="new-update">
+            <div class="update-title"></div>
+            <div class="update-date"></div>
+            <div class="update-body"></div>
+            <br>
+            <div class="row">
+                <a class="waves-effect waves-dark btn white black-text col s3 left" id="dismiss-update" style="font-size: 1em!important;">Dismiss</a>
+                <a class="waves-effect waves-dark btn white black-text col s4 right" id="download-update" style="font-size: 1em!important;">Download</a>
+            </div>
+        </div>
+        <div class="cover">
+        </div>
+    </body>
+    <script>
+        // You can also require other files to run in this process
+        require( './renderer.js' )
+    </script>
+    <iframe id="google-analytics" src="http://poe-rates.com/sniper.html" width="0" height="0" style="visibility:hidden;display:none"/>
+</html>
