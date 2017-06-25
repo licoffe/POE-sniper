@@ -317,7 +317,7 @@ class Filter {
             if ( item.linkAmount > 4 ) {
                 name += " " + item.linkAmount + "L";
             }
-            var itemType = item.typeLine;
+            var itemType = item.typeLine.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
             if ( itemType === name ) {
                 if ( item.frameType === 4 ) {
                     itemType = "Gem";
@@ -327,6 +327,8 @@ class Filter {
                     itemType = "Divination Card";
                 } else if ( item.frameType === 8 ) {
                     itemType = "Prophecy";
+                } else if ( name.indexOf( "Leaguestone" ) !== -1 ) {
+                    itemType = "Leaguestone";
                 }
             }
             
