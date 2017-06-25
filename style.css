@@ -251,7 +251,7 @@ input {
 }
 
 .divination {
-    color: rgba(0, 200, 200, 1);
+    color: rgb(19, 255, 183);
 }
 
 .prophecy {
@@ -264,6 +264,20 @@ input {
 
 .legacy {
     color: rgba(72, 144, 68, 1);
+}
+
+.map {
+    color: rgba(255, 0, 100, 1);
+}
+
+.fragment {
+    color: rgba(200, 200, 0, 1);
+}
+
+.essence {
+    background: -webkit-linear-gradient(left, rgb(101,94,192), rgb(127,255,252),rgb(255,255,167),rgb(219,66,63),rgb(235,117,154),rgb(92,25,205));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .not-unique {
@@ -513,7 +527,7 @@ input[type=range] {
     padding: 0!important;
 }
 
-.old {
+.old, .sold {
     opacity: 0.3;
 }
 

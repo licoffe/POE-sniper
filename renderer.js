@@ -534,6 +534,7 @@ $( document).ready( function() {
                     if ( !filter.clipboard ) {
                         $( "#" + filter.id ).parent().parent().find( ".clipboard" ).hide();
                     }
+                    colorFilter( filter );
                     bindFilterToggleState( filter.id );
                     bindFilterEdit( filter.id );
                     updateFilterAmount( filter.id );
@@ -546,6 +547,32 @@ $( document).ready( function() {
                 poeTradeStats( filters );
             });
         });
+    };
+
+    /**
+     * Color filter based on item name to help visually differenciate
+     *
+     * @params Filter
+     * @return Nothing
+     */
+    var colorFilter = function( filter ) {
+        if ( itemTypes["divination-card"].types.indexOf( filter.item ) !== -1 ) {
+            $( "#filter-detail-" + filter.id + " .item" ).addClass( "divination" );
+        } else if ( itemTypes["prophecy"].types.indexOf( filter.item ) !== -1 ) {
+            $( "#filter-detail-" + filter.id + " .item" ).addClass( "prophecy" );
+        } else if ( itemTypes["unique"].types.indexOf( filter.item ) !== -1 ) {
+            $( "#filter-detail-" + filter.id + " .item" ).addClass( "unique" );
+        } else if ( itemTypes["currency"].types.indexOf( filter.item ) !== -1 ) {
+            $( "#filter-detail-" + filter.id + " .item" ).addClass( "currency" );
+        } else if ( itemTypes["gem"].types.indexOf( filter.item ) !== -1 ) {
+            $( "#filter-detail-" + filter.id + " .item" ).addClass( "gem" );
+        } else if ( itemTypes["map"].types.indexOf( filter.item ) !== -1 ) {
+            $( "#filter-detail-" + filter.id + " .item" ).addClass( "map" );
+        } else if ( itemTypes["fragment"].types.indexOf( filter.item ) !== -1 ) {
+            $( "#filter-detail-" + filter.id + " .item" ).addClass( "fragment" );
+        } else if ( itemTypes["essence"].types.indexOf( filter.item ) !== -1 ) {
+            $( "#filter-detail-" + filter.id + " .item" ).addClass( "essence" );
+        } 
     };
 
     /**
@@ -588,6 +615,7 @@ $( document).ready( function() {
         if ( !filter.clipboard ) {
             $( "#" + filter.id ).parent().parent().find( ".clipboard" ).hide();
         }
+        colorFilter( filter );
         bindFilterToggleState( filter.id );
         bindFilterEdit( filter.id );
         updateFilterAmount( filter.id );
@@ -861,7 +889,8 @@ $( document).ready( function() {
         audio.volume = config.volume;
         audio.play();
         var displayName = item.name;
-        if ( item.typeLine && ( item.frameType > 0 && item.frameType < 4 )) {
+        var itemType = item.typeLine.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
+        if ( itemType !== item.name && ( item.frameType > 0 && item.frameType < 4 )) {
             displayName += " (" + item.typeLine + ")";
         }
         notifier.notify({
@@ -946,7 +975,6 @@ $( document).ready( function() {
                                         };
                                     }
                                     itemInStash[stash.id].items.push( item.itemId );
-                                    console.log( itemInStash );
                                     // If item has not already been added
                                     var foundIndex = resultsId.indexOf( item.itemId );
                                     if ( foundIndex !== -1 ) {
@@ -1040,8 +1068,7 @@ $( document).ready( function() {
                             if ( itemInStash[stash.id] ) {
                                 async.each( itemInStash[stash.id].previousItems, function( previousItem, cbPreviousItem ) {
                                     if ( itemInStash[stash.id].items.indexOf( previousItem ) === -1 ) {
-                                        console.log( previousItem + " was sold" );
-                                        $( "li#" + entryLookup[previousItem] ).addClass( "old" );
+                                        $( "li#" + entryLookup[previousItem] ).addClass( "sold" );
                                         delete results[entryLookup[previousItem]];
                                     }
                                     cbPreviousItem();
