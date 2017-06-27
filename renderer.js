@@ -231,13 +231,11 @@ $( document).ready( function() {
                 }
                 formData.affixesDis.push( affix );
             });
-            // console.log( formData.affixes );
-            // console.log( formData.league );
-            // console.log( currencyRates );
-            if ( formData.budget > currencyRates[formData.league].exa && formData.currency === "chaos" ) {
-                formData.budget /= currencyRates[formData.league].exa;
-                formData.currency = "exa";
-            }
+            // Convert price to exa if higher than exa rate
+            // if ( formData.budget > currencyRates[formData.league].exa && formData.currency === "chaos" ) {
+            //     formData.budget /= currencyRates[formData.league].exa;
+            //     formData.currency = "exa";
+            // }
             if ( formData.budget ) {
                 formData.budget = Math.round( formData.budget * 100 ) / 100;
                 formData.displayPrice = formData.budget + " " + formData.currency;
