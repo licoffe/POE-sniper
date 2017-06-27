@@ -41,7 +41,7 @@ class Misc {
             data.name += " " + data.typeLine;
         }
         str     = str.replace( /<account>/g, data.accountName );
-        str     = str.replace( "<item>",     data.name );
+        str     = str.replace( "<item>",     data.whisperName );
         str     = str.replace( "<league>",   data.league );
         str     = str.replace( "<stash>",    data.stashName );
         str     = str.replace( "<price>",    data.originalPrice );

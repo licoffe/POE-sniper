@@ -901,8 +901,7 @@ $( document).ready( function() {
         audio.volume = config.volume;
         audio.play();
         var displayName = item.name;
-        var itemType = item.typeLine.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
-        if ( itemType !== item.name && ( item.frameType > 0 && item.frameType < 4 )) {
+        if ( item.typeLine !== item.name && ( item.frameType > 0 && item.frameType < 4 )) {
             displayName += " (" + item.typeLine + ")";
         }
         notifier.notify({
@@ -1056,6 +1055,7 @@ $( document).ready( function() {
 
                                         // Only notify if the item is new in the list
                                         if ( foundIndex === -1 ) {
+                                            console.log( item );
                                             item.clipboard = filter.clipboard;
                                             lastItem       = item;
                                             // If delay queue is empty an no notification is being displayed, notify now

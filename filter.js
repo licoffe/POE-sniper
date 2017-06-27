@@ -314,12 +314,12 @@ class Filter {
             if ( !prices.convertedPrice ) {
                 prices.currency = "Negociate price";
             }
-
+            var whisperName = name;
             if ( item.linkAmount > 4 ) {
                 name += " " + item.linkAmount + "L";
             }
             var itemType = item.typeLine.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
-            if ( itemType === name ) {
+            if ( itemType === whisperName ) {
                 if ( item.frameType === 4 ) {
                     itemType = "Gem";
                 } else if ( item.frameType === 5 ) {
@@ -330,13 +330,18 @@ class Filter {
                     itemType = "Prophecy";
                 } else if ( name.indexOf( "Leaguestone" ) !== -1 ) {
                     itemType = "Leaguestone";
+                } else if ( item.frameType === 1 ) {
+                    itemType = "";
                 }
+            } else {
+                whisperName += " " + itemType;
             }
             
             callback({
                 time:          time,
                 account:       item.lastCharacterName,
                 item:          name,
+                whisperName:   whisperName,
                 frameType:     item.frameType,
                 price:         prices.convertedPrice,
                 currency:      prices.currency,
@@ -371,9 +376,11 @@ class Filter {
     check( item, currencyRates, callback ) {
         var self = this;
         // Clean up the item name and typeLine
-        var itemName = item.name.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
-        var typeLine = item.typeLine.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
-        var name = itemName;
+        item.name     = item.name.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
+        item.typeLine = item.typeLine.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
+        var itemName  = item.name.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
+        var typeLine  = item.typeLine.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
+        var name      = itemName;
         // If item name is empty, the name is the type instead
         if ( itemName === "" ) {
             name = typeLine;
