@@ -970,11 +970,11 @@ $( document).ready( function() {
                                 if ( item ) {
                                     if ( !itemInStash[stash.id]) {
                                         itemInStash[stash.id] = {
-                                            previousItems: [],
-                                            items: []
+                                            previousItems: {},
+                                            items:         {}
                                         };
                                     }
-                                    itemInStash[stash.id].items.push( item.itemId );
+                                    itemInStash[stash.id].items[item.itemId] = item.id;
                                     // If item has not already been added
                                     var foundIndex = resultsId.indexOf( item.itemId );
                                     if ( foundIndex !== -1 ) {
@@ -1064,23 +1064,7 @@ $( document).ready( function() {
                             if ( err ) {
                                 console.log( err );
                             }
-                            // Remove sold/displaced items
-                            if ( itemInStash[stash.id] ) {
-                                async.each( itemInStash[stash.id].previousItems, function( previousItem, cbPreviousItem ) {
-                                    if ( itemInStash[stash.id].items.indexOf( previousItem ) === -1 ) {
-                                        $( "li#" + entryLookup[previousItem] ).addClass( "sold" );
-                                        delete results[entryLookup[previousItem]];
-                                    }
-                                    cbPreviousItem();
-                                }, function( err ) {
-                                    itemInStash[stash.id].previousItems = itemInStash[stash.id].items;
-                                    itemInStash[stash.id].items = [];
-                                    callbackStash();
-                                });
-                            } else {
-                                callbackStash();
-                            }
-                            
+                            callbackStash();
                             // console.log( "Done with item" );
                         });
                     }, function( err ) {
@@ -1100,8 +1084,32 @@ $( document).ready( function() {
                 if ( err ) {
                     console.log( err );
                 }
-                console.timeEnd( "Total search time" );
-                done( data );
+
+                // Remove sold/displaced items
+                async.each( data.stashes, function( stash, cbStash ) {
+                    if ( itemInStash[stash.id] ) {
+                        async.each( Object.keys( itemInStash[stash.id].previousItems ), function( previousItem, cbPreviousItem ) {
+                            if ( !itemInStash[stash.id].items[previousItem]) {
+                                console.log( previousItem + " was sold" );
+                                $( "li#" + itemInStash[stash.id].previousItems[previousItem] ).addClass( "sold" );
+                                delete results[itemInStash[stash.id].previousItems[previousItem]];
+                            }
+                            cbPreviousItem();
+                        }, function( err ) {
+                            itemInStash[stash.id].previousItems = JSON.parse( JSON.stringify( itemInStash[stash.id].items ));
+                            itemInStash[stash.id].items         = {};
+                            cbStash();
+                        });
+                    } else {
+                        cbStash();
+                    }
+                }, function( err ) {
+                    if ( err ) {
+                        console.log( err );
+                    }
+                    console.timeEnd( "Total search time" );
+                    done( data );
+                });
             });
         };
 
@@ -1163,7 +1171,6 @@ $( document).ready( function() {
             });
 
             $( "#dismiss-update" ).click( function() {
-                console.log( "test" );
                 dismissUpdate();
             });
         }

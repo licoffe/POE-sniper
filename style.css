@@ -54,6 +54,7 @@ span.title {
 
 li.collection-item {
     border: none!important;
+    margin-top: 3px!important;
     /*background-color: rgba( 0, 0, 0, 0 )!important;*/
     /*transition: background-color 0.2s linear;*/
     /*border-radius: 3px;*/
@@ -527,8 +528,12 @@ input[type=range] {
     padding: 0!important;
 }
 
-.old, .sold {
+.old {
     opacity: 0.3;
+}
+
+.sold {
+    filter: grayscale(100%) brightness(76%);
 }
 
 .cover {
