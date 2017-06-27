@@ -234,11 +234,17 @@ $( document).ready( function() {
             // console.log( formData.affixes );
             // console.log( formData.league );
             // console.log( currencyRates );
-            if ( formData.budget > currencyRates[formData.league].exa && currency === "chaos" ) {
+            if ( formData.budget > currencyRates[formData.league].exa && formData.currency === "chaos" ) {
                 formData.budget /= currencyRates[formData.league].exa;
-                currency = "exa";
+                formData.currency = "exa";
             }
-            formData.budget = Math.round( formData.budget * 100 ) / 100;
+            if ( formData.budget ) {
+                formData.budget = Math.round( formData.budget * 100 ) / 100;
+                formData.displayPrice = formData.budget + " " + formData.currency;
+            } else {
+                formData.displayPrice = "Any price";
+            }
+
             var title = "";
             if ( formData.corrupted === "true" ) {
                 title += "<span class=\"filter-corrupted\">Corrupted</span>";
@@ -334,6 +340,7 @@ $( document).ready( function() {
 
             formData.title  = title;
             formData.active = true;
+            console.log( formData );
             var filter = new Filter( formData );
             // console.log( filter );
             if ( $( "#add-filter" ).text() === "Add filter" ) {
@@ -516,6 +523,11 @@ $( document).ready( function() {
         // For each filter, generate using the 'filter' template
         // and add them to the filters array
         async.each( filterData, function( filter, cbFilter ) {
+            if ( !filter.displayPrice && filter.budget && filter.budget > 0 ) {
+                filter.displayPrice = filter.budget + " " + filter.currency;
+            } else if ( !filter.displayPrice && ( !filter.budget || filter.budget === 0 )) {
+                filter.displayPrice = "Any price";
+            }
             filter = new Filter( filter );
             filters.add( filter );
             cbFilter();

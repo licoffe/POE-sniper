@@ -53,7 +53,8 @@ class Filter {
         this.itemType     = obj.itemType,
         this.title        = obj.title,
         this.active       = obj.active,
-        this.checked      = obj.active ? "checked" : ""
+        this.checked      = obj.active ? "checked" : "",
+        this.displayPrice = obj.displayPrice
     }
 
     /**
@@ -404,7 +405,7 @@ class Filter {
             var prices = this.computePrice( item, currencyRates );
             
             // Convert filter price to chaos and check if the item is within budget
-            if (( prices.convertedPrice && 
+            if ( !this.budget || ( prices.convertedPrice && 
                   prices.convertedPriceChaos <= this.budget * currencyRates[this.league][this.currency]) || 
                 ( !prices.convertedPrice && !this.buyout )) {
 
