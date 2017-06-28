@@ -9,8 +9,20 @@
 var async    = require( "async" );
 var mu       = require( "mu2" );
 var fs       = require( "fs" );
+const {app}  = require( "electron" ).remote;
+const path   = require( "path" );
 mu.root      = __dirname + '/templates';
-var config   = require( "./config.json" );
+var config   = {};
+// Check if config.json exists in app data, otherwise create it from default
+// config file.
+if ( !fs.existsSync( app.getPath( "userData" ) + path.sep + "config.json" )) {
+    console.log( "Config file does not exist, creating it" );
+    fs.createReadStream( __dirname + path.sep + "config.json" ).pipe( fs.createWriteStream( app.getPath( "userData" ) + path.sep + "config.json" ));
+    config = require( app.getPath( "userData" ) + path.sep + "config.json" );
+} else {
+    console.log( "Loading config from " + app.getPath( "userData" ) + path.sep + "config.json" );
+    config = require( app.getPath( "userData" ) + path.sep + "config.json" );
+}
 // Item price RegExp
 var priceReg = /(?:([0-9\.]+)|([0-9]+)\/([0-9]+)) ([a-z]+)/g;
 var Item     = require( "./item.js" );

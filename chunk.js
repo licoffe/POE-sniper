@@ -14,7 +14,19 @@ dnscache             = require( "dnscache" )({
     "ttl" : 300,
     "cachesize" : 1000
 });
-var config = require( "./config.json" );
+const {app}          = require( "electron" ).remote;
+const path           = require( "path" );
+var config           = {};
+// Check if config.json exists in app data, otherwise create it from default
+// config file.
+if ( !fs.existsSync( app.getPath( "userData" ) + path.sep + "config.json" )) {
+    console.log( "Config file does not exist, creating it" );
+    fs.createReadStream( __dirname + path.sep + "config.json" ).pipe( fs.createWriteStream( app.getPath( "userData" ) + path.sep + "config.json" ));
+    config = require( app.getPath( "userData" ) + path.sep + "config.json" );
+} else {
+    console.log( "Loading config from " + app.getPath( "userData" ) + path.sep + "config.json" );
+    config = require( app.getPath( "userData" ) + path.sep + "config.json" );
+}
 
 class Chunk {
 

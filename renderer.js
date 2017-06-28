@@ -7,7 +7,19 @@ var fs               = require( "fs" );
 var async            = require( "async" );
 var marked           = require( "marked" );
 var open             = require( "open" );
-var config           = require( "./config.json" );
+const {app}          = require( "electron" ).remote;
+const path           = require( "path" );
+var config           = {};
+// Check if config.json exists in app data, otherwise create it from default
+// config file.
+if ( !fs.existsSync( app.getPath( "userData" ) + path.sep + "config.json" )) {
+    console.log( "Config file does not exist, creating it" );
+    fs.createReadStream( __dirname + path.sep + "config.json" ).pipe( fs.createWriteStream( app.getPath( "userData" ) + path.sep + "config.json" ));
+    config = require( app.getPath( "userData" ) + path.sep + "config.json" );
+} else {
+    console.log( "Loading config from " + app.getPath( "userData" ) + path.sep + "config.json" );
+    config = require( app.getPath( "userData" ) + path.sep + "config.json" );
+}
 var itemTypes        = require( "./itemTypes.json" );
 var Item             = require( "./item.js" );
 var Misc             = require( "./misc.js" );
@@ -93,6 +105,10 @@ $( document).ready( function() {
 
     // Actions
     // ------------------------------------------------------------------------
+
+    var backupFilterAndConfig = function() {
+
+    };
 
     // Fold/unfold filter list action
     var foldFilters = function() {
@@ -517,7 +533,18 @@ $( document).ready( function() {
     // Load filters
     var loadFilters = function() {
         // Load filters file in memory
-        filterData = require( __dirname + "/filters.json" );
+        // If filters exist in app data, use them, otherwise copy
+        // the default file to app data folder
+        var filterData = {};
+        if ( !fs.existsSync( app.getPath( "userData" ) + path.sep + "filters.json" )) {
+            console.log( "Filters file does not exist, creating it" );
+            fs.createReadStream( __dirname + path.sep + "filters.json" ).pipe( fs.createWriteStream( app.getPath( "userData" ) + path.sep + "filters.json" ));
+            filterData = require( app.getPath( "userData" ) + path.sep + "filters.json" );
+        } else {
+            console.log( "Loading filters from " + app.getPath( "userData" ) + path.sep + "filters.json" );
+            filterData = require( app.getPath( "userData" ) + path.sep + "filters.json" );
+        }
+
         // For each filter, generate using the 'filter' template
         // and add them to the filters array
         async.each( filterData, function( filter, cbFilter ) {
@@ -1053,7 +1080,6 @@ $( document).ready( function() {
 
                                         // Only notify if the item is new in the list
                                         if ( foundIndex === -1 ) {
-                                            console.log( item );
                                             item.clipboard = filter.clipboard;
                                             lastItem       = item;
                                             // If delay queue is empty an no notification is being displayed, notify now

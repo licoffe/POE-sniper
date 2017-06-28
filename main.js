@@ -7,7 +7,17 @@ var fs              = require( "fs" );
 
 const path = require('path')
 const url = require('url')
-var config = require( "./config.json" );
+var config           = {};
+// Check if config.json exists in app data, otherwise create it from default
+// config file.
+if ( !fs.existsSync( app.getPath( "userData" ) + path.sep + "config.json" )) {
+    console.log( "Config file does not exist, creating it" );
+    fs.createReadStream( __dirname + path.sep + "config.json" ).pipe( fs.createWriteStream( app.getPath( "userData" ) + path.sep + "config.json" ));
+    config = require( app.getPath( "userData" ) + path.sep + "config.json" );
+} else {
+    console.log( "Loading config from " + app.getPath( "userData" ) + path.sep + "config.json" );
+    config = require( app.getPath( "userData" ) + path.sep + "config.json" );
+}
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -30,7 +40,7 @@ function createWindow () {
   mainWindow.setPosition( config.x, config.y );
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -68,6 +78,21 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
+
+var shouldQuit = app.makeSingleInstance(function(commandLine, workingDirectory) {
+  // Someone tried to run a second instance, we should focus our window.
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore();
+    }
+    mainWindow.focus();
+  }
+});
+
+if (shouldQuit) {
+  app.quit();
+  return;
+}
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
