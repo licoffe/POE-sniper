@@ -12,8 +12,12 @@ var config           = {};
 // config file.
 if ( !fs.existsSync( app.getPath( "userData" ) + path.sep + "config.json" )) {
     console.log( "Config file does not exist, creating it" );
-    fs.createReadStream( __dirname + path.sep + "config.json" ).pipe( fs.createWriteStream( app.getPath( "userData" ) + path.sep + "config.json" ));
-    config = require( app.getPath( "userData" ) + path.sep + "config.json" );
+    var readStream  = fs.createReadStream( __dirname + path.sep + "config.json" );
+    var writeStream = fs.createWriteStream( app.getPath( "userData" ) + path.sep + "config.json" );
+    writeStream.on( "close", function() {
+        config = require( app.getPath( "userData" ) + path.sep + "config.json" );
+    });
+    readStream.pipe( writeStream );
 } else {
     console.log( "Loading config from " + app.getPath( "userData" ) + path.sep + "config.json" );
     config = require( app.getPath( "userData" ) + path.sep + "config.json" );
@@ -54,7 +58,7 @@ function createWindow () {
     var size = mainWindow.getSize();
     config.windowWidth  = size[0];
     config.windowHeight = size[1];
-    fs.writeFile( __dirname + "/config.json", JSON.stringify( config ), function( err ) {
+    fs.writeFile( app.getPath( "userData" ) + path.sep + "config.json", JSON.stringify( config ), function( err ) {
         if ( err ) {
             console.log( err );
         }
@@ -65,7 +69,7 @@ function createWindow () {
     var pos = mainWindow.getPosition();
     config.x = pos[0];
     config.y = pos[1];
-    fs.writeFile( __dirname + "/config.json", JSON.stringify( config ), function( err ) {
+    fs.writeFile( app.getPath( "userData" ) + path.sep + "config.json", JSON.stringify( config ), function( err ) {
         if ( err ) {
             console.log( err );
         }

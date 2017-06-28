@@ -14,8 +14,12 @@ var config           = {};
 // config file.
 if ( !fs.existsSync( app.getPath( "userData" ) + path.sep + "config.json" )) {
     console.log( "Config file does not exist, creating it" );
-    fs.createReadStream( __dirname + path.sep + "config.json" ).pipe( fs.createWriteStream( app.getPath( "userData" ) + path.sep + "config.json" ));
-    config = require( app.getPath( "userData" ) + path.sep + "config.json" );
+    var readStream  = fs.createReadStream( __dirname + path.sep + "config.json" );
+    var writeStream = fs.createWriteStream( app.getPath( "userData" ) + path.sep + "config.json" );
+    writeStream.on( "close", function() {
+        config = require( app.getPath( "userData" ) + path.sep + "config.json" );
+    });
+    readStream.pipe( writeStream );
 } else {
     console.log( "Loading config from " + app.getPath( "userData" ) + path.sep + "config.json" );
     config = require( app.getPath( "userData" ) + path.sep + "config.json" );
@@ -538,8 +542,12 @@ $( document).ready( function() {
         var filterData = {};
         if ( !fs.existsSync( app.getPath( "userData" ) + path.sep + "filters.json" )) {
             console.log( "Filters file does not exist, creating it" );
-            fs.createReadStream( __dirname + path.sep + "filters.json" ).pipe( fs.createWriteStream( app.getPath( "userData" ) + path.sep + "filters.json" ));
-            filterData = require( app.getPath( "userData" ) + path.sep + "filters.json" );
+            var readStream  = fs.createReadStream( __dirname + path.sep + "filters.json" );
+            var writeStream = fs.createWriteStream( app.getPath( "userData" ) + path.sep + "filters.json" );
+            writeStream.on( "close", function() {
+                config = require( app.getPath( "userData" ) + path.sep + "filters.json" );
+            });
+            readStream.pipe( writeStream );
         } else {
             console.log( "Loading filters from " + app.getPath( "userData" ) + path.sep + "filters.json" );
             filterData = require( app.getPath( "userData" ) + path.sep + "filters.json" );
@@ -673,8 +681,9 @@ $( document).ready( function() {
 
     var bindFilterToggleState = function( id ) {
         $( "#enable-filter-" + id ).click( function() {
-            filters.toggle( id );
-            filters.save();
+            filters.toggle( id, function() {
+                filters.save();
+            });
         });
     };
 
