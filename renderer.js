@@ -363,7 +363,6 @@ $( document).ready( function() {
 
             formData.title  = title;
             formData.active = true;
-            console.log( formData );
             var filter = new Filter( formData );
             // console.log( filter );
             if ( $( "#add-filter" ).text() === "Add filter" ) {
@@ -379,7 +378,6 @@ $( document).ready( function() {
                 filters.update( filter, function() {
                     filter.render( function( generated ) {
                         filters.findFilterIndex( filter, function( res ) {
-                            console.log( res );
                             postRender( filter, generated, res.index );
                         });
                     });
@@ -1272,7 +1270,33 @@ $( document).ready( function() {
 
     // $( "#toggle-all-filters" ).click( toggleAllFiltersAction )
 
+    var matchTypeWithPoeTrade = function( type ) {
+        switch ( type ) {
+            case "map fragments":
+                return "fragment";
+            case "divination card":
+                return "divination-card";
+            case "body armour":
+                return "body-armor";
+            case "two hand sword":
+                return "two-handed sword";
+            case "two hand mace":
+                return "two-handed mace";
+            case "two hand axe":
+                return "two-handed axe";
+            case "one hand sword":
+                return "one-handed sword";
+            case "one hand mace":
+                return "one-handed mace";
+            case "one hand axe":
+                return "one-handed axe";
+            default:
+                return type;
+        }
+    };
+
     var fillInFormWithPOETradeData = function( data ) {
+        console.log( data );
         if ( !data.name && data.base !== "any" ) {
             $( "#item" ).val( data.base );
         } else if ( data.name ) {
@@ -1291,7 +1315,7 @@ $( document).ready( function() {
                 }
             });
         }
-        $( "#item-type" ).val( data.type.toLowerCase() );
+        $( "#item-type" ).val( matchTypeWithPoeTrade( data.type.toLowerCase() ));
         $( "#item-type" ).material_select();
         $( "#armor" ).val( data.armour_min );
         $( "#es" ).val( data.shield_min );
@@ -1303,7 +1327,10 @@ $( document).ready( function() {
                 title: mod,
                 min:   data.mods[mod].min,
                 max:   data.mods[mod].max,
-                affix: mod.replace( "#", "( " + data.mods[mod].min + " - " + data.mods[mod].max + " )" ),
+                affix: mod.replace( 
+                    "#", "( " + data.mods[mod].min + " - " + 
+                                data.mods[mod].max + " )" 
+                ),
                 id:    Misc.guidGenerator()
             };
             mu.compileAndRender( "affix.html", obj )
@@ -1323,7 +1350,8 @@ $( document).ready( function() {
         // Compute total links
         var totalLinks = 0;
         if ( !data.link_min ) {
-            totalLinks = parseInt( data.linked_r ) + parseInt( data.linked_g ) + parseInt( data.linked_b ) + parseInt( data.linked_w );
+            totalLinks = parseInt( data.linked_r ) + parseInt( data.linked_g ) + 
+                         parseInt( data.linked_b ) + parseInt( data.linked_w );
         } else {
             totalLinks = data.link_min;
         }
@@ -1341,7 +1369,7 @@ $( document).ready( function() {
         $( "#sockets-green" ).val( data.sockets_g );
         $( "#sockets-blue" ).val( data.sockets_b );
         $( "#sockets-white" ).val( data.sockets_w );
-        $( "#level" ).val( data.level_min );
+        $( "#level" ).val( data.ilvl_min );
         $( "#tier" ).val( data.level_min );
         $( "#quality" ).val( data.q_min );
         if ( data.corrupted !== "either" ) {
@@ -1406,6 +1434,7 @@ $( document).ready( function() {
         });
     })
 
+    // Bind modals
     $('.modal').modal();
 
 });

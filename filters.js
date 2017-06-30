@@ -65,9 +65,9 @@ class Filters {
         async.each( this.filterList, function( filter, cbFilter ) {
             if ( filter.id === id ) {
                 filter.active = !filter.active;
-                console.log( "Toggled filter " + filter.item );
-                cbFilter();
+                // console.log( "Toggled filter " + filter.item );
             }
+            cbFilter();
         }, function( err ) {
             if ( err ) {
                 console.log( err );
@@ -177,23 +177,10 @@ class Filters {
     save() {
         fs.writeFile( app.getPath( "userData" ) + path.sep + "filters.json", JSON.stringify( this.filterList ), function( err ) {
             if ( err ) {
-                return console.log( err );
+                console.log( err );
             }
         });
     }
-
-    // check( item ) {
-    //     var matched = [];
-    //     async.each( this.filterList, function( filter, cbFilter ) {
-    //         if ( filter.check ) {
-    //             matched.push( item );
-    //             cbFilter();
-    //         } else {
-    //             cbFilter();
-    //         }
-    //     });
-    // }
-
 }
 
 module.exports = Filters;
