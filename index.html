@@ -21,7 +21,10 @@
                 <div class="input-field col s2">
                     <!--Item-->
                     <!--<i class="material-icons prefix">search</i>-->
-                    <input type="text" id="item" class="autocomplete" placeholder="Item name">
+                    <div class="input-field item-name">
+                        <input type="text" id="item" class="autocomplete">
+                        <label>Item name</label>
+                    </div>
                     <!--Item type-->
                     <select id="item-type">
                         <option value="any" selected>Type</option>
@@ -56,18 +59,32 @@
                         <option value="quiver">Quiver</option>
                         <option value="ring">Ring</option>
                     </select>
-                    <input type="number" id="armor" placeholder="Armor" max="100" min="0" class="">
-                    <input type="number" id="es" placeholder="Energy shield" max="100" min="0" class="">
-                    <input type="number" id="evasion" placeholder="Evasion" max="100" min="0" class="">
+                    <div class="input-field">
+                        <input type="number" id="armor" max="100" min="0" class="">
+                        <label for="armor">Armor</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="number" id="es" max="100" min="0" class="">
+                        <label for="es">Shield</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="number" id="evasion" max="100" min="0" class="">
+                        <label for="evasion">Evasion</label>
+                    </div>
                 </div>
                 <div class="input-field col s3">
                     <input type="text" id="affixes" placeholder="Affixes" class="autocomplete">
-                    <div class="">
-                    <input type="number" id="affix-min" placeholder="min" max="100" min="0" class="col s3">
-                    <span class="col s1"></span>
-                    <input type="number" id="affix-max" placeholder="max" max="100" min="0" class="col s3">
-                    <span class="col s1"></span>
-                    <a class="waves-effect waves-light btn blue-grey col s3 right" id="add-affix" style="font-size: 1.3em!important; top: -8px!important;">Add affix</a>
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <input type="number" id="affix-min" max="100" min="0">
+                            <label for="affix-min">Min</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input type="number" id="affix-max" max="100" min="0">
+                            <label for="affix-max">Max</label>
+                        </div>
+                        <span class="col s1"></span>
+                        <a class="waves-effect waves-light btn col s3 right" id="add-affix" style="font-size: 1.3em!important; top: -8px!important;">Add affix</a>
                     </div>
                     <div id="affixes-list">
                     </div>
@@ -81,16 +98,49 @@
                         <option value="6">6 links</option>
                     </select>
                     <div class="row" style="margin-bottom: 0">
-                        <input type="number" id="sockets-total" placeholder="Total Sockets" max="6" min="0" class="col s4">
-                        <input type="number" id="sockets-red"   placeholder="Red"   class="col s2">
-                        <input type="number" id="sockets-green" placeholder="Green" class="col s2">
-                        <input type="number" id="sockets-blue"  placeholder="Blue"  class="col s2">
-                        <input type="number" id="sockets-white" placeholder="White" class="col s2">
+                        <div class="row">
+                            <div class="input-field col s4" style="
+    padding: 0!important;">
+                                <input type="number" id="sockets-total" max="6" min="0">
+                                <label for="sockets-total">Sockets</label>
+                            </div>
+                            <div class="input-field col s2">
+                                <input type="number" id="sockets-red">
+                                <label for="sockets-red">R</label>
+                            </div>
+                            <div class="input-field col s2">
+                                <input type="number" id="sockets-green">
+                                <label for="sockets-green">G</label>
+                            </div>
+                            <div class="input-field col s2">
+                                <input type="number" id="sockets-blue">
+                                <label for="sockets-blue">B</label>
+                            </div>
+                            <div class="input-field col s2">
+                                <input type="number" id="sockets-white">
+                                <label for="sockets-white">W</label>
+                            </div>
+                        </div>
                     </div>
-                    <input type="number" id="level" placeholder="Level" max="100" min="0" class="">
-                    <input type="number" id="tier" placeholder="Tier" max="100" min="0" class="col s6">
-                    <input type="number" id="experience" placeholder="Gem XP (%)" max="100" min="0" class="col s6">
-                    <input type="number" id="quality" placeholder="Quality" max="20" min="0" class="">
+                    <div class="input-field row">
+                        <input type="number" id="level" max="100" min="0" class="">
+                        <label for="level">Level</label>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6" style="
+    padding: 0!important;">
+                            <input type="number" id="tier" max="100" min="0">
+                            <label for="tier">Tier</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input type="number" id="experience" max="100" min="0">
+                            <label for="experience">Gem XP (%)</label>
+                        </div>
+                    </div>
+                    <div class="input-field row">
+                        <input type="number" id="quality" max="20" min="0" class="">
+                        <label for="quality">Quality</label>
+                    </div>
                 </div>
                 <div class="input-field col s2">
                     <!--<i class="material-icons prefix">home</i>-->
@@ -124,10 +174,19 @@
                         <option value="9">Legacy</option>
                     </select>
                 </div>
-                <div class="input-field col s2">
+                <div class="input-field col s2" style="
+    padding: 0!important;">
                     <div class="row" style="margin-bottom: 0">
-                        <input type="number" id="dps" placeholder="Total DPS" class="col s6">
-                        <input type="number" id="pdps" placeholder="Phys DPS" class="col s6">
+                        <div class="input-field col s6" style="
+    padding: 0!important;">
+                            <input type="number" id="dps">
+                            <label for="dps">Total DPS</label>
+                        </div>
+                        <div class="input-field col s6" style="
+    padding: 0!important;">
+                            <input type="number" id="pdps">
+                            <label for="pdps">Phys DPS</label>
+                        </div>
                     </div>
                     <!--<i class="material-icons prefix">home</i>-->
                     <select id="league">
@@ -138,18 +197,22 @@
                         <option value="2 Week Mayhem (JRE092)">Mayhem</option>
                         <option value="2 Week Mayhem HC (JRE091)">Mayhem HC</option>
                     </select>
-                    <input type="text" id="price" placeholder="Price">
+                    <div class="input-field" style="
+    padding: 0!important;">
+                        <input type="text" id="price">
+                        <label for="price">Price</label>
+                    </div>
                     <select id="currency">
                         <option value="chaos" selected>Chaos</option>
                         <option value="exa">Exalted</option>
                     </select>
                     <div style="padding: 0; position: relative; top: -15px; left: -10px;">
                         <p class="col s6" style="padding: 0">
-                            <input type="checkbox" class="filled-in" id="price-bo" checked/>
+                            <input type="checkbox" class="filled-in cb" id="price-bo" checked/>
                             <label for="price-bo">BO only</label>
                         </p>
                         <p class="col s6" style="padding: 0">
-                            <input type="checkbox" class="filled-in" id="clipboard"/>
+                            <input type="checkbox" class="filled-in cb" id="clipboard"/>
                             <label for="clipboard">Clipboard</label>
                         </p>
                     </div>
@@ -161,17 +224,18 @@
             <div class="indeterminate"></div>
         </div>
         <div class="row filter-interaction">
-            <span class="col s4"><i class="material-icons prefix">info_outline</i><span id="current-change-id">...</span></span>
-                <div class="col s2"></div>
-                <p class="col s2" style="padding: 0; position: relative; left: 80px; top: 3px">
-                    <input type="checkbox" class="filled-in" id="global-clipboard" checked/>
+            <span class="col s3"><i class="material-icons prefix">info_outline</i><span id="current-change-id">...</span></span>
+                <!--<div class="col s1"></div>-->
+                <div class="col s1"></div>
+                <a class="waves-effect waves-light btn col s2" id="import-poe-trade" href="#import-poe-trade-modal">Import from poe.trade</a>
+                <p class="col s2 grey darken-4" style="padding: 0; position: relative; left: 80px; top: 3px">
+                    <input type="checkbox" class="filled-in cb" id="global-clipboard" checked/>
                     <label for="global-clipboard" style="font-size: 1em!important;">Global clipboard</label>
                 </p>
                 <!--<span><input type="checkbox" class="filled-in col s1" id="global-clipboard" checked/>Global clipboard</span>-->
-                <a class="waves-effect waves-light btn blue-grey col s1" id="cancel-filter">Clear filter</a>
-                <a class="waves-effect waves-light btn blue-grey col s1" id="add-filter" style="left: 10px">Add filter</a>
-                <div class="col s1"></div>
-                <a class="waves-effect waves-light btn blue-grey col s1 right" id="snipe">Snipe</a>
+                <a class="waves-effect waves-light btn col s1" id="cancel-filter">Clear filter</a>
+                <a class="waves-effect waves-light btn col s1" id="add-filter" style="left: 10px">Add filter</a>
+                <a class="waves-effect waves-light btn col s1 right" id="snipe">Snipe</a>
         </div>
         <div class="row filter-list">
             <form class="col s12">
@@ -183,6 +247,14 @@
                     <input id="filter-filter" class="col s3" type="text" placeholder="Filter filters">
                 </div>
                 <div class="col s12" id="filters">
+                    <!--<ul class="collection" style="border: none;">
+                        <li class="filter-action grey darken-4">
+                            <div class="row">
+                                <span class="col s1"></span>
+                                <a class="waves-effect waves-light btn col s1 left" id="toggle-all-filters" style="font-size: 1.3em!important; top: -8px!important;">Toggle all filters</a>
+                            </div>
+                        </li>
+                    </ul>-->
                     <ul class="collection" style="border: none;">
                     </ul>
                 </div>
@@ -237,6 +309,7 @@
             </form>
         </div>-->
         <div id="poe-trade-output"></div>
+        <div id="poe-trade-search-output"></div>
         <div id="status-bar">
             <span id="status-message"></span>
             <span id="stats"></span>
@@ -252,6 +325,16 @@
             </div>
         </div>
         <div class="cover">
+        </div>
+        <div id="import-poe-trade-modal" class="modal grey darken-4">
+            <div class="modal-content">
+                <h5>Import from poe.trade</h5>
+                <p>Enter poe.trade search URL</p>
+                <input type="text" id="poe-trade-url" placeholder="poe.trade search url" class="col s10">
+            </div>
+            <div class="modal-footer black">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat col s2" style="color: rgba(0,200,100,1)" id="import">Import</a>
+            </div>
         </div>
     </body>
     <script>

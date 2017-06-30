@@ -10,24 +10,6 @@ var async   = require( "async" );
 var config  = require( "./config.json" );
 var Misc    = require( "./misc.js" );
 var leagues = config.leagues;
-var currencyLookupTable = {
-    "Exalted Orb":           "exa",
-    "Chaos Orb":             "chaos",
-    "Orb of Alchemy":        "alch", 
-    "Orb of Alteration":     "alt", 
-    "Orb of Fusing":         "fuse", 
-    "Divine Orb":            "divine",
-    "Orb of Chance":         "chance", 
-    "Jeweller's Orb":        "jew", 
-    "Cartographer's Chisel": "chisel", 
-    "Vaal Orb":              "vaal", 
-    "Orb of Regret":         "regret", 
-    "Regal Orb":             "regal",
-    "Gemcutter's Prism":     "gcp",
-    "Chromatic Orb":         "chrome",
-    "Orb of Scouring":       "scour",
-    "Blessed Orb":           "bless"
-};
 
 class Currency {
 
@@ -54,7 +36,7 @@ class Currency {
                 // Change long rate name to short one using lookup table
                 for ( var rate in rates ) {
                     if ( rates.hasOwnProperty( rate )) {
-                        shortRates[league][currencyLookupTable[rate]] = parseFloat( rates[rate]);
+                        shortRates[league][Currency.currencyLookupTable[rate]] = parseFloat( rates[rate]);
                     }
                 }
                 shortRates[league].chaos = 1.0;
@@ -68,5 +50,24 @@ class Currency {
         });
     }
 }
+
+Currency.currencyLookupTable = {
+    "Exalted Orb":           "exa",
+    "Chaos Orb":             "chaos",
+    "Orb of Alchemy":        "alch", 
+    "Orb of Alteration":     "alt", 
+    "Orb of Fusing":         "fuse", 
+    "Divine Orb":            "divine",
+    "Orb of Chance":         "chance", 
+    "Jeweller's Orb":        "jew", 
+    "Cartographer's Chisel": "chisel", 
+    "Vaal Orb":              "vaal", 
+    "Orb of Regret":         "regret", 
+    "Regal Orb":             "regal",
+    "Gemcutter's Prism":     "gcp",
+    "Chromatic Orb":         "chrome",
+    "Orb of Scouring":       "scour",
+    "Blessed Orb":           "bless"
+};
 
 module.exports = Currency;

@@ -68,6 +68,95 @@ class Misc {
         cb( str );
     }
 
+    static extractPoeTradeSearchParameters( poeTradeSearchURL, callback ) {
+        // Fetch URL
+        $.get( poeTradeSearchURL, {}, function( data ) {
+            var wrapper = document.getElementById( "poe-trade-search-output" );
+            wrapper.innerHTML = data;
+            // $( "div.poe-trade-output" ).html( data );
+            $( "#poe-trade-search-output script" ).remove();
+            $( "#poe-trade-search-output link" ).remove();
+            data = {
+                league:          $( "#poe-trade-search-output select[name='league'] option:selected" ).first().text(),
+                type:            $( "#poe-trade-search-output select[name='type'] option:selected" ).text().trim(),
+                base:            $( "#poe-trade-search-output select[name='base'] option:selected" ).text(),
+                name:            $( "#poe-trade-search-output input#name" ).val(),
+                dmg_min:         $( "#poe-trade-search-output #prop-dmg input[name='dmg_min']" ).val(),
+                dmg_max:         $( "#poe-trade-search-output #prop-dmg input[name='dmg_max']" ).val(),
+                aps_min:         $( "#poe-trade-search-output #prop-aps input[name='aps_min']" ).val(),
+                aps_max:         $( "#poe-trade-search-output #prop-aps input[name='aps_max']" ).val(),
+                crit_min:        $( "#poe-trade-search-output #prop-crit input[name='crit_min']" ).val(),
+                crit_max:        $( "#poe-trade-search-output #prop-crit input[name='crit_max']" ).val(),
+                dps_min:         $( "#poe-trade-search-output #prop-dps input[name='dps_min']" ).val(),
+                dps_max:         $( "#poe-trade-search-output #prop-dps input[name='dps_max']" ).val(),
+                edps_min:        $( "#poe-trade-search-output #prop-edps input[name='edps_min']" ).val(),
+                edps_max:        $( "#poe-trade-search-output #prop-edps input[name='edps_max']" ).val(),
+                pdps_min:        $( "#poe-trade-search-output #prop-pdps input[name='pdps_min']" ).val(),
+                pdps_max:        $( "#poe-trade-search-output #prop-pdps input[name='pdps_max']" ).val(),
+                armour_min:      $( "#poe-trade-search-output input[name='armour_min']" ).val(),
+                armour_max:      $( "#poe-trade-search-output input[name='armour_max']" ).val(),
+                evasion_min:     $( "#poe-trade-search-output input[name='evasion_min']" ).val(),
+                evasion_max:     $( "#poe-trade-search-output input[name='evasion_max']" ).val(),
+                shield_min:      $( "#poe-trade-search-output input[name='shield_min']" ).val(),
+                shield_max:      $( "#poe-trade-search-output input[name='shield_max']" ).val(),
+                block_min:       $( "#poe-trade-search-output input[name='block_min']" ).val(),
+                block_max:       $( "#poe-trade-search-output input[name='block_max']" ).val(),
+                sockets_min:     $( "#poe-trade-search-output input[name='sockets_min']" ).val(),
+                sockets_max:     $( "#poe-trade-search-output input[name='sockets_max']" ).val(),
+                link_min:        $( "#poe-trade-search-output input[name='link_min']" ).val(),
+                link_max:        $( "#poe-trade-search-output input[name='link_max']" ).val(),
+                sockets_r:       $( "#poe-trade-search-output input[name='sockets_r']" ).val(),
+                sockets_g:       $( "#poe-trade-search-output input[name='sockets_g']" ).val(),
+                sockets_b:       $( "#poe-trade-search-output input[name='sockets_b']" ).val(),
+                sockets_w:       $( "#poe-trade-search-output input[name='sockets_w']" ).val(),
+                linked_r:        $( "#poe-trade-search-output input[name='linked_r']" ).val(),
+                linked_g:        $( "#poe-trade-search-output input[name='linked_g']" ).val(),
+                linked_b:        $( "#poe-trade-search-output input[name='linked_b']" ).val(),
+                linked_w:        $( "#poe-trade-search-output input[name='linked_w']" ).val(),
+                rlevel_min:      $( "#poe-trade-search-output input[name='rlevel_min']" ).val(),
+                rlevel_max:      $( "#poe-trade-search-output input[name='rlevel_max']" ).val(),
+                rstr_min:        $( "#poe-trade-search-output input[name='rstr_min']" ).val(),
+                rstr_max:        $( "#poe-trade-search-output input[name='rstr_max']" ).val(),
+                rdex_min:        $( "#poe-trade-search-output input[name='rdex_min']" ).val(),
+                rdex_max:        $( "#poe-trade-search-output input[name='rdex_max']" ).val(),
+                rint_min:        $( "#poe-trade-search-output input[name='rint_min']" ).val(),
+                rint_max:        $( "#poe-trade-search-output input[name='rint_max']" ).val(),
+                q_min:           $( "#poe-trade-search-output input[name='q_min']" ).val(),
+                q_max:           $( "#poe-trade-search-output input[name='q_max']" ).val(),
+                level_min:       $( "#poe-trade-search-output input[name='level_min']" ).val(),
+                level_max:       $( "#poe-trade-search-output input[name='level_max']" ).val(),
+                ilvl_min:        $( "#poe-trade-search-output input[name='ilvl_min']" ).val(),
+                ilvl_max:        $( "#poe-trade-search-output input[name='ilvl_max']" ).val(),
+                rarity:          $( "#poe-trade-search-output select[name='rarity'] option:selected" ).text(),
+                seller:          $( "#poe-trade-search-output input[name='seller']" ).val(),
+                thread:          $( "#poe-trade-search-output input[name='thread']" ).val(),
+                identified:      $( "#poe-trade-search-output select[name='identified'] option:selected" ).text(),
+                corrupted:       $( "#poe-trade-search-output select[name='corrupted'] option:selected" ).text(),
+                online:          $( "#poe-trade-search-output input[name='online']:checked" ).val(),
+                buyout:          $( "#poe-trade-search-output select[name='has_buyout'] option:selected" ).text(),
+                alt_art:         $( "#poe-trade-search-output input[name='altart']:checked" ).val(),
+                capquality:      $( "#poe-trade-search-output input[name='capquality']:checked" ).val(),
+                buyout_min:      $( "#poe-trade-search-output input[name='buyout_min']" ).val(),
+                buyout_max:      $( "#poe-trade-search-output input[name='buyout_max']" ).val(),
+                buyout_currency: $( "#poe-trade-search-output select[name='buyout_currency'] option:selected" ).text(),
+                crafted:         $( "#poe-trade-search-output select[name='crafted'] option:selected" ).text(),
+                enchanted:       $( "#poe-trade-search-output select[name='enchanted'] option:selected" ).text(),
+                mods:            {}
+            };
+            $( "#poe-trade-search-output select[name='mod_name']" ).each( function() {
+                var mod_name = $( this ).find( "option:selected" ).val();
+                if ( mod_name ) {
+                    var mod_min  = $( this ).parent().parent().find( "input[name='mod_min']" ).val();
+                    var mod_max  = $( this ).parent().parent().find( "input[name='mod_max']" ).val();
+                    var pseudo   = mod_name.indexOf( "total" ) !== -1;
+                    mod_name = mod_name.replace( "(pseudo) (total)", "" ).trim();
+                    data.mods[mod_name] = { min: mod_min, max: mod_max, pseudo: pseudo };
+                }
+            });
+            callback( data );
+        });
+    }
+
     /**
      * Send messages to the status bar
      *

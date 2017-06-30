@@ -16,6 +16,7 @@ form {
     top: 8px!important;
     font-size: 0.9em!important;
     text-transform: none!important;
+    font-weight: 300;
 }
 
 #snipe {
@@ -34,8 +35,13 @@ form {
 }
 
 .select-wrapper input.select-dropdown, input {
-    border-bottom: 1px dotted white!important;
+    border-bottom: 1px dotted rgba(0,0,0,0)!important;
     padding-left: 0!important;
+}
+
+.select-wrapper input.select-dropdown {
+    border-bottom: 1px dotted rgba(0,0,0,0)!important;
+    padding-left: 10px!important;
 }
 
 .caret {
@@ -44,7 +50,7 @@ form {
 
 .progress {
     position: absolute!important;
-    top: 240px;
+    top: 230px;
 }
 
 span.title {
@@ -154,8 +160,8 @@ ul .row {
 }
 
 .select-wrapper input.select-dropdown, input {
-    border-bottom: 1px dotted white!important;
-    padding-left: 0!important;
+    /*border-bottom: 1px dotted white!important;*/
+    /*padding-left: 0!important;*/
 }
 
 span.highlight {
@@ -327,7 +333,7 @@ input:active {
     padding-right: 10px;
 }
 
-#poe-trade-output {
+#poe-trade-output, #poe-trade-search-output {
     display: none;
 }
 
@@ -486,12 +492,12 @@ input[type=range] {
 
 #item-filter {
     position: relative;
-    top:-3px;
+    top:-1px;
 }
 
 #filter-filter {
     position: relative;
-    top: 6px;
+    top: 9px;
 }
 
 .filter-list .collection {
@@ -550,4 +556,95 @@ input[type=range] {
 .typeLine {
     color: #c7c7c7;
     padding-left: 10px;
+}
+
+label {
+    top: 3px!important;
+    left: 0!important;
+    padding-left: 10px;
+}
+
+label.active {
+    transform: translateX(50px)!important;
+    text-align: right!important;
+    color: #b9ecb7!important;
+    /*text-shadow: 0 0 5px blue;*/
+}
+
+.item-name label.active {
+    transform: translateX(230%)!important;
+}
+
+label.active[for="sockets-red"], label.active[for="sockets-green"], label.active[for="sockets-blue"], label.active[for="sockets-white"] {
+    transform: translateX(120%)!important;
+}
+
+label.active[for="tier"] {
+    transform: translateX(165%)!important;
+}
+
+label[for="price-bo"] {
+    left: 20px!important;
+}
+
+.input-field {
+    margin-top: 0rem!important;
+}
+
+input[type="number"], input[type="text"], input.select-dropdown {
+    /*padding-left: 25%!important;*/
+    /*width: 75%!important;*/
+    border-radius: 5px!important;
+    padding-left: 10px!important;
+    /*width: 100%!important;*/
+}
+
+input[type="number"], input[type="text"] {
+    /*border-bottom: 1px solid rgba(27, 173, 173, 0.2)!important;*/
+}
+
+input[type="number"]:focus, input[type="text"]:focus {
+    box-shadow: 0 1px 0 0 rgba(0,0,0,0)!important;
+    background: black;
+    padding-left: 10px!important;
+}
+
+input:hover {
+    background-color: rgba( 0, 0, 0, 0.2 )!important;
+    transition: background-color 0.2s linear;
+}
+
+input:focus {
+    background-color: rgba( 0, 0, 0, 0.4 )!important;
+    transition: background-color 0.2s linear;
+}
+
+.filter-form .row {
+    margin-bottom: 0!important;
+}
+
+.btn {
+    background: #2b2b2b!important;
+}
+
+.cb[type="checkbox"].filled-in:checked + label:after {
+    border: 2px solid #2b2b2b!important;
+    background-color: #2b2b2b!important;
+}
+
+[type="checkbox"].filled-in:not(:checked)+label:after {
+    background-color: rgb(41, 41, 41)!important;
+    border: 2px solid rgba(0, 0, 0, 1)!important;
+}
+
+#poe-trade-url {
+    font-size: 1em!important;
+    position: relative;
+    top: 10px;
+    left: -10px;
+    color: rgba(0,200,100,1)!important;
+}
+
+.filter-action {
+    margin-bottom: 10px;
 }

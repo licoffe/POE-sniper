@@ -181,8 +181,7 @@ $( document).ready( function() {
         $( "#filters-amount" ).text( $( "#filters .collection-item:visible" ).length );
     };
 
-    // When clicking on 'Clear Filter'
-    var cancelEditAction = function() {
+    var resetFilters = function() {
         $( "#league" ).val( config.leagues[config.defaultLeagueIndex]);
         $( "#league").material_select();
         $( "#item" ).val( "" );
@@ -220,12 +219,18 @@ $( document).ready( function() {
         $( "#affixes-list" ).empty();
         $( "#item-type" ).val( "any" );
         $( "#item-type").material_select();
+        Materialize.updateTextFields();
+    };
+
+    // When clicking on 'Clear Filter'
+    var cancelEditAction = function() {
+        resetFilters();
 
         // If we are editing and the button is 'Clear Filter'
         if ( $( this ).text() !== "Clear filter" ) {
             $( "#add-filter" ).text( "Add filter" );
             $( "#cancel-filter" ).text( "Clear filter" );
-            $( "#cancel-filter" ).removeClass( "red" ).addClass( "blue-grey" );
+            $( "#cancel-filter" ).removeClass( "red" );
             editingFilter = "";
         }
     };
@@ -649,7 +654,7 @@ $( document).ready( function() {
             editingFilter = "";
             $( "#add-filter" ).text( "Add filter" );
             $( "#cancel-filter" ).text( "Clear filter" );
-            $( "#cancel-filter" ).removeClass( "red" ).addClass( "blue-grey" );
+            $( "#cancel-filter" ).removeClass( "red" );
         }
         // Color item name depending on rarity
         colorRarity( filter );
@@ -735,6 +740,7 @@ $( document).ready( function() {
                     $( "#item-type" ).val( filter.itemType );
                     $( "#item-type" ).material_select();
                     $( "#affixes-list" ).empty();
+                    Materialize.updateTextFields();
                     // For each affix
                     async.each( filter.affixesDis, function( affix, cbAffix ) {
                         var generated = "";
@@ -1247,8 +1253,159 @@ $( document).ready( function() {
         }
     }, config.NOTIFICATION_QUEUE_INTERVAL );
 
-    // setInterval( function() {
-    //     console.log( "editingFilter: " + editingFilter );
-    // }, 1000 );
+    // var toggleAllFiltersAction = function() {
+    //     // Get all visible filters
+    //     var toggleOn = false;
+    //     $( ".filter-detail:visible" ).parent().find( ".cb" ).each( function() {
+    //         if ( !$( this ).prop( "checked" )) {
+    //             toggleOn = true;
+    //         }
+    //     });
+    //     $( ".filter-detail:visible" ).parent().find( ".cb" ).each( function() {
+    //         if ( toggleOn ) {
+    //             $( this ).prop( "checked", true );
+    //         } else {
+    //             $( this ).prop( "checked", false );
+    //         }
+    //     });
+    // };
+
+    // $( "#toggle-all-filters" ).click( toggleAllFiltersAction )
+
+    var fillInFormWithPOETradeData = function( data ) {
+        if ( !data.name && data.base !== "any" ) {
+            $( "#item" ).val( data.base );
+        } else if ( data.name ) {
+            // Check if it's a unique name
+            var uniqueName = "";
+            async.each( itemTypes.unique.types, function( unique, cbUnique ) {
+                if ( !uniqueName && data.name.indexOf( unique ) !== -1 ) {
+                    uniqueName = unique;
+                }
+                cbUnique();
+            }, function() {
+                if ( uniqueName ) {
+                    $( "#item" ).val( uniqueName );
+                } else {
+                    $( "#item" ).val( data.name );
+                }
+            });
+        }
+        $( "#item-type" ).val( data.type.toLowerCase() );
+        $( "#item-type" ).material_select();
+        $( "#armor" ).val( data.armour_min );
+        $( "#es" ).val( data.shield_min );
+        $( "#evasion" ).val( data.evasion_min );
+        $( "#evasion" ).val( data.evasion_min );
+        async.each( Object.keys( data.mods ), function( mod, cbMod ) {
+            var generated = "";
+            var obj = {
+                title: mod,
+                min:   data.mods[mod].min,
+                max:   data.mods[mod].max,
+                affix: mod.replace( "#", "( " + data.mods[mod].min + " - " + data.mods[mod].max + " )" ),
+                id:    Misc.guidGenerator()
+            };
+            mu.compileAndRender( "affix.html", obj )
+            .on( "data", function ( data ) {
+                generated += data.toString();
+            })
+            .on( "end", function () {
+                $( "#affixes-list" ).append( generated );
+                $( "#" + obj.id ).data( "data-item", obj );
+                // When clicking on remove affix
+                $( ".remove-affix" ).click( function() {
+                    $( this ).parent().parent().remove();
+                });
+            });
+            cbMod();
+        });
+        // Compute total links
+        var totalLinks = 0;
+        if ( !data.link_min ) {
+            totalLinks = parseInt( data.linked_r ) + parseInt( data.linked_g ) + parseInt( data.linked_b ) + parseInt( data.linked_w );
+        } else {
+            totalLinks = data.link_min;
+        }
+        if ( totalLinks > 0 && totalLinks <= 4 ) {
+            $( "#links" ).val( "0" );
+        } else if ( totalLinks === "5" ) {
+            $( "#links" ).val( "5" );
+        } else if ( totalLinks === "6" ) {
+            $( "#links" ).val( "6" );
+        }
+        $( "#links").material_select();
+        // Compute sockets
+        $( "#sockets-total" ).val( data.sockets_min );
+        $( "#sockets-red" ).val( data.sockets_r );
+        $( "#sockets-green" ).val( data.sockets_g );
+        $( "#sockets-blue" ).val( data.sockets_b );
+        $( "#sockets-white" ).val( data.sockets_w );
+        $( "#level" ).val( data.level_min );
+        $( "#tier" ).val( data.level_min );
+        $( "#quality" ).val( data.q_min );
+        if ( data.corrupted !== "either" ) {
+            $( "#corrupted" ).val( data.corrupted === "Yes" ? "true" : "false" );
+            $( "#corrupted").material_select();
+        }
+        
+        if ( data.crafted !== "either" ) {
+            $( "#crafted" ).val( data.crafted === "Yes" ? "true" : "false" );
+            $( "#crafted").material_select();
+        }
+        if ( data.enchanted !== "either" ) {
+            $( "#enchanted" ).val( data.enchanted === "Yes" ? "true" : "false" );
+            $( "#enchanted").material_select();
+        }
+        if ( data.identified !== "either" ) {
+            $( "#identified" ).val( data.identified === "Yes" ? "true" : "false" );
+            $( "#identified").material_select();
+        }
+        if ( data.rarity === "Normal" ) {
+            $( "#rarity" ).val( 0 );
+        } else if ( data.rarity === "Magic" ) {
+            $( "#rarity" ).val( 1 );
+        } else if ( data.rarity === "Rare" ) {
+            $( "#rarity" ).val( 2 );
+        } else if ( data.rarity === "Unique" ) {
+            $( "#rarity" ).val( 3 );
+        } else if ( data.rarity === "Relic" ) {
+            $( "#rarity" ).val( 9 );
+        }
+        $( "#rarity").material_select();
+        $( "#dps" ).val( data.dps_min );
+        $( "#pdps" ).val( data.pdps_min );
+        $( "#league" ).val( data.league );
+        $( "#league").material_select();
+        // Set price and currency
+        if ( data.buyout.max ) {
+            if ( data.buyout_currency === "Chaos Orb" ) {
+                $( "#currency" ).val( "chaos" );
+                $( "#price" ).val( data.buyout_max );
+            } else if ( data.buyout_currency === "Exalted Orb" ) {
+                $( "#currency" ).val( "exa" );
+                $( "#price" ).val( data.buyout_max );
+            // Otherwise convert rate to chaos
+            } else if ( data.buyout_currency ) {
+                $( "#currency" ).val( "chaos" );
+                $( "#price" ).val( 
+                    Math.round( currencyRates[data.league][Currency.currencyLookupTable[data.buyout_currency]] * data.buyout_max * 100 ) / 100 );
+            }
+            $( "#currency" ).material_select();   
+        }
+        // Buyout
+        $( "#price-bo" ).prop( "checked", data.buyout === "Yes" ? true : false );
+        Materialize.updateTextFields();
+    };
+
+    $( "#import" ).click( function() {
+            Misc.extractPoeTradeSearchParameters( $( "#poe-trade-url" ).val(), function( data ) {
+            // console.log( data );
+            resetFilters();
+            fillInFormWithPOETradeData( data );
+        });
+    })
+
+    $('.modal').modal();
 
 });

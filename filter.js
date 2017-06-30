@@ -191,9 +191,14 @@ class Filter {
         for ( var affix in this.affixes ) {
             if ( this.affixes.hasOwnProperty( affix )) {
                 keys++;
+                // If there is no lower value
+                this.affixes[affix][0] = this.affixes[affix][0] !== "" ? this.affixes[affix][0] : 0;
+                // If there is no upper value
+                this.affixes[affix][1] = this.affixes[affix][1] !== "" ? this.affixes[affix][1] : 1000000;
                 // If mod has one parameter
                 if ( parsedMods.mods[affix] && parsedMods.mods[affix].length === 1 ) {
-                    if ( parsedMods.mods[affix] && this.affixes[affix][0] <= parsedMods.mods[affix][0] &&
+                    if ( parsedMods.mods[affix] && 
+                        this.affixes[affix][0] <= parsedMods.mods[affix][0] &&
                         this.affixes[affix][1] >= parsedMods.mods[affix][0]) {
                         passed++;
                     }
