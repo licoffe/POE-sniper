@@ -286,8 +286,8 @@ class Filter {
     /**
      * Format item to display in the results
      *
-     * @params Item, item name, prices and callback
-     * @return Formatted item through callback
+     * @params  Item, item name, prices and callback
+     * @returns Formatted item through callback
      */
     formatItem( item, name, prices, callback ) {
         var time = this.formatTime();
@@ -418,7 +418,8 @@ class Filter {
         // ( no level filter OR item is a gem OR ( item is not a gem AND filter level <= item level )) AND
         // ( no rarity filter OR rarities are the same ) AND
         // ( no item type filter OR item types are the same )
-        if (( this.item    === ""    || itemName === this.item || typeLine === this.item ) &&
+        if (( this.item    === ""    || itemName.toLowerCase() === this.item.toLowerCase() || 
+              typeLine.toLowerCase() === this.item.toLowerCase() ) &&
             ( this.league  === "any" || item.league === this.league ) &&
             ( this.socketsTotal === ""    || this.socketsTotal <= item.sockets.length ) && 
             (( this.corrupted  == 'true' ) === item.corrupted  || this.corrupted  === "any" ) &&

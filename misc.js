@@ -68,12 +68,17 @@ class Misc {
         cb( str );
     }
 
+    /**
+     * Extract from data from a poe.trade search
+     *
+     * @params poe.trade search URL, callback
+     * @return Extracted data through callback
+     */
     static extractPoeTradeSearchParameters( poeTradeSearchURL, callback ) {
-        // Fetch URL
+        // Fetch URL, and store it in the page
         $.get( poeTradeSearchURL, {}, function( data ) {
             var wrapper = document.getElementById( "poe-trade-search-output" );
             wrapper.innerHTML = data;
-            // $( "div.poe-trade-output" ).html( data );
             $( "#poe-trade-search-output script" ).remove();
             $( "#poe-trade-search-output link" ).remove();
             data = {
@@ -143,6 +148,7 @@ class Misc {
                 enchanted:       $( "#poe-trade-search-output select[name='enchanted'] option:selected" ).text(),
                 mods:            {}
             };
+            // Extract mods
             $( "#poe-trade-search-output select[name='mod_name']" ).each( function() {
                 var mod_name = $( this ).find( "option:selected" ).val();
                 if ( mod_name ) {
