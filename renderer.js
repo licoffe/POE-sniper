@@ -68,6 +68,7 @@ var currencyRates   = {};
 var delayQueue      = []; // Stores filtered items
 var displayingNotification = false;
 var lastItem        = null;
+var prices          = {};
 
 // var writeFilterStats = function( filterStats ) {
 //     fs.appendFile( __dirname + "/stats_filters.csv", filterStats, function( err ) {
@@ -1092,7 +1093,10 @@ $( document).ready( function() {
                                         renderSockets( item );
 
                                         // Only notify if the item is new in the list
-                                        if ( foundIndex === -1 ) {
+                                        // or if it's been repriced lower
+                                        if ( foundIndex === -1 || item.originalPrice < prices[item.itemId]) {
+                                            // Update stored price
+                                            prices[item.itemId] = item.originalPrice;
                                             item.clipboard = filter.clipboard;
                                             lastItem       = item;
                                             // If delay queue is empty an no notification is being displayed, notify now
@@ -1142,6 +1146,7 @@ $( document).ready( function() {
                                 console.log( previousItem + " was sold" );
                                 $( "li#" + itemInStash[stash.id].previousItems[previousItem] ).addClass( "sold" );
                                 delete results[itemInStash[stash.id].previousItems[previousItem]];
+                                delete prices[previousItem];
                             }
                             cbPreviousItem();
                         }, function( err ) {
@@ -1199,6 +1204,7 @@ $( document).ready( function() {
         $( "#status-bar" ).hide();
     }
 
+    // Check for update on startup
     Misc.checkUpdate( function( data ) {
         // If there is an update
         if ( data ) {
@@ -1270,6 +1276,7 @@ $( document).ready( function() {
 
     // $( "#toggle-all-filters" ).click( toggleAllFiltersAction )
 
+    // Map internal types to poe.trade ones
     var matchTypeWithPoeTrade = function( type ) {
         switch ( type ) {
             case "map fragments":
@@ -1295,6 +1302,8 @@ $( document).ready( function() {
         }
     };
 
+
+    // Fill in the filter form from the extracted poe.trade search
     var fillInFormWithPOETradeData = function( data ) {
         console.log( data );
         if ( !data.name && data.base !== "any" ) {
@@ -1426,6 +1435,7 @@ $( document).ready( function() {
         Materialize.updateTextFields();
     };
 
+    // When clicking on import button
     $( "#import" ).click( function() {
             Misc.extractPoeTradeSearchParameters( $( "#poe-trade-url" ).val(), function( data ) {
             // console.log( data );
