@@ -102,6 +102,10 @@ class Filter {
         var originalPrice = "";
         var convertedPrice;
         var convertedPriceChaos;
+        var league = this.league;
+        if ( config.useBeta ) {
+            league = "beta-" + league;
+        }
 
         // The price is the name of the stash
         var price = item.stashTab;
@@ -119,19 +123,19 @@ class Filter {
                 // Compute the fraction: 1/2 exa -> 0.5 exa
                 originalPrice = Math.round( match[2] / match[3] * 100 ) / 100 + " " + match[4];
                 // Same but convert to chaos: 1/2 exa -> 0.5 x chaos_rate(exa)
-                convertedPrice = ( match[2] / match[3] ) * currencyRates[this.league][match[4]];
+                convertedPrice = ( match[2] / match[3] ) * currencyRates[league][match[4]];
             // Otherwise
         } else {
                 // Same thing as above without divisions
                 originalPrice  = Math.round( match[1] * 100 ) / 100 + " " + match[4];
-                convertedPrice = match[1] * currencyRates[this.league][match[4]];
+                convertedPrice = match[1] * currencyRates[league][match[4]];
             }
             
             convertedPriceChaos = convertedPrice;
             // If the converted price is above the rate of exalted orbs in this league
             // convert the price to exalted instead
-            if ( convertedPrice > currencyRates[this.league].exa ) {
-                convertedPrice /= currencyRates[this.league].exa;
+            if ( convertedPrice > currencyRates[league].exa ) {
+                convertedPrice /= currencyRates[league].exa;
                 currency = "exa";
             }
             // Round up the price to .00 precision
@@ -357,6 +361,11 @@ class Filter {
             } else {
                 whisperName += " " + itemType;
             }
+
+            // If beta is used, add full path to icon
+            if ( config.useBeta ) {
+                item.icon = "http://web.poecdn.com/" + item.icon;
+            }
             
             callback({
                 time:          time,
@@ -406,6 +415,10 @@ class Filter {
         if ( itemName === "" ) {
             name = typeLine;
         }
+        var league = this.league;
+        if ( config.useBeta ) {
+            league = "beta-" + league;
+        }
 
         // If: 
         // ( no names filter OR names are the same OR the typeLines are the same ) AND
@@ -432,10 +445,11 @@ class Filter {
             ) {
 
             var prices = this.computePrice( item, currencyRates );
+            console.log( currencyRates[league] );
             
             // Convert filter price to chaos and check if the item is within budget
             if ( !this.budget || ( prices.convertedPrice && 
-                  prices.convertedPriceChaos <= this.budget * currencyRates[this.league][this.currency]) || 
+                  prices.convertedPriceChaos <= this.budget * currencyRates[league][this.currency]) || 
                 ( !prices.convertedPrice && !this.buyout )) {
 
                 // Parse item mods

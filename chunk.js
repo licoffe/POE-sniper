@@ -32,6 +32,17 @@ if ( !fs.existsSync( app.getPath( "userData" ) + path.sep + "config.json" )) {
     config = require( app.getPath( "userData" ) + path.sep + "config.json" );
 }
 
+var links = {
+    "normal": {
+        "api": "http://www.pathofexile.com/api/public-stash-tabs",
+        "domain": "www.pathofexile.com"
+    },
+    "beta": {
+        "api": "http://betaapi.pathofexile.com/api/public-stash-tabs",
+        "domain": "betaapi.pathofexile.com"
+    }
+};
+
 class Chunk {
 
     /**
@@ -48,12 +59,16 @@ class Chunk {
                     setTimeout( Chunk.getLastChangeId, 1000, callback );
                 } else {
                     var data = JSON.parse( body, 'utf8' );
-                    callback( data.changeId );
+                    if ( config.useBeta ) {
+                        callback( data.changeIdBeta );
+                    } else {
+                        callback( data.changeId );
+                    }
                 }
             }
         );
     };
-
+    
     /**
      * Download compressed gzip change data
      *
@@ -62,11 +77,17 @@ class Chunk {
      */
     static download( chunkID, callback ) {
         // console.time( "Downloading chunk " + chunkID );
-        var begin = Date.now();
+        var begin    = Date.now();
         var dataSize = 0;
         var chunkStats;
-        dnscache.lookup( "www.pathofexile.com", function( err, result ) {
-            request({ "url": "http://www.pathofexile.com/api/public-stash-tabs?id=" + chunkID, "gzip": true },
+        var link     = links.normal.api;
+        var domain   = links.normal.domain;
+        if ( config.useBeta ) {
+            link   = links.beta.api;
+            domain = links.beta.domain;
+        }
+        dnscache.lookup( domain, function( err, result ) {
+            request({ "url": link + "?id=" + chunkID, "gzip": true },
                 function( error, response, body ) {
                     // If there is an error, retry dowloading after delay
                     if ( error ) {

@@ -57,6 +57,9 @@ class Misc {
         if ( data.name !== data.typeLine ) {
             data.name += " " + data.typeLine;
         }
+        if ( config.useBeta ) {
+            data.league = "Beta " + data.league;
+        }
         str     = str.replace( /<account>/g, data.accountName );
         str     = str.replace( "<item>",     data.whisperName );
         str     = str.replace( "<league>",   data.league );

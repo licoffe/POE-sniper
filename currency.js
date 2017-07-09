@@ -10,6 +10,8 @@ var async   = require( "async" );
 var config  = require( "./config.json" );
 var Misc    = require( "./misc.js" );
 var leagues = config.leagues;
+leagues.push( "beta-Standard" );
+leagues.push( "beta-Hardcore" );
 
 class Currency {
 
@@ -36,7 +38,7 @@ class Currency {
                 // Change long rate name to short one using lookup table
                 for ( var rate in rates ) {
                     if ( rates.hasOwnProperty( rate )) {
-                        shortRates[league][Currency.currencyLookupTable[rate]] = parseFloat( rates[rate]);
+                        shortRates[league][Currency.shortToLongLookupTable[rate]] = parseFloat( rates[rate]);
                     }
                 }
                 shortRates[league].chaos = 1.0;
@@ -68,6 +70,25 @@ Currency.currencyLookupTable = {
     "Chromatic Orb":         "chrome",
     "Orb of Scouring":       "scour",
     "Blessed Orb":           "bless"
+};
+
+Currency.shortToLongLookupTable = {
+    "exa":    "Exalted Orb",
+    "chaos":  "Chaos Orb",
+    "alch":   "Orb of Alchemy",
+    "alt":    "Orb of Alteration",
+    "fuse":   "Orb of Fusing",
+    "divine": "Divine Orb",
+    "chance": "Orb of Chance",
+    "jew":    "Jeweller's Orb",
+    "chisel": "Cartographer's Chisel",
+    "vaal":   "Vaal Orb",
+    "regret": "Orb of Regret",
+    "regal":  "Regal Orb",
+    "gcp":    "Gemcutter's Prism",
+    "chrom":  "Chromatic Orb",
+    "scour":  "Orb of Scouring",
+    "bless":  "Blessed Orb"
 };
 
 module.exports = Currency;
