@@ -10,7 +10,8 @@
         <script type="text/javascript" src="http://hammerjs.github.io/dist/hammer.min.js"></script>
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="./materialize/css/materialize.min.css">
-
+        <!-- Fontin -->
+        <link rel="stylesheet" href="./font/stylesheet.css">
         <!-- Compiled and minified JavaScript -->
         <script src="./materialize/js/materialize.min.js"></script>
     </head>
@@ -192,11 +193,11 @@
                     <!--<i class="material-icons prefix">home</i>-->
                     <select id="league">
                         <option value="Standard">Standard</option>
-                        <option value="Legacy" selected>Legacy</option>
+                        <option id="current-league-option" value="Legacy" selected>Legacy</option>
                         <option value="Hardcore">Hardcore</option>
-                        <option value="Hardcore Legacy">Hardcore Legacy</option>
-                        <option value="2 Week Mayhem (JRE092)">Mayhem</option>
-                        <option value="2 Week Mayhem HC (JRE091)">Mayhem HC</option>
+                        <option id="current-league-hardcore-option" value="Hardcore Legacy">Hardcore Legacy</option>
+                        <option id="current-race-option" value="2 Week Mayhem (JRE092)">Mayhem</option>
+                        <option id="current-race-hardcore-option" value="2 Week Mayhem HC (JRE091)">Mayhem HC</option>
                     </select>
                     <div class="input-field" style="
     padding: 0!important;">
@@ -227,15 +228,16 @@
         <div class="row filter-interaction">
             <span class="col s3"><i class="material-icons prefix">info_outline</i><span id="current-change-id">...</span></span>
                 <!--<div class="col s1"></div>-->
-                <div class="col s1"></div>
-                <a class="waves-effect waves-light btn col s2 z-depth-2" id="import-poe-trade" href="#import-poe-trade-modal">Import from poe.trade</a>
-                <p class="col s2 grey darken-4" style="padding: 0; position: relative; left: 80px; top: 3px">
+                <div class="col s2"></div>
+                <a class="waves-effect waves-light btn col s1 z-depth-2" id="import-poe-trade" href="#import-poe-trade-modal">Import poe.trade</a>
+                <p class="col s1 grey darken-4" style="">
                     <input type="checkbox" class="filled-in cb" id="global-clipboard" checked/>
-                    <label for="global-clipboard" style="font-size: 1em!important;">Global clipboard</label>
+                    <label for="global-clipboard" style="font-size: 1em!important;">Clipboard</label>
                 </p>
                 <!--<span><input type="checkbox" class="filled-in col s1" id="global-clipboard" checked/>Global clipboard</span>-->
                 <a class="waves-effect waves-light btn col s1 z-depth-2" id="cancel-filter">Clear filter</a>
                 <a class="waves-effect waves-light btn col s1 z-depth-2" id="add-filter" style="left: 10px">Add filter</a>
+                <a class="waves-effect waves-light btn col s1 z-depth-2" id="settings" href="#settings-modal" style="left: 20px"><i class="material-icons">settings</i><span>Settings</span></a>
                 <a class="waves-effect waves-light btn col s1 right z-depth-2" id="snipe">Snipe</a>
         </div>
         <div class="row filter-list">
@@ -327,14 +329,90 @@
         </div>
         <div class="cover">
         </div>
-        <div id="import-poe-trade-modal" class="modal grey darken-4">
+        <div id="import-poe-trade-modal" class="modal blue-grey darken-4">
             <div class="modal-content">
                 <h5>Import from poe.trade</h5>
                 <p>Enter poe.trade search URL</p>
                 <input type="text" id="poe-trade-url" placeholder="poe.trade search url" class="col s10">
             </div>
-            <div class="modal-footer black">
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat col s2" style="color: rgba(0,200,100,1)" id="import">Import</a>
+            <div class="modal-footer blue-grey darken-4">
+                <a href="#!" id="import" class="modal-action waves-effect waves-light btn col s1 z-depth-2 modal-close">Import</a>
+            </div>
+        </div>
+        <div id="settings-modal" class="modal blue-grey darken-4">
+            <div class="modal-content">
+                <h5>Configuration</h5><br>
+                <div class="row">
+                    <span class="section">Sound</span>
+                </div>
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input type="number" id="sound-volume" max="100" min="0" value="0">
+                        <label for="sound-volume">Sound volume</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <select id="sound-effect">
+                            <option value="sound1">Sound effect 1</option>
+                            <option value="sound2">Sound effect 2</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s3">
+                        <a href="#!" id="play-sound" class="waves-effect waves-light btn z-depth-2" style="font-size: 1.2em!important; position: relative; top: -10px!important; "><i class="material-icons" style="position: relative; top: 0">play_arrow</i><span style="position: relative; top: -5px; left: 5px">Play</span></a>
+                    </div>
+                </div>
+                <hr><br>
+                <div class="row">
+                    <span class="section">Message</span>
+                </div>
+                <div class="row">
+                    <p style="font-size: 1.3em">
+                        Whisper and barter message use the same format as poe.trade in their default configuration. You can change them if you wish. The tags are : <span class="tag">&lt;account&gt;</span>, <span class="tag">&lt;item&gt;</span>, <span class="tag">&lt;price&gt;</span>, <span class="tag">&lt;league&gt;</span>, <span class="tag">&lt;stashTab&gt;</span>, <span class="tag">&lt;left&gt;</span> and <span class="tag">&lt;top&gt;</span>.
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                        <label for="whisper-message">Whisper message</label>
+                        <textarea id="whisper-message" class="materialize-textarea">
+                        </textarea>
+                    </div>
+                    <div class="col s6">
+                        <label for="whisper-preview">Whisper preview</label>
+                        <textarea id="whisper-preview" class="materialize-textarea" disabled>
+                        </textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                        <label for="barter-message">Barter message</label>
+                        <textarea id="barter-message" class="materialize-textarea">
+                        </textarea>
+                    </div>
+                    <div class="col s6">
+                        <label for="barter-preview">Barter preview</label>
+                        <textarea id="barter-preview" class="materialize-textarea" disabled>
+                        </textarea>
+                    </div>
+                </div>
+                <hr><br>
+                <div class="row">
+                    <span class="section">Misc.</span>
+                </div>
+                <div class="row">
+                    <p style="font-size: 1.3em">
+                        Activate Beta API to use the beta stash API instead of the standard one. Note that you are only able to use one or the other for performance reasons.
+                    </p>
+                </div>
+                <div class="switch">
+                    <label>
+                        Standard API
+                        <input type="checkbox" id="use-beta">
+                        <span class="lever"></span>
+                        Beta API
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer blue-grey darken-4">
+                <a href="#!" id="apply-settings" class="waves-effect waves-light btn col s1 z-depth-2 modal-action modal-close" style="font-size: 1.2em!important;">Apply</a>
             </div>
         </div>
     </body>

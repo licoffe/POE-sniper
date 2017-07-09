@@ -648,3 +648,76 @@ input:focus {
 .filter-action {
     margin-bottom: 10px;
 }
+
+#settings i {
+    position: relative;
+    top: 0;
+}
+
+#settings span {
+    position: relative;
+    top: -6px;
+    left: 5px;
+}
+
+#settings-modal {
+    font-size: 0.8em;
+}
+
+.modal-content hr {
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.modal-footer .btn {
+    margin-bottom: 20px;
+}
+
+.section {
+    font-size: 1.5em;
+}
+
+#whisper-message, #barter-message {
+    color: rgba(34, 255, 147, 1)!important;
+    border-radius: 5px!important;
+    border-bottom: 1px solid rgba(0,0,0,0)!important;
+    padding: 5px!important;
+    font-size: 1.22em!important;
+    padding-bottom: 15px;
+    min-height: 4rem!important;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.materialize-textarea:hover {
+    background-color: rgba( 0, 0, 0, 0.2 )!important;
+    transition: background-color 0.2s linear;
+}
+
+.materialize-textarea:focus {
+    background-color: rgba( 0, 0, 0, 0.4 )!important;
+    transition: background-color 0.2s linear;
+    box-shadow: none!important;
+}
+
+#whisper-preview, #barter-preview {
+    font-size: 1.3em!important;
+    font-family: "Fontin";
+    color: rgba(255, 255, 255, 0.8)!important;
+    min-height: 4rem!important;
+}
+
+#whisper-preview:hover, #barter-preview:hover {
+    background-color: rgba( 0, 0, 0, 0 )!important;
+    transition: background-color 0.2s linear;
+}
+
+.tag {
+    font-family: "Courier New", Courier, monospace;
+    color: yellow;
+}
+
+#apply-settings, #import {
+    position: relative;
+    top: -10px!important;
+    left: -10px!important;
+}

@@ -1444,6 +1444,95 @@ $( document).ready( function() {
         });
     })
 
+    // When clicking on play sound
+    $( "#play-sound" ).click( function() {
+        // Grab selected audio sound and volume
+        var sound    = $( "#sound-effect" ).val() + ".mp3";
+        var volume   = $( "#sound-volume" ).val();
+        var audio    = new Audio( __dirname + '/' + sound );
+        audio.volume = volume / 100;
+        audio.play();
+    });
+
+    var formatMessage = function( data, message, cb ) {
+        var str = message;
+        if ( data.name !== data.typeLine ) {
+            data.name += " " + data.typeLine;
+        }
+        str     = str.replace( /<account>/g,  data.accountName );
+        str     = str.replace( /<item>/g,     data.whisperName );
+        str     = str.replace( /<league>/g,   data.league );
+        str     = str.replace( /<stash>/g,    data.stashName );
+        str     = str.replace( /<price>/g,    data.originalPrice );
+        str     = str.replace( /<stashTab>/g, data.stashTab );
+        str     = str.replace( /<left>/g,     data.left );
+        str     = str.replace( /<top>/g,      data.top );
+        cb( str );
+    }
+
+    // Sample item used for message preview
+    var sampleItem = {
+        accountName:   "ClearForest",
+        whisperName:   "Necropolis Map",
+        league:        "Standard",
+        stashName:     "",
+        originalPrice: "36 exa",
+        stashTab:      "Mirror worthy",
+        left:          "9",
+        top:           "2",
+    };
+    var fillInSettings = function() {
+        // Setup sound options
+        $( "#sound-effect" ).val( config.sound.replace( ".mp3", "" ));
+        $( "#sound-effect" ).material_select();
+        $( "#sound-volume" ).val( config.volume * 100 );
+        // Setup whisper options
+        $( "#whisper-message" ).val( config.message );
+        $( "#barter-message" ).val( config.barter );
+        // fill in preview 
+        formatMessage( sampleItem, config.message, function( str ) {
+            $( "#whisper-preview" ).text( str );
+        });
+        formatMessage( sampleItem, config.barter, function( str ) {
+            $( "#barter-preview" ).text( str );
+        });
+        // Setup beta options
+        if ( config.useBeta ) {
+            $( "#use-beta" ).prop( "checked", true );
+        }
+    };
+    fillInSettings();
+
+    var applySettings = function() {
+        config.sound   = $( "#sound-effect" ).val() + ".mp3";
+        config.volume  = $( "#sound-volume" ).val() / 100;
+        // Setup whisper options
+        config.message = $( "#whisper-message" ).val();
+        config.barter  = $( "#barter-message" ).val();
+        // Setup beta options
+        config.useBeta    = $( "#use-beta" ).prop( "checked" );
+        // save config
+        fs.writeFile( app.getPath( "userData" ) + path.sep + "config.json", JSON.stringify( config ), function( err ) {
+            if ( err ) {
+                console.log( err );
+            }
+        });
+    };
+
+    // Bind applySettings function to apply button
+    $( "#apply-settings" ).click( function() {
+        applySettings();
+    });
+
+    // When changing whisper or barter message, update preview
+    $( "#whisper-message" ).keyup( function() {
+        var message = $( "#whisper-message" ).val();
+        // fill in preview 
+        formatMessage( sampleItem, message, function( str ) {
+            $( "#whisper-preview" ).text( str );
+        });
+    });
+
     // Bind modals
     $('.modal').modal();
 
