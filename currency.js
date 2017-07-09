@@ -41,7 +41,7 @@ class Currency {
                         shortRates[league][Currency.shortToLongLookupTable[rate]] = parseFloat( rates[rate]);
                     }
                 }
-                shortRates[league].chaos = 1.0;
+                shortRates[league]["Chaos Orb"] = 1.0;
                 cbLeague();
             });
         }, function( err ) {

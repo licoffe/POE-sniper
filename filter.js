@@ -31,6 +31,7 @@ if ( !fs.existsSync( app.getPath( "userData" ) + path.sep + "config.json" )) {
 var priceReg = /(?:([0-9\.]+)|([0-9]+)\/([0-9]+)) ([a-z]+)/g;
 var Item     = require( "./item.js" );
 var Misc     = require( "./misc.js" );
+var Currency = require( "./currency.js" );
 var itemTypes = require( "./itemTypes.json" );
 
 class Filter {
@@ -119,16 +120,17 @@ class Filter {
         // If the price is recognized by the RegExp
         if ( match ) {
             // and if the price is a fraction
+            // console.log( league + ", " + price );
             if ( match[1] === undefined ) {
                 // Compute the fraction: 1/2 exa -> 0.5 exa
                 originalPrice = Math.round( match[2] / match[3] * 100 ) / 100 + " " + match[4];
                 // Same but convert to chaos: 1/2 exa -> 0.5 x chaos_rate(exa)
-                convertedPrice = ( match[2] / match[3] ) * currencyRates[league][match[4]];
+                convertedPrice = ( match[2] / match[3] ) * currencyRates[league][Currency.shortToLongLookupTable[match[4]]];
             // Otherwise
-        } else {
+            } else {
                 // Same thing as above without divisions
                 originalPrice  = Math.round( match[1] * 100 ) / 100 + " " + match[4];
-                convertedPrice = match[1] * currencyRates[league][match[4]];
+                convertedPrice = match[1] * currencyRates[league][Currency.shortToLongLookupTable[match[4]]];
             }
             
             convertedPriceChaos = convertedPrice;
@@ -140,12 +142,12 @@ class Filter {
             }
             // Round up the price to .00 precision
             convertedPrice = Math.round( convertedPrice * 100 ) / 100;
+            // console.log( "Found entry: " + name + " for " + convertedPriceChaos + ":" + convertedPrice + " " + currency + " (" + originalPrice + ")" );
 
             return { convertedPrice:      convertedPrice, 
                      convertedPriceChaos: convertedPriceChaos,
                      originalPrice:       originalPrice,
                      currency:            currency };
-            // console.log( "Found entry: " + name + " for " + convertedPrice + " " + currency );
         // If there is no price, this is barter
         } else {
             // console.log( "Invalid price: " + price );
@@ -405,6 +407,11 @@ class Filter {
      */
     check( item, currencyRates, callback ) {
         var self = this;
+        if ( this.currency === "chaos" ) {
+            this.currency = "Chaos Orb";
+        } else if  ( this.currency === "exa" ) {
+            this.curreny = "Exalted Orb";
+        }
         // Clean up the item name and typeLine
         item.name     = item.name.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
         item.typeLine = item.typeLine.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
@@ -445,7 +452,7 @@ class Filter {
             ) {
 
             var prices = this.computePrice( item, currencyRates );
-            console.log( currencyRates[league] );
+            // console.log( currencyRates[league] );
             
             // Convert filter price to chaos and check if the item is within budget
             if ( !this.budget || ( prices.convertedPrice && 
@@ -505,6 +512,8 @@ class Filter {
             // Item is not within the budget
             } else {
                 // fs.appendFileSync( __dirname + "/log.txt", name + " (" + typeLine + "): Not within budget\n" );
+                // console.log( currencyRates[league] );
+                // console.log( prices.convertedPriceChaos + " > " + this.budget + " * " + currencyRates[league][this.currency] + ", " + league + ", " + this.currency );
                 callback( false );
             }
         // Item does not match the first tests
