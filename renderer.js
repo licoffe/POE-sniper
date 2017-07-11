@@ -9,21 +9,13 @@ var marked           = require( "marked" );
 var open             = require( "open" );
 const {app}          = require( "electron" ).remote;
 const path           = require( "path" );
-var config           = {};
-// Check if config.json exists in app data, otherwise create it from default
-// config file.
-if ( !fs.existsSync( app.getPath( "userData" ) + path.sep + "config.json" )) {
-    console.log( "Config file does not exist, creating it" );
-    var readStream  = fs.createReadStream( __dirname + path.sep + "config.json" );
-    var writeStream = fs.createWriteStream( app.getPath( "userData" ) + path.sep + "config.json" );
-    writeStream.on( "close", function() {
-        config = require( app.getPath( "userData" ) + path.sep + "config.json" );
-    });
-    readStream.pipe( writeStream );
-} else {
-    console.log( "Loading config from " + app.getPath( "userData" ) + path.sep + "config.json" );
-    config = require( app.getPath( "userData" ) + path.sep + "config.json" );
+
+var config = require( app.getPath( "userData" ) + path.sep + "config.json" );
+if ( Object.keys( config ).length === 0 ) {
+    console.log( "Fallback" );
+    config = require( __dirname + "/config.json" );
 }
+
 var itemTypes        = require( "./itemTypes.json" );
 var Item             = require( "./item.js" );
 var Misc             = require( "./misc.js" );
@@ -110,10 +102,6 @@ $( document).ready( function() {
 
     // Actions
     // ------------------------------------------------------------------------
-
-    var backupFilterAndConfig = function() {
-
-    };
 
     // Fold/unfold filter list action
     var foldFilters = function() {
@@ -549,7 +537,7 @@ $( document).ready( function() {
             var readStream  = fs.createReadStream( __dirname + path.sep + "filters.json" );
             var writeStream = fs.createWriteStream( app.getPath( "userData" ) + path.sep + "filters.json" );
             writeStream.on( "close", function() {
-                config = require( app.getPath( "userData" ) + path.sep + "filters.json" );
+                filterData = require( app.getPath( "userData" ) + path.sep + "filters.json" );
             });
             readStream.pipe( writeStream );
         } else {
@@ -936,10 +924,10 @@ $( document).ready( function() {
      */
     var notifyNewItem = function( item ) {
         displayingNotification = true;
-        var audio = new Audio( __dirname + '/' + config.sound );
-        audio.volume = config.volume;
+        var audio              = new Audio( __dirname + '/' + config.sound );
+        audio.volume           = config.volume;
         audio.play();
-        var displayName = item.name;
+        var displayName        = item.name;
         if ( item.typeLine !== item.name && ( item.frameType > 0 && item.frameType < 4 )) {
             displayName += " (" + item.typeLine + ")";
         }
@@ -1535,5 +1523,9 @@ $( document).ready( function() {
 
     // Bind modals
     $('.modal').modal();
+
+    // setInterval( function() {
+    //     console.log( config );
+    // }, 100 );
 
 });

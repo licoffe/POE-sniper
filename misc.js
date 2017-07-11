@@ -11,20 +11,9 @@ var fs      = require( "fs" );
 const {app} = require( "electron" ).remote;
 const path  = require( "path" );
 var config           = {};
-// Check if config.json exists in app data, otherwise create it from default
-// config file.
-if ( !fs.existsSync( app.getPath( "userData" ) + path.sep + "config.json" )) {
-    console.log( "Config file does not exist, creating it" );
-    var readStream  = fs.createReadStream( __dirname + path.sep + "config.json" );
-    var writeStream = fs.createWriteStream( app.getPath( "userData" ) + path.sep + "config.json" );
-    writeStream.on( "close", function() {
-        config = require( app.getPath( "userData" ) + path.sep + "config.json" );
-    });
-    readStream.pipe( writeStream );
-} else {
-    console.log( "Loading config from " + app.getPath( "userData" ) + path.sep + "config.json" );
-    config = require( app.getPath( "userData" ) + path.sep + "config.json" );
-}
+console.log( "Loading config from " + app.getPath( "userData" ) + path.sep + "config.json" );
+config = require( app.getPath( "userData" ) + path.sep + "config.json" );
+
 
 class Misc {
 
