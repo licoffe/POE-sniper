@@ -649,12 +649,12 @@ input:focus {
     margin-bottom: 10px;
 }
 
-#settings i {
+#settings i, #snipe i, #cancel-filter i, #add-filter i, #import-poe-trade i {
     position: relative;
     top: 0;
 }
 
-#settings span {
+#settings span, #snipe span, #cancel-filter span, #add-filter span, #import-poe-trade span {
     position: relative;
     top: -6px;
     left: 5px;
@@ -728,4 +728,9 @@ input:focus {
 
 .btn:hover {
     border: 1px solid rgba(0,200,200,0.5)!important;
+}
+
+#cancel-filter.disabled, #add-filter.disabled, #import-poe-trade.disabled {
+    background-color: #2f2f2f !important;
+    color: #5f5f5f !important;
 }

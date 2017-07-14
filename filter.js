@@ -18,11 +18,7 @@ var config   = {};
 console.log( "Loading config from " + app.getPath( "userData" ) + path.sep + "config.json" );
 config = require( app.getPath( "userData" ) + path.sep + "config.json" );
 
-// Item price RegExp
-var priceReg = /(?:([0-9\.]+)|([0-9]+)\/([0-9]+)) ([a-z]+)/g;
 var Item     = require( "./item.js" );
-var Misc     = require( "./misc.js" );
-var Currency = require( "./currency.js" );
 var itemTypes = require( "./itemTypes.json" );
 
 class Filter {
@@ -80,99 +76,6 @@ class Filter {
         .on( "end", function() {
             callback( generated );
         });
-    }
-
-    /**
-     * Compute item price
-     *
-     * @params Item, currencyRates
-     * @return Price
-     */
-    computePrice( item, currencyRates ) {
-        // Default currency is chaos
-        var currency = "chaos";
-        var originalPrice = "";
-        var convertedPrice;
-        var convertedPriceChaos;
-        var league = this.league;
-        if ( config.useBeta ) {
-            league = "beta-" + league;
-        }
-
-        // The price is the name of the stash
-        var price = item.stashTab;
-        // If item has a note, the price is the note instead
-        if ( item.note ) {
-            price = item.note;
-        }
-        priceReg.lastIndex = 0;
-        var match = priceReg.exec( price );
-
-        // If the price is recognized by the RegExp
-        if ( match ) {
-            // and if the price is a fraction
-            // console.log( league + ", " + price );
-            if ( match[1] === undefined ) {
-                // Compute the fraction: 1/2 exa -> 0.5 exa
-                originalPrice = Math.round( match[2] / match[3] * 100 ) / 100 + " " + match[4];
-                // Same but convert to chaos: 1/2 exa -> 0.5 x chaos_rate(exa)
-                convertedPrice = ( match[2] / match[3] ) * currencyRates[league][Currency.shortToLongLookupTable[match[4]]];
-            // Otherwise
-            } else {
-                // Same thing as above without divisions
-                originalPrice  = Math.round( match[1] * 100 ) / 100 + " " + match[4];
-                convertedPrice = match[1] * currencyRates[league][Currency.shortToLongLookupTable[match[4]]];
-            }
-            
-            convertedPriceChaos = convertedPrice;
-            // If the converted price is above the rate of exalted orbs in this league
-            // convert the price to exalted instead
-            if ( convertedPrice > currencyRates[league].exa ) {
-                convertedPrice /= currencyRates[league].exa;
-                currency = "exa";
-            }
-            // Round up the price to .00 precision
-            convertedPrice = Math.round( convertedPrice * 100 ) / 100;
-            // console.log( "Found entry: " + name + " for " + convertedPriceChaos + ":" + convertedPrice + " " + currency + " (" + originalPrice + ")" );
-
-            return { convertedPrice:      convertedPrice, 
-                     convertedPriceChaos: convertedPriceChaos,
-                     originalPrice:       originalPrice,
-                     currency:            currency };
-        // If there is no price, this is barter
-        } else {
-            // console.log( "Invalid price: " + price );
-            originalPrice = "Negociate price";
-            return { originalPrice: originalPrice };
-        }
-    }
-
-    /**
-     * Update item entry with dps values
-     *
-     * @params Item, DPS, callback
-     * @return Item with DPS values through callback
-     */
-    insertDPSValues( item, dps, callback ) {
-        if ( dps.pDPS ) {
-            item.properties.push({
-                name: "pDPS",
-                values: [[dps.pDPS]]
-            });
-        }
-        if ( dps.eDPS ) {
-            item.properties.push({
-                name: "eDPS",
-                values: [[dps.eDPS]]
-            });
-        }
-        if ( dps.DPS ) {
-            item.properties.push({
-                name: "DPS",
-                values: [[dps.DPS]]
-            });
-        }
-        callback( item );
     }
 
     /**
@@ -266,131 +169,6 @@ class Filter {
     }
 
     /**
-     * Format time to display on the interface
-     *
-     * @params Nothing
-     * @return Formatted time
-     */
-    formatTime() {
-        var date = new Date();
-        var hour = date.getHours()   < 10 ? "0" + date.getHours()   : date.getHours();
-        var min  = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-        var sec  = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-        
-        return hour + " : " + min + " : " + sec;
-    }
-
-    /**
-     * Format item to display in the results
-     *
-     * @params  Item, item name, prices and callback
-     * @returns Formatted item through callback
-     */
-    formatItem( item, name, prices, callback ) {
-        var time = this.formatTime();
-        var guid = Misc.guidGenerator();
-        var implicit   = "";
-        var explicit   = "";
-        var crafted    = "";
-        var enchant    = "";
-        var properties = "";
-        if ( item.implicitMods ) {
-            implicit += "<span class=\"implicit\">";
-            implicit += item.implicitMods.join( "</span><br><span class=\"implicit\">" );
-            implicit += "</span><br>";
-        }
-        if ( item.explicitMods ) {
-            explicit += "<span class=\"explicit\">";
-            explicit += item.explicitMods.join( "</span><br><span class=\"explicit\">" );
-            explicit += "</span><br>";
-        }
-        if ( item.craftedMods ) {
-            crafted += "<span class=\"crafted\">";
-            crafted += item.craftedMods.join( "</span><br><span class=\"crafted\">" );
-            crafted += "</span><br>";
-        }
-        if ( item.enchantMods ) {
-            enchant += "<span class=\"enchant\">";
-            enchant += item.enchantMods.join( "</span><br><span class=\"enchant\">" );
-            enchant += "</span><br>";
-        }
-        // console.log( item );
-        properties += "<span class=\"property\"><span class=\"col s5 property-title\">Item Level</span><span class=\"col s7 property-value\">" + item.ilvl + "</span></span><br>";
-
-        async.each( item.properties, function( property, cbProperty ) {
-            // console.log( property );
-            if ( property.values.length > 0 && property.values[0].length > 0 ) {
-                properties += "<span class=\"property\"><span class=\"col s5 property-title\">" + property.name + "</span><span class=\"col s7 property-value\">" + property.values[0][0] + "</span></span><br>";
-            }
-            cbProperty();
-        }, function( err ) {
-            if ( err ) {
-                console.log( err );
-            }
-            
-            // If no b/o price
-            if ( !prices.convertedPrice ) {
-                prices.currency = "Negociate price";
-            }
-            var whisperName = name;
-            if ( item.linkAmount > 4 ) {
-                name += " " + item.linkAmount + "L";
-            }
-            var itemType = item.typeLine.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
-            if ( itemType === whisperName ) {
-                if ( item.frameType === 4 ) {
-                    itemType = "Gem";
-                } else if ( item.frameType === 5 ) {
-                    itemType = "Currency";
-                } else if ( item.frameType === 6 ) {
-                    itemType = "Divination Card";
-                } else if ( item.frameType === 8 ) {
-                    itemType = "Prophecy";
-                } else if ( name.indexOf( "Leaguestone" ) !== -1 ) {
-                    itemType = "Leaguestone";
-                } else if ( item.frameType === 1 ) {
-                    itemType = "";
-                }
-            } else {
-                whisperName += " " + itemType;
-            }
-
-            // If beta is used, add full path to icon
-            if ( config.useBeta ) {
-                item.icon = "http://web.poecdn.com/" + item.icon;
-            }
-            
-            callback({
-                time:          time,
-                account:       item.lastCharacterName,
-                item:          name,
-                whisperName:   whisperName,
-                frameType:     item.frameType,
-                price:         prices.convertedPrice,
-                currency:      prices.currency,
-                originalPrice: prices.originalPrice,
-                itemId:        item.id,
-                id:            guid,
-                icon:          item.icon,
-                implicit:      implicit,
-                explicit:      explicit,
-                crafted:       crafted,
-                corrupted:     item.corrupted,
-                enchant:       enchant,
-                properties:    properties,
-                links:         item.linkAmount,
-                league:        item.league,
-                stashTab:      item.stashTab,
-                left:          item.x,
-                top:           item.y,
-                typeLine:      item.typeLine,
-                sockets:       item.sockets,
-                type:          itemType
-            });
-        });
-    }
-
-    /**
      * Check if item match the filter
      *
      * @params Item to check against, currency rates, callback
@@ -442,7 +220,7 @@ class Filter {
             ( this.itemType === "any" || itemTypes[this.itemType].types.indexOf( item.typeLine ) !== -1 )
             ) {
 
-            var prices = this.computePrice( item, currencyRates );
+            var prices = Item.computePrice( item, currencyRates );
             // console.log( currencyRates[league] );
             
             // Convert filter price to chaos and check if the item is within budget
@@ -462,11 +240,11 @@ class Filter {
                                     var dps = Item.computeDPS( parsedProperties );
                                     parsedProperties.DPS = dps.DPS;
                                     parsedProperties.pDPS = dps.pDPS;
-                                    self.insertDPSValues( newItem, dps, function( item ) {
+                                    Item.insertDPSValues( newItem, dps, function( item ) {
                                         // Compare properties
                                         self.compareProperties( item, parsedProperties, function( equal ) {
                                             if ( equal ) {
-                                                self.formatItem( item, name, prices, function( newItem ) {
+                                                Item.formatItem( item, name, prices, function( newItem ) {
                                                     callback( newItem );
                                                 });
                                             // Item does not have the required properties
@@ -481,7 +259,7 @@ class Filter {
                                     self.compareProperties( newItem, parsedProperties, function( equal ) {
                                         // console.log( newItem );
                                         if ( equal ) {
-                                            self.formatItem( newItem, name, prices, function( newItem ) {
+                                            Item.formatItem( newItem, name, prices, function( newItem ) {
                                                 callback( newItem );
                                             });
                                         // Item does not have the required properties

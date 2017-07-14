@@ -57,10 +57,15 @@ var itemInStash     = {};
 // Price regexp
 var priceReg        = /(?:([0-9\.]+)|([0-9]+)\/([0-9]+)) ([a-z]+)/g;
 var currencyRates   = {};
+var itemRates       = {};
 var delayQueue      = []; // Stores filtered items
 var displayingNotification = false;
 var lastItem        = null;
 var prices          = {};
+
+Item.getLastRates( function( rates ) {
+    itemRates = rates;
+});
 
 // var writeFilterStats = function( filterStats ) {
 //     fs.appendFile( __dirname + "/stats_filters.csv", filterStats, function( err ) {
@@ -217,9 +222,10 @@ $( document).ready( function() {
 
         // If we are editing and the button is 'Clear Filter'
         if ( $( this ).text() !== "Clear filter" ) {
-            $( "#add-filter" ).text( "Add filter" );
-            $( "#cancel-filter" ).text( "Clear filter" );
+            $( "#add-filter" ).html( "<i class=\"material-icons\">playlist_add</i><span>Add filter</span>" );
+            $( "#cancel-filter" ).html( "<i class=\"material-icons\">delete</i><span>Clear filter</span>" );
             $( "#cancel-filter" ).removeClass( "red" );
+            $( "#add-filter" ).removeClass( "green" );
             editingFilter = "";
         }
     };
@@ -353,8 +359,9 @@ $( document).ready( function() {
             formData.title  = title;
             formData.active = true;
             var filter = new Filter( formData );
-            // console.log( filter );
-            if ( $( "#add-filter" ).text() === "Add filter" ) {
+            console.log( filter );
+            console.log( formData );
+            if ( $( "#add-filter" ).text() === "playlist_addAdd filter" ) {
                 // console.log( filters );
                 filters.add( filter );
                 filters.findFilterIndex( filter, function( res ) {
@@ -553,6 +560,12 @@ $( document).ready( function() {
             } else if ( !filter.displayPrice && ( !filter.budget || filter.budget === 0 )) {
                 filter.displayPrice = "Any price";
             }
+            // Fix for change of currency from long to short form
+            if ( filter.currency === "Chaos Orb" ) {
+                filter.currency = "chaos";
+            } else if ( filter.currency === "Exalted Orb" ) {
+                filter.currency = "exa";
+            }
             filter = new Filter( filter );
             filters.add( filter );
             cbFilter();
@@ -625,7 +638,7 @@ $( document).ready( function() {
             last = true;
             // console.log( "Last in list" );
         }
-        if ( $( "#add-filter" ).text() === "Add filter" ) {
+        if ( $( "#add-filter" ).text() === "playlist_addAdd filter" ) {
             if ( last ) {
                 $( "#filters ul" ).append( generated );
             } else {
@@ -639,9 +652,10 @@ $( document).ready( function() {
                 $( generated ).insertBefore( $( "#filters ul li" )[position] );
             }
             editingFilter = "";
-            $( "#add-filter" ).text( "Add filter" );
-            $( "#cancel-filter" ).text( "Clear filter" );
+            $( "#add-filter" ).html( "<i class=\"material-icons\">playlist_add</i><span>Add filter</span>" );
+            $( "#cancel-filter" ).html( "<i class=\"material-icons\">delete</i><span>Clear filter</span>" );
             $( "#cancel-filter" ).removeClass( "red" );
+            $( "#add-filter" ).removeClass( "green" );
         }
         // Color item name depending on rarity
         colorRarity( filter );
@@ -721,9 +735,10 @@ $( document).ready( function() {
                     $( "#pdps" ).val( filter.pdps );
                     $( "#price-bo" ).prop( "checked", filter.buyout );
                     $( "#clipboard" ).prop( "checked", filter.clipboard );
-                    $( "#add-filter" ).text( "Update filter" );
-                    $( "#cancel-filter" ).text( "Cancel edit" );
+                    $( "#add-filter" ).html( "<i class=\"material-icons\">thumb_up</i><span>Update filter</span>" );
+                    $( "#cancel-filter" ).html( "<i class=\"material-icons\">thumb_down</i><span>Cancel edit</span>" );
                     $( "#cancel-filter" ).addClass( "red" ).removeClass( "blue-grey" );
+                    $( "#add-filter" ).addClass( "green" ).removeClass( "blue-grey" );
                     $( "#item-type" ).val( filter.itemType );
                     $( "#item-type" ).material_select();
                     $( "#affixes-list" ).empty();
@@ -830,7 +845,7 @@ $( document).ready( function() {
             downloading = true;
             interrupt   = false;
             $( ".progress" ).fadeIn();
-            $( "#snipe" ).text( "Stop" );
+            $( "#snipe" ).html( "<i class=\"material-icons\">pause</i><span>Stop</span>" );
             Chunk.getLastChangeId( function( entry ) {
                 downloadChunk( entry, downloadChunk );
             });
@@ -838,7 +853,7 @@ $( document).ready( function() {
             downloading = false;
             interrupt   = true;
             $( ".progress" ).fadeOut();
-            $( "#snipe" ).text( "Snipe" );
+            $( "#snipe" ).html( "<i class=\"material-icons\">play_arrow</i><span>Snipe</span>" );
         }
     });
 
@@ -938,6 +953,7 @@ $( document).ready( function() {
         }, function ( err ) {
             if ( err ) {
                 console.log( err );
+                console.log( item );
             }
             displayingNotification = false;
         });
@@ -974,6 +990,89 @@ $( document).ready( function() {
         });
     };
 
+    var displayItem = function( item, stash, foundIndex, clipboard, callback ) {
+        var generated = "";
+        var displayItem = JSON.parse( JSON.stringify( item ));
+        if ( displayItem.fullPrice ) {
+            displayItem.originalPrice += " (" + displayItem.fullPrice + " chaos)";
+        }
+        mu.compileAndRender( "entry.html", displayItem )
+        .on( "data", function ( data ) {
+            generated += data.toString();
+        })
+        .on( "end", function () {
+            $( "#results ul" ).prepend( generated );
+            updateResultsAmount();
+            item.accountName = stash.lastCharacterName;
+            item.name = item.item;
+            
+            item.price = price;
+            item.stashName = stash.stash;
+            $( "#" + item.id ).data( "item", item );
+            // Add proper coloring
+            if ( item.frameType === 1 ) {
+                $( "#" + item.id + " .item" ).addClass( "magic" );
+            } else if ( item.frameType === 2 ) {
+                $( "#" + item.id + " .item" ).addClass( "rare" );
+            } else if ( item.frameType === 3 ) {
+                $( "#" + item.id + " .item" ).addClass( "unique" );
+            } else if ( item.frameType === 4 ) {
+                $( "#" + item.id + " .item" ).addClass( "gem" );
+            } else if ( item.frameType === 5 ) {
+                $( "#" + item.id + " .item" ).addClass( "currency" );
+            } else if ( item.frameType === 6 ) {
+                $( "#" + item.id + " .item" ).addClass( "divination" );
+            } else if ( item.frameType === 8 ) {
+                $( "#" + item.id + " .item" ).addClass( "prophecy" );
+            } else if ( item.frameType === 9 ) {
+                $( "#" + item.id + " .item" ).addClass( "legacy" );
+            } 
+            bindClickEntry( item.id );
+            $( "#" + item.id + " .implicit-container" ).html( item.implicit );
+            $( "#" + item.id + " .enchant-container" ).html( item.enchant );
+            $( "#" + item.id + " .explicit-container" ).html( item.explicit );
+            $( "#" + item.id + " .crafted-container" ).html( item.crafted );
+            if ( item.implicit === "" ) {
+                $( "#" + item.id + " .implicit-container" ).hide();
+            }
+            if ( item.enchant === "" ) {
+                $( "#" + item.id + " .enchant-container" ).hide();
+            }
+            if ( item.crafted === "" ) {
+                $( "#" + item.id + " .crafted-container" ).hide();
+            }
+            if ( !item.corrupted ) {
+                $( "#" + item.id + " .corrupted" ).hide();
+            }
+            $( "#" + item.id + " .properties-container" ).html( item.properties );
+            // Send notification
+            // notifier.notify('Message');
+            item.displayPrice = item.originalPrice;
+            if ( item.displayPrice === "Negotiate price" ) {
+                item.displayPrice = "barter";
+            }
+
+            renderSockets( item );
+
+            // Only notify if the item is new in the list
+            // or if it's been repriced lower
+            if ( foundIndex === -1 || item.originalPrice < prices[item.itemId]) {
+                // Update stored price
+                prices[item.itemId] = item.originalPrice;
+                item.clipboard = clipboard;
+                lastItem       = item;
+                // If delay queue is empty an no notification is being displayed, notify now
+                // Otherwise, put in the queue
+                if ( delayQueue.length === 0 && !displayingNotification ) {
+                    notifyNewItem( item );
+                } else {
+                    delayQueue.push( item );
+                }
+            }
+            callback();
+        });
+    }
+
     /**
      * Download all public stashes starting with input chunk ID.
      *
@@ -992,167 +1091,157 @@ $( document).ready( function() {
         var parseData = function( data ) {
             // Store last chunk ID
             console.time( "Total search time" );
-            async.each( filters.filterList, function( filter, callbackFilter ) {
-                if ( !filter.active ) {
-                    callbackFilter();
-                } else {
-                    // For each stashes in the new data file
-                    var totalItems = 0;
-                    async.each( data.stashes, function( stash, callbackStash ) {
-                        totalItems += stash.items.length;
-                        async.each( stash.items, function( item, callbackItem ) {
-                            item.stashTab          = stash.stash;
-                            item.lastCharacterName = stash.lastCharacterName;
-                            item.accountName       = stash.accountName;
-                            filter.check( item, currencyRates, function( item ) {
-                                if ( item ) {
-                                    if ( !itemInStash[stash.id]) {
-                                        itemInStash[stash.id] = {
-                                            previousItems: {},
-                                            items:         {}
-                                        };
-                                    }
-                                    itemInStash[stash.id].items[item.itemId] = item.id;
-                                    // If item has not already been added
-                                    var foundIndex = resultsId.indexOf( item.itemId );
-                                    if ( foundIndex !== -1 ) {
-                                        $( "li#" + entryLookup[item.itemId]).addClass( "old" );
-                                    }
-                                    entryLookup[item.itemId] = item.id;
-                                    results[item.id] = item;
-                                    resultsId.push( item.itemId );
-                                    var generated = "";
-                                    mu.compileAndRender( "entry.html", item )
-                                    .on( "data", function ( data ) {
-                                        generated += data.toString();
-                                    })
-                                    .on( "end", function () {
-                                        $( "#results ul" ).prepend( generated );
-                                        updateResultsAmount();
-                                        item.accountName = stash.lastCharacterName;
-                                        item.name = item.item;
-                                        
-                                        item.price = price;
-                                        item.stashName = stash.stash;
-                                        $( "#" + item.id ).data( "item", item );
-                                        // Add proper coloring
-                                        if ( item.frameType === 1 ) {
-                                            $( "#" + item.id + " .item" ).addClass( "magic" );
-                                        } else if ( item.frameType === 2 ) {
-                                            $( "#" + item.id + " .item" ).addClass( "rare" );
-                                        } else if ( item.frameType === 3 ) {
-                                            $( "#" + item.id + " .item" ).addClass( "unique" );
-                                        } else if ( item.frameType === 4 ) {
-                                            $( "#" + item.id + " .item" ).addClass( "gem" );
-                                        } else if ( item.frameType === 5 ) {
-                                            $( "#" + item.id + " .item" ).addClass( "currency" );
-                                        } else if ( item.frameType === 6 ) {
-                                            $( "#" + item.id + " .item" ).addClass( "divination" );
-                                        } else if ( item.frameType === 8 ) {
-                                            $( "#" + item.id + " .item" ).addClass( "prophecy" );
-                                        } else if ( item.frameType === 9 ) {
-                                            $( "#" + item.id + " .item" ).addClass( "legacy" );
-                                        } 
-                                        bindClickEntry( item.id );
-                                        $( "#" + item.id + " .implicit-container" ).html( item.implicit );
-                                        $( "#" + item.id + " .enchant-container" ).html( item.enchant );
-                                        $( "#" + item.id + " .explicit-container" ).html( item.explicit );
-                                        $( "#" + item.id + " .crafted-container" ).html( item.crafted );
-                                        if ( item.implicit === "" ) {
-                                            $( "#" + item.id + " .implicit-container" ).hide();
-                                        }
-                                        if ( item.enchant === "" ) {
-                                            $( "#" + item.id + " .enchant-container" ).hide();
-                                        }
-                                        if ( item.crafted === "" ) {
-                                            $( "#" + item.id + " .crafted-container" ).hide();
-                                        }
-                                        if ( !item.corrupted ) {
-                                            $( "#" + item.id + " .corrupted" ).hide();
-                                        }
-                                        $( "#" + item.id + " .properties-container" ).html( item.properties );
-                                        // Send notification
-                                        // notifier.notify('Message');
-                                        item.displayPrice = item.originalPrice;
-                                        if ( item.displayPrice === "Negociate price" ) {
-                                            item.displayPrice = "barter";
-                                        }
-
-                                        renderSockets( item );
-
-                                        // Only notify if the item is new in the list
-                                        // or if it's been repriced lower
-                                        if ( foundIndex === -1 || item.originalPrice < prices[item.itemId]) {
-                                            // Update stored price
-                                            prices[item.itemId] = item.originalPrice;
-                                            item.clipboard = filter.clipboard;
-                                            lastItem       = item;
-                                            // If delay queue is empty an no notification is being displayed, notify now
-                                            // Otherwise, put in the queue
-                                            if ( delayQueue.length === 0 && !displayingNotification ) {
-                                                notifyNewItem( item );
-                                            } else {
-                                                delayQueue.push( item );
-                                            }
-                                        }
-                                    });
-                                    callbackItem();
-                                } else {
-                                    callbackItem();
+            if ( config.checkUnderpriced ) {
+                async.each( data.stashes, function( stash, callbackStash ) {
+                    async.each( stash.items, function( item, callbackItem ) {
+                        item.stashTab          = stash.stash;
+                        item.lastCharacterName = stash.lastCharacterName;
+                        item.accountName       = stash.accountName;
+                        Item.checkUnderpriced( item, currencyRates, itemRates, function( item ) {
+                            if ( item ) {
+                                if ( !itemInStash[stash.id]) {
+                                    itemInStash[stash.id] = {
+                                        previousItems: {},
+                                        items:         {}
+                                    };
                                 }
+                                itemInStash[stash.id].items[item.itemId] = item.id;
+                                // If item has not already been added
+                                var foundIndex = resultsId.indexOf( item.itemId );
+                                if ( foundIndex !== -1 ) {
+                                    $( "li#" + entryLookup[item.itemId]).addClass( "old" );
+                                }
+                                entryLookup[item.itemId] = item.id;
+                                results[item.id] = item;
+                                resultsId.push( item.itemId );
+                                displayItem( item, stash, foundIndex, false, function() {
+                                    callbackItem();
+                                });
+                            } else {
+                                callbackItem();
+                            }
+                        });
+                    }, function() {
+                        callbackStash();
+                    });
+                }, function() {
+                    // Remove sold/displaced items
+                    async.each( data.stashes, function( stash, cbStash ) {
+                        if ( itemInStash[stash.id] ) {
+                            async.each( Object.keys( itemInStash[stash.id].previousItems ), function( previousItem, cbPreviousItem ) {
+                                if ( !itemInStash[stash.id].items[previousItem]) {
+                                    console.log( previousItem + " was sold" );
+                                    $( "li#" + itemInStash[stash.id].previousItems[previousItem] ).addClass( "sold" );
+                                    delete results[itemInStash[stash.id].previousItems[previousItem]];
+                                    delete prices[previousItem];
+                                }
+                                cbPreviousItem();
+                            }, function( err ) {
+                                itemInStash[stash.id].previousItems = JSON.parse( JSON.stringify( itemInStash[stash.id].items ));
+                                itemInStash[stash.id].items         = {};
+                                cbStash();
+                            });
+                        } else {
+                            cbStash();
+                        }
+                    }, function( err ) {
+                        if ( err ) {
+                            console.log( err );
+                        }
+                        console.timeEnd( "Total search time" );
+                        done( data );
+                    });
+                });
+            } else {
+                async.each( filters.filterList, function( filter, callbackFilter ) {
+                    if ( !filter.active ) {
+                        callbackFilter();
+                    } else {
+                        // For each stashes in the new data file
+                        var totalItems = 0;
+                        async.each( data.stashes, function( stash, callbackStash ) {
+                            totalItems += stash.items.length;
+                            async.each( stash.items, function( item, callbackItem ) {
+                                item.stashTab          = stash.stash;
+                                item.lastCharacterName = stash.lastCharacterName;
+                                item.accountName       = stash.accountName;
+                                filter.check( item, currencyRates, function( item ) {
+                                    if ( item ) {
+                                        if ( !itemInStash[stash.id]) {
+                                            itemInStash[stash.id] = {
+                                                previousItems: {},
+                                                items:         {}
+                                            };
+                                        }
+                                        itemInStash[stash.id].items[item.itemId] = item.id;
+                                        // If item has not already been added
+                                        var foundIndex = resultsId.indexOf( item.itemId );
+                                        if ( foundIndex !== -1 ) {
+                                            $( "li#" + entryLookup[item.itemId]).addClass( "old" );
+                                        }
+                                        entryLookup[item.itemId] = item.id;
+                                        results[item.id] = item;
+                                        resultsId.push( item.itemId );
+                                        displayItem( item, stash, foundIndex, filter.clipboard, function() {
+                                            callbackItem();
+                                        });
+                                    } else {
+                                        callbackItem();
+                                    }
+                                });
+                            }, function( err ) {
+                                if ( err ) {
+                                    console.log( err );
+                                }
+                                callbackStash();
+                                // console.log( "Done with item" );
                             });
                         }, function( err ) {
                             if ( err ) {
                                 console.log( err );
                             }
-                            callbackStash();
-                            // console.log( "Done with item" );
+                            callbackFilter();
+                            // console.log( "Searched among " + totalItems + " items" );
+                            // var end = Date.now();
+                            // var filterStats = filter.id + "," + (end - begin) + "," + totalItems + "\n";
+                            // writeFilterStats( filterStats );
+                            // console.timeEnd( "Searching in " + nextChunkId + " for " + filter.item );
+                            
                         });
-                    }, function( err ) {
-                        if ( err ) {
-                            console.log( err );
-                        }
-                        callbackFilter();
-                        // console.log( "Searched among " + totalItems + " items" );
-                        // var end = Date.now();
-                        // var filterStats = filter.id + "," + (end - begin) + "," + totalItems + "\n";
-                        // writeFilterStats( filterStats );
-                        // console.timeEnd( "Searching in " + nextChunkId + " for " + filter.item );
-                        
-                    });
-                }
-            }, function( err ) {
-                if ( err ) {
-                    console.log( err );
-                }
-
-                // Remove sold/displaced items
-                async.each( data.stashes, function( stash, cbStash ) {
-                    if ( itemInStash[stash.id] ) {
-                        async.each( Object.keys( itemInStash[stash.id].previousItems ), function( previousItem, cbPreviousItem ) {
-                            if ( !itemInStash[stash.id].items[previousItem]) {
-                                console.log( previousItem + " was sold" );
-                                $( "li#" + itemInStash[stash.id].previousItems[previousItem] ).addClass( "sold" );
-                                delete results[itemInStash[stash.id].previousItems[previousItem]];
-                                delete prices[previousItem];
-                            }
-                            cbPreviousItem();
-                        }, function( err ) {
-                            itemInStash[stash.id].previousItems = JSON.parse( JSON.stringify( itemInStash[stash.id].items ));
-                            itemInStash[stash.id].items         = {};
-                            cbStash();
-                        });
-                    } else {
-                        cbStash();
                     }
                 }, function( err ) {
                     if ( err ) {
                         console.log( err );
                     }
-                    console.timeEnd( "Total search time" );
-                    done( data );
+
+                    // Remove sold/displaced items
+                    async.each( data.stashes, function( stash, cbStash ) {
+                        if ( itemInStash[stash.id] ) {
+                            async.each( Object.keys( itemInStash[stash.id].previousItems ), function( previousItem, cbPreviousItem ) {
+                                if ( !itemInStash[stash.id].items[previousItem]) {
+                                    console.log( previousItem + " was sold" );
+                                    $( "li#" + itemInStash[stash.id].previousItems[previousItem] ).addClass( "sold" );
+                                    delete results[itemInStash[stash.id].previousItems[previousItem]];
+                                    delete prices[previousItem];
+                                }
+                                cbPreviousItem();
+                            }, function( err ) {
+                                itemInStash[stash.id].previousItems = JSON.parse( JSON.stringify( itemInStash[stash.id].items ));
+                                itemInStash[stash.id].items         = {};
+                                cbStash();
+                            });
+                        } else {
+                            cbStash();
+                        }
+                    }, function( err ) {
+                        if ( err ) {
+                            console.log( err );
+                        }
+                        console.timeEnd( "Total search time" );
+                        done( data );
+                    });
                 });
-            });
+            }
         };
 
         Chunk.download( chunkID, parseData );
@@ -1182,6 +1271,7 @@ $( document).ready( function() {
     // Fetch new rates now and setup to be fetched every 10 seconds
     Currency.getLastRates( function( rates ) {
         currencyRates = rates;
+        console.log( currencyRates );
     });
     setInterval( Currency.getLastRates, config.RATES_REFRESH_INTERVAL, function( rates ) {
         currencyRates = rates;
@@ -1293,7 +1383,11 @@ $( document).ready( function() {
 
     // Fill in the filter form from the extracted poe.trade search
     var fillInFormWithPOETradeData = function( data ) {
-        console.log( data );
+        if ( data.league === "Beta Standard" ) {
+            data.league = "beta-Standard";
+        } else if ( data.league === "Beta Hardcore" ) {
+            data.league = "beta-Hardcore";
+        }
         if ( !data.name && data.base !== "any" ) {
             $( "#item" ).val( data.base );
         } else if ( data.name ) {
@@ -1403,7 +1497,7 @@ $( document).ready( function() {
         $( "#league" ).val( data.league );
         $( "#league").material_select();
         // Set price and currency
-        if ( data.buyout.max ) {
+        if ( data.buyout_max ) {
             if ( data.buyout_currency === "Chaos Orb" ) {
                 $( "#currency" ).val( "chaos" );
                 $( "#price" ).val( data.buyout_max );
@@ -1414,7 +1508,7 @@ $( document).ready( function() {
             } else if ( data.buyout_currency ) {
                 $( "#currency" ).val( "chaos" );
                 $( "#price" ).val( 
-                    Math.round( currencyRates[data.league][Currency.currencyLookupTable[data.buyout_currency]] * data.buyout_max * 100 ) / 100 );
+                    Math.round( currencyRates[data.league][data.buyout_currency] * data.buyout_max * 100 ) / 100 );
             }
             $( "#currency" ).material_select();   
         }
@@ -1500,11 +1594,7 @@ $( document).ready( function() {
         // Setup beta options
         config.useBeta    = $( "#use-beta" ).prop( "checked" );
         // save config
-        fs.writeFile( app.getPath( "userData" ) + path.sep + "config.json", JSON.stringify( config ), function( err ) {
-            if ( err ) {
-                console.log( err );
-            }
-        });
+        saveConfig();
     };
 
     // Bind applySettings function to apply button
@@ -1521,11 +1611,47 @@ $( document).ready( function() {
         });
     });
 
+    var saveConfig = function() {
+        fs.writeFile( app.getPath( "userData" ) + path.sep + "config.json", JSON.stringify( config ), function( err ) {
+            if ( err ) {
+                console.log( err );
+            }
+        });
+    };
+
+    var toggleMode = function() {
+        // If underpriced mode, hide filters and form
+        if ( $( "#toggle-mispriced" ).prop( "checked" )) {
+            $( ".filter-form" ).slideUp();
+            $( ".filter-list" ).slideUp();
+            $( "#cancel-filter" ).addClass( "disabled" );
+            $( "#add-filter" ).addClass( "disabled" );
+            $( "#import-poe-trade" ).addClass( "disabled" );
+            $( ".progress" ).css( "top", "-8px" );
+            config.checkUnderpriced = true;
+            config.NOTIFICATION_QUEUE_INTERVAL = 0;
+            saveConfig();
+        } else {
+            $( ".filter-form" ).slideDown();
+            $( ".filter-list" ).slideDown();
+            $( "#cancel-filter" ).removeClass( "disabled" );
+            $( "#add-filter" ).removeClass( "disabled" );
+            $( "#import-poe-trade" ).removeClass( "disabled" );
+            $( ".progress" ).css( "top", "230px" );
+            config.checkUnderpriced = false;
+            config.NOTIFICATION_QUEUE_INTERVAL = 5000;
+            saveConfig();
+        }
+    };
+
+    $( "#toggle-mispriced" ).click( function() {
+        toggleMode();
+    });
+
+    $( "#toggle-mispriced" ).prop( "checked", config.checkUnderpriced );
+    toggleMode();
+
     // Bind modals
     $('.modal').modal();
-
-    // setInterval( function() {
-    //     console.log( config );
-    // }, 100 );
 
 });

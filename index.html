@@ -224,19 +224,27 @@
             <div class="indeterminate"></div>
         </div>
         <div class="row filter-interaction">
-            <span class="col s3"><i class="material-icons prefix">info_outline</i><span id="current-change-id">...</span></span>
+            <span class="col s3" style="position: relative; top: 10px"><i class="material-icons prefix">info_outline</i><span id="current-change-id">...</span></span>
                 <!--<div class="col s1"></div>-->
-                <div class="col s2"></div>
-                <a class="waves-effect waves-light btn col s1 z-depth-2" id="import-poe-trade" href="#import-poe-trade-modal">Import poe.trade</a>
-                <p class="col s1 grey darken-4" style="">
-                    <input type="checkbox" class="filled-in cb" id="global-clipboard" checked/>
-                    <label for="global-clipboard" style="font-size: 1em!important;">Clipboard</label>
-                </p>
-                <!--<span><input type="checkbox" class="filled-in col s1" id="global-clipboard" checked/>Global clipboard</span>-->
-                <a class="waves-effect waves-light btn col s1 z-depth-2" id="cancel-filter">Clear filter</a>
-                <a class="waves-effect waves-light btn col s1 z-depth-2" id="add-filter" style="left: 10px">Add filter</a>
-                <a class="waves-effect waves-light btn col s1 z-depth-2" id="settings" href="#settings-modal" style="left: 20px"><i class="material-icons">settings</i><span>Settings</span></a>
-                <a class="waves-effect waves-light btn col s1 right z-depth-2" id="snipe">Snipe</a>
+                <!-- <div class="col s1"></div> -->
+            <div class="switch col s2 input-field">
+                <label style="font-size: 1em!important; position: relative; top: 20px!important;">
+                    Filters
+                    <input type="checkbox" id="toggle-mispriced">
+                    <span class="lever"></span>
+                    Mispriced
+                </label>
+            </div>
+            <a class="waves-effect waves-light btn col s1 z-depth-2" id="import-poe-trade" href="#import-poe-trade-modal"><i class="material-icons">cloud_download</i><span>Import filter</span></a>
+            <p class="col s1 grey darken-4" style="">
+                <input type="checkbox" class="filled-in cb" id="global-clipboard" checked/>
+                <label for="global-clipboard" style="font-size: 1em!important;">Clipboard</label>
+            </p>
+            <!--<span><input type="checkbox" class="filled-in col s1" id="global-clipboard" checked/>Global clipboard</span>-->
+            <a class="waves-effect waves-light btn col s1 z-depth-2" id="cancel-filter"><i class="material-icons">delete</i><span>Clear filter</span></a>
+            <a class="waves-effect waves-light btn col s1 z-depth-2" id="add-filter" style="left: 10px"><i class="material-icons">playlist_add</i><span>Add filter</span></a>
+            <a class="waves-effect waves-light btn col s1 z-depth-2" id="settings" href="#settings-modal" style="left: 20px"><i class="material-icons">settings</i><span>Settings</span></a>
+            <a class="waves-effect waves-light btn col s1 right z-depth-2" id="snipe"><i class="material-icons">play_arrow</i><span>Snipe</span></a>
         </div>
         <div class="row filter-list">
             <form class="col s12">

@@ -40,7 +40,7 @@ class Misc {
      */
     static formatMessage( data, cb ) {
         var str = config.message;
-        if ( data.originalPrice === "Negociate price" ) {
+        if ( data.originalPrice === "Negotiate price" ) {
             str = config.barter;
         }
         if ( data.name !== data.typeLine ) {

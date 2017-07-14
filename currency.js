@@ -7,7 +7,9 @@
  */
 
 var async   = require( "async" );
-var config  = require( "./config.json" );
+const {app} = require( "electron" ).remote;
+const path  = require( "path" );
+var config  = require( app.getPath( "userData" ) + path.sep + "config.json" );
 var Misc    = require( "./misc.js" );
 var leagues = config.leagues;
 leagues.push( "beta-Standard" );
@@ -28,7 +30,7 @@ class Currency {
         Misc.publishStatusMessage( "Downloading last rates from poe-rates.com" );
         var shortRates = {};
         // For each league
-        async.each( leagues, function( league, cbLeague ) {
+        async.each( config.leagues, function( league, cbLeague ) {
             $.get( "http://poe-rates.com/actions/getLastRates.php", {
                 league: league
             }, function( data ) {
