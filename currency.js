@@ -12,8 +12,6 @@ const path  = require( "path" );
 var config  = require( app.getPath( "userData" ) + path.sep + "config.json" );
 var Misc    = require( "./misc.js" );
 var leagues = config.leagues;
-leagues.push( "beta-Standard" );
-leagues.push( "beta-Hardcore" );
 
 class Currency {
 

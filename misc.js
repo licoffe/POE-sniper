@@ -18,6 +18,20 @@ config = require( app.getPath( "userData" ) + path.sep + "config.json" );
 class Misc {
 
     /**
+     * Fetch active leagues from poe-rates.com API
+     *
+     * @params callback
+     * @return return leagues through callback
+     */
+    static getLeagues( callback ) {
+        $.get( "http://poe-rates.com/actions/getLeagues.php",
+            function( data ) {
+                callback( $.parseJSON( data ).leagues );
+            }
+        )
+    }
+
+    /**
      * Generates a random id
      * From http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
      *

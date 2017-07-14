@@ -74,8 +74,8 @@ class Item {
             Item.getLinksAmountAndColor( item, function( res ) {
 
                 var ref = itemName + "_" + ( res.linkAmount <= 4 ? 3 : ( res.linkAmount - 1 )) + "_" + item.frameType;
-                if ( item.frameType === 3 && itemRates[itemLeague][ref] && prices.convertedPriceChaos < itemRates[itemLeague][ref]) {
-                    console.log( item.name + " " + res.linkAmount + "L for " + prices.convertedPriceChaos + " instead of " + (itemRates[itemLeague][ref] * 130/100) + " in " + itemLeague );
+                if ( item.frameType === 3 && itemRates[itemLeague][ref] && prices.convertedPriceChaos <= itemRates[itemLeague][ref] * 70 / 100 ) {
+                    console.log( item.name + " " + res.linkAmount + "L for " + prices.convertedPriceChaos + " instead of " + (itemRates[itemLeague][ref]) + " in " + itemLeague );
                     Item.parseProperties( item, function( newItem, parsedProperties ) {
                         // console.log( newItem );
                         // If we have an attack per second property, compute DPS
@@ -85,13 +85,13 @@ class Item {
                             parsedProperties.pDPS = dps.pDPS;
                             Item.insertDPSValues( newItem, dps, function( item ) {
                                 Item.formatItem( item, name, prices, function( newItem ) {
-                                    newItem.fullPrice = Math.round( itemRates[itemLeague][ref] * 130 / 100 );
+                                    newItem.fullPrice = Math.round( itemRates[itemLeague][ref]);
                                     callback( newItem );
                                 });
                             });
                         } else {
                             Item.formatItem( newItem, name, prices, function( newItem ) {
-                                newItem.fullPrice = Math.round( itemRates[itemLeague][ref] * 130 / 100 );
+                                newItem.fullPrice = Math.round( itemRates[itemLeague][ref]);
                                 callback( newItem );
                             });
                         }
@@ -541,6 +541,7 @@ class Item {
     static getLastRates( callback ) {
         // console.log( "Downloading last rates from poe-rates.com" );
         var rates = {};
+
         // For each league
         async.each( config.leagues, function( league, cbLeague ) {
             rates[league] = {};
@@ -550,8 +551,9 @@ class Item {
                 var parsed = $.parseJSON( data );
                 async.each( parsed.rates, function( rate, cbRate ) {
                     // rates[league][rate.name + "_" + rate.links + "_" + rate.quality + "_" + rate.level + "_" + rate.corrupted] = rate.median;
-                    var value = rate.mode < rate.median ? rate.mode : rate.median;
-                    rates[league][rate.name + "_" + rate.links + "_" + rate.frameType] = value * 70/100;
+                    var value = parseFloat(rate.mode) < parseFloat(rate.median) ? parseFloat(rate.mode) : parseFloat(rate.median);
+                    // console.log( rate.name + "(" + league + ") " + rate.mode + " < " + rate.median + ": " + ( rate.mode < rate.median ) + " -> " + value );
+                    rates[league][rate.name + "_" + rate.links + "_" + rate.frameType] = value;
                     cbRate();
                 }, function() {
                     cbLeague();
@@ -561,7 +563,6 @@ class Item {
             if ( err ) {
                 console.log( err );
             }
-            console.log( rates );
             callback( rates );
         });
     }

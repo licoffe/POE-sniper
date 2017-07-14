@@ -63,10 +63,6 @@ var displayingNotification = false;
 var lastItem        = null;
 var prices          = {};
 
-Item.getLastRates( function( rates ) {
-    itemRates = rates;
-});
-
 // var writeFilterStats = function( filterStats ) {
 //     fs.appendFile( __dirname + "/stats_filters.csv", filterStats, function( err ) {
 //         if ( err ) {
@@ -595,6 +591,7 @@ $( document).ready( function() {
                 if ( err ) {
                     console.log( err );
                 }
+                filters.save();
                 poeTradeStats( filters );
             });
         });
@@ -1268,13 +1265,30 @@ $( document).ready( function() {
     $( 'select' ).material_select(); // Generate selects
     setupAutocomplete();             // Setup autocompletion
 
-    // Fetch new rates now and setup to be fetched every 10 seconds
-    Currency.getLastRates( function( rates ) {
-        currencyRates = rates;
-        console.log( currencyRates );
-    });
-    setInterval( Currency.getLastRates, config.RATES_REFRESH_INTERVAL, function( rates ) {
-        currencyRates = rates;
+    // Fetch active leagues and save them to the config file
+    Misc.getLeagues( function( leagues ) {
+        console.log( leagues );
+        config.leagues = leagues;
+        saveConfig();
+        // Fetch new rates now and setup to be fetched every 10 seconds
+        Currency.getLastRates( function( rates ) {
+            currencyRates = rates;
+            console.log( currencyRates );
+        });
+        setInterval( Currency.getLastRates, config.RATES_REFRESH_INTERVAL, function( rates ) {
+            console.log( rates );
+            currencyRates = rates;
+        });
+
+        // Fetch new item rates and setup to be fetched every 30 min
+        Item.getLastRates( function( rates ) {
+            itemRates = rates;
+            console.log( itemRates );
+        });
+        setInterval( Item.getLastRates, 30 * 60 * 1000, function( rates ) {
+            console.log( rates );
+            currencyRates = rates;
+        });
     });
 
     // If user decided not to show status bar, hide it
