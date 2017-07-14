@@ -179,7 +179,7 @@ class Filter {
         if ( this.currency === "chaos" ) {
             this.currency = "Chaos Orb";
         } else if  ( this.currency === "exa" ) {
-            this.curreny = "Exalted Orb";
+            this.currency = "Exalted Orb";
         }
         // Clean up the item name and typeLine
         item.name     = item.name.replace( "<<set:MS>><<set:M>><<set:S>>", "" );

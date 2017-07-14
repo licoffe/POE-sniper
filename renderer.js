@@ -601,7 +601,7 @@ $( document).ready( function() {
     };
 
     /**
-     * Color filter based on item name to help visually differenciate
+     * Color filter based on item name to help visually differentiate
      *
      * @params Filter
      * @return Nothing
@@ -700,7 +700,7 @@ $( document).ready( function() {
             editingFilter = id;
             // Search for filter with the corresponding id
             async.each( filters.filterList, function( filter, cbFilter ) {
-                // if filter matches, load all filter informations in the fields
+                // if filter matches, load all filter information in the fields
                 if ( filter.id === id ) {
                     $( "#league" ).val( filter.league );
                     $( "#league").material_select();
@@ -980,7 +980,7 @@ $( document).ready( function() {
         async.each( item.sockets, function( socket, cbSocket ) {
             socketIndex++;
             currentGroup = socket.group;
-            // Change image ressource associated to socket type and reveal
+            // Change image resource associated to socket type and reveal
             $( "li#" + item.id + " .socket" + socketIndex ).attr( "src", rsc[socket.attr]).show();
             // If we are still in the same group, draw a link
             if ( currentGroup === lastGroup && socketIndex > 1 ) {

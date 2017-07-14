@@ -46,7 +46,7 @@ class Item {
     }
 
     /**
-     * Check if item is underpricded
+     * Check if item is underpriced
      *
      * @params Item to check against, currency rates, itemRates, callback
      * @return item through callback

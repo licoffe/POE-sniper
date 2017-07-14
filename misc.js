@@ -183,9 +183,9 @@ class Misc {
                 "headers": { "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36" }
             },
             function( error, response, body ) {
-                // If there is an error, retry dowloading after delay
+                // If there is an error, retry downloading after delay
                 if ( error ) {
-                    console.log( "Error occured, retrying: " + error );
+                    console.log( "Error occurred, retrying: " + error );
                 }
                 try {
                     var data = JSON.parse( body, 'utf8' );
