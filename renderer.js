@@ -157,6 +157,7 @@ $( document).ready( function() {
                 }
             }
         });
+        $( "#results-amount" ).text( $( ".entry:visible" ).length );
     };
 
     // Action when the user is typing in the filter filters text field
@@ -858,7 +859,7 @@ $( document).ready( function() {
     });
 
     var updateResultsAmount = function() {
-        $( "#results-amount" ).text( Object.keys( results ).length );
+        $( "#results-amount" ).text( $( ".entry:visible" ).length );
     };
 
     // When clicking on share entries icon
@@ -952,8 +953,7 @@ $( document).ready( function() {
             wait:    true
         }, function ( err ) {
             if ( err ) {
-                console.log( err );
-                console.log( item );
+                // console.log( err );
             }
             displayingNotification = false;
         });
@@ -1315,7 +1315,7 @@ $( document).ready( function() {
             var attr = $( this ).attr( "id" );
             $( this ).slideUp().remove();
         });
-        $( "#results-amount" ).text( $( ".entry" ).length );
+        $( "#results-amount" ).text( $( ".entry:visible" ).length );
     }, 5000 );
 
     // Setup global clipboard
