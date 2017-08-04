@@ -17,6 +17,30 @@
     </head>
 
     <body class="grey darken-4">
+         <div class="row blue-grey darken-4 underpriced-form" style="padding-top: 20px; ">
+            <form>
+                <div class="input-field col s2">
+                    <input type="text" id="underpriced-percentage">
+                    <label>%</label>
+                </div>
+                <span class="col s1 input-field" style="font-size: 1.3em; top: 3px; left: -150px"> of </span>
+                <select id="underpriced-metric" class="input-field col s2">
+                    <option value="min_mode_median">Min( median price, mode price )</option>
+                    <option value="min">Min price</option>
+                    <option value="mode">Mode price</option>
+                    <option value="median">Median price</option>
+                </select>
+                <span class="col s1 input-field" style="font-size: 1.3em; top: 3px; left: -270px; width: 0.5%;"> in </span>
+                <select id="underpriced-league" class="input-field col s2">
+                    <option value="Standard">Standard</option>
+                    <option id="current-league-option-underpriced" value="Harbinger" selected>Harbinger</option>
+                    <option value="Hardcore">Hardcore</option>
+                    <option id="current-league-hardcore-option-underpriced" value="Harbinger Legacy">Harbinger Legacy</option>
+                </select>
+                <span class="col s1 input-field" style="font-size: 1.3em; top: 3px; left: -250px"> league</span>
+                <!-- <a class="waves-effect waves-light btn col s1 z-depth-2 green" style="top:-10px!important" id="underpriced-apply"><i class="material-icons" style="top: 0">thumb_up</i><span style="top: -5px;position: relative;left: 10px;font-size: 1.4em">Apply</span></a> -->
+            </form>
+        </div> 
         <div class="row blue-grey darken-4 filter-form" style="padding-top: 20px; ">
             <form class="col s12">
                 <div class="input-field col s2">
@@ -193,11 +217,9 @@
                     <!--<i class="material-icons prefix">home</i>-->
                     <select id="league">
                         <option value="Standard">Standard</option>
-                        <option id="current-league-option" value="Legacy" selected>Legacy</option>
+                        <option id="current-league-option" value="Harbinger" selected>Harbinger</option>
                         <option value="Hardcore">Hardcore</option>
-                        <option id="current-league-hardcore-option" value="Hardcore Legacy">Hardcore Legacy</option>
-                        <option value="2 Week Turmoil (JRE094)">Turmoil</option>
-                        <option value="2 Week Turmoil HC (JRE095)">Turmoil HC</option>
+                        <option id="current-league-hardcore-option" value="Harbinger Legacy">Harbinger Legacy</option>
                     </select>
                     <div class="input-field" style="
     padding: 0!important;">

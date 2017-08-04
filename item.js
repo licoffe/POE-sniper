@@ -51,7 +51,7 @@ class Item {
      * @params Item to check against, currency rates, itemRates, callback
      * @return item through callback
      */
-    static checkUnderpriced( item, currencyRates, itemRates, callback ) {
+    static checkUnderpriced( item, currencyRates, itemRates, value, metric, league, callback ) {
         var self = this;
 
         // Clean up the item name and typeLine
@@ -70,11 +70,38 @@ class Item {
         if ( config.useBeta ) {
             itemLeague = "beta-" + itemLeague;
         }
-        if ( prices.originalPrice !== "Negotiate price" && itemName !== "" && prices.convertedPriceChaos > 5 && !item.corrupted ) {
+        
+        if ( prices.originalPrice !== "Negotiate price" && itemLeague === league && 
+             name !== "" && prices.convertedPriceChaos > 5 && !item.corrupted ) {
             Item.getLinksAmountAndColor( item, function( res ) {
-
-                var ref = itemName + "_" + ( res.linkAmount <= 4 ? 3 : ( res.linkAmount - 1 )) + "_" + item.frameType;
-                if ( item.frameType === 3 && itemRates[itemLeague][ref] && prices.convertedPriceChaos <= itemRates[itemLeague][ref] * 70 / 100 ) {
+                var ref = "";
+                if ( item.frameType === 3 || item.frameType === 9 ) {
+                    ref = name + "_" + ( res.linkAmount <= 4 ? 3 : ( res.linkAmount - 1 )) + "_" + item.frameType;
+                } else if ( item.frameType === 5 || item.frameType === 6 || item.frameType === 8 ) {
+                    ref = name + "_0_" + item.frameType;
+                }
+                // If percentage value is not defined, default to 30%
+                if ( !value ) {
+                    value = 70;
+                }
+                var metricValueChaos = 0;
+                if ( ref && itemRates[itemLeague][ref]) {
+                    console.log( ref + " in " + itemLeague );
+                    console.log( itemRates[itemLeague][ref] );
+                    if ( metric === "min_mode_median" ) {
+                        metricValueChaos = Math.min( itemRates[itemLeague][ref].mode, itemRates[itemLeague][ref].median );
+                    } else if ( metric === "min" ) {
+                        metricValueChaos = itemRates[itemLeague][ref].min;
+                    } else if ( metric === "mode" ) {
+                        metricValueChaos = itemRates[itemLeague][ref].mode;
+                    } else if ( metric === "median" ) {
+                        metricValueChaos = itemRates[itemLeague][ref].median;
+                    }
+                }
+                
+                if ( itemRates[itemLeague][ref] && 
+                    ( item.frameType === 3 || item.frameType === 8 || item.frameType === 6 || item.frameType === 9 || item.frameType === 5 ) && 
+                    prices.convertedPriceChaos <= metricValueChaos * value / 100 ) {
                     console.log( item.name + " " + res.linkAmount + "L for " + prices.convertedPriceChaos + " instead of " + (itemRates[itemLeague][ref]) + " in " + itemLeague );
                     Item.parseProperties( item, function( newItem, parsedProperties ) {
                         // console.log( newItem );
@@ -85,13 +112,13 @@ class Item {
                             parsedProperties.pDPS = dps.pDPS;
                             Item.insertDPSValues( newItem, dps, function( item ) {
                                 Item.formatItem( item, name, prices, function( newItem ) {
-                                    newItem.fullPrice = Math.round( itemRates[itemLeague][ref]);
+                                    newItem.fullPrice = Math.round( itemRates[itemLeague][ref].mode);
                                     callback( newItem );
                                 });
                             });
                         } else {
                             Item.formatItem( newItem, name, prices, function( newItem ) {
-                                newItem.fullPrice = Math.round( itemRates[itemLeague][ref]);
+                                newItem.fullPrice = Math.round( itemRates[itemLeague][ref].mode);
                                 callback( newItem );
                             });
                         }
@@ -299,6 +326,8 @@ class Item {
         if ( config.useBeta ) {
             league = "beta-" + league;
         }
+
+        // console.log( JSON.stringify( currencyRates ));
 
         // The price is the name of the stash
         var price = item.stashTab;
@@ -550,10 +579,14 @@ class Item {
             }, function( data ) {
                 var parsed = $.parseJSON( data );
                 async.each( parsed.rates, function( rate, cbRate ) {
+                    rates[league][rate.name + "_" + rate.links + "_" + rate.frameType]        = {};
+                    rates[league][rate.name + "_" + rate.links + "_" + rate.frameType].min    = parseFloat(rate.min);
+                    rates[league][rate.name + "_" + rate.links + "_" + rate.frameType].mode   = parseFloat(rate.mode);
+                    rates[league][rate.name + "_" + rate.links + "_" + rate.frameType].median = parseFloat(rate.median);
                     // rates[league][rate.name + "_" + rate.links + "_" + rate.quality + "_" + rate.level + "_" + rate.corrupted] = rate.median;
-                    var value = parseFloat(rate.mode) < parseFloat(rate.median) ? parseFloat(rate.mode) : parseFloat(rate.median);
+                    // var value = parseFloat(rate.mode) < parseFloat(rate.median) ? parseFloat(rate.mode) : parseFloat(rate.median);
                     // console.log( rate.name + "(" + league + ") " + rate.mode + " < " + rate.median + ": " + ( rate.mode < rate.median ) + " -> " + value );
-                    rates[league][rate.name + "_" + rate.links + "_" + rate.frameType] = value;
+                    // rates[league][rate.name + "_" + rate.links + "_" + rate.frameType] = value;
                     cbRate();
                 }, function() {
                     cbLeague();

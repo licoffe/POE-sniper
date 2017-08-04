@@ -142,13 +142,18 @@ $( document).ready( function() {
 
     // Action when the user is typing in the filter items text field
     var filterResultListAction = function() {
+        // TODO: See if OK performance wise
+        $( ".results .collection-item" ).show();
         var text = $( "#item-filter" ).val().toLowerCase();
         $( ".results .collection-item" ).each( function() {
-            if ( text === "" ) {
-                $( this ).show();
-            } else {
-                var itemName = $( this ).find( ".item" ).text();
-                if ( itemName.toLowerCase().indexOf( text ) === -1 ) {
+            if ( text !== "" ) {
+                var itemName   = $( this ).find( ".item" ).text();
+                var leagueName = $( this ).find( ".item-league" ).text();
+                var typeLine = $( this ).find( ".item-typeLine" ).text();
+                // If the item name nor league match the text typed, hide the item
+                if ( itemName.toLowerCase().indexOf( text )   === -1 && 
+                     leagueName.toLowerCase().indexOf( text ) === -1 &&
+                     typeLine.toLowerCase().indexOf( text )   === -1 ) {
                     $( this ).hide();
                 }
             }
@@ -258,6 +263,12 @@ $( document).ready( function() {
                 formData.displayPrice = formData.budget + " " + formData.currency;
             } else {
                 formData.displayPrice = "Any price";
+            }
+
+            if ( formData.currency === "chaos" ) {
+                formData.currency = "Chaos Orb";
+            } else if ( formData.currency === "exa" ) {
+                formData.currency = "Exalted Orb";
             }
 
             var title = "";
@@ -703,7 +714,11 @@ $( document).ready( function() {
                     $( "#league").material_select();
                     $( "#item" ).val( filter.item );
                     $( "#price" ).val( filter.budget );
-                    $( "#currency" ).val( filter.currency );
+                    if ( filter.currency === "Chaos Orb" ) {
+                        $( "#currency" ).val( "chaos" );
+                    } else {
+                        $( "#currency" ).val( "exa" );
+                    }
                     $( "#currency").material_select();
                     $( "#links" ).val( filter.links );
                     $( "#links").material_select();
@@ -1094,7 +1109,12 @@ $( document).ready( function() {
                         item.stashTab          = stash.stash;
                         item.lastCharacterName = stash.lastCharacterName;
                         item.accountName       = stash.accountName;
-                        Item.checkUnderpriced( item, currencyRates, itemRates, function( item ) {
+                        var underpricedPercentage = $( "#underpriced-percentage" ).val();
+                        var underpricedMetric     = $( "#underpriced-metric" ).val();
+                        var underpricedLeague     = $( "#underpriced-league" ).val();
+                        Item.checkUnderpriced( 
+                            item, currencyRates, itemRates, underpricedPercentage, 
+                            underpricedMetric, underpricedLeague, function( item ) {
                             if ( item ) {
                                 if ( !itemInStash[stash.id]) {
                                     itemInStash[stash.id] = {
@@ -1272,21 +1292,28 @@ $( document).ready( function() {
         saveConfig();
         // Fetch new rates now and setup to be fetched every 10 seconds
         Currency.getLastRates( function( rates ) {
-            currencyRates = rates;
+            for ( var league in rates ) {
+                if ( rates.hasOwnProperty( league )) {
+                    currencyRates[league] = rates[league];
+                }
+            }
             console.log( currencyRates );
         });
         setInterval( Currency.getLastRates, config.RATES_REFRESH_INTERVAL, function( rates ) {
-            console.log( rates );
-            currencyRates = rates;
+            for ( var league in rates ) {
+                if ( rates.hasOwnProperty( league )) {
+                    currencyRates[league] = rates[league];
+                }
+            }
         });
 
         // Fetch new item rates and setup to be fetched every 30 min
         Item.getLastRates( function( rates ) {
             itemRates = rates;
-            console.log( itemRates );
+            // console.log( itemRates );
         });
         setInterval( Item.getLastRates, 30 * 60 * 1000, function( rates ) {
-            console.log( rates );
+            // console.log( rates );
             currencyRates = rates;
         });
     });
@@ -1636,6 +1663,7 @@ $( document).ready( function() {
     var toggleMode = function() {
         // If underpriced mode, hide filters and form
         if ( $( "#toggle-mispriced" ).prop( "checked" )) {
+            $( ".underpriced-form").slideDown();
             $( ".filter-form" ).slideUp();
             $( ".filter-list" ).slideUp();
             $( "#cancel-filter" ).addClass( "disabled" );
@@ -1643,9 +1671,11 @@ $( document).ready( function() {
             $( "#import-poe-trade" ).addClass( "disabled" );
             $( ".progress" ).css( "top", "-8px" );
             config.checkUnderpriced = true;
+            // Remove queue interval delay
             config.NOTIFICATION_QUEUE_INTERVAL = 0;
             saveConfig();
         } else {
+            $( ".underpriced-form").slideUp();
             $( ".filter-form" ).slideDown();
             $( ".filter-list" ).slideDown();
             $( "#cancel-filter" ).removeClass( "disabled" );
