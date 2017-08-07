@@ -1305,6 +1305,7 @@ $( document).ready( function() {
                     currencyRates[league] = rates[league];
                 }
             }
+            // console.log( currencyRates );
         });
 
         // Fetch new item rates and setup to be fetched every 30 min

@@ -65,13 +65,16 @@ class Item {
             name = typeLine;
         }
 
-        var prices = Item.computePrice( item, currencyRates );
         var itemLeague = item.league;
         if ( config.useBeta ) {
             itemLeague = "beta-" + itemLeague;
         }
+        var prices = {};
+        if ( itemLeague === league ) {
+            prices = Item.computePrice( item, currencyRates );
+        }
         
-        if ( prices.originalPrice !== "Negotiate price" && itemLeague === league && 
+        if ( prices.originalPrice !== "Negotiate price" && itemLeague === league &&
              name !== "" && prices.convertedPriceChaos > 5 && !item.corrupted ) {
             Item.getLinksAmountAndColor( item, function( res ) {
                 var ref = "";
@@ -86,8 +89,8 @@ class Item {
                 }
                 var metricValueChaos = 0;
                 if ( ref && itemRates[itemLeague][ref]) {
-                    console.log( ref + " in " + itemLeague );
-                    console.log( itemRates[itemLeague][ref] );
+                    // console.log( ref + " in " + itemLeague );
+                    // console.log( itemRates[itemLeague][ref] );
                     if ( metric === "min_mode_median" ) {
                         metricValueChaos = Math.min( itemRates[itemLeague][ref].mode, itemRates[itemLeague][ref].median );
                     } else if ( metric === "min" ) {
@@ -102,7 +105,7 @@ class Item {
                 if ( itemRates[itemLeague][ref] && 
                     ( item.frameType === 3 || item.frameType === 8 || item.frameType === 6 || item.frameType === 9 || item.frameType === 5 ) && 
                     prices.convertedPriceChaos <= metricValueChaos * value / 100 ) {
-                    console.log( item.name + " " + res.linkAmount + "L for " + prices.convertedPriceChaos + " instead of " + (itemRates[itemLeague][ref]) + " in " + itemLeague );
+                    // console.log( item.name + " " + res.linkAmount + "L for " + prices.convertedPriceChaos + " instead of " + (itemRates[itemLeague][ref]) + " in " + itemLeague );
                     Item.parseProperties( item, function( newItem, parsedProperties ) {
                         // console.log( newItem );
                         // If we have an attack per second property, compute DPS
@@ -349,6 +352,8 @@ class Item {
                 convertedPrice = ( match[2] / match[3] ) * currencyRates[league][Currency.shortToLongLookupTable[match[4]]];
             // Otherwise
             } else {
+                // console.log( league );
+                // console.log( currencyRates[league] );
                 // Same thing as above without divisions
                 originalPrice  = Math.round( match[1] * 100 ) / 100 + " " + match[4];
                 // console.log( match[1] + " " + match[4]);
