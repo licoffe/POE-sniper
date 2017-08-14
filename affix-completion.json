@@ -42,6 +42,7 @@
   "+# to Level of Socketed Gems": null,
   "+# to Level of Socketed Melee Gems": null,
   "+# to maximum Energy Shield": null,
+  "#% increased maximum Energy Shield": null,
   "+# to maximum Life": null,
   "+# to maximum Mana": null,
   "+#% to Critical Strike Multiplier with Cold Skills": null,
@@ -286,10 +287,9 @@
   "#% reduced Chaos Damage taken over time": null,
   "-# Chaos Damage taken": null,
   "#% reduced Physical Damage": null,
-  "Mercury Footprints": null
-
-
-
-
-
+  "Mercury Footprints": null,
+  "#% more Melee Physical Damage during effect": null,
+  "Knocks Back Enemies in an Area on Flask use": null,
+  "Adds Knockback during Flask effect": null,
+  "#% chance to cause Enemies to Flee on use": null
 }

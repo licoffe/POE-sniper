@@ -154,9 +154,10 @@ class Filter {
             // Check the amount of links
             Item.getLinksAmountAndColor( item, function( res ) {
                 item.linkAmount = res.linkAmount;
-                // If there is no link filter or item links >= filter links AND
+                // If there is no link filter or item links >= filter links
+                // console.log( "filter-links: " + self.links + ", item-links: " + res.linkAmount );
                 callback(
-                    ( res.linkAmount >= self.links || self.links === "any" ) && 
+                    (( self.links === "0" && res.linkAmount < 5 ) || ( self.links !== "0" && self.links !== "45" && res.linkAmount === parseInt( self.links )) || self.links === "any" || ( self.links === "45" && res.linkAmount < 6 )) && 
                     ( self.socketsRed   === "" || ( res.colorCount.S >= parseInt( self.socketsRed )))   &&
                     ( self.socketsGreen === "" || ( res.colorCount.D >= parseInt( self.socketsGreen ))) &&
                     ( self.socketsBlue  === "" || ( res.colorCount.I >= parseInt( self.socketsBlue )))  &&
@@ -207,9 +208,9 @@ class Filter {
         // ( no level filter OR item is a gem OR ( item is not a gem AND filter level <= item level )) AND
         // ( no rarity filter OR rarities are the same ) AND
         // ( no item type filter OR item types are the same )
-        if (( this.item    === ""    || itemName.toLowerCase() === this.item.toLowerCase() || 
+        if (( this.league  === "any" || item.league === this.league ) &&
+            ( this.item    === ""    || itemName.toLowerCase() === this.item.toLowerCase() || 
               typeLine.toLowerCase() === this.item.toLowerCase() ) &&
-            ( this.league  === "any" || item.league === this.league ) &&
             ( this.socketsTotal === ""    || this.socketsTotal <= item.sockets.length ) && 
             (( this.corrupted  == 'true' ) === item.corrupted  || this.corrupted  === "any" ) &&
             (( this.enchanted  == 'true' ) === item.enchanted  || this.enchanted  === "any" ) &&

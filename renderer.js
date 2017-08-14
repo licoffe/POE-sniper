@@ -286,8 +286,12 @@ $( document).ready( function() {
             } else {
                 title += "<span style=\"padding-right: 10px;\">" + formData.item + "</span>";
             }
-            if ( formData.links !== "0" && formData.links !== "any" ) {
+            if ( formData.links !== "0" && formData.links !== "45" && formData.links !== "any" ) {
                 title += "<span class=\"filter-links\">" + formData.links + "L</span>";
+            } else if ( formData.links === "0" ) {
+                title += "<span class=\"filter-links\">< 5L</span>";
+            } else if ( formData.links === "45" ) {
+                title += "<span class=\"filter-links\">< 6L</span>";
             }
             var total;
             if ( formData.socketsTotal === "" ) {
@@ -1176,6 +1180,7 @@ $( document).ready( function() {
                     } else {
                         // For each stashes in the new data file
                         var totalItems = 0;
+                        // console.time( "Checking stashes" );
                         async.each( data.stashes, function( stash, callbackStash ) {
                             totalItems += stash.items.length;
                             async.each( stash.items, function( item, callbackItem ) {
@@ -1217,8 +1222,9 @@ $( document).ready( function() {
                             if ( err ) {
                                 console.log( err );
                             }
+                            // console.timeEnd( "Checking stashes" );
                             callbackFilter();
-                            // console.log( "Searched among " + totalItems + " items" );
+                            console.log( "Searched among " + totalItems + " items" );
                             // var end = Date.now();
                             // var filterStats = filter.id + "," + (end - begin) + "," + totalItems + "\n";
                             // writeFilterStats( filterStats );
