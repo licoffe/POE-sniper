@@ -76,22 +76,22 @@ function createWindow() {
         var size = mainWindow.getSize();
         config.windowWidth = size[ 0 ];
         config.windowHeight = size[ 1 ];
-        fs.writeFile( app.getPath( "userData" ) + path.sep + "config.json", JSON.stringify( config ), function ( err ) {
-            if ( err ) {
-                console.log( err );
-            }
-        } );
+        // fs.writeFile( app.getPath( "userData" ) + path.sep + "config.json", JSON.stringify( config ), function ( err ) {
+        //     if ( err ) {
+        //         console.log( err );
+        //     }
+        // } );
     } );
 
     mainWindow.on( "move", function () {
         var pos = mainWindow.getPosition();
         config.x = pos[ 0 ];
         config.y = pos[ 1 ];
-        fs.writeFile( app.getPath( "userData" ) + path.sep + "config.json", JSON.stringify( config ), function ( err ) {
-            if ( err ) {
-                console.log( err );
-            }
-        } );
+        // fs.writeFile( app.getPath( "userData" ) + path.sep + "config.json", JSON.stringify( config ), function ( err ) {
+        //     if ( err ) {
+        //         console.log( err );
+        //     }
+        // } );
     } );
 
 }
