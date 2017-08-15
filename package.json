@@ -1,6 +1,6 @@
 {
   "name": "POE-sniper",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "description": "A Path of Exile item sniper",
   "main": "main.js",
   "scripts": {

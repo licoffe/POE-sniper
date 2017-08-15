@@ -1,5 +1,5 @@
 {
-    "bow": {
+    "Bow": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { 'properties.name': /Bow/, frameType: { $ne: 4 }, typeLine: { $all: [/^(?!Superior|<<).+/] }})",
         "types": [
             "Recurve Bow",
@@ -29,7 +29,7 @@
             "Composite Bow"
         ]
     },
-    "claw": {
+    "Claw": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { 'properties.name': /Claw/, frameType: { $ne: 4 }, typeLine: { $all: [/^(?!Superior|<<).+/] }})",
         "types": [
             "Timeworn Claw",
@@ -59,7 +59,7 @@
             "Cat's Paw"
         ]
     },
-    "one-handed sword": {
+    "One-handed sword": {
         "types": [
             "Rusted Sword",
             "Copper Sword",
@@ -88,7 +88,7 @@
             "Tiger Hook"
         ]
     },
-    "thrusting one-handed sword": {
+    "Thrusting one-handed sword": {
         "types": [
             "Rusted Spike",
             "Whalebone Rapier",
@@ -117,7 +117,7 @@
             "Dragoon Sword"
         ]
     },
-    "two-handed sword" : {
+    "Two-handed sword" : {
         "types": [
             "Corroded Blade",
             "Longsword",
@@ -143,7 +143,7 @@
             "Exquisite Blade"
         ]
     },
-    "one-handed axe": {
+    "One-handed axe": {
         "types": [
             "Rusted Hatchet",
             "Jade Hatchet",
@@ -172,7 +172,7 @@
             "Runic Hatchet"
         ]
     },
-    "two-handed axe": {
+    "Two-handed axe": {
         "types": [
             "Stone Axe",
             "Jade Chopper",
@@ -198,7 +198,7 @@
             "Fleshripper"
         ]
     },
-    "one-handed mace": {
+    "One-handed mace": {
         "types": [
             "Driftwood Club",
             "Tribal Club",
@@ -227,7 +227,7 @@
             "Behemoth Mace"
         ]
     },
-    "two-handed mace" : {
+    "Two-handed mace" : {
         "types": [
             "Driftwood Maul",
             "Tribal Maul",
@@ -253,7 +253,7 @@
             "Coronal Maul"
         ]
     },
-    "dagger": {
+    "Dagger": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { 'properties.name': /Dagger/, frameType: { $ne: 4 }, typeLine: { $all: [/^(?!Superior|<<).+/] }})",
         "types": [
             "Royal Skean",
@@ -283,7 +283,7 @@
             "Carving Knife"
         ]
     },
-    "sceptre": { 
+    "Sceptre": { 
         "command": "db.getCollection('stashes').distinct( 'typeLine', { frameType: { $ne: 4 }, typeLine: { $all: [/^(?!Superior|<<).+ (?:Sceptre|Fetish|Sekhem)/] }})",
         "types": [
             "Void Sceptre",
@@ -312,7 +312,7 @@
             "Horned Sceptre" 
         ]
     },
-    "staff": {
+    "Staff": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { 'properties.name': /Staff/, frameType: { $ne: 4 }, typeLine: { $all: [/^(?!Superior|<<).+/] }})",
         "types": [
             "Military Staff",
@@ -339,7 +339,7 @@
             "Primitive Staff"
         ]
     },
-    "wand": {
+    "Wand": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { 'properties.name': /Wand/, frameType: { $ne: 4 }, typeLine: { $all: [/^(?!Superior|<<).+/] }})",
         "types": [
             "Demon's Horn",
@@ -363,7 +363,7 @@
             "Quartz Wand"
         ]
     },
-    "body-armor": {
+    "Body-armor": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { frameType: { $ne: 4 }, 'properties.name': /Armour/, typeLine: { $all: [/^(?!Superior|<<).+ (?:Plate|Garb|Lamellar|Raiment|Armour|Tunic|Regalia|Hauberk|Doublet|Vest|Chestplate|Brigandine|Vestment|Chainmail|Leather|Ringmail|Dragonscale|Wyrmscale|Mantle|Silks|Coat|Jacket|Robe|Jerkin|Wrap)/] }})",
         "types": [
             "Vaal Regalia",
@@ -426,7 +426,7 @@
             "Occultist's Vestment"
         ]
     },
-    "boots": {
+    "Boots": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { frameType: { $ne: 4 }, 'properties.name': /Armour/, typeLine: { $all: [/^(?!Superior|<<).+ (?:Boots|Greaves|Slippers|Caligae|Shoes)/] }})",
         "types": [
             "Serpentscale Boots",
@@ -468,7 +468,7 @@
             "Slink Boots"
         ]
     },
-    "gloves": {
+    "Gloves": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { frameType: { $ne: 4 }, 'properties.name': /Armour/, typeLine: { $all: [/^(?!Superior|<<).+ (?:Mitts|Gauntlets|Gloves|Bracers)/] }})",
         "types": [
             "Wyrmscale Gauntlets",
@@ -508,7 +508,7 @@
             "Deerskin Gloves"
         ]
     },
-    "helmet": {
+    "Helmet": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { frameType: { $ne: 4 }, 'properties.name': /Armour/, typeLine: { $all: [/^(?!Superior|<<).+ (?:Helmet|Helm|Circlet|Mask|BurgonetBascinet|Sallet|Crown|Wreath|Hood|Hat|Cap|Pelt|Cage|Tricorne|Coif)/] }})",
         "types": [
             "Siege Helmet",
@@ -548,7 +548,7 @@
             "Solaris Circlet"
         ]
     },
-    "shield": {
+    "Shield": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { frameType: { $ne: 4 }, typeLine: { $all: [/^(?!Superior|<<).+ (?:Shield|Buckler)/] }})",
         "types": [
             "Girded Tower Shield",
@@ -640,7 +640,7 @@
             "Corroded Tower Shield"
         ]
     },
-    "amulet": {
+    "Amulet": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { frameType: { $ne: 4 }, typeLine: { $all: [/^(?!Superior|<<).+ Amulet/] }})",
         "types": [
             "Turquoise Amulet",
@@ -659,7 +659,7 @@
             "Marble Amulet"
         ]
     },
-    "belt": {
+    "Belt": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { frameType: { $ne: 4 }, typeLine: { $all: [/^(?!Superior|<<).+ (?:Belt|Obi|Sash)/] }})",
         "types": [
             "Chain Belt",
@@ -673,7 +673,7 @@
             "Crystal Belt"
         ]
     },
-    "divination-card": {
+    "Divination-card": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { frameType: { $eq: 6 }, typeLine: { $all: [/^(?!Superior|<<).+/] }})", 
         "types": [
             "The Gambler",
@@ -840,7 +840,7 @@
             "The Void"
         ]
     },
-    "flask": {
+    "Flask": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { frameType: { $ne: 4 }, typeLine: { $all: [/^(?!Superior|<<).+ Flask/] }})",
         "types": [
             "Jade Flask",
@@ -890,7 +890,7 @@
             "Medium Hybrid Flask"
         ]
     },
-    "jewel": {
+    "Jewel": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { frameType: { $ne: 4 }, typeLine: { $all: [/^(?!Superior|<<).+ Jewel/] }})", 
         "types": [
             "Crimson Jewel",
@@ -899,7 +899,7 @@
             "Prismatic Jewel"
         ]
     },
-    "gem": {
+    "Gem": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { frameType: { $eq: 4 }, typeLine: { $all: [/^(?!Superior|<<).+/] }})", 
         "types": [
             "Leap Slam",
@@ -1174,7 +1174,7 @@
             "Lacerate"
         ]
     },
-    "map": {
+    "Map": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { 'properties.name': /Map/, frameType: { $ne: 4 }, typeLine: { $all: [/^(?!Superior|<<).+/] }})",
         "types": [
             "Museum Map",
@@ -1320,7 +1320,7 @@
             "Shaped Villa Map"
         ]
     },
-    "fragment": {
+    "Fragment": {
         "command": "",
         "types": [
             "Sacrifice at Dawn",
@@ -1342,7 +1342,7 @@
             "Fragment of the Chimera"
         ]
     },
-    "currency": {
+    "Currency": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { frameType: { $eq: 5 }})",
         "types": [
             "Orb of Chance",
@@ -1388,7 +1388,7 @@
             "Unshaping Orb"
         ]
     },
-    "prophecy": {
+    "Prophecy": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { frameType: { $eq: 8 }, typeLine: { $all: [/^(?!Superior|<<).+/] }})", 
         "types": [
             "Mysterious Invaders",
@@ -1594,7 +1594,7 @@
             "Deadly Rivalry IV"
         ]
     },
-    "quiver": {
+    "Quiver": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { frameType: { $ne: 4 }, typeLine: { $all: [/^(?!Superior|<<).+ Quiver/] }})", 
         "types": [
             "Spike-Point Arrow Quiver",
@@ -1612,7 +1612,7 @@
             "Rugged Quiver"
         ]
     },
-    "ring": {
+    "Ring": {
         "command": "db.getCollection('stashes').distinct( 'typeLine', { frameType: { $ne: 4 }, typeLine: { $all: [/^(?!Superior|<<).+ Ring/] }})", 
         "types": [
             "Gold Ring",
@@ -1632,7 +1632,7 @@
             "Steel Ring"
         ]
     },
-    "map-fragments": {
+    "Map-fragments": {
         "command": "",
         "types": []
     },
@@ -2314,7 +2314,7 @@
             "Zerphi's Last Breath"
         ]
     },
-    "essence": {
+    "Essence": {
         "types":[
             "Whispering Essence of Hatred",
             "Muttering Essence of Sorrow",

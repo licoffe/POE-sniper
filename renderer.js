@@ -601,13 +601,13 @@ $( document).ready( function() {
                     updateFilterAmount( filter.id );
                     cbSorted();
                     addPoeTradeForm( filter );
+                    console.log( filter );
                 });
             }, function( err ) {
                 if ( err ) {
                     console.log( err );
                 }
                 filters.save();
-                poeTradeStats( filters );
                 $( ".filter-detail a" ).click( function( event ) {
                     event.preventDefault();
                     event.stopPropagation();
@@ -631,21 +631,21 @@ $( document).ready( function() {
      * @return Nothing
      */
     var colorFilter = function( filter ) {
-        if ( itemTypes["divination-card"].types.indexOf( filter.item ) !== -1 ) {
+        if ( itemTypes["Divination-card"].types.indexOf( filter.item ) !== -1 ) {
             $( "#filter-detail-" + filter.id + " .item" ).addClass( "divination" );
-        } else if ( itemTypes["prophecy"].types.indexOf( filter.item ) !== -1 ) {
+        } else if ( itemTypes["Prophecy"].types.indexOf( filter.item ) !== -1 ) {
             $( "#filter-detail-" + filter.id + " .item" ).addClass( "prophecy" );
         } else if ( itemTypes["unique"].types.indexOf( filter.item ) !== -1 ) {
             $( "#filter-detail-" + filter.id + " .item" ).addClass( "unique" );
-        } else if ( itemTypes["currency"].types.indexOf( filter.item ) !== -1 ) {
+        } else if ( itemTypes["Currency"].types.indexOf( filter.item ) !== -1 ) {
             $( "#filter-detail-" + filter.id + " .item" ).addClass( "currency" );
-        } else if ( itemTypes["gem"].types.indexOf( filter.item ) !== -1 ) {
+        } else if ( itemTypes["Gem"].types.indexOf( filter.item ) !== -1 ) {
             $( "#filter-detail-" + filter.id + " .item" ).addClass( "gem" );
-        } else if ( itemTypes["map"].types.indexOf( filter.item ) !== -1 ) {
+        } else if ( itemTypes["Map"].types.indexOf( filter.item ) !== -1 ) {
             $( "#filter-detail-" + filter.id + " .item" ).addClass( "map" );
-        } else if ( itemTypes["fragment"].types.indexOf( filter.item ) !== -1 ) {
+        } else if ( itemTypes["Fragment"].types.indexOf( filter.item ) !== -1 ) {
             $( "#filter-detail-" + filter.id + " .item" ).addClass( "fragment" );
-        } else if ( itemTypes["essence"].types.indexOf( filter.item ) !== -1 ) {
+        } else if ( itemTypes["Essence"].types.indexOf( filter.item ) !== -1 ) {
             $( "#filter-detail-" + filter.id + " .item" ).addClass( "essence" );
         } 
     };
@@ -710,19 +710,6 @@ $( document).ready( function() {
         displaySearchEngines();
     };
 
-    // var render = function( filter ) {
-    //     console.log( "AM I OBSOLETE?!!!!!!!!!!!" )
-    //     var generated = "";
-    //     mu.compileAndRender( "filter.html", filter )
-    //     .on( "data", function ( data ) {
-    //         generated += data.toString();
-    //     })
-    //     .on( "end", function () {
-            
-    //     });
-    //     filters.save();
-    // };
-
     // Render poe.trade form for search link
     var renderPoeTradeForm = function( filter, cb ) {
         var generated = "";
@@ -753,6 +740,25 @@ $( document).ready( function() {
         renderPoeTradeForm( filter, function( generated ) {
             $( "#" + filter.id + "-poe-trade-form" ).remove();
             $( "#poe-trade-forms" ).append( generated );
+            // Generate form to query poe.trade with mods
+            var reg   = /\(\s*([0-9. ]+)\s*\-\s*([0-9. ]+)\s*\)(.*)/;
+            async.each( filter.affixesDis, function( affix, cbAffix ) {
+                var match = reg.exec( affix );
+                $( "#" + filter.id + "-poe-trade-form" ).append(
+                    "<select name=\"mod_name\"><option>#" + match[3] + "</option></select>" +
+                    "<input type=\"text\" name=\"mod_min\" value=\"" + match[1] + "\">" +
+                    "<input type=\"text\" name=\"mod_max\" value=\"" + match[2] + "\">"
+                );
+                // console.log( "#" + match[3] + ": " + match[1] + ", " + match[2] );
+                cbAffix();
+            }, function() {
+                $( "#" + filter.id + "-poe-trade-form" ).append(
+                    "<input type=\"text\" name=\"group_min\" value=\"\">" +
+                    "<input type=\"text\" name=\"group_max\" value=\"\">" +
+                    "<input type=\"text\" name=\"group_count\" value=\"" + filter.affixesDis.length + "\">" +
+                    "<select name=\"group_type\"><option>And</option></select>"
+                );
+            });
         });
     };
 
@@ -868,6 +874,7 @@ $( document).ready( function() {
         } else {
             $( ".item-stats" ).show();
         }
+        var reg = /\(\s*([^ ]+)\s*\-\s*([^ ]+)\s*\)(.*)/;
         console.log( "Refreshing poe.trade stats" );
         Misc.publishStatusMessage( "Fetching item stats from poe.trade" );
         async.each( filters.filterList, function( filter, cbFilter ) {
@@ -885,58 +892,97 @@ $( document).ready( function() {
                 filter.link_min = filter.links;
                 filter.link_max = filter.link_min;
             }
-            $.post( "http://poe.trade/search", {
+            var corrupted = filter.corrupted;
+            if ( corrupted === "any" ) {
+                corrupted = "";
+            }
+            var data = $.param({
                 name:       filter.item,
                 league:     filter.league,
+                type:       filter.itemType,
                 link_min:   filter.link_min,
                 link_max:   filter.link_max,
                 q_min:      filter.quality,
                 ilvl_min:   filter.level,
                 level_min:  filter.tier,
-                corrupted:  filter.corrupted,
-                online:     "x",
-                has_buyout: "1"
-            }, function( data ) {
-                var wrapper = document.getElementById( "poe-trade-output" );
-                wrapper.innerHTML = data;
-                // $( "div.poe-trade-output" ).html( data );
-                $( "#poe-trade-output script" ).remove();
-                $( "#poe-trade-output link" ).remove();
-                var prices = [];
-                var priceCount = {};
-                var mostPopularCount = 0;
-                var mostPopularPrice = "";
-                var sellers = [];
-                $( "#poe-trade-output .item" ).each( function() {
-                    var seller = $( this ).data( "seller" );
-                    if ( sellers.indexOf( seller ) === -1 ) {
-                        // console.log( $( this ).data( "buyout" ));
-                        sellers.push( seller );
-                        prices.push( $( this ).data( "buyout" ));
-                        if ( !priceCount[$( this ).data( "buyout" )]) {
-                            priceCount[$( this ).data( "buyout" )] = 0;
+                corrupted:  corrupted
+            }, true );
+            // Add mods
+            async.each( filter.affixesDis, function( affix, cbAffix ) {
+                var match = reg.exec( affix );
+                // console.log( "'#" + match[3] + "': '" + match[1] + "', '" + match[2] + "'" );
+                data += "&" + $.param({
+                    mod_name: "#" + match[3],
+                    mod_min: match[1],
+                    mod_max: match[2]
+                }, true);
+                cbAffix();
+            }, function() {
+                data += "&" + $.param({
+                    group_type: "And",
+                    group_min: "",
+                    group_max: "",
+                    group_count: filter.affixesDis.length,
+                    online:     "x",
+                    has_buyout: "1"
+                }, true);
+                // console.log( data );
+                $.post( "http://poe.trade/search", data, function( data ) {
+                    var wrapper = document.getElementById( "poe-trade-output" );
+                    wrapper.innerHTML = data;
+                    // $( "div.poe-trade-output" ).html( data );
+                    $( "#poe-trade-output script" ).remove();
+                    $( "#poe-trade-output link" ).remove();
+                    var prices = [];
+                    var priceCount = {};
+                    var mostPopularCount = 0;
+                    var mostPopularPrice = "";
+                    var sellers = [];
+                    $( "#poe-trade-output .item" ).each( function() {
+                        var seller = $( this ).data( "seller" );
+                        if ( sellers.indexOf( seller ) === -1 ) {
+                            // console.log( $( this ).data( "buyout" ));
+                            sellers.push( seller );
+                            prices.push( $( this ).data( "buyout" ));
+                            if ( !priceCount[$( this ).data( "buyout" )]) {
+                                priceCount[$( this ).data( "buyout" )] = 0;
+                            }
+                            priceCount[$( this ).data( "buyout" )]++;
+                            if ( priceCount[$( this ).data( "buyout" )] > mostPopularCount ) {
+                                mostPopularPrice = $( this ).data( "buyout" );
+                                mostPopularCount = priceCount[$( this ).data( "buyout" )];
+                            }
                         }
-                        priceCount[$( this ).data( "buyout" )]++;
-                        if ( priceCount[$( this ).data( "buyout" )] > mostPopularCount ) {
-                            mostPopularPrice = $( this ).data( "buyout" );
-                            mostPopularCount = priceCount[$( this ).data( "buyout" )];
+                    });
+                    str += "<span>Poe.trade stats based on <b>" + prices.length + "</b> items</span>";
+                    for ( var p in priceCount ) {
+                        if ( priceCount.hasOwnProperty( p ) && priceCount[p] > 1 ) {
+                            str += "<span>" + p + ": <b>" + priceCount[p] + "</b></span>";
                         }
                     }
+                    $( "#" + filter.id ).parent().parent().find( ".item-stats" ).html(
+                        str
+                    );
+                    // console.log( "Stats over " + prices.length + " items" );
+                    // console.log( "Most popular price: " + mostPopularPrice + " with " + mostPopularCount );
+                    // console.log( "Median price: " + prices[parseInt( prices.length/2)]);
+                    cbFilter();
                 });
-                str += "<span>Poe.trade stats based on <b>" + prices.length + "</b> items</span>";
-                for ( var p in priceCount ) {
-                    if ( priceCount.hasOwnProperty( p ) && priceCount[p] > 1 ) {
-                        str += "<span>" + p + ": <b>" + priceCount[p] + "</b></span>";
-                    }
-                }
-                $( "#" + filter.id ).parent().parent().find( ".item-stats" ).html(
-                    str
-                );
-                // console.log( "Stats over " + prices.length + " items" );
-                // console.log( "Most popular price: " + mostPopularPrice + " with " + mostPopularCount );
-                // console.log( "Median price: " + prices[parseInt( prices.length/2)]);
-                cbFilter();
             });
+            // data += "&" + $.param({
+            //     mod_name: "#% increased Attack Speed",
+            //     mod_min: 1,
+            //     mod_max: 12
+            // });
+            // data += "&" + $.param({
+            //     mod_name: "#% increased Physical Damage",
+            //     mod_min: 1,
+            //     mod_max: 20
+            // });
+            
+            // mod_name: ["#% increased Attack Speed", "#% increased Physical Damage"],
+            // mod_min: ["1", "1"],
+            // mod_max: ["12","20"],
         });
     };
 
@@ -1542,7 +1588,7 @@ $( document).ready( function() {
                 }
             });
         }
-        $( "#item-type" ).val( matchTypeWithPoeTrade( data.type.toLowerCase() ));
+        $( "#item-type" ).val( matchTypeWithPoeTrade( data.type ));
         $( "#item-type" ).material_select();
         $( "#armor" ).val( data.armour_min );
         $( "#es" ).val( data.shield_min );
