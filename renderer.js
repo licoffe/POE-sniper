@@ -601,7 +601,7 @@ $( document).ready( function() {
                     updateFilterAmount( filter.id );
                     cbSorted();
                     addPoeTradeForm( filter );
-                    console.log( filter );
+                    // console.log( filter );
                 });
             }, function( err ) {
                 if ( err ) {
@@ -713,6 +713,12 @@ $( document).ready( function() {
     // Render poe.trade form for search link
     var renderPoeTradeForm = function( filter, cb ) {
         var generated = "";
+        if ( filter.itemType === "any" ) {
+            filter.poeTradeType = "";
+        } else {
+            filter.poeTradeType = filter.itemType;
+        }
+        // console.log( filter );
         mu.compileAndRender( "poe-trade-form.html", filter )
         .on( "data", function ( data ) {
             generated += data.toString();
@@ -757,6 +763,40 @@ $( document).ready( function() {
                     "<input type=\"text\" name=\"group_max\" value=\"\">" +
                     "<input type=\"text\" name=\"group_count\" value=\"" + filter.affixesDis.length + "\">" +
                     "<select name=\"group_type\"><option>And</option></select>"
+                );
+                // Add corrupted, enchanted ... states
+                var option = "<option value=\"\">Either</option>";
+                if ( filter.corrupted === "true" ) {
+                    option = "<option value=\"1\">Yes</option>";
+                } else if ( filter.corrupted === "false" ) {
+                    option = "<option value=\"0\">No</option>";
+                }
+                $( "#" + filter.id + "-poe-trade-form" ).append(
+                    "<select name=\"corrupted\">" +
+                    option +
+                    "</select>"
+                );
+                option = "<option value=\"\">Either</option>";
+                if ( filter.enchanted === "true" ) {
+                    option = "<option value=\"1\">Yes</option>";
+                } else if ( filter.enchanted === "false" ) {
+                    option = "<option value=\"0\">No</option>";
+                }
+                $( "#" + filter.id + "-poe-trade-form" ).append(
+                    "<select name=\"enchanted\">" +
+                    option +
+                    "</select>"
+                );
+                option = "<option value=\"\">Either</option>";
+                if ( filter.crafted === "true" ) {
+                    option = "<option value=\"1\">Yes</option>";
+                } else if ( filter.crafted === "false" ) {
+                    option = "<option value=\"0\">No</option>";
+                }
+                $( "#" + filter.id + "-poe-trade-form" ).append(
+                    "<select name=\"crafted\">" +
+                    option +
+                    "</select>"
                 );
             });
         });
@@ -895,17 +935,40 @@ $( document).ready( function() {
             var corrupted = filter.corrupted;
             if ( corrupted === "any" ) {
                 corrupted = "";
+            } else {
+                corrupted = filter.corrupted === "True" ? "1" : "0";
+            }
+            var enchanted = filter.enchanted;
+            if ( enchanted === "any" ) {
+                enchanted = "";
+            } else {
+                enchanted = filter.enchanted  === "True" ? "1" : "0";
+            }
+            var crafted = filter.crafted;
+            if ( crafted === "any" ) {
+                crafted = "";
+            } else {
+                crafted = filter.crafted  === "True" ? "1" : "0";
+            }
+            var itemType = filter.itemType;
+            if ( filter.itemType === "any" ) {
+                itemType = "";
             }
             var data = $.param({
-                name:       filter.item,
-                league:     filter.league,
-                type:       filter.itemType,
-                link_min:   filter.link_min,
-                link_max:   filter.link_max,
-                q_min:      filter.quality,
-                ilvl_min:   filter.level,
-                level_min:  filter.tier,
-                corrupted:  corrupted
+                name:        filter.item,
+                league:      filter.league,
+                type:        itemType,
+                link_min:    filter.link_min,
+                link_max:    filter.link_max,
+                q_min:       filter.quality,
+                ilvl_min:    filter.level,
+                level_min:   filter.tier,
+                corrupted:   corrupted,
+                enchanted:   enchanted,
+                crafted:     crafted,
+                armour_min:  filter.armor,
+                evasion_min: filter.evasion,
+                shield_min:  filter.es
             }, true );
             // Add mods
             async.each( filter.affixesDis, function( affix, cbAffix ) {
@@ -918,14 +981,18 @@ $( document).ready( function() {
                 }, true);
                 cbAffix();
             }, function() {
+                if ( filter.affixesDis.length > 0 ) {
+                    data += "&" + $.param({
+                        group_type: "And",
+                        group_min: "",
+                        group_max: "",
+                        group_count: filter.affixesDis.length,
+                    }, true );
+                }
                 data += "&" + $.param({
-                    group_type: "And",
-                    group_min: "",
-                    group_max: "",
-                    group_count: filter.affixesDis.length,
                     online:     "x",
                     has_buyout: "1"
-                }, true);
+                }, true );
                 // console.log( data );
                 $.post( "http://poe.trade/search", data, function( data ) {
                     var wrapper = document.getElementById( "poe-trade-output" );
