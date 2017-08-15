@@ -2,13 +2,20 @@
     <div class="row">
         <div class="col s1">
             <input type="checkbox" class="filled-in cb" id="enable-filter-{{id}}" {{checked}}>
-            <label for="enable-filter-{{id}}" style="font-size: 1em!important; left: 20%!important;"></label>
+            <label for="enable-filter-{{id}}" style="font-size: 1em!important; left: 20%!important; top: -5px!important"></label>
         </div>
         <div class="col s11 filter-detail" id="filter-detail-{{id}}">
             <span class="title">
-                <span class="item">{{{title}}}</span> in {{league}} league <= <span class="currency">{{displayPrice}}</span><span class="buyout">&nbsp;(include barter offers)</span><span class="clipboard">&nbsp;(clipboard)</span><br><br><br>
-                <span class="item-stats">
-                </span>
+                <span class="item">{{{title}}}</span> in {{league}} league <= <span class="currency">{{displayPrice}}</span><span class="buyout">&nbsp;(include barter offers)</span><span class="clipboard">&nbsp;(clipboard)</span>
+                <div class="item-stats">
+                    updating...
+                </div>
+                <div class="search-engines">
+                    <span class="poe-trade-link"><a href="http://poe.trade" data-item="{{id}}-poe-trade-form" target="_blank">poe.trade</a></span>
+                    <span class="poe-ninja-link"><a href="http://poe.ninja/{{league}}" target="_blank">poe.ninja</a></span>
+                    <span class="poe-rates-link"><a href="http://poe-rates.com/index.php?league={{league}}&item={{item}}&interval=7d" target="_blank">poe-rates</a></span>
+                    <span class="poe-wiki-link"><a href="http://pathofexile.gamepedia.com/{{item}}" target="_blank">wiki</a></span>
+                </div>
             </span>
             <a href="#!" class="secondary-content"><i class="material-icons red-text remove-filter" style="top: -20px" id="{{id}}">remove</i></a>
         </div>

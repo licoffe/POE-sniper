@@ -66,7 +66,7 @@ class Chunk {
      * @return unparsed JSON body through callback
      */
     static download( chunkID, callback ) {
-        // console.time( "Downloading chunk " + chunkID );
+        console.time( "Downloading chunk " + chunkID );
         var begin    = Date.now();
         var dataSize = 0;
         var chunkStats;
@@ -79,10 +79,10 @@ class Chunk {
         dnscache.lookup( domain, function( err, result ) {
             request({ "url": link + "?id=" + chunkID, "gzip": true },
                 function( error, response, body ) {
-                    // If there is an error, retry dowloading after delay
+                    // If there is an error, retry downloading after delay
                     if ( error ) {
-                        // console.timeEnd( "Downloading chunk " + chunkID );
-                        console.log( "Error occured, retrying: " + error );
+                        console.timeEnd( "Downloading chunk " + chunkID );
+                        console.log( "Error occurred, retrying: " + error );
                         var end = Date.now();
                         if ( config.writeChunkStats ) {
                             chunkStats = chunkID + "," + ( end - begin ) + "," + dataSize + ",failed\n";
@@ -91,7 +91,7 @@ class Chunk {
                         setTimeout( Chunk.download, config.CHUNK_RETRY_INTERVAL, chunkID, callback );
                     } else {
                         var end = Date.now();
-                        // console.timeEnd( "Downloading chunk " + chunkID );
+                        console.timeEnd( "Downloading chunk " + chunkID );
                         if ( config.writeChunkStats ) {
                             chunkStats = chunkID + "," + ( end - begin ) + "," + dataSize + ",passed\n";
                             writeChunkStats( chunkStats );
@@ -114,7 +114,7 @@ class Chunk {
      * @return Send parsed JSON to callback
      */
     static loadJSON( data, chunkID, callback ) {
-        // try {
+        try {
             data = JSON.parse( data, 'utf8' );
             // If we reached the top and next_change_id is null
             if ( !data.next_change_id ) {
@@ -124,10 +124,10 @@ class Chunk {
                 // console.log( "Next ID: " + data.next_change_id );
                 callback( data );
             }
-        // } catch ( e ) {
-        //     console.log( "Error occured, retrying: " + e );
+        } catch ( e ) {
+            console.log( "Error occured, retrying: " + e );
         //     setTimeout( Chunk.download, config.CHUNK_RETRY_INTERVAL, chunkID, callback );
-        // }
+        }
     }
 
     static writeChunkStats( chunkStats ) {

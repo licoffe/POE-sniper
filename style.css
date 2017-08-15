@@ -295,6 +295,23 @@ input {
 
 .item-stats {
     color: rgba(0, 200, 200, 1);
+    padding-top: 10px;
+     display: none;
+}
+
+.poe-trade-link, .poe-ninja-link, .poe-rates-link, .poe-wiki-link {
+    top: 8px!important;
+    margin-right: 10px;
+    position: relative;
+}
+
+.filter-detail a {
+    transition: color 0.2s linear;
+}
+
+.filter-detail a:hover {
+    color: rgba(34, 255, 147, 1)!important;
+    transition: color 0.2s linear;
 }
 
 [type="checkbox"].filled-in:checked+label:after {
@@ -754,4 +771,12 @@ input:focus {
 
 #underpriced-league {
     left: -200px!important;
+}
+
+#poe-trade-forms {
+    display: none;
+}
+
+.search-engines {
+    display: none;
 }

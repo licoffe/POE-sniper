@@ -371,8 +371,6 @@ $( document).ready( function() {
             formData.title  = title;
             formData.active = true;
             var filter = new Filter( formData );
-            console.log( filter );
-            console.log( formData );
             if ( $( "#add-filter" ).text() === "playlist_addAdd filter" ) {
                 // console.log( filters );
                 filters.add( filter );
@@ -526,7 +524,6 @@ $( document).ready( function() {
             $( this ).parent().parent().parent().parent().remove();
             var newFilters = [];
             var id         = $( this ).attr( "id" );
-            // console.log( id );
             // Search for filter index and remove it from the array
             async.each( filters.filterList, function( filter, cb ) {
                 if ( filter.id !== id ) {
@@ -541,6 +538,8 @@ $( document).ready( function() {
                 // console.log( filters );
                 updateFilterAmount( id );
                 filters.save();
+                // Remove poe.trade form
+                $( "#" + id + "-poe-trade-form" ).remove();
             });
         });
     };
@@ -601,6 +600,7 @@ $( document).ready( function() {
                     bindFilterEdit( filter.id );
                     updateFilterAmount( filter.id );
                     cbSorted();
+                    addPoeTradeForm( filter );
                 });
             }, function( err ) {
                 if ( err ) {
@@ -608,6 +608,18 @@ $( document).ready( function() {
                 }
                 filters.save();
                 poeTradeStats( filters );
+                $( ".filter-detail a" ).click( function( event ) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    var id = $( this ).data( "item" );
+                    if ( id ) {
+                        $( "#" + id ).submit();
+                    } else {
+                        open( $( this ).attr( "href" ));
+                    }
+                });
+                // Hide or show elements
+                displaySearchEngines();
             });
         });
     };
@@ -684,18 +696,64 @@ $( document).ready( function() {
         bindFilterEdit( filter.id );
         updateFilterAmount( filter.id );
         poeTradeStats( filters );
+        $( ".filter-detail a" ).click( function( event ) {
+            event.preventDefault();
+            event.stopPropagation();
+            var id = $( this ).data( "item" );
+            if ( id ) {
+                $( "#" + id ).submit();
+            } else {
+                open( $( this ).attr( "href" ));
+            }
+        });
+        addPoeTradeForm( filter );
+        displaySearchEngines();
     };
 
-    var render = function( filter ) {
+    // var render = function( filter ) {
+    //     console.log( "AM I OBSOLETE?!!!!!!!!!!!" )
+    //     var generated = "";
+    //     mu.compileAndRender( "filter.html", filter )
+    //     .on( "data", function ( data ) {
+    //         generated += data.toString();
+    //     })
+    //     .on( "end", function () {
+            
+    //     });
+    //     filters.save();
+    // };
+
+    // Render poe.trade form for search link
+    var renderPoeTradeForm = function( filter, cb ) {
         var generated = "";
-        mu.compileAndRender( "filter.html", filter )
+        mu.compileAndRender( "poe-trade-form.html", filter )
         .on( "data", function ( data ) {
             generated += data.toString();
         })
         .on( "end", function () {
-            
+            cb( generated );
         });
-        filters.save();
+    };
+
+    var addPoeTradeForm = function( filter ) {
+        // Add poe.trade form to the page
+        if ( filter.links === "0" ) {
+            filter.link_min = "0";
+            filter.link_max = "4";
+        } else if ( filter.links === "45" ) {
+            filter.link_min = "0";
+            filter.link_max = "5";
+        } else if ( filter.links === "any" ) {
+            filter.link_min = "";
+            filter.link_max = "";
+        } else {
+            filter.link_min = filter.links;
+            filter.link_max = filter.link_min;
+        }
+        renderPoeTradeForm( filter, function( generated ) {
+            $( "#" + filter.id + "-poe-trade-form" ).remove();
+            $( "#poe-trade-forms" ).append( generated );
+        });
     };
 
     var bindFilterToggleState = function( id ) {
@@ -804,11 +862,41 @@ $( document).ready( function() {
     };
 
     var poeTradeStats = function( filters ) {
+        if ( !config.usePoeTradeStats ) {
+            $( ".item-stats" ).hide();
+            return;
+        } else {
+            $( ".item-stats" ).show();
+        }
         console.log( "Refreshing poe.trade stats" );
         Misc.publishStatusMessage( "Fetching item stats from poe.trade" );
         async.each( filters.filterList, function( filter, cbFilter ) {
             var str = "";
-            $.post( "http://poe.trade/search", { name: filter.item, league: filter.league, online: "x", has_buyout: "1" }, function( data ) {
+            if ( filter.links === "0" ) {
+                filter.link_min = "0";
+                filter.link_max = "4";
+            } else if ( filter.links === "45" ) {
+                filter.link_min = "0";
+                filter.link_max = "5";
+            } else if ( filter.links === "any" ) {
+                filter.link_min = "";
+                filter.link_max = "";
+            } else {
+                filter.link_min = filter.links;
+                filter.link_max = filter.link_min;
+            }
+            $.post( "http://poe.trade/search", {
+                name:       filter.item,
+                league:     filter.league,
+                link_min:   filter.link_min,
+                link_max:   filter.link_max,
+                q_min:      filter.quality,
+                ilvl_min:   filter.level,
+                level_min:  filter.tier,
+                corrupted:  filter.corrupted,
+                online:     "x",
+                has_buyout: "1"
+            }, function( data ) {
                 var wrapper = document.getElementById( "poe-trade-output" );
                 wrapper.innerHTML = data;
                 // $( "div.poe-trade-output" ).html( data );
@@ -1627,8 +1715,23 @@ $( document).ready( function() {
             $( "#barter-preview" ).text( str );
         });
         // Setup beta options
-        if ( config.useBeta ) {
-            $( "#use-beta" ).prop( "checked", true );
+        // if ( config.useBeta ) {
+        //     $( "#use-beta" ).prop( "checked", true );
+        // }
+        if ( config.usePoeTradeStats ) {
+            $( "#use-poeTradeStats" ).prop( "checked", true );
+        }
+        if ( config.showPoeTradeLink ) {
+            $( "#show-poe-trade-search-link" ).prop( "checked", true );
+        }
+        if ( config.showPoeNinjaLink ) {
+            $( "#show-poe-ninja-search-link" ).prop( "checked", true );
+        }
+        if ( config.showPoeRatesLink ) {
+            $( "#show-poe-rates-search-link" ).prop( "checked", true );
+        }
+        if ( config.showPoeWikiLink ) {
+            $( "#show-poe-wiki-search-link" ).prop( "checked", true );
         }
     };
     fillInSettings();
@@ -1640,15 +1743,58 @@ $( document).ready( function() {
         config.message = $( "#whisper-message" ).val();
         config.barter  = $( "#barter-message" ).val();
         // Setup beta options
-        config.useBeta    = $( "#use-beta" ).prop( "checked" );
+        // config.useBeta    = $( "#use-beta" ).prop( "checked" );
+        config.usePoeTradeStats = $( "#use-poeTradeStats" ).prop( "checked" );
+        config.showPoeTradeLink = $( "#show-poe-trade-search-link" ).prop( "checked" );
+        config.showPoeNinjaLink = $( "#show-poe-ninja-search-link" ).prop( "checked" );
+        config.showPoeRatesLink = $( "#show-poe-rates-search-link" ).prop( "checked" );
+        config.showPoeWikiLink  = $( "#show-poe-wiki-search-link" ).prop( "checked" );
         // save config
         saveConfig();
+        // Hide or show elements
+        displaySearchEngines();
     };
 
     // Bind applySettings function to apply button
     $( "#apply-settings" ).click( function() {
         applySettings();
     });
+
+    var displaySearchEngines = function() {
+        if ( config.usePoeTradeStats ) {
+            poeTradeStats( filters );
+            $( ".item-stats" ).show();
+        } else {
+            $( ".item-stats" ).hide();
+        }
+        if ( config.showPoeTradeLink ) {
+            $( ".search-engines" ).show();
+            $( ".poe-trade-link" ).show();
+        } else {
+            $( ".poe-trade-link" ).hide();
+        }
+        if ( config.showPoeNinjaLink ) {
+            $( ".search-engines" ).show();
+            $( ".poe-ninja-link" ).show();
+        } else {
+            $( ".poe-ninja-link" ).hide();
+        }
+        if ( config.showPoeRatesLink ) {
+            $( ".search-engines" ).show();
+            $( ".poe-rates-link" ).show();
+        } else {
+            $( ".poe-rates-link" ).hide();
+        }
+        if ( config.showPoeWikiLink ) {
+            $( ".search-engines" ).show();
+            $( ".poe-wiki-link" ).show();
+        } else {
+            $( ".poe-wiki-link" ).hide();
+        }
+        if ( !config.showPoeNinjaLink && !config.showPoeRatesLink && !config.showPoeTradeLink && !config.showPoeWikiLink ) {
+            $( ".search-engines" ).hide();
+        }
+    };
 
     // When changing whisper or barter message, update preview
     $( "#whisper-message" ).keyup( function() {
