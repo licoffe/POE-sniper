@@ -242,7 +242,7 @@ $( document).ready( function() {
                 data = $( this ).data( "data-item" );
                 formData.affixes[data.title] = [data.min, data.max];
                 var count = ( data.title.match( /#/g ) || []).length;
-                // console.log( data.title );
+                console.log( data );
                 // console.log( count );
                 var affix = "";
                 if ( count > 1 ) {
@@ -515,6 +515,42 @@ $( document).ready( function() {
         // $( "#filters-amount" ).text( filters.length );
         $( "#filters-amount" ).text( $( "#filters .collection-item:visible" ).length );
         bindRemoveFilter( id );
+    };
+
+    var displaySearchEngines = function() {
+        if ( config.usePoeTradeStats ) {
+            poeTradeStats( filters );
+            $( ".item-stats" ).show();
+        } else {
+            $( ".item-stats" ).hide();
+        }
+        if ( config.showPoeTradeLink ) {
+            $( ".search-engines" ).show();
+            $( ".poe-trade-link" ).show();
+        } else {
+            $( ".poe-trade-link" ).hide();
+        }
+        if ( config.showPoeNinjaLink ) {
+            $( ".search-engines" ).show();
+            $( ".poe-ninja-link" ).show();
+        } else {
+            $( ".poe-ninja-link" ).hide();
+        }
+        if ( config.showPoeRatesLink ) {
+            $( ".search-engines" ).show();
+            $( ".poe-rates-link" ).show();
+        } else {
+            $( ".poe-rates-link" ).hide();
+        }
+        if ( config.showPoeWikiLink ) {
+            $( ".search-engines" ).show();
+            $( ".poe-wiki-link" ).show();
+        } else {
+            $( ".poe-wiki-link" ).hide();
+        }
+        if ( !config.showPoeNinjaLink && !config.showPoeRatesLink && !config.showPoeTradeLink && !config.showPoeWikiLink ) {
+            $( ".search-engines" ).hide();
+        }
     };
 
     // When clicking on the minus sign, remove filter
@@ -886,6 +922,13 @@ $( document).ready( function() {
                             match = reg.exec( affix );
                         }
                         var title = affix.replace( reg, "#" );
+                        if ( !matches[0]) {
+                            matches[0] = "";
+                        }
+                        if ( !matches[1]) {
+                            matches[1] = "";
+                        }
+                        console.log( "Modified mod: " + title + " " + matches[0] + matches[1] );
                         var obj = {
                             title: title,
                             min:   matches[0],
@@ -898,6 +941,7 @@ $( document).ready( function() {
                             generated += data.toString();
                         })
                         .on( "end", function () {
+                            console.log( "Modified: " + generated );
                             $( "#affixes-list" ).append( generated );
                             $( "#" + obj.id ).data( "data-item", obj );
                             // When clicking on remove affix
@@ -1892,42 +1936,6 @@ $( document).ready( function() {
     $( "#apply-settings" ).click( function() {
         applySettings();
     });
-
-    var displaySearchEngines = function() {
-        if ( config.usePoeTradeStats ) {
-            poeTradeStats( filters );
-            $( ".item-stats" ).show();
-        } else {
-            $( ".item-stats" ).hide();
-        }
-        if ( config.showPoeTradeLink ) {
-            $( ".search-engines" ).show();
-            $( ".poe-trade-link" ).show();
-        } else {
-            $( ".poe-trade-link" ).hide();
-        }
-        if ( config.showPoeNinjaLink ) {
-            $( ".search-engines" ).show();
-            $( ".poe-ninja-link" ).show();
-        } else {
-            $( ".poe-ninja-link" ).hide();
-        }
-        if ( config.showPoeRatesLink ) {
-            $( ".search-engines" ).show();
-            $( ".poe-rates-link" ).show();
-        } else {
-            $( ".poe-rates-link" ).hide();
-        }
-        if ( config.showPoeWikiLink ) {
-            $( ".search-engines" ).show();
-            $( ".poe-wiki-link" ).show();
-        } else {
-            $( ".poe-wiki-link" ).hide();
-        }
-        if ( !config.showPoeNinjaLink && !config.showPoeRatesLink && !config.showPoeTradeLink && !config.showPoeWikiLink ) {
-            $( ".search-engines" ).hide();
-        }
-    };
 
     // When changing whisper or barter message, update preview
     $( "#whisper-message" ).keyup( function() {
