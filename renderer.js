@@ -914,7 +914,7 @@ $( document).ready( function() {
         } else {
             $( ".item-stats" ).show();
         }
-        var reg = /\(\s*([^ ]+)\s*\-\s*([^ ]+)\s*\)(.*)/;
+        var reg = /\(\s*([^ ]*)\s*\-\s*([^ ]*)\s*\)(.*)/;
         console.log( "Refreshing poe.trade stats" );
         Misc.publishStatusMessage( "Fetching item stats from poe.trade" );
         async.each( filters.filterList, function( filter, cbFilter ) {
@@ -973,8 +973,8 @@ $( document).ready( function() {
             // Add mods
             async.each( filter.affixesDis, function( affix, cbAffix ) {
                 var match = reg.exec( affix );
-                // console.log( "'#" + match[3] + "': '" + match[1] + "', '" + match[2] + "'" );
                 if ( match ) {
+                    console.log( "'#" + match[3] + "': '" + match[1] + "', '" + match[2] + "'" );
                     data += "&" + $.param({
                         mod_name: "#" + match[3],
                         mod_min: match[1],
