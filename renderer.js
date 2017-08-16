@@ -752,7 +752,7 @@ $( document).ready( function() {
         if ( filter.itemType === "any" ) {
             filter.poeTradeType = "";
         } else {
-            filter.poeTradeType = filter.itemType;
+            filter.poeTradeType = matchPoeTradeTypeWithInternal( filter.itemType );
         }
         // console.log( filter );
         mu.compileAndRender( "poe-trade-form.html", filter )
@@ -912,16 +912,17 @@ $( document).ready( function() {
                     Materialize.updateTextFields();
                     // For each affix
                     async.each( filter.affixesDis, function( affix, cbAffix ) {
+                        console.log( affix );
                         var generated = "";
                         // Extract title, min and max
                         var reg = /([0-9\.]+)/g;
+                        var regPar = /\([^()]\)/g;
                         var match = reg.exec( affix );
                         var matches = [];
                         while ( match !== null ) {
                             matches.push( parseFloat( match[1]));
                             match = reg.exec( affix );
                         }
-                        var title = affix.replace( reg, "#" );
                         if ( !matches[0]) {
                             matches[0] = "";
                         }
@@ -929,6 +930,7 @@ $( document).ready( function() {
                             matches[1] = "";
                         }
                         console.log( "Modified mod: " + title + " " + matches[0] + matches[1] );
+                        var title = affix.replace( regPar, "#" );
                         var obj = {
                             title: title,
                             min:   matches[0],
@@ -1007,6 +1009,8 @@ $( document).ready( function() {
             var itemType = filter.itemType;
             if ( filter.itemType === "any" ) {
                 itemType = "";
+            } else {
+                itemType = matchPoeTradeTypeWithInternal( filter.itemType );
             }
             var data = $.param({
                 name:        filter.item,
@@ -1693,6 +1697,31 @@ $( document).ready( function() {
         }
     };
 
+    // Map internal types to poe.trade ones
+    var matchPoeTradeTypeWithInternal = function( type ) {
+        switch ( type ) {
+            case "Fragment":
+                return "Map Fragments";
+            case "Divination-card":
+                return "Divination Card";
+            case "Body-armor":
+                return "Body Armour";
+            case "Two-handed sword":
+                return "Two Hand Sword";
+            case "Two-handed-mace":
+                return "Two Hand Mace";
+            case "Two-handed-axe":
+                return "Two Hand Axe";
+            case "One-handed-sword":
+                return "One Hand Sword";
+            case "One-handed-mace":
+                return "One Hand Mace";
+            case "One-handed-axe":
+                return "One Hand Axe";
+            default:
+                return type;
+        }
+    };
 
     // Fill in the filter form from the extracted poe.trade search
     var fillInFormWithPOETradeData = function( data ) {
