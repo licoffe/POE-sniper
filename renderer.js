@@ -747,15 +747,25 @@ $( document).ready( function() {
             $( "#" + filter.id + "-poe-trade-form" ).remove();
             $( "#poe-trade-forms" ).append( generated );
             // Generate form to query poe.trade with mods
-            var reg   = /\(\s*([0-9. ]+)\s*\-\s*([0-9. ]+)\s*\)(.*)/;
+            var reg   = /\(\s*([^ ]*)\s*\-\s*([^ ]*)\s*\)/;
             async.each( filter.affixesDis, function( affix, cbAffix ) {
                 var match = reg.exec( affix );
-                $( "#" + filter.id + "-poe-trade-form" ).append(
-                    "<select name=\"mod_name\"><option>#" + match[3] + "</option></select>" +
-                    "<input type=\"text\" name=\"mod_min\" value=\"" + match[1] + "\">" +
-                    "<input type=\"text\" name=\"mod_max\" value=\"" + match[2] + "\">"
-                );
-                // console.log( "#" + match[3] + ": " + match[1] + ", " + match[2] );
+                if ( match ) {
+                    $( "#" + filter.id + "-poe-trade-form" ).append(
+                        "<select name=\"mod_name\"><option>" + affix.replace( match[0], "#" ) + "</option></select>" +
+                        "<input type=\"text\" name=\"mod_min\" value=\"" + match[1] + "\">" +
+                        "<input type=\"text\" name=\"mod_max\" value=\"" + match[2] + "\">"
+                    );
+                    console.log( affix.replace( match[0], "#" ) + ": " + match[1] + ", " + match[2] );
+                // If mod has no values
+                } else {
+                    $( "#" + filter.id + "-poe-trade-form" ).append(
+                        "<select name=\"mod_name\"><option>" + affix + "</option></select>" +
+                        "<input type=\"text\" name=\"mod_min\" value=\"\">" +
+                        "<input type=\"text\" name=\"mod_max\" value=\"\">"
+                    );
+                    console.log( affix );
+                }
                 cbAffix();
             }, function() {
                 $( "#" + filter.id + "-poe-trade-form" ).append(
@@ -914,7 +924,7 @@ $( document).ready( function() {
         } else {
             $( ".item-stats" ).show();
         }
-        var reg = /\(\s*([^ ]*)\s*\-\s*([^ ]*)\s*\)(.*)/;
+        var reg = /\(\s*([^ ]*)\s*\-\s*([^ ]*)\s*\)/;
         console.log( "Refreshing poe.trade stats" );
         Misc.publishStatusMessage( "Fetching item stats from poe.trade" );
         async.each( filters.filterList, function( filter, cbFilter ) {
@@ -974,12 +984,20 @@ $( document).ready( function() {
             async.each( filter.affixesDis, function( affix, cbAffix ) {
                 var match = reg.exec( affix );
                 if ( match ) {
-                    console.log( "'#" + match[3] + "': '" + match[1] + "', '" + match[2] + "'" );
+                    console.log( "'" + affix.replace( match[0], "#" ) + "': '" + match[1] + "', '" + match[2] + "'" );
                     data += "&" + $.param({
-                        mod_name: "#" + match[3],
-                        mod_min: match[1],
-                        mod_max: match[2]
+                        mod_name: affix.replace( match[0], "#" ),
+                        mod_min:  match[1],
+                        mod_max:  match[2]
                     }, true );
+                // If mod has no value
+                } else {
+                    data += "&" + $.param({
+                        mod_name: affix,
+                        mod_min:  "",
+                        mod_max:  ""
+                    }, true );
+                    console.log( affix );
                 }
                 cbAffix();
             }, function() {
