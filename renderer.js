@@ -178,8 +178,8 @@ $( document).ready( function() {
     };
 
     var resetFilters = function() {
-        $( "#league" ).val( config.leagues[config.defaultLeagueIndex]);
-        $( "#league").material_select();
+        // $( "#league" ).val( config.leagues[config.defaultLeagueIndex]);
+        // $( "#league").material_select();
         $( "#item" ).val( "" );
         $( "#price" ).val( "" );
         $( "#currency" ).val( "chaos" );
@@ -974,11 +974,13 @@ $( document).ready( function() {
             async.each( filter.affixesDis, function( affix, cbAffix ) {
                 var match = reg.exec( affix );
                 // console.log( "'#" + match[3] + "': '" + match[1] + "', '" + match[2] + "'" );
-                data += "&" + $.param({
-                    mod_name: "#" + match[3],
-                    mod_min: match[1],
-                    mod_max: match[2]
-                }, true);
+                if ( match ) {
+                    data += "&" + $.param({
+                        mod_name: "#" + match[3],
+                        mod_min: match[1],
+                        mod_max: match[2]
+                    }, true );
+                }
                 cbAffix();
             }, function() {
                 if ( filter.affixesDis.length > 0 ) {
