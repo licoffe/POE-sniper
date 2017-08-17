@@ -88,6 +88,7 @@ class Filter {
         var passed = 0;
         var keys   = 0;
         // Compare mod values to filter
+        // console.log( this.affixes );
         for ( var affix in this.affixes ) {
             if ( this.affixes.hasOwnProperty( affix )) {
                 keys++;
@@ -95,6 +96,14 @@ class Filter {
                 this.affixes[affix][0] = this.affixes[affix][0] !== "" ? this.affixes[affix][0] : 0;
                 // If there is no upper value
                 this.affixes[affix][1] = this.affixes[affix][1] !== "" ? this.affixes[affix][1] : 1000000;
+
+                // if ( !parsedMods.mods[affix] ) {
+                //     console.log( "Item " + item.name + " does not have affix " + affix );
+                // } else {
+                //     console.log( "Item " + item.name + " has this affix " + affix );
+                //     console.log( parsedMods );
+                // }
+
                 // If mod has one parameter
                 if ( parsedMods.mods[affix] && parsedMods.mods[affix].length === 1 ) {
                     if ( parsedMods.mods[affix] && 

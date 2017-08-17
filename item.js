@@ -410,7 +410,14 @@ class Item {
                 match = re.exec( mod );
             }
             mod = mod.replace( re, "#" );
-            parsedMods[mod] = matches;
+            // If mod already exists (for example, implicit + explicit)
+            if ( parsedMods[mod]) {
+                for ( var i = 0 ; i < matches.length ; i++ ) {
+                    parsedMods[mod][i] += matches[i];
+                }
+            } else {
+                parsedMods[mod] = matches;
+            }
             cbMod();
         }, function( err ) {
             if ( err ) {
@@ -426,7 +433,14 @@ class Item {
                     match = re.exec( mod );
                 }
                 mod = mod.replace( re, "#" );
-                parsedMods[mod] = matches;
+                // If mod already exists (for example, implicit + explicit)
+                if ( parsedMods[mod]) {
+                    for ( var i = 0 ; i < matches.length ; i++ ) {
+                        parsedMods[mod][i] += matches[i];
+                    }
+                } else {
+                    parsedMods[mod] = matches;
+                }
                 cbMod();
             }, function( err ) {
                 if ( err ) {
@@ -442,7 +456,14 @@ class Item {
                         match = re.exec( mod );
                     }
                     mod = mod.replace( re, "#" );
-                    parsedMods[mod] = matches;
+                    // If mod already exists (for example, implicit + explicit)
+                    if ( parsedMods[mod]) {
+                        for ( var i = 0 ; i < matches.length ; i++ ) {
+                            parsedMods[mod][i] += matches[i];
+                        }
+                    } else {
+                        parsedMods[mod] = matches;
+                    }
                     cbMod();
                 }, function( err ) {
                     if ( err ) {
@@ -458,7 +479,14 @@ class Item {
                             match = re.exec( mod );
                         }
                         mod = mod.replace( re, "#" );
-                        parsedMods[mod] = matches;
+                        // If mod already exists (for example, implicit + explicit)
+                        if ( parsedMods[mod]) {
+                            for ( var i = 0 ; i < matches.length ; i++ ) {
+                                parsedMods[mod][i] += matches[i];
+                            }
+                        } else {
+                            parsedMods[mod] = matches;
+                        }
                         cbMod();
                     }, function( err ) {
                         if ( err ) {

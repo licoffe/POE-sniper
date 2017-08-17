@@ -792,7 +792,7 @@ $( document).ready( function() {
                         "<input type=\"text\" name=\"mod_min\" value=\"" + match[1] + "\">" +
                         "<input type=\"text\" name=\"mod_max\" value=\"" + match[2] + "\">"
                     );
-                    console.log( affix.replace( match[0], "#" ) + ": " + match[1] + ", " + match[2] );
+                    // console.log( affix.replace( match[0], "#" ) + ": " + match[1] + ", " + match[2] );
                 // If mod has no values
                 } else {
                     $( "#" + filter.id + "-poe-trade-form" ).append(
@@ -912,11 +912,11 @@ $( document).ready( function() {
                     Materialize.updateTextFields();
                     // For each affix
                     async.each( filter.affixesDis, function( affix, cbAffix ) {
-                        console.log( affix );
+                        // console.log( affix );
                         var generated = "";
                         // Extract title, min and max
                         var reg = /([0-9\.]+)/g;
-                        var regPar = /\([^()]\)/g;
+                        var regPar = /\([^()]+\)/g;
                         var match = reg.exec( affix );
                         var matches = [];
                         while ( match !== null ) {
@@ -929,8 +929,8 @@ $( document).ready( function() {
                         if ( !matches[1]) {
                             matches[1] = "";
                         }
-                        console.log( "Modified mod: " + title + " " + matches[0] + matches[1] );
                         var title = affix.replace( regPar, "#" );
+                        console.log( "Modified mod: " + title + " " + matches[0] + ", " + matches[1] );
                         var obj = {
                             title: title,
                             min:   matches[0],
@@ -1032,7 +1032,7 @@ $( document).ready( function() {
             async.each( filter.affixesDis, function( affix, cbAffix ) {
                 var match = reg.exec( affix );
                 if ( match ) {
-                    console.log( "'" + affix.replace( match[0], "#" ) + "': '" + match[1] + "', '" + match[2] + "'" );
+                    // console.log( "'" + affix.replace( match[0], "#" ) + "': '" + match[1] + "', '" + match[2] + "'" );
                     data += "&" + $.param({
                         mod_name: affix.replace( match[0], "#" ),
                         mod_min:  match[1],
@@ -1090,8 +1090,9 @@ $( document).ready( function() {
                         }
                     });
                     str += "<span>Poe.trade stats based on <b>" + prices.length + "</b> items</span>";
+                    console.log( priceCount );
                     for ( var p in priceCount ) {
-                        if ( priceCount.hasOwnProperty( p ) && priceCount[p] > 1 ) {
+                        if ( priceCount.hasOwnProperty( p ) && priceCount[p] > 1 && p != "" ) {
                             str += "<span>" + p + ": <b>" + priceCount[p] + "</b></span>";
                         }
                     }
@@ -1104,20 +1105,6 @@ $( document).ready( function() {
                     cbFilter();
                 });
             });
-            // data += "&" + $.param({
-            //     mod_name: "#% increased Attack Speed",
-            //     mod_min: 1,
-            //     mod_max: 12
-            // });
-            // data += "&" + $.param({
-            //     mod_name: "#% increased Physical Damage",
-            //     mod_min: 1,
-            //     mod_max: 20
-            // });
-            
-            // mod_name: ["#% increased Attack Speed", "#% increased Physical Damage"],
-            // mod_min: ["1", "1"],
-            // mod_max: ["12","20"],
         });
     };
 
