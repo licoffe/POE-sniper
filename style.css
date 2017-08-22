@@ -780,3 +780,7 @@ input:focus {
 .search-engines {
     display: none;
 }
+
+#poe-trade-link {
+    display: none;
+}

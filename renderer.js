@@ -653,6 +653,23 @@ $( document).ready( function() {
                     event.stopPropagation();
                     var id = $( this ).data( "item" );
                     if ( id ) {
+                        $( "#" + id ).unbind();
+                        $( "#" + id ).submit( function( event ){
+                            $.ajax({
+                                url: 'http://poe.trade/search',
+                                data: $( this ).serialize(),
+                                type: 'POST', 
+                                success: function( data ) {
+                                    var wrapper = document.getElementById( "poe-trade-link" );
+                                    wrapper.innerHTML = data;
+                                    $( "#poe-trade-link script" ).remove();
+                                    $( "#poe-trade-link link" ).remove();
+                                    var link = "http://poe.trade" + $( "#poe-trade-link .live-search-box a" ).attr( "href" ).replace( "/live", "" );
+                                    open( link );
+                                }
+                            });
+                            return false;
+                        });
                         $( "#" + id ).submit();
                     } else {
                         open( $( this ).attr( "href" ));
@@ -742,6 +759,23 @@ $( document).ready( function() {
             event.stopPropagation();
             var id = $( this ).data( "item" );
             if ( id ) {
+                $( "#" + id ).unbind();
+                $( "#" + id ).submit( function( event ){
+                    $.ajax({
+                        url: 'http://poe.trade/search',
+                        data: $( this ).serialize(),
+                        type: 'POST', 
+                        success: function( data ) {
+                            var wrapper = document.getElementById( "poe-trade-link" );
+                            wrapper.innerHTML = data;
+                            $( "#poe-trade-link script" ).remove();
+                            $( "#poe-trade-link link" ).remove();
+                            var link = "http://poe.trade" + $( "#poe-trade-link .live-search-box a" ).attr( "href" ).replace( "/live", "" );
+                            open( link );
+                        }
+                    });
+                    return false;
+                });
                 $( "#" + id ).submit();
             } else {
                 open( $( this ).attr( "href" ));
