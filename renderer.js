@@ -647,6 +647,7 @@ $( document).ready( function() {
                     console.log( err );
                 }
                 filters.save();
+                $( ".filter-detail a" ).unbind();
                 $( ".filter-detail a" ).click( function( event ) {
                     event.preventDefault();
                     event.stopPropagation();
@@ -735,6 +736,7 @@ $( document).ready( function() {
         bindFilterEdit( filter.id );
         updateFilterAmount( filter.id );
         poeTradeStats( filters );
+        $( ".filter-detail a" ).unbind();
         $( ".filter-detail a" ).click( function( event ) {
             event.preventDefault();
             event.stopPropagation();
