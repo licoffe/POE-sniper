@@ -215,6 +215,9 @@ $( document).ready( function() {
         $( "#affixes-list" ).empty();
         $( "#item-type" ).val( "any" );
         $( "#item-type").material_select();
+        $( "#affix-min" ).val( "" );
+        $( "#affix-max" ).val( "" );
+        $( "#affixes" ).val( "" );
         Materialize.updateTextFields();
     };
 
@@ -930,7 +933,7 @@ $( document).ready( function() {
                             matches[1] = "";
                         }
                         var title = affix.replace( regPar, "#" );
-                        console.log( "Modified mod: " + title + " " + matches[0] + ", " + matches[1] );
+                        // console.log( "Modified mod: " + title + " " + matches[0] + ", " + matches[1] );
                         var obj = {
                             title: title,
                             min:   matches[0],
@@ -943,7 +946,7 @@ $( document).ready( function() {
                             generated += data.toString();
                         })
                         .on( "end", function () {
-                            console.log( "Modified: " + generated );
+                            // console.log( "Modified: " + generated );
                             $( "#affixes-list" ).append( generated );
                             $( "#" + obj.id ).data( "data-item", obj );
                             // When clicking on remove affix
@@ -1090,7 +1093,7 @@ $( document).ready( function() {
                         }
                     });
                     str += "<span>Poe.trade stats based on <b>" + prices.length + "</b> items</span>";
-                    console.log( priceCount );
+                    // console.log( priceCount );
                     for ( var p in priceCount ) {
                         if ( priceCount.hasOwnProperty( p ) && priceCount[p] > 1 && p != "" ) {
                             str += "<span>" + p + ": <b>" + priceCount[p] + "</b></span>";
@@ -1436,7 +1439,7 @@ $( document).ready( function() {
                     } else {
                         // For each stashes in the new data file
                         var totalItems = 0;
-                        // console.time( "Checking stashes" );
+                        console.time( "Checking filter: " + filter.id );
                         async.each( data.stashes, function( stash, callbackStash ) {
                             totalItems += stash.items.length;
                             async.each( stash.items, function( item, callbackItem ) {
@@ -1478,7 +1481,7 @@ $( document).ready( function() {
                             if ( err ) {
                                 console.log( err );
                             }
-                            // console.timeEnd( "Checking stashes" );
+                            console.timeEnd( "Checking filter: " + filter.id );
                             callbackFilter();
                             console.log( "Searched among " + totalItems + " items" );
                             // var end = Date.now();
@@ -1494,6 +1497,7 @@ $( document).ready( function() {
                     }
 
                     // Remove sold/displaced items
+                    console.time( "Removing sold/displaced" );
                     async.each( data.stashes, function( stash, cbStash ) {
                         if ( itemInStash[stash.id] ) {
                             async.each( Object.keys( itemInStash[stash.id].previousItems ), function( previousItem, cbPreviousItem ) {
@@ -1516,6 +1520,7 @@ $( document).ready( function() {
                         if ( err ) {
                             console.log( err );
                         }
+                        console.timeEnd( "Removing sold/displaced" );
                         console.timeEnd( "Total search time" );
                         done( data );
                     });
@@ -1530,6 +1535,8 @@ $( document).ready( function() {
             var nextID = data.next_change_id;
             var end = Date.now();
             var waitInterval = config.CHUNK_DOWNLOAD_INTERVAL - ( end - begin );
+            waitInterval     = waitInterval < 0 ? 0 : waitInterval;
+            console.log( "Waiting " + waitInterval + " ms" );
 
             if ( interrupt ) {
                 console.log( "Stopped sniper" );

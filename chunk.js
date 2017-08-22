@@ -36,7 +36,8 @@ var links = {
 class Chunk {
 
     /**
-     * Get last change id from the poe-rates API
+     * Get last change id from both poe-rates API and poe.ninja and take the
+     * most recent one of the two
      *
      * @param callback
      * @return Next change ID through callback
@@ -49,15 +50,27 @@ class Chunk {
                     setTimeout( Chunk.getLastChangeId, 1000, callback );
                 } else {
                     var data = JSON.parse( body, 'utf8' );
-                    if ( config.useBeta ) {
-                        callback( data.changeIdBeta );
-                    } else {
-                        callback( data.changeId );
-                    }
+                    var poeRatesChangeId = data.changeId;
+                    request({ "url": "http://api.poe.ninja/api/Data/GetStats", "gzip": true },
+                        function( error, response, body ) {
+                            if ( error ) {
+                                console.log( "Error occured, retrying: " + error );
+                                setTimeout( Chunk.getLastChangeId, 1000, callback );
+                            } else {
+                                var data = JSON.parse( body, 'utf8' );
+                                var poeNinjaChangeId = data.nextChangeId;
+                                if ( poeNinjaChangeId > poeRatesChangeId ) {
+                                    callback( poeNinjaChangeId );
+                                } else {
+                                    callback( poeRatesChangeId );
+                                }
+                            }
+                        }
+                    )
                 }
             }
-        );
-    };
+        )
+    }
     
     /**
      * Download compressed gzip change data
