@@ -210,8 +210,10 @@ $( document).ready( function() {
         $( "#evasion" ).val( "" );
         $( "#dps" ).val( "" );
         $( "#pdps" ).val( "" );
+        $( "#edps" ).val( "" );
         $( "#price-bo" ).prop( "checked", true );
         $( "#clipboard" ).prop( "checked", false );
+        $( "#convert-currency" ).prop( "checked", true );
         $( "#affixes-list" ).empty();
         $( "#item-type" ).val( "any" );
         $( "#item-type").material_select();
@@ -239,7 +241,7 @@ $( document).ready( function() {
     var addFilterAction = function() {
         // console.log( "Adding filter" );
         fetchFormData( function( formData ) {
-            // console.log( formData );
+            console.log( formData );
             // var re         = /([0-9.]+)/g;
             $( ".affix-item" ).each( function() {
                 data = $( this ).data( "data-item" );
@@ -268,11 +270,12 @@ $( document).ready( function() {
                 formData.displayPrice = "Any price";
             }
 
-            if ( formData.currency === "chaos" ) {
-                formData.currency = "Chaos Orb";
-            } else if ( formData.currency === "exa" ) {
-                formData.currency = "Exalted Orb";
-            }
+            // if ( formData.currency === "chaos" ) {
+            //     formData.currency = "Chaos Orb";
+            // } else if ( formData.currency === "exa" ) {
+            //     formData.currency = "Exalted Orb";
+            // }
+            formData.currency = Currency.shortToLongLookupTable[formData.currency];
 
             var title = "";
             if ( formData.corrupted === "true" ) {
@@ -352,6 +355,9 @@ $( document).ready( function() {
             if ( formData.pdps !== "" ) {
                 title += "<span class=\"filter-property\">PDPS>=" + formData.pdps + "</span>";
             }
+            if ( formData.edps !== "" ) {
+                title += "<span class=\"filter-property\">EDPS>=" + formData.edps + "</span>";
+            }
             if ( formData.quality !== "" ) {
                 title += "<span class=\"filter-property\">quality>=" + formData.quality + "%</span>";
             }
@@ -373,10 +379,11 @@ $( document).ready( function() {
 
             formData.title  = title;
             formData.active = true;
+            console.log( formData );
             var filter = new Filter( formData );
             if ( $( "#add-filter" ).text() === "playlist_addAdd filter" ) {
-                // console.log( filters );
                 filters.add( filter );
+                console.log( filters );
                 filters.findFilterIndex( filter, function( res ) {
                     filters.save();
                     filter.render( function( generated ) {
@@ -385,6 +392,7 @@ $( document).ready( function() {
                 });
             } else {
                 filters.update( filter, function() {
+                    console.log( filters );
                     filter.render( function( generated ) {
                         filters.findFilterIndex( filter, function( res ) {
                             postRender( filter, generated, res.index );
@@ -478,8 +486,10 @@ $( document).ready( function() {
         data.evasion      = $( "#evasion" ).val();
         data.dps          = $( "#dps" ).val();
         data.pdps         = $( "#pdps" ).val();
+        data.edps         = $( "#edps" ).val();
         data.buyout       = $( "#price-bo" ).is(":checked");
         data.clipboard    = $( "#clipboard" ).is(":checked");
+        data.convert      = $( "#convert-currency" ).is(":checked");
         data.itemType     = $( "#item-type" ).val();
         data.affixesDis   = [];
         data.affixes      = {};
@@ -611,11 +621,12 @@ $( document).ready( function() {
                 filter.displayPrice = "Any price";
             }
             // Fix for change of currency from long to short form
-            if ( filter.currency === "Chaos Orb" ) {
-                filter.currency = "chaos";
-            } else if ( filter.currency === "Exalted Orb" ) {
-                filter.currency = "exa";
-            }
+            // if ( filter.currency === "Chaos Orb" ) {
+            //     filter.currency = "chaos";
+            // } else if ( filter.currency === "Exalted Orb" ) {
+            //     filter.currency = "exa";
+            // }
+            // filter.currency = Currency.currencyLookupTable[filter.currency];
             filter = new Filter( filter );
             filters.add( filter );
             cbFilter();
@@ -907,11 +918,14 @@ $( document).ready( function() {
                     $( "#league").material_select();
                     $( "#item" ).val( filter.item );
                     $( "#price" ).val( filter.budget );
-                    if ( filter.currency === "Chaos Orb" ) {
-                        $( "#currency" ).val( "chaos" );
-                    } else {
-                        $( "#currency" ).val( "exa" );
-                    }
+                    // if ( filter.currency === "Chaos Orb" ) {
+                    //     $( "#currency" ).val( "chaos" );
+                    // } else {
+                    //     $( "#currency" ).val( "exa" );
+                    // }
+                    $( "#currency" ).val( Currency.currencyLookupTable[filter.currency]);
+                    console.log( filter.currency );
+                    console.log( Currency.currencyLookupTable[filter.currency] );
                     $( "#currency").material_select();
                     $( "#links" ).val( filter.links );
                     $( "#links").material_select();
@@ -939,8 +953,10 @@ $( document).ready( function() {
                     $( "#evasion" ).val( filter.evasion );
                     $( "#dps" ).val( filter.dps );
                     $( "#pdps" ).val( filter.pdps );
+                    $( "#edps" ).val( filter.edps );
                     $( "#price-bo" ).prop( "checked", filter.buyout );
                     $( "#clipboard" ).prop( "checked", filter.clipboard );
+                    $( "#convert-currency" ).prop( "checked", filter.convert );
                     $( "#add-filter" ).html( "<i class=\"material-icons\">thumb_up</i><span>Update filter</span>" );
                     $( "#cancel-filter" ).html( "<i class=\"material-icons\">thumb_down</i><span>Cancel edit</span>" );
                     $( "#cancel-filter" ).addClass( "red" ).removeClass( "blue-grey" );
@@ -1866,6 +1882,7 @@ $( document).ready( function() {
         $( "#rarity").material_select();
         $( "#dps" ).val( data.dps_min );
         $( "#pdps" ).val( data.pdps_min );
+        $( "#edps" ).val( data.edps_min );
         $( "#league" ).val( data.league );
         $( "#league").material_select();
         // Set price and currency

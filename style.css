@@ -588,6 +588,10 @@ label.active {
     /*text-shadow: 0 0 5px blue;*/
 }
 
+.dps-group label.active {
+    transform: translateX(30px)!important;
+}
+
 .item-name label.active {
     transform: translateX(230%)!important;
 }

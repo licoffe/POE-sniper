@@ -203,16 +203,21 @@
                 </div>
                 <div class="input-field col s2" style="
     padding: 0!important;">
-                    <div class="row" style="margin-bottom: 0">
-                        <div class="input-field col s6" style="
+                    <div class="row dps-group" style="margin-bottom: 0">
+                        <div class="input-field col s4" style="
     padding: 0!important;">
                             <input type="number" id="dps">
-                            <label for="dps">Total DPS</label>
+                            <label for="dps">DPS</label>
                         </div>
-                        <div class="input-field col s6" style="
+                        <div class="input-field col s4" style="
     padding: 0!important;">
                             <input type="number" id="pdps">
-                            <label for="pdps">Phys DPS</label>
+                            <label for="pdps">pDPS</label>
+                        </div>
+                        <div class="input-field col s4" style="
+                        padding: 0!important;">
+                            <input type="number" id="edps">
+                            <label for="edps">eDPS</label>
                         </div>
                     </div>
                     <!--<i class="material-icons prefix">home</i>-->
@@ -224,12 +229,38 @@
                     </select>
                     <div class="input-field" style="
     padding: 0!important;">
-                        <input type="text" id="price">
-                        <label for="price">Price</label>
+                        <div class="row" style="margin-bottom: 0">
+                            <div class="input-field col s5" style="
+padding: 0!important;">
+                                <input type="text" id="price">
+                                <label for="price">Price</label>
+                            </div>
+                            <div class="input-field col s7" style="
+                            padding: 0!important; top: -10px">
+                                <p class="col s6" style="padding: 0">
+                                    <input type="checkbox" class="filled-in cb" id="convert-currency" checked/>
+                                    <label for="convert-currency">Conversion</label>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                     <select id="currency">
                         <option value="chaos" selected>Chaos</option>
                         <option value="exa">Exalted</option>
+                        <option value="alch">Alchemy</option>
+                        <option value="alt">Alteration</option>
+                        <option value="fuse">Fusing</option>
+                        <option value="divine">Divine</option>
+                        <option value="chance">Chance</option>
+                        <option value="jew">Jeweller</option>
+                        <option value="chisel">Chisel</option>
+                        <option value="vaal">Vaal</option>
+                        <option value="regret">Regret</option>
+                        <option value="regal">Regal</option>
+                        <option value="gcp">GCP</option>
+                        <option value="chrom">Chromatic</option>
+                        <option value="scour">Scouring</option>
+                        <option value="bless">Blessed</option>
                     </select>
                     <div style="padding: 0; position: relative; top: -15px; left: -10px;">
                         <p class="col s6" style="padding: 0">

@@ -321,8 +321,10 @@ class Item {
      */
     static computePrice( item, currencyRates ) {
         // Default currency is chaos
-        var currency = "chaos";
-        var originalPrice = "";
+        var currency         = "chaos";
+        var originalPrice    = "";
+        var originalAmount   = "";
+        var originalCurrency = "";
         var convertedPrice;
         var convertedPriceChaos;
         var league = item.league;
@@ -346,16 +348,21 @@ class Item {
             // and if the price is a fraction
             if ( match[1] === undefined ) {
                 // Compute the fraction: 1/2 exa -> 0.5 exa
-                originalPrice = Math.round( match[2] / match[3] * 100 ) / 100 + " " + match[4];
+                var fraction     = match[2] / match[3];
+                originalPrice    = Math.round( fraction * 100 ) / 100 + " " + match[4];
+                originalAmount   = Math.round( fraction * 100 ) / 100;
+                originalCurrency = match[4];
                 // console.log( match[2] + "/" + match[3] + " " + match[4]);
                 // Same but convert to chaos: 1/2 exa -> 0.5 x chaos_rate(exa)
-                convertedPrice = ( match[2] / match[3] ) * currencyRates[league][Currency.shortToLongLookupTable[match[4]]];
+                convertedPrice = fraction * currencyRates[league][Currency.shortToLongLookupTable[match[4]]];
             // Otherwise
             } else {
                 // console.log( league );
                 // console.log( currencyRates[league] );
                 // Same thing as above without divisions
-                originalPrice  = Math.round( match[1] * 100 ) / 100 + " " + match[4];
+                originalPrice    = Math.round( match[1] * 100 ) / 100 + " " + match[4];
+                originalAmount   = Math.round( match[1] * 100 ) / 100;
+                originalCurrency = match[4];
                 // console.log( match[1] + " " + match[4]);
                 convertedPrice = match[1] * currencyRates[league][Currency.shortToLongLookupTable[match[4]]];
             }
@@ -374,6 +381,8 @@ class Item {
             return { convertedPrice:      convertedPrice, 
                      convertedPriceChaos: convertedPriceChaos,
                      originalPrice:       originalPrice,
+                     originalAmount:      originalAmount,
+                     originalCurrency:    originalCurrency,
                      currency:            currency };
         // If there is no price, this is barter
         } else {

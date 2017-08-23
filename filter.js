@@ -18,7 +18,8 @@ var config   = {};
 console.log( "Loading config from " + app.getPath( "userData" ) + path.sep + "config.json" );
 config = require( app.getPath( "userData" ) + path.sep + "config.json" );
 
-var Item     = require( "./item.js" );
+var Item      = require( "./item.js" );
+var Currency  = require( "./currency.js" );
 var itemTypes = require( "./itemTypes.json" );
 
 class Filter {
@@ -50,6 +51,7 @@ class Filter {
         this.evasion      = obj.evasion, 
         this.dps          = obj.dps,
         this.pdps         = obj.pdps,
+        this.edps         = obj.edps,
         this.affixes      = obj.affixes,
         this.affixesDis   = obj.affixesDis,
         this.buyout       = obj.buyout,
@@ -58,6 +60,7 @@ class Filter {
         this.title        = obj.title,
         this.active       = obj.active,
         this.checked      = obj.active ? "checked" : "",
+        this.convert      = obj.convert,
         this.displayPrice = obj.displayPrice
     }
 
@@ -151,6 +154,7 @@ class Filter {
             ( this.armor   === "" || parseInt( this.armor )   <= parseInt( parsedProperties.Armour )) &&
             ( this.dps     === "" || parseFloat( this.dps )   <= parseFloat( parsedProperties.DPS )) &&
             ( this.pdps    === "" || parseFloat( this.pdps )  <= parseFloat( parsedProperties.pDPS )) &&
+            ( this.edps    === "" || parseFloat( this.edps )  <= parseFloat( parsedProperties.eDPS )) &&
             ( this.quality   === "" || parsedProperties.Quality !== undefined &&
             parseInt( this.quality ) <= parseInt( parsedProperties.Quality.replace( /[\+\%]/g, "" ))) &&
             ( this.tier   === "" || ( parsedProperties["Map Tier"] !== undefined && (
@@ -231,12 +235,16 @@ class Filter {
             ) {
 
             var prices = Item.computePrice( item, currencyRates );
+            // console.log( prices );
             // console.log( currencyRates[league] );
+
+            // console.log( this.convert + " " + this.currency + " === " + Currency.shortToLongLookupTable[prices.originalCurrency] + " && " + this.budget + " >= " + prices.originalAmount + ", " + prices.currency );
             
             // Convert filter price to chaos and check if the item is within budget
-            if ( !this.budget || ( prices.convertedPrice && 
+            if ( !this.budget || ( this.convert && prices.convertedPrice && 
                   prices.convertedPriceChaos <= this.budget * currencyRates[league][this.currency]) || 
-                ( !prices.convertedPrice && !this.buyout )) {
+                ( !prices.convertedPrice && !this.buyout ) || 
+                ( !this.convert && this.currency === Currency.shortToLongLookupTable[prices.originalCurrency] && prices.originalAmount <= this.budget )) {
 
                 // Parse item mods
                 Item.parseMods( item, function( parsedMods ) {
@@ -250,6 +258,7 @@ class Filter {
                                     var dps = Item.computeDPS( parsedProperties );
                                     parsedProperties.DPS = dps.DPS;
                                     parsedProperties.pDPS = dps.pDPS;
+                                    parsedProperties.eDPS = dps.eDPS;
                                     Item.insertDPSValues( newItem, dps, function( item ) {
                                         // Compare properties
                                         self.compareProperties( item, parsedProperties, function( equal ) {
