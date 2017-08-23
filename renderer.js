@@ -1180,6 +1180,7 @@ $( document).ready( function() {
         } else {
             downloading = false;
             interrupt   = true;
+            delayQueue  = [];
             $( ".progress" ).fadeOut();
             $( "#snipe" ).html( "<i class=\"material-icons\">play_arrow</i><span>Snipe</span>" );
         }
@@ -1592,6 +1593,8 @@ $( document).ready( function() {
 
             if ( interrupt ) {
                 console.log( "Stopped sniper" );
+                // Stop notifications when not sniping
+                delayQueue  = [];
             } else {
                 if ( !interrupt ) {
                     setTimeout( callback, waitInterval, nextID, callback );
