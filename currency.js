@@ -28,28 +28,34 @@ class Currency {
         Misc.publishStatusMessage( "Downloading last rates from poe-rates.com" );
         var shortRates = {};
         // For each league
-        async.each( config.leagues, function( league, cbLeague ) {
-            $.get( "http://poe-rates.com/actions/getLastRates.php", {
-                league: league
-            }, function( data ) {
-                shortRates[league] = {};
-                var parsed = $.parseJSON( data );
-                var rates  = parsed.rates;
-                // Change long rate name to short one using lookup table
-                for ( var rate in rates ) {
-                    if ( rates.hasOwnProperty( rate )) {
-                        shortRates[league][Currency.shortToLongLookupTable[rate]] = parseFloat( rates[rate]);
+        try {
+            async.each( config.leagues, function( league, cbLeague ) {
+                $.get( "http://poe-rates.com/actions/getLastRates.php", {
+                    league: league
+                }, function( data ) {
+                    shortRates[league] = {};
+                    var parsed = $.parseJSON( data );
+                    var rates  = parsed.rates;
+                    // Change long rate name to short one using lookup table
+                    for ( var rate in rates ) {
+                        if ( rates.hasOwnProperty( rate )) {
+                            shortRates[league][Currency.shortToLongLookupTable[rate]] = parseFloat( rates[rate]);
+                        }
                     }
+                    shortRates[league]["Chaos Orb"] = 1.0;
+                    cbLeague();
+                });
+            }, function( err ) {
+                if ( err ) {
+                    console.log( err );
+                    setTimeout( Currency.getLastRates, 1000, callback );
                 }
-                shortRates[league]["Chaos Orb"] = 1.0;
-                cbLeague();
+                callback( shortRates );
             });
-        }, function( err ) {
-            if ( err ) {
-                console.log( err );
-            }
-            callback( shortRates );
-        });
+        } catch ( e ) {
+            console.log( "Error occured, retrying: " + e );
+            setTimeout( Currency.getLastRates, 1000, callback );
+        }
     }
 }
 

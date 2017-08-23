@@ -101,7 +101,9 @@ class Chunk {
                             chunkStats = chunkID + "," + ( end - begin ) + "," + dataSize + ",failed\n";
                             writeChunkStats( chunkStats );
                         }
-                        setTimeout( Chunk.download, config.CHUNK_RETRY_INTERVAL, chunkID, callback );
+                        getLastChangeId( function( chunkID ) {
+                            setTimeout( Chunk.download, config.CHUNK_RETRY_INTERVAL, chunkID, callback );
+                        });
                     } else {
                         var end = Date.now();
                         console.timeEnd( "Downloading chunk " + chunkID );

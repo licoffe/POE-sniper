@@ -197,6 +197,12 @@ img.right.circle {
 
 .affix-item {
     cursor: pointer;
+    transition: color 0.2s linear;
+}
+
+.affix-item:hover {
+    color: rgba(34, 255, 147, 1)!important;
+    transition: color 0.2s linear;
 }
 
 .filter-corrupted {
@@ -321,6 +327,11 @@ input {
 
 input:not(.select-dropdown) {
     color: rgba(34, 255, 147, 1)!important;
+}
+
+.affix-preview {
+    color: rgba(150,150,150,1)!important;
+    /* font-style: italic; */
 }
 
 input:active {
@@ -751,7 +762,7 @@ input:focus {
     border: 1px solid rgba(0,200,200,0.5)!important;
 }
 
-#cancel-filter.disabled, #add-filter.disabled, #import-poe-trade.disabled {
+#cancel-filter.disabled, #add-filter.disabled, #import-poe-trade.disabled, #cancel-affix.disabled, #add-affix.disabled {
     background-color: #2f2f2f !important;
     color: #5f5f5f !important;
 }

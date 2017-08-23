@@ -62,6 +62,8 @@ var delayQueue      = []; // Stores filtered items
 var displayingNotification = false;
 var lastItem        = null;
 var prices          = {};
+var loadedAffix     = false;
+var editingAffix    = "";
 
 // var writeFilterStats = function( filterStats ) {
 //     fs.appendFile( __dirname + "/stats_filters.csv", filterStats, function( err ) {
@@ -221,6 +223,11 @@ $( document).ready( function() {
         $( "#affix-max" ).val( "" );
         $( "#affixes" ).val( "" );
         Materialize.updateTextFields();
+        loadedAffix  = false;
+        editingAffix = "";
+        $( "#add-affix" ).addClass( "disabled" );
+        $( "#cancel-affix" ).addClass( "disabled" );
+        $( "#add-affix" ).text( "Add" );
     };
 
     // When clicking on 'Clear Filter'
@@ -241,7 +248,7 @@ $( document).ready( function() {
     var addFilterAction = function() {
         // console.log( "Adding filter" );
         fetchFormData( function( formData ) {
-            console.log( formData );
+            // console.log( formData );
             // var re         = /([0-9.]+)/g;
             $( ".affix-item" ).each( function() {
                 data = $( this ).data( "data-item" );
@@ -379,7 +386,7 @@ $( document).ready( function() {
 
             formData.title  = title;
             formData.active = true;
-            console.log( formData );
+            // console.log( formData );
             var filter = new Filter( formData );
             if ( $( "#add-filter" ).text() === "playlist_addAdd filter" ) {
                 filters.add( filter );
@@ -924,8 +931,8 @@ $( document).ready( function() {
                     //     $( "#currency" ).val( "exa" );
                     // }
                     $( "#currency" ).val( Currency.currencyLookupTable[filter.currency]);
-                    console.log( filter.currency );
-                    console.log( Currency.currencyLookupTable[filter.currency] );
+                    // console.log( filter.currency );
+                    // console.log( Currency.currencyLookupTable[filter.currency] );
                     $( "#currency").material_select();
                     $( "#links" ).val( filter.links );
                     $( "#links").material_select();
@@ -964,14 +971,22 @@ $( document).ready( function() {
                     $( "#item-type" ).val( filter.itemType );
                     $( "#item-type" ).material_select();
                     $( "#affixes-list" ).empty();
+                    $( "#affix-min" ).val( "" );
+                    $( "#affix-max" ).val( "" );
+                    $( "#affixes" ).val( "" );
                     Materialize.updateTextFields();
+                    loadedAffix  = false;
+                    editingAffix = "";
+                    $( "#add-affix" ).addClass( "disabled" );
+                    $( "#cancel-affix" ).addClass( "disabled" );
+                    $( "#add-affix" ).text( "Add" );
                     // For each affix
                     async.each( filter.affixesDis, function( affix, cbAffix ) {
                         // console.log( affix );
                         var generated = "";
                         // Extract title, min and max
                         var reg = /([0-9\.]+)/g;
-                        var regPar = /\([^()]+\)/g;
+                        var regPar = /\([^()]+\)|\d+/g;
                         var match = reg.exec( affix );
                         var matches = [];
                         while ( match !== null ) {
@@ -1005,6 +1020,8 @@ $( document).ready( function() {
                             $( ".remove-affix" ).click( function() {
                                 $( this ).parent().parent().remove();
                             });
+                            bindAffixEdition( obj.id );
+                            bindAffixHover( obj.id );
                         });
                         cbAffix();
                     });
@@ -1223,9 +1240,21 @@ $( document).ready( function() {
             });
         });
     };
+
+    // When clicking on 'cancel affix'
+    $( "#cancel-affix" ).click( function() {
+        $( "#affix-min" ).val( "" );
+        $( "#affix-max" ).val( "" );
+        $( "#affixes" ).val( "" );
+        Materialize.updateTextFields();
+        $( "#add-affix" ).addClass( "disabled" );
+        $( "#cancel-affix" ).addClass( "disabled" );
+        $( "#add-affix" ).text( "Add" );
+    });
     
     // When clicking on 'add affix'
     $( "#add-affix" ).click( function() {
+        loadedAffix = false;
         var affix = $( "#affixes" ).val();
         if ( affix !== "" ) {
             var min = $( "#affix-min" ).val();
@@ -1244,18 +1273,36 @@ $( document).ready( function() {
                 max:   max,
                 id:    Misc.guidGenerator()
             };
+            // Editing existing affix
+            if ( $( "#add-affix" ).text() !== "Add" ) {
+                console.log( "Editing affix " + editingAffix );
+                obj.id = editingAffix;
+                editingAffix = "";
+            }
             var generated = "";
             mu.compileAndRender( "affix.html", obj )
             .on( "data", function ( data ) {
                 generated += data.toString();
             })
             .on( "end", function () {
-                $( "#affixes-list" ).append( generated );
+                if ( $( "#affixes-list #" + obj.id ).length > 0 ) {
+                    $( "#affixes-list #" + obj.id ).parent().replaceWith( generated );
+                } else {
+                    $( "#affixes-list" ).append( generated );
+                }
                 $( "#" + obj.id ).data( "data-item", obj );
                 // When clicking on remove affix
                 $( ".remove-affix" ).click( function() {
                     $( this ).parent().parent().remove();
                 });
+                bindAffixEdition( obj.id );
+                bindAffixHover( obj.id );
+                $( "#affix-min" ).val( "" );
+                $( "#affix-max" ).val( "" );
+                $( "#affixes" ).val( "" );
+                Materialize.updateTextFields();
+                $( "#add-affix" ).addClass( "disabled" );
+                $( "#cancel-affix" ).addClass( "disabled" );
             });
         }
     });
@@ -1890,18 +1937,20 @@ $( document).ready( function() {
         $( "#league").material_select();
         // Set price and currency
         if ( data.buyout_max ) {
-            if ( data.buyout_currency === "Chaos Orb" ) {
-                $( "#currency" ).val( "chaos" );
+            var poeTradeCurrency = Currency.currencyLookupTable[data.buyout_currency];
+            if ( poeTradeCurrency ) {
+                $( "#currency" ).val( poeTradeCurrency );
                 $( "#price" ).val( data.buyout_max );
-            } else if ( data.buyout_currency === "Exalted Orb" ) {
-                $( "#currency" ).val( "exa" );
-                $( "#price" ).val( data.buyout_max );
-            // Otherwise convert rate to chaos
-            } else if ( data.buyout_currency ) {
-                $( "#currency" ).val( "chaos" );
-                $( "#price" ).val( 
-                    Math.round( currencyRates[data.league][data.buyout_currency] * data.buyout_max * 100 ) / 100 );
             }
+            // } else if ( data.buyout_currency === "Exalted Orb" ) {
+            //     $( "#currency" ).val( "exa" );
+            //     $( "#price" ).val( data.buyout_max );
+            // // Otherwise convert rate to chaos
+            // } else if ( data.buyout_currency ) {
+            //     $( "#currency" ).val( "chaos" );
+            //     $( "#price" ).val( 
+            //         Math.round( currencyRates[data.league][data.buyout_currency] * data.buyout_max * 100 ) / 100 );
+            // }
             $( "#currency" ).material_select();   
         }
         // Buyout
@@ -2070,5 +2119,99 @@ $( document).ready( function() {
 
     // Bind modals
     $('.modal').modal();
+
+    var bindAffixHover = function( id ) {
+        var currentTitle = "";
+        var currentMin   = "";
+        var currentMax   = "";
+        $( ".affix-item#" + id ).mouseover( function() {
+            if ( !loadedAffix ) {
+                currentTitle = $( "#affixes" ).val();
+                currentMin   = $( "#affix-min" ).val();
+                currentMax   = $( "#affix-max" ).val();
+                var affix = $( this ).text();
+                // Extract title, min and max
+                var reg = /([0-9\.]+)/g;
+                var regPar = /\([^()]+\)|\d+/g;
+                var match = reg.exec( affix );
+                var matches = [];
+                while ( match !== null ) {
+                    matches.push( parseFloat( match[1]));
+                    match = reg.exec( affix );
+                }
+                if ( !matches[0]) {
+                    matches[0] = "";
+                }
+                if ( !matches[1]) {
+                    matches[1] = "";
+                }
+                var title = affix.replace( regPar, "#" );
+                // Replace affix form with select affix values
+                $( "#affixes" ).val( title.trim());
+                $( "#affixes" ).addClass( "affix-preview" );
+                $( "#affix-min" ).val( matches[0]);
+                $( "#affix-min" ).addClass( "affix-preview" );
+                $( "#affix-max" ).val( matches[1]);
+                $( "#affix-max" ).addClass( "affix-preview" );
+                Materialize.updateTextFields();
+                // console.log( title.trim() + " " + matches[0] + " - " + matches[1]);
+            }
+        });
+        $( ".affix-item#" + id ).mouseout( function() {
+            if ( !loadedAffix ) {
+                $( "#affixes" ).val( currentTitle );
+                $( "#affixes" ).removeClass( "affix-preview" );
+                $( "#affix-min" ).val( currentMin );
+                $( "#affix-min" ).removeClass( "affix-preview" );
+                $( "#affix-max" ).val( currentMax );
+                $( "#affix-max" ).removeClass( "affix-preview" );
+                Materialize.updateTextFields();
+            }
+            loadedAffix = false;
+        });
+    };
+
+    var bindAffixEdition = function( id ) {
+        $( ".affix-item#" + id ).click( function() {
+            loadedAffix = true;
+            editingAffix = id;
+            var affix = $( this ).text();
+            // Extract title, min and max
+            var reg = /([0-9\.]+)/g;
+            var regPar = /\([^()]+\)|\d+/g;
+            var match = reg.exec( affix );
+            var matches = [];
+            while ( match !== null ) {
+                matches.push( parseFloat( match[1]));
+                match = reg.exec( affix );
+            }
+            if ( !matches[0]) {
+                matches[0] = "";
+            }
+            if ( !matches[1]) {
+                matches[1] = "";
+            }
+            var title = affix.replace( regPar, "#" );
+            // Replace affix form with select affix values
+            $( "#affixes" ).val( title.trim());
+            $( "#affix-min" ).val( matches[0]);
+            $( "#affix-max" ).val( matches[1]);
+            Materialize.updateTextFields();
+            $( "#add-affix" ).removeClass( "disabled" );
+            $( "#cancel-affix" ).removeClass( "disabled" );
+            $( "#add-affix" ).text( "Upd." );
+            console.log( title.trim() + " " + matches[0] + " - " + matches[1]);
+        });
+    };
+
+    // If affixes is not empty, activate add affix button
+    $( "#affixes" ).keyup( function() {
+        console.log( $( this ).val() );
+        if ( $( this ).val() !== "" ) {
+            $( "#add-affix" ).removeClass( "disabled" );
+        } else {
+            $( "#add-affix" ).addClass( "disabled" );
+        }
+    });
 
 });
