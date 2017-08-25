@@ -845,7 +845,8 @@ $( document).ready( function() {
                 var match = reg.exec( affix );
                 if ( match ) {
                     $( "#" + filter.id + "-poe-trade-form" ).append(
-                        "<select name=\"mod_name\"><option>" + affix.replace( match[0], "#" ) + "</option></select>" +
+                        "<select name=\"mod_name\"><option>" + affix.replace( match[0], "#" ).replace( "[TOTAL]", "(pseudo) (total)" )
+                        .replace( "[PSEUDO]", "(pseudo)" ) + "</option></select>" +
                         "<input type=\"text\" name=\"mod_min\" value=\"" + match[1] + "\">" +
                         "<input type=\"text\" name=\"mod_max\" value=\"" + match[2] + "\">"
                     );
@@ -1106,7 +1107,9 @@ $( document).ready( function() {
                 if ( match ) {
                     // console.log( "'" + affix.replace( match[0], "#" ) + "': '" + match[1] + "', '" + match[2] + "'" );
                     data += "&" + $.param({
-                        mod_name: affix.replace( match[0], "#" ),
+                        mod_name: affix.replace( match[0], "#" )
+                                       .replace( "[TOTAL]", "(pseudo) (total)" )
+                                       .replace( "[PSEUDO]", "(pseudo)" ),
                         mod_min:  match[1],
                         mod_max:  match[2]
                     }, true );
@@ -1407,6 +1410,8 @@ $( document).ready( function() {
             $( "#" + item.id + " .enchant-container" ).html( item.enchant );
             $( "#" + item.id + " .explicit-container" ).html( item.explicit );
             $( "#" + item.id + " .crafted-container" ).html( item.crafted );
+            $( "#" + item.id + " .total-container" ).html( item.total );
+            $( "#" + item.id + " .pseudo-container" ).html( item.pseudo );
             if ( item.implicit === "" ) {
                 $( "#" + item.id + " .implicit-container" ).hide();
             }
@@ -1770,24 +1775,24 @@ $( document).ready( function() {
     // Map internal types to poe.trade ones
     var matchTypeWithPoeTrade = function( type ) {
         switch ( type ) {
-            case "map fragments":
-                return "fragment";
-            case "divination card":
-                return "divination-card";
-            case "body armour":
-                return "body-armor";
-            case "two hand sword":
-                return "two-handed sword";
-            case "two hand mace":
-                return "two-handed mace";
-            case "two hand axe":
-                return "two-handed axe";
-            case "one hand sword":
-                return "one-handed sword";
-            case "one hand mace":
-                return "one-handed mace";
-            case "one hand axe":
-                return "one-handed axe";
+            case "Map Fragments":
+                return "Fragment";
+            case "Divination Card":
+                return "Divination-card";
+            case "Body Armour":
+                return "Body-armor";
+            case "Two Hand Sword":
+                return "Two-handed sword";
+            case "Two Hand Mace":
+                return "Two-handed mace";
+            case "Two Hand Axe":
+                return "Two-handed axe";
+            case "One Hand Sword":
+                return "One-handed sword";
+            case "One Hand Mace":
+                return "One-handed mace";
+            case "One Hand Axe":
+                return "One-handed axe";
             default:
                 return type;
         }

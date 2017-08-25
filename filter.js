@@ -91,7 +91,6 @@ class Filter {
         var passed = 0;
         var keys   = 0;
         // Compare mod values to filter
-        // console.log( this.affixes );
         for ( var affix in this.affixes ) {
             if ( this.affixes.hasOwnProperty( affix )) {
                 keys++;
@@ -113,6 +112,7 @@ class Filter {
                         this.affixes[affix][0] <= parsedMods.mods[affix][0] &&
                         this.affixes[affix][1] >= parsedMods.mods[affix][0]) {
                         passed++;
+                        // console.log( this.affixes[affix][0] + " <= " + parsedMods.mods[affix][0] + " and " + this.affixes[affix][1] + " >= " + parsedMods.mods[affix][0] );
                     }
                 // If mod has two
                 } else if ( parsedMods.mods[affix] && parsedMods.mods[affix].length === 2 ) {
@@ -120,10 +120,12 @@ class Filter {
                     if ( parsedMods.mods[affix] &&
                         this.affixes[affix][0] <= average &&
                         this.affixes[affix][1] >= average ) {
+                        // console.log( this.affixes[affix][0] + " <= " + average + " and " + this.affixes[affix][1] + " >= " + average );
                         passed++;
                     }
                 // Otherwise
                 } else if ( parsedMods.mods[affix]) {
+                    // console.log( parsedMods.mods[affix]);
                     passed++;
                 }
             }
@@ -248,6 +250,27 @@ class Filter {
 
                 // Parse item mods
                 Item.parseMods( item, function( parsedMods ) {
+                    // item.totalMods = parsedMods.totalMods;
+                    // console.log( parsedMods.totalMods );
+                    var keptTotalMods = [];
+                    for ( var mod in parsedMods.totalMods ) {
+                        if ( parsedMods.totalMods.hasOwnProperty( mod )) {
+                            if ( self.affixes[mod]) {
+                                keptTotalMods.push( mod.replace( "#", parsedMods.totalMods[mod]));
+                            }
+                        }
+                    }
+                    item.totalMods = keptTotalMods;
+                    var keptPseudoMods = [];
+                    for ( var mod in parsedMods.pseudoMods ) {
+                        if ( parsedMods.pseudoMods.hasOwnProperty( mod )) {
+                            if ( self.affixes[mod]) {
+                                keptPseudoMods.push( mod.replace( "#", parsedMods.pseudoMods[mod]));
+                            }
+                        }
+                    }
+                    item.pseudoMods = keptPseudoMods;
+                    // console.log( item );
                     // Compare mods
                     self.compareMods( item, parsedMods, function( passed ) {
                         if ( passed ) {
@@ -256,7 +279,7 @@ class Filter {
                                 // If we have an attack per second property, compute DPS
                                 if ( parsedProperties["Attacks per Second"]) {
                                     var dps = Item.computeDPS( parsedProperties );
-                                    parsedProperties.DPS = dps.DPS;
+                                    parsedProperties.DPS  = dps.DPS;
                                     parsedProperties.pDPS = dps.pDPS;
                                     parsedProperties.eDPS = dps.eDPS;
                                     Item.insertDPSValues( newItem, dps, function( item ) {
