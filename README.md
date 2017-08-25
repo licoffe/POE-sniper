@@ -1,6 +1,8 @@
 ### Releases
 You can grab the latest release [here](https://github.com/licoffe/POE-sniper/releases).
 
+__Note for Linux users__: Make sure to install the [_xclip_](https://linux.die.net/man/1/xclip) clipboard manager to be able to copy whisper messages to the clipboard.
+
 ![alt text](./sniper.png "Tool preview")
 
 ### Introduction
