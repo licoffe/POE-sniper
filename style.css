@@ -540,6 +540,11 @@ input[type=range] {
     top: 9px;
 }
 
+#filter-filter[disabled] {
+    background-color: rgba( 255, 0, 0, 0 );
+    color: rgb( 50, 50, 50 )!important;
+}
+
 .filter-list .collection {
     padding-top: 10px!important;
     margin: 0;
@@ -659,7 +664,7 @@ input[type="number"]:focus, input[type="text"]:focus {
     padding-left: 10px!important;
 }
 
-input:hover {
+input:hover:enabled {
     background-color: rgba( 0, 0, 0, 0.2 )!important;
     transition: background-color 0.2s linear;
 }

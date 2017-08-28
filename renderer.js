@@ -116,10 +116,18 @@ $( document).ready( function() {
     // Fold/unfold filter list action
     var foldFilters = function() {
         $( "#fold-filters" ).toggleClass( "folded" );
+        // If filter was unfolded
         if ( $( "#fold-filters" ).hasClass( "folded" )) {
+            // Fold content
             $( "#filters" ).slideUp();
+            // Disable filtering
+            $( "#filter-filter" ).prop( "disabled", true );
+        // Otherwise
         } else {
+            // Unfold content
             $( "#filters" ).slideDown();
+            // Enable filtering
+            $( "#filter-filter" ).prop( "disabled", false );
         }
     };
 
@@ -183,7 +191,8 @@ $( document).ready( function() {
                 }
             }
         });
-        $( "#filters-amount" ).text( $( "#filters .collection-item:visible" ).length );
+        // Update filter amount
+        updateFilterAmount();
     };
 
     var resetFilters = function() {
@@ -551,8 +560,13 @@ $( document).ready( function() {
     };
 
     var updateFilterAmount = function( id ) {
-        // $( "#filters-amount" ).text( filters.length );
-        $( "#filters-amount" ).text( $( "#filters .collection-item:visible" ).length );
+        // If filters are folded, count the amount of filters in the array
+        if ( $( "#fold-filters" ).hasClass( "folded" )) {
+            $( "#filters-amount" ).text( filters.length );
+        // Otherwise count the visible filters
+        } else {
+            $( "#filters-amount" ).text( $( "#filters .collection-item:visible" ).length );
+        }
         bindRemoveFilter( id );
     };
 
@@ -605,6 +619,7 @@ $( document).ready( function() {
 
     // When clicking on the trash sign, remove tagged items
     var bindRemoveTaggedItems = function( id ) {
+        console.log( "Binding to id " + id );
         clearTaggedItems( id );
     };
 
@@ -836,8 +851,13 @@ $( document).ready( function() {
                 open( $( this ).attr( "href" ));
             }
         });
+        // If filters are folded, unfold them
+        if ( $( "#fold-filters" ).hasClass( "folded" )) {
+            foldFilters();
+        }
         addPoeTradeForm( filter );
         displaySearchEngines();
+        filterFilterListAction();
     };
 
     // Render poe.trade form for search link
