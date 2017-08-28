@@ -592,6 +592,22 @@ $( document).ready( function() {
         }
     };
 
+    var clearTaggedItems = function( tag ) {
+        $( "#" + tag + "-clear" ).click( function() {
+            console.log( "clearing" );
+            $( ".entry" ).each( function() { 
+                if ( $( this ).data( "tag" ) === tag ) { 
+                    $( this ).remove(); 
+                }
+            });
+        });
+    };
+
+    // When clicking on the trash sign, remove tagged items
+    var bindRemoveTaggedItems = function( id ) {
+        clearTaggedItems( id );
+    };
+
     // When clicking on the minus sign, remove filter
     var bindRemoveFilter = function( id ) {
         $( "#" + id + ".remove-filter" ).click( function() {
@@ -677,6 +693,7 @@ $( document).ready( function() {
                     updateFilterAmount( filter.id );
                     cbSorted();
                     addPoeTradeForm( filter );
+                    bindRemoveTaggedItems( filter.id );
                     // console.log( filter );
                 });
             }, function( err ) {
@@ -788,6 +805,7 @@ $( document).ready( function() {
         colorFilter( filter );
         bindFilterToggleState( filter.id );
         bindFilterEdit( filter.id );
+        bindRemoveTaggedItems( filter.id );
         updateFilterAmount( filter.id );
         poeTradeStats( filters );
         $( ".filter-detail a" ).unbind();
@@ -1386,7 +1404,7 @@ $( document).ready( function() {
         });
     };
 
-    var displayItem = function( item, stash, foundIndex, clipboard, callback ) {
+    var displayItem = function( item, stash, foundIndex, clipboard, filterId, callback ) {
         var generated = "";
         var displayItem = JSON.parse( JSON.stringify( item ));
         if ( displayItem.fullPrice ) {
@@ -1401,6 +1419,9 @@ $( document).ready( function() {
             updateResultsAmount();
             item.accountName = stash.lastCharacterName;
             item.name = item.item;
+
+            // Tag item with filter id
+            $( "#" + item.id ).data( "tag", filterId );
             
             // item.price = price;
             item.stashName = stash.stash;
@@ -1586,7 +1607,7 @@ $( document).ready( function() {
                                         entryLookup[item.itemId] = item.id;
                                         results[item.id] = item;
                                         resultsId.push( item.itemId );
-                                        displayItem( item, stash, foundIndex, filter.clipboard, function() {
+                                        displayItem( item, stash, foundIndex, filter.clipboard, filter.id, function() {
                                             callbackItem();
                                         });
                                     } else {
