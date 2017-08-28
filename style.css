@@ -618,6 +618,10 @@ label.active {
     transform: translateX(230%)!important;
 }
 
+.item-type label.active {
+    transform: translateX(230%)!important;
+}
+
 label.active[for="sockets-red"], label.active[for="sockets-green"], label.active[for="sockets-blue"], label.active[for="sockets-white"] {
     transform: translateX(120%)!important;
 }

@@ -1,3 +1,9 @@
+/* jshint node: true */
+/* jshint jquery: true */
+/* jshint esversion: 6 */
+/* jshint browser: true */
+"use strict";
+
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
@@ -64,6 +70,7 @@ var lastItem        = null;
 var prices          = {};
 var loadedAffix     = false;
 var editingAffix    = "";
+var interrupt       = false;
 
 // var writeFilterStats = function( filterStats ) {
 //     fs.appendFile( __dirname + "/stats_filters.csv", filterStats, function( err ) {
@@ -217,8 +224,7 @@ $( document).ready( function() {
         $( "#clipboard" ).prop( "checked", false );
         $( "#convert-currency" ).prop( "checked", true );
         $( "#affixes-list" ).empty();
-        $( "#item-type" ).val( "any" );
-        $( "#item-type").material_select();
+        $( "#item-type" ).val( "" );
         $( "#affix-min" ).val( "" );
         $( "#affix-max" ).val( "" );
         $( "#affixes" ).val( "" );
@@ -251,7 +257,7 @@ $( document).ready( function() {
             // console.log( formData );
             // var re         = /([0-9.]+)/g;
             $( ".affix-item" ).each( function() {
-                data = $( this ).data( "data-item" );
+                var data = $( this ).data( "data-item" );
                 formData.affixes[data.title] = [data.min, data.max];
                 var count = ( data.title.match( /#/g ) || []).length;
                 console.log( data );
@@ -454,6 +460,19 @@ $( document).ready( function() {
             });
             // Close on Escape
             $( '#affixes' ).keydown( function( e ) {
+                if ( e.which == 27 ) {
+                    $( ".autocomplete-content" ).empty();
+                }
+            });
+
+            // Setup type completion
+            var typeCompletion = require( "./type-completion.json" );
+            $( '#item-type' ).autocomplete({
+                data: typeCompletion,
+                limit: 20
+            });
+            // Close on Escape
+            $( '#item-type' ).keydown( function( e ) {
                 if ( e.which == 27 ) {
                     $( ".autocomplete-content" ).empty();
                 }
@@ -970,7 +989,6 @@ $( document).ready( function() {
                     $( "#cancel-filter" ).addClass( "red" ).removeClass( "blue-grey" );
                     $( "#add-filter" ).addClass( "green" ).removeClass( "blue-grey" );
                     $( "#item-type" ).val( filter.itemType );
-                    $( "#item-type" ).material_select();
                     $( "#affixes-list" ).empty();
                     $( "#affix-min" ).val( "" );
                     $( "#affix-max" ).val( "" );
@@ -1167,7 +1185,7 @@ $( document).ready( function() {
                     str += "<span>Poe.trade stats based on <b>" + prices.length + "</b> items</span>";
                     // console.log( priceCount );
                     for ( var p in priceCount ) {
-                        if ( priceCount.hasOwnProperty( p ) && priceCount[p] > 1 && p != "" ) {
+                        if ( priceCount.hasOwnProperty( p ) && priceCount[p] > 1 && p !== "" ) {
                             str += "<span>" + p + ": <b>" + priceCount[p] + "</b></span>";
                         }
                     }
@@ -1384,7 +1402,7 @@ $( document).ready( function() {
             item.accountName = stash.lastCharacterName;
             item.name = item.item;
             
-            item.price = price;
+            // item.price = price;
             item.stashName = stash.stash;
             $( "#" + item.id ).data( "item", item );
             // Add proper coloring
@@ -1451,7 +1469,7 @@ $( document).ready( function() {
             }
             callback();
         });
-    }
+    };
 
     /**
      * Download all public stashes starting with input chunk ID.
@@ -1850,7 +1868,6 @@ $( document).ready( function() {
             });
         }
         $( "#item-type" ).val( matchTypeWithPoeTrade( data.type ));
-        $( "#item-type" ).material_select();
         $( "#armor" ).val( data.armour_min );
         $( "#es" ).val( data.shield_min );
         $( "#evasion" ).val( data.evasion_min );
@@ -1970,7 +1987,7 @@ $( document).ready( function() {
             resetFilters();
             fillInFormWithPOETradeData( data );
         });
-    })
+    });
 
     // When clicking on play sound
     $( "#play-sound" ).click( function() {
@@ -1996,7 +2013,7 @@ $( document).ready( function() {
         str     = str.replace( /<left>/g,     data.left );
         str     = str.replace( /<top>/g,      data.top );
         cb( str );
-    }
+    };
 
     // Sample item used for message preview
     var sampleItem = {
