@@ -6,7 +6,10 @@
   "scripts": {
     "start": "electron ."
   },
-  "repository": "",
+  "repository": {
+  "type": "git",
+  "url": "git://github.com/licoffe/POE-sniper.git"
+  },
   "keywords": [
     "Electron",
     "quick",
