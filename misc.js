@@ -1,3 +1,8 @@
+/* jshint node: true */
+/* jshint jquery: true */
+/* jshint esversion: 6 */
+"use strict";
+
 /**
  * Misc class
  *
@@ -28,7 +33,7 @@ class Misc {
             function( data ) {
                 callback( $.parseJSON( data ).leagues );
             }
-        )
+        );
     }
 
     /**

@@ -231,14 +231,14 @@ class Filter {
         if (( this.league  === "any" || item.league === this.league ) &&
             ( this.item    === ""    || itemName.toLowerCase() === this.item.toLowerCase() || 
               typeLine.toLowerCase() === this.item.toLowerCase() ) &&
+            ( this.itemType === "any" || this.itemType === "" || itemTypes[this.itemType].types.indexOf( item.typeLine ) !== -1 ) &&
             ( this.socketsTotal === ""    || this.socketsTotal <= item.sockets.length ) && 
             (( this.corrupted  == 'true' ) === item.corrupted  || this.corrupted  === "any" ) &&
             (( this.enchanted  == 'true' ) === item.enchanted  || this.enchanted  === "any" ) &&
             (( this.crafted    == 'true' ) === item.crafted    || this.crafted    === "any" ) &&
             (( this.identified == 'true' ) === item.identified || this.identified === "any" ) &&
             ( this.level === "" || item.frameType === 4 || ( item.frameType !== 4 && this.level <= item.ilvl )) && 
-            ( this.rarity === "any" || this.rarity == item.frameType || ( this.rarity === "not-unique" && item.frameType !== 3 )) &&
-            ( this.itemType === "any" || this.itemType === "" || itemTypes[this.itemType].types.indexOf( item.typeLine ) !== -1 )
+            ( this.rarity === "any" || this.rarity == item.frameType || ( this.rarity === "not-unique" && item.frameType !== 3 ))
             ) {
 
             var prices = Item.computePrice( item, currencyRates );

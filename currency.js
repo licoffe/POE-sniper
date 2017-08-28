@@ -1,3 +1,8 @@
+/* jshint node: true */
+/* jshint jquery: true */
+/* jshint esversion: 6 */
+"use strict";
+
 /**
  * Currency class
  *
@@ -25,7 +30,6 @@ class Currency {
      */
     static getLastRates( callback ) {
         // console.log( "Downloading last rates from poe-rates.com" );
-        Misc.publishStatusMessage( "Downloading last rates from poe-rates.com" );
         var shortRates = {};
         // For each league
         try {

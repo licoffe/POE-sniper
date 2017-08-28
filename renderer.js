@@ -1361,6 +1361,7 @@ $( document).ready( function() {
         if ( item.typeLine !== item.name && ( item.frameType > 0 && item.frameType < 4 )) {
             displayName += " (" + item.typeLine + ")";
         }
+
         notifier.notify({
             title:   displayName,
             message: "Price: " + item.displayPrice,
@@ -1577,7 +1578,7 @@ $( document).ready( function() {
                     });
                 });
             } else {
-                async.each( filters.filterList, function( filter, callbackFilter ) {
+                async.eachLimit( filters.filterList, 1, function( filter, callbackFilter ) {
                     if ( !filter.active ) {
                         callbackFilter();
                     } else {
@@ -1585,7 +1586,7 @@ $( document).ready( function() {
                         var totalItems = 0;
                         console.time( "Checking filter: " + filter.id );
                         async.each( data.stashes, function( stash, callbackStash ) {
-                            totalItems += stash.items.length;
+                            // totalItems += stash.items.length;
                             async.each( stash.items, function( item, callbackItem ) {
                                 item.stashTab          = stash.stash;
                                 item.lastCharacterName = stash.lastCharacterName;
@@ -1627,7 +1628,7 @@ $( document).ready( function() {
                             }
                             console.timeEnd( "Checking filter: " + filter.id );
                             callbackFilter();
-                            console.log( "Searched among " + totalItems + " items" );
+                            // console.log( "Searched among " + totalItems + " items" );
                             // var end = Date.now();
                             // var filterStats = filter.id + "," + (end - begin) + "," + totalItems + "\n";
                             // writeFilterStats( filterStats );
@@ -2249,7 +2250,6 @@ $( document).ready( function() {
 
     // If affixes is not empty, activate add affix button
     $( "#affixes" ).keyup( function() {
-        console.log( $( this ).val() );
         if ( $( this ).val() !== "" ) {
             $( "#add-affix" ).removeClass( "disabled" );
         } else {

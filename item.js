@@ -1,3 +1,8 @@
+/* jshint node: true */
+/* jshint jquery: true */
+/* jshint esversion: 6 */
+"use strict";
+
 /**
  * Item class
  *
@@ -1010,15 +1015,16 @@ class Item {
                         if ( err ) {
                             console.log( "Error: " + err );
                         }
+                        var mod;
                         // console.timeEnd( "Parsing mods" );
                         // Add total mods to parsedMods to compare later on
-                        for ( var mod in totalMods ) {
+                        for ( mod in totalMods ) {
                             if ( totalMods.hasOwnProperty( mod )) {
                                 parsedMods[mod] = [totalMods[mod]];
                             }
                         }
                         // Same for pseudo mods
-                        for ( var mod in pseudoMods ) {
+                        for ( mod in pseudoMods ) {
                             if ( pseudoMods.hasOwnProperty( mod )) {
                                 parsedMods[mod] = [pseudoMods[mod]];
                             }
@@ -1099,15 +1105,16 @@ class Item {
         var physical  = 0;
         var elemental = 0;
         var reg = /([0-9\.]+)-([0-9\.]+)/g;
+        var match = "";
         if ( itemProperties["Physical Damage"]) {
-            var match = reg.exec( itemProperties["Physical Damage"]);
+            match = reg.exec( itemProperties["Physical Damage"]);
             if ( match ) {
                 physical = (parseFloat(match[1]) + parseFloat(match[2]))/2;
                 dps += physical;
             }
         }
         if ( itemProperties["Elemental Damage"]) {
-            var match = reg.exec( itemProperties["Elemental Damage"]);
+            match = reg.exec( itemProperties["Elemental Damage"]);
             if ( match ) {
                 elemental = (parseFloat(match[1]) + parseFloat(match[2]))/2;
                 dps += elemental;

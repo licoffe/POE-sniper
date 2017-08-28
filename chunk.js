@@ -1,3 +1,8 @@
+/* jshint node: true */
+/* jshint jquery: true */
+/* jshint esversion: 6 */
+"use strict";
+
 /**
  * Chunk class
  *
@@ -66,10 +71,10 @@ class Chunk {
                                 }
                             }
                         }
-                    )
+                    );
                 }
             }
-        )
+        );
     }
     
     /**
@@ -79,6 +84,7 @@ class Chunk {
      * @return unparsed JSON body through callback
      */
     static download( chunkID, callback ) {
+        console.log( "Downloading last change id" );
         console.time( "Downloading chunk " + chunkID );
         var begin    = Date.now();
         var dataSize = 0;
@@ -90,27 +96,18 @@ class Chunk {
             domain = links.beta.domain;
         }
         dnscache.lookup( domain, function( err, result ) {
-            request({ "url": link + "?id=" + chunkID, "gzip": true },
+            request({ "url": link + "?id=" + chunkID, "gzip": true, "timeout": 60 * 1000 },
                 function( error, response, body ) {
                     // If there is an error, retry downloading after delay
+                    var end = Date.now();
                     if ( error ) {
                         console.timeEnd( "Downloading chunk " + chunkID );
                         console.log( "Error occurred, retrying: " + error );
-                        var end = Date.now();
-                        if ( config.writeChunkStats ) {
-                            chunkStats = chunkID + "," + ( end - begin ) + "," + dataSize + ",failed\n";
-                            writeChunkStats( chunkStats );
-                        }
-                        getLastChangeId( function( chunkID ) {
+                        Chunk.getLastChangeId( function( chunkID ) {
                             setTimeout( Chunk.download, config.CHUNK_RETRY_INTERVAL, chunkID, callback );
                         });
                     } else {
-                        var end = Date.now();
                         console.timeEnd( "Downloading chunk " + chunkID );
-                        if ( config.writeChunkStats ) {
-                            chunkStats = chunkID + "," + ( end - begin ) + "," + dataSize + ",passed\n";
-                            writeChunkStats( chunkStats );
-                        }
                         Chunk.loadJSON( body, chunkID, callback );
                     }
                 }
@@ -141,7 +138,7 @@ class Chunk {
             }
         } catch ( e ) {
             console.log( "Error occured, retrying: " + e );
-        //     setTimeout( Chunk.download, config.CHUNK_RETRY_INTERVAL, chunkID, callback );
+            setTimeout( Chunk.download, config.CHUNK_RETRY_INTERVAL, chunkID, callback );
         }
     }
 
