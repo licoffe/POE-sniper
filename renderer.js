@@ -607,8 +607,9 @@ $( document).ready( function() {
     };
 
     var clearTaggedItems = function( tag ) {
-        $( "#" + tag + "-clear" ).click( function() {
-            console.log( "clearing" );
+        $( "#" + tag + "-clear" ).click( function( event ) {
+            event.stopPropagation();
+            console.log( "clearing tagged items" );
             $( ".entry" ).each( function() { 
                 if ( $( this ).data( "tag" ) === tag ) { 
                     $( this ).remove(); 
@@ -716,8 +717,8 @@ $( document).ready( function() {
                     console.log( err );
                 }
                 filters.save();
-                $( ".filter-detail a" ).unbind();
-                $( ".filter-detail a" ).click( function( event ) {
+                $( ".search-engines a" ).unbind();
+                $( ".search-engines a" ).click( function( event ) {
                     event.preventDefault();
                     event.stopPropagation();
                     var id = $( this ).data( "item" );
@@ -823,8 +824,8 @@ $( document).ready( function() {
         bindRemoveTaggedItems( filter.id );
         updateFilterAmount( filter.id );
         poeTradeStats( filters );
-        $( ".filter-detail a" ).unbind();
-        $( ".filter-detail a" ).click( function( event ) {
+        $( ".search-engines a" ).unbind();
+        $( ".search-engines a" ).click( function( event ) {
             event.preventDefault();
             event.stopPropagation();
             var id = $( this ).data( "item" );
