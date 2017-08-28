@@ -300,7 +300,7 @@ $( document).ready( function() {
             if ( formData.crafted === "true" ) {
                 title += "<span class=\"filter-crafted\">Crafted</span>";
             }
-            if ( formData.itemType !== "any" ) {
+            if ( formData.itemType !== "any" && formData.itemType !== "" ) {
                 title += "<span style=\"padding-right: 10px;\">" + formData.item + "(any " + formData.itemType + ")</span>";
             } else {
                 title += "<span style=\"padding-right: 10px;\">" + formData.item + "</span>";
