@@ -7,14 +7,18 @@
         <div class="col s11 filter-detail" id="filter-detail-{{id}}">
             <span class="title">
                 <span class="item">{{{title}}}</span> in {{league}} league <= <span class="currency">{{displayPrice}}</span><span class="buyout">&nbsp;(include barter offers)</span><span class="clipboard">&nbsp;(clipboard)</span>
-                <div class="item-stats">
-                    updating...
+                <div class="row">
+                    <div class="item-stats col s10">
+                        updating...
+                    </div>
                 </div>
-                <div class="search-engines">
-                    <span class="poe-trade-link"><a href="http://poe.trade" data-item="{{id}}-poe-trade-form" target="_blank">poe.trade</a></span>
-                    <span class="poe-ninja-link"><a href="http://poe.ninja/{{league}}" target="_blank">poe.ninja</a></span>
-                    <span class="poe-rates-link"><a href="http://poe-rates.com/index.php?league={{league}}&item={{item}}&interval=7d" target="_blank">poe-rates</a></span>
-                    <span class="poe-wiki-link"><a href="http://pathofexile.gamepedia.com/{{item}}" target="_blank">wiki</a></span>
+                <div class="row">
+                    <div class="search-engines">
+                        <span class="poe-trade-link"><a href="http://poe.trade" data-item="{{id}}-poe-trade-form" target="_blank">poe.trade</a></span>
+                        <span class="poe-ninja-link"><a href="http://poe.ninja/{{league}}" target="_blank">poe.ninja</a></span>
+                        <span class="poe-rates-link"><a href="http://poe-rates.com/index.php?league={{league}}&item={{item}}&interval=7d" target="_blank">poe-rates</a></span>
+                        <span class="poe-wiki-link"><a href="http://pathofexile.gamepedia.com/{{item}}" target="_blank">wiki</a></span>
+                    </div>
                 </div>
             </span>
             <a href="#!" class="secondary-content"><i class="material-icons red-text remove-filter" style="top: -20px" id="{{id}}">remove</i></a>

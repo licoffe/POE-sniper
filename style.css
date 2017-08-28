@@ -309,11 +309,12 @@ input {
 
 .item-stats {
     color: rgba(0, 200, 200, 1);
-    padding-top: 5px;
     display: none;
     word-wrap: break-word;
-    /* display: block; */
     line-height: 15px;
+    padding-top: 7px!important;
+    left: -10px!important;
+    position: relative;
 }
 
 .poe-trade-link, .poe-ninja-link, .poe-rates-link, .poe-wiki-link {
@@ -567,6 +568,8 @@ input[type=range] {
 .filter-detail .title {
     position: relative;
     top: 9px;
+    word-wrap: break-word;
+    line-height: 15px;
 }
 
 .filter-entry {
