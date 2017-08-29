@@ -73,12 +73,12 @@ If you run into this error on startup, it means that the config.json file holdin
 - On Linux: ~/.config/POE-Sniper
 
 #### Stuck on a change_id / No new items in a while
-The connection to the API is set to timeout after a minute. If it happens for some reason (loss of internet connection, real restart, etc.), the program will fetch again the last known change_id from either poe.ninja/poe-rates.com and attempt to download it.
+The connection to the API is set to timeout after a minute. If it happens for some reason (loss of internet connection, realm restart, computer went to sleep, etc.), the program will fetch again the last known change_id from either poe.ninja/poe-rates.com and attempt to download it.
 
 If you did not receive item updates in a while, then this is most likely an error due to your current filter setup. Feel free to contact me on Reddit or Discord if it happens.
 
 #### Program freeze
-Make sure not to use filters which are too broad (ie. (any Gem) or (any )). A filter matching too many items will greatly increase parsing time, consume additional memory and slowdown the entire program.
+Make sure not to use filters which are too broad (ie. (any Gem) or (any Map)). A filter matching too many items is not useful, will greatly increase parsing time, consume additional memory and slowdown the entire program.
 
 ### Contact
 
