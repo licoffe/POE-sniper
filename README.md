@@ -78,8 +78,8 @@ The connection to the API is set to timeout after a minute. If it happens for so
 If you did not receive item updates in a while, then this is most likely an error due to your current filter setup. Feel free to contact me on Reddit or Discord if it happens.
 
 #### Program freeze
-Make sure not to use filters which are too broad (ie. (any Gem) or (any Map)). A filter matching too many items is not useful, will greatly increase parsing time, consume additional memory and slowdown the entire program.
+Make sure not to use filters which are too broad (ie. (any Gem) or (any Map)). A filter matching too many items is not useful, will greatly increase parsing time, consume additional memory and slow down the entire program.
 
 ### Contact
 
-You can contact me on Reddit or Discord, same account.
+You can contact me on reddit or Discord, same account.
