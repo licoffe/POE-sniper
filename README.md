@@ -62,6 +62,8 @@ Within a terminal:
 Make sure to have an unlimited connection plan and a good bandwidth since the tool downloads currently around 1.5 MB of JSON data every second.
 
 ### Troubleshooting
+
+#### Error on startup
 ![alt text](https://user-images.githubusercontent.com/9851687/29394111-e6815842-82cd-11e7-8155-78f21215e25b.png "JS error on startup")
 
 If you run into this error on startup, it means that the config.json file holding your settings has been corrupted. The solution is to erase the config file, which will be rebuilt by the program on the next startup. Here are the different paths depending on your system:
@@ -69,3 +71,15 @@ If you run into this error on startup, it means that the config.json file holdin
 - On Windows: C:\Users\YourUser\AppData\Roaming\POE-Sniper
 - On MacOS: ~/Library/Application Support/POE-Sniper
 - On Linux: ~/.config/POE-Sniper
+
+#### Stuck on a change_id / No new items in a while
+The connection to the API is set to timeout after a minute. If it happens for some reason (loss of internet connection, real restart, etc.), the program will fetch again the last known change_id from either poe.ninja/poe-rates.com and attempt to download it.
+
+If you did not receive item updates in a while, then this is most likely an error due to your current filter setup. Feel free to contact me on Reddit or Discord if it happens.
+
+#### Program freeze
+Make sure not to use filters which are too broad (ie. (any Gem) or (any )). A filter matching too many items will greatly increase parsing time, consume additional memory and slowdown the entire program.
+
+### Contact
+
+You can contact me on Reddit or Discord, same account.
