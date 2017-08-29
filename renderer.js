@@ -1560,7 +1560,7 @@ $( document).ready( function() {
                                 entryLookup[item.itemId] = item.id;
                                 results[item.id] = item;
                                 resultsId.push( item.itemId );
-                                displayItem( item, stash, foundIndex, false, function() {
+                                displayItem( item, stash, foundIndex, false, "", function() {
                                     callbackItem();
                                 });
                             } else {
@@ -1697,6 +1697,7 @@ $( document).ready( function() {
         Chunk.download( chunkID, parseData );
 
         var done = function( data ) {
+            // removeEntriesAboveLimit( 100 )
             filterResultListAction();
             var nextID = data.next_change_id;
             var end = Date.now();
@@ -1715,6 +1716,12 @@ $( document).ready( function() {
                 }
             }
         };
+    };
+
+    var removeEntriesAboveLimit = function( limit ) {
+        while ( $( "div#results .entry" ).length > limit ) { 
+            $( "div#results" ).find( ".entry:last-child" ).remove(); 
+        }
     };
 
     // View setup
