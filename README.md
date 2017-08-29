@@ -60,3 +60,12 @@ Within a terminal:
 
 ### Disclaimer
 Make sure to have an unlimited connection plan and a good bandwidth since the tool downloads currently around 1.5 MB of JSON data every second.
+
+### Troubleshooting
+![alt text](https://user-images.githubusercontent.com/9851687/29394111-e6815842-82cd-11e7-8155-78f21215e25b.png "JS error on startup")
+
+If you run into this error on startup, it means that the config.json file holding your settings has been corrupted. The solution is to erase the config file, which will be rebuilt by the program on the next startup. Here are the different paths depending on your system:
+
+- On Windows: C:\Users\YourUser\AppData\Roaming\POE-Sniper
+- On MacOS: ~/Library/Application Support/POE-Sniper
+- On Linux: ~/.config/POE-Sniper
