@@ -238,7 +238,7 @@ class Filter {
             (( this.crafted    == 'true' ) === item.crafted    || this.crafted    === "any" ) &&
             (( this.identified == 'true' ) === item.identified || this.identified === "any" ) &&
             ( this.level === "" || item.frameType === 4 || ( item.frameType !== 4 && this.level <= item.ilvl )) && 
-            ( this.rarity === "any" || this.rarity == item.frameType || ( this.rarity === "not-unique" && item.frameType !== 3 ))
+            ( this.rarity === "any" || this.rarity == item.frameType || ( this.rarity === "not-unique" && item.frameType !== 3 && item.frameType !== 9 ))
             ) {
 
             var prices = Item.computePrice( item, currencyRates );
@@ -283,22 +283,24 @@ class Filter {
                                 // console.log( newItem );
                                 // If we have an attack per second property, compute DPS
                                 if ( parsedProperties["Attacks per Second"]) {
-                                    var dps = Item.computeDPS( parsedProperties );
-                                    parsedProperties.DPS  = dps.DPS;
-                                    parsedProperties.pDPS = dps.pDPS;
-                                    parsedProperties.eDPS = dps.eDPS;
-                                    Item.insertDPSValues( newItem, dps, function( item ) {
-                                        // Compare properties
-                                        self.compareProperties( item, parsedProperties, function( equal ) {
-                                            if ( equal ) {
-                                                Item.formatItem( item, name, prices, function( newItem ) {
-                                                    callback( newItem );
-                                                });
-                                            // Item does not have the required properties
-                                            } else {
-                                                // fs.appendFileSync( __dirname + "/log.txt", name + " (" + typeLine + "): Not the right properties\n" );
-                                                callback( false );
-                                            }
+                                    Item.computeDPS( parsedProperties, function( dps ) {
+                                        parsedProperties.DPS  = dps.DPS;
+                                        parsedProperties.pDPS = dps.pDPS;
+                                        parsedProperties.eDPS = dps.eDPS;
+                                        Item.insertDPSValues( newItem, dps, function( item ) {
+                                            // console.log( "Inserted DPS value for item " + name );
+                                            // Compare properties
+                                            self.compareProperties( item, parsedProperties, function( equal ) {
+                                                if ( equal ) {
+                                                    Item.formatItem( item, name, prices, function( newItem ) {
+                                                        callback( newItem );
+                                                    });
+                                                // Item does not have the required properties
+                                                } else {
+                                                    // fs.appendFileSync( __dirname + "/log.txt", name + " (" + typeLine + "): Not the right properties\n" );
+                                                    callback( false );
+                                                }
+                                            });
                                         });
                                     });
                                 } else {

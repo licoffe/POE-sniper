@@ -29,23 +29,27 @@ class Item {
      * @return Item with DPS values through callback
      */
     static insertDPSValues( item, dps, callback ) {
-        if ( dps.pDPS ) {
+        // console.log( "inserting DPS values" );
+        if ( dps.pDPS && !item.hasPDPS ) {
             item.properties.push({
                 name: "pDPS",
                 values: [[dps.pDPS]]
             });
+            item.hasPDPS = true;
         }
-        if ( dps.eDPS ) {
+        if ( dps.eDPS && !item.hasEDPS ) {
             item.properties.push({
                 name: "eDPS",
                 values: [[dps.eDPS]]
             });
+            item.hasEDPS = true;
         }
-        if ( dps.DPS ) {
+        if ( dps.DPS && !item.hasDPS ) {
             item.properties.push({
                 name: "DPS",
                 values: [[dps.DPS]]
             });
+            item.hasDPS = true;
         }
         callback( item );
     }
@@ -115,13 +119,15 @@ class Item {
                         // console.log( newItem );
                         // If we have an attack per second property, compute DPS
                         if ( parsedProperties["Attacks per Second"]) {
-                            var dps = Item.computeDPS( parsedProperties );
-                            parsedProperties.DPS = dps.DPS;
-                            parsedProperties.pDPS = dps.pDPS;
-                            Item.insertDPSValues( newItem, dps, function( item ) {
-                                Item.formatItem( item, name, prices, function( newItem ) {
-                                    newItem.fullPrice = Math.round( itemRates[itemLeague][ref].mode);
-                                    callback( newItem );
+                            Item.computeDPS( parsedProperties, function( dps ) {
+                                parsedProperties.DPS = dps.DPS;
+                                parsedProperties.pDPS = dps.pDPS;
+                                Item.insertDPSValues( newItem, dps, function( item ) {
+                                    console.log( "Inserted DPS value for item" );
+                                    Item.formatItem( item, name, prices, function( newItem ) {
+                                        newItem.fullPrice = Math.round( itemRates[itemLeague][ref].mode);
+                                        callback( newItem );
+                                    });
                                 });
                             });
                         } else {
@@ -1100,35 +1106,56 @@ class Item {
      * @params Item properties
      * @return DPS values
      */
-    static computeDPS( itemProperties ) {
+    static computeDPS( itemProperties, callback ) {
         var dps       = 0;
         var physical  = 0;
         var elemental = 0;
         var reg = /([0-9\.]+)-([0-9\.]+)/g;
-        var match = "";
         if ( itemProperties["Physical Damage"]) {
-            match = reg.exec( itemProperties["Physical Damage"]);
+            var match = reg.exec( itemProperties["Physical Damage"]);
             if ( match ) {
                 physical = (parseFloat(match[1]) + parseFloat(match[2]))/2;
                 dps += physical;
             }
         }
         if ( itemProperties["Elemental Damage"]) {
-            match = reg.exec( itemProperties["Elemental Damage"]);
-            if ( match ) {
-                elemental = (parseFloat(match[1]) + parseFloat(match[2]))/2;
-                dps += elemental;
-            }
+            Item.matchElementalDamage( itemProperties["Elemental Damage"], function( total ) {
+                dps      += total;
+                dps       = Math.round( dps       * parseFloat( itemProperties["Attacks per Second"]) * 100 ) / 100;
+                physical  = Math.round( physical  * parseFloat( itemProperties["Attacks per Second"]) * 100 ) / 100;
+                elemental = Math.round( total     * parseFloat( itemProperties["Attacks per Second"]) * 100 ) / 100;
+                callback({
+                    "pDPS": physical,
+                    "eDPS": elemental,
+                    "DPS" : dps 
+                });
+            });
+        } else {
+            dps       = Math.round( dps       * parseFloat( itemProperties["Attacks per Second"]) * 100 ) / 100;
+            physical  = Math.round( physical  * parseFloat( itemProperties["Attacks per Second"]) * 100 ) / 100;
+    
+            callback({
+                "pDPS": physical,
+                "eDPS": elemental,
+                "DPS" : dps 
+            });
         }
-        dps       = Math.round( dps       * parseFloat( itemProperties["Attacks per Second"]) * 100 ) / 100;
-        physical  = Math.round( physical  * parseFloat( itemProperties["Attacks per Second"]) * 100 ) / 100;
-        elemental = Math.round( elemental * parseFloat( itemProperties["Attacks per Second"]) * 100 ) / 100;
+    }
 
-        return {
-            "pDPS": physical,
-            "eDPS": elemental,
-            "DPS" : dps 
-        };
+    static matchElementalDamage( string, callback ) {
+        var totalElemental = 0;
+        var reg = /([0-9\.]+)-([0-9\.]+)/g;
+        var match = reg.exec( string );
+        async.whilst( function() {
+            return match !== null;
+        }, function( cbEle ) {
+            var elemental = (parseFloat(match[1]) + parseFloat(match[2]))/2;
+            totalElemental += elemental;
+            match = reg.exec( string );
+            cbEle();
+        }, function() {
+            callback( totalElemental );
+        });
     }
 
     /**
