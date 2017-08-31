@@ -57,7 +57,7 @@ var ncp             = require( "copy-paste" );
 var editingFilter   = "";    // Are we editing filters at the moment
 var downloading     = false; // Is the tool downloading chunks at the moment
 var results         = {};
-var resultsId       = [];
+var resultsId       = {};
 var entryLookup     = {};
 var itemInStash     = {};
 // Price regexp
@@ -71,6 +71,7 @@ var prices          = {};
 var loadedAffix     = false;
 var editingAffix    = "";
 var interrupt       = false;
+var sold = 0;
 
 // var writeFilterStats = function( filterStats ) {
 //     fs.appendFile( __dirname + "/stats_filters.csv", filterStats, function( err ) {
@@ -612,6 +613,14 @@ $( document).ready( function() {
             console.log( "clearing tagged items" );
             $( ".entry" ).each( function() { 
                 if ( $( this ).data( "tag" ) === tag ) { 
+                    var id       = $( this ).data( "item" ).itemId;
+                    var visualId = $( this ).data( "item" ).id;
+                    console.log( id );
+                    delete results[visualId];
+                    delete resultsId[id];
+                    delete prices[id];
+                    delete entryLookup[id];
+                    console.log( results );
                     $( this ).remove(); 
                 }
             });
@@ -1279,8 +1288,10 @@ $( document).ready( function() {
     // When clicking on clear entries icon
     $( "#clear-entries" ).click( function() {
         $( "#results ul" ).empty();
-        results   = {};
-        resultsId = [];
+        results     = {};
+        resultsId   = {};
+        prices      = {};
+        entryLookup = {};
         updateResultsAmount();
     });
 
@@ -1553,13 +1564,17 @@ $( document).ready( function() {
                                 }
                                 itemInStash[stash.id].items[item.itemId] = item.id;
                                 // If item has not already been added
-                                var foundIndex = resultsId.indexOf( item.itemId );
-                                if ( foundIndex !== -1 ) {
+                                var foundIndex = -1;
+                                if( resultsId[item.itemId]) {
+                                    console.log( "Selecting: " + $( "li#" + entryLookup[item.itemId]).length );
                                     $( "li#" + entryLookup[item.itemId]).addClass( "old" );
-                                }
+                                    foundIndex = 1;
+                                    results[entryLookup[item.itemId]] = item;
+                                } else {
+                                    resultsId[item.itemId] = true;
                                 entryLookup[item.itemId] = item.id;
                                 results[item.id] = item;
-                                resultsId.push( item.itemId );
+                                }
                                 displayItem( item, stash, foundIndex, false, "", function() {
                                     callbackItem();
                                 });
@@ -1577,9 +1592,12 @@ $( document).ready( function() {
                             async.each( Object.keys( itemInStash[stash.id].previousItems ), function( previousItem, cbPreviousItem ) {
                                 if ( !itemInStash[stash.id].items[previousItem]) {
                                     console.log( previousItem + " was sold" );
-                                    $( "li#" + itemInStash[stash.id].previousItems[previousItem] ).addClass( "sold" );
-                                    delete results[itemInStash[stash.id].previousItems[previousItem]];
+                                    sold++;
+                                    $( "li#" + entryLookup[previousItem] ).addClass( "sold" );
+                                    delete results[entryLookup[previousItem]];
                                     delete prices[previousItem];
+                                    delete resultsId[previousItem];
+                                    delete entryLookup[previousItem];
                                 }
                                 cbPreviousItem();
                             }, function( err ) {
@@ -1622,13 +1640,17 @@ $( document).ready( function() {
                                         }
                                         itemInStash[stash.id].items[item.itemId] = item.id;
                                         // If item has not already been added
-                                        var foundIndex = resultsId.indexOf( item.itemId );
-                                        if ( foundIndex !== -1 ) {
+                                        var foundIndex = -1;
+                                        if( resultsId[item.itemId]) {
                                             $( "li#" + entryLookup[item.itemId]).addClass( "old" );
-                                        }
+                                            foundIndex = 1;
+                                            results[entryLookup[item.itemId]] = item;
+                                        } else {
+                                            // console.log( "Found new id " + item.itemId );
+                                            resultsId[item.itemId] = true;
                                         entryLookup[item.itemId] = item.id;
                                         results[item.id] = item;
-                                        resultsId.push( item.itemId );
+                                        }
                                         displayItem( item, stash, foundIndex, filter.clipboard, filter.id, function() {
                                             callbackItem();
                                         });
@@ -1669,9 +1691,11 @@ $( document).ready( function() {
                             async.each( Object.keys( itemInStash[stash.id].previousItems ), function( previousItem, cbPreviousItem ) {
                                 if ( !itemInStash[stash.id].items[previousItem]) {
                                     console.log( previousItem + " was sold" );
+                                    sold++;
                                     $( "li#" + itemInStash[stash.id].previousItems[previousItem] ).addClass( "sold" );
                                     delete results[itemInStash[stash.id].previousItems[previousItem]];
                                     delete prices[previousItem];
+                                    delete resultsId[previousItem];
                                 }
                                 cbPreviousItem();
                             }, function( err ) {
@@ -1697,6 +1721,13 @@ $( document).ready( function() {
         Chunk.download( chunkID, parseData );
 
         var done = function( data ) {
+
+            console.log( "resultsId: " + Object.keys( resultsId ).length );
+            console.log( "results: " + Object.keys( results ).length );
+            console.log( "prices: " + Object.keys( prices ).length );
+            console.log( "entryLookup: " + Object.keys( entryLookup ).length );
+            console.log( "sold: " + sold );
+
             // removeEntriesAboveLimit( 100 )
             filterResultListAction();
             var nextID = data.next_change_id;
@@ -1798,7 +1829,6 @@ $( document).ready( function() {
     // Clean up old items
     setInterval( function() {
         $( ".old" ).each( function() {
-            var attr = $( this ).attr( "id" );
             $( this ).slideUp().remove();
         });
         $( "#results-amount" ).text( $( ".entry:visible" ).length );
