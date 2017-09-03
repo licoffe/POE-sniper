@@ -318,32 +318,8 @@ padding: 0!important;">
                 </div>
             </form>
         </div>
-        <!--<div id="preference-pane" class="grey darken-4 z-depth-5">
-            <form>
-                <div class="row preference-title">
-                    Settings
-                </div>
-                <div class="row">
-                    <div class="col s2">
-                            <select id="sound">
-                                <option value="sound1">Sound1</option>
-                                <option value="sound2" selected>Sound 2</option>
-                                <option value="sound3">Sound 3</option>
-                                <option value="sound4">Sound 4</option>
-                            </select>
-                    </div>
-                    <div class="col s2">
-                        <p class="range-field">
-                            <span class="volume-label">Volume</span>
-                            <input type="range" id="audio-volume" min="0" max="100" />
-                        </p>
-                    </div>
-                    <div class="col s2">
-                        <a class="waves-effect waves-light btn blue-grey right" id="play-sound" style="font-size: 1.3em!important; top: -8px!important;">Test sound</a>
-                    </div>
-                </div>
-            </form>
-        </div>-->
+        
+        </div>
         <div id="poe-trade-output"></div>
         <div id="poe-trade-search-output"></div>
         <div id="poe-trade-link"></div>
@@ -378,7 +354,17 @@ padding: 0!important;">
             <div class="modal-content">
                 <h5>Configuration</h5><br>
                 <div class="row">
-                    <span class="section">Sound</span>
+                    <span class="section">Notifications</span>
+                </div>
+                <!-- Audio notifications -->
+                <div class="row">
+                    <div class="switch col s7">
+                        <label>
+                            Use audio notifications
+                            <input type="checkbox" id="use-audio-notifications">
+                            <span class="lever"></span>
+                        </label>
+                    </div>    
                 </div>
                 <div class="row">
                     <div class="input-field col s3">
@@ -394,6 +380,16 @@ padding: 0!important;">
                     <div class="input-field col s3">
                         <a href="#!" id="play-sound" class="waves-effect waves-light btn z-depth-2" style="font-size: 1.2em!important; position: relative; top: -10px!important; "><i class="material-icons" style="position: relative; top: 0">play_arrow</i><span style="position: relative; top: -5px; left: 5px">Play</span></a>
                     </div>
+                </div>
+                <!-- Visual notifications -->
+                <div class="row">
+                    <div class="switch col s7">
+                        <label>
+                            Use visual notifications
+                            <input type="checkbox" id="use-visual-notifications">
+                            <span class="lever"></span>
+                        </label>
+                    </div>    
                 </div>
                 <hr><br>
                 <div class="row">

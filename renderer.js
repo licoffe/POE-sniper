@@ -45,10 +45,12 @@ notifier.on( "click", function () {
     // displayingNotification = false;
     Misc.formatMessage( lastItem, function( str ) {
         ncp.copy( str, function() {
-            notifier.notify({
-                'title': 'Message copied to clipboard',
-                'message': str,
-            });
+            if ( config.visualNotification ) {
+                notifier.notify({
+                    'title': 'Message copied to clipboard',
+                    'message': str,
+                });
+            }
         });
     });
 });
@@ -1303,10 +1305,12 @@ $( document).ready( function() {
             Misc.formatMessage( data, function( str ) {
                 ncp.copy( str, function() {
                     console.log( data );
-                    notifier.notify({
-                        'title': 'Message copied to clipboard',
-                        'message': str,
-                    });
+                    if ( config.visualNotification ) {
+                        notifier.notify({
+                            'title': 'Message copied to clipboard',
+                            'message': str,
+                        });
+                    }
                 });
             });
         });
@@ -1386,24 +1390,30 @@ $( document).ready( function() {
      */
     var notifyNewItem = function( item ) {
         displayingNotification = true;
-        var audio              = new Audio( __dirname + '/' + config.sound );
-        audio.volume           = config.volume;
-        audio.play();
-        var displayName        = item.name;
-        if ( item.typeLine !== item.name && ( item.frameType > 0 && item.frameType < 4 )) {
-            displayName += " (" + item.typeLine + ")";
+        // If audio notifications are activated
+        if ( config.audioNotification ) {
+            var audio              = new Audio( __dirname + '/' + config.sound );
+            audio.volume           = config.volume;
+            audio.play();
         }
-
-        notifier.notify({
-            title:   displayName,
-            message: "Price: " + item.displayPrice,
-            wait:    true
-        }, function ( err ) {
-            if ( err ) {
-                // console.log( err );
+        // If visual notifications are activated
+        if ( config.visualNotification ) {
+            var displayName        = item.name;
+            if ( item.typeLine !== item.name && ( item.frameType > 0 && item.frameType < 4 )) {
+                displayName += " (" + item.typeLine + ")";
             }
-            displayingNotification = false;
-        });
+
+            notifier.notify({
+                title:   displayName,
+                message: "Price: " + item.displayPrice,
+                wait:    true
+            }, function ( err ) {
+                if ( err ) {
+                    // console.log( err );
+                }
+                displayingNotification = false;
+            });
+        }
 
         // If copy to clipboard enabled, do it
         if ( item.clipboard || $( "#global-clipboard" ).prop( "checked" )) {
@@ -1497,8 +1507,7 @@ $( document).ready( function() {
                 $( "#" + item.id + " .corrupted" ).hide();
             }
             $( "#" + item.id + " .properties-container" ).html( item.properties );
-            // Send notification
-            // notifier.notify('Message');
+
             item.displayPrice = item.originalPrice;
             if ( item.displayPrice === "Negotiate price" ) {
                 item.displayPrice = "barter";
@@ -1572,8 +1581,8 @@ $( document).ready( function() {
                                     results[entryLookup[item.itemId]] = item;
                                 } else {
                                     resultsId[item.itemId] = true;
-                                entryLookup[item.itemId] = item.id;
-                                results[item.id] = item;
+                                    entryLookup[item.itemId] = item.id;
+                                    results[item.id] = item;
                                 }
                                 displayItem( item, stash, foundIndex, false, "", function() {
                                     callbackItem();
@@ -2106,11 +2115,39 @@ $( document).ready( function() {
         left:          "9",
         top:           "2",
     };
+
+    // Toggle sub audio options when toggling audio switch
+    $( "#use-audio-notifications" ).click( function() {
+        toggleAudioNotification();
+    });
+
+    var toggleAudioNotification = function() {
+        if ( !$( "#use-audio-notifications" ).prop( "checked" )) {
+            $( "#sound-volume" ).prop( "disabled", true );
+            $( "#sound-effect" ).prop( "disabled", true );
+            $( "#play-sound" ).prop( "disabled", true );
+            $( "label[for=sound-volume]" ).prop( "disabled", true );
+            $( "#play-sound" ).addClass( "disabled" );
+            $( "#sound-effect" ).material_select();
+        } else {
+            $( "#sound-volume" ).prop( "disabled", false );
+            $( "#sound-effect" ).prop( "disabled", false );
+            $( "#play-sound" ).prop( "disabled", false );
+            $( "label[for=sound-volume]" ).prop( "disabled", true );
+            $( "#play-sound" ).removeClass( "disabled" );
+            $( "#sound-effect" ).material_select();
+        }
+    };
+    
     var fillInSettings = function() {
-        // Setup sound options
+        // Setup audio notifications options
+        $( "#use-audio-notifications" ).prop( "checked", config.audioNotification );
+        toggleAudioNotification();
         $( "#sound-effect" ).val( config.sound.replace( ".mp3", "" ));
         $( "#sound-effect" ).material_select();
         $( "#sound-volume" ).val( config.volume * 100 );
+        // Setup visual notifications options
+        $( "#use-visual-notifications" ).prop( "checked", config.visualNotification );
         // Setup whisper options
         $( "#whisper-message" ).val( config.message );
         $( "#barter-message" ).val( config.barter );
@@ -2144,8 +2181,12 @@ $( document).ready( function() {
     fillInSettings();
 
     var applySettings = function() {
+        // Setup audio notifications
+        config.audioNotification = $( "#use-audio-notifications" ).prop( "checked" );
         config.sound   = $( "#sound-effect" ).val() + ".mp3";
         config.volume  = $( "#sound-volume" ).val() / 100;
+        // Setup visual notifications
+        config.visualNotification = $( "#use-visual-notifications" ).prop( "checked" );
         // Setup whisper options
         config.message = $( "#whisper-message" ).val();
         config.barter  = $( "#barter-message" ).val();

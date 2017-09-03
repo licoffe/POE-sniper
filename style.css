@@ -623,6 +623,10 @@ label.active {
     /*text-shadow: 0 0 5px blue;*/
 }
 
+#settings-modal label {
+    color: white;
+}
+
 .dps-group label.active {
     transform: translateX(30px)!important;
 }
@@ -790,7 +794,7 @@ input:focus {
     border: 1px solid rgba(0,200,200,0.5)!important;
 }
 
-#cancel-filter.disabled, #add-filter.disabled, #import-poe-trade.disabled, #cancel-affix.disabled, #add-affix.disabled {
+#cancel-filter.disabled, #add-filter.disabled, #import-poe-trade.disabled, #cancel-affix.disabled, #add-affix.disabled, #play-sound.disabled {
     background-color: #2f2f2f !important;
     color: #5f5f5f !important;
 }
@@ -826,4 +830,12 @@ input:focus {
 
 #poe-trade-link {
     display: none;
+}
+
+input:disabled {
+    color: grey!important;
+}
+
+label:disabled {
+    color: grey!important;
 }
