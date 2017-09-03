@@ -147,6 +147,11 @@ ul .row {
     position: absolute!important;
     top: 40px;
     width: 95%!important;
+    z-index: 1000!important;
+}
+
+.dropdown-content {
+    z-index: 1000!important;
 }
 
 .dropdown-content li > a, .dropdown-content li > span {
