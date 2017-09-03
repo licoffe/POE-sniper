@@ -832,6 +832,11 @@ input:focus {
     display: none;
 }
 
+.performance-info {
+    padding-top: 15px;
+    display: none;
+}
+
 input:disabled {
     color: grey!important;
 }

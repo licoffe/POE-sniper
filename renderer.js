@@ -199,8 +199,6 @@ $( document).ready( function() {
     };
 
     var resetFilters = function() {
-        // $( "#league" ).val( config.leagues[config.defaultLeagueIndex]);
-        // $( "#league").material_select();
         $( "#item" ).val( "" );
         $( "#price" ).val( "" );
         $( "#currency" ).val( "chaos" );
@@ -573,9 +571,17 @@ $( document).ready( function() {
         bindRemoveFilter( id );
     };
 
+    var displayTimes = function() {
+        if ( config.showFilterProcessingTime ) {
+            $( ".performance-info" ).show();
+        } else {
+            $( ".performance-info" ).show();
+        }
+    }
+
     var displaySearchEngines = function() {
         if ( config.usePoeTradeStats ) {
-            poeTradeStats( filters );
+            poeTradeStats( filters.filterList );
             $( ".item-stats" ).show();
         } else {
             $( ".item-stats" ).hide();
@@ -631,7 +637,6 @@ $( document).ready( function() {
 
     // When clicking on the trash sign, remove tagged items
     var bindRemoveTaggedItems = function( id ) {
-        console.log( "Binding to id " + id );
         clearTaggedItems( id );
     };
 
@@ -758,6 +763,7 @@ $( document).ready( function() {
                 });
                 // Hide or show elements
                 displaySearchEngines();
+                displayTimes();
             });
         });
     };
@@ -834,7 +840,7 @@ $( document).ready( function() {
         bindFilterEdit( filter.id );
         bindRemoveTaggedItems( filter.id );
         updateFilterAmount( filter.id );
-        poeTradeStats( filters );
+        poeTradeStats([filter]);
         $( ".search-engines a" ).unbind();
         $( ".search-engines a" ).click( function( event ) {
             event.preventDefault();
@@ -869,6 +875,7 @@ $( document).ready( function() {
         }
         addPoeTradeForm( filter );
         displaySearchEngines();
+        displayTimes();
         filterFilterListAction();
     };
 
@@ -1114,7 +1121,7 @@ $( document).ready( function() {
         var reg = /\(\s*([^ ]*)\s*\-\s*([^ ]*)\s*\)/;
         console.log( "Refreshing poe.trade stats" );
         Misc.publishStatusMessage( "Fetching item stats from poe.trade" );
-        async.each( filters.filterList, function( filter, cbFilter ) {
+        async.each( filters, function( filter, cbFilter ) {
             var str = "";
             if ( filter.links === "0" ) {
                 filter.link_min = "0";
@@ -1633,6 +1640,7 @@ $( document).ready( function() {
                         // For each stashes in the new data file
                         var totalItems = 0;
                         console.time( "Checking filter: " + filter.id );
+                        var beginFilter = Date.now();
                         async.each( data.stashes, function( stash, callbackStash ) {
                             // totalItems += stash.items.length;
                             async.each( stash.items, function( item, callbackItem ) {
@@ -1679,13 +1687,16 @@ $( document).ready( function() {
                                 console.log( err );
                             }
                             console.timeEnd( "Checking filter: " + filter.id );
+                            if ( config.showFilterProcessingTime ) {
+                                var time = Date.now() - beginFilter;
+                                $( "#filter-detail-" + filter.id + " .performance-info-time" ).text( time + " ms" );
+                                if ( time > 100 ) {
+                                    $( "#filter-detail-" + filter.id + " .performance-info-time" ).addClass( "red-text" );
+                                } else {
+                                    $( "#filter-detail-" + filter.id + " .performance-info-time" ).removeClass( "red-text" );
+                                }
+                            }
                             callbackFilter();
-                            // console.log( "Searched among " + totalItems + " items" );
-                            // var end = Date.now();
-                            // var filterStats = filter.id + "," + (end - begin) + "," + totalItems + "\n";
-                            // writeFilterStats( filterStats );
-                            // console.timeEnd( "Searching in " + nextChunkId + " for " + filter.item );
-                            
                         });
                     }
                 }, function( err ) {
@@ -1702,6 +1713,7 @@ $( document).ready( function() {
                                     console.log( previousItem + " was sold" );
                                     sold++;
                                     $( "li#" + itemInStash[stash.id].previousItems[previousItem] ).addClass( "sold" );
+                                    console.log( "li#" + itemInStash[stash.id].previousItems[previousItem] );
                                     delete results[itemInStash[stash.id].previousItems[previousItem]];
                                     delete prices[previousItem];
                                     delete resultsId[previousItem];
@@ -2158,10 +2170,7 @@ $( document).ready( function() {
         formatMessage( sampleItem, config.barter, function( str ) {
             $( "#barter-preview" ).text( str );
         });
-        // Setup beta options
-        // if ( config.useBeta ) {
-        //     $( "#use-beta" ).prop( "checked", true );
-        // }
+        // Setup search engines
         if ( config.usePoeTradeStats ) {
             $( "#use-poeTradeStats" ).prop( "checked", true );
         }
@@ -2177,6 +2186,10 @@ $( document).ready( function() {
         if ( config.showPoeWikiLink ) {
             $( "#show-poe-wiki-search-link" ).prop( "checked", true );
         }
+        // Setup debug
+        if ( config.showFilterProcessingTime ) {
+            $( "#show-filter-processing-time" ).prop( "checked", true );
+        }
     };
     fillInSettings();
 
@@ -2190,13 +2203,15 @@ $( document).ready( function() {
         // Setup whisper options
         config.message = $( "#whisper-message" ).val();
         config.barter  = $( "#barter-message" ).val();
-        // Setup beta options
-        // config.useBeta    = $( "#use-beta" ).prop( "checked" );
+        // Setup search engines
         config.usePoeTradeStats = $( "#use-poeTradeStats" ).prop( "checked" );
         config.showPoeTradeLink = $( "#show-poe-trade-search-link" ).prop( "checked" );
         config.showPoeNinjaLink = $( "#show-poe-ninja-search-link" ).prop( "checked" );
         config.showPoeRatesLink = $( "#show-poe-rates-search-link" ).prop( "checked" );
         config.showPoeWikiLink  = $( "#show-poe-wiki-search-link" ).prop( "checked" );
+        // Setup debug
+        config.showFilterProcessingTime = $( "#show-filter-processing-time" ).prop( "checked" );
+        displayTimes();
         // save config
         saveConfig();
         // Hide or show elements
