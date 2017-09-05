@@ -60,7 +60,7 @@ class Item {
      * @params Item to check against, currency rates, itemRates, callback
      * @return item through callback
      */
-    static checkUnderpriced( item, currencyRates, itemRates, value, metric, league, callback ) {
+    static checkUnderpriced( item, minPrice, maxPrice, currencyRates, itemRates, value, metric, league, callback ) {
         var self = this;
 
         // Clean up the item name and typeLine
@@ -84,7 +84,8 @@ class Item {
         }
         
         if ( prices.originalPrice !== "Negotiate price" && itemLeague === league &&
-             name !== "" && prices.convertedPriceChaos > 5 && !item.corrupted ) {
+             name !== "" && prices.convertedPriceChaos > minPrice && 
+             prices.convertedPriceChaos < maxPrice && !item.corrupted ) {
             Item.getLinksAmountAndColor( item, function( res ) {
                 var ref = "";
                 if ( item.frameType === 3 || item.frameType === 9 ) {

@@ -20,7 +20,7 @@
          <div class="row blue-grey darken-4 underpriced-form" style="padding-top: 20px; ">
             <form>
                 <div class="input-field col s2">
-                    <input type="text" id="underpriced-percentage">
+                    <input type="number" id="underpriced-percentage" value="70">
                     <label>%</label>
                 </div>
                 <span class="col s1 input-field" style="font-size: 1.3em; top: 3px; left: -150px"> of </span>
@@ -37,7 +37,17 @@
                     <option value="Hardcore">Hardcore</option>
                     <option id="current-league-hardcore-option-underpriced" value="Hardcore Harbinger">Harbinger Hardcore</option>
                 </select>
-                <span class="col s1 input-field" style="font-size: 1.3em; top: 3px; left: -250px"> league</span>
+                <span class="col s2 input-field" style="font-size: 1.3em; top: 3px; left: -250px"> league ranging from </span>
+                <div class="input-field col s1" style="left: -300px">
+                        <input type="number" id="underpriced-min-price">
+                        <label>min</label>
+                    </div>
+                <span class="col input-field" style="font-size: 1.3em; top: 3px; left: -300px"> to </span>
+                <div class="input-field col" style="left: -300px">
+                        <input type="number" id="underpriced-max-price">
+                        <label>max</label>
+                    </div>
+                <span class="input-field" style="font-size: 1.3em; top: 3px; left: -350px"> price </span>
                 <!-- <a class="waves-effect waves-light btn col s1 z-depth-2 green" style="top:-10px!important" id="underpriced-apply"><i class="material-icons" style="top: 0">thumb_up</i><span style="top: -5px;position: relative;left: 10px;font-size: 1.4em">Apply</span></a> -->
             </form>
         </div> 

@@ -4,11 +4,11 @@
             <input type="checkbox" class="filled-in cb" id="enable-filter-{{id}}" {{checked}}>
             <label for="enable-filter-{{id}}" style="font-size: 1em!important; left: 20%!important; top: -5px!important"></label>
         </div>
-        <div class="col s11 filter-detail" id="filter-detail-{{id}}">
+        <div class="col s10 filter-detail valign-wrapper" id="filter-detail-{{id}}">
             <span class="title">
                 <span class="item">{{{title}}}</span> in {{league}} league <= <span class="currency">{{displayPrice}}</span><span class="buyout">&nbsp;(include barter offers)</span><span class="clipboard">&nbsp;(clipboard)</span>
                 <div class="row">
-                    <div class="item-stats col s10">
+                    <div class="item-stats col s12">
                         updating...
                     </div>
                 </div>
@@ -26,8 +26,10 @@
                     </div>
                 </div>
             </span>
-            <a href="#!" class="secondary-content"><i class="material-icons red-text remove-filter" style="top: -20px" id="{{id}}">remove</i></a>
-            <a href="#!" class="secondary-content"><i class="material-icons red-text clear-filter" style="top: -20px" id="{{id}}-clear">delete_sweep</i></a>
+        </div>
+        <div class="col s1">
+            <a href="#!" class="secondary-content right"><i class="material-icons red-text remove-filter" id="{{id}}">remove</i></a>
+            <a href="#!" class="secondary-content right"><i class="material-icons red-text clear-filter" id="{{id}}-clear">delete_sweep</i></a>
         </div>
     </div>
 </li>

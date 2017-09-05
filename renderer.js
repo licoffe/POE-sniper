@@ -1580,6 +1580,11 @@ $( document).ready( function() {
             // Store last chunk ID
             console.time( "Total search time" );
             if ( config.checkUnderpriced ) {
+                var minPrice = $( "#underpriced-min-price" ).val();
+                var maxPrice = $( "#underpriced-max-price" ).val();
+                // If min or max price are not set, min = 0 and max = 100000
+                minPrice = minPrice === "" ? 0 : minPrice;
+                maxPrice = maxPrice === "" ? 100000 : maxPrice;
                 async.each( data.stashes, function( stash, callbackStash ) {
                     async.each( stash.items, function( item, callbackItem ) {
                         item.stashTab          = stash.stash;
@@ -1589,7 +1594,7 @@ $( document).ready( function() {
                         var underpricedMetric     = $( "#underpriced-metric" ).val();
                         var underpricedLeague     = $( "#underpriced-league" ).val();
                         Item.checkUnderpriced( 
-                            item, currencyRates, itemRates, underpricedPercentage, 
+                            item, minPrice, maxPrice, currencyRates, itemRates, underpricedPercentage, 
                             underpricedMetric, underpricedLeague, function( item ) {
                             if ( item ) {
                                 if ( !itemInStash[stash.id]) {
