@@ -220,11 +220,11 @@ img.right.circle {
 
 #affixes-list {
     position: absolute;
-    top: 100px;
+    top: 80px;
     font-size: 1.3em;
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: 110px;
+    max-height: 130px;
     width: 100%;
 }
 
@@ -885,7 +885,7 @@ label:disabled {
 .badge {
     float: none!important;
     margin-left: 0!important;
-    /* font-weight: 500!important; */
+    font-weight: 500!important;
     font-size: 0.8rem!important;
     color: #fff!important;
     background-color: #26a69a;
@@ -903,4 +903,8 @@ label:disabled {
 
 .bad {
     color: rgb(190,0,0);
+}
+
+.affix-filter-list {
+    margin-top: 5px;
 }

@@ -260,6 +260,36 @@ $( document).ready( function() {
         }
     };
 
+    var renderAffixes = function( filter, cb ) {
+        // Format mods
+        async.each( filter.affixesDis, function( affix, cbAffix ) {
+            var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
+            var match      = extractReg.exec( affix );
+            var matched;
+            if ( !match ) {
+                matched = "Explicit";
+            } else {
+                matched = match[1];
+            }
+            var obj        = {
+                typeLC: matched.toLowerCase(),
+                type:   matched,
+                title:  affix.replace( /^\([a-zA-Z ]+\)\s*/, "" )
+            };
+            var generated = "";
+            mu.compileAndRender( "affix-filter.html", obj )
+            .on( "data", function ( data ) {
+                generated += data.toString();
+            })
+            .on( "end", function () {
+                $( "#filter-detail-" + filter.id + " .affix-filter-list" ).append( generated );
+                cbAffix();
+            });
+        }, function() {
+            cb();
+        });
+    };
+
     // When adding a new filter
     var addFilterAction = function() {
         // console.log( "Adding filter" );
@@ -393,9 +423,9 @@ $( document).ready( function() {
             if ( formData.experience !== "" ) {
                 title += "<span class=\"filter-property\">Experience>=" + formData.experience + "%</span>";
             }
-            if ( formData.affixesDis.length > 0 ) {
-                title += "<span class=\"filter-affix\">" + formData.affixesDis.join( ", " ) + "</span>";
-            }
+            // if ( formData.affixesDis.length > 0 ) {
+            //     title += "<span class=\"filter-affix\">" + formData.affixesDis.join( ", " ) + "</span>";
+            // }
 
             var filterId = editingFilter !== "" ? editingFilter : Misc.guidGenerator();
             formData.id = filterId;
@@ -493,6 +523,13 @@ $( document).ready( function() {
                         } else {
                             $( this ).html( "<span class='badge red' data-badge-caption='Unknown'></span>" + text );
                         }
+                        // When selecting an item in the completion menu
+                        $( this ).click( function () {
+                            var affixType = $( this ).find( ".badge" ).data( "badge-caption" );
+                            var affixName = $( this ).text();
+                            console.log( "(" + affixType + ") " + affixName );
+                            setTimeout( function() { $( "#affixes" ).val( "(" + affixType + ") " + affixName ); }, 1 );
+                        });
                     });
                 }
             });
@@ -727,22 +764,25 @@ $( document).ready( function() {
             async.each( filters.filterList, function( filter, cbSorted ) {
                 filter.render( function( generated ) {
                     $( "#filters ul" ).append( generated );
-                    // Color item name depending on rarity
-                    colorRarity( filter );
-                    if ( filter.buyout ) {
-                        $( "#filter-detail-" + filter.id + " .buyout" ).hide();
-                    }
-                    if ( !filter.clipboard ) {
-                        $( "#filter-detail-" + filter.id + " .clipboard" ).hide();
-                    }
-                    colorFilter( filter );
-                    bindFilterToggleState( filter.id );
-                    bindFilterEdit( filter.id );
-                    updateFilterAmount( filter.id );
-                    cbSorted();
-                    addPoeTradeForm( filter );
-                    bindRemoveTaggedItems( filter.id );
-                    // console.log( filter );
+                    // Format mods
+                    renderAffixes( filter, function() {
+                        // Color item name depending on rarity
+                        colorRarity( filter );
+                        if ( filter.buyout ) {
+                            $( "#filter-detail-" + filter.id + " .buyout" ).hide();
+                        }
+                        if ( !filter.clipboard ) {
+                            $( "#filter-detail-" + filter.id + " .clipboard" ).hide();
+                        }
+                        colorFilter( filter );
+                        bindFilterToggleState( filter.id );
+                        bindFilterEdit( filter.id );
+                        updateFilterAmount( filter.id );
+                        cbSorted();
+                        addPoeTradeForm( filter );
+                        bindRemoveTaggedItems( filter.id );
+                        // console.log( filter );
+                    });
                 });
             }, function( err ) {
                 if ( err ) {
@@ -843,6 +883,7 @@ $( document).ready( function() {
             $( "#cancel-filter" ).removeClass( "red" );
             $( "#add-filter" ).removeClass( "green" );
         }
+        renderAffixes( filter, function() {});
         // Color item name depending on rarity
         colorRarity( filter );
         // console.log( filter.buyout );
@@ -1073,7 +1114,6 @@ $( document).ready( function() {
                     $( "#add-affix" ).addClass( "disabled" );
                     $( "#cancel-affix" ).addClass( "disabled" );
                     $( "#add-affix" ).text( "Add" );
-                    // For each affix
                     async.each( filter.affixesDis, function( affix, cbAffix ) {
                         // console.log( affix );
                         var generated = "";
@@ -1087,19 +1127,30 @@ $( document).ready( function() {
                             match = reg.exec( affix );
                         }
                         if ( !matches[0]) {
-                            matches[0] = "";
+                            matches[0] = "…";
                         }
                         if ( !matches[1]) {
-                            matches[1] = "";
+                            matches[1] = "…";
+                        }
+                        var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
+                        var match      = extractReg.exec( affix );
+                        var matched;
+                        if ( !match ) {
+                            matched = "Explicit";
+                        } else {
+                            matched = match[1];
                         }
                         var title = affix.replace( regPar, "#" );
-                        // console.log( "Modified mod: " + title + " " + matches[0] + ", " + matches[1] );
+                        
+                        console.log( affix.replace( /^\([a-zA-Z ]+\)\s*/, "" ) );
                         var obj = {
-                            title: title,
+                            title: affix,
                             min:   matches[0],
                             max:   matches[1],
-                            affix: affix,
-                            id:    Misc.guidGenerator()
+                            affix: affix.replace( /^\([a-zA-Z ]+\)\s*/, "<span class='badge affix-" + matched.toLowerCase() +  "' data-badge-caption='" + matched + "'></span>" ),
+                            id:    Misc.guidGenerator(),
+                            typeLC: matched.toLowerCase(),
+                            type:   matched,
                         };
                         mu.compileAndRender( "affix.html", obj )
                         .on( "data", function ( data ) {
@@ -1358,7 +1409,9 @@ $( document).ready( function() {
         var affix = $( "#affixes" ).val();
         if ( affix !== "" ) {
             var min = $( "#affix-min" ).val();
+            min = min === "" ? "…" : min;
             var max = $( "#affix-max" ).val();
+            max = max === "" ? "…" : max;
             var count = ( affix.match( /#/g ) || []).length;
             if ( count > 1 ) {
                 affix = affix.replace( "#", min );
@@ -1391,6 +1444,11 @@ $( document).ready( function() {
                 } else {
                     $( "#affixes-list" ).append( generated );
                 }
+                var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
+                var match      = extractReg.exec( obj.affix );
+                $( "#" + obj.id ).text( obj.affix.replace( /^\([a-zA-Z ]+\)\s*/, "" ));
+                $( "#" + obj.id ).prepend( "<span class='badge affix-" + match[1].toLowerCase() + "' data-badge-caption='" + match[1] + "'></span>" );
+
                 $( "#" + obj.id ).data( "data-item", obj );
                 // When clicking on remove affix
                 $( ".remove-affix" ).click( function() {
@@ -2370,7 +2428,11 @@ $( document).ready( function() {
                 currentTitle = $( "#affixes" ).val();
                 currentMin   = $( "#affix-min" ).val();
                 currentMax   = $( "#affix-max" ).val();
-                var affix = $( this ).text();
+                var affix = $( this ).text().trim();
+                var type  = $( this ).parent().find( ".badge" ).data( "badge-caption" );
+                // affix     = "(" + type + ") " + affix;
+                console.log( affix );
+
                 // Extract title, min and max
                 var reg = /([0-9\.]+)/g;
                 var regPar = /\([^()]+\)|\d+/g;
@@ -2387,6 +2449,7 @@ $( document).ready( function() {
                     matches[1] = "";
                 }
                 var title = affix.replace( regPar, "#" );
+                title     = "(" + type + ") " + title;
                 // Replace affix form with select affix values
                 $( "#affixes" ).val( title.trim());
                 $( "#affixes" ).addClass( "affix-preview" );
@@ -2417,6 +2480,7 @@ $( document).ready( function() {
             loadedAffix = true;
             editingAffix = id;
             var affix = $( this ).text();
+            var type  = $( this ).parent().find( ".badge" ).data( "badge-caption" );
             // Extract title, min and max
             var reg = /([0-9\.]+)/g;
             var regPar = /\([^()]+\)|\d+/g;
@@ -2432,7 +2496,8 @@ $( document).ready( function() {
             if ( !matches[1]) {
                 matches[1] = "";
             }
-            var title = affix.replace( regPar, "#" );
+            var title = affix.replace( regPar, "#" ).trim();
+            title     = "(" + type + ") " + title;
             // Replace affix form with select affix values
             $( "#affixes" ).val( title.trim());
             $( "#affix-min" ).val( matches[0]);
