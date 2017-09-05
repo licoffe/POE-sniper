@@ -115,6 +115,8 @@ class Item {
                 if ( itemRates[itemLeague][ref] && 
                     ( item.frameType === 3 || item.frameType === 8 || item.frameType === 6 || item.frameType === 9 || item.frameType === 5 ) && 
                     prices.convertedPriceChaos <= metricValueChaos * value / 100 ) {
+                    item.confidence = itemRates[itemLeague][ref].confidence;
+
                     // console.log( item.name + " " + res.linkAmount + "L for " + prices.convertedPriceChaos + " instead of " + (itemRates[itemLeague][ref]) + " in " + itemLeague );
                     Item.parseProperties( item, function( newItem, parsedProperties ) {
                         // console.log( newItem );
@@ -335,7 +337,8 @@ class Item {
                 top:           item.y,
                 typeLine:      item.typeLine,
                 sockets:       item.sockets,
-                type:          itemType
+                type:          itemType,
+                confidence:    item.confidence
             });
         });
     }
@@ -1179,14 +1182,19 @@ class Item {
             }, function( data ) {
                 var parsed = $.parseJSON( data );
                 async.each( parsed.rates, function( rate, cbRate ) {
-                    rates[league][rate.name + "_" + rate.links + "_" + rate.frameType]        = {};
-                    rates[league][rate.name + "_" + rate.links + "_" + rate.frameType].min    = parseFloat(rate.min);
-                    rates[league][rate.name + "_" + rate.links + "_" + rate.frameType].mode   = parseFloat(rate.mode);
-                    rates[league][rate.name + "_" + rate.links + "_" + rate.frameType].median = parseFloat(rate.median);
-                    // rates[league][rate.name + "_" + rate.links + "_" + rate.quality + "_" + rate.level + "_" + rate.corrupted] = rate.median;
-                    // var value = parseFloat(rate.mode) < parseFloat(rate.median) ? parseFloat(rate.mode) : parseFloat(rate.median);
-                    // console.log( rate.name + "(" + league + ") " + rate.mode + " < " + rate.median + ": " + ( rate.mode < rate.median ) + " -> " + value );
-                    // rates[league][rate.name + "_" + rate.links + "_" + rate.frameType] = value;
+                    var ref = rate.name + "_" + rate.links + "_" + rate.frameType;
+                    var confidence = "good";
+                    if ( rate.amount < 100 && rate.amount >= 50 ) {
+                        confidence = "medium";
+                    } else if ( rate.amount < 50 ) {
+                        confidence = "bad";
+                    }
+                    rates[league][ref]        = {
+                        "min"       : parseFloat(rate.min),
+                        "mode"      : parseFloat(rate.mode),
+                        "median"    : parseFloat(rate.median),
+                        "confidence": confidence
+                    };
                     cbRate();
                 }, function() {
                     cbLeague();

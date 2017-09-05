@@ -599,7 +599,7 @@ $( document).ready( function() {
         } else {
             $( ".performance-info" ).hide();
         }
-    }
+    };
 
     var displaySearchEngines = function() {
         if ( config.showPoeTradeLink ) {
@@ -1476,15 +1476,16 @@ $( document).ready( function() {
     var displayItem = function( item, stash, foundIndex, clipboard, filterId, callback ) {
         var generated = "";
         var displayItem = JSON.parse( JSON.stringify( item ));
-        if ( displayItem.fullPrice ) {
-            displayItem.originalPrice += " (" + displayItem.fullPrice + " chaos)";
-        }
         mu.compileAndRender( "entry.html", displayItem )
         .on( "data", function ( data ) {
             generated += data.toString();
         })
         .on( "end", function () {
             $( "#results ul" ).prepend( generated );
+            if ( displayItem.fullPrice ) {
+                displayItem.originalPrice += "<span class=\"" + displayItem.confidence + "\"> (" + displayItem.fullPrice + " chaos)</span>";
+                $( "#" + item.id + " .currency" ).html( displayItem.originalPrice );
+            }
             updateResultsAmount();
             item.accountName = stash.lastCharacterName;
             item.name = item.item;

@@ -892,3 +892,15 @@ label:disabled {
     border-radius: 2px;
     margin-right: 10px;
 }
+
+.good {
+    color: green;
+}
+
+.medium {
+    color: rgb(180,180,0);
+}
+
+.bad {
+    color: rgb(190,0,0);
+}
