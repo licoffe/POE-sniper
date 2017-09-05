@@ -391,6 +391,19 @@ padding: 0!important;">
                         </label>
                     </div>    
                 </div>
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input type="number" id="notification-duration" max="10" min="1" value="0">
+                        <label for="notification-duration">Notification duration</label>
+                    </div>
+                    <div class="switch col s7">
+                        <label>
+                            <input type="checkbox" id="notify-clipboard-copy">
+                            <span class="lever"></span>
+                            Notify clipboard copy
+                        </label>
+                    </div>    
+                </div>
                 <hr><br>
                 <div class="row">
                     <span class="section">Message</span>
@@ -425,6 +438,14 @@ padding: 0!important;">
                     </div>
                 </div>
                 <hr><br>
+                <div class="row">
+                        <span class="section">Performances</span>
+                    </div>
+                    <div class="input-field col s3">
+                        <input type="number" id="entry-amount-limit" max="1000" min="100" value="0">
+                        <label for="entry-amount-limit">Max. amount of displayed results (100 - 1000)</label>
+                    </div>
+                    <hr><br>
                 <div class="row">
                     <span class="section">POE Trade stats</span>
                 </div>

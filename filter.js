@@ -216,6 +216,7 @@ class Filter {
         if ( config.useBeta ) {
             league = "beta-" + league;
         }
+        var itemLC = this.item.toLowerCase();
 
         // If: 
         // ( no names filter OR names are the same OR the typeLines are the same ) AND
@@ -229,14 +230,14 @@ class Filter {
         // ( no rarity filter OR rarities are the same ) AND
         // ( no item type filter OR item types are the same )
         if (( this.league  === "any" || item.league === this.league ) &&
-            ( this.item    === ""    || itemName.toLowerCase() === this.item.toLowerCase() || 
-              typeLine.toLowerCase() === this.item.toLowerCase() ) &&
+            ( this.item    === ""    || itemName.toLowerCase() === itemLC || 
+              typeLine.toLowerCase() === itemLC ) &&
             ( this.itemType === "any" || this.itemType === "" || itemTypes[this.itemType].types.indexOf( item.typeLine ) !== -1 ) &&
             ( this.socketsTotal === ""    || this.socketsTotal <= item.sockets.length ) && 
-            (( this.corrupted  == 'true' ) === item.corrupted  || this.corrupted  === "any" ) &&
-            (( this.enchanted  == 'true' ) === item.enchanted  || this.enchanted  === "any" ) &&
-            (( this.crafted    == 'true' ) === item.crafted    || this.crafted    === "any" ) &&
-            (( this.identified == 'true' ) === item.identified || this.identified === "any" ) &&
+            ( this.corrupted   === "any" || ( this.corrupted  == 'true' ) === item.corrupted ) &&
+            ( this.enchanted   === "any" || ( this.enchanted  == 'true' ) === item.enchanted ) &&
+            ( this.crafted     === "any" || ( this.crafted    == 'true' ) === item.crafted   ) &&
+            ( this.identified  === "any" || ( this.identified == 'true' ) === item.identified ) &&
             ( this.level === "" || item.frameType === 4 || ( item.frameType !== 4 && this.level <= item.ilvl )) && 
             ( this.rarity === "any" || this.rarity == item.frameType || ( this.rarity === "not-unique" && item.frameType !== 3 && item.frameType !== 9 ))
             ) {
