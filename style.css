@@ -100,7 +100,15 @@ li.collection-item {
 }
 
 .implicit, .explicit {
-    color: rgb(132, 183, 255);;
+    color: rgb(132, 183, 255);
+}
+
+.affix-implicit {
+    background-color: rgba(132, 183, 255, 0.25)!important;
+}
+
+.affix-explicit {
+    background-color: rgba(132, 183, 255, 0.5)!important;
 }
 
 .implicit {
@@ -111,16 +119,32 @@ li.collection-item {
     color: rgba(181, 229, 250, 1);
 }
 
+.affix-crafted {
+    background-color: rgba(181, 229, 250, 0.5)!important;
+}
+
 .enchant {
     color: rgba(180, 180, 255, 1);
+}
+
+.affix-enchant {
+    background-color: rgba(180, 180, 255, 0.5)!important;
 }
 
 .total {
     color: rgba(167,167,58,1);
 }
 
+.affix-total {
+    background-color: rgba(167,167,58,0.5)!important;
+}
+
 .pseudo {
     color: rgba(155,155,155,1);
+}
+
+.affix-pseudo {
+    background-color: rgba(155,155,155,0.5)!important;
 }
 
 .corrupted {
@@ -272,6 +296,10 @@ input {
     color: rgba(175, 96, 37, 1);
 }
 
+.affix-unique {
+    background-color: rgba(175, 96, 37, 0.5)!important;
+}
+
 .gem {
     color: rgba(0, 255, 0, 1);
 }
@@ -294,6 +322,10 @@ input {
 
 .map {
     color: rgba(255, 0, 100, 1);
+}
+
+.affix-essence {
+    background-color: rgba(255, 0, 100, 0.5)!important;
 }
 
 .fragment {
@@ -568,6 +600,11 @@ input[type=range] {
     cursor: pointer;
     position: relative;
     top: -9px;
+    padding-bottom: 15px!important;
+}
+
+.filter-detail {
+    margin-bottom: 5px!important;
 }
 
 .filter-detail:hover, .entry:hover {
@@ -843,4 +880,15 @@ input:disabled {
 
 label:disabled {
     color: grey!important;
+}
+
+.badge {
+    float: none!important;
+    margin-left: 0!important;
+    /* font-weight: 500!important; */
+    font-size: 0.8rem!important;
+    color: #fff!important;
+    background-color: #26a69a;
+    border-radius: 2px;
+    margin-right: 10px;
 }
