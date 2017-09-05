@@ -1483,7 +1483,7 @@ $( document).ready( function() {
         .on( "end", function () {
             $( "#results ul" ).prepend( generated );
             if ( displayItem.fullPrice ) {
-                displayItem.originalPrice += "<span class=\"" + displayItem.confidence + "\"> (" + displayItem.fullPrice + " chaos)</span>";
+                displayItem.originalPrice += "<span class=\"" + displayItem.confidence + "\"> (" + displayItem.fullPrice + " chaos)</span> " + Math.round(( 1 - displayItem.price / displayItem.fullPrice ) * 100 ) + "% off" ;
                 $( "#" + item.id + " .currency" ).html( displayItem.originalPrice );
             }
             updateResultsAmount();
@@ -1690,7 +1690,7 @@ $( document).ready( function() {
                                             $( "li#" + entryLookup[item.itemId]).addClass( "old" );
                                             foundIndex = 1;
                                             results[entryLookup[item.itemId]] = item;
-                                            console.log( item.id + ":" + entryLookup[item.itemId] + " already added" );
+                                            // console.log( item.id + ":" + entryLookup[item.itemId] + " already added" );
                                             // console.log( JSON.stringify( resultsId ));
                                             // console.log( JSON.stringify( entryLookup ));
                                         } else {
@@ -1698,7 +1698,7 @@ $( document).ready( function() {
                                             resultsId[item.itemId] = true;
                                             entryLookup[item.itemId] = item.id;
                                             results[item.id] = item;
-                                            console.log( "Adding " + item.id  + ":" + entryLookup[item.itemId]);
+                                            // console.log( "Adding " + item.id  + ":" + entryLookup[item.itemId]);
                                         }
                                         displayItem( item, stash, foundIndex, filter.clipboard, filter.id, function() {
                                             callbackItem();
@@ -1779,11 +1779,11 @@ $( document).ready( function() {
 
         var done = function( data ) {
 
-            console.log( "resultsId: " + Object.keys( resultsId ).length );
-            console.log( "results: " + Object.keys( results ).length );
-            console.log( "prices: " + Object.keys( prices ).length );
-            console.log( "entryLookup: " + Object.keys( entryLookup ).length );
-            console.log( "sold: " + sold );
+            // console.log( "resultsId: " + Object.keys( resultsId ).length );
+            // console.log( "results: " + Object.keys( results ).length );
+            // console.log( "prices: " + Object.keys( prices ).length );
+            // console.log( "entryLookup: " + Object.keys( entryLookup ).length );
+            // console.log( "sold: " + sold );
 
             removeEntriesAboveLimit( config.maxEntryAmount );
             filterResultListAction();

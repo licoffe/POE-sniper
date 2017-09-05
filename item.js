@@ -128,14 +128,14 @@ class Item {
                                 Item.insertDPSValues( newItem, dps, function( item ) {
                                     console.log( "Inserted DPS value for item" );
                                     Item.formatItem( item, name, prices, function( newItem ) {
-                                        newItem.fullPrice = Math.round( itemRates[itemLeague][ref].mode);
+                                        newItem.fullPrice = Math.round( metricValueChaos );
                                         callback( newItem );
                                     });
                                 });
                             });
                         } else {
                             Item.formatItem( newItem, name, prices, function( newItem ) {
-                                newItem.fullPrice = Math.round( itemRates[itemLeague][ref].mode);
+                                newItem.fullPrice = Math.round( metricValueChaos );
                                 callback( newItem );
                             });
                         }
