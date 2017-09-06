@@ -522,7 +522,7 @@ $( document).ready( function() {
                                 "<span class='badge " + affixType + "' data-badge-caption='" + match[1] + 
                                 "'></span>" + text );
                         } else {
-                            $( this ).html( "<span class='badge red' data-badge-caption='Unknown'></span>" + text );
+                            // $( this ).html( "<span class='badge red' data-badge-caption='Unknown'></span>" + text );
                         }
                         // When selecting an item in the completion menu
                         $( this ).click( function () {
