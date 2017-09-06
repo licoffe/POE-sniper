@@ -97,12 +97,22 @@ class Filter {
         var keys   = 0;
         // Compare mod values to filter
         for ( var affix in this.affixes ) {
+            // console.log( affix );
+            var cleanedAffix = affix.replace( /(<span class=\'value\'>[^<>]+<\/span>)/g, "#" ).replace( "( # - # )", "#" ).replace( "Unique explicit", "Explicit" );
+            // console.log( cleanedAffix );
             if ( this.affixes.hasOwnProperty( affix )) {
                 keys++;
+                // console.log( this.affixes );
+                if ( isNaN( this.affixes[affix][0])) {
+                    this.affixes[affix][0] = this.affixes[affix][0].replace( /.*>(.+)<.*/, "$1" );
+                }
+                if ( isNaN( this.affixes[affix][1])) {
+                    this.affixes[affix][1] = this.affixes[affix][1].replace( /.*>(.+)<.*/, "$1" );
+                }
                 // If there is no lower value
-                this.affixes[affix][0] = this.affixes[affix][0] !== "" ? this.affixes[affix][0] : 0;
+                this.affixes[affix][0] = this.affixes[affix][0] !== "…" ? this.affixes[affix][0] : 0;
                 // If there is no upper value
-                this.affixes[affix][1] = this.affixes[affix][1] !== "" ? this.affixes[affix][1] : 1000000;
+                this.affixes[affix][1] = this.affixes[affix][1] !== "…" ? this.affixes[affix][1] : 1000000;
 
                 // if ( !parsedMods.mods[affix] ) {
                 //     console.log( "Item " + item.name + " does not have affix " + affix );
@@ -112,29 +122,31 @@ class Filter {
                 // }
 
                 // If mod has one parameter
-                if ( parsedMods.mods[affix] && parsedMods.mods[affix].length === 1 ) {
-                    if ( parsedMods.mods[affix] && 
-                        this.affixes[affix][0] <= parsedMods.mods[affix][0] &&
-                        this.affixes[affix][1] >= parsedMods.mods[affix][0]) {
+                // console.log( parsedMods.mods );
+                if ( parsedMods.mods[cleanedAffix] && parsedMods.mods[cleanedAffix].length === 1 ) {
+                    if ( parsedMods.mods[cleanedAffix] && 
+                        this.affixes[affix][0] <= parsedMods.mods[cleanedAffix][0] &&
+                        this.affixes[affix][1] >= parsedMods.mods[cleanedAffix][0]) {
                         passed++;
                         // console.log( this.affixes[affix][0] + " <= " + parsedMods.mods[affix][0] + " and " + this.affixes[affix][1] + " >= " + parsedMods.mods[affix][0] );
                     }
                 // If mod has two
-                } else if ( parsedMods.mods[affix] && parsedMods.mods[affix].length === 2 ) {
-                    var average = ( parsedMods.mods[affix][0] + parsedMods.mods[affix][1]) / 2;
-                    if ( parsedMods.mods[affix] &&
+                } else if ( parsedMods.mods[cleanedAffix] && parsedMods.mods[cleanedAffix].length === 2 ) {
+                    var average = ( parsedMods.mods[cleanedAffix][0] + parsedMods.mods[cleanedAffix][1]) / 2;
+                    if ( parsedMods.mods[cleanedAffix] &&
                         this.affixes[affix][0] <= average &&
                         this.affixes[affix][1] >= average ) {
                         // console.log( this.affixes[affix][0] + " <= " + average + " and " + this.affixes[affix][1] + " >= " + average );
                         passed++;
                     }
                 // Otherwise
-                } else if ( parsedMods.mods[affix]) {
+                } else if ( parsedMods.mods[cleanedAffix]) {
                     // console.log( parsedMods.mods[affix]);
                     passed++;
                 }
             }
         }
+        // console.log( "keys: " + keys + ", passed: " + passed );
         callback( passed === keys );
     }
 
@@ -243,10 +255,6 @@ class Filter {
             ) {
 
             var prices = Item.computePrice( item, currencyRates );
-            // console.log( prices );
-            // console.log( currencyRates[league] );
-
-            // console.log( this.convert + " " + this.currency + " === " + Currency.shortToLongLookupTable[prices.originalCurrency] + " && " + this.budget + " >= " + prices.originalAmount + ", " + prices.currency );
             
             // Convert filter price to chaos and check if the item is within budget
             if ( !this.budget || ( this.convert && prices.convertedPrice && 
@@ -256,13 +264,17 @@ class Filter {
 
                 // Parse item mods
                 Item.parseMods( item, function( parsedMods ) {
+                    // if ( Object.keys( parsedMods["mods"] ). length > 0 ) {
+                    //     console.log( JSON.stringify( parsedMods ));
+                    // }
+
                     // item.totalMods = parsedMods.totalMods;
                     // console.log( parsedMods.totalMods );
                     var keptTotalMods = [];
                     for ( var mod in parsedMods.totalMods ) {
                         if ( parsedMods.totalMods.hasOwnProperty( mod )) {
                             if ( self.affixes[mod]) {
-                                keptTotalMods.push( mod.replace( "#", parsedMods.totalMods[mod]));
+                                keptTotalMods.push( mod.replace( /^\([a-zA-Z ]+\)\s*/, "" ).replace( "#", parsedMods.totalMods[mod]));
                             }
                         }
                     }
@@ -271,7 +283,7 @@ class Filter {
                     for ( var mod in parsedMods.pseudoMods ) {
                         if ( parsedMods.pseudoMods.hasOwnProperty( mod )) {
                             if ( self.affixes[mod]) {
-                                keptPseudoMods.push( mod.replace( "#", parsedMods.pseudoMods[mod]));
+                                keptPseudoMods.push( mod.replace( /^\([a-zA-Z ]+\)\s*/, "" ).replace( "#", parsedMods.pseudoMods[mod]));
                             }
                         }
                     }

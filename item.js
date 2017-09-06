@@ -233,34 +233,33 @@ class Item {
         var pseudo     = "";
         var properties = "";
         if ( item.implicitMods ) {
-            implicit += "<span class=\"implicit\">";
-            implicit += item.implicitMods.join( "</span><br><span class=\"implicit\">" );
+            implicit += "<span class=\"badge affix-implicit\" data-badge-caption=\"Implicit\"></span><span class=\"implicit\">";
+            implicit += item.implicitMods.join( "</span><br><span class=\"badge affix-implicit\" data-badge-caption=\"Implicit\"></span><span class=\"implicit\">" );
             implicit += "</span><br>";
         }
         if ( item.explicitMods ) {
-            explicit += "<span class=\"explicit\">";
-            explicit += item.explicitMods.join( "</span><br><span class=\"explicit\">" );
+            explicit += "<span class=\"badge affix-explicit\" data-badge-caption=\"Explicit\"></span><span class=\"explicit\">";
+            explicit += item.explicitMods.join( "</span><br><span class=\"badge affix-explicit\" data-badge-caption=\"Explicit\"></span></span><span class=\"explicit\">" );
             explicit += "</span><br>";
         }
         if ( item.craftedMods ) {
-            crafted += "<span class=\"crafted\">";
-            crafted += item.craftedMods.join( "</span><br><span class=\"crafted\">" );
+            crafted += "<span class=\"badge affix-crafted\" data-badge-caption=\"Crafted\"></span><span class=\"crafted\">";
+            crafted += item.craftedMods.join( "</span><br><span class=\"badge affix-crafted\" data-badge-caption=\"Crafted\"></span><span class=\"crafted\">" );
             crafted += "</span><br>";
         }
         if ( item.enchantMods ) {
-            enchant += "<span class=\"enchant\">";
-            enchant += item.enchantMods.join( "</span><br><span class=\"enchant\">" );
+            enchant += "<span class=\"badge affix-enchant\" data-badge-caption=\"Enchant\"></span><span class=\"enchant\">";
+            enchant += item.enchantMods.join( "</span><br><span class=\"badge affix-enchant\" data-badge-caption=\"Enchant\"></span><span class=\"enchant\">" );
             enchant += "</span><br>";
         }
-        // console.log( item );
-        if ( item.totalMods ) {
-            total += "<span class=\"total\">";
-            total += item.totalMods.join( "</span><br><span class=\"total\">" );
+        if ( item.totalMods.length > 0 ) {
+            total += "<span class=\"badge affix-total\" data-badge-caption=\"Total\"></span><span class=\"total\">";
+            total += item.totalMods.join( "</span><br><span class=\"badge affix-total\" data-badge-caption=\"Total\"></span><span class=\"total\">" );
             total += "</span><br>";
         }
-        if ( item.pseudoMods ) {
-            pseudo += "<span class=\"pseudo\">";
-            pseudo += item.pseudoMods.join( "</span><br><span class=\"pseudo\">" );
+        if ( item.pseudoMods.length > 0 ) {
+            pseudo += "<span class=\"badge affix-pseudo\" data-badge-caption=\"Pseudo\"></span><span class=\"pseudo\">";
+            pseudo += item.pseudoMods.join( "</span><br><span class=\"badge affix-pseudo\" data-badge-caption=\"Pseudo\"></span><span class=\"pseudo\">" );
             pseudo += "</span><br>";
         }
         // console.log( item );
@@ -427,135 +426,136 @@ class Item {
         var match = {
             "+#% to Cold Resistance": function( val ) {
                 if ( !tags.cold ) {
-                    pseudoMods["[PSEUDO] +#% total Resistance"] = val[0];
-                    pseudoMods["[PSEUDO] +#% total Elemental Resistance"] = val[0];
-                    pseudoMods["[PSEUDO] # Resistances"] = 1;
-                    pseudoMods["[PSEUDO] # Elemental Resistances"] = 1;
+                    pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
+                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
+                    pseudoMods["(Pseudo) # Resistances"] = 1;
+                    pseudoMods["(Pseudo) # Elemental Resistances"] = 1;
                     tags.cold = true;
                 }
             },
             "+#% to Lightning Resistance": function( val ) {
                 if ( !tags.lightning ) {
-                    pseudoMods["[PSEUDO] +#% total Resistance"] = val[0];
-                    pseudoMods["[PSEUDO] +#% total Elemental Resistance"] = val[0];
-                    pseudoMods["[PSEUDO] # Resistances"] = 1;
-                    pseudoMods["[PSEUDO] # Elemental Resistances"] = 1;
+                    pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
+                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
+                    pseudoMods["(Pseudo) # Resistances"] = 1;
+                    pseudoMods["(Pseudo) # Elemental Resistances"] = 1;
                     tags.lightning = true;
                 }
             },
             "+#% to Fire Resistance": function( val ) {
                 if ( !tags.fire ) {
-                    pseudoMods["[PSEUDO] +#% total Resistance"] = val[0];
-                    pseudoMods["[PSEUDO] +#% total Elemental Resistance"] = val[0];
-                    pseudoMods["[PSEUDO] # Resistances"] = 1;
-                    pseudoMods["[PSEUDO] # Elemental Resistances"] = 1;
+                    pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
+                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
+                    pseudoMods["(Pseudo) # Resistances"] = 1;
+                    pseudoMods["(Pseudo) # Elemental Resistances"] = 1;
                     tags.fire = true;
                 }
             },
             "+#% to Chaos Resistance": function( val ) {
                 if ( !tags.chaos ) {
-                    pseudoMods["[PSEUDO] +#% total Resistance"] = val[0];
-                    pseudoMods["[PSEUDO] # Resistances"] = 1;
+                    pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
+                    pseudoMods["(Pseudo) # Resistances"] = 1;
                     tags.chaos = true;
                 }
             },
             "+#% to all Elemental Resistances": function( val ) {
                 if ( !tags.cold ) {
-                    pseudoMods["[PSEUDO] +#% total Resistance"] = val[0];
-                    pseudoMods["[PSEUDO] +#% total Elemental Resistance"] = val[0];
-                    pseudoMods["[PSEUDO] # Resistances"] = 1;
-                    pseudoMods["[PSEUDO] # Elemental Resistances"] = 1;
+                    pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
+                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
+                    pseudoMods["(Pseudo) # Resistances"] = 1;
+                    pseudoMods["(Pseudo) # Elemental Resistances"] = 1;
                     tags.cold = true;
                 }
                 if ( !tags.lightning ) {
-                    pseudoMods["[PSEUDO] +#% total Resistance"] += val[0];
-                    pseudoMods["[PSEUDO] +#% total Elemental Resistance"] += val[0];
-                    pseudoMods["[PSEUDO] # Resistances"] += 1;
-                    pseudoMods["[PSEUDO] # Elemental Resistances"] += 1;
+                    pseudoMods["(Pseudo) +#% total Resistance"] += val[0];
+                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] += val[0];
+                    pseudoMods["(Pseudo) # Resistances"] += 1;
+                    pseudoMods["(Pseudo) # Elemental Resistances"] += 1;
                     tags.lightning = true;
                 }
                 if ( !tags.fire ) {
-                    pseudoMods["[PSEUDO] +#% total Resistance"] += val[0];
-                    pseudoMods["[PSEUDO] +#% total Elemental Resistance"] += val[0];
-                    pseudoMods["[PSEUDO] # Resistances"] += 1;
-                    pseudoMods["[PSEUDO] # Elemental Resistances"] += 1;
+                    pseudoMods["(Pseudo) +#% total Resistance"] += val[0];
+                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] += val[0];
+                    pseudoMods["(Pseudo) # Resistances"] += 1;
+                    pseudoMods["(Pseudo) # Elemental Resistances"] += 1;
                     tags.fire = true;
                 }
-                // pseudoMods["[PSEUDO] +#% total Resistance"] = val[0] * 3;
-                // pseudoMods["[PSEUDO] +#% total Elemental Resistance"] = val[0] * 3;
-                // pseudoMods["[PSEUDO] # Resistances"] = 3;
-                // pseudoMods["[PSEUDO] # Elemental Resistances"] = 3;
+                // pseudoMods["(Pseudo) +#% total Resistance"] = val[0] * 3;
+                // pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0] * 3;
+                // pseudoMods["(Pseudo) # Resistances"] = 3;
+                // pseudoMods["(Pseudo) # Elemental Resistances"] = 3;
                 // tags.cold      = true;
                 // tags.lightning = true;
                 // tags.fire      = true;
             },
             "+#% to Cold and Lightning Resistances": function( val ) {
                 if ( !tags.cold ) {
-                    pseudoMods["[PSEUDO] +#% total Resistance"] = val[0];
-                    pseudoMods["[PSEUDO] +#% total Elemental Resistance"] = val[0];
-                    pseudoMods["[PSEUDO] # Resistances"] = 1;
-                    pseudoMods["[PSEUDO] # Elemental Resistances"] = 1;
+                    pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
+                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
+                    pseudoMods["(Pseudo) # Resistances"] = 1;
+                    pseudoMods["(Pseudo) # Elemental Resistances"] = 1;
                     tags.cold = true;
                 }
                 if ( !tags.lightning ) {
-                    pseudoMods["[PSEUDO] +#% total Resistance"] += val[0];
-                    pseudoMods["[PSEUDO] +#% total Elemental Resistance"] += val[0];
-                    pseudoMods["[PSEUDO] # Resistances"] += 1;
-                    pseudoMods["[PSEUDO] # Elemental Resistances"] += 1;
+                    pseudoMods["(Pseudo) +#% total Resistance"] += val[0];
+                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] += val[0];
+                    pseudoMods["(Pseudo) # Resistances"] += 1;
+                    pseudoMods["(Pseudo) # Elemental Resistances"] += 1;
                     tags.lightning = true;
                 }
-                // pseudoMods["[PSEUDO] +#% total Resistance"] = val[0] * 2;
-                // pseudoMods["[PSEUDO] +#% total Elemental Resistance"] = val[0] * 2;
-                // pseudoMods["[PSEUDO] # Resistances"] = 2;
-                // pseudoMods["[PSEUDO] # Elemental Resistances"] = 2;
+                // pseudoMods["(Pseudo) +#% total Resistance"] = val[0] * 2;
+                // pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0] * 2;
+                // pseudoMods["(Pseudo) # Resistances"] = 2;
+                // pseudoMods["(Pseudo) # Elemental Resistances"] = 2;
                 // tags.cold      = true;
                 // tags.lightning = true;
             },
             "+#% to Fire and Cold Resistances": function( val ) {
                 if ( !tags.cold ) {
-                    pseudoMods["[PSEUDO] +#% total Resistance"] = val[0];
-                    pseudoMods["[PSEUDO] +#% total Elemental Resistance"] = val[0];
-                    pseudoMods["[PSEUDO] # Resistances"] = 1;
-                    pseudoMods["[PSEUDO] # Elemental Resistances"] = 1;
+                    pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
+                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
+                    pseudoMods["(Pseudo) # Resistances"] = 1;
+                    pseudoMods["(Pseudo) # Elemental Resistances"] = 1;
                     tags.cold = true;
                 }
                 if ( !tags.fire ) {
-                    pseudoMods["[PSEUDO] +#% total Resistance"] += val[0];
-                    pseudoMods["[PSEUDO] +#% total Elemental Resistance"] += val[0];
-                    pseudoMods["[PSEUDO] # Resistances"] += 1;
-                    pseudoMods["[PSEUDO] # Elemental Resistances"] += 1;
+                    pseudoMods["(Pseudo) +#% total Resistance"] += val[0];
+                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] += val[0];
+                    pseudoMods["(Pseudo) # Resistances"] += 1;
+                    pseudoMods["(Pseudo) # Elemental Resistances"] += 1;
                     tags.fire = true;
                 }
-                // pseudoMods["[PSEUDO] +#% total Resistance"] = val[0] * 2;
-                // pseudoMods["[PSEUDO] +#% total Elemental Resistance"] = val[0] * 2;
-                // pseudoMods["[PSEUDO] # Resistances"] = 2;
-                // pseudoMods["[PSEUDO] # Elemental Resistances"] = 2;
+                // pseudoMods["(Pseudo) +#% total Resistance"] = val[0] * 2;
+                // pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0] * 2;
+                // pseudoMods["(Pseudo) # Resistances"] = 2;
+                // pseudoMods["(Pseudo) # Elemental Resistances"] = 2;
                 // tags.cold      = true;
                 // tags.fire      = true;
             },
             "+#% to Fire and Lightning Resistances": function( val ) {
                 if ( !tags.lightning ) {
-                    pseudoMods["[PSEUDO] +#% total Resistance"] = val[0];
-                    pseudoMods["[PSEUDO] +#% total Elemental Resistance"] = val[0];
-                    pseudoMods["[PSEUDO] # Resistances"] = 1;
-                    pseudoMods["[PSEUDO] # Elemental Resistances"] = 1;
+                    pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
+                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
+                    pseudoMods["(Pseudo) # Resistances"] = 1;
+                    pseudoMods["(Pseudo) # Elemental Resistances"] = 1;
                     tags.lightning = true;
                 }
                 if ( !tags.fire ) {
-                    pseudoMods["[PSEUDO] +#% total Resistance"] += val[0];
-                    pseudoMods["[PSEUDO] +#% total Elemental Resistance"] += val[0];
-                    pseudoMods["[PSEUDO] # Resistances"] += 1;
-                    pseudoMods["[PSEUDO] # Elemental Resistances"] += 1;
+                    pseudoMods["(Pseudo) +#% total Resistance"] += val[0];
+                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] += val[0];
+                    pseudoMods["(Pseudo) # Resistances"] += 1;
+                    pseudoMods["(Pseudo) # Elemental Resistances"] += 1;
                     tags.fire = true;
                 }
-                // pseudoMods["[PSEUDO] +#% total Resistance"] = val[0] * 2;
-                // pseudoMods["[PSEUDO] +#% total Elemental Resistance"] = val[0] * 2;
-                // pseudoMods["[PSEUDO] # Resistances"] = 2;
-                // pseudoMods["[PSEUDO] # Elemental Resistances"] = 2;
+                // pseudoMods["(Pseudo) +#% total Resistance"] = val[0] * 2;
+                // pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0] * 2;
+                // pseudoMods["(Pseudo) # Resistances"] = 2;
+                // pseudoMods["(Pseudo) # Elemental Resistances"] = 2;
                 // tags.lightning = true;
                 // tags.fire      = true;
             }
         };
+        mod = mod.replace( /^\([a-zA-Z ]+\)\s*/, "" );
         if ( match[mod]) {
             match[mod]( val );
         }
@@ -567,277 +567,278 @@ class Item {
         var match = {
             // # Life Regenerated per second
             "# Life Regenerated per second": function( val ) {
-                totalMods["[TOTAL] # Life Regenerated per second"] = val[0];
+                totalMods["(Total) # Life Regenerated per second"] = val[0];
             },
             // #% increased Attack Speed
             "#% increased Attack Speed": function( val ) {
-                totalMods["[TOTAL] #% increased Attack Speed"] = val[0];
+                totalMods["(Total) #% increased Attack Speed"] = val[0];
             },
             // #% increased Cast Speed
             "#% increased Cast Speed": function( val ) {
-                totalMods["[TOTAL] #% increased Cast Speed"] = val[0];
+                totalMods["(Total) #% increased Cast Speed"] = val[0];
             },
             "#% increased Attack and Cast Speed": function( val ) {
-                totalMods["[TOTAL] #% increased Cast Speed"] = val[0];
-                totalMods["[TOTAL] #% increased Attack Speed"] = val[0];
+                totalMods["(Total) #% increased Cast Speed"] = val[0];
+                totalMods["(Total) #% increased Attack Speed"] = val[0];
             },
             // #% Elemental damage and spells
             "#% increased Burning Damage": function( val ) {
-                totalMods["[TOTAL] #% increased Burning Damage"] = val[0];
+                totalMods["(Total) #% increased Burning Damage"] = val[0];
             },
             "#% increased Fire Damage": function( val ) {
-                totalMods["[TOTAL] #% increased Burning Damage"] = val[0];
-                totalMods["[TOTAL] #% increased Fire Damage with Attack Skills"] = val[0];
-                totalMods["[TOTAL] #% increased Fire Spell Damage"] = val[0];
-                totalMods["[TOTAL] #% increased Fire Area Damage"] = val[0];
+                totalMods["(Total) #% increased Burning Damage"] = val[0];
+                totalMods["(Total) #% increased Fire Damage with Attack Skills"] = val[0];
+                totalMods["(Total) #% increased Fire Spell Damage"] = val[0];
+                totalMods["(Total) #% increased Fire Area Damage"] = val[0];
             },
             "#% increased Elemental Damage": function( val ) {
-                totalMods["[TOTAL] #% increased Burning Damage"] = val[0];
-                totalMods["[TOTAL] #% increased Cold Damage with Attack Skills"] = val[0];
-                totalMods["[TOTAL] #% increased Fire Damage with Attack Skills"] = val[0];
-                totalMods["[TOTAL] #% increased Lightning Damage with Attack Skills"] = val[0];
-                totalMods["[TOTAL] #% increased Cold Spell Damage"] = val[0];
-                totalMods["[TOTAL] #% increased Fire Spell Damage"] = val[0];
-                totalMods["[TOTAL] #% increased Lightning Spell Damage"] = val[0];
-                totalMods["[TOTAL] #% increased Elemental Damage with Attack Skills"] = val[0];
-                totalMods["[TOTAL] #% increased Fire Area Damage"] = val[0];
+                totalMods["(Total) #% increased Burning Damage"] = val[0];
+                totalMods["(Total) #% increased Cold Damage with Attack Skills"] = val[0];
+                totalMods["(Total) #% increased Fire Damage with Attack Skills"] = val[0];
+                totalMods["(Total) #% increased Lightning Damage with Attack Skills"] = val[0];
+                totalMods["(Total) #% increased Cold Spell Damage"] = val[0];
+                totalMods["(Total) #% increased Fire Spell Damage"] = val[0];
+                totalMods["(Total) #% increased Lightning Spell Damage"] = val[0];
+                totalMods["(Total) #% increased Elemental Damage with Attack Skills"] = val[0];
+                totalMods["(Total) #% increased Fire Area Damage"] = val[0];
             },
             "#% increased Cold Damage": function( val ) {
-                totalMods["[TOTAL] #% increased Cold Damage with Attack Skills"] = val[0];
-                totalMods["[TOTAL] #% increased Cold Spell Damage"] = val[0];
+                totalMods["(Total) #% increased Cold Damage with Attack Skills"] = val[0];
+                totalMods["(Total) #% increased Cold Spell Damage"] = val[0];
             },
             "#% increased Elemental Damage with Attack Skills": function( val ) {
-                totalMods["[TOTAL] #% increased Cold Damage with Attack Skills"] = val[0];
-                totalMods["[TOTAL] #% increased Fire Damage with Attack Skills"] = val[0];
-                totalMods["[TOTAL] #% increased Lightning Damage with Attack Skills"] = val[0];
-                totalMods["[TOTAL] #% increased Elemental Damage with Attack Skills"] = val[0];
+                totalMods["(Total) #% increased Cold Damage with Attack Skills"] = val[0];
+                totalMods["(Total) #% increased Fire Damage with Attack Skills"] = val[0];
+                totalMods["(Total) #% increased Lightning Damage with Attack Skills"] = val[0];
+                totalMods["(Total) #% increased Elemental Damage with Attack Skills"] = val[0];
             },
             "#% increased Lightning Damage": function( val ) {
-                totalMods["[TOTAL] #% increased Lightning Damage with Attack Skills"] = val[0];
-                totalMods["[TOTAL] #% increased Lightning Spell Damage"] = val[0];
+                totalMods["(Total) #% increased Lightning Damage with Attack Skills"] = val[0];
+                totalMods["(Total) #% increased Lightning Spell Damage"] = val[0];
             },
             "#% increased Spell Damage": function( val ) {
-                totalMods["[TOTAL] #% increased Cold Spell Damage"] = val[0];
-                totalMods["[TOTAL] #% increased Fire Spell Damage"] = val[0];
-                totalMods["[TOTAL] #% increased Lightning Spell Damage"] = val[0];
-                totalMods["[TOTAL] #% increased Spell Damage"] = val[0];
+                totalMods["(Total) #% increased Cold Spell Damage"] = val[0];
+                totalMods["(Total) #% increased Fire Spell Damage"] = val[0];
+                totalMods["(Total) #% increased Lightning Spell Damage"] = val[0];
+                totalMods["(Total) #% increased Spell Damage"] = val[0];
             },
             "#% increased Area Damage": function( val ) {
-                totalMods["[TOTAL] #% increased Fire Area Damage"] = val[0];
+                totalMods["(Total) #% increased Fire Area Damage"] = val[0];
             },
             // +# to maximum Life
             "+# to maximum Life": function( val ) {
-                totalMods["[TOTAL] +# to maximum Life"] = val[0];
+                totalMods["(Total) +# to maximum Life"] = val[0];
             },
             // +# to maximum Mana
             "+# to maximum Mana": function( val ) {
-                totalMods["[TOTAL] +# to maximum Mana"] = val[0];
+                totalMods["(Total) +# to maximum Mana"] = val[0];
             },
             // #% increased Critical Strike Chance for Spells
             "#% increased Critical Strike Chance for Spells": function( val ) {
-                totalMods["[TOTAL] #% increased Critical Strike Chance for Spells"] = val[0];
+                totalMods["(Total) #% increased Critical Strike Chance for Spells"] = val[0];
             },
             "#% increased Global Critical Strike Chance": function( val ) {
-                totalMods["[TOTAL] #% increased Critical Strike Chance for Spells"] = val[0];
-                totalMods["[TOTAL] #% increased Global Critical Strike Chance"] = val[0];
+                totalMods["(Total) #% increased Critical Strike Chance for Spells"] = val[0];
+                totalMods["(Total) #% increased Global Critical Strike Chance"] = val[0];
             },
             "#% increased Mana Regeneration Rate": function( val ) {
-                totalMods["[TOTAL] #% increased Mana Regeneration Rate"] = val[0];
+                totalMods["(Total) #% increased Mana Regeneration Rate"] = val[0];
             },
             "#% increased maximum Energy Shield": function( val ) {
-                totalMods["[TOTAL] #% increased maximum Energy Shield"] = val[0];
+                totalMods["(Total) #% increased maximum Energy Shield"] = val[0];
             },
             "#% increased Physical Damage": function( val ) {
-                totalMods["[TOTAL] #% increased Physical Damage"] = val[0];
+                totalMods["(Total) #% increased Physical Damage"] = val[0];
             },
             "#% increased Rarity of Items found": function( val ) {
-                totalMods["[TOTAL] #% increased Rarity of Items found"] = val[0];
+                totalMods["(Total) #% increased Rarity of Items found"] = val[0];
             },
             "#% of Physical Attack Damage Leeched as Life": function( val ) {
-                totalMods["[TOTAL] #% of Physical Attack Damage Leeched as Life"] = val[0];
+                totalMods["(Total) #% of Physical Attack Damage Leeched as Life"] = val[0];
             },
             "+# to all Attributes": function( val ) {
-                totalMods["[TOTAL] +# to all Attributes"] = val[0];
-                totalMods["[TOTAL] +# to Dexterity"] = val[0];
-                totalMods["[TOTAL] +# to Intelligence"] = val[0];
-                totalMods["[TOTAL] +# to Strength"] = val[0];
-                totalMods["[TOTAL] +# to maximum Life"] = Math.floor( val[0] / 2 );
-                totalMods["[TOTAL] +# to maximum Mana"] = Math.floor( val[0] / 2 );
+                totalMods["(Total) +# to all Attributes"] = val[0];
+                totalMods["(Total) +# to Dexterity"] = val[0];
+                totalMods["(Total) +# to Intelligence"] = val[0];
+                totalMods["(Total) +# to Strength"] = val[0];
+                totalMods["(Total) +# to maximum Life"] = Math.floor( val[0] / 2 );
+                totalMods["(Total) +# to maximum Mana"] = Math.floor( val[0] / 2 );
             },
             "+# to Dexterity": function( val ) {
-                totalMods["[TOTAL] +# to Dexterity"] = val[0];
+                totalMods["(Total) +# to Dexterity"] = val[0];
             },
             "+# to Intelligence": function( val ) {
-                totalMods["[TOTAL] +# to Intelligence"] = val[0];
-                totalMods["[TOTAL] +# to maximum Mana"] = Math.floor( val[0] / 2 );
+                totalMods["(Total) +# to Intelligence"] = val[0];
+                totalMods["(Total) +# to maximum Mana"] = Math.floor( val[0] / 2 );
             },
             "+# to Strength": function( val ) {
-                totalMods["[TOTAL] +# to Strength"] = val[0];
-                totalMods["[TOTAL] +# to maximum Life"] = Math.floor( val[0] / 2 );
+                totalMods["(Total) +# to Strength"] = val[0];
+                totalMods["(Total) +# to maximum Life"] = Math.floor( val[0] / 2 );
             },
             "+# to Dexterity and Intelligence": function( val ) {
-                totalMods["[TOTAL] +# to Dexterity"] = val[0];
-                totalMods["[TOTAL] +# to Intelligence"] = val[0];
-                totalMods["[TOTAL] +# to maximum Mana"] = Math.floor( val[0] / 2 );
+                totalMods["(Total) +# to Dexterity"] = val[0];
+                totalMods["(Total) +# to Intelligence"] = val[0];
+                totalMods["(Total) +# to maximum Mana"] = Math.floor( val[0] / 2 );
             },
             "+# to Strength and Dexterity": function( val ) {
-                totalMods["[TOTAL] +# to Dexterity"] = val[0];
-                totalMods["[TOTAL] +# to Strength"] = val[0];
-                totalMods["[TOTAL] +# to maximum Life"] = Math.floor( val[0] / 2 );
+                totalMods["(Total) +# to Dexterity"] = val[0];
+                totalMods["(Total) +# to Strength"] = val[0];
+                totalMods["(Total) +# to maximum Life"] = Math.floor( val[0] / 2 );
             },
             "+# to Strength and Intelligence": function( val ) {
-                totalMods["[TOTAL] +# to Strength"] = val[0];
-                totalMods["[TOTAL] +# to Intelligence"] = val[0];
-                totalMods["[TOTAL] +# to maximum Life"] = Math.floor( val[0] / 2 );
-                totalMods["[TOTAL] +# to maximum Mana"] = Math.floor( val[0] / 2 );
+                totalMods["(Total) +# to Strength"] = val[0];
+                totalMods["(Total) +# to Intelligence"] = val[0];
+                totalMods["(Total) +# to maximum Life"] = Math.floor( val[0] / 2 );
+                totalMods["(Total) +# to maximum Mana"] = Math.floor( val[0] / 2 );
             },
             "+# to Level of Socketed Gems": function( val ) {
-                totalMods["[TOTAL] +# to Level of Socketed Aura Gems"] = val[0];
-                totalMods["[TOTAL] +# to Level of Socketed Bow Gems"] = val[0];
-                totalMods["[TOTAL] +# to Level of Socketed Chaos Gems"] = val[0];
-                totalMods["[TOTAL] +# to Level of Socketed Fire Gems"] = val[0];
-                totalMods["[TOTAL] +# to Level of Socketed Cold Gems"] = val[0];
-                totalMods["[TOTAL] +# to Level of Socketed Lightning Gems"] = val[0];
-                totalMods["[TOTAL] +# to Level of Socketed Elemental Gems"] = val[0];
-                totalMods["[TOTAL] +# to Level of Socketed Melee Gems"] = val[0];
-                totalMods["[TOTAL] +# to Level of Socketed Minion Gems"] = val[0];
-                totalMods["[TOTAL] +# to Level of Socketed Movement Gems"] = val[0];
-                totalMods["[TOTAL] +# to Level of Socketed Spell Gems"] = val[0];
-                totalMods["[TOTAL] +# to Level of Socketed Strength Gems"] = val[0];
-                totalMods["[TOTAL] +# to Level of Socketed Vaal Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Aura Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Bow Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Chaos Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Fire Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Cold Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Lightning Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Elemental Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Melee Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Minion Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Movement Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Spell Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Strength Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Vaal Gems"] = val[0];
             },
             "+# to Level of Socketed Aura Gems": function( val ) {
-                totalMods["[TOTAL] +# to Level of Socketed Aura Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Aura Gems"] = val[0];
             },
             "+# to Level of Socketed Bow Gems": function( val ) {
-                totalMods["[TOTAL] +# to Level of Socketed Bow Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Bow Gems"] = val[0];
             },
             "+# to Level of Socketed Chaos Gems": function( val ) {
-                totalMods["[TOTAL] +# to Level of Socketed Chaos Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Chaos Gems"] = val[0];
             },
             "+# to Level of Socketed Fire Gems": function( val ) {
-                totalMods["[TOTAL] +# to Level of Socketed Fire Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Fire Gems"] = val[0];
             },
             "+# to Level of Socketed Cold Gems": function( val ) {
-                totalMods["[TOTAL] +# to Level of Socketed Cold Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Cold Gems"] = val[0];
             },
             "+# to Level of Socketed Lightning Gems": function( val ) {
-                totalMods["[TOTAL] +# to Level of Socketed Lightning Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Lightning Gems"] = val[0];
             },
             "+# to Level of Socketed Elemental Gems": function( val ) {
-                totalMods["[TOTAL] +# to Level of Socketed Elemental Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Elemental Gems"] = val[0];
             },
             "+# to Level of Socketed Melee Gems": function( val ) {
-                totalMods["[TOTAL] +# to Level of Socketed Melee Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Melee Gems"] = val[0];
             },
             "+# to Level of Socketed Minion Gems": function( val ) {
-                totalMods["[TOTAL] +# to Level of Socketed Minion Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Minion Gems"] = val[0];
             },
             "+# to Level of Socketed Movement Gems": function( val ) {
-                totalMods["[TOTAL] +# to Level of Socketed Movement Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Movement Gems"] = val[0];
             },
             "+# to Level of Socketed Spell Gems": function( val ) {
-                totalMods["[TOTAL] +# to Level of Socketed Spell Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Spell Gems"] = val[0];
             },
             "+# to Level of Socketed Strength Gems": function( val ) {
-                totalMods["[TOTAL] +# to Level of Socketed Strength Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Strength Gems"] = val[0];
             },
             "+# to Level of Socketed Vaal Gems": function( val ) {
-                totalMods["[TOTAL] +# to Level of Socketed Vaal Gems"] = val[0];
+                totalMods["(Total) +# to Level of Socketed Vaal Gems"] = val[0];
             },
             "+# to maximum Energy Shield": function( val ) {
-                totalMods["[TOTAL] +# to maximum Energy Shield"] = val[0];
+                totalMods["(Total) +# to maximum Energy Shield"] = val[0];
             },
             "+#% to all Elemental Resistances": function( val ) {
-                totalMods["[TOTAL] +#% to all Elemental Resistances"] = val[0];
-                totalMods["[TOTAL] +#% to Cold Resistance"] = val[0];
-                totalMods["[TOTAL] +#% to Fire Resistance"] = val[0];
-                totalMods["[TOTAL] +#% to Lightning Resistance"] = val[0];
+                totalMods["(Total) +#% to all Elemental Resistances"] = val[0];
+                totalMods["(Total) +#% to Cold Resistance"] = val[0];
+                totalMods["(Total) +#% to Fire Resistance"] = val[0];
+                totalMods["(Total) +#% to Lightning Resistance"] = val[0];
             },
             "+#% to Cold Resistance": function( val ) {
-                totalMods["[TOTAL] +#% to Cold Resistance"] = val[0];
+                totalMods["(Total) +#% to Cold Resistance"] = val[0];
             },
             "+#% to Fire Resistance": function( val ) {
-                totalMods["[TOTAL] +#% to Fire Resistance"] = val[0];
+                totalMods["(Total) +#% to Fire Resistance"] = val[0];
             },
             "+#% to Lightning Resistance": function( val ) {
-                totalMods["[TOTAL] +#% to Lightning Resistance"] = val[0];
+                totalMods["(Total) +#% to Lightning Resistance"] = val[0];
             },
             "+#% to Fire and Cold Resistances": function( val ) {
-                totalMods["[TOTAL] +#% to Fire Resistance"] = val[0];
-                totalMods["[TOTAL] +#% to Cold Resistance"] = val[0];
+                totalMods["(Total) +#% to Fire Resistance"] = val[0];
+                totalMods["(Total) +#% to Cold Resistance"] = val[0];
             },
             "+#% to Cold and Lightning Resistances": function( val ) {
-                totalMods["[TOTAL] +#% to Lightning Resistance"] = val[0];
-                totalMods["[TOTAL] +#% to Cold Resistance"] = val[0];
+                totalMods["(Total) +#% to Lightning Resistance"] = val[0];
+                totalMods["(Total) +#% to Cold Resistance"] = val[0];
             },
             "+#% to Fire and Lightning Resistances": function( val ) {
-                totalMods["[TOTAL] +#% to Lightning Resistance"] = val[0];
-                totalMods["[TOTAL] +#% to Fire Resistance"] = val[0];
+                totalMods["(Total) +#% to Lightning Resistance"] = val[0];
+                totalMods["(Total) +#% to Fire Resistance"] = val[0];
             },
             "+#% to Global Critical Strike Multiplier": function( val ) {
-                totalMods["[TOTAL] +#% to Global Critical Strike Multiplier"] = val[0];
+                totalMods["(Total) +#% to Global Critical Strike Multiplier"] = val[0];
             },
             "Adds # to # Fire Damage": function( val ) {
-                totalMods["[TOTAL] Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Elemental Damage to Attacks"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Fire Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Elemental Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Fire Damage to Attacks"] = ( val[0] + val[1]) / 2;
             },
             "Adds # to # Fire Damage to Attacks": function( val ) {
-                totalMods["[TOTAL] Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Elemental Damage to Attacks"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Fire Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Elemental Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Fire Damage to Attacks"] = ( val[0] + val[1]) / 2;
             },
             "Adds # to # Lightning Damage to Attacks": function( val ) {
-                totalMods["[TOTAL] Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Elemental Damage to Attacks"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Lightning Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Elemental Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Lightning Damage to Attacks"] = ( val[0] + val[1]) / 2;
             },
             "Adds # to # Lightning Damage": function( val ) {
-                totalMods["[TOTAL] Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Elemental Damage to Attacks"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Lightning Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Elemental Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Lightning Damage to Attacks"] = ( val[0] + val[1]) / 2;
             },
             "Adds # to # Cold Damage": function( val ) {
-                totalMods["[TOTAL] Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Elemental Damage to Attacks"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Cold Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Elemental Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Cold Damage to Attacks"] = ( val[0] + val[1]) / 2;
             },
             "Adds # to # Cold Damage to Attacks": function( val ) {
-                totalMods["[TOTAL] Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Elemental Damage to Attacks"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Cold Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Elemental Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Cold Damage to Attacks"] = ( val[0] + val[1]) / 2;
             },
             "Adds # to # Physical Damage": function( val ) {
-                totalMods["[TOTAL] Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Physical Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Physical Damage to Attacks"] = ( val[0] + val[1]) / 2;
             },
             "Adds # to # Physical Damage to Attacks": function( val ) {
-                totalMods["[TOTAL] Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Physical Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Physical Damage to Attacks"] = ( val[0] + val[1]) / 2;
             },
             "Adds # to # Chaos Damage to Attacks": function( val ) {
-                totalMods["[TOTAL] Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
             },
             "Adds # to # Chaos Damage": function( val ) {
-                totalMods["[TOTAL] Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Damage to Attacks"] = ( val[0] + val[1]) / 2;
             },
             "Adds # to # Lightning Damage to Spells": function( val ) {
-                totalMods["[TOTAL] Adds # Damage to Spells"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Elemental Damage to Spells"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Damage to Spells"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Elemental Damage to Spells"] = ( val[0] + val[1]) / 2;
             },
             "Adds # to # Cold Damage to Spells": function( val ) {
-                totalMods["[TOTAL] Adds # Damage to Spells"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Elemental Damage to Spells"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Damage to Spells"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Elemental Damage to Spells"] = ( val[0] + val[1]) / 2;
             },
             "Adds # to # Fire Damage to Spells": function( val ) {
-                totalMods["[TOTAL] Adds # Damage to Spells"] = ( val[0] + val[1]) / 2;
-                totalMods["[TOTAL] Adds # Elemental Damage to Spells"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Damage to Spells"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Elemental Damage to Spells"] = ( val[0] + val[1]) / 2;
             },
             "Adds # to # Chaos Damage to Spells": function( val ) {
-                totalMods["[TOTAL] Adds # Damage to Spells"] = ( val[0] + val[1]) / 2;
+                totalMods["(Total) Adds # Damage to Spells"] = ( val[0] + val[1]) / 2;
             }
         };
+        mod = mod.replace( /^\([a-zA-Z ]+\)\s*/, "" );
         if ( match[mod]) {
             match[mod]( val );
         }
@@ -873,6 +874,7 @@ class Item {
                 matches.push( parseFloat( match[1]));
                 match = re.exec( mod );
             }
+            mod = "(Explicit) " + mod;
             mod = mod.replace( re, "#" );
             Item.matchTotalMod( mod, matches, function( total ) {
                 for ( var p in total ) {
@@ -919,6 +921,7 @@ class Item {
                     matches.push( parseFloat( match[1]));
                     match = re.exec( mod );
                 }
+                mod = "(Implicit) " + mod;
                 mod = mod.replace( re, "#" );
                 Item.matchTotalMod( mod, matches, function( total ) {
                     for ( var p in total ) {
@@ -965,6 +968,7 @@ class Item {
                         matches.push( parseFloat( match[1]));
                         match = re.exec( mod );
                     }
+                    mod = "(Crafted) " + mod;
                     mod = mod.replace( re, "#" );
                     Item.matchTotalMod( mod, matches, function( total ) {
                         for ( var p in total ) {
@@ -1011,6 +1015,7 @@ class Item {
                             matches.push( parseFloat( match[1]));
                             match = re.exec( mod );
                         }
+                        mod = "(Enchant) " + mod;
                         mod = mod.replace( re, "#" );
                         // If mod already exists (for example, implicit + explicit)
                         if ( parsedMods[mod]) {

@@ -244,6 +244,7 @@ $( document).ready( function() {
         $( "#add-affix" ).addClass( "disabled" );
         $( "#cancel-affix" ).addClass( "disabled" );
         $( "#add-affix" ).text( "Add" );
+        $( "#affixes" ).prop( "disabled", false );
     };
 
     // When clicking on 'Clear Filter'
@@ -1114,6 +1115,7 @@ $( document).ready( function() {
                     $( "#add-affix" ).addClass( "disabled" );
                     $( "#cancel-affix" ).addClass( "disabled" );
                     $( "#add-affix" ).text( "Add" );
+                    $( "#affixes" ).prop( "disabled", false );
                     async.each( filter.affixesDis, function( affix, cbAffix ) {
                         // console.log( affix );
                         var generated = "";
@@ -1401,6 +1403,7 @@ $( document).ready( function() {
         $( "#add-affix" ).addClass( "disabled" );
         $( "#cancel-affix" ).addClass( "disabled" );
         $( "#add-affix" ).text( "Add" );
+        $( "#affixes" ).prop( "disabled", false );
     });
     
     // When clicking on 'add affix'
@@ -1410,8 +1413,10 @@ $( document).ready( function() {
         if ( affix !== "" ) {
             var min = $( "#affix-min" ).val();
             min = min === "" ? "…" : min;
+            min = "<span class='value'>" + min + "</span>";
             var max = $( "#affix-max" ).val();
             max = max === "" ? "…" : max;
+            max = "<span class='value'>" + max + "</span>";
             var count = ( affix.match( /#/g ) || []).length;
             if ( count > 1 ) {
                 affix = affix.replace( "#", min );
@@ -1446,7 +1451,7 @@ $( document).ready( function() {
                 }
                 var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
                 var match      = extractReg.exec( obj.affix );
-                $( "#" + obj.id ).text( obj.affix.replace( /^\([a-zA-Z ]+\)\s*/, "" ));
+                $( "#" + obj.id ).html( obj.affix.replace( /^\([a-zA-Z ]+\)\s*/, "" ));
                 $( "#" + obj.id ).prepend( "<span class='badge affix-" + match[1].toLowerCase() + "' data-badge-caption='" + match[1] + "'></span>" );
 
                 $( "#" + obj.id ).data( "data-item", obj );
@@ -1462,6 +1467,7 @@ $( document).ready( function() {
                 Materialize.updateTextFields();
                 $( "#add-affix" ).addClass( "disabled" );
                 $( "#cancel-affix" ).addClass( "disabled" );
+                $( "#affixes" ).prop( "disabled", false );
             });
         }
     });
@@ -2477,6 +2483,7 @@ $( document).ready( function() {
 
     var bindAffixEdition = function( id ) {
         $( ".affix-item#" + id ).click( function() {
+            $( "#affixes" ).prop( "disabled", true );
             loadedAffix = true;
             editingAffix = id;
             var affix = $( this ).text();

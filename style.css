@@ -908,3 +908,8 @@ label:disabled {
 .affix-filter-list {
     margin-top: 5px;
 }
+
+.value {
+    color: #49bf9b;
+    font-weight: bold;
+}
