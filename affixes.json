@@ -1,5 +1,5 @@
 {
-    "One Handed Axe": {
+    "One-handed Axe": {
         "prefix": {
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": 1, "max": 3, "lvl": 2 },
@@ -881,7 +881,7 @@
             ]
         }
     },
-    "One Handed Mace": {
+    "One-handed Mace": {
         "prefix": {
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": 1, "max": 3, "lvl": 2 },
@@ -1515,7 +1515,7 @@
             ]
         }
     },
-    "One Handed Sword": {
+    "One-handed Sword": {
         "prefix": {
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": 1, "max": 3, "lvl": 2 },
@@ -2140,7 +2140,7 @@
             ]
         }
     },
-    "Two Handed Axe": {
+    "Two-handed Axe": {
         "prefix": {
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": 2, "max": 5, "lvl": 2 },
@@ -2693,7 +2693,7 @@
             ]
         }
     },
-    "Two Handed Mace": {
+    "Two-handed Mace": {
         "prefix": {
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": 2, "max": 5, "lvl": 2 },
@@ -3322,7 +3322,7 @@
             ]
         }
     },
-    "Two Handed Sword": {
+    "Two-handed Sword": {
         "prefix": {
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": 2, "max": 5, "lvl": 2 },
@@ -8185,7 +8185,7 @@
             }
         }
     },
-    "Armor": {
+    "Body-armor": {
         "AR": {
             "prefix": {
                 "Reflects # Physical Damage to Melee Attackers": [
@@ -9439,14 +9439,14 @@
         "prefix": {
             "Adds # to # Cold Damage to Attacks": [
                 { "name": "Frosted", "min": 1, "max": 2, "lvl": 2 },
-                { "name": "Chilled", "min": 3, "max": 8, "lvl": 13 },
-                { "name": "Icy", "min": 5, "max": 12, "lvl": 21 },
-                { "name": "Frigid", "min": 6, "max": 16, "lvl": 29 },
-                { "name": "Freezing", "min": 8, "max": 19, "lvl": 36 },
-                { "name": "Frozen", "min": 10, "max": 24, "lvl": 45 },
-                { "name": "Glaciated", "min": 12, "max": 28, "lvl": 53 },
-                { "name": "Polar", "min": 14, "max": 34, "lvl": 65 },
-                { "name": "Entombing", "min": 17, "max": 40, "lvl": 77 }
+                { "name": "Chilled", "min": [3,4], "max": [7,8], "lvl": 13 },
+                { "name": "Icy", "min": [5,7], "max": [10,12], "lvl": 21 },
+                { "name": "Frigid", "min": [6,9], "max": [13,16], "lvl": 29 },
+                { "name": "Freezing", "min": [8,11], "max": [16,19], "lvl": 36 },
+                { "name": "Frozen", "min": [10,13], "max": [20,24], "lvl": 45 },
+                { "name": "Glaciated", "min": [12,16], "max": [24,28], "lvl": 53 },
+                { "name": "Polar", "min": [14,19], "max": [29,34], "lvl": 65 },
+                { "name": "Entombing", "min": [17,22], "max": [34,40], "lvl": 77 }
             ],
             "#% increased maximum Energy Shield": [
                 { "name": "Protective", "min": 2, "max": 4, "lvl": 3 },
@@ -9468,14 +9468,14 @@
             ],
             "Adds # to # Fire Damage to Attacks": [
                 { "name": "Heated", "min": 1, "max": 2, "lvl": 1 },
-                { "name": "Smouldering", "min": 3, "max": 8, "lvl": 12 },
-                { "name": "Smoking", "min": 5, "max": 13, "lvl": 20 },
-                { "name": "Burning", "min": 7, "max": 18, "lvl": 28 },
-                { "name": "Flaming", "min": 9, "max": 22, "lvl": 35 },
-                { "name": "Scorching", "min": 11, "max": 27, "lvl": 44 },
-                { "name": "Incinerating", "min": 13, "max": 31, "lvl": 52 },
-                { "name": "Blasting", "min": 16, "max": 38, "lvl": 64 },
-                { "name": "Cremating", "min": 19, "max": 45, "lvl": 76 }
+                { "name": "Smouldering", "min": [3,5], "max": [7,8], "lvl": 12 },
+                { "name": "Smoking", "min": [5,7], "max": [11,13], "lvl": 20 },
+                { "name": "Burning", "min": [7,10], "max": [15,18], "lvl": 28 },
+                { "name": "Flaming", "min": [9,12], "max": [19,22], "lvl": 35 },
+                { "name": "Scorching", "min": [11,15], "max": [23,27], "lvl": 44 },
+                { "name": "Incinerating", "min": [13,18], "max": [27,31], "lvl": 52 },
+                { "name": "Blasting", "min": [16,22], "max": [32,38], "lvl": 64 },
+                { "name": "Cremating", "min": [19,25], "max": [39,45], "lvl": 76 }
             ],
             "+# to maximum Energy Shield": [
                 { "name": "Shining", "min": 1, "max": 3, "lvl": 3 },
@@ -9545,14 +9545,14 @@
             ],
             "Adds # to # Lightning Damage to Attacks": [
                 { "name": "Humming", "min": 1, "max": 5, "lvl": 3 },
-                { "name": "Buzzing", "min": 1, "max": 15, "lvl": 13 },
-                { "name": "Snapping", "min": 1, "max": 23, "lvl": 22 },
-                { "name": "Crackling", "min": 1, "max": 28, "lvl": 28 },
-                { "name": "Sparking", "min": 1, "max": 34, "lvl": 35 },
-                { "name": "Arcing", "min": 1, "max": 43, "lvl": 44 },
-                { "name": "Shocking", "min": 2, "max": 50, "lvl": 52 },
-                { "name": "Discharging", "min": 3, "max": 61, "lvl": 64 },
-                { "name": "Electrocuting", "min": 3, "max": 72, "lvl": 76 }
+                { "name": "Buzzing", "min": 1, "max": [14,15], "lvl": 13 },
+                { "name": "Snapping", "min": [1,2], "max": [22,23], "lvl": 22 },
+                { "name": "Crackling", "min": [1,2], "max": [27,28], "lvl": 28 },
+                { "name": "Sparking", "min": [1,3], "max": [33,34], "lvl": 35 },
+                { "name": "Arcing", "min": [1,4], "max": [40,43], "lvl": 44 },
+                { "name": "Shocking", "min": [2,5], "max": [47,50], "lvl": 52 },
+                { "name": "Discharging", "min": [3,6], "max": [57,61], "lvl": 64 },
+                { "name": "Electrocuting", "min": [3,7], "max": [68,72], "lvl": 76 }
             ],
             "#% of Physical Attack Damage Leeched as Mana": [
                 { "name": "Thirsty", "min": 0.2, "max": 0.4, "lvl": 50 },
@@ -10452,1387 +10452,1391 @@
             ]
         }
     },
-    "Life": {
-        "prefix": {
-            "Instant": [
-                { "name": "Seething", "min": 66, "max": 66, "lvl": 7 }
-            ],
-            "#% reduced Charges used": [
-                { "name": "Chemist's", "min": 25, "max": 20, "lvl": 14 }
-            ],
-            "+# Extra Charges": [
-                { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
-            ],
-            "Mod": [
-                { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 },
-                { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 },
-                { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
-            ],
-            "Mod": [
-                { "name": "Sapping", "min": 40, "max": 10, "lvl": 13 },
-                { "name": "Saturated", "min": 50, "max": 33, "lvl": 1 },
-                { "name": "Cautious", "min": 100, "max": 100, "lvl": 6 }
-            ],
-            "Mod": [
-                { "name": "Catalysed", "min": 50, "max": 50, "lvl": 1 },
-                { "name": "Panicked", "min": 25, "max": 25, "lvl": 9 },
-                { "name": "Bubbling", "min": 50, "max": 135, "lvl": 3 }
-            ]
+    "Flask": {
+        "Life": {
+            "prefix": {
+                "Instant": [
+                    { "name": "Seething", "min": 66, "max": 66, "lvl": 7 }
+                ],
+                "#% reduced Charges used": [
+                    { "name": "Chemist's", "min": 25, "max": 20, "lvl": 14 }
+                ],
+                "+# Extra Charges": [
+                    { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
+                ],
+                "Mod": [
+                    { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 },
+                    { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 },
+                    { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
+                ],
+                "Mod": [
+                    { "name": "Sapping", "min": 40, "max": 10, "lvl": 13 },
+                    { "name": "Saturated", "min": 50, "max": 33, "lvl": 1 },
+                    { "name": "Cautious", "min": 100, "max": 100, "lvl": 6 }
+                ],
+                "Mod": [
+                    { "name": "Catalysed", "min": 50, "max": 50, "lvl": 1 },
+                    { "name": "Panicked", "min": 25, "max": 25, "lvl": 9 },
+                    { "name": "Bubbling", "min": 50, "max": 135, "lvl": 3 }
+                ]
+            },
+            "suffix": {
+                "Mod": [
+                    { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 },
+                    { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 },
+                    { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 },
+                    { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 },
+                    { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 },
+                    { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 },
+                    { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 },
+                    { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 },
+                    { "name": "of Warding", "min": 0, "max": 0, "lvl": 18 }
+                ],
+                "Immunity to Ignite during Flask": [
+                    { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
+                ],
+                "Immunity to Freeze and Chill during Flask": [
+                    { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
+                ],
+                "Immune to Poison during Flask": [
+                    { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
+                ],
+                "Grants #% of Life Recovery to Minions": [
+                    { "name": "of Animation", "min": 40, "max": 60, "lvl": 10 }
+                ],
+                "Immunity to Bleeding during Flask": [
+                    { "name": "of Staunching", "min": 0, "max": 0, "lvl": 8 }
+                ],
+                "Immunity to Shock during Flask": [
+                    { "name": "of Grounding", "min": 0, "max": 0, "lvl": 10 }
+                ]
+            }
         },
-        "suffix": {
-            "Mod": [
-                { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 },
-                { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 },
-                { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 },
-                { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 },
-                { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 },
-                { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 },
-                { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 },
-                { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 },
-                { "name": "of Warding", "min": 0, "max": 0, "lvl": 18 }
-            ],
-            "Immunity to Ignite during Flask": [
-                { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
-            ],
-            "Immunity to Freeze and Chill during Flask": [
-                { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
-            ],
-            "Immune to Poison during Flask": [
-                { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
-            ],
-            "Grants #% of Life Recovery to Minions": [
-                { "name": "of Animation", "min": 40, "max": 60, "lvl": 10 }
-            ],
-            "Immunity to Bleeding during Flask": [
-                { "name": "of Staunching", "min": 0, "max": 0, "lvl": 8 }
-            ],
-            "Immunity to Shock during Flask": [
-                { "name": "of Grounding", "min": 0, "max": 0, "lvl": 10 }
-            ]
+        "Mana": {
+            "prefix": {
+                "Instant": [
+                    { "name": "Seething", "min": 66, "max": 66, "lvl": 7 }
+                ],
+                "#% reduced Charges used": [
+                    { "name": "Chemist's", "min": 25, "max": 20, "lvl": 14 }
+                ],
+                "+# Extra Charges": [
+                    { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
+                ],
+                "Mod": [
+                    { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 },
+                    { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 },
+                    { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
+                ],
+                "Mod": [
+                    { "name": "Caustic", "min": 60, "max": 15, "lvl": 11 },
+                    { "name": "Saturated", "min": 50, "max": 33, "lvl": 1 },
+                    { "name": "Cautious", "min": 100, "max": 100, "lvl": 6 }
+                ],
+                "Mod": [
+                    { "name": "Catalysed", "min": 50, "max": 50, "lvl": 1 },
+                    { "name": "Panicked", "min": 25, "max": 25, "lvl": 9 },
+                    { "name": "Bubbling", "min": 50, "max": 135, "lvl": 3 }
+                ]
+            },
+            "suffix": {
+                "Mod": [
+                    { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 },
+                    { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 },
+                    { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 },
+                    { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 },
+                    { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 },
+                    { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 },
+                    { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 },
+                    { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 },
+                    { "name": "of Warding", "min": 0, "max": 0, "lvl": 18 }
+                ],
+                "Immunity to Ignite during Flask": [
+                    { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
+                ],
+                "Immunity to Freeze and Chill during Flask": [
+                    { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
+                ],
+                "Immune to Poison during Flask": [
+                    { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
+                ],
+                "Immunity to Bleeding during Flask": [
+                    { "name": "of Staunching", "min": 0, "max": 0, "lvl": 8 }
+                ],
+                "Immunity to Shock during Flask": [
+                    { "name": "of Grounding", "min": 0, "max": 0, "lvl": 10 }
+                ]
+            }
+        },
+        "Hybrid": {
+            "prefix": {
+                "Instant": [
+                    { "name": "Seething", "min": 66, "max": 66, "lvl": 7 }
+                ],
+                "#% reduced Charges used": [
+                    { "name": "Chemist's", "min": 25, "max": 20, "lvl": 14 }
+                ],
+                "+# Extra Charges": [
+                    { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
+                ],
+                "Mod": [
+                    { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 },
+                    { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 },
+                    { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
+                ],
+                "Mod": [
+                    { "name": "Saturated", "min": 50, "max": 33, "lvl": 1 },
+                    { "name": "Cautious", "min": 100, "max": 100, "lvl": 6 }
+                ],
+                "Mod": [
+                    { "name": "Catalysed", "min": 50, "max": 50, "lvl": 1 },
+                    { "name": "Panicked", "min": 25, "max": 25, "lvl": 9 },
+                    { "name": "Bubbling", "min": 50, "max": 135, "lvl": 3 }
+                ]
+            },
+            "suffix": {
+                "Mod": [
+                    { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 },
+                    { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 },
+                    { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 },
+                    { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 },
+                    { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 },
+                    { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 },
+                    { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 },
+                    { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 },
+                    { "name": "of Warding", "min": 0, "max": 0, "lvl": 18 }
+                ],
+                "Immunity to Ignite during Flask": [
+                    { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
+                ],
+                "Immunity to Freeze and Chill during Flask": [
+                    { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
+                ],
+                "Immune to Poison during Flask": [
+                    { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
+                ],
+                "Grants #% of Life Recovery to Minions": [
+                    { "name": "of Animation", "min": 40, "max": 60, "lvl": 10 }
+                ],
+                "Immunity to Bleeding during Flask": [
+                    { "name": "of Staunching", "min": 0, "max": 0, "lvl": 8 }
+                ],
+                "Immunity to Shock during Flask": [
+                    { "name": "of Grounding", "min": 0, "max": 0, "lvl": 10 }
+                ]
+            }
+        },
+        "Utility": {
+            "prefix": {
+                "#% reduced Charges used": [
+                    { "name": "Chemist's", "min": 25, "max": 20, "lvl": 14 }
+                ],
+                "+# Extra Charges": [
+                    { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
+                ],
+                "Mod group: FlaskRechargeRate": [
+                    { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 },
+                    { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 },
+                    { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
+                ],
+                "Mod group: FlaskRecoverySpeed": [
+                    { "name": "Alchemist's", "min": 33, "max": 25, "lvl": 20 },
+                    { "name": "Experimenter's", "min": 30, "max": 40, "lvl": 20 }
+                ]
+            },
+            "suffix": {
+                "Mod": [
+                    { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 },
+                    { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 },
+                    { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 },
+                    { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 },
+                    { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 },
+                    { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 },
+                    { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 },
+                    { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 },
+                    { "name": "of Warding", "min": 0, "max": 0, "lvl": 18 }
+                ],
+                "Immunity to Ignite during Flask": [
+                    { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
+                ],
+                "Immunity to Freeze and Chill during Flask": [
+                    { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
+                ],
+                "Immune to Poison during Flask": [
+                    { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
+                ],
+                "Immunity to Bleeding during Flask": [
+                    { "name": "of Staunching", "min": 0, "max": 0, "lvl": 8 }
+                ],
+                "Immunity to Shock during Flask": [
+                    { "name": "of Grounding", "min": 0, "max": 0, "lvl": 10 }
+                ]
+            }
+        },
+        "Critical Utility": {
+            "prefix": {
+                "#% reduced Charges used": [
+                    { "name": "Chemist's", "min": 25, "max": 20, "lvl": 14 }
+                ],
+                "+# Extra Charges": [
+                    { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
+                ],
+                "Mod": [
+                    { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 },
+                    { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
+                ],
+                "#% increased Duration": [
+                    { "name": "Experimenter's", "min": 30, "max": 40, "lvl": 20 }
+                ]
+            },
+            "suffix": {
+                "Mod": [
+                    { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 },
+                    { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 },
+                    { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 },
+                    { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 },
+                    { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 },
+                    { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 },
+                    { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 },
+                    { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 },
+                    { "name": "of Warding", "min": 0, "max": 0, "lvl": 18 }
+                ],
+                "Immunity to Ignite during Flask": [
+                    { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
+                ],
+                "Immunity to Freeze and Chill during Flask": [
+                    { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
+                ],
+                "Immune to Poison during Flask": [
+                    { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
+                ],
+                "Immunity to Bleeding during Flask": [
+                    { "name": "of Staunching", "min": 0, "max": 0, "lvl": 8 }
+                ],
+                "Immunity to Shock during Flask": [
+                    { "name": "of Grounding", "min": 0, "max": 0, "lvl": 10 }
+                ]
+            }
         }
     },
-    "Mana": {
-        "prefix": {
-            "Instant": [
-                { "name": "Seething", "min": 66, "max": 66, "lvl": 7 }
-            ],
-            "#% reduced Charges used": [
-                { "name": "Chemist's", "min": 25, "max": 20, "lvl": 14 }
-            ],
-            "+# Extra Charges": [
-                { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
-            ],
-            "Mod": [
-                { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 },
-                { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 },
-                { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
-            ],
-            "Mod": [
-                { "name": "Caustic", "min": 60, "max": 15, "lvl": 11 },
-                { "name": "Saturated", "min": 50, "max": 33, "lvl": 1 },
-                { "name": "Cautious", "min": 100, "max": 100, "lvl": 6 }
-            ],
-            "Mod": [
-                { "name": "Catalysed", "min": 50, "max": 50, "lvl": 1 },
-                { "name": "Panicked", "min": 25, "max": 25, "lvl": 9 },
-                { "name": "Bubbling", "min": 50, "max": 135, "lvl": 3 }
-            ]
+    "Jewel": {
+        "Cobalt": {
+            "prefix": {
+                "#% increased Chaos Damage": [
+                    { "name": "Chaotic", "min": 9, "max": 13, "lvl": 1 }
+                ],
+                "#% increased Cast Speed with Cold Skills": [
+                    { "name": "Cryomantic", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Cold Skills": [
+                    { "name": "Avalanching", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier with Cold Skills": [
+                    { "name": "Arctic", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Cold Damage": [
+                    { "name": "Chilling", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Sabotage", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Leadership", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Trapping", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% faster start of Energy Shield Recharge": [
+                    { "name": "Serene", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% increased maximum Energy Shield": [
+                    { "name": "Shimmering", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Energy Shield Recharge Rate": [
+                    { "name": "Fevered", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Cast Speed with Fire Skills": [
+                    { "name": "Pyromantic", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Fire Skills": [
+                    { "name": "Incinerating", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier with Fire Skills": [
+                    { "name": "Infernal", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Fire Damage": [
+                    { "name": "Flaming", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Parrying", "min": 1, "max": 1, "lvl": 1 },
+                    { "name": "Shielding", "min": 1, "max": 1, "lvl": 1 },
+                    { "name": "Deflecting", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Dissipating", "min": 1, "max": 1, "lvl": 1 },
+                    { "name": "Thwarting", "min": 1, "max": 1, "lvl": 1 },
+                    { "name": "Halting", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% increased Totem Life": [
+                    { "name": "Carved", "min": 8, "max": 12, "lvl": 1 }
+                ],
+                "#% increased Cast Speed with Lightning Skills": [
+                    { "name": "Electromantic", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Lightning Skills": [
+                    { "name": "Thundering", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier with Lightning Skills": [
+                    { "name": "Surging", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Lightning Damage": [
+                    { "name": "Humming", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Mana Regeneration Rate": [
+                    { "name": "Energetic", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% increased maximum Life": [
+                    { "name": "Vivid", "min": 5, "max": 7, "lvl": 1 }
+                ],
+                "#% increased maximum Mana": [
+                    { "name": "Enlightened", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Harmonic", "min": 4, "max": 6, "lvl": 1 },
+                    { "name": "Charging", "min": 4, "max": 6, "lvl": 1 },
+                    { "name": "Resonant", "min": 3, "max": 5, "lvl": 1 },
+                    { "name": "Warding", "min": 3, "max": 5, "lvl": 1 },
+                    { "name": "Wright's", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Mine Laying Speed": [
+                    { "name": "Arming", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "Minions have #% increased maximum Life": [
+                    { "name": "Master's", "min": 8, "max": 12, "lvl": 1 }
+                ],
+                "#% increased Physical Damage": [
+                    { "name": "Sharpened", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with Wands": [
+                    { "name": "Cruel", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with Wands": [
+                    { "name": "Jinxing", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Sorcerer's", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Battlemage's", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Wizard's", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Totem Damage": [
+                    { "name": "Shaman's", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Trap Throwing Speed": [
+                    { "name": "Honed", "min": 6, "max": 8, "lvl": 1 }
+                ]
+            },
+            "suffix": {
+                "Mod": [
+                    { "name": "of Freezing", "min": 2, "max": 16, "lvl": 1 },
+                    { "name": "of Burning", "min": 2, "max": 5, "lvl": 1 },
+                    { "name": "of Shocking", "min": 2, "max": 16, "lvl": 1 }
+                ],
+                "+# to all Attributes": [
+                    { "name": "of Adaption", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "+#% to all Elemental Resistances": [
+                    { "name": "of Resistance", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Area Damage": [
+                    { "name": "of Blasting", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "#% increased Attack and Cast Speed": [
+                    { "name": "of Zeal", "min": 2, "max": 4, "lvl": 1 }
+                ],
+                "+#% to Chaos Resistance": [
+                    { "name": "of Order", "min": 7, "max": 13, "lvl": 1 }
+                ],
+                "+#% to Cold and Lightning Resistances": [
+                    { "name": "of Shelter", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "+#% to Cold Resistance": [
+                    { "name": "of the Beast", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% increased Global Critical Strike Chance": [
+                    { "name": "of Menace", "min": 8, "max": 12, "lvl": 1 }
+                ],
+                "+#% to Global Critical Strike Multiplier": [
+                    { "name": "of Potency", "min": 9, "max": 12, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "of Wounding", "min": 8, "max": 10, "lvl": 1 },
+                    { "name": "of Archery", "min": 10, "max": 12, "lvl": 1 },
+                    { "name": "of Mysticism", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "#% increased Damage over Time": [
+                    { "name": "of Entropy", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "+# to Dexterity": [
+                    { "name": "of Dexterity", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "+# to Dexterity and Intelligence": [
+                    { "name": "of Cunning", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Elemental Skills": [
+                    { "name": "of the Apocalypse", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier with Elemental Skills": [
+                    { "name": "of the Elements", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "+# Energy Shield gained for each Enemy hit by your Attacks": [
+                    { "name": "of Focus", "min": 2, "max": 3, "lvl": 1 }
+                ],
+                "+#% to Fire and Cold Resistances": [
+                    { "name": "of the Hearth", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "+#% to Fire and Lightning Resistances": [
+                    { "name": "of Insulation", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "+#% to Fire Resistance": [
+                    { "name": "of the Dragon", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance for Spells": [
+                    { "name": "of Annihilation", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier for Spells": [
+                    { "name": "of Unmaking", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% increased Attack Speed": [
+                    { "name": "of Berserking", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Cast Speed": [
+                    { "name": "of Enchanting", "min": 2, "max": 4, "lvl": 1 }
+                ],
+                "+# to Intelligence": [
+                    { "name": "of Intelligence", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Rarity of Items found": [
+                    { "name": "of Raiding", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% chance to Knock Enemies Back on hit": [
+                    { "name": "of Fending", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "+#% to Lightning Resistance": [
+                    { "name": "of Grounding", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% reduced Mana Cost of Skills": [
+                    { "name": "of Efficiency", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "Minions have #% Chance to Block": [
+                    { "name": "of the Wall", "min": 2, "max": 4, "lvl": 1 }
+                ],
+                "Minions have +#% to all Elemental Resistances": [
+                    { "name": "of Resilience", "min": 6, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Projectile Speed": [
+                    { "name": "of Soaring", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "+# to Strength": [
+                    { "name": "of Strength", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "+# to Strength and Dexterity": [
+                    { "name": "of Athletics", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "+# to Strength and Intelligence": [
+                    { "name": "of Spirit", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Stun Duration on Enemies": [
+                    { "name": "of Stunning", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "#% increased Stun and Block Recovery": [
+                    { "name": "of Recovery", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "Totems gain +#% to all Elemental Resistances": [
+                    { "name": "of Runes", "min": 6, "max": 10, "lvl": 1 }
+                ]
+            },
+            "corrupted": {
+                "#% reduced Character Size": [
+                    { "name": "ReducedCharacterSizeJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% additional Chance to receive a Critical Strike": [
+                    { "name": "ChanceToBeCritJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "Adds # to # Chaos Damage to Attacks": [
+                    { "name": "AddedChaosDamageJewelCorrupted", "min": 1, "max": 3, "lvl": 1 }
+                ],
+                "#% increased Chaos Damage per equipped Corrupted Item": [
+                    { "name": "ChaosDamagePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "+#% to Chaos Resistance": [
+                    { "name": "ChaosResistJewelCorrupted", "min": 1, "max": 3, "lvl": 1 }
+                ],
+                "#% increased": [
+                    { "name": "IncreasedChargeDurationJewelCorrupted_", "min": 3, "max": 7, "lvl": 1 }
+                ],
+                "#% increased Damage while Dead": [
+                    { "name": "DamageWhileDeadJewelCorrupted", "min": 20, "max": 30, "lvl": 1 }
+                ],
+                "#% increased Life Leeched per second per equipped Corrupted Item": [
+                    { "name": "LifeLeechRatePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% increased Mana Leeched per second per equipped Corrupted Item": [
+                    { "name": "ManaLeechRatePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "You cannot be Cursed with Silence": [
+                    { "name": "SilenceImmunityJewelCorrupted", "min": 0, "max": 0, "lvl": 1 }
+                ],
+                "#% reduced Ignite Duration on You": [
+                    { "name": "ReducedIgniteDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% reduced Chill Duration on You": [
+                    { "name": "ReducedChillDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% reduced Freeze Duration on You": [
+                    { "name": "ReducedFreezeDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% reduced Shock Duration on You": [
+                    { "name": "ReducedShockDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Vaal Skill Damage": [
+                    { "name": "VaalSkillDamageJewelCorrupted", "min": 5, "max": 10, "lvl": 1 }
+                ]
+            }
         },
-        "suffix": {
-            "Mod": [
-                { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 },
-                { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 },
-                { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 },
-                { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 },
-                { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 },
-                { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 },
-                { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 },
-                { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 },
-                { "name": "of Warding", "min": 0, "max": 0, "lvl": 18 }
-            ],
-            "Immunity to Ignite during Flask": [
-                { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
-            ],
-            "Immunity to Freeze and Chill during Flask": [
-                { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
-            ],
-            "Immune to Poison during Flask": [
-                { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
-            ],
-            "Immunity to Bleeding during Flask": [
-                { "name": "of Staunching", "min": 0, "max": 0, "lvl": 8 }
-            ],
-            "Immunity to Shock during Flask": [
-                { "name": "of Grounding", "min": 0, "max": 0, "lvl": 10 }
-            ]
-        }
-    },
-    "Hybrid": {
-        "prefix": {
-            "Instant": [
-                { "name": "Seething", "min": 66, "max": 66, "lvl": 7 }
-            ],
-            "#% reduced Charges used": [
-                { "name": "Chemist's", "min": 25, "max": 20, "lvl": 14 }
-            ],
-            "+# Extra Charges": [
-                { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
-            ],
-            "Mod": [
-                { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 },
-                { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 },
-                { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
-            ],
-            "Mod": [
-                { "name": "Saturated", "min": 50, "max": 33, "lvl": 1 },
-                { "name": "Cautious", "min": 100, "max": 100, "lvl": 6 }
-            ],
-            "Mod": [
-                { "name": "Catalysed", "min": 50, "max": 50, "lvl": 1 },
-                { "name": "Panicked", "min": 25, "max": 25, "lvl": 9 },
-                { "name": "Bubbling", "min": 50, "max": 135, "lvl": 3 }
-            ]
+        "Crimson": {
+            "prefix": {
+                "#% increased Chaos Damage": [
+                    { "name": "Chaotic", "min": 9, "max": 13, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Cold Skills": [
+                    { "name": "Avalanching", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier with Cold Skills": [
+                    { "name": "Arctic", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Cold Damage": [
+                    { "name": "Chilling", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Fire Skills": [
+                    { "name": "Incinerating", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier with Fire Skills": [
+                    { "name": "Infernal", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Fire Damage": [
+                    { "name": "Flaming", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "Mod group: FormBlock": [
+                    { "name": "Parrying", "min": 1, "max": 1, "lvl": 1 },
+                    { "name": "Shielding", "min": 1, "max": 1, "lvl": 1 },
+                    { "name": "Deflecting", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "Mod group: FormSpellBlock": [
+                    { "name": "Dissipating", "min": 1, "max": 1, "lvl": 1 },
+                    { "name": "Thwarting", "min": 1, "max": 1, "lvl": 1 },
+                    { "name": "Halting", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% increased Armour": [
+                    { "name": "Armoured", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Totem Life": [
+                    { "name": "Carved", "min": 8, "max": 12, "lvl": 1 }
+                ],
+                "#% of Physical Attack Damage Leeched as Life": [
+                    { "name": "Hungering", "min": 0.2, "max": 0.4, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Lightning Skills": [
+                    { "name": "Thundering", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier with Lightning Skills": [
+                    { "name": "Surging", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Lightning Damage": [
+                    { "name": "Humming", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Mana Regeneration Rate": [
+                    { "name": "Energetic", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% increased maximum Life": [
+                    { "name": "Vivid", "min": 5, "max": 7, "lvl": 1 }
+                ],
+                "#% increased maximum Mana": [
+                    { "name": "Enlightened", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "Mod group: MeleeTypeCritChance": [
+                    { "name": "Technical", "min": 14, "max": 18, "lvl": 1 },
+                    { "name": "Harming", "min": 14, "max": 18, "lvl": 1 },
+                    { "name": "Sundering", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "Mod group: MeleeTypeCritMultiplier": [
+                    { "name": "Puncturing", "min": 15, "max": 18, "lvl": 1 },
+                    { "name": "Piercing", "min": 15, "max": 18, "lvl": 1 },
+                    { "name": "Rupturing", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "Mod group: MeleeTypeDamage": [
+                    { "name": "Gladiator's", "min": 12, "max": 14, "lvl": 1 },
+                    { "name": "Soldier's", "min": 12, "max": 14, "lvl": 1 },
+                    { "name": "Champion's", "min": 12, "max": 14, "lvl": 1 },
+                    { "name": "Flanking", "min": 12, "max": 14, "lvl": 1 }
+                ],
+                "Mod group: MeleeTypeSpeed": [
+                    { "name": "Harmonic", "min": 4, "max": 6, "lvl": 1 },
+                    { "name": "Charging", "min": 4, "max": 6, "lvl": 1 },
+                    { "name": "Bandit's", "min": 4, "max": 6, "lvl": 1 },
+                    { "name": "Warrior's", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% increased Physical Damage": [
+                    { "name": "Sharpened", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "Mod group: SpecificWeaponDamage": [
+                    { "name": "Sinister", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Brutal", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Judging", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Vicious", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "Mod group: SpecificWeaponSpeed": [
+                    { "name": "Cleaving", "min": 6, "max": 8, "lvl": 1 },
+                    { "name": "Beating", "min": 6, "max": 8, "lvl": 1 },
+                    { "name": "Blunt", "min": 6, "max": 8, "lvl": 1 },
+                    { "name": "Fencing", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Totem Damage": [
+                    { "name": "Shaman's", "min": 12, "max": 16, "lvl": 1 }
+                ]
+            },
+            "suffix": {
+                "Mod group: AilmentChanceAndDuration": [
+                    { "name": "of Freezing", "min": 2, "max": 16, "lvl": 1 },
+                    { "name": "of Burning", "min": 2, "max": 5, "lvl": 1 },
+                    { "name": "of Shocking", "min": 2, "max": 16, "lvl": 1 }
+                ],
+                "+# to all Attributes": [
+                    { "name": "of Adaption", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "+#% to all Elemental Resistances": [
+                    { "name": "of Resistance", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Area Damage": [
+                    { "name": "of Blasting", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "#% increased Attack and Cast Speed": [
+                    { "name": "of Zeal", "min": 2, "max": 4, "lvl": 1 }
+                ],
+                "+#% to Chaos Resistance": [
+                    { "name": "of Order", "min": 7, "max": 13, "lvl": 1 }
+                ],
+                "+#% to Cold and Lightning Resistances": [
+                    { "name": "of Shelter", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "+#% to Cold Resistance": [
+                    { "name": "of the Beast", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% increased Global Critical Strike Chance": [
+                    { "name": "of Menace", "min": 8, "max": 12, "lvl": 1 }
+                ],
+                "+#% to Global Critical Strike Multiplier": [
+                    { "name": "of Potency", "min": 9, "max": 12, "lvl": 1 }
+                ],
+                "Mod group: DamageForm": [
+                    { "name": "of Wounding", "min": 8, "max": 10, "lvl": 1 },
+                    { "name": "of Combat", "min": 10, "max": 12, "lvl": 1 },
+                    { "name": "of Archery", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "#% increased Damage over Time": [
+                    { "name": "of Entropy", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "+# to Dexterity": [
+                    { "name": "of Dexterity", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "+# to Dexterity and Intelligence": [
+                    { "name": "of Cunning", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Elemental Skills": [
+                    { "name": "of the Apocalypse", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier with Elemental Skills": [
+                    { "name": "of the Elements", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "+#% to Fire and Cold Resistances": [
+                    { "name": "of the Hearth", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "+#% to Fire and Lightning Resistances": [
+                    { "name": "of Insulation", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "+#% to Fire Resistance": [
+                    { "name": "of the Dragon", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% increased Melee Critical Strike Chance": [
+                    { "name": "of Weight", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "+#% to Melee Critical Strike Multiplier": [
+                    { "name": "of Demolishing", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% increased Attack Speed": [
+                    { "name": "of Berserking", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "+# to Intelligence": [
+                    { "name": "of Intelligence", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Rarity of Items found": [
+                    { "name": "of Raiding", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% chance to Knock Enemies Back on hit": [
+                    { "name": "of Fending", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "+# Life gained for each Enemy hit by your Attacks": [
+                    { "name": "of Rejuvenation", "min": 2, "max": 3, "lvl": 1 }
+                ],
+                "+#% to Lightning Resistance": [
+                    { "name": "of Grounding", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% reduced Mana Cost of Skills": [
+                    { "name": "of Efficiency", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Projectile Speed": [
+                    { "name": "of Soaring", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "+# to Strength": [
+                    { "name": "of Strength", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "+# to Strength and Dexterity": [
+                    { "name": "of Athletics", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "+# to Strength and Intelligence": [
+                    { "name": "of Spirit", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Stun Duration on Enemies": [
+                    { "name": "of Stunning", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "#% increased Stun and Block Recovery": [
+                    { "name": "of Recovery", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "Totems gain +#% to all Elemental Resistances": [
+                    { "name": "of Runes", "min": 6, "max": 10, "lvl": 1 }
+                ]
+            },
+            "corrupted": {
+                "#% reduced Character Size": [
+                    { "name": "ReducedCharacterSizeJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% additional Chance to receive a Critical Strike": [
+                    { "name": "ChanceToBeCritJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "Adds # to # Chaos Damage to Attacks": [
+                    { "name": "AddedChaosDamageJewelCorrupted", "min": 1, "max": 3, "lvl": 1 }
+                ],
+                "#% increased Chaos Damage per equipped Corrupted Item": [
+                    { "name": "ChaosDamagePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "+#% to Chaos Resistance": [
+                    { "name": "ChaosResistJewelCorrupted", "min": 1, "max": 3, "lvl": 1 }
+                ],
+                "#% increased": [
+                    { "name": "IncreasedChargeDurationJewelCorrupted_", "min": 3, "max": 7, "lvl": 1 }
+                ],
+                "#% increased Damage while Dead": [
+                    { "name": "DamageWhileDeadJewelCorrupted", "min": 20, "max": 30, "lvl": 1 }
+                ],
+                "#% increased Life Leeched per second per equipped Corrupted Item": [
+                    { "name": "LifeLeechRatePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% increased Mana Leeched per second per equipped Corrupted Item": [
+                    { "name": "ManaLeechRatePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "You cannot be Cursed with Silence": [
+                    { "name": "SilenceImmunityJewelCorrupted", "min": 0, "max": 0, "lvl": 1 }
+                ],
+                "#% reduced Ignite Duration on You": [
+                    { "name": "ReducedIgniteDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% reduced Chill Duration on You": [
+                    { "name": "ReducedChillDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% reduced Freeze Duration on You": [
+                    { "name": "ReducedFreezeDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% reduced Shock Duration on You": [
+                    { "name": "ReducedShockDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Vaal Skill Damage": [
+                    { "name": "VaalSkillDamageJewelCorrupted", "min": 5, "max": 10, "lvl": 1 }
+                ]
+            }
         },
-        "suffix": {
-            "Mod": [
-                { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 },
-                { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 },
-                { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 },
-                { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 },
-                { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 },
-                { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 },
-                { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 },
-                { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 },
-                { "name": "of Warding", "min": 0, "max": 0, "lvl": 18 }
-            ],
-            "Immunity to Ignite during Flask": [
-                { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
-            ],
-            "Immunity to Freeze and Chill during Flask": [
-                { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
-            ],
-            "Immune to Poison during Flask": [
-                { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
-            ],
-            "Grants #% of Life Recovery to Minions": [
-                { "name": "of Animation", "min": 40, "max": 60, "lvl": 10 }
-            ],
-            "Immunity to Bleeding during Flask": [
-                { "name": "of Staunching", "min": 0, "max": 0, "lvl": 8 }
-            ],
-            "Immunity to Shock during Flask": [
-                { "name": "of Grounding", "min": 0, "max": 0, "lvl": 10 }
-            ]
-        }
-    },
-    "Utility": {
-        "prefix": {
-            "#% reduced Charges used": [
-                { "name": "Chemist's", "min": 25, "max": 20, "lvl": 14 }
-            ],
-            "+# Extra Charges": [
-                { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
-            ],
-            "Mod group: FlaskRechargeRate": [
-                { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 },
-                { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 },
-                { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
-            ],
-            "Mod group: FlaskRecoverySpeed": [
-                { "name": "Alchemist's", "min": 33, "max": 25, "lvl": 20 },
-                { "name": "Experimenter's", "min": 30, "max": 40, "lvl": 20 }
-            ]
+        "Viridian": {
+            "prefix": {
+                "#% increased Chaos Damage": [
+                    { "name": "Chaotic", "min": 9, "max": 13, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Cold Skills": [
+                    { "name": "Avalanching", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier with Cold Skills": [
+                    { "name": "Arctic", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Cold Damage": [
+                    { "name": "Chilling", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Sabotage", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Trapping", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Evasion Rating": [
+                    { "name": "Evasive", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Fire Skills": [
+                    { "name": "Incinerating", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier with Fire Skills": [
+                    { "name": "Infernal", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Fire Damage": [
+                    { "name": "Flaming", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Parrying", "min": 1, "max": 1, "lvl": 1 },
+                    { "name": "Shielding", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Dissipating", "min": 1, "max": 1, "lvl": 1 },
+                    { "name": "Thwarting", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% increased Totem Life": [
+                    { "name": "Carved", "min": 8, "max": 12, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Lightning Skills": [
+                    { "name": "Thundering", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier with Lightning Skills": [
+                    { "name": "Surging", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Lightning Damage": [
+                    { "name": "Humming", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% of Physical Attack Damage Leeched as Mana": [
+                    { "name": "Thirsting", "min": 0.2, "max": 0.4, "lvl": 1 }
+                ],
+                "#% increased Mana Regeneration Rate": [
+                    { "name": "Energetic", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% increased maximum Life": [
+                    { "name": "Vivid", "min": 5, "max": 7, "lvl": 1 }
+                ],
+                "#% increased maximum Mana": [
+                    { "name": "Enlightened", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Technical", "min": 14, "max": 18, "lvl": 1 },
+                    { "name": "Harming", "min": 14, "max": 18, "lvl": 1 },
+                    { "name": "Sundering", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Puncturing", "min": 15, "max": 18, "lvl": 1 },
+                    { "name": "Piercing", "min": 15, "max": 18, "lvl": 1 },
+                    { "name": "Rupturing", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Gladiator's", "min": 12, "max": 14, "lvl": 1 },
+                    { "name": "Soldier's", "min": 12, "max": 14, "lvl": 1 },
+                    { "name": "Champion's", "min": 12, "max": 14, "lvl": 1 },
+                    { "name": "Flanking", "min": 12, "max": 14, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Harmonic", "min": 4, "max": 6, "lvl": 1 },
+                    { "name": "Charging", "min": 4, "max": 6, "lvl": 1 },
+                    { "name": "Bandit's", "min": 4, "max": 6, "lvl": 1 },
+                    { "name": "Warrior's", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% increased Mine Laying Speed": [
+                    { "name": "Arming", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Physical Damage": [
+                    { "name": "Sharpened", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Sinister", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Fierce", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Savage", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Lethal", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Vicious", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Cleaving", "min": 6, "max": 8, "lvl": 1 },
+                    { "name": "Volleying", "min": 6, "max": 8, "lvl": 1 },
+                    { "name": "Ripping", "min": 6, "max": 8, "lvl": 1 },
+                    { "name": "Slicing", "min": 6, "max": 8, "lvl": 1 },
+                    { "name": "Fencing", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Totem Damage": [
+                    { "name": "Shaman's", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Trap Throwing Speed": [
+                    { "name": "Honed", "min": 6, "max": 8, "lvl": 1 }
+                ]
+            },
+            "suffix": {
+                "#% increased Accuracy": [
+                    { "name": "of Deadliness", "min": 6, "max": 10, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "of Freezing", "min": 2, "max": 16, "lvl": 1 },
+                    { "name": "of Burning", "min": 2, "max": 5, "lvl": 1 },
+                    { "name": "of Shocking", "min": 2, "max": 16, "lvl": 1 }
+                ],
+                "+# to all Attributes": [
+                    { "name": "of Adaption", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "+#% to all Elemental Resistances": [
+                    { "name": "of Resistance", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Area Damage": [
+                    { "name": "of Blasting", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "#% increased Attack and Cast Speed": [
+                    { "name": "of Zeal", "min": 2, "max": 4, "lvl": 1 }
+                ],
+                "+#% to Chaos Resistance": [
+                    { "name": "of Order", "min": 7, "max": 13, "lvl": 1 }
+                ],
+                "+#% to Cold and Lightning Resistances": [
+                    { "name": "of Shelter", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "+#% to Cold Resistance": [
+                    { "name": "of the Beast", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% increased Global Critical Strike Chance": [
+                    { "name": "of Menace", "min": 8, "max": 12, "lvl": 1 }
+                ],
+                "+#% to Global Critical Strike Multiplier": [
+                    { "name": "of Potency", "min": 9, "max": 12, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "of Wounding", "min": 8, "max": 10, "lvl": 1 },
+                    { "name": "of Combat", "min": 10, "max": 12, "lvl": 1 },
+                    { "name": "of Archery", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "#% increased Damage over Time": [
+                    { "name": "of Entropy", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "+# to Dexterity": [
+                    { "name": "of Dexterity", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "+# to Dexterity and Intelligence": [
+                    { "name": "of Cunning", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Elemental Skills": [
+                    { "name": "of the Apocalypse", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier with Elemental Skills": [
+                    { "name": "of the Elements", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "+#% to Fire and Cold Resistances": [
+                    { "name": "of the Hearth", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "+#% to Fire and Lightning Resistances": [
+                    { "name": "of Insulation", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "+#% to Fire Resistance": [
+                    { "name": "of the Dragon", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% increased Melee Critical Strike Chance": [
+                    { "name": "of Weight", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "+#% to Melee Critical Strike Multiplier": [
+                    { "name": "of Demolishing", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% increased Accuracy Rating": [
+                    { "name": "of Precision", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "#% increased Attack Speed": [
+                    { "name": "of Berserking", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "+# to Intelligence": [
+                    { "name": "of Intelligence", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Rarity of Items found": [
+                    { "name": "of Raiding", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% chance to Knock Enemies Back on hit": [
+                    { "name": "of Fending", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "+#% to Lightning Resistance": [
+                    { "name": "of Grounding", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% reduced Mana Cost of Skills": [
+                    { "name": "of Efficiency", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "+# Mana gained for each Enemy hit by your Attacks": [
+                    { "name": "of Absorption", "min": 1, "max": 2, "lvl": 1 }
+                ],
+                "#% increased Projectile Speed": [
+                    { "name": "of Soaring", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "+# to Strength": [
+                    { "name": "of Strength", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "+# to Strength and Dexterity": [
+                    { "name": "of Athletics", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "+# to Strength and Intelligence": [
+                    { "name": "of Spirit", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Stun Duration on Enemies": [
+                    { "name": "of Stunning", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "#% increased Stun and Block Recovery": [
+                    { "name": "of Recovery", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "Totems gain +#% to all Elemental Resistances": [
+                    { "name": "of Runes", "min": 6, "max": 10, "lvl": 1 }
+                ]
+            },
+            "corrupted": {
+                "#% reduced Character Size": [
+                    { "name": "ReducedCharacterSizeJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% additional Chance to receive a Critical Strike": [
+                    { "name": "ChanceToBeCritJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "Adds # to # Chaos Damage to Attacks": [
+                    { "name": "AddedChaosDamageJewelCorrupted", "min": 1, "max": 3, "lvl": 1 }
+                ],
+                "#% increased Chaos Damage per equipped Corrupted Item": [
+                    { "name": "ChaosDamagePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "+#% to Chaos Resistance": [
+                    { "name": "ChaosResistJewelCorrupted", "min": 1, "max": 3, "lvl": 1 }
+                ],
+                "#% increased": [
+                    { "name": "IncreasedChargeDurationJewelCorrupted_", "min": 3, "max": 7, "lvl": 1 }
+                ],
+                "#% increased Damage while Dead": [
+                    { "name": "DamageWhileDeadJewelCorrupted", "min": 20, "max": 30, "lvl": 1 }
+                ],
+                "#% increased Life Leeched per second per equipped Corrupted Item": [
+                    { "name": "LifeLeechRatePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% increased Mana Leeched per second per equipped Corrupted Item": [
+                    { "name": "ManaLeechRatePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "You cannot be Cursed with Silence": [
+                    { "name": "SilenceImmunityJewelCorrupted", "min": 0, "max": 0, "lvl": 1 }
+                ],
+                "#% reduced Ignite Duration on You": [
+                    { "name": "ReducedIgniteDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% reduced Chill Duration on You": [
+                    { "name": "ReducedChillDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% reduced Freeze Duration on You": [
+                    { "name": "ReducedFreezeDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% reduced Shock Duration on You": [
+                    { "name": "ReducedShockDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Vaal Skill Damage": [
+                    { "name": "VaalSkillDamageJewelCorrupted", "min": 5, "max": 10, "lvl": 1 }
+                ]
+            }
         },
-        "suffix": {
-            "Mod": [
-                { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 },
-                { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 },
-                { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 },
-                { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 },
-                { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 },
-                { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 },
-                { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 },
-                { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 },
-                { "name": "of Warding", "min": 0, "max": 0, "lvl": 18 }
-            ],
-            "Immunity to Ignite during Flask": [
-                { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
-            ],
-            "Immunity to Freeze and Chill during Flask": [
-                { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
-            ],
-            "Immune to Poison during Flask": [
-                { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
-            ],
-            "Immunity to Bleeding during Flask": [
-                { "name": "of Staunching", "min": 0, "max": 0, "lvl": 8 }
-            ],
-            "Immunity to Shock during Flask": [
-                { "name": "of Grounding", "min": 0, "max": 0, "lvl": 10 }
-            ]
-        }
-    },
-    "Critical Utility": {
-        "prefix": {
-            "#% reduced Charges used": [
-                { "name": "Chemist's", "min": 25, "max": 20, "lvl": 14 }
-            ],
-            "+# Extra Charges": [
-                { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
-            ],
-            "Mod": [
-                { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 },
-                { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
-            ],
-            "#% increased Duration": [
-                { "name": "Experimenter's", "min": 30, "max": 40, "lvl": 20 }
-            ]
-        },
-        "suffix": {
-            "Mod": [
-                { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 },
-                { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 },
-                { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 },
-                { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 },
-                { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 },
-                { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 },
-                { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 },
-                { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 },
-                { "name": "of Warding", "min": 0, "max": 0, "lvl": 18 }
-            ],
-            "Immunity to Ignite during Flask": [
-                { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
-            ],
-            "Immunity to Freeze and Chill during Flask": [
-                { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
-            ],
-            "Immune to Poison during Flask": [
-                { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
-            ],
-            "Immunity to Bleeding during Flask": [
-                { "name": "of Staunching", "min": 0, "max": 0, "lvl": 8 }
-            ],
-            "Immunity to Shock during Flask": [
-                { "name": "of Grounding", "min": 0, "max": 0, "lvl": 10 }
-            ]
-        }
-    },
-    "Cobalt": {
-        "prefix": {
-            "#% increased Chaos Damage": [
-                { "name": "Chaotic", "min": 9, "max": 13, "lvl": 1 }
-            ],
-            "#% increased Cast Speed with Cold Skills": [
-                { "name": "Cryomantic", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance with Cold Skills": [
-                { "name": "Avalanching", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier with Cold Skills": [
-                { "name": "Arctic", "min": 15, "max": 18, "lvl": 1 }
-            ],
-            "#% increased Cold Damage": [
-                { "name": "Chilling", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Sabotage", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Leadership", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Trapping", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "#% faster start of Energy Shield Recharge": [
-                { "name": "Serene", "min": 4, "max": 6, "lvl": 1 }
-            ],
-            "#% increased maximum Energy Shield": [
-                { "name": "Shimmering", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "#% increased Energy Shield Recharge Rate": [
-                { "name": "Fevered", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "#% increased Cast Speed with Fire Skills": [
-                { "name": "Pyromantic", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance with Fire Skills": [
-                { "name": "Incinerating", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier with Fire Skills": [
-                { "name": "Infernal", "min": 15, "max": 18, "lvl": 1 }
-            ],
-            "#% increased Fire Damage": [
-                { "name": "Flaming", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Parrying", "min": 1, "max": 1, "lvl": 1 },
-                { "name": "Shielding", "min": 1, "max": 1, "lvl": 1 },
-                { "name": "Deflecting", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Dissipating", "min": 1, "max": 1, "lvl": 1 },
-                { "name": "Thwarting", "min": 1, "max": 1, "lvl": 1 },
-                { "name": "Halting", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "#% increased Totem Life": [
-                { "name": "Carved", "min": 8, "max": 12, "lvl": 1 }
-            ],
-            "#% increased Cast Speed with Lightning Skills": [
-                { "name": "Electromantic", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance with Lightning Skills": [
-                { "name": "Thundering", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier with Lightning Skills": [
-                { "name": "Surging", "min": 15, "max": 18, "lvl": 1 }
-            ],
-            "#% increased Lightning Damage": [
-                { "name": "Humming", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "#% increased Mana Regeneration Rate": [
-                { "name": "Energetic", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% increased maximum Life": [
-                { "name": "Vivid", "min": 5, "max": 7, "lvl": 1 }
-            ],
-            "#% increased maximum Mana": [
-                { "name": "Enlightened", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Harmonic", "min": 4, "max": 6, "lvl": 1 },
-                { "name": "Charging", "min": 4, "max": 6, "lvl": 1 },
-                { "name": "Resonant", "min": 3, "max": 5, "lvl": 1 },
-                { "name": "Warding", "min": 3, "max": 5, "lvl": 1 },
-                { "name": "Wright's", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% increased Mine Laying Speed": [
-                { "name": "Arming", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "Minions have #% increased maximum Life": [
-                { "name": "Master's", "min": 8, "max": 12, "lvl": 1 }
-            ],
-            "#% increased Physical Damage": [
-                { "name": "Sharpened", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "#% increased Physical Damage with Wands": [
-                { "name": "Cruel", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "#% increased Attack Speed with Wands": [
-                { "name": "Jinxing", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Sorcerer's", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Battlemage's", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Wizard's", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "#% increased Totem Damage": [
-                { "name": "Shaman's", "min": 12, "max": 16, "lvl": 1 }
-            ],
-            "#% increased Trap Throwing Speed": [
-                { "name": "Honed", "min": 6, "max": 8, "lvl": 1 }
-            ]
-        },
-        "suffix": {
-            "Mod": [
-                { "name": "of Freezing", "min": 2, "max": 16, "lvl": 1 },
-                { "name": "of Burning", "min": 2, "max": 5, "lvl": 1 },
-                { "name": "of Shocking", "min": 2, "max": 16, "lvl": 1 }
-            ],
-            "+# to all Attributes": [
-                { "name": "of Adaption", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "+#% to all Elemental Resistances": [
-                { "name": "of Resistance", "min": 8, "max": 10, "lvl": 1 }
-            ],
-            "#% increased Area Damage": [
-                { "name": "of Blasting", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "#% increased Attack and Cast Speed": [
-                { "name": "of Zeal", "min": 2, "max": 4, "lvl": 1 }
-            ],
-            "+#% to Chaos Resistance": [
-                { "name": "of Order", "min": 7, "max": 13, "lvl": 1 }
-            ],
-            "+#% to Cold and Lightning Resistances": [
-                { "name": "of Shelter", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "+#% to Cold Resistance": [
-                { "name": "of the Beast", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% increased Global Critical Strike Chance": [
-                { "name": "of Menace", "min": 8, "max": 12, "lvl": 1 }
-            ],
-            "+#% to Global Critical Strike Multiplier": [
-                { "name": "of Potency", "min": 9, "max": 12, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "of Wounding", "min": 8, "max": 10, "lvl": 1 },
-                { "name": "of Archery", "min": 10, "max": 12, "lvl": 1 },
-                { "name": "of Mysticism", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "#% increased Damage over Time": [
-                { "name": "of Entropy", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "+# to Dexterity": [
-                { "name": "of Dexterity", "min": 12, "max": 16, "lvl": 1 }
-            ],
-            "+# to Dexterity and Intelligence": [
-                { "name": "of Cunning", "min": 8, "max": 10, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance with Elemental Skills": [
-                { "name": "of the Apocalypse", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier with Elemental Skills": [
-                { "name": "of the Elements", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "+# Energy Shield gained for each Enemy hit by your Attacks": [
-                { "name": "of Focus", "min": 2, "max": 3, "lvl": 1 }
-            ],
-            "+#% to Fire and Cold Resistances": [
-                { "name": "of the Hearth", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "+#% to Fire and Lightning Resistances": [
-                { "name": "of Insulation", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "+#% to Fire Resistance": [
-                { "name": "of the Dragon", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance for Spells": [
-                { "name": "of Annihilation", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier for Spells": [
-                { "name": "of Unmaking", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% increased Attack Speed": [
-                { "name": "of Berserking", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% increased Cast Speed": [
-                { "name": "of Enchanting", "min": 2, "max": 4, "lvl": 1 }
-            ],
-            "+# to Intelligence": [
-                { "name": "of Intelligence", "min": 12, "max": 16, "lvl": 1 }
-            ],
-            "#% increased Rarity of Items found": [
-                { "name": "of Raiding", "min": 4, "max": 6, "lvl": 1 }
-            ],
-            "#% chance to Knock Enemies Back on hit": [
-                { "name": "of Fending", "min": 4, "max": 6, "lvl": 1 }
-            ],
-            "+#% to Lightning Resistance": [
-                { "name": "of Grounding", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% reduced Mana Cost of Skills": [
-                { "name": "of Efficiency", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "Minions have #% Chance to Block": [
-                { "name": "of the Wall", "min": 2, "max": 4, "lvl": 1 }
-            ],
-            "Minions have +#% to all Elemental Resistances": [
-                { "name": "of Resilience", "min": 6, "max": 10, "lvl": 1 }
-            ],
-            "#% increased Projectile Speed": [
-                { "name": "of Soaring", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "+# to Strength": [
-                { "name": "of Strength", "min": 12, "max": 16, "lvl": 1 }
-            ],
-            "+# to Strength and Dexterity": [
-                { "name": "of Athletics", "min": 8, "max": 10, "lvl": 1 }
-            ],
-            "+# to Strength and Intelligence": [
-                { "name": "of Spirit", "min": 8, "max": 10, "lvl": 1 }
-            ],
-            "#% increased Stun Duration on Enemies": [
-                { "name": "of Stunning", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "#% increased Stun and Block Recovery": [
-                { "name": "of Recovery", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "Totems gain +#% to all Elemental Resistances": [
-                { "name": "of Runes", "min": 6, "max": 10, "lvl": 1 }
-            ]
-        },
-        "corrupted": {
-            "#% reduced Character Size": [
-                { "name": "ReducedCharacterSizeJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "#% additional Chance to receive a Critical Strike": [
-                { "name": "ChanceToBeCritJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "Adds # to # Chaos Damage to Attacks": [
-                { "name": "AddedChaosDamageJewelCorrupted", "min": 1, "max": 3, "lvl": 1 }
-            ],
-            "#% increased Chaos Damage per equipped Corrupted Item": [
-                { "name": "ChaosDamagePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "+#% to Chaos Resistance": [
-                { "name": "ChaosResistJewelCorrupted", "min": 1, "max": 3, "lvl": 1 }
-            ],
-            "#% increased": [
-                { "name": "IncreasedChargeDurationJewelCorrupted_", "min": 3, "max": 7, "lvl": 1 }
-            ],
-            "#% increased Damage while Dead": [
-                { "name": "DamageWhileDeadJewelCorrupted", "min": 20, "max": 30, "lvl": 1 }
-            ],
-            "#% increased Life Leeched per second per equipped Corrupted Item": [
-                { "name": "LifeLeechRatePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "#% increased Mana Leeched per second per equipped Corrupted Item": [
-                { "name": "ManaLeechRatePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "You cannot be Cursed with Silence": [
-                { "name": "SilenceImmunityJewelCorrupted", "min": 0, "max": 0, "lvl": 1 }
-            ],
-            "#% reduced Ignite Duration on You": [
-                { "name": "ReducedIgniteDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% reduced Chill Duration on You": [
-                { "name": "ReducedChillDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% reduced Freeze Duration on You": [
-                { "name": "ReducedFreezeDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% reduced Shock Duration on You": [
-                { "name": "ReducedShockDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% increased Vaal Skill Damage": [
-                { "name": "VaalSkillDamageJewelCorrupted", "min": 5, "max": 10, "lvl": 1 }
-            ]
-        }
-    },
-    "Crimson": {
-        "prefix": {
-            "#% increased Chaos Damage": [
-                { "name": "Chaotic", "min": 9, "max": 13, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance with Cold Skills": [
-                { "name": "Avalanching", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier with Cold Skills": [
-                { "name": "Arctic", "min": 15, "max": 18, "lvl": 1 }
-            ],
-            "#% increased Cold Damage": [
-                { "name": "Chilling", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance with Fire Skills": [
-                { "name": "Incinerating", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier with Fire Skills": [
-                { "name": "Infernal", "min": 15, "max": 18, "lvl": 1 }
-            ],
-            "#% increased Fire Damage": [
-                { "name": "Flaming", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "Mod group: FormBlock": [
-                { "name": "Parrying", "min": 1, "max": 1, "lvl": 1 },
-                { "name": "Shielding", "min": 1, "max": 1, "lvl": 1 },
-                { "name": "Deflecting", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "Mod group: FormSpellBlock": [
-                { "name": "Dissipating", "min": 1, "max": 1, "lvl": 1 },
-                { "name": "Thwarting", "min": 1, "max": 1, "lvl": 1 },
-                { "name": "Halting", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "#% increased Armour": [
-                { "name": "Armoured", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "#% increased Totem Life": [
-                { "name": "Carved", "min": 8, "max": 12, "lvl": 1 }
-            ],
-            "#% of Physical Attack Damage Leeched as Life": [
-                { "name": "Hungering", "min": 0.2, "max": 0.4, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance with Lightning Skills": [
-                { "name": "Thundering", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier with Lightning Skills": [
-                { "name": "Surging", "min": 15, "max": 18, "lvl": 1 }
-            ],
-            "#% increased Lightning Damage": [
-                { "name": "Humming", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "#% increased Mana Regeneration Rate": [
-                { "name": "Energetic", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% increased maximum Life": [
-                { "name": "Vivid", "min": 5, "max": 7, "lvl": 1 }
-            ],
-            "#% increased maximum Mana": [
-                { "name": "Enlightened", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "Mod group: MeleeTypeCritChance": [
-                { "name": "Technical", "min": 14, "max": 18, "lvl": 1 },
-                { "name": "Harming", "min": 14, "max": 18, "lvl": 1 },
-                { "name": "Sundering", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "Mod group: MeleeTypeCritMultiplier": [
-                { "name": "Puncturing", "min": 15, "max": 18, "lvl": 1 },
-                { "name": "Piercing", "min": 15, "max": 18, "lvl": 1 },
-                { "name": "Rupturing", "min": 15, "max": 18, "lvl": 1 }
-            ],
-            "Mod group: MeleeTypeDamage": [
-                { "name": "Gladiator's", "min": 12, "max": 14, "lvl": 1 },
-                { "name": "Soldier's", "min": 12, "max": 14, "lvl": 1 },
-                { "name": "Champion's", "min": 12, "max": 14, "lvl": 1 },
-                { "name": "Flanking", "min": 12, "max": 14, "lvl": 1 }
-            ],
-            "Mod group: MeleeTypeSpeed": [
-                { "name": "Harmonic", "min": 4, "max": 6, "lvl": 1 },
-                { "name": "Charging", "min": 4, "max": 6, "lvl": 1 },
-                { "name": "Bandit's", "min": 4, "max": 6, "lvl": 1 },
-                { "name": "Warrior's", "min": 4, "max": 6, "lvl": 1 }
-            ],
-            "#% increased Physical Damage": [
-                { "name": "Sharpened", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "Mod group: SpecificWeaponDamage": [
-                { "name": "Sinister", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Brutal", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Judging", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Vicious", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "Mod group: SpecificWeaponSpeed": [
-                { "name": "Cleaving", "min": 6, "max": 8, "lvl": 1 },
-                { "name": "Beating", "min": 6, "max": 8, "lvl": 1 },
-                { "name": "Blunt", "min": 6, "max": 8, "lvl": 1 },
-                { "name": "Fencing", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "#% increased Totem Damage": [
-                { "name": "Shaman's", "min": 12, "max": 16, "lvl": 1 }
-            ]
-        },
-        "suffix": {
-            "Mod group: AilmentChanceAndDuration": [
-                { "name": "of Freezing", "min": 2, "max": 16, "lvl": 1 },
-                { "name": "of Burning", "min": 2, "max": 5, "lvl": 1 },
-                { "name": "of Shocking", "min": 2, "max": 16, "lvl": 1 }
-            ],
-            "+# to all Attributes": [
-                { "name": "of Adaption", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "+#% to all Elemental Resistances": [
-                { "name": "of Resistance", "min": 8, "max": 10, "lvl": 1 }
-            ],
-            "#% increased Area Damage": [
-                { "name": "of Blasting", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "#% increased Attack and Cast Speed": [
-                { "name": "of Zeal", "min": 2, "max": 4, "lvl": 1 }
-            ],
-            "+#% to Chaos Resistance": [
-                { "name": "of Order", "min": 7, "max": 13, "lvl": 1 }
-            ],
-            "+#% to Cold and Lightning Resistances": [
-                { "name": "of Shelter", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "+#% to Cold Resistance": [
-                { "name": "of the Beast", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% increased Global Critical Strike Chance": [
-                { "name": "of Menace", "min": 8, "max": 12, "lvl": 1 }
-            ],
-            "+#% to Global Critical Strike Multiplier": [
-                { "name": "of Potency", "min": 9, "max": 12, "lvl": 1 }
-            ],
-            "Mod group: DamageForm": [
-                { "name": "of Wounding", "min": 8, "max": 10, "lvl": 1 },
-                { "name": "of Combat", "min": 10, "max": 12, "lvl": 1 },
-                { "name": "of Archery", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "#% increased Damage over Time": [
-                { "name": "of Entropy", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "+# to Dexterity": [
-                { "name": "of Dexterity", "min": 12, "max": 16, "lvl": 1 }
-            ],
-            "+# to Dexterity and Intelligence": [
-                { "name": "of Cunning", "min": 8, "max": 10, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance with Elemental Skills": [
-                { "name": "of the Apocalypse", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier with Elemental Skills": [
-                { "name": "of the Elements", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "+#% to Fire and Cold Resistances": [
-                { "name": "of the Hearth", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "+#% to Fire and Lightning Resistances": [
-                { "name": "of Insulation", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "+#% to Fire Resistance": [
-                { "name": "of the Dragon", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% increased Melee Critical Strike Chance": [
-                { "name": "of Weight", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "+#% to Melee Critical Strike Multiplier": [
-                { "name": "of Demolishing", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% increased Attack Speed": [
-                { "name": "of Berserking", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "+# to Intelligence": [
-                { "name": "of Intelligence", "min": 12, "max": 16, "lvl": 1 }
-            ],
-            "#% increased Rarity of Items found": [
-                { "name": "of Raiding", "min": 4, "max": 6, "lvl": 1 }
-            ],
-            "#% chance to Knock Enemies Back on hit": [
-                { "name": "of Fending", "min": 4, "max": 6, "lvl": 1 }
-            ],
-            "+# Life gained for each Enemy hit by your Attacks": [
-                { "name": "of Rejuvenation", "min": 2, "max": 3, "lvl": 1 }
-            ],
-            "+#% to Lightning Resistance": [
-                { "name": "of Grounding", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% reduced Mana Cost of Skills": [
-                { "name": "of Efficiency", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% increased Projectile Speed": [
-                { "name": "of Soaring", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "+# to Strength": [
-                { "name": "of Strength", "min": 12, "max": 16, "lvl": 1 }
-            ],
-            "+# to Strength and Dexterity": [
-                { "name": "of Athletics", "min": 8, "max": 10, "lvl": 1 }
-            ],
-            "+# to Strength and Intelligence": [
-                { "name": "of Spirit", "min": 8, "max": 10, "lvl": 1 }
-            ],
-            "#% increased Stun Duration on Enemies": [
-                { "name": "of Stunning", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "#% increased Stun and Block Recovery": [
-                { "name": "of Recovery", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "Totems gain +#% to all Elemental Resistances": [
-                { "name": "of Runes", "min": 6, "max": 10, "lvl": 1 }
-            ]
-        },
-        "corrupted": {
-            "#% reduced Character Size": [
-                { "name": "ReducedCharacterSizeJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "#% additional Chance to receive a Critical Strike": [
-                { "name": "ChanceToBeCritJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "Adds # to # Chaos Damage to Attacks": [
-                { "name": "AddedChaosDamageJewelCorrupted", "min": 1, "max": 3, "lvl": 1 }
-            ],
-            "#% increased Chaos Damage per equipped Corrupted Item": [
-                { "name": "ChaosDamagePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "+#% to Chaos Resistance": [
-                { "name": "ChaosResistJewelCorrupted", "min": 1, "max": 3, "lvl": 1 }
-            ],
-            "#% increased": [
-                { "name": "IncreasedChargeDurationJewelCorrupted_", "min": 3, "max": 7, "lvl": 1 }
-            ],
-            "#% increased Damage while Dead": [
-                { "name": "DamageWhileDeadJewelCorrupted", "min": 20, "max": 30, "lvl": 1 }
-            ],
-            "#% increased Life Leeched per second per equipped Corrupted Item": [
-                { "name": "LifeLeechRatePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "#% increased Mana Leeched per second per equipped Corrupted Item": [
-                { "name": "ManaLeechRatePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "You cannot be Cursed with Silence": [
-                { "name": "SilenceImmunityJewelCorrupted", "min": 0, "max": 0, "lvl": 1 }
-            ],
-            "#% reduced Ignite Duration on You": [
-                { "name": "ReducedIgniteDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% reduced Chill Duration on You": [
-                { "name": "ReducedChillDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% reduced Freeze Duration on You": [
-                { "name": "ReducedFreezeDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% reduced Shock Duration on You": [
-                { "name": "ReducedShockDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% increased Vaal Skill Damage": [
-                { "name": "VaalSkillDamageJewelCorrupted", "min": 5, "max": 10, "lvl": 1 }
-            ]
-        }
-    },
-    "Viridian": {
-        "prefix": {
-            "#% increased Chaos Damage": [
-                { "name": "Chaotic", "min": 9, "max": 13, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance with Cold Skills": [
-                { "name": "Avalanching", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier with Cold Skills": [
-                { "name": "Arctic", "min": 15, "max": 18, "lvl": 1 }
-            ],
-            "#% increased Cold Damage": [
-                { "name": "Chilling", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Sabotage", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Trapping", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "#% increased Evasion Rating": [
-                { "name": "Evasive", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance with Fire Skills": [
-                { "name": "Incinerating", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier with Fire Skills": [
-                { "name": "Infernal", "min": 15, "max": 18, "lvl": 1 }
-            ],
-            "#% increased Fire Damage": [
-                { "name": "Flaming", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Parrying", "min": 1, "max": 1, "lvl": 1 },
-                { "name": "Shielding", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Dissipating", "min": 1, "max": 1, "lvl": 1 },
-                { "name": "Thwarting", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "#% increased Totem Life": [
-                { "name": "Carved", "min": 8, "max": 12, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance with Lightning Skills": [
-                { "name": "Thundering", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier with Lightning Skills": [
-                { "name": "Surging", "min": 15, "max": 18, "lvl": 1 }
-            ],
-            "#% increased Lightning Damage": [
-                { "name": "Humming", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "#% of Physical Attack Damage Leeched as Mana": [
-                { "name": "Thirsting", "min": 0.2, "max": 0.4, "lvl": 1 }
-            ],
-            "#% increased Mana Regeneration Rate": [
-                { "name": "Energetic", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% increased maximum Life": [
-                { "name": "Vivid", "min": 5, "max": 7, "lvl": 1 }
-            ],
-            "#% increased maximum Mana": [
-                { "name": "Enlightened", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Technical", "min": 14, "max": 18, "lvl": 1 },
-                { "name": "Harming", "min": 14, "max": 18, "lvl": 1 },
-                { "name": "Sundering", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Puncturing", "min": 15, "max": 18, "lvl": 1 },
-                { "name": "Piercing", "min": 15, "max": 18, "lvl": 1 },
-                { "name": "Rupturing", "min": 15, "max": 18, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Gladiator's", "min": 12, "max": 14, "lvl": 1 },
-                { "name": "Soldier's", "min": 12, "max": 14, "lvl": 1 },
-                { "name": "Champion's", "min": 12, "max": 14, "lvl": 1 },
-                { "name": "Flanking", "min": 12, "max": 14, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Harmonic", "min": 4, "max": 6, "lvl": 1 },
-                { "name": "Charging", "min": 4, "max": 6, "lvl": 1 },
-                { "name": "Bandit's", "min": 4, "max": 6, "lvl": 1 },
-                { "name": "Warrior's", "min": 4, "max": 6, "lvl": 1 }
-            ],
-            "#% increased Mine Laying Speed": [
-                { "name": "Arming", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "#% increased Physical Damage": [
-                { "name": "Sharpened", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Sinister", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Fierce", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Savage", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Lethal", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Vicious", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Cleaving", "min": 6, "max": 8, "lvl": 1 },
-                { "name": "Volleying", "min": 6, "max": 8, "lvl": 1 },
-                { "name": "Ripping", "min": 6, "max": 8, "lvl": 1 },
-                { "name": "Slicing", "min": 6, "max": 8, "lvl": 1 },
-                { "name": "Fencing", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "#% increased Totem Damage": [
-                { "name": "Shaman's", "min": 12, "max": 16, "lvl": 1 }
-            ],
-            "#% increased Trap Throwing Speed": [
-                { "name": "Honed", "min": 6, "max": 8, "lvl": 1 }
-            ]
-        },
-        "suffix": {
-            "#% increased Accuracy": [
-                { "name": "of Deadliness", "min": 6, "max": 10, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "of Freezing", "min": 2, "max": 16, "lvl": 1 },
-                { "name": "of Burning", "min": 2, "max": 5, "lvl": 1 },
-                { "name": "of Shocking", "min": 2, "max": 16, "lvl": 1 }
-            ],
-            "+# to all Attributes": [
-                { "name": "of Adaption", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "+#% to all Elemental Resistances": [
-                { "name": "of Resistance", "min": 8, "max": 10, "lvl": 1 }
-            ],
-            "#% increased Area Damage": [
-                { "name": "of Blasting", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "#% increased Attack and Cast Speed": [
-                { "name": "of Zeal", "min": 2, "max": 4, "lvl": 1 }
-            ],
-            "+#% to Chaos Resistance": [
-                { "name": "of Order", "min": 7, "max": 13, "lvl": 1 }
-            ],
-            "+#% to Cold and Lightning Resistances": [
-                { "name": "of Shelter", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "+#% to Cold Resistance": [
-                { "name": "of the Beast", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% increased Global Critical Strike Chance": [
-                { "name": "of Menace", "min": 8, "max": 12, "lvl": 1 }
-            ],
-            "+#% to Global Critical Strike Multiplier": [
-                { "name": "of Potency", "min": 9, "max": 12, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "of Wounding", "min": 8, "max": 10, "lvl": 1 },
-                { "name": "of Combat", "min": 10, "max": 12, "lvl": 1 },
-                { "name": "of Archery", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "#% increased Damage over Time": [
-                { "name": "of Entropy", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "+# to Dexterity": [
-                { "name": "of Dexterity", "min": 12, "max": 16, "lvl": 1 }
-            ],
-            "+# to Dexterity and Intelligence": [
-                { "name": "of Cunning", "min": 8, "max": 10, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance with Elemental Skills": [
-                { "name": "of the Apocalypse", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier with Elemental Skills": [
-                { "name": "of the Elements", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "+#% to Fire and Cold Resistances": [
-                { "name": "of the Hearth", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "+#% to Fire and Lightning Resistances": [
-                { "name": "of Insulation", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "+#% to Fire Resistance": [
-                { "name": "of the Dragon", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% increased Melee Critical Strike Chance": [
-                { "name": "of Weight", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "+#% to Melee Critical Strike Multiplier": [
-                { "name": "of Demolishing", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% increased Accuracy Rating": [
-                { "name": "of Precision", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "#% increased Attack Speed": [
-                { "name": "of Berserking", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "+# to Intelligence": [
-                { "name": "of Intelligence", "min": 12, "max": 16, "lvl": 1 }
-            ],
-            "#% increased Rarity of Items found": [
-                { "name": "of Raiding", "min": 4, "max": 6, "lvl": 1 }
-            ],
-            "#% chance to Knock Enemies Back on hit": [
-                { "name": "of Fending", "min": 4, "max": 6, "lvl": 1 }
-            ],
-            "+#% to Lightning Resistance": [
-                { "name": "of Grounding", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% reduced Mana Cost of Skills": [
-                { "name": "of Efficiency", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "+# Mana gained for each Enemy hit by your Attacks": [
-                { "name": "of Absorption", "min": 1, "max": 2, "lvl": 1 }
-            ],
-            "#% increased Projectile Speed": [
-                { "name": "of Soaring", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "+# to Strength": [
-                { "name": "of Strength", "min": 12, "max": 16, "lvl": 1 }
-            ],
-            "+# to Strength and Dexterity": [
-                { "name": "of Athletics", "min": 8, "max": 10, "lvl": 1 }
-            ],
-            "+# to Strength and Intelligence": [
-                { "name": "of Spirit", "min": 8, "max": 10, "lvl": 1 }
-            ],
-            "#% increased Stun Duration on Enemies": [
-                { "name": "of Stunning", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "#% increased Stun and Block Recovery": [
-                { "name": "of Recovery", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "Totems gain +#% to all Elemental Resistances": [
-                { "name": "of Runes", "min": 6, "max": 10, "lvl": 1 }
-            ]
-        },
-        "corrupted": {
-            "#% reduced Character Size": [
-                { "name": "ReducedCharacterSizeJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "#% additional Chance to receive a Critical Strike": [
-                { "name": "ChanceToBeCritJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "Adds # to # Chaos Damage to Attacks": [
-                { "name": "AddedChaosDamageJewelCorrupted", "min": 1, "max": 3, "lvl": 1 }
-            ],
-            "#% increased Chaos Damage per equipped Corrupted Item": [
-                { "name": "ChaosDamagePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "+#% to Chaos Resistance": [
-                { "name": "ChaosResistJewelCorrupted", "min": 1, "max": 3, "lvl": 1 }
-            ],
-            "#% increased": [
-                { "name": "IncreasedChargeDurationJewelCorrupted_", "min": 3, "max": 7, "lvl": 1 }
-            ],
-            "#% increased Damage while Dead": [
-                { "name": "DamageWhileDeadJewelCorrupted", "min": 20, "max": 30, "lvl": 1 }
-            ],
-            "#% increased Life Leeched per second per equipped Corrupted Item": [
-                { "name": "LifeLeechRatePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "#% increased Mana Leeched per second per equipped Corrupted Item": [
-                { "name": "ManaLeechRatePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "You cannot be Cursed with Silence": [
-                { "name": "SilenceImmunityJewelCorrupted", "min": 0, "max": 0, "lvl": 1 }
-            ],
-            "#% reduced Ignite Duration on You": [
-                { "name": "ReducedIgniteDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% reduced Chill Duration on You": [
-                { "name": "ReducedChillDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% reduced Freeze Duration on You": [
-                { "name": "ReducedFreezeDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% reduced Shock Duration on You": [
-                { "name": "ReducedShockDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% increased Vaal Skill Damage": [
-                { "name": "VaalSkillDamageJewelCorrupted", "min": 5, "max": 10, "lvl": 1 }
-            ]
-        }
-    },
-    "Prismatic": {
-        "prefix": {
-            "#% increased Chaos Damage": [
-                { "name": "Chaotic", "min": 9, "max": 13, "lvl": 1 }
-            ],
-            "#% increased Cast Speed with Cold Skills": [
-                { "name": "Cryomantic", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance with Cold Skills": [
-                { "name": "Avalanching", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier with Cold Skills": [
-                { "name": "Arctic", "min": 15, "max": 18, "lvl": 1 }
-            ],
-            "#% increased Cold Damage": [
-                { "name": "Chilling", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "Minions deal #% increased Damage": [
-                { "name": "Leadership", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "#% faster start of Energy Shield Recharge": [
-                { "name": "Serene", "min": 4, "max": 6, "lvl": 1 }
-            ],
-            "#% increased maximum Energy Shield": [
-                { "name": "Shimmering", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "#% increased Energy Shield Recharge Rate": [
-                { "name": "Fevered", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "#% increased Evasion Rating": [
-                { "name": "Evasive", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "#% increased Cast Speed with Fire Skills": [
-                { "name": "Pyromantic", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance with Fire Skills": [
-                { "name": "Incinerating", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier with Fire Skills": [
-                { "name": "Infernal", "min": 15, "max": 18, "lvl": 1 }
-            ],
-            "#% increased Fire Damage": [
-                { "name": "Flaming", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Parrying", "min": 1, "max": 1, "lvl": 1 },
-                { "name": "Shielding", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Dissipating", "min": 1, "max": 1, "lvl": 1 },
-                { "name": "Thwarting", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "#% increased Armour": [
-                { "name": "Armoured", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "#% increased Totem Life": [
-                { "name": "Carved", "min": 8, "max": 12, "lvl": 1 }
-            ],
-            "#% of Physical Attack Damage Leeched as Life": [
-                { "name": "Hungering", "min": 0.2, "max": 0.4, "lvl": 1 }
-            ],
-            "#% increased Cast Speed with Lightning Skills": [
-                { "name": "Electromantic", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance with Lightning Skills": [
-                { "name": "Thundering", "min": 14, "max": 18, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier with Lightning Skills": [
-                { "name": "Surging", "min": 15, "max": 18, "lvl": 1 }
-            ],
-            "#% increased Lightning Damage": [
-                { "name": "Humming", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "#% of Physical Attack Damage Leeched as Mana": [
-                { "name": "Thirsting", "min": 0.2, "max": 0.4, "lvl": 1 }
-            ],
-            "#% increased Mana Regeneration Rate": [
-                { "name": "Energetic", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% increased maximum Life": [
-                { "name": "Vivid", "min": 5, "max": 7, "lvl": 1 }
-            ],
-            "#% increased maximum Mana": [
-                { "name": "Enlightened", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Harmonic", "min": 4, "max": 6, "lvl": 1 },
-                { "name": "Charging", "min": 4, "max": 6, "lvl": 1 },
-                { "name": "Resonant", "min": 3, "max": 5, "lvl": 1 },
-                { "name": "Warding", "min": 3, "max": 5, "lvl": 1 },
-                { "name": "Wright's", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "Minions have #% increased maximum Life": [
-                { "name": "Master's", "min": 8, "max": 12, "lvl": 1 }
-            ],
-            "#% increased Physical Damage": [
-                { "name": "Sharpened", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Fierce", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Savage", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Lethal", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Brutal", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Judging", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Cruel", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Volleying", "min": 6, "max": 8, "lvl": 1 },
-                { "name": "Ripping", "min": 6, "max": 8, "lvl": 1 },
-                { "name": "Slicing", "min": 6, "max": 8, "lvl": 1 },
-                { "name": "Beating", "min": 6, "max": 8, "lvl": 1 },
-                { "name": "Blunt", "min": 6, "max": 8, "lvl": 1 },
-                { "name": "Jinxing", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "Sorcerer's", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Battlemage's", "min": 14, "max": 16, "lvl": 1 },
-                { "name": "Wizard's", "min": 14, "max": 16, "lvl": 1 }
-            ],
-            "#% increased Totem Damage": [
-                { "name": "Shaman's", "min": 12, "max": 16, "lvl": 1 }
-            ]
-        },
-        "suffix": {
-            "#% increased Accuracy": [
-                { "name": "of Deadliness", "min": 6, "max": 10, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "of Freezing", "min": 2, "max": 16, "lvl": 1 },
-                { "name": "of Burning", "min": 2, "max": 5, "lvl": 1 },
-                { "name": "of Shocking", "min": 2, "max": 16, "lvl": 1 }
-            ],
-            "+# to all Attributes": [
-                { "name": "of Adaption", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "+#% to all Elemental Resistances": [
-                { "name": "of Resistance", "min": 8, "max": 10, "lvl": 1 }
-            ],
-            "#% increased Area Damage": [
-                { "name": "of Blasting", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "#% increased Attack and Cast Speed": [
-                { "name": "of Zeal", "min": 2, "max": 4, "lvl": 1 }
-            ],
-            "+#% to Chaos Resistance": [
-                { "name": "of Order", "min": 7, "max": 13, "lvl": 1 }
-            ],
-            "+#% to Cold and Lightning Resistances": [
-                { "name": "of Shelter", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "+#% to Cold Resistance": [
-                { "name": "of the Beast", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% increased Global Critical Strike Chance": [
-                { "name": "of Menace", "min": 8, "max": 12, "lvl": 1 }
-            ],
-            "+#% to Global Critical Strike Multiplier": [
-                { "name": "of Potency", "min": 9, "max": 12, "lvl": 1 }
-            ],
-            "Mod": [
-                { "name": "of Wounding", "min": 8, "max": 10, "lvl": 1 },
-                { "name": "of Archery", "min": 10, "max": 12, "lvl": 1 },
-                { "name": "of Mysticism", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "#% increased Damage over Time": [
-                { "name": "of Entropy", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "+# to Dexterity": [
-                { "name": "of Dexterity", "min": 12, "max": 16, "lvl": 1 }
-            ],
-            "+# to Dexterity and Intelligence": [
-                { "name": "of Cunning", "min": 8, "max": 10, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance with Elemental Skills": [
-                { "name": "of the Apocalypse", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier with Elemental Skills": [
-                { "name": "of the Elements", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "+# Energy Shield gained for each Enemy hit by your Attacks": [
-                { "name": "of Focus", "min": 2, "max": 3, "lvl": 1 }
-            ],
-            "+#% to Fire and Cold Resistances": [
-                { "name": "of the Hearth", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "+#% to Fire and Lightning Resistances": [
-                { "name": "of Insulation", "min": 10, "max": 12, "lvl": 1 }
-            ],
-            "+#% to Fire Resistance": [
-                { "name": "of the Dragon", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% increased Critical Strike Chance for Spells": [
-                { "name": "of Annihilation", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "+#% to Critical Strike Multiplier for Spells": [
-                { "name": "of Unmaking", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% increased Accuracy Rating": [
-                { "name": "of Precision", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "#% increased Attack Speed": [
-                { "name": "of Berserking", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% increased Cast Speed": [
-                { "name": "of Enchanting", "min": 2, "max": 4, "lvl": 1 }
-            ],
-            "+# to Intelligence": [
-                { "name": "of Intelligence", "min": 12, "max": 16, "lvl": 1 }
-            ],
-            "#% increased Rarity of Items found": [
-                { "name": "of Raiding", "min": 4, "max": 6, "lvl": 1 }
-            ],
-            "#% chance to Knock Enemies Back on hit": [
-                { "name": "of Fending", "min": 4, "max": 6, "lvl": 1 }
-            ],
-            "+# Life gained for each Enemy hit by your Attacks": [
-                { "name": "of Rejuvenation", "min": 2, "max": 3, "lvl": 1 }
-            ],
-            "+#% to Lightning Resistance": [
-                { "name": "of Grounding", "min": 12, "max": 15, "lvl": 1 }
-            ],
-            "#% reduced Mana Cost of Skills": [
-                { "name": "of Efficiency", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "+# Mana gained for each Enemy hit by your Attacks": [
-                { "name": "of Absorption", "min": 1, "max": 2, "lvl": 1 }
-            ],
-            "Minions have #% Chance to Block": [
-                { "name": "of the Wall", "min": 2, "max": 4, "lvl": 1 }
-            ],
-            "Minions have +#% to all Elemental Resistances": [
-                { "name": "of Resilience", "min": 6, "max": 10, "lvl": 1 }
-            ],
-            "#% increased Projectile Speed": [
-                { "name": "of Soaring", "min": 6, "max": 8, "lvl": 1 }
-            ],
-            "+# to Strength": [
-                { "name": "of Strength", "min": 12, "max": 16, "lvl": 1 }
-            ],
-            "+# to Strength and Dexterity": [
-                { "name": "of Athletics", "min": 8, "max": 10, "lvl": 1 }
-            ],
-            "+# to Strength and Intelligence": [
-                { "name": "of Spirit", "min": 8, "max": 10, "lvl": 1 }
-            ],
-            "#% increased Stun Duration on Enemies": [
-                { "name": "of Stunning", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "#% increased Stun and Block Recovery": [
-                { "name": "of Recovery", "min": 10, "max": 14, "lvl": 1 }
-            ],
-            "Totems gain +#% to all Elemental Resistances": [
-                { "name": "of Runes", "min": 6, "max": 10, "lvl": 1 }
-            ]
-        },
-        "corrupted": {
-            "#% reduced Character Size": [
-                { "name": "ReducedCharacterSizeJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "#% additional Chance to receive a Critical Strike": [
-                { "name": "ChanceToBeCritJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "Adds # to # Chaos Damage to Attacks": [
-                { "name": "AddedChaosDamageJewelCorrupted", "min": 1, "max": 3, "lvl": 1 }
-            ],
-            "#% increased Chaos Damage per equipped Corrupted Item": [
-                { "name": "ChaosDamagePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "+#% to Chaos Resistance": [
-                { "name": "ChaosResistJewelCorrupted", "min": 1, "max": 3, "lvl": 1 }
-            ],
-            "#% increased": [
-                { "name": "IncreasedChargeDurationJewelCorrupted_", "min": 3, "max": 7, "lvl": 1 }
-            ],
-            "#% increased Damage while Dead": [
-                { "name": "DamageWhileDeadJewelCorrupted", "min": 20, "max": 30, "lvl": 1 }
-            ],
-            "#% increased Life Leeched per second per equipped Corrupted Item": [
-                { "name": "LifeLeechRatePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "#% increased Mana Leeched per second per equipped Corrupted Item": [
-                { "name": "ManaLeechRatePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
-            ],
-            "You cannot be Cursed with Silence": [
-                { "name": "SilenceImmunityJewelCorrupted", "min": 0, "max": 0, "lvl": 1 }
-            ],
-            "#% reduced Ignite Duration on You": [
-                { "name": "ReducedIgniteDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% reduced Chill Duration on You": [
-                { "name": "ReducedChillDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% reduced Freeze Duration on You": [
-                { "name": "ReducedFreezeDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% reduced Shock Duration on You": [
-                { "name": "ReducedShockDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
-            ],
-            "#% increased Vaal Skill Damage": [
-                { "name": "VaalSkillDamageJewelCorrupted", "min": 5, "max": 10, "lvl": 1 }
-            ]
+        "Prismatic": {
+            "prefix": {
+                "#% increased Chaos Damage": [
+                    { "name": "Chaotic", "min": 9, "max": 13, "lvl": 1 }
+                ],
+                "#% increased Cast Speed with Cold Skills": [
+                    { "name": "Cryomantic", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Cold Skills": [
+                    { "name": "Avalanching", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier with Cold Skills": [
+                    { "name": "Arctic", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Cold Damage": [
+                    { "name": "Chilling", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "Minions deal #% increased Damage": [
+                    { "name": "Leadership", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% faster start of Energy Shield Recharge": [
+                    { "name": "Serene", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% increased maximum Energy Shield": [
+                    { "name": "Shimmering", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Energy Shield Recharge Rate": [
+                    { "name": "Fevered", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Evasion Rating": [
+                    { "name": "Evasive", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Cast Speed with Fire Skills": [
+                    { "name": "Pyromantic", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Fire Skills": [
+                    { "name": "Incinerating", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier with Fire Skills": [
+                    { "name": "Infernal", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Fire Damage": [
+                    { "name": "Flaming", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Parrying", "min": 1, "max": 1, "lvl": 1 },
+                    { "name": "Shielding", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Dissipating", "min": 1, "max": 1, "lvl": 1 },
+                    { "name": "Thwarting", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% increased Armour": [
+                    { "name": "Armoured", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Totem Life": [
+                    { "name": "Carved", "min": 8, "max": 12, "lvl": 1 }
+                ],
+                "#% of Physical Attack Damage Leeched as Life": [
+                    { "name": "Hungering", "min": 0.2, "max": 0.4, "lvl": 1 }
+                ],
+                "#% increased Cast Speed with Lightning Skills": [
+                    { "name": "Electromantic", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Lightning Skills": [
+                    { "name": "Thundering", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier with Lightning Skills": [
+                    { "name": "Surging", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Lightning Damage": [
+                    { "name": "Humming", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% of Physical Attack Damage Leeched as Mana": [
+                    { "name": "Thirsting", "min": 0.2, "max": 0.4, "lvl": 1 }
+                ],
+                "#% increased Mana Regeneration Rate": [
+                    { "name": "Energetic", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% increased maximum Life": [
+                    { "name": "Vivid", "min": 5, "max": 7, "lvl": 1 }
+                ],
+                "#% increased maximum Mana": [
+                    { "name": "Enlightened", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Harmonic", "min": 4, "max": 6, "lvl": 1 },
+                    { "name": "Charging", "min": 4, "max": 6, "lvl": 1 },
+                    { "name": "Resonant", "min": 3, "max": 5, "lvl": 1 },
+                    { "name": "Warding", "min": 3, "max": 5, "lvl": 1 },
+                    { "name": "Wright's", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "Minions have #% increased maximum Life": [
+                    { "name": "Master's", "min": 8, "max": 12, "lvl": 1 }
+                ],
+                "#% increased Physical Damage": [
+                    { "name": "Sharpened", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Fierce", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Savage", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Lethal", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Brutal", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Judging", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Cruel", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Volleying", "min": 6, "max": 8, "lvl": 1 },
+                    { "name": "Ripping", "min": 6, "max": 8, "lvl": 1 },
+                    { "name": "Slicing", "min": 6, "max": 8, "lvl": 1 },
+                    { "name": "Beating", "min": 6, "max": 8, "lvl": 1 },
+                    { "name": "Blunt", "min": 6, "max": 8, "lvl": 1 },
+                    { "name": "Jinxing", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "Sorcerer's", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Battlemage's", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "Wizard's", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Totem Damage": [
+                    { "name": "Shaman's", "min": 12, "max": 16, "lvl": 1 }
+                ]
+            },
+            "suffix": {
+                "#% increased Accuracy": [
+                    { "name": "of Deadliness", "min": 6, "max": 10, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "of Freezing", "min": 2, "max": 16, "lvl": 1 },
+                    { "name": "of Burning", "min": 2, "max": 5, "lvl": 1 },
+                    { "name": "of Shocking", "min": 2, "max": 16, "lvl": 1 }
+                ],
+                "+# to all Attributes": [
+                    { "name": "of Adaption", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "+#% to all Elemental Resistances": [
+                    { "name": "of Resistance", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Area Damage": [
+                    { "name": "of Blasting", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "#% increased Attack and Cast Speed": [
+                    { "name": "of Zeal", "min": 2, "max": 4, "lvl": 1 }
+                ],
+                "+#% to Chaos Resistance": [
+                    { "name": "of Order", "min": 7, "max": 13, "lvl": 1 }
+                ],
+                "+#% to Cold and Lightning Resistances": [
+                    { "name": "of Shelter", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "+#% to Cold Resistance": [
+                    { "name": "of the Beast", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% increased Global Critical Strike Chance": [
+                    { "name": "of Menace", "min": 8, "max": 12, "lvl": 1 }
+                ],
+                "+#% to Global Critical Strike Multiplier": [
+                    { "name": "of Potency", "min": 9, "max": 12, "lvl": 1 }
+                ],
+                "Mod": [
+                    { "name": "of Wounding", "min": 8, "max": 10, "lvl": 1 },
+                    { "name": "of Archery", "min": 10, "max": 12, "lvl": 1 },
+                    { "name": "of Mysticism", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "#% increased Damage over Time": [
+                    { "name": "of Entropy", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "+# to Dexterity": [
+                    { "name": "of Dexterity", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "+# to Dexterity and Intelligence": [
+                    { "name": "of Cunning", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Elemental Skills": [
+                    { "name": "of the Apocalypse", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier with Elemental Skills": [
+                    { "name": "of the Elements", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "+# Energy Shield gained for each Enemy hit by your Attacks": [
+                    { "name": "of Focus", "min": 2, "max": 3, "lvl": 1 }
+                ],
+                "+#% to Fire and Cold Resistances": [
+                    { "name": "of the Hearth", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "+#% to Fire and Lightning Resistances": [
+                    { "name": "of Insulation", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "+#% to Fire Resistance": [
+                    { "name": "of the Dragon", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance for Spells": [
+                    { "name": "of Annihilation", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "+#% to Critical Strike Multiplier for Spells": [
+                    { "name": "of Unmaking", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% increased Accuracy Rating": [
+                    { "name": "of Precision", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "#% increased Attack Speed": [
+                    { "name": "of Berserking", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Cast Speed": [
+                    { "name": "of Enchanting", "min": 2, "max": 4, "lvl": 1 }
+                ],
+                "+# to Intelligence": [
+                    { "name": "of Intelligence", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Rarity of Items found": [
+                    { "name": "of Raiding", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% chance to Knock Enemies Back on hit": [
+                    { "name": "of Fending", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "+# Life gained for each Enemy hit by your Attacks": [
+                    { "name": "of Rejuvenation", "min": 2, "max": 3, "lvl": 1 }
+                ],
+                "+#% to Lightning Resistance": [
+                    { "name": "of Grounding", "min": 12, "max": 15, "lvl": 1 }
+                ],
+                "#% reduced Mana Cost of Skills": [
+                    { "name": "of Efficiency", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "+# Mana gained for each Enemy hit by your Attacks": [
+                    { "name": "of Absorption", "min": 1, "max": 2, "lvl": 1 }
+                ],
+                "Minions have #% Chance to Block": [
+                    { "name": "of the Wall", "min": 2, "max": 4, "lvl": 1 }
+                ],
+                "Minions have +#% to all Elemental Resistances": [
+                    { "name": "of Resilience", "min": 6, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Projectile Speed": [
+                    { "name": "of Soaring", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "+# to Strength": [
+                    { "name": "of Strength", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "+# to Strength and Dexterity": [
+                    { "name": "of Athletics", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "+# to Strength and Intelligence": [
+                    { "name": "of Spirit", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Stun Duration on Enemies": [
+                    { "name": "of Stunning", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "#% increased Stun and Block Recovery": [
+                    { "name": "of Recovery", "min": 10, "max": 14, "lvl": 1 }
+                ],
+                "Totems gain +#% to all Elemental Resistances": [
+                    { "name": "of Runes", "min": 6, "max": 10, "lvl": 1 }
+                ]
+            },
+            "corrupted": {
+                "#% reduced Character Size": [
+                    { "name": "ReducedCharacterSizeJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% additional Chance to receive a Critical Strike": [
+                    { "name": "ChanceToBeCritJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "Adds # to # Chaos Damage to Attacks": [
+                    { "name": "AddedChaosDamageJewelCorrupted", "min": 1, "max": 3, "lvl": 1 }
+                ],
+                "#% increased Chaos Damage per equipped Corrupted Item": [
+                    { "name": "ChaosDamagePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "+#% to Chaos Resistance": [
+                    { "name": "ChaosResistJewelCorrupted", "min": 1, "max": 3, "lvl": 1 }
+                ],
+                "#% increased": [
+                    { "name": "IncreasedChargeDurationJewelCorrupted_", "min": 3, "max": 7, "lvl": 1 }
+                ],
+                "#% increased Damage while Dead": [
+                    { "name": "DamageWhileDeadJewelCorrupted", "min": 20, "max": 30, "lvl": 1 }
+                ],
+                "#% increased Life Leeched per second per equipped Corrupted Item": [
+                    { "name": "LifeLeechRatePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% increased Mana Leeched per second per equipped Corrupted Item": [
+                    { "name": "ManaLeechRatePerCorruptedItemJewelCorrupted", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "You cannot be Cursed with Silence": [
+                    { "name": "SilenceImmunityJewelCorrupted", "min": 0, "max": 0, "lvl": 1 }
+                ],
+                "#% reduced Ignite Duration on You": [
+                    { "name": "ReducedIgniteDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% reduced Chill Duration on You": [
+                    { "name": "ReducedChillDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% reduced Freeze Duration on You": [
+                    { "name": "ReducedFreezeDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% reduced Shock Duration on You": [
+                    { "name": "ReducedShockDurationJewelCorrupted", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Vaal Skill Damage": [
+                    { "name": "VaalSkillDamageJewelCorrupted", "min": 5, "max": 10, "lvl": 1 }
+                ]
+            }
         }
     }
 }

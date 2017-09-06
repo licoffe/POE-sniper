@@ -111,6 +111,18 @@ li.collection-item {
     background-color: rgba(132, 183, 255, 0.5)!important;
 }
 
+.affix-prefix {
+    background-color: rgba(200, 0, 100, 0.5)!important;
+}
+
+.affix-suffix {
+    background-color: rgba(0, 100, 200, 0.5)!important;
+}
+
+.affix-corrupted {
+    background-color: rgba(255, 0, 0, 0.5)!important;
+}
+
 .implicit {
     border-bottom: 1px dotted grey;
 }

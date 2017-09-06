@@ -19,6 +19,8 @@ var config   = require( app.getPath( "userData" ) + path.sep + "config.json" );
 var priceReg = /(?:([0-9\.]+)|([0-9]+)\/([0-9]+)) ([a-z]+)/g;
 var Misc     = require( "./misc.js" );
 var Currency = require( "./currency.js" );
+var mods     = require( "./affixes.json" );
+var types    = require( "./reverseItemType.json" );
 
 class Item {
 
@@ -237,109 +239,319 @@ class Item {
             implicit += item.implicitMods.join( "</span><br><span class=\"badge affix-implicit\" data-badge-caption=\"Implicit\"></span><span class=\"implicit\">" );
             implicit += "</span><br>";
         }
+
         if ( item.explicitMods ) {
-            explicit += "<span class=\"badge affix-explicit\" data-badge-caption=\"Explicit\"></span><span class=\"explicit\">";
-            explicit += item.explicitMods.join( "</span><br><span class=\"badge affix-explicit\" data-badge-caption=\"Explicit\"></span></span><span class=\"explicit\">" );
-            explicit += "</span><br>";
-        }
-        if ( item.craftedMods ) {
-            crafted += "<span class=\"badge affix-crafted\" data-badge-caption=\"Crafted\"></span><span class=\"crafted\">";
-            crafted += item.craftedMods.join( "</span><br><span class=\"badge affix-crafted\" data-badge-caption=\"Crafted\"></span><span class=\"crafted\">" );
-            crafted += "</span><br>";
-        }
-        if ( item.enchantMods ) {
-            enchant += "<span class=\"badge affix-enchant\" data-badge-caption=\"Enchant\"></span><span class=\"enchant\">";
-            enchant += item.enchantMods.join( "</span><br><span class=\"badge affix-enchant\" data-badge-caption=\"Enchant\"></span><span class=\"enchant\">" );
-            enchant += "</span><br>";
-        }
-        if ( item.totalMods.length > 0 ) {
-            total += "<span class=\"badge affix-total\" data-badge-caption=\"Total\"></span><span class=\"total\">";
-            total += item.totalMods.join( "</span><br><span class=\"badge affix-total\" data-badge-caption=\"Total\"></span><span class=\"total\">" );
-            total += "</span><br>";
-        }
-        if ( item.pseudoMods.length > 0 ) {
-            pseudo += "<span class=\"badge affix-pseudo\" data-badge-caption=\"Pseudo\"></span><span class=\"pseudo\">";
-            pseudo += item.pseudoMods.join( "</span><br><span class=\"badge affix-pseudo\" data-badge-caption=\"Pseudo\"></span><span class=\"pseudo\">" );
-            pseudo += "</span><br>";
-        }
-        // console.log( item );
-        properties += "<span class=\"property\"><span class=\"col s5 property-title\">Item Level</span><span class=\"col s7 property-value\">" + item.ilvl + "</span></span><br>";
-
-        async.each( item.properties, function( property, cbProperty ) {
-            // console.log( property );
-            if ( property.values.length > 0 && property.values[0].length > 0 ) {
-                properties += "<span class=\"property\"><span class=\"col s5 property-title\">" + property.name + "</span><span class=\"col s7 property-value\">" + property.values[0][0] + "</span></span><br>";
-            }
-            cbProperty();
-        }, function( err ) {
-            if ( err ) {
-                console.log( err );
-            }
-            
-            // If no b/o price
-            if ( !prices.convertedPrice ) {
-                prices.currency = "Negotiate price";
-            }
-            var whisperName = name;
-            if ( item.linkAmount > 4 ) {
-                name += " " + item.linkAmount + "L";
-            }
-            var itemType = item.typeLine.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
-            if ( itemType === whisperName ) {
-                if ( item.frameType === 4 ) {
-                    itemType = "Gem";
-                } else if ( item.frameType === 5 ) {
-                    itemType = "Currency";
-                } else if ( item.frameType === 6 ) {
-                    itemType = "Divination Card";
-                } else if ( item.frameType === 8 ) {
-                    itemType = "Prophecy";
-                } else if ( name.indexOf( "Leaguestone" ) !== -1 ) {
-                    itemType = "Leaguestone";
-                } else if ( item.frameType === 1 ) {
-                    itemType = "";
+            var itemType = types[item.typeLine]; 
+            console.log( itemType );
+            if ( itemType ) {
+                var split = itemType.split( "_" );
+                var prefixes  = [];
+                var suffixes  = [];
+                var corrupted = [];
+                var iterationP;
+                var iterationS;
+                var iterationC;
+                if ( split.length > 1 ) {
+                    prefixes  = mods[split[0]][split[1]]["prefix"];
+                    suffixes  = mods[split[0]][split[1]]["suffix"];
+                    corrupted = mods[split[0]][split[1]]["corrupted"];
+                } else {
+                    prefixes  = mods[split[0]]["prefix"];
+                    suffixes  = mods[split[0]]["suffix"];
+                    corrupted = mods[split[0]]["corrupted"];
                 }
-            } else {
-                whisperName += " " + itemType;
-            }
+                async.each( item.explicitMods, function( explicitMod, cbExplicit ) {
+                    var reg   = /([0-9.]+)/;
+                    var match = reg.exec( explicitMod );
+                    var value = "";
+                    if ( match ) {
+                        value = match[1];
+                    }
+                    var index = "";
+                    var explicitTitle = explicitMod.replace( reg, "#" );
+                    console.log( explicitTitle + ", " + value );
 
-            // If beta is used, add full path to icon
-            var imageDomain = "";
-            if ( config.useBeta ) {
-                imageDomain = "http://web.poecdn.com/";
-            }
+                    // If this mod is a prefix
+                    if ( prefixes[explicitTitle]) {
+                        console.log( prefixes[explicitTitle] );
+                        iterationP = prefixes[explicitTitle].length;
+                        console.log( "Start rank = " + iterationP );
+                        var found = false;
+                        async.eachLimit( prefixes[explicitTitle], 1, function( affix, cbAffix ) {
+                            if ( affix.min <= value &&
+                                 affix.max >= value ) {
+                                index = iterationP;
+                                console.log( "P" + index );
+                                explicit += 
+                                    "<span class=\"badge affix-prefix\" data-badge-caption=\"P" + 
+                                    index + "\"></span><span class=\"explicit\">" + explicitMod + "</span><br>";
+                                console.log( explicit );
+                                found = true;
+                            } else {
+                                if ( !found ) {
+                                    iterationP--;
+                                    console.log( "Increasing rank" );
+                                }
+                            }
+                            cbAffix();
+                        }, function() {
+                            cbExplicit();
+                        });
+                    // If this mod is a suffix
+                    } else if ( suffixes[explicitTitle]) {
+                        console.log( suffixes[explicitTitle] );
+                        iterationS = suffixes[explicitTitle].length;
+                        async.eachLimit( suffixes[explicitTitle], 1, function( affix, cbAffix ) {
+                            if ( affix.min <= value &&
+                                 affix.max >= value ) {
+                                index = iterationS;
+                                console.log( "S" + index );
+                                explicit += 
+                                "<span class=\"badge affix-suffix\" data-badge-caption=\"S" + 
+                                index + "\"></span><span class=\"explicit\">" + explicitMod + "</span><br>";
+                                console.log( explicit );
+                            } else {
+                                iterationS--;
+                            }
+                            cbAffix();
+                        }, function() {
+                            cbExplicit();
+                        });
+                    // If this mod is corrupted
+                    } else if ( corrupted[explicitTitle]) {
+                        console.log( corrupted[explicitTitle] );
+                        iterationC = corrupted[explicitTitle].length;
+                        async.eachLimit( corrupted[explicitTitle], 1, function( affix, cbAffix ) {
+                            if ( affix.min <= value &&
+                                 affix.max >= value ) {
+                                index = iterationC;
+                                console.log( "C" + index );
+                                explicit += 
+                                "<span class=\"badge affix-corrupted\" data-badge-caption=\"C" + 
+                                index + "\"></span><span class=\"explicit\">" + explicitMod + "</span><br>";
+                                console.log( explicit );
+                            } else {
+                                iterationC--;
+                            }
+                            cbAffix();
+                        }, function() {
+                            cbExplicit();
+                        });
+                    // Otherwise
+                    } else {
+                        explicit += 
+                            "<span class=\"badge affix-explicit\" data-badge-caption=\"?" +
+                            "\"></span><span class=\"explicit\">" + explicitMod + "</span><br>";
+                            console.log( explicit );
+                        cbExplicit();
+                    }
+                }, function() {
+                    console.log( explicit );
+                    if ( item.craftedMods ) {
+                        crafted += "<span class=\"badge affix-crafted\" data-badge-caption=\"Crafted\"></span><span class=\"crafted\">";
+                        crafted += item.craftedMods.join( "</span><br><span class=\"badge affix-crafted\" data-badge-caption=\"Crafted\"></span><span class=\"crafted\">" );
+                        crafted += "</span><br>";
+                    }
+                    if ( item.enchantMods ) {
+                        enchant += "<span class=\"badge affix-enchant\" data-badge-caption=\"Enchant\"></span><span class=\"enchant\">";
+                        enchant += item.enchantMods.join( "</span><br><span class=\"badge affix-enchant\" data-badge-caption=\"Enchant\"></span><span class=\"enchant\">" );
+                        enchant += "</span><br>";
+                    }
+                    if ( item.totalMods.length > 0 ) {
+                        total += "<span class=\"badge affix-total\" data-badge-caption=\"Total\"></span><span class=\"total\">";
+                        total += item.totalMods.join( "</span><br><span class=\"badge affix-total\" data-badge-caption=\"Total\"></span><span class=\"total\">" );
+                        total += "</span><br>";
+                    }
+                    if ( item.pseudoMods.length > 0 ) {
+                        pseudo += "<span class=\"badge affix-pseudo\" data-badge-caption=\"Pseudo\"></span><span class=\"pseudo\">";
+                        pseudo += item.pseudoMods.join( "</span><br><span class=\"badge affix-pseudo\" data-badge-caption=\"Pseudo\"></span><span class=\"pseudo\">" );
+                        pseudo += "</span><br>";
+                    }
+                    // console.log( item );
+                    properties += "<span class=\"property\"><span class=\"col s5 property-title\">Item Level</span><span class=\"col s7 property-value\">" + item.ilvl + "</span></span><br>";
             
-            callback({
-                time:          time,
-                account:       item.lastCharacterName,
-                item:          name,
-                whisperName:   whisperName,
-                frameType:     item.frameType,
-                price:         prices.convertedPrice,
-                currency:      prices.currency,
-                originalPrice: prices.originalPrice,
-                itemId:        item.id,
-                id:            guid,
-                icon:          imageDomain + item.icon,
-                implicit:      implicit,
-                explicit:      explicit,
-                crafted:       crafted,
-                corrupted:     item.corrupted,
-                enchant:       enchant,
-                total:         total,
-                pseudo:        pseudo,
-                properties:    properties,
-                links:         item.linkAmount,
-                league:        item.league,
-                stashTab:      item.stashTab,
-                left:          item.x,
-                top:           item.y,
-                typeLine:      item.typeLine,
-                sockets:       item.sockets,
-                type:          itemType,
-                confidence:    item.confidence
+                    async.each( item.properties, function( property, cbProperty ) {
+                        // console.log( property );
+                        if ( property.values.length > 0 && property.values[0].length > 0 ) {
+                            properties += "<span class=\"property\"><span class=\"col s5 property-title\">" + property.name + "</span><span class=\"col s7 property-value\">" + property.values[0][0] + "</span></span><br>";
+                        }
+                        cbProperty();
+                    }, function( err ) {
+                        if ( err ) {
+                            console.log( err );
+                        }
+                        
+                        // If no b/o price
+                        if ( !prices.convertedPrice ) {
+                            prices.currency = "Negotiate price";
+                        }
+                        var whisperName = name;
+                        if ( item.linkAmount > 4 ) {
+                            name += " " + item.linkAmount + "L";
+                        }
+                        var itemType = item.typeLine.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
+                        if ( itemType === whisperName ) {
+                            if ( item.frameType === 4 ) {
+                                itemType = "Gem";
+                            } else if ( item.frameType === 5 ) {
+                                itemType = "Currency";
+                            } else if ( item.frameType === 6 ) {
+                                itemType = "Divination Card";
+                            } else if ( item.frameType === 8 ) {
+                                itemType = "Prophecy";
+                            } else if ( name.indexOf( "Leaguestone" ) !== -1 ) {
+                                itemType = "Leaguestone";
+                            } else if ( item.frameType === 1 ) {
+                                itemType = "";
+                            }
+                        } else {
+                            whisperName += " " + itemType;
+                        }
+            
+                        // If beta is used, add full path to icon
+                        var imageDomain = "";
+                        if ( config.useBeta ) {
+                            imageDomain = "http://web.poecdn.com/";
+                        }
+                        
+                        callback({
+                            time:          time,
+                            account:       item.lastCharacterName,
+                            item:          name,
+                            whisperName:   whisperName,
+                            frameType:     item.frameType,
+                            price:         prices.convertedPrice,
+                            currency:      prices.currency,
+                            originalPrice: prices.originalPrice,
+                            itemId:        item.id,
+                            id:            guid,
+                            icon:          imageDomain + item.icon,
+                            implicit:      implicit,
+                            explicit:      explicit,
+                            crafted:       crafted,
+                            corrupted:     item.corrupted,
+                            enchant:       enchant,
+                            total:         total,
+                            pseudo:        pseudo,
+                            properties:    properties,
+                            links:         item.linkAmount,
+                            league:        item.league,
+                            stashTab:      item.stashTab,
+                            left:          item.x,
+                            top:           item.y,
+                            typeLine:      item.typeLine,
+                            sockets:       item.sockets,
+                            type:          itemType,
+                            confidence:    item.confidence
+                        });
+                    });
+                });
+            } else {
+                console.log( "Unknown item type " + itemType );
+            }
+            // explicit += "<span class=\"badge affix-explicit\" data-badge-caption=\"Explicit\"></span><span class=\"explicit\">";
+            // explicit += item.explicitMods.join( "</span><br><span class=\"badge affix-explicit\" data-badge-caption=\"Explicit\"></span></span><span class=\"explicit\">" );
+            // explicit += "</span><br>";
+        } else {
+            if ( item.craftedMods ) {
+                crafted += "<span class=\"badge affix-crafted\" data-badge-caption=\"Crafted\"></span><span class=\"crafted\">";
+                crafted += item.craftedMods.join( "</span><br><span class=\"badge affix-crafted\" data-badge-caption=\"Crafted\"></span><span class=\"crafted\">" );
+                crafted += "</span><br>";
+            }
+            if ( item.enchantMods ) {
+                enchant += "<span class=\"badge affix-enchant\" data-badge-caption=\"Enchant\"></span><span class=\"enchant\">";
+                enchant += item.enchantMods.join( "</span><br><span class=\"badge affix-enchant\" data-badge-caption=\"Enchant\"></span><span class=\"enchant\">" );
+                enchant += "</span><br>";
+            }
+            if ( item.totalMods.length > 0 ) {
+                total += "<span class=\"badge affix-total\" data-badge-caption=\"Total\"></span><span class=\"total\">";
+                total += item.totalMods.join( "</span><br><span class=\"badge affix-total\" data-badge-caption=\"Total\"></span><span class=\"total\">" );
+                total += "</span><br>";
+            }
+            if ( item.pseudoMods.length > 0 ) {
+                pseudo += "<span class=\"badge affix-pseudo\" data-badge-caption=\"Pseudo\"></span><span class=\"pseudo\">";
+                pseudo += item.pseudoMods.join( "</span><br><span class=\"badge affix-pseudo\" data-badge-caption=\"Pseudo\"></span><span class=\"pseudo\">" );
+                pseudo += "</span><br>";
+            }
+            // console.log( item );
+            properties += "<span class=\"property\"><span class=\"col s5 property-title\">Item Level</span><span class=\"col s7 property-value\">" + item.ilvl + "</span></span><br>";
+    
+            async.each( item.properties, function( property, cbProperty ) {
+                // console.log( property );
+                if ( property.values.length > 0 && property.values[0].length > 0 ) {
+                    properties += "<span class=\"property\"><span class=\"col s5 property-title\">" + property.name + "</span><span class=\"col s7 property-value\">" + property.values[0][0] + "</span></span><br>";
+                }
+                cbProperty();
+            }, function( err ) {
+                if ( err ) {
+                    console.log( err );
+                }
+                
+                // If no b/o price
+                if ( !prices.convertedPrice ) {
+                    prices.currency = "Negotiate price";
+                }
+                var whisperName = name;
+                if ( item.linkAmount > 4 ) {
+                    name += " " + item.linkAmount + "L";
+                }
+                var itemType = item.typeLine.replace( "<<set:MS>><<set:M>><<set:S>>", "" );
+                if ( itemType === whisperName ) {
+                    if ( item.frameType === 4 ) {
+                        itemType = "Gem";
+                    } else if ( item.frameType === 5 ) {
+                        itemType = "Currency";
+                    } else if ( item.frameType === 6 ) {
+                        itemType = "Divination Card";
+                    } else if ( item.frameType === 8 ) {
+                        itemType = "Prophecy";
+                    } else if ( name.indexOf( "Leaguestone" ) !== -1 ) {
+                        itemType = "Leaguestone";
+                    } else if ( item.frameType === 1 ) {
+                        itemType = "";
+                    }
+                } else {
+                    whisperName += " " + itemType;
+                }
+    
+                // If beta is used, add full path to icon
+                var imageDomain = "";
+                if ( config.useBeta ) {
+                    imageDomain = "http://web.poecdn.com/";
+                }
+                
+                callback({
+                    time:          time,
+                    account:       item.lastCharacterName,
+                    item:          name,
+                    whisperName:   whisperName,
+                    frameType:     item.frameType,
+                    price:         prices.convertedPrice,
+                    currency:      prices.currency,
+                    originalPrice: prices.originalPrice,
+                    itemId:        item.id,
+                    id:            guid,
+                    icon:          imageDomain + item.icon,
+                    implicit:      implicit,
+                    explicit:      explicit,
+                    crafted:       crafted,
+                    corrupted:     item.corrupted,
+                    enchant:       enchant,
+                    total:         total,
+                    pseudo:        pseudo,
+                    properties:    properties,
+                    links:         item.linkAmount,
+                    league:        item.league,
+                    stashTab:      item.stashTab,
+                    left:          item.x,
+                    top:           item.y,
+                    typeLine:      item.typeLine,
+                    sockets:       item.sockets,
+                    type:          itemType,
+                    confidence:    item.confidence
+                });
             });
-        });
+        }
     }
 
     /**
