@@ -98,7 +98,12 @@ class Filter {
         // Compare mod values to filter
         for ( var affix in this.affixes ) {
             // console.log( affix );
-            var cleanedAffix = affix.replace( /(<span class=\'value\'>[^<>]+<\/span>)/g, "#" ).replace( "( # - # )", "#" ).replace( "Unique explicit", "Explicit" );
+            var cleanedAffix = 
+                affix.replace( /(<span class=\'value\'>[^<>]+<\/span>)/g, "#" )
+                     .replace( "( # - # )", "#" )
+                     .replace( "Unique explicit", "Explicit" )
+                     .replace( "Essence", "Explicit" )
+                     .replace( "Talisman implicit", "Implicit" );
             // console.log( cleanedAffix );
             if ( this.affixes.hasOwnProperty( affix )) {
                 keys++;

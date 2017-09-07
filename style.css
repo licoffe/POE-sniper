@@ -111,16 +111,20 @@ li.collection-item {
     background-color: rgba(132, 183, 255, 0.5)!important;
 }
 
-.affix-prefix {
+.affix-P {
     background-color: rgba(200, 0, 100, 0.5)!important;
 }
 
-.affix-suffix {
+.affix-S {
     background-color: rgba(0, 100, 200, 0.5)!important;
 }
 
-.affix-corrupted {
+.affix-C {
     background-color: rgba(255, 0, 0, 0.5)!important;
+}
+
+.affix-talisman {
+    background-color: rgba(0, 100, 200, 0.5)!important;
 }
 
 .implicit {

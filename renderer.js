@@ -821,6 +821,7 @@ $( document).ready( function() {
                 // Hide or show elements
                 displaySearchEngines();
                 displayTimes();
+                console.log( "Calling poe.trade stats" );
                 poeTradeStats( filters.filterList );
             });
         });
@@ -899,6 +900,7 @@ $( document).ready( function() {
         bindFilterEdit( filter.id );
         bindRemoveTaggedItems( filter.id );
         updateFilterAmount( filter.id );
+        console.log( "Calling poe.trade stats" );
         poeTradeStats([filter]);
         $( ".search-engines a" ).unbind();
         $( ".search-engines a" ).click( function( event ) {
@@ -1182,6 +1184,7 @@ $( document).ready( function() {
     };
 
     var poeTradeStats = function( filters ) {
+        console.log( filters );
         if ( !config.usePoeTradeStats ) {
             $( ".item-stats" ).hide();
             return;
@@ -1330,7 +1333,7 @@ $( document).ready( function() {
 
     loadFilters();
     
-    setInterval( poeTradeStats, config.POE_TRADE_STATS_INTERVAL, filters );
+    setInterval( poeTradeStats, config.POE_TRADE_STATS_INTERVAL, filters.filterList );
 
     // When clicking on 'Snipe', download change_ids and filter them
     $( "#snipe" ).click( function() {
@@ -2358,6 +2361,7 @@ $( document).ready( function() {
         displayTimes();
         // If we use poe.trade stats and the elements are hidden
         if ( config.usePoeTradeStats && $( ".item-stats:visible" ).length === 0 ) {
+            console.log( "Calling poe.trade stats" );
             poeTradeStats( filters.filterList );
         // If we do not use poe.trade stats, hide the elements
         } else if ( !config.usePoeTradeStats ) {
