@@ -930,14 +930,14 @@
             ],
             "Adds # to # Lightning Damage": [
                 { "name": "Humming", "min": 1, "max": 6, "lvl": 3 },
-                { "name": "Buzzing", "min": 1, "max": 28, "lvl": 13 },
-                { "name": "Snapping", "min": 1, "max": 43, "lvl": 19 },
-                { "name": "Crackling", "min": 2, "max": 61, "lvl": 31 },
-                { "name": "Sparking", "min": 2, "max": 76, "lvl": 34 },
-                { "name": "Arcing", "min": 2, "max": 96, "lvl": 42 },
-                { "name": "Shocking", "min": 3, "max": 116, "lvl": 51 },
-                { "name": "Discharging", "min": 4, "max": 140, "lvl": 63 },
-                { "name": "Electrocuting", "min": 4, "max": 166, "lvl": 74 }
+                { "name": "Buzzing", "min": [1,2], "max": [27,28], "lvl": 13 },
+                { "name": "Snapping", "min": [1,3], "max": [41,43], "lvl": 19 },
+                { "name": "Crackling", "min": [2,5], "max": [58,61], "lvl": 31 },
+                { "name": "Sparking", "min": [2,6], "max": [72,76], "lvl": 34 },
+                { "name": "Arcing", "min": [2,7], "max": [91,96], "lvl": 42 },
+                { "name": "Shocking", "min": [3,9], "max": [110,116], "lvl": 51 },
+                { "name": "Discharging", "min": [4,11], "max": [133,140], "lvl": 63 },
+                { "name": "Electrocuting", "min": [4,13], "max": [158,166], "lvl": 74 }
             ],
             "Adds # to # Chaos Damage": [
                 { "name": "Malicious", "min": [47,72], "max": [98,123], "lvl": 83 }
@@ -2155,26 +2155,26 @@
     "Two-handed Axe": {
         "prefix": {
             "Adds # to # Cold Damage": [
-                { "name": "Frosted", "min": 2, "max": 5, "lvl": 2 },
-                { "name": "Chilled", "min": 10, "max": 22, "lvl": 12 },
-                { "name": "Icy", "min": 15, "max": 34, "lvl": 19 },
-                { "name": "Frigid", "min": 21, "max": 48, "lvl": 27 },
-                { "name": "Freezing", "min": 26, "max": 60, "lvl": 34 },
-                { "name": "Frozen", "min": 32, "max": 76, "lvl": 43 },
-                { "name": "Glaciated", "min": 39, "max": 91, "lvl": 52 },
-                { "name": "Polar", "min": 47, "max": 110, "lvl": 63 },
-                { "name": "Entombing", "min": 56, "max": 131, "lvl": 75 }
+                { "name": "Frosted", "min": [2,3], "max": [4,5], "lvl": 2 },
+                { "name": "Chilled", "min": [10,13], "max": [19,22], "lvl": 12 },
+                { "name": "Icy", "min": [15,20], "max": [29,34], "lvl": 19 },
+                { "name": "Frigid", "min": [21,27], "max": [41,48], "lvl": 27 },
+                { "name": "Freezing", "min": [26,34], "max": [52,60], "lvl": 34 },
+                { "name": "Frozen", "min": [32,43], "max": [65,76], "lvl": 43 },
+                { "name": "Glaciated", "min": [39,52], "max": [78,91], "lvl": 52 },
+                { "name": "Polar", "min": [47,63], "max": [94,110], "lvl": 63 },
+                { "name": "Entombing", "min": [56,75], "max": [112,131], "lvl": 75 }
             ],
             "Adds # to # Fire Damage": [
-                { "name": "Heated", "min": 3, "max": 6, "lvl": 1 },
-                { "name": "Smouldering", "min": 12, "max": 27, "lvl": 11 },
-                { "name": "Smoking", "min": 18, "max": 42, "lvl": 18 },
-                { "name": "Burning", "min": 25, "max": 59, "lvl": 26 },
-                { "name": "Flaming", "min": 32, "max": 74, "lvl": 33 },
-                { "name": "Scorching", "min": 40, "max": 92, "lvl": 42 },
-                { "name": "Incinerating", "min": 48, "max": 111, "lvl": 51 },
-                { "name": "Blasting", "min": 58, "max": 134, "lvl": 62 },
-                { "name": "Cremating", "min": 68, "max": 160, "lvl": 74 }
+                { "name": "Heated", "min": [3,4], "max": [5,6], "lvl": 1 },
+                { "name": "Smouldering", "min": [12,16], "max": [23,27], "lvl": 11 },
+                { "name": "Smoking", "min": [18,24], "max": [36,42], "lvl": 18 },
+                { "name": "Burning", "min": [25,34], "max": [50,59], "lvl": 26 },
+                { "name": "Flaming", "min": [32,42], "max": [63,74], "lvl": 33 },
+                { "name": "Scorching", "min": [40,53], "max": [79,92], "lvl": 42 },
+                { "name": "Incinerating", "min": [48,64], "max": [95,111], "lvl": 51 },
+                { "name": "Blasting", "min": [58,77], "max": [115,134], "lvl": 62 },
+                { "name": "Cremating", "min": [68,91], "max": [137,160], "lvl": 74 }
             ],
             "+# to Level of Socketed Gems": [
                 { "name": "Paragon's", "min": 1, "max": 1, "lvl": 50 }
@@ -2197,17 +2197,17 @@
             ],
             "Adds # to # Lightning Damage": [
                 { "name": "Humming", "min": 1, "max": 10, "lvl": 3 },
-                { "name": "Buzzing", "min": 1, "max": 43, "lvl": 13 },
-                { "name": "Snapping", "min": 2, "max": 66, "lvl": 19 },
-                { "name": "Crackling", "min": 2, "max": 92, "lvl": 31 },
-                { "name": "Sparking", "min": 3, "max": 115, "lvl": 34 },
-                { "name": "Arcing", "min": 4, "max": 145, "lvl": 42 },
-                { "name": "Shocking", "min": 4, "max": 174, "lvl": 51 },
-                { "name": "Discharging", "min": 5, "max": 211, "lvl": 63 },
-                { "name": "Electrocuting", "min": 6, "max": 250, "lvl": 74 }
+                { "name": "Buzzing", "min": [1,3], "max": [41,43], "lvl": 13 },
+                { "name": "Snapping", "min": [2,5], "max": [62,66], "lvl": 19 },
+                { "name": "Crackling", "min": [2,7], "max": [87,92], "lvl": 31 },
+                { "name": "Sparking", "min": [3,9], "max": [109,115], "lvl": 34 },
+                { "name": "Arcing", "min": [4,11], "max": [137,145], "lvl": 42 },
+                { "name": "Shocking", "min": [4,13], "max": [165,174], "lvl": 51 },
+                { "name": "Discharging", "min": [5,16], "max": [200,211], "lvl": 63 },
+                { "name": "Electrocuting", "min": [6,19], "max": [237,250], "lvl": 74 }
             ],
             "Adds # to # Chaos Damage": [
-                { "name": "Malicious", "min": 70, "max": 185, "lvl": 83 }
+                { "name": "Malicious", "min": [70,108], "max": [147,185], "lvl": 83 }
             ],
             "#% increased Physical": [
                 { "name": "Squire's", "min": 15, "max": 7, "lvl": 1 },
@@ -2234,14 +2234,14 @@
             ],
             "Adds # to # Physical Damage": [
                 { "name": "Glinting", "min": 2, "max": 5, "lvl": 2 },
-                { "name": "Burnished", "min": 6, "max": 14, "lvl": 13 },
-                { "name": "Polished", "min": 9, "max": 21, "lvl": 21 },
-                { "name": "Honed", "min": 11, "max": 27, "lvl": 29 },
-                { "name": "Gleaming", "min": 14, "max": 33, "lvl": 36 },
-                { "name": "Annealed", "min": 18, "max": 42, "lvl": 46 },
-                { "name": "Razor Sharp", "min": 20, "max": 48, "lvl": 54 },
-                { "name": "Tempered", "min": 24, "max": 57, "lvl": 65 },
-                { "name": "Flaring", "min": 29, "max": 68, "lvl": 77 }
+                { "name": "Burnished", "min": [6,8], "max": [12,14], "lvl": 13 },
+                { "name": "Polished", "min": [9,12], "max": [18,21], "lvl": 21 },
+                { "name": "Honed", "min": [11,15], "max": [23,27], "lvl": 29 },
+                { "name": "Gleaming", "min": [14,19], "max": [28,33], "lvl": 36 },
+                { "name": "Annealed", "min": [18,24], "max": [36,42], "lvl": 46 },
+                { "name": "Razor Sharp", "min": [20,27], "max": [41,48], "lvl": 54 },
+                { "name": "Tempered", "min": [24,33], "max": [49,57], "lvl": 65 },
+                { "name": "Flaring", "min": [29,38], "max": [58,68], "lvl": 77 }
             ]
         },
         "suffix": {
@@ -2404,9 +2404,9 @@
                 { "name": "LightningDamageLifeLeechPermyriadCorrupted", "min": 0.2, "max": 0.2, "lvl": 50 }
             ],
             "Adds # to # Chaos Damage": [
-                { "name": "LocalAddedChaosDamageCorrupted1", "min": 1, "max": 5, "lvl": 1 },
-                { "name": "LocalAddedChaosDamageCorrupted2", "min": 6, "max": 13, "lvl": 20 },
-                { "name": "LocalAddedChaosDamageCorrupted3", "min": 8, "max": 23, "lvl": 40 }
+                { "name": "LocalAddedChaosDamageCorrupted1", "min": [1,2], "max": [3,5], "lvl": 1 },
+                { "name": "LocalAddedChaosDamageCorrupted2", "min": [6,8], "max": [11,13], "lvl": 20 },
+                { "name": "LocalAddedChaosDamageCorrupted3", "min": [8,11], "max": [19,23], "lvl": 40 }
             ],
             "+# to Weapon range": [
                 { "name": "LocalMeleeWeaponRangeCorrupted", "min": 1, "max": 2, "lvl": 1 }
@@ -2417,25 +2417,25 @@
         "prefix": {
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": 1, "max": 3, "lvl": 2 },
-                { "name": "Chilled", "min": 6, "max": 15, "lvl": 12 },
-                { "name": "Icy", "min": 10, "max": 23, "lvl": 19 },
-                { "name": "Frigid", "min": 14, "max": 32, "lvl": 27 },
-                { "name": "Freezing", "min": 17, "max": 40, "lvl": 34 },
-                { "name": "Frozen", "min": 22, "max": 50, "lvl": 43 },
-                { "name": "Glaciated", "min": 26, "max": 60, "lvl": 52 },
-                { "name": "Polar", "min": 31, "max": 73, "lvl": 63 },
-                { "name": "Entombing", "min": 37, "max": 87, "lvl": 75 }
+                { "name": "Chilled", "min": [6,8], "max": [13,15], "lvl": 12 },
+                { "name": "Icy", "min": [10,13], "max": [19,23], "lvl": 19 },
+                { "name": "Frigid", "min": [14,18], "max": [27,32], "lvl": 27 },
+                { "name": "Freezing", "min": [17,23], "max": [34,40], "lvl": 34 },
+                { "name": "Frozen", "min": [22,29], "max": [43,50], "lvl": 43 },
+                { "name": "Glaciated", "min": [26,35], "max": [52,60], "lvl": 52 },
+                { "name": "Polar", "min": [31,42], "max": [63,73], "lvl": 63 },
+                { "name": "Entombing", "min": [37,50], "max": [74,87], "lvl": 75 }
             ],
             "Adds # to # Fire Damage": [
-                { "name": "Heated", "min": 1, "max": 4, "lvl": 1 },
-                { "name": "Smouldering", "min": 8, "max": 18, "lvl": 11 },
-                { "name": "Smoking", "min": 12, "max": 28, "lvl": 18 },
-                { "name": "Burning", "min": 17, "max": 39, "lvl": 26 },
-                { "name": "Flaming", "min": 21, "max": 49, "lvl": 33 },
-                { "name": "Scorching", "min": 26, "max": 61, "lvl": 42 },
-                { "name": "Incinerating", "min": 32, "max": 74, "lvl": 51 },
-                { "name": "Blasting", "min": 38, "max": 89, "lvl": 62 },
-                { "name": "Cremating", "min": 45, "max": 106, "lvl": 74 }
+                { "name": "Heated", "min": [1,2], "max": [3,4], "lvl": 1 },
+                { "name": "Smouldering", "min": [8,10], "max": [15,18], "lvl": 11 },
+                { "name": "Smoking", "min": [12,16], "max": [24,28], "lvl": 18 },
+                { "name": "Burning", "min": [17,22], "max": [33,39], "lvl": 26 },
+                { "name": "Flaming", "min": [21,28], "max": [42,49], "lvl": 33 },
+                { "name": "Scorching", "min": [26,35], "max": [53,61], "lvl": 42 },
+                { "name": "Incinerating", "min": [32,42], "max": [63,74], "lvl": 51 },
+                { "name": "Blasting", "min": [38,51], "max": [77,89], "lvl": 62 },
+                { "name": "Cremating", "min": [45,61], "max": [91,106], "lvl": 74 }
             ],
             "+# to Level of Socketed Gems": [
                 { "name": "Paragon's", "min": 1, "max": 1, "lvl": 50 }
@@ -2456,17 +2456,17 @@
             ],
             "Adds # to # Lightning Damage": [
                 { "name": "Humming", "min": 1, "max": 6, "lvl": 3 },
-                { "name": "Buzzing", "min": 1, "max": 28, "lvl": 13 },
-                { "name": "Snapping", "min": 1, "max": 43, "lvl": 19 },
-                { "name": "Crackling", "min": 2, "max": 61, "lvl": 31 },
-                { "name": "Sparking", "min": 2, "max": 76, "lvl": 34 },
-                { "name": "Arcing", "min": 2, "max": 96, "lvl": 42 },
-                { "name": "Shocking", "min": 3, "max": 116, "lvl": 51 },
-                { "name": "Discharging", "min": 4, "max": 140, "lvl": 63 },
-                { "name": "Electrocuting", "min": 4, "max": 166, "lvl": 74 }
+                { "name": "Buzzing", "min": [1,2], "max": [27,28], "lvl": 13 },
+                { "name": "Snapping", "min": [1,3], "max": [41,43], "lvl": 19 },
+                { "name": "Crackling", "min": [2,5], "max": [58,61], "lvl": 31 },
+                { "name": "Sparking", "min": [2,6], "max": [72,76], "lvl": 34 },
+                { "name": "Arcing", "min": [2,7], "max": [91,96], "lvl": 42 },
+                { "name": "Shocking", "min": [3,9], "max": [110,116], "lvl": 51 },
+                { "name": "Discharging", "min": [4,11], "max": [133,140], "lvl": 63 },
+                { "name": "Electrocuting", "min": [4,13], "max": [158,166], "lvl": 74 }
             ],
             "Adds # to # Chaos Damage": [
-                { "name": "Malicious", "min": 47, "max": 123, "lvl": 83 }
+                { "name": "Malicious", "min": [47,72], "max": [98,123], "lvl": 83 }
             ],
             "#% increased Physical": [
                 { "name": "Squire's", "min": 15, "max": 7, "lvl": 1 },
@@ -2493,14 +2493,14 @@
             ],
             "Adds # to # Physical Damage": [
                 { "name": "Glinting", "min": 2, "max": 5, "lvl": 2 },
-                { "name": "Burnished", "min": 6, "max": 14, "lvl": 13 },
-                { "name": "Polished", "min": 9, "max": 21, "lvl": 21 },
-                { "name": "Honed", "min": 11, "max": 27, "lvl": 29 },
-                { "name": "Gleaming", "min": 14, "max": 33, "lvl": 36 },
-                { "name": "Annealed", "min": 18, "max": 42, "lvl": 46 },
-                { "name": "Razor Sharp", "min": 20, "max": 48, "lvl": 54 },
-                { "name": "Tempered", "min": 24, "max": 57, "lvl": 65 },
-                { "name": "Flaring", "min": 29, "max": 68, "lvl": 77 }
+                { "name": "Burnished", "min": [6,8], "max": [12,14], "lvl": 13 },
+                { "name": "Polished", "min": [9,12], "max": [18,21], "lvl": 21 },
+                { "name": "Honed", "min": [11,15], "max": [23,27], "lvl": 29 },
+                { "name": "Gleaming", "min": [14,19], "max": [28,33], "lvl": 36 },
+                { "name": "Annealed", "min": [18,24], "max": [36,42], "lvl": 46 },
+                { "name": "Razor Sharp", "min": [20,27], "max": [41,48], "lvl": 54 },
+                { "name": "Tempered", "min": [24,33], "max": [49,57], "lvl": 65 },
+                { "name": "Flaring", "min": [29,38], "max": [58,68], "lvl": 77 }
             ]
         },
         "suffix": {
@@ -2652,9 +2652,9 @@
                 { "name": "LightningDamageLifeLeechPermyriadCorrupted", "min": 0.2, "max": 0.2, "lvl": 50 }
             ],
             "Adds # to # Chaos Damage": [
-                { "name": "LocalAddedChaosDamageCorrupted1", "min": 1, "max": 5, "lvl": 1 },
-                { "name": "LocalAddedChaosDamageCorrupted2", "min": 6, "max": 13, "lvl": 20 },
-                { "name": "LocalAddedChaosDamageCorrupted3", "min": 8, "max": 23, "lvl": 40 }
+                { "name": "LocalAddedChaosDamageCorrupted1", "min": [1,2], "max": [3,5], "lvl": 1 },
+                { "name": "LocalAddedChaosDamageCorrupted2", "min": [6,8], "max": [11,13], "lvl": 20 },
+                { "name": "LocalAddedChaosDamageCorrupted3", "min": [8,11], "max": [19,23], "lvl": 40 }
             ],
             "Socketed Gems are supported by level # Fork": [
                 { "name": "SupportedByForkCorrupted", "min": 1, "max": 1, "lvl": 6 }
@@ -2708,26 +2708,26 @@
     "Two-handed Mace": {
         "prefix": {
             "Adds # to # Cold Damage": [
-                { "name": "Frosted", "min": 2, "max": 5, "lvl": 2 },
-                { "name": "Chilled", "min": 10, "max": 22, "lvl": 12 },
-                { "name": "Icy", "min": 15, "max": 34, "lvl": 19 },
-                { "name": "Frigid", "min": 21, "max": 48, "lvl": 27 },
-                { "name": "Freezing", "min": 26, "max": 60, "lvl": 34 },
-                { "name": "Frozen", "min": 32, "max": 76, "lvl": 43 },
-                { "name": "Glaciated", "min": 39, "max": 91, "lvl": 52 },
-                { "name": "Polar", "min": 47, "max": 110, "lvl": 63 },
-                { "name": "Entombing", "min": 56, "max": 131, "lvl": 75 }
+                { "name": "Frosted", "min": [2,3], "max": [4,5], "lvl": 2 },
+                { "name": "Chilled", "min": [10,13], "max": [19,22], "lvl": 12 },
+                { "name": "Icy", "min": [15,20], "max": [29,34], "lvl": 19 },
+                { "name": "Frigid", "min": [21,27], "max": [41,48], "lvl": 27 },
+                { "name": "Freezing", "min": [26,34], "max": [52,60], "lvl": 34 },
+                { "name": "Frozen", "min": [32,43], "max": [65,76], "lvl": 43 },
+                { "name": "Glaciated", "min": [39,52], "max": [78,91], "lvl": 52 },
+                { "name": "Polar", "min": [47,63], "max": [94,110], "lvl": 63 },
+                { "name": "Entombing", "min": [56,75], "max": [112,131], "lvl": 75 }
             ],
             "Adds # to # Fire Damage": [
-                { "name": "Heated", "min": 3, "max": 6, "lvl": 1 },
-                { "name": "Smouldering", "min": 12, "max": 27, "lvl": 11 },
-                { "name": "Smoking", "min": 18, "max": 42, "lvl": 18 },
-                { "name": "Burning", "min": 25, "max": 59, "lvl": 26 },
-                { "name": "Flaming", "min": 32, "max": 74, "lvl": 33 },
-                { "name": "Scorching", "min": 40, "max": 92, "lvl": 42 },
-                { "name": "Incinerating", "min": 48, "max": 111, "lvl": 51 },
-                { "name": "Blasting", "min": 58, "max": 134, "lvl": 62 },
-                { "name": "Cremating", "min": 68, "max": 160, "lvl": 74 }
+                { "name": "Heated", "min": [3,4], "max": [5,6], "lvl": 1 },
+                { "name": "Smouldering", "min": [12,16], "max": [23,27], "lvl": 11 },
+                { "name": "Smoking", "min": [18,24], "max": [36,42], "lvl": 18 },
+                { "name": "Burning", "min": [25,34], "max": [50,59], "lvl": 26 },
+                { "name": "Flaming", "min": [32,42], "max": [63,74], "lvl": 33 },
+                { "name": "Scorching", "min": [40,53], "max": [79,92], "lvl": 42 },
+                { "name": "Incinerating", "min": [48,64], "max": [95,111], "lvl": 51 },
+                { "name": "Blasting", "min": [58,77], "max": [115,134], "lvl": 62 },
+                { "name": "Cremating", "min": [68,91], "max": [137,160], "lvl": 74 }
             ],
             "+# to Level of Socketed Gems": [
                 { "name": "Paragon's", "min": 1, "max": 1, "lvl": 50 }
@@ -2750,17 +2750,17 @@
             ],
             "Adds # to # Lightning Damage": [
                 { "name": "Humming", "min": 1, "max": 10, "lvl": 3 },
-                { "name": "Buzzing", "min": 1, "max": 43, "lvl": 13 },
-                { "name": "Snapping", "min": 2, "max": 66, "lvl": 19 },
-                { "name": "Crackling", "min": 2, "max": 92, "lvl": 31 },
-                { "name": "Sparking", "min": 3, "max": 115, "lvl": 34 },
-                { "name": "Arcing", "min": 4, "max": 145, "lvl": 42 },
-                { "name": "Shocking", "min": 4, "max": 174, "lvl": 51 },
-                { "name": "Discharging", "min": 5, "max": 211, "lvl": 63 },
-                { "name": "Electrocuting", "min": 6, "max": 250, "lvl": 74 }
+                { "name": "Buzzing", "min": [1,3], "max": [41,43], "lvl": 13 },
+                { "name": "Snapping", "min": [2,5], "max": [62,66], "lvl": 19 },
+                { "name": "Crackling", "min": [2,7], "max": [87,92], "lvl": 31 },
+                { "name": "Sparking", "min": [3,9], "max": [109,115], "lvl": 34 },
+                { "name": "Arcing", "min": [4,11], "max": [137,145], "lvl": 42 },
+                { "name": "Shocking", "min": [4,13], "max": [165,174], "lvl": 51 },
+                { "name": "Discharging", "min": [5,16], "max": [200,211], "lvl": 63 },
+                { "name": "Electrocuting", "min": [6,19], "max": [237,250], "lvl": 74 }
             ],
             "Adds # to # Chaos Damage": [
-                { "name": "Malicious", "min": 70, "max": 185, "lvl": 83 }
+                { "name": "Malicious", "min": [70,108], "max": [147,185], "lvl": 83 }
             ],
             "#% increased Physical": [
                 { "name": "Squire's", "min": 15, "max": 7, "lvl": 1 },
@@ -2787,14 +2787,14 @@
             ],
             "Adds # to # Physical Damage": [
                 { "name": "Glinting", "min": 2, "max": 5, "lvl": 2 },
-                { "name": "Burnished", "min": 6, "max": 14, "lvl": 13 },
-                { "name": "Polished", "min": 9, "max": 21, "lvl": 21 },
-                { "name": "Honed", "min": 11, "max": 27, "lvl": 29 },
-                { "name": "Gleaming", "min": 14, "max": 33, "lvl": 36 },
-                { "name": "Annealed", "min": 18, "max": 42, "lvl": 46 },
-                { "name": "Razor Sharp", "min": 20, "max": 48, "lvl": 54 },
-                { "name": "Tempered", "min": 24, "max": 57, "lvl": 65 },
-                { "name": "Flaring", "min": 29, "max": 68, "lvl": 77 }
+                { "name": "Burnished", "min": [6,8], "max": [12,14], "lvl": 13 },
+                { "name": "Polished", "min": [9,12], "max": [18,21], "lvl": 21 },
+                { "name": "Honed", "min": [11,15], "max": [23,27], "lvl": 29 },
+                { "name": "Gleaming", "min": [14,19], "max": [28,33], "lvl": 36 },
+                { "name": "Annealed", "min": [18,24], "max": [36,42], "lvl": 46 },
+                { "name": "Razor Sharp", "min": [20,27], "max": [41,48], "lvl": 54 },
+                { "name": "Tempered", "min": [24,33], "max": [49,57], "lvl": 65 },
+                { "name": "Flaring", "min": [29,38], "max": [58,68], "lvl": 77 }
             ]
         },
         "suffix": {
@@ -2940,9 +2940,9 @@
                 { "name": "LightningDamageLifeLeechPermyriadCorrupted", "min": 0.2, "max": 0.2, "lvl": 50 }
             ],
             "Adds # to # Chaos Damage": [
-                { "name": "LocalAddedChaosDamageCorrupted1", "min": 1, "max": 5, "lvl": 1 },
-                { "name": "LocalAddedChaosDamageCorrupted2", "min": 6, "max": 13, "lvl": 20 },
-                { "name": "LocalAddedChaosDamageCorrupted3", "min": 8, "max": 23, "lvl": 40 }
+                { "name": "LocalAddedChaosDamageCorrupted1", "min": [1,2], "max": [3,5], "lvl": 1 },
+                { "name": "LocalAddedChaosDamageCorrupted2", "min": [6,8], "max": [11,13], "lvl": 20 },
+                { "name": "LocalAddedChaosDamageCorrupted3", "min": [8,11], "max": [19,23], "lvl": 40 }
             ],
             "+# to Weapon range": [
                 { "name": "LocalMeleeWeaponRangeCorrupted", "min": 1, "max": 2, "lvl": 1 }
@@ -2955,26 +2955,26 @@
     "Staff": {
         "prefix": {
             "Adds # to # Cold Damage": [
-                { "name": "Frosted", "min": 2, "max": 5, "lvl": 2 },
-                { "name": "Chilled", "min": 10, "max": 22, "lvl": 12 },
-                { "name": "Icy", "min": 15, "max": 34, "lvl": 19 },
-                { "name": "Frigid", "min": 21, "max": 48, "lvl": 27 },
-                { "name": "Freezing", "min": 26, "max": 60, "lvl": 34 },
-                { "name": "Frozen", "min": 32, "max": 76, "lvl": 43 },
-                { "name": "Glaciated", "min": 39, "max": 91, "lvl": 52 },
-                { "name": "Polar", "min": 47, "max": 110, "lvl": 63 },
-                { "name": "Entombing", "min": 56, "max": 131, "lvl": 75 }
+                { "name": "Frosted", "min": [2,3], "max": [4,5], "lvl": 2 },
+                { "name": "Chilled", "min": [10,13], "max": [19,22], "lvl": 12 },
+                { "name": "Icy", "min": [15,20], "max": [29,34], "lvl": 19 },
+                { "name": "Frigid", "min": [21,27], "max": [41,48], "lvl": 27 },
+                { "name": "Freezing", "min": [26,34], "max": [52,60], "lvl": 34 },
+                { "name": "Frozen", "min": [32,43], "max": [65,76], "lvl": 43 },
+                { "name": "Glaciated", "min": [39,52], "max": [78,91], "lvl": 52 },
+                { "name": "Polar", "min": [47,63], "max": [94,110], "lvl": 63 },
+                { "name": "Entombing", "min": [56,75], "max": [112,131], "lvl": 75 }
             ],
             "Adds # to # Fire Damage": [
-                { "name": "Heated", "min": 3, "max": 6, "lvl": 1 },
-                { "name": "Smouldering", "min": 12, "max": 27, "lvl": 11 },
-                { "name": "Smoking", "min": 18, "max": 42, "lvl": 18 },
-                { "name": "Burning", "min": 25, "max": 59, "lvl": 26 },
-                { "name": "Flaming", "min": 32, "max": 74, "lvl": 33 },
-                { "name": "Scorching", "min": 40, "max": 92, "lvl": 42 },
-                { "name": "Incinerating", "min": 48, "max": 111, "lvl": 51 },
-                { "name": "Blasting", "min": 58, "max": 134, "lvl": 62 },
-                { "name": "Cremating", "min": 68, "max": 160, "lvl": 74 }
+                { "name": "Heated", "min": [3,4], "max": [5,6], "lvl": 1 },
+                { "name": "Smouldering", "min": [12,16], "max": [23,27], "lvl": 11 },
+                { "name": "Smoking", "min": [18,24], "max": [36,42], "lvl": 18 },
+                { "name": "Burning", "min": [25,34], "max": [50,59], "lvl": 26 },
+                { "name": "Flaming", "min": [32,42], "max": [63,74], "lvl": 33 },
+                { "name": "Scorching", "min": [40,53], "max": [79,92], "lvl": 42 },
+                { "name": "Incinerating", "min": [48,64], "max": [95,111], "lvl": 51 },
+                { "name": "Blasting", "min": [58,77], "max": [115,134], "lvl": 62 },
+                { "name": "Cremating", "min": [68,91], "max": [137,160], "lvl": 74 }
             ],
             "+# to Level of Socketed Gems": [
                 { "name": "Paragon's", "min": 1, "max": 1, "lvl": 50 }
@@ -3018,17 +3018,17 @@
             ],
             "Adds # to # Lightning Damage": [
                 { "name": "Humming", "min": 1, "max": 10, "lvl": 3 },
-                { "name": "Buzzing", "min": 1, "max": 43, "lvl": 13 },
-                { "name": "Snapping", "min": 2, "max": 66, "lvl": 19 },
-                { "name": "Crackling", "min": 2, "max": 92, "lvl": 31 },
-                { "name": "Sparking", "min": 3, "max": 115, "lvl": 34 },
-                { "name": "Arcing", "min": 4, "max": 145, "lvl": 42 },
-                { "name": "Shocking", "min": 4, "max": 174, "lvl": 51 },
-                { "name": "Discharging", "min": 5, "max": 211, "lvl": 63 },
-                { "name": "Electrocuting", "min": 6, "max": 250, "lvl": 74 }
+                { "name": "Buzzing", "min": [1,3], "max": [41,43], "lvl": 13 },
+                { "name": "Snapping", "min": [2,5], "max": [62,66], "lvl": 19 },
+                { "name": "Crackling", "min": [2,7], "max": [87,92], "lvl": 31 },
+                { "name": "Sparking", "min": [3,9], "max": [109,115], "lvl": 34 },
+                { "name": "Arcing", "min": [4,11], "max": [137,145], "lvl": 42 },
+                { "name": "Shocking", "min": [4,13], "max": [165,174], "lvl": 51 },
+                { "name": "Discharging", "min": [5,16], "max": [200,211], "lvl": 63 },
+                { "name": "Electrocuting", "min": [6,19], "max": [237,250], "lvl": 74 }
             ],
             "Adds # to # Chaos Damage": [
-                { "name": "Malicious", "min": 70, "max": 185, "lvl": 83 }
+                { "name": "Malicious", "min": [70,108], "max": [147,185], "lvl": 83 }
             ],
             "#% increased Physical": [
                 { "name": "Squire's", "min": 15, "max": 7, "lvl": 1 },
@@ -3055,43 +3055,47 @@
             ],
             "Adds # to # Physical Damage": [
                 { "name": "Glinting", "min": 2, "max": 5, "lvl": 2 },
-                { "name": "Burnished", "min": 6, "max": 14, "lvl": 13 },
-                { "name": "Polished", "min": 9, "max": 21, "lvl": 21 },
-                { "name": "Honed", "min": 11, "max": 27, "lvl": 29 },
-                { "name": "Gleaming", "min": 14, "max": 33, "lvl": 36 },
-                { "name": "Annealed", "min": 18, "max": 42, "lvl": 46 },
-                { "name": "Razor Sharp", "min": 20, "max": 48, "lvl": 54 },
-                { "name": "Tempered", "min": 24, "max": 57, "lvl": 65 },
-                { "name": "Flaring", "min": 29, "max": 68, "lvl": 77 }
+                { "name": "Burnished", "min": [6,8], "max": [12,14], "lvl": 13 },
+                { "name": "Polished", "min": [9,12], "max": [18,21], "lvl": 21 },
+                { "name": "Honed", "min": [11,15], "max": [23,27], "lvl": 29 },
+                { "name": "Gleaming", "min": [14,19], "max": [28,33], "lvl": 36 },
+                { "name": "Annealed", "min": [18,24], "max": [36,42], "lvl": 46 },
+                { "name": "Razor Sharp", "min": [20,27], "max": [41,48], "lvl": 54 },
+                { "name": "Tempered", "min": [24,33], "max": [49,57], "lvl": 65 },
+                { "name": "Flaring", "min": [29,38], "max": [58,68], "lvl": 77 }
             ],
-            "Mod": [
-                { "name": "Frosted", "min": 1, "max": 4, "lvl": 1 },
-                { "name": "Chilled", "min": 8, "max": 18, "lvl": 11 },
-                { "name": "Icy", "min": 12, "max": 27, "lvl": 18 },
-                { "name": "Frigid", "min": 16, "max": 38, "lvl": 26 },
-                { "name": "Freezing", "min": 21, "max": 48, "lvl": 33 },
-                { "name": "Frozen", "min": 26, "max": 60, "lvl": 42 },
-                { "name": "Glaciated", "min": 31, "max": 73, "lvl": 51 },
-                { "name": "Polar", "min": 38, "max": 88, "lvl": 62 },
-                { "name": "Entombing", "min": 45, "max": 104, "lvl": 74 },
-                { "name": "Heated", "min": 1, "max": 5, "lvl": 1 },
-                { "name": "Smouldering", "min": 8, "max": 19, "lvl": 11 },
-                { "name": "Smoking", "min": 13, "max": 30, "lvl": 18 },
-                { "name": "Burning", "min": 18, "max": 42, "lvl": 26 },
-                { "name": "Flaming", "min": 23, "max": 53, "lvl": 33 },
-                { "name": "Scorching", "min": 28, "max": 66, "lvl": 42 },
-                { "name": "Incinerating", "min": 34, "max": 80, "lvl": 51 },
-                { "name": "Blasting", "min": 41, "max": 96, "lvl": 62 },
-                { "name": "Cremating", "min": 49, "max": 115, "lvl": 74 },
+            "Adds # to # Cold Damage to Spells": [
+                { "name": "Frosted", "min": [1,2], "max": [3,4], "lvl": 1 },
+                { "name": "Chilled", "min": [8,10], "max": [15,18], "lvl": 11 },
+                { "name": "Icy", "min": [12,16], "max": [23,27], "lvl": 18 },
+                { "name": "Frigid", "min": [16,22], "max": [33,38], "lvl": 26 },
+                { "name": "Freezing", "min": [21,27], "max": [41,48], "lvl": 33 },
+                { "name": "Frozen", "min": [26,34], "max": [52,60], "lvl": 42 },
+                { "name": "Glaciated", "min": [31,41], "max": [62,73], "lvl": 51 },
+                { "name": "Polar", "min": [38,50], "max": [75,88], "lvl": 62 },
+                { "name": "Entombing", "min": [45,60], "max": [89,104], "lvl": 74 }
+            ],
+            "Adds # to # Fire Damage to Spells": [
+                { "name": "Heated", "min": [1,2], "max": [4,5], "lvl": 1 },
+                { "name": "Smouldering", "min": [8,11], "max": [17,19], "lvl": 11 },
+                { "name": "Smoking", "min": [13,17], "max": [26,30], "lvl": 18 },
+                { "name": "Burning", "min": [18,24], "max": [36,42], "lvl": 26 },
+                { "name": "Flaming", "min": [23,30], "max": [45,53], "lvl": 33 },
+                { "name": "Scorching", "min": [28,38], "max": [57,66], "lvl": 42 },
+                { "name": "Incinerating", "min": [34,46], "max": [68,80], "lvl": 51 },
+                { "name": "Blasting", "min": [41,55], "max": [83,96], "lvl": 62 },
+                { "name": "Cremating", "min": [49,65], "max": [98,115], "lvl": 74 }
+            ],
+            "Adds # to # Lightning Damage to Spells": [
                 { "name": "Humming", "min": 1, "max": 7, "lvl": 1 },
-                { "name": "Buzzing", "min": 1, "max": 34, "lvl": 11 },
-                { "name": "Snapping", "min": 1, "max": 52, "lvl": 18 },
-                { "name": "Crackling", "min": 2, "max": 73, "lvl": 26 },
-                { "name": "Sparking", "min": 2, "max": 92, "lvl": 33 },
-                { "name": "Arcing", "min": 3, "max": 115, "lvl": 42 },
-                { "name": "Shocking", "min": 4, "max": 139, "lvl": 51 },
-                { "name": "Discharging", "min": 4, "max": 168, "lvl": 62 },
-                { "name": "Electrocuting", "min": 5, "max": 200, "lvl": 74 }
+                { "name": "Buzzing", "min": [1,3], "max": [32,34], "lvl": 11 },
+                { "name": "Snapping", "min": [1,4], "max": [49,52], "lvl": 18 },
+                { "name": "Crackling", "min": [2,6], "max": [69,73], "lvl": 26 },
+                { "name": "Sparking", "min": [2,7], "max": [87,92], "lvl": 33 },
+                { "name": "Arcing", "min": [3,9], "max": [109,115], "lvl": 42 },
+                { "name": "Shocking", "min": [4,11], "max": [132,139], "lvl": 51 },
+                { "name": "Discharging", "min": [4,13], "max": [159,168], "lvl": 62 },
+                { "name": "Electrocuting", "min": [5,15], "max": [189,200], "lvl": 74 }
             ],
             "#% increased Spell Damage": [
                 { "name": "Apprentice's", "min": 15, "max": 29, "lvl": 2 },
@@ -3102,15 +3106,6 @@
                 { "name": "Incanter's", "min": 90, "max": 104, "lvl": 58 },
                 { "name": "Glyphic", "min": 105, "max": 110, "lvl": 79 },
                 { "name": "Runic", "min": 111, "max": 115, "lvl": 84 }
-            ],
-            "#% increased Spell": [
-                { "name": "Caster's", "min": 8, "max": 10, "lvl": 2 },
-                { "name": "Conjuror's", "min": 15, "max": 13, "lvl": 11 },
-                { "name": "Wizard's", "min": 23, "max": 16, "lvl": 23 },
-                { "name": "Warlock's", "min": 30, "max": 19, "lvl": 35 },
-                { "name": "Mage's", "min": 38, "max": 22, "lvl": 46 },
-                { "name": "Archmage's", "min": 45, "max": 25, "lvl": 58 },
-                { "name": "Lich's", "min": 51, "max": 28, "lvl": 80 }
             ]
         },
         "suffix": {
@@ -3322,9 +3317,9 @@
                 { "name": "LightningDamageLifeLeechPermyriadCorrupted", "min": 0.2, "max": 0.2, "lvl": 50 }
             ],
             "Adds # to # Chaos Damage": [
-                { "name": "LocalAddedChaosDamageCorrupted1", "min": 1, "max": 5, "lvl": 1 },
-                { "name": "LocalAddedChaosDamageCorrupted2", "min": 6, "max": 13, "lvl": 20 },
-                { "name": "LocalAddedChaosDamageCorrupted3", "min": 8, "max": 23, "lvl": 40 }
+                { "name": "LocalAddedChaosDamageCorrupted1", "min": [1,2], "max": [3,5], "lvl": 1 },
+                { "name": "LocalAddedChaosDamageCorrupted2", "min": [6,8], "max": [11,13], "lvl": 20 },
+                { "name": "LocalAddedChaosDamageCorrupted3", "min": [8,11], "max": [19,23], "lvl": 40 }
             ],
             "+# to Weapon range": [
                 { "name": "LocalMeleeWeaponRangeCorrupted", "min": 1, "max": 2, "lvl": 1 }
@@ -3337,26 +3332,26 @@
     "Two-handed Sword": {
         "prefix": {
             "Adds # to # Cold Damage": [
-                { "name": "Frosted", "min": 2, "max": 5, "lvl": 2 },
-                { "name": "Chilled", "min": 10, "max": 22, "lvl": 12 },
-                { "name": "Icy", "min": 15, "max": 34, "lvl": 19 },
-                { "name": "Frigid", "min": 21, "max": 48, "lvl": 27 },
-                { "name": "Freezing", "min": 26, "max": 60, "lvl": 34 },
-                { "name": "Frozen", "min": 32, "max": 76, "lvl": 43 },
-                { "name": "Glaciated", "min": 39, "max": 91, "lvl": 52 },
-                { "name": "Polar", "min": 47, "max": 110, "lvl": 63 },
-                { "name": "Entombing", "min": 56, "max": 131, "lvl": 75 }
+                { "name": "Frosted", "min": [2,3], "max": [4,5], "lvl": 2 },
+                { "name": "Chilled", "min": [10,13], "max": [19,22], "lvl": 12 },
+                { "name": "Icy", "min": [15,20], "max": [29,34], "lvl": 19 },
+                { "name": "Frigid", "min": [21,27], "max": [41,48], "lvl": 27 },
+                { "name": "Freezing", "min": [26,34], "max": [52,60], "lvl": 34 },
+                { "name": "Frozen", "min": [32,43], "max": [65,76], "lvl": 43 },
+                { "name": "Glaciated", "min": [39,52], "max": [78,91], "lvl": 52 },
+                { "name": "Polar", "min": [47,63], "max": [94,110], "lvl": 63 },
+                { "name": "Entombing", "min": [56,75], "max": [112,131], "lvl": 75 }
             ],
             "Adds # to # Fire Damage": [
-                { "name": "Heated", "min": 3, "max": 6, "lvl": 1 },
-                { "name": "Smouldering", "min": 12, "max": 27, "lvl": 11 },
-                { "name": "Smoking", "min": 18, "max": 42, "lvl": 18 },
-                { "name": "Burning", "min": 25, "max": 59, "lvl": 26 },
-                { "name": "Flaming", "min": 32, "max": 74, "lvl": 33 },
-                { "name": "Scorching", "min": 40, "max": 92, "lvl": 42 },
-                { "name": "Incinerating", "min": 48, "max": 111, "lvl": 51 },
-                { "name": "Blasting", "min": 58, "max": 134, "lvl": 62 },
-                { "name": "Cremating", "min": 68, "max": 160, "lvl": 74 }
+                { "name": "Heated", "min": [3,4], "max": [5,6], "lvl": 1 },
+                { "name": "Smouldering", "min": [12,16], "max": [23,27], "lvl": 11 },
+                { "name": "Smoking", "min": [18,24], "max": [36,42], "lvl": 18 },
+                { "name": "Burning", "min": [25,34], "max": [50,59], "lvl": 26 },
+                { "name": "Flaming", "min": [32,42], "max": [63,74], "lvl": 33 },
+                { "name": "Scorching", "min": [40,53], "max": [79,92], "lvl": 42 },
+                { "name": "Incinerating", "min": [48,64], "max": [95,111], "lvl": 51 },
+                { "name": "Blasting", "min": [58,77], "max": [115,134], "lvl": 62 },
+                { "name": "Cremating", "min": [68,91], "max": [137,160], "lvl": 74 }
             ],
             "+# to Level of Socketed Gems": [
                 { "name": "Paragon's", "min": 1, "max": 1, "lvl": 50 }
@@ -3379,17 +3374,17 @@
             ],
             "Adds # to # Lightning Damage": [
                 { "name": "Humming", "min": 1, "max": 10, "lvl": 3 },
-                { "name": "Buzzing", "min": 1, "max": 43, "lvl": 13 },
-                { "name": "Snapping", "min": 2, "max": 66, "lvl": 19 },
-                { "name": "Crackling", "min": 2, "max": 92, "lvl": 31 },
-                { "name": "Sparking", "min": 3, "max": 115, "lvl": 34 },
-                { "name": "Arcing", "min": 4, "max": 145, "lvl": 42 },
-                { "name": "Shocking", "min": 4, "max": 174, "lvl": 51 },
-                { "name": "Discharging", "min": 5, "max": 211, "lvl": 63 },
-                { "name": "Electrocuting", "min": 6, "max": 250, "lvl": 74 }
+                { "name": "Buzzing", "min": [1,3], "max": [41,43], "lvl": 13 },
+                { "name": "Snapping", "min": [2,5], "max": [62,66], "lvl": 19 },
+                { "name": "Crackling", "min": [2,7], "max": [87,92], "lvl": 31 },
+                { "name": "Sparking", "min": [3,9], "max": [109,115], "lvl": 34 },
+                { "name": "Arcing", "min": [4,11], "max": [137,145], "lvl": 42 },
+                { "name": "Shocking", "min": [4,13], "max": [165,174], "lvl": 51 },
+                { "name": "Discharging", "min": [5,16], "max": [200,211], "lvl": 63 },
+                { "name": "Electrocuting", "min": [6,19], "max": [237,250], "lvl": 74 }
             ],
             "Adds # to # Chaos Damage": [
-                { "name": "Malicious", "min": 70, "max": 185, "lvl": 83 }
+                { "name": "Malicious", "min": [70,108], "max": [147,185], "lvl": 83 }
             ],
             "#% increased Physical": [
                 { "name": "Squire's", "min": 15, "max": 7, "lvl": 1 },
@@ -3416,14 +3411,14 @@
             ],
             "Adds # to # Physical Damage": [
                 { "name": "Glinting", "min": 2, "max": 5, "lvl": 2 },
-                { "name": "Burnished", "min": 6, "max": 14, "lvl": 13 },
-                { "name": "Polished", "min": 9, "max": 21, "lvl": 21 },
-                { "name": "Honed", "min": 11, "max": 27, "lvl": 29 },
-                { "name": "Gleaming", "min": 14, "max": 33, "lvl": 36 },
-                { "name": "Annealed", "min": 18, "max": 42, "lvl": 46 },
-                { "name": "Razor Sharp", "min": 20, "max": 48, "lvl": 54 },
-                { "name": "Tempered", "min": 24, "max": 57, "lvl": 65 },
-                { "name": "Flaring", "min": 29, "max": 68, "lvl": 77 }
+                { "name": "Burnished", "min": [6,8], "max": [12,14], "lvl": 13 },
+                { "name": "Polished", "min": [9,12], "max": [18,21], "lvl": 21 },
+                { "name": "Honed", "min": [11,15], "max": [23,27], "lvl": 29 },
+                { "name": "Gleaming", "min": [14,19], "max": [28,33], "lvl": 36 },
+                { "name": "Annealed", "min": [18,24], "max": [36,42], "lvl": 46 },
+                { "name": "Razor Sharp", "min": [20,27], "max": [41,48], "lvl": 54 },
+                { "name": "Tempered", "min": [24,33], "max": [49,57], "lvl": 65 },
+                { "name": "Flaring", "min": [29,38], "max": [58,68], "lvl": 77 }
             ]
         },
         "suffix": {
@@ -3583,9 +3578,9 @@
                 { "name": "LightningDamageLifeLeechPermyriadCorrupted", "min": 0.2, "max": 0.2, "lvl": 50 }
             ],
             "Adds # to # Chaos Damage": [
-                { "name": "LocalAddedChaosDamageCorrupted1", "min": 1, "max": 5, "lvl": 1 },
-                { "name": "LocalAddedChaosDamageCorrupted2", "min": 6, "max": 13, "lvl": 20 },
-                { "name": "LocalAddedChaosDamageCorrupted3", "min": 8, "max": 23, "lvl": 40 }
+                { "name": "LocalAddedChaosDamageCorrupted1", "min": [1,2], "max": [3,5], "lvl": 1 },
+                { "name": "LocalAddedChaosDamageCorrupted2", "min": [6,8], "max": [11,13], "lvl": 20 },
+                { "name": "LocalAddedChaosDamageCorrupted3", "min": [8,11], "max": [19,23], "lvl": 40 }
             ],
             "+# to Weapon range": [
                 { "name": "LocalMeleeWeaponRangeCorrupted", "min": 1, "max": 2, "lvl": 1 }
@@ -3750,7 +3745,7 @@
                 "#% of Damage taken gained as Mana when Hit": [
                     { "name": "ManaOnLifeLostCorrupted", "min": 3, "max": 6, "lvl": 1 }
                 ],
-                "(-#--#) Physical Damage taken from Attacks": [
+                "-# Physical Damage taken from Attacks": [
                     { "name": "DamageTakenFlatReductionCorrupted1", "min": -5, "max": -10, "lvl": 1 },
                     { "name": "DamageTakenFlatReductionCorrupted2", "min": -11, "max": -16, "lvl": 30 },
                     { "name": "DamageTakenFlatReductionCorrupted3", "min": -17, "max": -24, "lvl": 60 }
@@ -3914,7 +3909,7 @@
                 "#% of Damage taken gained as Mana when Hit": [
                     { "name": "ManaOnLifeLostCorrupted", "min": 3, "max": 6, "lvl": 1 }
                 ],
-                "(-#--#) Physical Damage taken from Attacks": [
+                "-# Physical Damage taken from Attacks": [
                     { "name": "DamageTakenFlatReductionCorrupted1", "min": -5, "max": -10, "lvl": 1 },
                     { "name": "DamageTakenFlatReductionCorrupted2", "min": -11, "max": -16, "lvl": 30 },
                     { "name": "DamageTakenFlatReductionCorrupted3", "min": -17, "max": -24, "lvl": 60 }
@@ -4130,7 +4125,7 @@
                 "#% of Damage taken gained as Mana when Hit": [
                     { "name": "ManaOnLifeLostCorrupted", "min": 3, "max": 6, "lvl": 1 }
                 ],
-                "(-#--#) Physical Damage taken from Attacks": [
+                "-# Physical Damage taken from Attacks": [
                     { "name": "DamageTakenFlatReductionCorrupted1", "min": -5, "max": -10, "lvl": 1 },
                     { "name": "DamageTakenFlatReductionCorrupted2", "min": -11, "max": -16, "lvl": 30 },
                     { "name": "DamageTakenFlatReductionCorrupted3", "min": -17, "max": -24, "lvl": 60 }
@@ -4313,7 +4308,7 @@
                 "#% of Damage taken gained as Mana when Hit": [
                     { "name": "ManaOnLifeLostCorrupted", "min": 3, "max": 6, "lvl": 1 }
                 ],
-                "(-#--#) Physical Damage taken from Attacks": [
+                "-# Physical Damage taken from Attacks": [
                     { "name": "DamageTakenFlatReductionCorrupted1", "min": -5, "max": -10, "lvl": 1 },
                     { "name": "DamageTakenFlatReductionCorrupted2", "min": -11, "max": -16, "lvl": 30 },
                     { "name": "DamageTakenFlatReductionCorrupted3", "min": -17, "max": -24, "lvl": 60 }
@@ -4514,7 +4509,7 @@
                 "#% of Damage taken gained as Mana when Hit": [
                     { "name": "ManaOnLifeLostCorrupted", "min": 3, "max": 6, "lvl": 1 }
                 ],
-                "(-#--#) Physical Damage taken from Attacks": [
+                "-# Physical Damage taken from Attacks": [
                     { "name": "DamageTakenFlatReductionCorrupted1", "min": -5, "max": -10, "lvl": 1 },
                     { "name": "DamageTakenFlatReductionCorrupted2", "min": -11, "max": -16, "lvl": 30 },
                     { "name": "DamageTakenFlatReductionCorrupted3", "min": -17, "max": -24, "lvl": 60 }
@@ -4715,7 +4710,7 @@
                 "#% of Damage taken gained as Mana when Hit": [
                     { "name": "ManaOnLifeLostCorrupted", "min": 3, "max": 6, "lvl": 1 }
                 ],
-                "(-#--#) Physical Damage taken from Attacks": [
+                "-# Physical Damage taken from Attacks": [
                     { "name": "DamageTakenFlatReductionCorrupted1", "min": -5, "max": -10, "lvl": 1 },
                     { "name": "DamageTakenFlatReductionCorrupted2", "min": -11, "max": -16, "lvl": 30 },
                     { "name": "DamageTakenFlatReductionCorrupted3", "min": -17, "max": -24, "lvl": 60 }
@@ -6901,9 +6896,9 @@
             "prefix": {
                 "Adds # to # Cold Damage to Attacks": [
                     { "name": "Frosted", "min": 1, "max": 2, "lvl": 2 },
-                    { "name": "Chilled", "min": 3, "max": 8, "lvl": 13 },
-                    { "name": "Icy", "min": 5, "max": 12, "lvl": 21 },
-                    { "name": "Frigid", "min": 6, "max": 16, "lvl": 29 }
+                    { "name": "Chilled", "min": [3,4], "max": [7,8], "lvl": 13 },
+                    { "name": "Icy", "min": [5,7], "max": [10,12], "lvl": 21 },
+                    { "name": "Frigid", "min": [6,9], "max": [13,16], "lvl": 29 }
                 ],
                 "#% increased Armour": [
                     { "name": "Reinforced", "min": 11, "max": 28, "lvl": 3 },
@@ -6924,9 +6919,9 @@
                 ],
                 "Adds # to # Fire Damage to Attacks": [
                     { "name": "Heated", "min": 1, "max": 2, "lvl": 1 },
-                    { "name": "Smouldering", "min": 3, "max": 8, "lvl": 12 },
-                    { "name": "Smoking", "min": 5, "max": 13, "lvl": 20 },
-                    { "name": "Burning", "min": 7, "max": 18, "lvl": 28 }
+                    { "name": "Smouldering", "min": [3,5], "max": [7,8], "lvl": 12 },
+                    { "name": "Smoking", "min": [5,7], "max": [11,13], "lvl": 20 },
+                    { "name": "Burning", "min": [7,10], "max": [15,18], "lvl": 28 }
                 ],
                 "+# to maximum Life": [
                     { "name": "Hale", "min": 3, "max": 9, "lvl": 1 },
@@ -6954,8 +6949,8 @@
                 "Adds # to # Lightning Damage to Attacks": [
                     { "name": "Humming", "min": 1, "max": 5, "lvl": 3 },
                     { "name": "Buzzing", "min": 1, "max": 15, "lvl": 13 },
-                    { "name": "Snapping", "min": 1, "max": 23, "lvl": 22 },
-                    { "name": "Crackling", "min": 1, "max": 28, "lvl": 28 }
+                    { "name": "Snapping", "min": [1,2], "max": [22,23], "lvl": 22 },
+                    { "name": "Crackling", "min": [1,2], "max": [27,28], "lvl": 28 }
                 ],
                 "#% of Physical Attack Damage Leeched as Mana": [
                     { "name": "Thirsty", "min": 0.2, "max": 0.4, "lvl": 50 }
@@ -7106,9 +7101,9 @@
             "prefix": {
                 "Adds # to # Cold Damage to Attacks": [
                     { "name": "Frosted", "min": 1, "max": 2, "lvl": 2 },
-                    { "name": "Chilled", "min": 3, "max": 8, "lvl": 13 },
-                    { "name": "Icy", "min": 5, "max": 12, "lvl": 21 },
-                    { "name": "Frigid", "min": 6, "max": 16, "lvl": 29 }
+                    { "name": "Chilled", "min": [3,4], "max": [7,8], "lvl": 13 },
+                    { "name": "Icy", "min": [5,7], "max": [10,12], "lvl": 21 },
+                    { "name": "Frigid", "min": [6,9], "max": [13,16], "lvl": 29 }
                 ],
                 "#% increased Evasion Rating": [
                     { "name": "Shade's", "min": 11, "max": 28, "lvl": 3 },
@@ -7129,9 +7124,9 @@
                 ],
                 "Adds # to # Fire Damage to Attacks": [
                     { "name": "Heated", "min": 1, "max": 2, "lvl": 1 },
-                    { "name": "Smouldering", "min": 3, "max": 8, "lvl": 12 },
-                    { "name": "Smoking", "min": 5, "max": 13, "lvl": 20 },
-                    { "name": "Burning", "min": 7, "max": 18, "lvl": 28 }
+                    { "name": "Smouldering", "min": [3,5], "max": [7,8], "lvl": 12 },
+                    { "name": "Smoking", "min": [5,7], "max": [11,13], "lvl": 20 },
+                    { "name": "Burning", "min": [7,10], "max": [15,18], "lvl": 28 }
                 ],
                 "+# to Evasion Rating": [
                     { "name": "Agile", "min": 3, "max": 10, "lvl": 1 },
@@ -7159,17 +7154,17 @@
                 "Adds # to # Lightning Damage to Attacks": [
                     { "name": "Humming", "min": 1, "max": 5, "lvl": 3 },
                     { "name": "Buzzing", "min": 1, "max": 15, "lvl": 13 },
-                    { "name": "Snapping", "min": 1, "max": 23, "lvl": 22 },
-                    { "name": "Crackling", "min": 1, "max": 28, "lvl": 28 }
+                    { "name": "Snapping", "min": [1,2], "max": [22,23], "lvl": 22 },
+                    { "name": "Crackling", "min": [1,2], "max": [27,28], "lvl": 28 }
                 ],
                 "#% of Physical Attack Damage Leeched as Mana": [
                     { "name": "Thirsty", "min": 0.2, "max": 0.4, "lvl": 50 }
                 ],
                 "Adds # to # Physical Damage to Attacks": [
                     { "name": "Glinting", "min": 1, "max": 2, "lvl": 5 },
-                    { "name": "Burnished", "min": 2, "max": 5, "lvl": 13 },
-                    { "name": "Polished", "min": 3, "max": 7, "lvl": 19 },
-                    { "name": "Honed", "min": 4, "max": 10, "lvl": 28 }
+                    { "name": "Burnished", "min": [2,3], "max": [4,5], "lvl": 13 },
+                    { "name": "Polished", "min": [3,4], "max": [6,7], "lvl": 19 },
+                    { "name": "Honed", "min": [4,6], "max": [9,10], "lvl": 28 }
                 ]
             },
             "suffix": {
@@ -7300,9 +7295,9 @@
             "prefix": {
                 "Adds # to # Cold Damage to Attacks": [
                     { "name": "Frosted", "min": 1, "max": 2, "lvl": 2 },
-                    { "name": "Chilled", "min": 3, "max": 8, "lvl": 13 },
-                    { "name": "Icy", "min": 5, "max": 12, "lvl": 21 },
-                    { "name": "Frigid", "min": 6, "max": 16, "lvl": 29 }
+                    { "name": "Chilled", "min": [3,4], "max": [7,8], "lvl": 13 },
+                    { "name": "Icy", "min": [5,7], "max": [10,12], "lvl": 21 },
+                    { "name": "Frigid", "min": [6,9], "max": [13,16], "lvl": 29 }
                 ],
                 "#% increased Energy Shield": [
                     { "name": "Protective", "min": 11, "max": 28, "lvl": 3 },
@@ -7323,9 +7318,9 @@
                 ],
                 "Adds # to # Fire Damage to Attacks": [
                     { "name": "Heated", "min": 1, "max": 2, "lvl": 1 },
-                    { "name": "Smouldering", "min": 3, "max": 8, "lvl": 12 },
-                    { "name": "Smoking", "min": 5, "max": 13, "lvl": 20 },
-                    { "name": "Burning", "min": 7, "max": 18, "lvl": 28 }
+                    { "name": "Smouldering", "min": [3,5], "max": [7,8], "lvl": 12 },
+                    { "name": "Smoking", "min": [5,7], "max": [11,13], "lvl": 20 },
+                    { "name": "Burning", "min": [7,10], "max": [15,18], "lvl": 28 }
                 ],
                 "+# to maximum Energy Shield": [
                     { "name": "Shining", "min": 3, "max": 5, "lvl": 3 },
@@ -7371,17 +7366,17 @@
                 "Adds # to # Lightning Damage to Attacks": [
                     { "name": "Humming", "min": 1, "max": 5, "lvl": 3 },
                     { "name": "Buzzing", "min": 1, "max": 15, "lvl": 13 },
-                    { "name": "Snapping", "min": 1, "max": 23, "lvl": 22 },
-                    { "name": "Crackling", "min": 1, "max": 28, "lvl": 28 }
+                    { "name": "Snapping", "min": [1,2], "max": [22,23], "lvl": 22 },
+                    { "name": "Crackling", "min": [1,2], "max": [27,28], "lvl": 28 }
                 ],
                 "#% of Physical Attack Damage Leeched as Mana": [
                     { "name": "Thirsty", "min": 0.2, "max": 0.4, "lvl": 50 }
                 ],
                 "Adds # to # Physical Damage to Attacks": [
                     { "name": "Glinting", "min": 1, "max": 2, "lvl": 5 },
-                    { "name": "Burnished", "min": 2, "max": 5, "lvl": 13 },
-                    { "name": "Polished", "min": 3, "max": 7, "lvl": 19 },
-                    { "name": "Honed", "min": 4, "max": 10, "lvl": 28 }
+                    { "name": "Burnished", "min": [2,3], "max": [4,5], "lvl": 13 },
+                    { "name": "Polished", "min": [3,4], "max": [6,7], "lvl": 19 },
+                    { "name": "Honed", "min": [4,6], "max": [9,10], "lvl": 28 }
                 ]
             },
             "suffix": {
@@ -7523,9 +7518,9 @@
             "prefix": {
                 "Adds # to # Cold Damage to Attacks": [
                     { "name": "Frosted", "min": 1, "max": 2, "lvl": 2 },
-                    { "name": "Chilled", "min": 3, "max": 8, "lvl": 13 },
-                    { "name": "Icy", "min": 5, "max": 12, "lvl": 21 },
-                    { "name": "Frigid", "min": 6, "max": 16, "lvl": 29 }
+                    { "name": "Chilled", "min": [3,4], "max": [7,8], "lvl": 13 },
+                    { "name": "Icy", "min": [5,7], "max": [10,12], "lvl": 21 },
+                    { "name": "Frigid", "min": [6,9], "max": [13,16], "lvl": 29 }
                 ],
                 "#% increased Armour and Evasion": [
                     { "name": "Scrapper's", "min": 11, "max": 28, "lvl": 3 },
@@ -7546,9 +7541,9 @@
                 ],
                 "Adds # to # Fire Damage to Attacks": [
                     { "name": "Heated", "min": 1, "max": 2, "lvl": 1 },
-                    { "name": "Smouldering", "min": 3, "max": 8, "lvl": 12 },
-                    { "name": "Smoking", "min": 5, "max": 13, "lvl": 20 },
-                    { "name": "Burning", "min": 7, "max": 18, "lvl": 28 }
+                    { "name": "Smouldering", "min": [3,5], "max": [7,8], "lvl": 12 },
+                    { "name": "Smoking", "min": [5,7], "max": [11,13], "lvl": 20 },
+                    { "name": "Burning", "min": [7,10], "max": [15,18], "lvl": 28 }
                 ],
                 "+# to Evasion Rating": [
                     { "name": "Agile", "min": 3, "max": 10, "lvl": 1 },
@@ -7581,17 +7576,17 @@
                 "Adds # to # Lightning Damage to Attacks": [
                     { "name": "Humming", "min": 1, "max": 5, "lvl": 3 },
                     { "name": "Buzzing", "min": 1, "max": 15, "lvl": 13 },
-                    { "name": "Snapping", "min": 1, "max": 23, "lvl": 22 },
-                    { "name": "Crackling", "min": 1, "max": 28, "lvl": 28 }
+                    { "name": "Snapping", "min": [1,2], "max": [22,23], "lvl": 22 },
+                    { "name": "Crackling", "min": [1,2], "max": [27,28], "lvl": 28 }
                 ],
                 "#% of Physical Attack Damage Leeched as Mana": [
                     { "name": "Thirsty", "min": 0.2, "max": 0.4, "lvl": 50 }
                 ],
                 "Adds # to # Physical Damage to Attacks": [
                     { "name": "Glinting", "min": 1, "max": 2, "lvl": 5 },
-                    { "name": "Burnished", "min": 2, "max": 5, "lvl": 13 },
-                    { "name": "Polished", "min": 3, "max": 7, "lvl": 19 },
-                    { "name": "Honed", "min": 4, "max": 10, "lvl": 28 }
+                    { "name": "Burnished", "min": [2,3], "max": [4,5], "lvl": 13 },
+                    { "name": "Polished", "min": [3,4], "max": [6,7], "lvl": 19 },
+                    { "name": "Honed", "min": [4,6], "max": [9,10], "lvl": 28 }
                 ]
             },
             "suffix": {
@@ -7733,9 +7728,9 @@
             "prefix": {
                 "Adds # to # Cold Damage to Attacks": [
                     { "name": "Frosted", "min": 1, "max": 2, "lvl": 2 },
-                    { "name": "Chilled", "min": 3, "max": 8, "lvl": 13 },
-                    { "name": "Icy", "min": 5, "max": 12, "lvl": 21 },
-                    { "name": "Frigid", "min": 6, "max": 16, "lvl": 29 }
+                    { "name": "Chilled", "min": [3,4], "max": [7,8], "lvl": 13 },
+                    { "name": "Icy", "min": [5,7], "max": [10,12], "lvl": 21 },
+                    { "name": "Frigid", "min": [6,9], "max": [13,16], "lvl": 29 }
                 ],
                 "#% increased Armour and Energy Shield": [
                     { "name": "Infixed", "min": 11, "max": 28, "lvl": 3 },
@@ -7756,9 +7751,9 @@
                 ],
                 "Adds # to # Fire Damage to Attacks": [
                     { "name": "Heated", "min": 1, "max": 2, "lvl": 1 },
-                    { "name": "Smouldering", "min": 3, "max": 8, "lvl": 12 },
-                    { "name": "Smoking", "min": 5, "max": 13, "lvl": 20 },
-                    { "name": "Burning", "min": 7, "max": 18, "lvl": 28 }
+                    { "name": "Smouldering", "min": [3,5], "max": [7,8], "lvl": 12 },
+                    { "name": "Smoking", "min": [5,7], "max": [11,13], "lvl": 20 },
+                    { "name": "Burning", "min": [7,10], "max": [15,18], "lvl": 28 }
                 ],
                 "+# to maximum Energy Shield": [
                     { "name": "Shining", "min": 3, "max": 5, "lvl": 3 },
@@ -7809,17 +7804,17 @@
                 "Adds # to # Lightning Damage to Attacks": [
                     { "name": "Humming", "min": 1, "max": 5, "lvl": 3 },
                     { "name": "Buzzing", "min": 1, "max": 15, "lvl": 13 },
-                    { "name": "Snapping", "min": 1, "max": 23, "lvl": 22 },
-                    { "name": "Crackling", "min": 1, "max": 28, "lvl": 28 }
+                    { "name": "Snapping", "min": [1,2], "max": [22,23], "lvl": 22 },
+                    { "name": "Crackling", "min": [1,2], "max": [27,28], "lvl": 28 }
                 ],
                 "#% of Physical Attack Damage Leeched as Mana": [
                     { "name": "Thirsty", "min": 0.2, "max": 0.4, "lvl": 50 }
                 ],
                 "Adds # to # Physical Damage to Attacks": [
                     { "name": "Glinting", "min": 1, "max": 2, "lvl": 5 },
-                    { "name": "Burnished", "min": 2, "max": 5, "lvl": 13 },
-                    { "name": "Polished", "min": 3, "max": 7, "lvl": 19 },
-                    { "name": "Honed", "min": 4, "max": 10, "lvl": 28 }
+                    { "name": "Burnished", "min": [2,3], "max": [4,5], "lvl": 13 },
+                    { "name": "Polished", "min": [3,4], "max": [6,7], "lvl": 19 },
+                    { "name": "Honed", "min": [4,6], "max": [9,10], "lvl": 28 }
                 ]
             },
             "suffix": {
@@ -7972,9 +7967,9 @@
             "prefix": {
                 "Adds # to # Cold Damage to Attacks": [
                     { "name": "Frosted", "min": 1, "max": 2, "lvl": 2 },
-                    { "name": "Chilled", "min": 3, "max": 8, "lvl": 13 },
-                    { "name": "Icy", "min": 5, "max": 12, "lvl": 21 },
-                    { "name": "Frigid", "min": 6, "max": 16, "lvl": 29 }
+                    { "name": "Chilled", "min": [3,4], "max": [7,8], "lvl": 13 },
+                    { "name": "Icy", "min": [5,7], "max": [10,12], "lvl": 21 },
+                    { "name": "Frigid", "min": [6,9], "max": [13,16], "lvl": 29 }
                 ],
                 "#% increased Evasion and Energy Shield": [
                     { "name": "Shadowy", "min": 11, "max": 28, "lvl": 3 },
@@ -7995,9 +7990,9 @@
                 ],
                 "Adds # to # Fire Damage to Attacks": [
                     { "name": "Heated", "min": 1, "max": 2, "lvl": 1 },
-                    { "name": "Smouldering", "min": 3, "max": 8, "lvl": 12 },
-                    { "name": "Smoking", "min": 5, "max": 13, "lvl": 20 },
-                    { "name": "Burning", "min": 7, "max": 18, "lvl": 28 }
+                    { "name": "Smouldering", "min": [3,5], "max": [7,8], "lvl": 12 },
+                    { "name": "Smoking", "min": [5,7], "max": [11,13], "lvl": 20 },
+                    { "name": "Burning", "min": [7,10], "max": [15,18], "lvl": 28 }
                 ],
                 "+# to maximum Energy Shield": [
                     { "name": "Shining", "min": 3, "max": 5, "lvl": 3 },
@@ -8048,17 +8043,17 @@
                 "Adds # to # Lightning Damage to Attacks": [
                     { "name": "Humming", "min": 1, "max": 5, "lvl": 3 },
                     { "name": "Buzzing", "min": 1, "max": 15, "lvl": 13 },
-                    { "name": "Snapping", "min": 1, "max": 23, "lvl": 22 },
-                    { "name": "Crackling", "min": 1, "max": 28, "lvl": 28 }
+                    { "name": "Snapping", "min": [1,2], "max": [22,23], "lvl": 22 },
+                    { "name": "Crackling", "min": [1,2], "max": [27,28], "lvl": 28 }
                 ],
                 "#% of Physical Attack Damage Leeched as Mana": [
                     { "name": "Thirsty", "min": 0.2, "max": 0.4, "lvl": 50 }
                 ],
                 "Adds # to # Physical Damage to Attacks": [
                     { "name": "Glinting", "min": 1, "max": 2, "lvl": 5 },
-                    { "name": "Burnished", "min": 2, "max": 5, "lvl": 13 },
-                    { "name": "Polished", "min": 3, "max": 7, "lvl": 19 },
-                    { "name": "Honed", "min": 4, "max": 10, "lvl": 28 }
+                    { "name": "Burnished", "min": [2,3], "max": [4,5], "lvl": 13 },
+                    { "name": "Polished", "min": [3,4], "max": [6,7], "lvl": 19 },
+                    { "name": "Honed", "min": [4,6], "max": [9,10], "lvl": 28 }
                 ]
             },
             "suffix": {
@@ -9817,7 +9812,7 @@
             "#% of Damage taken gained as Mana when Hit": [
                 { "name": "ManaOnLifeLostCorrupted", "min": 3, "max": 6, "lvl": 1 }
             ],
-            "(-#--#) Physical Damage taken from Attacks": [
+            "-# Physical Damage taken from Attacks": [
                 { "name": "DamageTakenFlatReductionCorrupted1", "min": -5, "max": -10, "lvl": 1 },
                 { "name": "DamageTakenFlatReductionCorrupted2", "min": -11, "max": -16, "lvl": 30 },
                 { "name": "DamageTakenFlatReductionCorrupted3", "min": -17, "max": -24, "lvl": 60 }
@@ -9985,15 +9980,15 @@
         "prefix": {
             "Adds # to # Cold Damage to Attacks": [
                 { "name": "Frosted", "min": 1, "max": 2, "lvl": 2 },
-                { "name": "Chilled", "min": 3, "max": 8, "lvl": 13 },
-                { "name": "Icy", "min": 5, "max": 12, "lvl": 21 },
-                { "name": "Frigid", "min": 6, "max": 16, "lvl": 29 }
+                { "name": "Chilled", "min": [3,4], "max": [7,8], "lvl": 13 },
+                { "name": "Icy", "min": [5,7], "max": [10,12], "lvl": 21 },
+                { "name": "Frigid", "min": [6,9], "max": [13,16], "lvl": 29 }
             ],
             "Adds # to # Fire Damage to Attacks": [
                 { "name": "Heated", "min": 1, "max": 2, "lvl": 1 },
-                { "name": "Smouldering", "min": 3, "max": 8, "lvl": 12 },
-                { "name": "Smoking", "min": 5, "max": 13, "lvl": 20 },
-                { "name": "Burning", "min": 7, "max": 18, "lvl": 28 }
+                { "name": "Smouldering", "min": [3,5], "max": [7,8], "lvl": 12 },
+                { "name": "Smoking", "min": [5,7], "max": [11,13], "lvl": 20 },
+                { "name": "Burning", "min": [7,10], "max": [15,18], "lvl": 28 }
             ],
             "+# to maximum Life": [
                 { "name": "Hale", "min": 3, "max": 9, "lvl": 1 },
@@ -10020,17 +10015,17 @@
             "Adds # to # Lightning Damage to Attacks": [
                 { "name": "Humming", "min": 1, "max": 5, "lvl": 3 },
                 { "name": "Buzzing", "min": 1, "max": 15, "lvl": 13 },
-                { "name": "Snapping", "min": 1, "max": 23, "lvl": 22 },
-                { "name": "Crackling", "min": 1, "max": 28, "lvl": 28 }
+                { "name": "Snapping", "min": [1,2], "max": [22,23], "lvl": 22 },
+                { "name": "Crackling", "min": [1,2], "max": [27,28], "lvl": 28 }
             ],
             "#% of Physical Attack Damage Leeched as Mana": [
                 { "name": "Thirsty", "min": 0.2, "max": 0.4, "lvl": 50 }
             ],
             "Adds # to # Physical Damage to Attacks": [
                 { "name": "Glinting", "min": 1, "max": 2, "lvl": 5 },
-                { "name": "Burnished", "min": 2, "max": 5, "lvl": 13 },
-                { "name": "Polished", "min": 3, "max": 7, "lvl": 19 },
-                { "name": "Honed", "min": 4, "max": 10, "lvl": 28 }
+                { "name": "Burnished", "min": [2,3], "max": [4,5], "lvl": 13 },
+                { "name": "Polished", "min": [3,4], "max": [6,7], "lvl": 19 },
+                { "name": "Honed", "min": [4,6], "max": [9,10], "lvl": 28 }
             ]
         },
         "suffix": {
