@@ -2504,6 +2504,15 @@
             ]
         },
         "suffix": {
+            "#% increased Bleed duration": [
+                { "name": "of Agony", "min": 8, "max": 12, "lvl": 30 },
+                { "name": "of Torment", "min": 13, "max": 18, "lvl": 60 }
+            ],
+            "#% increased Damage with Bleeding": [
+                { "name": "of Bloodletting", "min": 21, "max": 25, "lvl": 20 },
+                { "name": "of Haemophilia", "min": 26, "max": 30, "lvl": 40 },
+                { "name": "of Exsanguination", "min": 31, "max": 35, "lvl": 60 }
+            ],
             "+#% to Chaos Resistance": [
                 { "name": "of the Lost", "min": 5, "max": 10, "lvl": 16 },
                 { "name": "of Banishment", "min": 11, "max": 15, "lvl": 30 },
@@ -2606,10 +2615,24 @@
                 { "name": "of the Worthy", "min": 18, "max": 18, "lvl": 36 },
                 { "name": "of the Apt", "min": 32, "max": 32, "lvl": 60 }
             ],
+            "#% chance to Poison on Hit": [
+                { "name": "of Poisoning", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Toxins", "min": 20, "max": 20, "lvl": 55 },
+                { "name": "of Death", "min": 30, "max": 30, "lvl": 85 }
+            ],
             "+# Mana gained on Kill": [
                 { "name": "of Absorption", "min": 1, "max": 1, "lvl": 1 },
                 { "name": "of Osmosis", "min": 2, "max": 3, "lvl": 24 },
                 { "name": "of Consumption", "min": 4, "max": 6, "lvl": 40 }
+            ],
+            "#% increased Damage with Poison": [
+                { "name": "of Poison", "min": 21, "max": 25, "lvl": 20 },
+                { "name": "of Venom", "min": 26, "max": 30, "lvl": 40 },
+                { "name": "of Virulence", "min": 31, "max": 35, "lvl": 60 }
+            ],
+            "#% increased Poison Duration": [
+                { "name": "of Rot", "min": 8, "max": 12, "lvl": 30 },
+                { "name": "of Putrefaction", "min": 13, "max": 18, "lvl": 60 }
             ],
             "#% increased Projectile Speed": [
                 { "name": "of Darting", "min": 10, "max": 17, "lvl": 14 },

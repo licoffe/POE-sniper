@@ -223,15 +223,9 @@ class Item {
         var index;
         var explicit = "";
         var added    = false;
-        async.eachLimit( affixes, 1, function( affix, cbAffix ) {
-            console.log( explicitMod + " : " + JSON.stringify( affix.min ) + " : " + affix.min.length );
+        async.each( affixes, function( affix, cbAffix ) {
+            // console.log( explicitMod + " : " + JSON.stringify( affix.min ) + " : " + affix.min.length );
             if ( affix.min.length ) {
-                console.log ( 
-                    affix.min[0] + " <= " + values[0] + " && " +
-                    affix.min[1] + " >= " + values[0] + " && " +
-                    affix.max[0] + " <= " + values[1] + " && " +
-                    affix.max[1] + " >= " + values[1]
-                );
                 if ( !added &&
                      affix.min[0] <= values[0] &&
                      affix.min[1] >= values[0] &&
@@ -239,7 +233,6 @@ class Item {
                      affix.max[1] >= values[1]) {
                    index = iteration;
                    added = true;
-                   console.log( "yes" );
                 //    console.log( "P" + index );
                    explicit += 
                        "<span class=\"badge affix-" + affixType + "\" data-badge-caption=\"" + affixType +
@@ -293,9 +286,9 @@ class Item {
         }
 
         if ( item.explicitMods ) {
-            console.log( item.typeLine );
+            // console.log( item.typeLine );
             var itemType = types[item.typeLine];
-            console.log( itemType );
+            // console.log( itemType );
             if ( itemType && ( item.frameType === 1 || item.frameType === 2 )) {
                 var split = itemType.split( "_" );
                 var prefixes  = [];
@@ -323,32 +316,32 @@ class Item {
                     }
                     var index = "";
                     var explicitTitle = explicitMod.replace( reg, "#" );
-                    console.log( explicitTitle );
+                    // console.log( explicitTitle );
 
                     // If this mod is a prefix
                     if ( prefixes[explicitTitle]) {
                         Item.formatAffixes( prefixes[explicitTitle], values, explicitMod, "P", function( res ) {
                             explicit += res;
                             cbExplicit();
-                        })
+                        });
                     // If this mod is a suffix
                     } else if ( suffixes[explicitTitle]) {
                         Item.formatAffixes( suffixes[explicitTitle], values, explicitMod, "S", function( res ) {
                             explicit += res;
                             cbExplicit();
-                        })
+                        });
                     // If this mod is corrupted
                     } else if ( corrupted[explicitTitle]) {
                         Item.formatAffixes( corrupted[explicitTitle], values, explicitMod, "C", function( res ) {
                             explicit += res;
                             cbExplicit();
-                        })
+                        });
                     // Otherwise
                     } else {
                         explicit += 
                             "<span class=\"badge affix-explicit\" data-badge-caption=\"?" +
                             "\"></span><span class=\"explicit\">" + explicitMod + "</span><br>";
-                            console.log( explicit );
+                            // console.log( explicit );
                         cbExplicit();
                     }
                 }, function() {
@@ -370,11 +363,13 @@ class Item {
             enchant += item.enchantMods.join( "</span><br><span class=\"badge affix-enchant\" data-badge-caption=\"Enchant\"></span><span class=\"enchant\">" );
             enchant += "</span><br>";
         }
+        // console.log( item.totalMods );
         if ( item.totalMods && item.totalMods.length > 0 ) {
             total += "<span class=\"badge affix-total\" data-badge-caption=\"Total\"></span><span class=\"total\">";
             total += item.totalMods.join( "</span><br><span class=\"badge affix-total\" data-badge-caption=\"Total\"></span><span class=\"total\">" );
             total += "</span><br>";
         }
+        // console.log( item.pseudoMods );
         if ( item.pseudoMods && item.pseudoMods.length > 0 ) {
             pseudo += "<span class=\"badge affix-pseudo\" data-badge-caption=\"Pseudo\"></span><span class=\"pseudo\">";
             pseudo += item.pseudoMods.join( "</span><br><span class=\"badge affix-pseudo\" data-badge-caption=\"Pseudo\"></span><span class=\"pseudo\">" );
@@ -544,133 +539,98 @@ class Item {
         var match = {
             "+#% to Cold Resistance": function( val ) {
                 if ( !tags.cold ) {
-                    pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
-                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
                     pseudoMods["(Pseudo) # Resistances"] = 1;
                     pseudoMods["(Pseudo) # Elemental Resistances"] = 1;
                     tags.cold = true;
                 }
+                pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
+                pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
             },
             "+#% to Lightning Resistance": function( val ) {
                 if ( !tags.lightning ) {
-                    pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
-                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
                     pseudoMods["(Pseudo) # Resistances"] = 1;
                     pseudoMods["(Pseudo) # Elemental Resistances"] = 1;
                     tags.lightning = true;
                 }
+                pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
+                pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
             },
             "+#% to Fire Resistance": function( val ) {
                 if ( !tags.fire ) {
-                    pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
-                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
                     pseudoMods["(Pseudo) # Resistances"] = 1;
                     pseudoMods["(Pseudo) # Elemental Resistances"] = 1;
                     tags.fire = true;
                 }
+                pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
+                pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
             },
             "+#% to Chaos Resistance": function( val ) {
                 if ( !tags.chaos ) {
-                    pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
                     pseudoMods["(Pseudo) # Resistances"] = 1;
                     tags.chaos = true;
                 }
+                pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
             },
             "+#% to all Elemental Resistances": function( val ) {
                 if ( !tags.cold ) {
-                    pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
-                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
                     pseudoMods["(Pseudo) # Resistances"] = 1;
                     pseudoMods["(Pseudo) # Elemental Resistances"] = 1;
                     tags.cold = true;
                 }
                 if ( !tags.lightning ) {
-                    pseudoMods["(Pseudo) +#% total Resistance"] += val[0];
-                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] += val[0];
                     pseudoMods["(Pseudo) # Resistances"] += 1;
                     pseudoMods["(Pseudo) # Elemental Resistances"] += 1;
                     tags.lightning = true;
                 }
                 if ( !tags.fire ) {
-                    pseudoMods["(Pseudo) +#% total Resistance"] += val[0];
-                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] += val[0];
                     pseudoMods["(Pseudo) # Resistances"] += 1;
                     pseudoMods["(Pseudo) # Elemental Resistances"] += 1;
                     tags.fire = true;
                 }
-                // pseudoMods["(Pseudo) +#% total Resistance"] = val[0] * 3;
-                // pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0] * 3;
-                // pseudoMods["(Pseudo) # Resistances"] = 3;
-                // pseudoMods["(Pseudo) # Elemental Resistances"] = 3;
-                // tags.cold      = true;
-                // tags.lightning = true;
-                // tags.fire      = true;
+                pseudoMods["(Pseudo) +#% total Resistance"] = val[0] * 3;
+                pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0] * 3;
             },
             "+#% to Cold and Lightning Resistances": function( val ) {
                 if ( !tags.cold ) {
-                    pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
-                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
                     pseudoMods["(Pseudo) # Resistances"] = 1;
                     pseudoMods["(Pseudo) # Elemental Resistances"] = 1;
                     tags.cold = true;
                 }
                 if ( !tags.lightning ) {
-                    pseudoMods["(Pseudo) +#% total Resistance"] += val[0];
-                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] += val[0];
                     pseudoMods["(Pseudo) # Resistances"] += 1;
                     pseudoMods["(Pseudo) # Elemental Resistances"] += 1;
                     tags.lightning = true;
                 }
-                // pseudoMods["(Pseudo) +#% total Resistance"] = val[0] * 2;
-                // pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0] * 2;
-                // pseudoMods["(Pseudo) # Resistances"] = 2;
-                // pseudoMods["(Pseudo) # Elemental Resistances"] = 2;
-                // tags.cold      = true;
-                // tags.lightning = true;
+                pseudoMods["(Pseudo) +#% total Resistance"] = val[0] * 2;
+                pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0] * 2;
             },
             "+#% to Fire and Cold Resistances": function( val ) {
                 if ( !tags.cold ) {
-                    pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
-                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
                     pseudoMods["(Pseudo) # Resistances"] = 1;
                     pseudoMods["(Pseudo) # Elemental Resistances"] = 1;
                     tags.cold = true;
                 }
                 if ( !tags.fire ) {
-                    pseudoMods["(Pseudo) +#% total Resistance"] += val[0];
-                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] += val[0];
                     pseudoMods["(Pseudo) # Resistances"] += 1;
                     pseudoMods["(Pseudo) # Elemental Resistances"] += 1;
                     tags.fire = true;
                 }
-                // pseudoMods["(Pseudo) +#% total Resistance"] = val[0] * 2;
-                // pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0] * 2;
-                // pseudoMods["(Pseudo) # Resistances"] = 2;
-                // pseudoMods["(Pseudo) # Elemental Resistances"] = 2;
-                // tags.cold      = true;
-                // tags.fire      = true;
+                pseudoMods["(Pseudo) +#% total Resistance"] = val[0] * 2;
+                pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0] * 2;
             },
             "+#% to Fire and Lightning Resistances": function( val ) {
                 if ( !tags.lightning ) {
-                    pseudoMods["(Pseudo) +#% total Resistance"] = val[0];
-                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0];
                     pseudoMods["(Pseudo) # Resistances"] = 1;
                     pseudoMods["(Pseudo) # Elemental Resistances"] = 1;
                     tags.lightning = true;
                 }
                 if ( !tags.fire ) {
-                    pseudoMods["(Pseudo) +#% total Resistance"] += val[0];
-                    pseudoMods["(Pseudo) +#% total Elemental Resistance"] += val[0];
                     pseudoMods["(Pseudo) # Resistances"] += 1;
                     pseudoMods["(Pseudo) # Elemental Resistances"] += 1;
                     tags.fire = true;
                 }
-                // pseudoMods["(Pseudo) +#% total Resistance"] = val[0] * 2;
-                // pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0] * 2;
-                // pseudoMods["(Pseudo) # Resistances"] = 2;
-                // pseudoMods["(Pseudo) # Elemental Resistances"] = 2;
-                // tags.lightning = true;
-                // tags.fire      = true;
+                pseudoMods["(Pseudo) +#% total Resistance"] = val[0] * 2;
+                pseudoMods["(Pseudo) +#% total Elemental Resistance"] = val[0] * 2;
             }
         };
         mod = mod.replace( /^\([a-zA-Z ]+\)\s*/, "" );
