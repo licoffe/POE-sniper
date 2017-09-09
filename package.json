@@ -4,11 +4,12 @@
   "description": "A Path of Exile item sniper",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "electron-rebuild": "electron-rebuild"
   },
   "repository": {
-  "type": "git",
-  "url": "git://github.com/licoffe/POE-sniper.git"
+    "type": "git",
+    "url": "git://github.com/licoffe/POE-sniper.git"
   },
   "keywords": [
     "Electron",
@@ -20,7 +21,8 @@
   "author": "Licoffe",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^1.4.1"
+    "electron": "^1.4.1",
+    "electron-rebuild": "^1.6.0"
   },
   "dependencies": {
     "async": "^2.2.0",
