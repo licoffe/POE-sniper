@@ -13,9 +13,12 @@
 
 var request = require( "request" );
 var fs      = require( "fs" );
+var async   = require( "async" );
 const {app} = require( "electron" ).remote;
 const path  = require( "path" );
-var config           = {};
+var mu      = require( 'mu2' );
+mu.root     = __dirname + '/templates';
+var config  = {};
 console.log( "Loading config from " + app.getPath( "userData" ) + path.sep + "config.json" );
 config = require( app.getPath( "userData" ) + path.sep + "config.json" );
 
@@ -157,15 +160,18 @@ class Misc {
                 buyout_currency: $( "#poe-trade-search-output select[name='buyout_currency'] option:selected" ).text(),
                 crafted:         $( "#poe-trade-search-output select[name='crafted'] option:selected" ).text(),
                 enchanted:       $( "#poe-trade-search-output select[name='enchanted'] option:selected" ).text(),
-                mods:            {}
+                mods:            []
             };
             // Extract mods
-            $( "#poe-trade-search-output select[name='mod_name']" ).each( function() {
-                var mod_name = $( this ).find( "option:selected" ).val();
+            var mods = $( "#poe-trade-search-output select[name='mod_name']" );
+            async.each( mods, function( mod, cbMod ) {
+                var reg = /^\(([a-zA-Z ]+)\)\s*/;
+                var mod_name = $( mod ).find( "option:selected" ).val();
                 if ( mod_name ) {
-                    var mod_min  = $( this ).parent().parent().find( "input[name='mod_min']" ).val();
-                    var mod_max  = $( this ).parent().parent().find( "input[name='mod_max']" ).val();
-                    var pseudo   = mod_name.indexOf( "total" ) !== -1;
+                    var mod_min  = $( mod ).parent().parent().find( "input[name='mod_min']" ).val();
+                    var mod_max  = $( mod ).parent().parent().find( "input[name='mod_max']" ).val();
+                    mod_min = mod_min !== "" ? mod_min : "…";
+                    mod_max = mod_max !== "" ? mod_max : "…";
                     mod_name = mod_name.replace( "(pseudo) (total)", "(Total)" )
                                        .replace( "(pseudo)", "(Pseudo)" )
                                        .replace( "(unique explicit)", "(Unique explicit)" )
@@ -173,10 +179,40 @@ class Misc {
                                        .replace( "(crafted)", "(Crafted)" )
                                        .replace( "(implicit)", "(Implicit)" )
                                        .trim();
-                    data.mods[mod_name] = { min: mod_min, max: mod_max, pseudo: pseudo };
+                    var fullName = mod_name;
+                    var match = reg.exec( mod_name );
+                    var obj = {};
+                    if ( match ) {
+                        obj = {
+                            typeLC: match[1].toLowerCase(),
+                            type:   match[1],
+                            title:  mod_name.replace( reg, "" )
+                        };
+                    // This is an explicit mod
+                    } else {
+                        fullName = "(Explicit) " + mod_name;
+                        obj      = {
+                            typeLC: "explicit",
+                            type:   "Explicit",
+                            title:  mod_name
+                        };
+                    }
+                    var generated = "";
+                    mu.compileAndRender( "affix-filter.html", obj )
+                    .on( "data", function ( data ) {
+                        generated += data.toString();
+                    })
+                    .on( "end", function () {
+                        data.mods.push({ title: fullName, min: mod_min, max: mod_max, generated: generated });
+                        cbMod();
+                    });
+                } else {
+                    cbMod();
                 }
+            }, function() {
+                console.log( data );
+                callback( data );
             });
-            callback( data );
         });
     }
 

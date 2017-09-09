@@ -588,7 +588,7 @@ input[type=range] {
     top:-1px;
 }
 
-#filter-filter {
+#filter-filter, #filter-processing-total-time {
     position: relative;
     top: 9px;
 }
@@ -693,7 +693,7 @@ label.active {
 }
 
 .item-type label.active {
-    transform: translateX(230%)!important;
+    transform: translateX(260%)!important;
 }
 
 label.active[for="sockets-red"], label.active[for="sockets-green"], label.active[for="sockets-blue"], label.active[for="sockets-white"] {

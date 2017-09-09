@@ -313,7 +313,7 @@ $( document).ready( function() {
                               .replace( "Talisman implicit", "Implicit" );
                 formData.affixes[cleanedAffix] = [data.min, data.max];
                 var count = ( data.title.match( /#/g ) || []).length;
-                console.log( data );
+                // console.log( data );
                 // console.log( count );
                 var affix = "";
                 if ( count > 1 ) {
@@ -463,7 +463,7 @@ $( document).ready( function() {
             formData.active = true;
             // console.log( formData );
             var filter = new Filter( formData );
-            console.log( filter );
+            // console.log( filter );
             if ( $( "#add-filter" ).text() === "playlist_addAdd filter" ) {
                 filters.add( filter );
                 console.log( filters );
@@ -1841,6 +1841,7 @@ $( document).ready( function() {
                     });
                 });
             } else {
+                var totalTime = 0;
                 async.each( filters.filterList, function( filter, callbackFilter ) {
                     if ( !filter.active ) {
                         callbackFilter();
@@ -1904,6 +1905,7 @@ $( document).ready( function() {
                             // If we're monitoring processing time, compute and display it
                             if ( config.showFilterProcessingTime ) {
                                 var time = Date.now() - beginFilter;
+                                totalTime += time;
                                 var element = $( "#filter-detail-" + filter.id + " .performance-info-time" );
                                 element.text( time + " ms" );
                                 // Print text in red if above 100ms
@@ -1919,6 +1921,10 @@ $( document).ready( function() {
                 }, function( err ) {
                     if ( err ) {
                         console.log( err );
+                    }
+                    // If we're monitoring processing time, display total time
+                    if ( config.showFilterProcessingTime ) {
+                        $( "#total-processing-time" ).text( totalTime + " ms" );
                     }
 
                     // Remove sold/displaced items
@@ -2212,15 +2218,17 @@ $( document).ready( function() {
         $( "#es" ).val( data.shield_min );
         $( "#evasion" ).val( data.evasion_min );
         $( "#evasion" ).val( data.evasion_min );
-        async.each( Object.keys( data.mods ), function( mod, cbMod ) {
+        console.log( data.mods );
+        
+        async.each( data.mods, function( mod, cbMod ) {
             var generated = "";
             var obj = {
-                title: mod,
-                min:   data.mods[mod].min,
-                max:   data.mods[mod].max,
-                affix: mod.replace( 
-                    "#", "( " + data.mods[mod].min + " - " + 
-                                data.mods[mod].max + " )" 
+                title: mod.title,
+                min:   "<span class='value'>" + mod.min + "</span>",
+                max:   "<span class='value'>" + mod.max + "</span>",
+                affix: mod.generated.replace( 
+                    "#", "( <span class='value'>" + mod.min + "</span> - <span class='value'>" + 
+                                mod.max + "</span> )" 
                 ),
                 id:    Misc.guidGenerator()
             };
@@ -2235,9 +2243,9 @@ $( document).ready( function() {
                 $( ".remove-affix" ).click( function() {
                     $( this ).parent().parent().remove();
                 });
+                cbMod();
             });
-            cbMod();
-        });
+        }, function() {});
         // Compute total links
         var totalLinks = 0;
         if ( !data.link_min ) {
@@ -2554,10 +2562,10 @@ $( document).ready( function() {
                 var affix = $( this ).text().trim();
                 var type  = $( this ).parent().find( ".badge" ).data( "badge-caption" );
                 // affix     = "(" + type + ") " + affix;
-                console.log( affix );
+                // console.log( affix );
 
                 // Extract title, min and max
-                var reg = /([0-9\.]+)/g;
+                var reg = /([0-9\.…]+)/g;
                 var regPar = /\([^()]+\)|\d+/g;
                 var match = reg.exec( affix );
                 var matches = [];
@@ -2606,7 +2614,7 @@ $( document).ready( function() {
             var affix = $( this ).text();
             var type  = $( this ).parent().find( ".badge" ).data( "badge-caption" );
             // Extract title, min and max
-            var reg = /([0-9\.]+)/g;
+            var reg = /([0-9\.…]+)/g;
             var regPar = /\([^()]+\)|\d+/g;
             var match = reg.exec( affix );
             var matches = [];

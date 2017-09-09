@@ -270,6 +270,9 @@ class Item {
      * @returns Formatted item through callback
      */
     static formatItem( item, name, prices, openPrefix, openSuffix, callback ) {
+        var magicReg = /[a-zA-Z']+\s([a-zA-Z ']+)\sof.*/;
+        openPrefix = openPrefix === "" ? 0 : openPrefix;
+        openSuffix = openSuffix === "" ? 0 : openSuffix;
         var time       = Item.formatTime();
         var guid       = Misc.guidGenerator();
         var implicit   = "";
@@ -288,12 +291,29 @@ class Item {
             implicit += "</span><br>";
         }
 
-        if ( item.explicitMods ) {
+        if ( item.explicitMods && item.identified ) {
             // console.log( item.typeLine );
-            var itemType = types[item.typeLine];
+            // If object is magic, we have to guess the type another way
+            var itemType;
+            if ( item.frameType === 1 ) {
+                var cleanedTypeLine = item.typeLine.replace( "Shaped ", "" );
+                var match = magicReg.exec( cleanedTypeLine );
+                console.log( item.typeLine );
+                if ( match ) {
+                    itemType = types[match[1]];
+                    console.log( item.typeLine + ", " + match[1] + ", " + itemType );
+                } else {
+                    console.log( "Could not match " + item.typeLine );
+                }
+            } else {
+                itemType = types[item.typeLine];
+            }
+            
             // console.log( itemType );
             if ( itemType && ( item.frameType === 1 || item.frameType === 2 )) {
                 var split = itemType.split( "_" );
+                console.log( split );
+                console.log( item.typeLine );
                 var prefixes  = [];
                 var suffixes  = [];
                 var corrupted = [];
@@ -352,7 +372,9 @@ class Item {
                 }, function() {
                 });
             } else {
-                console.log( "Unknown item type " + itemType );
+                if ( !itemType ) {
+                    console.log( "Unknown item type " + itemType + " (" + item.typeLine +  ")" );
+                }
                 explicit += "<span class=\"badge affix-explicit\" data-badge-caption=\"Explicit\"></span><span class=\"explicit\">";
                 explicit += item.explicitMods.join( "</span><br><span class=\"badge affix-explicit\" data-badge-caption=\"Explicit\"></span></span><span class=\"explicit\">" );
                 explicit += "</span><br>";

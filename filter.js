@@ -67,8 +67,8 @@ class Filter {
         this.checked      = obj.active ? "checked" : "";
         this.convert      = obj.convert;
         this.displayPrice = obj.displayPrice;
-        this.openPrefixes = obj.openPrefixes === "" ? 0 : obj.openPrefixes;
-        this.openSuffixes = obj.openSuffixes === "" ? 0 : obj.openSuffixes;
+        this.openPrefixes = obj.openPrefixes;
+        this.openSuffixes = obj.openSuffixes;
         this.mapQuantity  = obj.mapQuantity;
         this.mapRarity    = obj.mapRarity;
         this.mapPackSize  = obj.mapPackSize;

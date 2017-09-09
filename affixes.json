@@ -1,5 +1,5 @@
 {
-    "One-handed Axe": {
+    "One-handed axe": {
         "prefix": {
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": [1,2], "max": [3,3], "lvl": 2 },
@@ -885,7 +885,7 @@
             ]
         }
     },
-    "One-handed Mace": {
+    "One-handed mace": {
         "prefix": {
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": 1, "max": 3, "lvl": 2 },
@@ -1135,7 +1135,7 @@
             ]
         }
     },
-    "Scepter": {
+    "Sceptre": {
         "prefix": {
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": 1, "max": 3, "lvl": 2 },
@@ -1523,7 +1523,7 @@
             ]
         }
     },
-    "One-handed Sword": {
+    "One-handed sword": {
         "prefix": {
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": 1, "max": 3, "lvl": 2 },
@@ -2152,7 +2152,7 @@
             ]
         }
     },
-    "Two-handed Axe": {
+    "Two-handed axe": {
         "prefix": {
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": [2,3], "max": [4,5], "lvl": 2 },
@@ -2596,7 +2596,7 @@
                 { "name": "of Victory", "min": 7, "max": 10, "lvl": 23 },
                 { "name": "of Triumph", "min": 11, "max": 14, "lvl": 40 }
             ],
-            "Mod": [
+            "#% increased Light Radius\n+# to Accuracy Rating": [
                 { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
                 { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
                 { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
@@ -2614,6 +2614,11 @@
             "#% reduced Attribute Requirements": [
                 { "name": "of the Worthy", "min": 18, "max": 18, "lvl": 36 },
                 { "name": "of the Apt", "min": 32, "max": 32, "lvl": 60 }
+            ],
+            "#% chance to cause Bleeding on Hit": [
+                { "name": "of Bleeding", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Flaying", "min": 15, "max": 15, "lvl": 55 },
+                { "name": "of Hemorrhaging", "min": 20, "max": 20, "lvl": 85 }
             ],
             "#% chance to Poison on Hit": [
                 { "name": "of Poisoning", "min": 10, "max": 10, "lvl": 15 },
@@ -2684,7 +2689,7 @@
             ]
         }
     },
-    "Fishing Rod": {
+    "Fishing rod": {
         "prefix": {
             "#% increased Fishing Line Strength": [
                 { "name": "Filigree", "min": 20, "max": 40, "lvl": 1 }
@@ -2728,7 +2733,7 @@
             ]
         }
     },
-    "Two-handed Mace": {
+    "Two-handed mace": {
         "prefix": {
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": [2,3], "max": [4,5], "lvl": 2 },
@@ -3352,7 +3357,7 @@
             ]
         }
     },
-    "Two-handed Sword": {
+    "Two-handed sword": {
         "prefix": {
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": [2,3], "max": [4,5], "lvl": 2 },
@@ -10485,173 +10490,306 @@
     "Flask": {
         "Life": {
             "prefix": {
-                "Instant": [
+                "Instant Recovery": [
                     { "name": "Seething", "min": 66, "max": 66, "lvl": 7 }
                 ],
                 "#% reduced Charges used": [
                     { "name": "Chemist's", "min": 25, "max": 20, "lvl": 14 }
                 ],
-                "+# Extra Charges": [
+                "+# to Maximum Charges": [
                     { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
                 ],
-                "Mod": [
-                    { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 },
-                    { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 },
+                "Recharges # Charge when you deal a Critical Strike": [
+                    { "name": "Surgeon's", "min": 1, "max": 1, "lvl": 8 }
+                ],
+                "#% chance to gain a Flask Charge when you deal a Critical Strike": [
+                    { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 }
+                ],
+                "Recharges # Charges when you take a Critical Strike": [
+                    { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 }
+                ],
+                "#% increased Charge Recovery": [
                     { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
                 ],
-                "Mod": [
-                    { "name": "Sapping", "min": 40, "max": 10, "lvl": 13 },
-                    { "name": "Saturated", "min": 50, "max": 33, "lvl": 1 },
+                "#% increased Life Recovered": [
+                    { "name": "Sapping", "min": 40, "max": 40, "lvl": 13 }
+                ],
+                "Removes #% of Life Recovered from Mana when used": [
+                    { "name": "Sapping", "min": 10, "max": 10, "lvl": 13 }
+                ],
+                "#% increased Amount Recovered": [
+                    { "name": "Saturated", "min": 50, "max": 50, "lvl": 1 }
+                ],
+                "#% reduced Recovery Speed": [
+                    { "name": "Saturated", "min": 33, "max": 33, "lvl": 1 }
+                ],
+                "#% increased Recovery when on Low Life": [
                     { "name": "Cautious", "min": 100, "max": 100, "lvl": 6 }
                 ],
-                "Mod": [
-                    { "name": "Catalysed", "min": 50, "max": 50, "lvl": 1 },
-                    { "name": "Panicked", "min": 25, "max": 25, "lvl": 9 },
-                    { "name": "Bubbling", "min": 50, "max": 135, "lvl": 3 }
+                "#% increased Recovery Speed": [
+                    { "name": "Catalysed", "min": 50, "max": 50, "lvl": 1 }
+                ],
+                "Instant Recovery when on Low Life": [
+                    { "name": "Panicked", "min": 0, "max": 0, "lvl": 9 }
+                ],
+                "#% reduced Amount Recovered": [
+                    { "name": "Panicked", "min": 25, "max": 25, "lvl": 9 }
+                ],
+                "#% of Recovery applied Instantly": [
+                    { "name": "Bubbling", "min": 50, "max": 50, "lvl": 3 }
+                ],
+                "#% reduced Amount Recovered": [
+                    { "name": "Bubbling", "min": 50, "max": 50, "lvl": 3 }
+                ],
+                "#% increased Recovery Speed": [
+                    { "name": "Bubbling", "min": 135, "max": 135, "lvl": 3 }
                 ]
             },
             "suffix": {
-                "Mod": [
-                    { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 },
-                    { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 },
-                    { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 },
-                    { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 },
-                    { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 },
-                    { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 },
-                    { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 },
-                    { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 },
+                "#% increased Armour during Flask effect": [
+                    { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 }
+                ],
+                "#% increased Evasion Rating during Flask effect": [
+                    { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 }
+                ],
+                "Adds Knockback to Melee Attacks during Flask effect": [
+                    { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 }
+                ],
+                "#% of Physical Attack Damage Leeched as Life during Flask effect": [
+                    { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 }
+                ],
+                "#% of Physical Attack Damage Leeched as Mana during Flask effect": [
+                    { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 }
+                ],
+                "#% increased Movement Speed during Flask effect": [
+                    { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 }
+                ],
+                "#% additional Elemental Resistances during Flask effect": [
+                    { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 }
+                ],
+                "#% increased Block and Stun Recovery during Flask effect": [
+                    { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 }
+                ],
+                "Immune to Curses during Flask effect\nRemoves Curses on use": [                    
                     { "name": "of Warding", "min": 0, "max": 0, "lvl": 18 }
                 ],
-                "Immunity to Ignite during Flask": [
+                "Immunity to Ignite during Flask effect\nRemoves Burning on use": [
                     { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
                 ],
-                "Immunity to Freeze and Chill during Flask": [
+                "Immunity to Freeze and Chill during Flask effect\nRemoves Freeze and Chill on use": [
                     { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
                 ],
-                "Immune to Poison during Flask": [
+                "Immune to Poison during Flask Effect\nRemoves Poison on use": [
                     { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
                 ],
                 "Grants #% of Life Recovery to Minions": [
                     { "name": "of Animation", "min": 40, "max": 60, "lvl": 10 }
                 ],
-                "Immunity to Bleeding during Flask": [
+                "Immunity to Bleeding during Flask effect\nRemoves Bleeding on use": [
                     { "name": "of Staunching", "min": 0, "max": 0, "lvl": 8 }
                 ],
-                "Immunity to Shock during Flask": [
+                "Immunity to Shock during Flask effect\nRemoves Shock on use": [
                     { "name": "of Grounding", "min": 0, "max": 0, "lvl": 10 }
                 ]
             }
         },
         "Mana": {
             "prefix": {
-                "Instant": [
+                "Instant Recovery": [
                     { "name": "Seething", "min": 66, "max": 66, "lvl": 7 }
                 ],
                 "#% reduced Charges used": [
                     { "name": "Chemist's", "min": 25, "max": 20, "lvl": 14 }
                 ],
-                "+# Extra Charges": [
+                "+# to Maximum Charges": [
                     { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
                 ],
-                "Mod": [
-                    { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 },
-                    { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 },
+                "Recharges # Charge when you deal a Critical Strike": [
+                    { "name": "Surgeon's", "min": 1, "max": 1, "lvl": 8 }
+                ],
+                "#% chance to gain a Flask Charge when you deal a Critical Strike": [
+                    { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 }
+                ],
+                "Recharges # Charges when you take a Critical Strike": [
+                    { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 }
+                ],
+                "#% increased Charge Recovery": [
                     { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
                 ],
-                "Mod": [
-                    { "name": "Caustic", "min": 60, "max": 15, "lvl": 11 },
-                    { "name": "Saturated", "min": 50, "max": 33, "lvl": 1 },
+                "#% increased Amount Recovered": [
+                    { "name": "Saturated", "min": 50, "max": 50, "lvl": 1 }
+                ],
+                "#% reduced Recovery Speed": [
+                    { "name": "Saturated", "min": 33, "max": 33, "lvl": 1 }
+                ],
+                "#% increased Recovery when on Low Life": [
                     { "name": "Cautious", "min": 100, "max": 100, "lvl": 6 }
                 ],
-                "Mod": [
-                    { "name": "Catalysed", "min": 50, "max": 50, "lvl": 1 },
-                    { "name": "Panicked", "min": 25, "max": 25, "lvl": 9 },
-                    { "name": "Bubbling", "min": 50, "max": 135, "lvl": 3 }
+                "#% increased Recovery Speed": [
+                    { "name": "Catalysed", "min": 50, "max": 50, "lvl": 1 }
+                ],
+                "Instant Recovery when on Low Life": [
+                    { "name": "Panicked", "min": 0, "max": 0, "lvl": 9 }
+                ],
+                "#% reduced Amount Recovered": [
+                    { "name": "Panicked", "min": 25, "max": 25, "lvl": 9 }
+                ],
+                "#% of Recovery applied Instantly": [
+                    { "name": "Bubbling", "min": 50, "max": 50, "lvl": 3 }
+                ],
+                "#% reduced Amount Recovered": [
+                    { "name": "Bubbling", "min": 50, "max": 50, "lvl": 3 }
+                ],
+                "#% increased Recovery Speed": [
+                    { "name": "Bubbling", "min": 135, "max": 135, "lvl": 3 }
                 ]
             },
             "suffix": {
-                "Mod": [
-                    { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 },
-                    { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 },
-                    { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 },
-                    { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 },
-                    { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 },
-                    { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 },
-                    { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 },
-                    { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 },
+                "#% increased Armour during Flask effect": [
+                    { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 }
+                ],
+                "#% increased Evasion Rating during Flask effect": [
+                    { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 }
+                ],
+                "Adds Knockback to Melee Attacks during Flask effect": [
+                    { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 }
+                ],
+                "#% of Physical Attack Damage Leeched as Life during Flask effect": [
+                    { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 }
+                ],
+                "#% of Physical Attack Damage Leeched as Mana during Flask effect": [
+                    { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 }
+                ],
+                "#% increased Movement Speed during Flask effect": [
+                    { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 }
+                ],
+                "#% additional Elemental Resistances during Flask effect": [
+                    { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 }
+                ],
+                "#% increased Block and Stun Recovery during Flask effect": [
+                    { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 }
+                ],
+                "Immune to Curses during Flask effect\nRemoves Curses on use": [                    
                     { "name": "of Warding", "min": 0, "max": 0, "lvl": 18 }
                 ],
-                "Immunity to Ignite during Flask": [
+                "Immunity to Ignite during Flask effect\nRemoves Burning on use": [
                     { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
                 ],
-                "Immunity to Freeze and Chill during Flask": [
+                "Immunity to Freeze and Chill during Flask effect\nRemoves Freeze and Chill on use": [
                     { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
                 ],
-                "Immune to Poison during Flask": [
+                "Immune to Poison during Flask Effect\nRemoves Poison on use": [
                     { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
                 ],
-                "Immunity to Bleeding during Flask": [
+                "Immunity to Bleeding during Flask effect\nRemoves Bleeding on use": [
                     { "name": "of Staunching", "min": 0, "max": 0, "lvl": 8 }
                 ],
-                "Immunity to Shock during Flask": [
+                "Immunity to Shock during Flask effect\nRemoves Shock on use": [
                     { "name": "of Grounding", "min": 0, "max": 0, "lvl": 10 }
                 ]
             }
         },
         "Hybrid": {
             "prefix": {
-                "Instant": [
+                "Instant Recovery": [
                     { "name": "Seething", "min": 66, "max": 66, "lvl": 7 }
                 ],
                 "#% reduced Charges used": [
                     { "name": "Chemist's", "min": 25, "max": 20, "lvl": 14 }
                 ],
-                "+# Extra Charges": [
+                "+# to Maximum Charges": [
                     { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
                 ],
-                "Mod": [
-                    { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 },
-                    { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 },
+                "Recharges # Charge when you deal a Critical Strike": [
+                    { "name": "Surgeon's", "min": 1, "max": 1, "lvl": 8 }
+                ],
+                "#% chance to gain a Flask Charge when you deal a Critical Strike": [
+                    { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 }
+                ],
+                "Recharges # Charges when you take a Critical Strike": [
+                    { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 }
+                ],
+                "#% increased Charge Recovery": [
                     { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
                 ],
-                "Mod": [
-                    { "name": "Saturated", "min": 50, "max": 33, "lvl": 1 },
+                "#% increased Life Recovered": [
+                    { "name": "Sapping", "min": 40, "max": 40, "lvl": 13 }
+                ],
+                "Removes #% of Life Recovered from Mana when used": [
+                    { "name": "Sapping", "min": 10, "max": 10, "lvl": 13 }
+                ],
+                "#% increased Amount Recovered": [
+                    { "name": "Saturated", "min": 50, "max": 50, "lvl": 1 }
+                ],
+                "#% reduced Recovery Speed": [
+                    { "name": "Saturated", "min": 33, "max": 33, "lvl": 1 }
+                ],
+                "#% increased Recovery when on Low Life": [
                     { "name": "Cautious", "min": 100, "max": 100, "lvl": 6 }
                 ],
-                "Mod": [
-                    { "name": "Catalysed", "min": 50, "max": 50, "lvl": 1 },
-                    { "name": "Panicked", "min": 25, "max": 25, "lvl": 9 },
-                    { "name": "Bubbling", "min": 50, "max": 135, "lvl": 3 }
+                "#% increased Recovery Speed": [
+                    { "name": "Catalysed", "min": 50, "max": 50, "lvl": 1 }
+                ],
+                "Instant Recovery when on Low Life": [
+                    { "name": "Panicked", "min": 0, "max": 0, "lvl": 9 }
+                ],
+                "#% reduced Amount Recovered": [
+                    { "name": "Panicked", "min": 25, "max": 25, "lvl": 9 }
+                ],
+                "#% of Recovery applied Instantly": [
+                    { "name": "Bubbling", "min": 50, "max": 50, "lvl": 3 }
+                ],
+                "#% reduced Amount Recovered": [
+                    { "name": "Bubbling", "min": 50, "max": 50, "lvl": 3 }
+                ],
+                "#% increased Recovery Speed": [
+                    { "name": "Bubbling", "min": 135, "max": 135, "lvl": 3 }
                 ]
             },
             "suffix": {
-                "Mod": [
-                    { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 },
-                    { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 },
-                    { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 },
-                    { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 },
-                    { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 },
-                    { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 },
-                    { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 },
-                    { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 },
+                "#% increased Armour during Flask effect": [
+                    { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 }
+                ],
+                "#% increased Evasion Rating during Flask effect": [
+                    { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 }
+                ],
+                "Adds Knockback to Melee Attacks during Flask effect": [
+                    { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 }
+                ],
+                "#% of Physical Attack Damage Leeched as Life during Flask effect": [
+                    { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 }
+                ],
+                "#% of Physical Attack Damage Leeched as Mana during Flask effect": [
+                    { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 }
+                ],
+                "#% increased Movement Speed during Flask effect": [
+                    { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 }
+                ],
+                "#% additional Elemental Resistances during Flask effect": [
+                    { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 }
+                ],
+                "#% increased Block and Stun Recovery during Flask effect": [
+                    { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 }
+                ],
+                "Immune to Curses during Flask effect\nRemoves Curses on use": [                    
                     { "name": "of Warding", "min": 0, "max": 0, "lvl": 18 }
-                ],
-                "Immunity to Ignite during Flask": [
-                    { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
-                ],
-                "Immunity to Freeze and Chill during Flask": [
-                    { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
-                ],
-                "Immune to Poison during Flask": [
-                    { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
                 ],
                 "Grants #% of Life Recovery to Minions": [
                     { "name": "of Animation", "min": 40, "max": 60, "lvl": 10 }
                 ],
-                "Immunity to Bleeding during Flask": [
+                "Immunity to Ignite during Flask effect\nRemoves Burning on use": [
+                    { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
+                ],
+                "Immunity to Freeze and Chill during Flask effect\nRemoves Freeze and Chill on use": [
+                    { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
+                ],
+                "Immune to Poison during Flask Effect\nRemoves Poison on use": [
+                    { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
+                ],
+                "Immunity to Bleeding during Flask effect\nRemoves Bleeding on use": [
                     { "name": "of Staunching", "min": 0, "max": 0, "lvl": 8 }
                 ],
-                "Immunity to Shock during Flask": [
+                "Immunity to Shock during Flask effect\nRemoves Shock on use": [
                     { "name": "of Grounding", "min": 0, "max": 0, "lvl": 10 }
                 ]
             }
@@ -10661,44 +10799,72 @@
                 "#% reduced Charges used": [
                     { "name": "Chemist's", "min": 25, "max": 20, "lvl": 14 }
                 ],
-                "+# Extra Charges": [
+                "+# to Maximum Charges": [
                     { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
                 ],
-                "Mod group: FlaskRechargeRate": [
-                    { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 },
-                    { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 },
+                "Recharges # Charge when you deal a Critical Strike": [
+                    { "name": "Surgeon's", "min": 1, "max": 1, "lvl": 8 }
+                ],
+                "#% chance to gain a Flask Charge when you deal a Critical Strike": [
+                    { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 }
+                ],
+                "Recharges # Charges when you take a Critical Strike": [
+                    { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 }
+                ],
+                "#% increased Charge Recovery": [
                     { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
                 ],
-                "Mod group: FlaskRecoverySpeed": [
-                    { "name": "Alchemist's", "min": 33, "max": 25, "lvl": 20 },
+                "#% reduced Duration": [
+                    { "name": "Alchemist's", "min": 33, "max": 33, "lvl": 20 }
+                ],
+                "#% increased effect": [
+                    { "name": "Alchemist's", "min": 25, "max": 25, "lvl": 20 }
+                ],
+                "#% increased Duration": [
                     { "name": "Experimenter's", "min": 30, "max": 40, "lvl": 20 }
                 ]
             },
             "suffix": {
-                "Mod": [
-                    { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 },
-                    { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 },
-                    { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 },
-                    { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 },
-                    { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 },
-                    { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 },
-                    { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 },
-                    { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 },
+                "#% increased Armour during Flask effect": [
+                    { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 }
+                ],
+                "#% increased Evasion Rating during Flask effect": [
+                    { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 }
+                ],
+                "Adds Knockback to Melee Attacks during Flask effect": [
+                    { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 }
+                ],
+                "#% of Physical Attack Damage Leeched as Life during Flask effect": [
+                    { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 }
+                ],
+                "#% of Physical Attack Damage Leeched as Mana during Flask effect": [
+                    { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 }
+                ],
+                "#% increased Movement Speed during Flask effect": [
+                    { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 }
+                ],
+                "#% additional Elemental Resistances during Flask effect": [
+                    { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 }
+                ],
+                "#% increased Block and Stun Recovery during Flask effect": [
+                    { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 }
+                ],
+                "Immune to Curses during Flask effect\nRemoves Curses on use": [                    
                     { "name": "of Warding", "min": 0, "max": 0, "lvl": 18 }
                 ],
-                "Immunity to Ignite during Flask": [
+                "Immunity to Ignite during Flask effect\nRemoves Burning on use": [
                     { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
                 ],
-                "Immunity to Freeze and Chill during Flask": [
+                "Immunity to Freeze and Chill during Flask effect\nRemoves Freeze and Chill on use": [
                     { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
                 ],
-                "Immune to Poison during Flask": [
+                "Immune to Poison during Flask Effect\nRemoves Poison on use": [
                     { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
                 ],
-                "Immunity to Bleeding during Flask": [
+                "Immunity to Bleeding during Flask effect\nRemoves Bleeding on use": [
                     { "name": "of Staunching", "min": 0, "max": 0, "lvl": 8 }
                 ],
-                "Immunity to Shock during Flask": [
+                "Immunity to Shock during Flask effect\nRemoves Shock on use": [
                     { "name": "of Grounding", "min": 0, "max": 0, "lvl": 10 }
                 ]
             }
@@ -10708,11 +10874,13 @@
                 "#% reduced Charges used": [
                     { "name": "Chemist's", "min": 25, "max": 20, "lvl": 14 }
                 ],
-                "+# Extra Charges": [
+                "+# to Maximum Charges": [
                     { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
                 ],
-                "Mod": [
-                    { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 },
+                "Recharges # Charges when you take a Critical Strike": [
+                    { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 }
+                ],
+                "#% increased Charge Recovery": [
                     { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
                 ],
                 "#% increased Duration": [
@@ -10720,30 +10888,115 @@
                 ]
             },
             "suffix": {
-                "Mod": [
-                    { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 },
-                    { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 },
-                    { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 },
-                    { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 },
-                    { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 },
-                    { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 },
-                    { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 },
-                    { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 },
+                "#% increased Armour during Flask effect": [
+                    { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 }
+                ],
+                "#% increased Evasion Rating during Flask effect": [
+                    { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 }
+                ],
+                "Adds Knockback to Melee Attacks during Flask effect": [
+                    { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 }
+                ],
+                "#% of Physical Attack Damage Leeched as Life during Flask effect": [
+                    { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 }
+                ],
+                "#% of Physical Attack Damage Leeched as Mana during Flask effect": [
+                    { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 }
+                ],
+                "#% increased Movement Speed during Flask effect": [
+                    { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 }
+                ],
+                "#% additional Elemental Resistances during Flask effect": [
+                    { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 }
+                ],
+                "#% increased Block and Stun Recovery during Flask effect": [
+                    { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 }
+                ],
+                "Immune to Curses during Flask effect\nRemoves Curses on use": [                    
                     { "name": "of Warding", "min": 0, "max": 0, "lvl": 18 }
                 ],
-                "Immunity to Ignite during Flask": [
+                "Immunity to Ignite during Flask effect\nRemoves Burning on use": [
                     { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
                 ],
-                "Immunity to Freeze and Chill during Flask": [
+                "Immunity to Freeze and Chill during Flask effect\nRemoves Freeze and Chill on use": [
                     { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
                 ],
-                "Immune to Poison during Flask": [
+                "Immune to Poison during Flask Effect\nRemoves Poison on use": [
                     { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
                 ],
-                "Immunity to Bleeding during Flask": [
+                "Immunity to Bleeding during Flask effect\nRemoves Bleeding on use": [
                     { "name": "of Staunching", "min": 0, "max": 0, "lvl": 8 }
                 ],
-                "Immunity to Shock during Flask": [
+                "Immunity to Shock during Flask effect\nRemoves Shock on use": [
+                    { "name": "of Grounding", "min": 0, "max": 0, "lvl": 10 }
+                ]
+            }
+        },
+        "Silver": {
+            "prefix": {
+                "#% reduced Charges used": [
+                    { "name": "Chemist's", "min": 25, "max": 20, "lvl": 14 }
+                ],
+                "+# to Maximum Charges": [
+                    { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
+                ],
+                "Recharges # Charge when you deal a Critical Strike": [
+                    { "name": "Surgeon's", "min": 1, "max": 1, "lvl": 8 }
+                ],
+                "#% chance to gain a Flask Charge when you deal a Critical Strike": [
+                    { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 }
+                ],
+                "Recharges 3 Charges when you take a Critical Strike": [
+                    { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 }
+                ],
+                "#% increased Charge Recovery": [
+                    { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
+                ],
+                "#% increased Duration": [
+                    { "name": "Experimenter's", "min": 30, "max": 40, "lvl": 20 }
+                ]
+            },
+            "suffix": {
+                "#% increased Armour during Flask effect": [
+                    { "name": "of Iron Skin", "min": 60, "max": 100, "lvl": 6 }
+                ],
+                "#% increased Evasion Rating during Flask effect": [
+                    { "name": "of Reflexes", "min": 60, "max": 100, "lvl": 8 }
+                ],
+                "Adds Knockback to Melee Attacks during Flask effect": [
+                    { "name": "of Fending", "min": 0, "max": 0, "lvl": 9 }
+                ],
+                "#% of Physical Attack Damage Leeched as Life during Flask effect": [
+                    { "name": "of Gluttony", "min": 0.4, "max": 0.4, "lvl": 10 }
+                ],
+                "#% of Physical Attack Damage Leeched as Mana during Flask effect": [
+                    { "name": "of Craving", "min": 0.4, "max": 0.4, "lvl": 12 }
+                ],
+                "#% increased Movement Speed during Flask effect": [
+                    { "name": "of Adrenaline", "min": 20, "max": 30, "lvl": 5 }
+                ],
+                "#% additional Elemental Resistances during Flask effect": [
+                    { "name": "of Resistance", "min": 20, "max": 30, "lvl": 1 }
+                ],
+                "#% increased Block and Stun Recovery during Flask effect": [
+                    { "name": "of Steadiness", "min": 40, "max": 60, "lvl": 1 }
+                ],
+                "Immune to Curses during Flask effect\nRemoves Curses on use": [
+                    { "name": "of Warding", "min": 0, "max": 0, "lvl": 18 }
+                ],
+                "Immunity to Ignite during Flask effect\nRemoves Burning on use": [
+                    { "name": "of Dousing", "min": 0, "max": 0, "lvl": 6 }
+                ],
+                "Immunity to Freeze and Chill during Flask effect\nRemoves Freeze and Chill on use": [
+                    { "name": "of Heat", "min": 0, "max": 0, "lvl": 4 }
+                ],
+                "Immune to Poison during Flask Effect\nRemoves Poison on use": [
+                    { "name": "of Curing", "min": 0, "max": 0, "lvl": 16 }
+                ],
+                "Immunity to Bleeding during Flask effect\nRemoves Bleeding on use": [
+                    { "name": "of Staunching", "min": 0, "max": 0, "lvl": 8 }
+                ],
+                "Immunity to Shock during Flask effect\nRemoves Shock on use": [
                     { "name": "of Grounding", "min": 0, "max": 0, "lvl": 10 }
                 ]
             }
@@ -10767,9 +11020,13 @@
                 "#% increased Cold Damage": [
                     { "name": "Chilling", "min": 14, "max": 16, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Sabotage", "min": 14, "max": 16, "lvl": 1 },
-                    { "name": "Leadership", "min": 14, "max": 16, "lvl": 1 },
+                "#% increased Mine Damage": [
+                    { "name": "Sabotage", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "Minions deal #% increased Damage": [
+                    { "name": "Leadership", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Trap Damage": [
                     { "name": "Trapping", "min": 14, "max": 16, "lvl": 1 }
                 ],
                 "#% faster start of Energy Shield Recharge": [
@@ -10793,14 +11050,22 @@
                 "#% increased Fire Damage": [
                     { "name": "Flaming", "min": 14, "max": 16, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Parrying", "min": 1, "max": 1, "lvl": 1 },
-                    { "name": "Shielding", "min": 1, "max": 1, "lvl": 1 },
+                "#% additional Block Chance while Dual Wielding": [
+                    { "name": "Parrying", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "+#% Chance to Block with Shields": [
+                    { "name": "Shielding", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% additional Chance to Block with Staves": [
                     { "name": "Deflecting", "min": 1, "max": 1, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Dissipating", "min": 1, "max": 1, "lvl": 1 },
-                    { "name": "Thwarting", "min": 1, "max": 1, "lvl": 1 },
+                "#% additional Chance to Block Spells while Dual Wielding": [
+                    { "name": "Dissipating", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% additional Chance to Block Spells with Shields": [
+                    { "name": "Thwarting", "min": 1, "max": 1, "lvl": 1 }  
+                ],
+                "#% additional Chance to Block Spells with Staves": [
                     { "name": "Halting", "min": 1, "max": 1, "lvl": 1 }
                 ],
                 "#% increased Totem Life": [
@@ -10827,11 +11092,19 @@
                 "#% increased maximum Mana": [
                     { "name": "Enlightened", "min": 6, "max": 8, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Harmonic", "min": 4, "max": 6, "lvl": 1 },
-                    { "name": "Charging", "min": 4, "max": 6, "lvl": 1 },
-                    { "name": "Resonant", "min": 3, "max": 5, "lvl": 1 },
-                    { "name": "Warding", "min": 3, "max": 5, "lvl": 1 },
+                "#% increased Attack Speed while Dual Wielding": [
+                    { "name": "Harmonic", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% increased Attack Speed while holding a Shield": [
+                    { "name": "Charging", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% increased Cast Speed while Dual Wielding": [
+                    { "name": "Resonant", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Cast Speed while holding a Shield": [
+                    { "name": "Warding", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Cast Speed while wielding a Staff": [
                     { "name": "Wright's", "min": 3, "max": 5, "lvl": 1 }
                 ],
                 "#% increased Mine Laying Speed": [
@@ -10849,9 +11122,13 @@
                 "#% increased Attack Speed with Wands": [
                     { "name": "Jinxing", "min": 6, "max": 8, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Sorcerer's", "min": 14, "max": 16, "lvl": 1 },
-                    { "name": "Battlemage's", "min": 14, "max": 16, "lvl": 1 },
+                "#% increased Spell Damage while Dual Wielding": [
+                    { "name": "Sorcerer's", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Spell Damage while holding a Shield": [
+                    { "name": "Battlemage's", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Spell Damage while wielding a Staff": [
                     { "name": "Wizard's", "min": 14, "max": 16, "lvl": 1 }
                 ],
                 "#% increased Totem Damage": [
@@ -10862,10 +11139,35 @@
                 ]
             },
             "suffix": {
-                "Mod": [
-                    { "name": "of Freezing", "min": 2, "max": 16, "lvl": 1 },
-                    { "name": "of Burning", "min": 2, "max": 5, "lvl": 1 },
-                    { "name": "of Shocking", "min": 2, "max": 16, "lvl": 1 }
+                "Attacks have #% chance to cause Bleeding": [
+                    { "name": "of Bleeding", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Bleed duration": [
+                    { "name": "of Bleeding", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "#% chance to Freeze": [
+                    { "name": "of Freezing", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Freeze Duration on Enemies": [
+                    { "name": "of Freezing", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "#% chance to Ignite": [
+                    { "name": "of Burning", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Ignite Duration on Enemies": [
+                    { "name": "of Burning", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% chance to Poison on Hit": [
+                    { "name": "of Poisoning", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Poison Duration": [
+                    { "name": "of Poisoning", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% chance to Shock": [
+                    { "name": "of Shocking", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Shock Duration on Enemies": [
+                    { "name": "of Shocking", "min": 12, "max": 16, "lvl": 1 }
                 ],
                 "+# to all Attributes": [
                     { "name": "of Adaption", "min": 6, "max": 8, "lvl": 1 }
@@ -10894,9 +11196,13 @@
                 "+#% to Global Critical Strike Multiplier": [
                     { "name": "of Potency", "min": 9, "max": 12, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "of Wounding", "min": 8, "max": 10, "lvl": 1 },
-                    { "name": "of Archery", "min": 10, "max": 12, "lvl": 1 },
+                "#% increased Damage": [
+                    { "name": "of Wounding", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Projectile Damage": [
+                    { "name": "of Archery", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "#% increased Spell Damage": [
                     { "name": "of Mysticism", "min": 10, "max": 12, "lvl": 1 }
                 ],
                 "#% increased Damage over Time": [
@@ -11052,14 +11358,22 @@
                 "#% increased Fire Damage": [
                     { "name": "Flaming", "min": 14, "max": 16, "lvl": 1 }
                 ],
-                "Mod group: FormBlock": [
-                    { "name": "Parrying", "min": 1, "max": 1, "lvl": 1 },
-                    { "name": "Shielding", "min": 1, "max": 1, "lvl": 1 },
+                "#% additional Block Chance while Dual Wielding": [
+                    { "name": "Parrying", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "+#% Chance to Block with Shields": [
+                    { "name": "Shielding", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% additional Chance to Block with Staves": [
                     { "name": "Deflecting", "min": 1, "max": 1, "lvl": 1 }
                 ],
-                "Mod group: FormSpellBlock": [
-                    { "name": "Dissipating", "min": 1, "max": 1, "lvl": 1 },
-                    { "name": "Thwarting", "min": 1, "max": 1, "lvl": 1 },
+                "#% additional Chance to Block Spells while Dual Wielding": [
+                    { "name": "Dissipating", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% additional Chance to Block Spells with Shields": [
+                    { "name": "Thwarting", "min": 1, "max": 1, "lvl": 1 }  
+                ],
+                "#% additional Chance to Block Spells with Staves": [
                     { "name": "Halting", "min": 1, "max": 1, "lvl": 1 }
                 ],
                 "#% increased Armour": [
@@ -11089,41 +11403,73 @@
                 "#% increased maximum Mana": [
                     { "name": "Enlightened", "min": 6, "max": 8, "lvl": 1 }
                 ],
-                "Mod group: MeleeTypeCritChance": [
-                    { "name": "Technical", "min": 14, "max": 18, "lvl": 1 },
-                    { "name": "Harming", "min": 14, "max": 18, "lvl": 1 },
+                "#% increased Weapon Critical Strike Chance while Dual Wielding": [
+                    { "name": "Technical", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with One Handed Melee Weapons": [
+                    { "name": "Harming", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Two Handed Melee Weapons": [
                     { "name": "Sundering", "min": 14, "max": 18, "lvl": 1 }
                 ],
-                "Mod group: MeleeTypeCritMultiplier": [
-                    { "name": "Puncturing", "min": 15, "max": 18, "lvl": 1 },
-                    { "name": "Piercing", "min": 15, "max": 18, "lvl": 1 },
+                "#% to Critical Strike Multiplier while Dual Wielding": [
+                    { "name": "Puncturing", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "#% to Critical Strike Multiplier with One Handed Melee Weapons": [
+                    { "name": "Piercing", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "#% to Critical Strike Multiplier with Two Handed Melee Weapons": [
                     { "name": "Rupturing", "min": 15, "max": 18, "lvl": 1 }
                 ],
-                "Mod group: MeleeTypeDamage": [
-                    { "name": "Gladiator's", "min": 12, "max": 14, "lvl": 1 },
-                    { "name": "Soldier's", "min": 12, "max": 14, "lvl": 1 },
-                    { "name": "Champion's", "min": 12, "max": 14, "lvl": 1 },
+                "#% increased Physical Weapon Damage while Dual Wielding": [
+                    { "name": "Gladiator's", "min": 12, "max": 14, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with One Handed Melee Weapons": [
+                    { "name": "Soldier's", "min": 12, "max": 14, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with Two Handed Melee Weapons": [
+                    { "name": "Champion's", "min": 12, "max": 14, "lvl": 1 }
+                ],
+                "#% increased Melee Physical Damage while holding a Shield": [
                     { "name": "Flanking", "min": 12, "max": 14, "lvl": 1 }
                 ],
-                "Mod group: MeleeTypeSpeed": [
-                    { "name": "Harmonic", "min": 4, "max": 6, "lvl": 1 },
-                    { "name": "Charging", "min": 4, "max": 6, "lvl": 1 },
-                    { "name": "Bandit's", "min": 4, "max": 6, "lvl": 1 },
+                "#% increased Attack Speed while Dual Wielding": [
+                    { "name": "Harmonic", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% increased Attack Speed while holding a Shield": [
+                    { "name": "Charging", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with One Handed Melee Weapons": [
+                    { "name": "Bandit's", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with Two Handed Melee Weapons": [
                     { "name": "Warrior's", "min": 4, "max": 6, "lvl": 1 }
                 ],
                 "#% increased Physical Damage": [
                     { "name": "Sharpened", "min": 14, "max": 16, "lvl": 1 }
                 ],
-                "Mod group: SpecificWeaponDamage": [
-                    { "name": "Sinister", "min": 14, "max": 16, "lvl": 1 },
-                    { "name": "Brutal", "min": 14, "max": 16, "lvl": 1 },
-                    { "name": "Judging", "min": 14, "max": 16, "lvl": 1 },
+                "#% increased Physical Damage with Axes": [
+                    { "name": "Sinister", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with Maces": [
+                    { "name": "Brutal", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with Staves": [
+                    { "name": "Judging", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with Swords": [
                     { "name": "Vicious", "min": 14, "max": 16, "lvl": 1 }
                 ],
-                "Mod group: SpecificWeaponSpeed": [
-                    { "name": "Cleaving", "min": 6, "max": 8, "lvl": 1 },
-                    { "name": "Beating", "min": 6, "max": 8, "lvl": 1 },
-                    { "name": "Blunt", "min": 6, "max": 8, "lvl": 1 },
+                "#% increased Attack Speed with Axes": [
+                    { "name": "Cleaving", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with Maces": [
+                    { "name": "Beating", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with Staves": [
+                    { "name": "Blunt", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with Swords": [
                     { "name": "Fencing", "min": 6, "max": 8, "lvl": 1 }
                 ],
                 "#% increased Totem Damage": [
@@ -11131,10 +11477,35 @@
                 ]
             },
             "suffix": {
-                "Mod group: AilmentChanceAndDuration": [
-                    { "name": "of Freezing", "min": 2, "max": 16, "lvl": 1 },
-                    { "name": "of Burning", "min": 2, "max": 5, "lvl": 1 },
-                    { "name": "of Shocking", "min": 2, "max": 16, "lvl": 1 }
+                "Attacks have #% chance to cause Bleeding": [
+                    { "name": "of Bleeding", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Bleed duration": [
+                    { "name": "of Bleeding", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "#% chance to Freeze": [
+                    { "name": "of Freezing", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Freeze Duration on Enemies": [
+                    { "name": "of Freezing", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "#% chance to Ignite": [
+                    { "name": "of Burning", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Ignite Duration on Enemies": [
+                    { "name": "of Burning", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% chance to Poison on Hit": [
+                    { "name": "of Poisoning", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Poison Duration": [
+                    { "name": "of Poisoning", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% chance to Shock": [
+                    { "name": "of Shocking", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Shock Duration on Enemies": [
+                    { "name": "of Shocking", "min": 12, "max": 16, "lvl": 1 }
                 ],
                 "+# to all Attributes": [
                     { "name": "of Adaption", "min": 6, "max": 8, "lvl": 1 }
@@ -11163,9 +11534,13 @@
                 "+#% to Global Critical Strike Multiplier": [
                     { "name": "of Potency", "min": 9, "max": 12, "lvl": 1 }
                 ],
-                "Mod group: DamageForm": [
-                    { "name": "of Wounding", "min": 8, "max": 10, "lvl": 1 },
-                    { "name": "of Combat", "min": 10, "max": 12, "lvl": 1 },
+                "#% increased Damage": [
+                    { "name": "of Wounding", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Melee Damage": [
+                    { "name": "of Combat", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "#% increased Projectile Damage": [
                     { "name": "of Archery", "min": 10, "max": 12, "lvl": 1 }
                 ],
                 "#% increased Damage over Time": [
@@ -11303,8 +11678,10 @@
                 "#% increased Cold Damage": [
                     { "name": "Chilling", "min": 14, "max": 16, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Sabotage", "min": 14, "max": 16, "lvl": 1 },
+                "#% increased Mine Damage": [
+                    { "name": "Sabotage", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Trap Damage": [
                     { "name": "Trapping", "min": 14, "max": 16, "lvl": 1 }
                 ],
                 "#% increased Evasion Rating": [
@@ -11319,13 +11696,17 @@
                 "#% increased Fire Damage": [
                     { "name": "Flaming", "min": 14, "max": 16, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Parrying", "min": 1, "max": 1, "lvl": 1 },
+                "#% additional Block Chance while Dual Wielding": [
+                    { "name": "Parrying", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "+#% Chance to Block with Shields": [
                     { "name": "Shielding", "min": 1, "max": 1, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Dissipating", "min": 1, "max": 1, "lvl": 1 },
-                    { "name": "Thwarting", "min": 1, "max": 1, "lvl": 1 }
+                "#% additional Chance to Block Spells while Dual Wielding": [
+                    { "name": "Dissipating", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% additional Chance to Block Spells with Shields": [
+                    { "name": "Thwarting", "min": 1, "max": 1, "lvl": 1 }  
                 ],
                 "#% increased Totem Life": [
                     { "name": "Carved", "min": 8, "max": 12, "lvl": 1 }
@@ -11351,26 +11732,46 @@
                 "#% increased maximum Mana": [
                     { "name": "Enlightened", "min": 6, "max": 8, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Technical", "min": 14, "max": 18, "lvl": 1 },
-                    { "name": "Harming", "min": 14, "max": 18, "lvl": 1 },
+                "#% increased Weapon Critical Strike Chance while Dual Wielding": [
+                    { "name": "Technical", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with One Handed Melee Weapons": [
+                    { "name": "Harming", "min": 14, "max": 18, "lvl": 1 }
+                ],
+                "#% increased Critical Strike Chance with Two Handed Melee Weapons": [
                     { "name": "Sundering", "min": 14, "max": 18, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Puncturing", "min": 15, "max": 18, "lvl": 1 },
-                    { "name": "Piercing", "min": 15, "max": 18, "lvl": 1 },
+                "#% to Critical Strike Multiplier while Dual Wielding": [
+                    { "name": "Puncturing", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "#% to Critical Strike Multiplier with One Handed Melee Weapons": [
+                    { "name": "Piercing", "min": 15, "max": 18, "lvl": 1 }
+                ],
+                "#% to Critical Strike Multiplier with Two Handed Melee Weapons": [
                     { "name": "Rupturing", "min": 15, "max": 18, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Gladiator's", "min": 12, "max": 14, "lvl": 1 },
-                    { "name": "Soldier's", "min": 12, "max": 14, "lvl": 1 },
-                    { "name": "Champion's", "min": 12, "max": 14, "lvl": 1 },
+                "#% increased Physical Weapon Damage while Dual Wielding": [
+                    { "name": "Gladiator's", "min": 12, "max": 14, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with One Handed Melee Weapons": [
+                    { "name": "Soldier's", "min": 12, "max": 14, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with Two Handed Melee Weapons": [
+                    { "name": "Champion's", "min": 12, "max": 14, "lvl": 1 }
+                ],
+                "#% increased Melee Physical Damage while holding a Shield": [
                     { "name": "Flanking", "min": 12, "max": 14, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Harmonic", "min": 4, "max": 6, "lvl": 1 },
-                    { "name": "Charging", "min": 4, "max": 6, "lvl": 1 },
-                    { "name": "Bandit's", "min": 4, "max": 6, "lvl": 1 },
+                "#% increased Attack Speed while Dual Wielding": [
+                    { "name": "Harmonic", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% increased Attack Speed while holding a Shield": [
+                    { "name": "Charging", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with One Handed Melee Weapons": [
+                    { "name": "Bandit's", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with Two Handed Melee Weapons": [
                     { "name": "Warrior's", "min": 4, "max": 6, "lvl": 1 }
                 ],
                 "#% increased Mine Laying Speed": [
@@ -11379,18 +11780,34 @@
                 "#% increased Physical Damage": [
                     { "name": "Sharpened", "min": 14, "max": 16, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Sinister", "min": 14, "max": 16, "lvl": 1 },
-                    { "name": "Fierce", "min": 14, "max": 16, "lvl": 1 },
-                    { "name": "Savage", "min": 14, "max": 16, "lvl": 1 },
-                    { "name": "Lethal", "min": 14, "max": 16, "lvl": 1 },
+                "#% increased Physical Damage with Axes": [
+                    { "name": "Sinister", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with Bows": [
+                    { "name": "Fierce", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with Claws": [
+                    { "name": "Savage", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with Daggers": [
+                    { "name": "Lethal", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with Swords": [
                     { "name": "Vicious", "min": 14, "max": 16, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Cleaving", "min": 6, "max": 8, "lvl": 1 },
-                    { "name": "Volleying", "min": 6, "max": 8, "lvl": 1 },
-                    { "name": "Ripping", "min": 6, "max": 8, "lvl": 1 },
-                    { "name": "Slicing", "min": 6, "max": 8, "lvl": 1 },
+                "#% increased Attack Speed with Axes": [
+                    { "name": "Cleaving", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with Bows": [
+                    { "name": "Volleying", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with Claws": [
+                    { "name": "Ripping", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with Daggers": [
+                    { "name": "Slicing", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with Swords": [
                     { "name": "Fencing", "min": 6, "max": 8, "lvl": 1 }
                 ],
                 "#% increased Totem Damage": [
@@ -11404,9 +11821,13 @@
                 "#% increased Accuracy": [
                     { "name": "of Deadliness", "min": 6, "max": 10, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "of Freezing", "min": 2, "max": 16, "lvl": 1 },
-                    { "name": "of Burning", "min": 2, "max": 5, "lvl": 1 },
+                "#% increased Damage": [
+                    { "name": "of Freezing", "min": 2, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Melee Damage": [
+                    { "name": "of Burning", "min": 2, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Projectile Damage": [
                     { "name": "of Shocking", "min": 2, "max": 16, "lvl": 1 }
                 ],
                 "+# to all Attributes": [
