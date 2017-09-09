@@ -131,23 +131,46 @@
                         </div>
                     </div>
                     <div class="input-field row">
-                        <input type="number" id="level" max="100" min="0" class="">
-                        <label for="level">Item Level</label>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6" style="
-    padding: 0!important;">
-                            <input type="number" id="tier" max="100" min="0">
-                            <label for="tier">Tier</label>
+                        <div class="input-field col s4" style="padding: 0!important;">
+                            <input type="number" id="level" max="100" min="0" class="">
+                            <label for="level">Item Level</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
+                            <input type="number" id="quality" max="20" min="0" class="">
+                            <label for="quality">Quality</label>
+                        </div>
+                        <div class="input-field col s4">
                             <input type="number" id="experience" max="100" min="0">
                             <label for="experience">Gem XP (%)</label>
                         </div>
                     </div>
-                    <div class="input-field row">
-                        <input type="number" id="quality" max="20" min="0" class="">
-                        <label for="quality">Quality</label>
+                    <div class="row">
+                        <div class="input-field col s4" style="padding: 0!important;">
+                            <input type="number" id="tier" max="100" min="0">
+                            <label for="tier">Tier</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input type="number" id="open-prefixes" max="100" min="0">
+                            <label for="open-prefixes">Open Prfx.</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input type="number" id="open-suffixes" max="100" min="0">
+                            <label for="open-suffixes">Open Sufx.</label>
+                        </div>
+                    </div>
+                    <div class="input-field row map-group">
+                        <div class="input-field col s4" style="padding: 0!important;">
+                            <input type="number" id="map-quantity" max="100" min="0" class="">
+                            <label for="map-quantity">Map Quantity</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input type="number" id="map-rarity" max="20" min="0" class="">
+                            <label for="map-rarity">Map Rarity</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input type="number" id="map-pack-size" max="20" min="0" class="">
+                            <label for="map-pack-size">Pack Size</label>
+                        </div>
                     </div>
                 </div>
                 <div class="input-field col s2">
@@ -291,6 +314,7 @@ padding: 0!important;">
                         <i id="fold-filters" class="material-icons">keyboard_arrow_down</i>
                     </span>
                     <input id="filter-filter" class="col s3" type="text" placeholder="Filter filters">
+                    <span id="filter-processing-total-time" class="col s1 title">10s</span>
                 </div>
                 <div class="col s12" id="filters">
                     <!--<ul class="collection" style="border: none;">

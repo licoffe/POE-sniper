@@ -684,6 +684,10 @@ label.active {
     transform: translateX(30px)!important;
 }
 
+.map-group label.active {
+    transform: translateX(35px)!important;
+}
+
 .item-name label.active {
     transform: translateX(230%)!important;
 }

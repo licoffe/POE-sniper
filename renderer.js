@@ -15,6 +15,7 @@ var marked           = require( "marked" );
 var open             = require( "open" );
 const {app}          = require( "electron" ).remote;
 const path           = require( "path" );
+// var child_process    = require( "child_process" );
 
 var config = require( app.getPath( "userData" ) + path.sep + "config.json" );
 if ( Object.keys( config ).length === 0 ) {
@@ -238,6 +239,11 @@ $( document).ready( function() {
         $( "#affix-min" ).val( "" );
         $( "#affix-max" ).val( "" );
         $( "#affixes" ).val( "" );
+        $( "#open-prefixes" ).val( "" );
+        $( "#open-suffixes" ).val( "" );
+        $( "#map-quantity" ).val( "" );
+        $( "#map-rarity" ).val( "" );
+        $( "#map-pack-size" ).val( "" );
         Materialize.updateTextFields();
         loadedAffix  = false;
         editingAffix = "";
@@ -299,7 +305,13 @@ $( document).ready( function() {
             // var re         = /([0-9.]+)/g;
             $( ".affix-item" ).each( function() {
                 var data = $( this ).data( "data-item" );
-                formData.affixes[data.title] = [data.min, data.max];
+                var cleanedAffix = 
+                    data.title.replace( /(<span class=\'value\'>[^<>]+<\/span>)/g, "#" )
+                              .replace( "( # - # )", "#" )
+                              .replace( "Unique explicit", "Explicit" )
+                              .replace( "Essence", "Explicit" )
+                              .replace( "Talisman implicit", "Implicit" );
+                formData.affixes[cleanedAffix] = [data.min, data.max];
                 var count = ( data.title.match( /#/g ) || []).length;
                 console.log( data );
                 // console.log( count );
@@ -312,6 +324,7 @@ $( document).ready( function() {
                 }
                 formData.affixesDis.push( affix );
             });
+        
             // Convert price to exa if higher than exa rate
             // if ( formData.budget > currencyRates[formData.league].exa && formData.currency === "chaos" ) {
             //     formData.budget /= currencyRates[formData.league].exa;
@@ -423,6 +436,21 @@ $( document).ready( function() {
             }
             if ( formData.experience !== "" ) {
                 title += "<span class=\"filter-property\">Experience>=" + formData.experience + "%</span>";
+            }
+            if ( formData.mapPackSize !== "" ) {
+                title += "<span class=\"filter-property\">Pack Size>=" + formData.mapPackSize + "%</span>";
+            }
+            if ( formData.mapQuantity !== "" ) {
+                title += "<span class=\"filter-property\">Quantity>=" + formData.mapQuantity + "%</span>";
+            }
+            if ( formData.mapRarity !== "" ) {
+                title += "<span class=\"filter-property\">Rarity>=" + formData.mapRarity + "%</span>";
+            }
+            if ( formData.openPrefixes !== "" ) {
+                title += "<span class=\"filter-property\">Open Prfx.>=" + formData.openPrefixes + "</span>";
+            }
+            if ( formData.openSuffixes !== "" ) {
+                title += "<span class=\"filter-property\">Open Sufx.>=" + formData.openSuffixes + "</span>";
             }
             // if ( formData.affixesDis.length > 0 ) {
             //     title += "<span class=\"filter-affix\">" + formData.affixesDis.join( ", " ) + "</span>";
@@ -587,6 +615,11 @@ $( document).ready( function() {
         data.clipboard    = $( "#clipboard" ).is(":checked");
         data.convert      = $( "#convert-currency" ).is(":checked");
         data.itemType     = $( "#item-type" ).val();
+        data.openPrefixes = $( "#open-prefixes" ).val();
+        data.openSuffixes = $( "#open-suffixes" ).val();
+        data.mapQuantity  = $( "#map-quantity" ).val();
+        data.mapRarity    = $( "#map-rarity" ).val();
+        data.mapPackSize  = $( "#map-pack-size" ).val();
         data.affixesDis   = [];
         data.affixes      = {};
         callback( data );
@@ -973,29 +1006,65 @@ $( document).ready( function() {
             filter.link_min = filter.links;
             filter.link_max = filter.link_min;
         }
+        if ( filter.rarity === "0" ) {
+            filter.grade = "normal";
+        } else if ( filter.rarity === "1" ) {
+            filter.grade = "magic";
+        } else if ( filter.rarity === "2" ) {
+            filter.grade = "rare";
+        } else if ( filter.rarity === "3" ) {
+            filter.grade = "unique";
+        } else if ( filter.rarity === "9" ) {
+            filter.grade = "relic";
+        } else {
+            filter.grade = "any";
+        }
         renderPoeTradeForm( filter, function( generated ) {
             $( "#" + filter.id + "-poe-trade-form" ).remove();
             $( "#poe-trade-forms" ).append( generated );
             // Generate form to query poe.trade with mods
-            var reg   = /\(\s*([^ ]*)\s*\-\s*([^ ]*)\s*\)/;
+            var reg   = /\(([A-Za-z ]+)\).*<span.*>([0-9.…]+)<\/span>\s*\-\s*<span.*>([0-9.…]+)<\/span>/;
             async.each( filter.affixesDis, function( affix, cbAffix ) {
                 var match = reg.exec( affix );
                 if ( match ) {
+                    var modType = match[1];
+                    var min     = match[2] === "…" ? "" : match[2];
+                    var max     = match[3] === "…" ? "" : match[3];
+                    var modName = affix.replace( /(<span class=\'value\'>[^<>]+<\/span>)/g, "#" )
+                                       .replace( "( # - # )", "#" )
+                                       .replace( "(Unique explicit)", "" )
+                                       .replace( "(Explicit)", "" )
+                                       .replace( "Implicit", "implicit" )
+                                       .replace( "Enchant", "enchant" )
+                                       .replace( "Crafted", "crafted" )
+                                       .replace( "(Total)", "(pseudo) (total)" )
+                                       .replace( "Pseudo", "pseudo" )
+                                       .replace( "Essence", "Explicit" )
+                                       .replace( "Talisman implicit", "Implicit" );
                     $( "#" + filter.id + "-poe-trade-form" ).append(
-                        "<select name=\"mod_name\"><option>" + affix.replace( match[0], "#" ).replace( "[TOTAL]", "(pseudo) (total)" )
-                        .replace( "[PSEUDO]", "(pseudo)" ) + "</option></select>" +
-                        "<input type=\"text\" name=\"mod_min\" value=\"" + match[1] + "\">" +
-                        "<input type=\"text\" name=\"mod_max\" value=\"" + match[2] + "\">"
+                        "<select name=\"mod_name\"><option>" + 
+                        modName + "</option></select>" +
+                        "<input type=\"text\" name=\"mod_min\" value=\"" + min + "\">" +
+                        "<input type=\"text\" name=\"mod_max\" value=\"" + max + "\">"
                     );
-                    // console.log( affix.replace( match[0], "#" ) + ": " + match[1] + ", " + match[2] );
+                    // console.log( modName + ": " + min + ", " + max );
                 // If mod has no values
                 } else {
+                    var modName = affix.replace( "(Unique explicit)", "" )
+                                       .replace( "(Explicit)", "" )
+                                       .replace( "Implicit", "implicit" )
+                                       .replace( "Enchant", "enchant" )
+                                       .replace( "Crafted", "crafted" )
+                                       .replace( "(Total)", "(pseudo) (total)" )
+                                       .replace( "Pseudo", "pseudo" )
+                                       .replace( "Essence", "Explicit" )
+                                       .replace( "Talisman implicit", "Implicit" );
                     $( "#" + filter.id + "-poe-trade-form" ).append(
-                        "<select name=\"mod_name\"><option>" + affix + "</option></select>" +
+                        "<select name=\"mod_name\"><option>" + modName + "</option></select>" +
                         "<input type=\"text\" name=\"mod_min\" value=\"\">" +
                         "<input type=\"text\" name=\"mod_max\" value=\"\">"
                     );
-                    console.log( affix );
+                    // console.log( modName );
                 }
                 cbAffix();
             }, function() {
@@ -1111,6 +1180,11 @@ $( document).ready( function() {
                     $( "#affix-min" ).val( "" );
                     $( "#affix-max" ).val( "" );
                     $( "#affixes" ).val( "" );
+                    $( "#open-prefixes" ).val( filter.openPrefixes );
+                    $( "#open-suffixes" ).val( filter.openSuffixes );
+                    $( "#map-quantity" ).val( filter.mapQuantity );
+                    $( "#map-rarity" ).val( filter.mapRarity );
+                    $( "#map-pack-size" ).val( filter.mapPackSize );
                     Materialize.updateTextFields();
                     loadedAffix  = false;
                     editingAffix = "";
@@ -1184,14 +1258,14 @@ $( document).ready( function() {
     };
 
     var poeTradeStats = function( filters ) {
-        console.log( filters );
+        // console.log( filters );
         if ( !config.usePoeTradeStats ) {
             $( ".item-stats" ).hide();
             return;
         } else {
             $( ".item-stats" ).show();
         }
-        var reg = /\(\s*([^ ]*)\s*\-\s*([^ ]*)\s*\)/;
+        // var reg = /\(\s*([^ ]*)\s*\-\s*([^ ]*)\s*\)/;
         console.log( "Refreshing poe.trade stats" );
         async.each( filters, function( filter, cbFilter ) {
             // console.log( "Updating poe.trade stats for filter " + filter.id );
@@ -1208,6 +1282,19 @@ $( document).ready( function() {
             } else {
                 filter.link_min = filter.links;
                 filter.link_max = filter.link_min;
+            }
+            if ( filter.rarity === "0" ) {
+                filter.grade = "normal";
+            } else if ( filter.rarity === "1" ) {
+                filter.grade = "magic";
+            } else if ( filter.rarity === "2" ) {
+                filter.grade = "rare";
+            } else if ( filter.rarity === "3" ) {
+                filter.grade = "unique";
+            } else if ( filter.rarity === "9" ) {
+                filter.grade = "relic";
+            } else {
+                filter.grade = "any";
             }
             var corrupted = filter.corrupted;
             if ( corrupted === "any" ) {
@@ -1237,6 +1324,11 @@ $( document).ready( function() {
                 name:        filter.item,
                 league:      filter.league,
                 type:        itemType,
+                sockets_min: filter.socketsTotal,
+                sockets_r:   filter.socketsRed,
+                sockets_g:   filter.socketsGreen,
+                sockets_b:   filter.socketsBlue,
+                sockets_w:   filter.socketsWhite,
                 link_min:    filter.link_min,
                 link_max:    filter.link_max,
                 q_min:       filter.quality,
@@ -1247,28 +1339,50 @@ $( document).ready( function() {
                 crafted:     crafted,
                 armour_min:  filter.armor,
                 evasion_min: filter.evasion,
-                shield_min:  filter.es
+                shield_min:  filter.es,
+                rarity:      filter.grade
             }, true );
             // Add mods
+            var reg   = /\(([A-Za-z ]+)\).*<span.*>([0-9.…]+)<\/span>\s*\-\s*<span.*>([0-9.…]+)<\/span>/;
             async.each( filter.affixesDis, function( affix, cbAffix ) {
                 var match = reg.exec( affix );
                 if ( match ) {
-                    // console.log( "'" + affix.replace( match[0], "#" ) + "': '" + match[1] + "', '" + match[2] + "'" );
+                    var modType = match[1];
+                    var min     = match[2] === "…" ? "" : match[2];
+                    var max     = match[3] === "…" ? "" : match[3];
+                    var modName = affix.replace( /(<span class=\'value\'>[^<>]+<\/span>)/g, "#" )
+                                       .replace( "( # - # )", "#" )
+                                       .replace( "(Unique explicit)", "" )
+                                       .replace( "(Explicit)", "" )
+                                       .replace( "Implicit", "implicit" )
+                                       .replace( "Enchant", "enchant" )
+                                       .replace( "Crafted", "crafted" )
+                                       .replace( "(Total)", "(pseudo) (total)" )
+                                       .replace( "Pseudo", "pseudo" )
+                                       .replace( "Essence", "Explicit" )
+                                       .replace( "Talisman implicit", "Implicit" );
                     data += "&" + $.param({
-                        mod_name: affix.replace( match[0], "#" )
-                                       .replace( "[TOTAL]", "(pseudo) (total)" )
-                                       .replace( "[PSEUDO]", "(pseudo)" ),
-                        mod_min:  match[1],
-                        mod_max:  match[2]
+                        mod_name: modName,
+                        mod_min:  min,
+                        mod_max:  max
                     }, true );
                 // If mod has no value
                 } else {
+                    var modName = affix.replace( "(Unique explicit)", "" )
+                                       .replace( "(Explicit)", "" )
+                                       .replace( "Implicit", "implicit" )
+                                       .replace( "Enchant", "enchant" )
+                                       .replace( "Crafted", "crafted" )
+                                       .replace( "(Total)", "(pseudo) (total)" )
+                                       .replace( "Pseudo", "pseudo" )
+                                       .replace( "Essence", "Explicit" )
+                                       .replace( "Talisman implicit", "Implicit" );
                     data += "&" + $.param({
-                        mod_name: affix,
+                        mod_name: modName,
                         mod_min:  "",
                         mod_max:  ""
                     }, true );
-                    console.log( affix );
+                    // console.log( affix );
                 }
                 cbAffix();
             }, function() {
@@ -1879,7 +1993,7 @@ $( document).ready( function() {
             var data     = entry.data( "item" );
             var itemId   = data.itemId;
             var visualId = data.id;
-            console.log( "Removing " + visualId  + ":" + entryLookup[itemId]);
+            // console.log( "Removing " + visualId  + ":" + entryLookup[itemId]);
             if ( !results[visualId] ) {
                 console.log( "results: Item does not exist" );
             }
@@ -2297,7 +2411,6 @@ $( document).ready( function() {
             $( "#barter-preview" ).text( str );
         });
         // Setup performances options
-        console.log( config.maxEntryAmount );
         // Confine maxEntryAmount between 100 and 1000
         if ( !config.maxEntryAmount ) {
             config.maxEntryAmount = 100;

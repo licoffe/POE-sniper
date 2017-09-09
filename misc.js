@@ -166,9 +166,13 @@ class Misc {
                     var mod_min  = $( this ).parent().parent().find( "input[name='mod_min']" ).val();
                     var mod_max  = $( this ).parent().parent().find( "input[name='mod_max']" ).val();
                     var pseudo   = mod_name.indexOf( "total" ) !== -1;
-                    mod_name = mod_name.replace( "(pseudo) (total)", "[TOTAL]" )
-                                       .replace( "(pseudo)", "[PSEUDO]" )
-                                       .replace( "(enchant)", "" ).trim();
+                    mod_name = mod_name.replace( "(pseudo) (total)", "(Total)" )
+                                       .replace( "(pseudo)", "(Pseudo)" )
+                                       .replace( "(unique explicit)", "(Unique explicit)" )
+                                       .replace( "(enchant)", "(Enchant)" )
+                                       .replace( "(crafted)", "(Crafted)" )
+                                       .replace( "(implicit)", "(Implicit)" )
+                                       .trim();
                     data.mods[mod_name] = { min: mod_min, max: mod_max, pseudo: pseudo };
                 }
             });

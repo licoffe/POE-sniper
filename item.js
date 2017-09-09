@@ -129,14 +129,14 @@ class Item {
                                 parsedProperties.pDPS = dps.pDPS;
                                 Item.insertDPSValues( newItem, dps, function( item ) {
                                     console.log( "Inserted DPS value for item" );
-                                    Item.formatItem( item, name, prices, function( newItem ) {
+                                    Item.formatItem( item, name, prices, 0, 0, function( newItem ) {
                                         newItem.fullPrice = Math.round( metricValueChaos );
                                         callback( newItem );
                                     });
                                 });
                             });
                         } else {
-                            Item.formatItem( newItem, name, prices, function( newItem ) {
+                            Item.formatItem( newItem, name, prices, 0, 0, function( newItem ) {
                                 newItem.fullPrice = Math.round( metricValueChaos );
                                 callback( newItem );
                             });
@@ -269,7 +269,7 @@ class Item {
      * @params  Item, item name, prices and callback
      * @returns Formatted item through callback
      */
-    static formatItem( item, name, prices, callback ) {
+    static formatItem( item, name, prices, openPrefix, openSuffix, callback ) {
         var time       = Item.formatTime();
         var guid       = Misc.guidGenerator();
         var implicit   = "";
@@ -279,6 +279,9 @@ class Item {
         var total      = "";
         var pseudo     = "";
         var properties = "";
+        var totalPrefix  = 0;
+        var totalSuffix  = 0;
+        var totalCrafted = 0;
         if ( item.implicitMods ) {
             implicit += "<span class=\"badge affix-implicit\" data-badge-caption=\"Implicit\"></span><span class=\"implicit\">";
             implicit += item.implicitMods.join( "</span><br><span class=\"badge affix-implicit\" data-badge-caption=\"Implicit\"></span><span class=\"implicit\">" );
@@ -322,12 +325,14 @@ class Item {
                     if ( prefixes[explicitTitle]) {
                         Item.formatAffixes( prefixes[explicitTitle], values, explicitMod, "P", function( res ) {
                             explicit += res;
+                            totalPrefix++;
                             cbExplicit();
                         });
                     // If this mod is a suffix
                     } else if ( suffixes[explicitTitle]) {
                         Item.formatAffixes( suffixes[explicitTitle], values, explicitMod, "S", function( res ) {
                             explicit += res;
+                            totalSuffix++;
                             cbExplicit();
                         });
                     // If this mod is corrupted
@@ -357,6 +362,7 @@ class Item {
             crafted += "<span class=\"badge affix-crafted\" data-badge-caption=\"Crafted\"></span><span class=\"crafted\">";
             crafted += item.craftedMods.join( "</span><br><span class=\"badge affix-crafted\" data-badge-caption=\"Crafted\"></span><span class=\"crafted\">" );
             crafted += "</span><br>";
+            totalCrafted = item.craftedMods.length;
         }
         if ( item.enchantMods ) {
             enchant += "<span class=\"badge affix-enchant\" data-badge-caption=\"Enchant\"></span><span class=\"enchant\">";
@@ -422,6 +428,15 @@ class Item {
                 imageDomain = "http://web.poecdn.com/";
             }
             
+            var passed = true;
+
+            // Compare with open prefix/suffix condition
+            // console.log( item.frameType + ", " + openSuffix + " >= " + (  3 - totalSuffix ) + " and " + openPrefix + " >= " + (  3 - totalPrefix ));
+            if ( item.frameType === 2 && 
+                ( openSuffix > ( 3 - totalSuffix ) || openPrefix > ( 3 - totalPrefix ) || ( totalPrefix + totalSuffix + totalCrafted ) > ( 6 - openSuffix - openPrefix ))) {
+                passed = false;
+            }
+            
             callback({
                 time:          time,
                 account:       item.lastCharacterName,
@@ -450,7 +465,8 @@ class Item {
                 typeLine:      item.typeLine,
                 sockets:       item.sockets,
                 type:          itemType,
-                confidence:    item.confidence
+                confidence:    item.confidence,
+                passed:        passed
             });
         });
     }
@@ -1163,6 +1179,16 @@ class Item {
                     newItem.properties.push({
                         name: "Experience",
                         values: [[Math.round( addProperty.progress * 10000 ) / 100]]
+                    });
+                } else if ( addProperty.name === "Monster Pack Size" || 
+                            addProperty.name === "Item Quantity" || 
+                            addProperty.name === "Item Rarity" ) {
+                    var reg = /\+(\d+)%/;
+                    var match = reg.exec( addProperty.values[0][0]);
+                    itemProperties[addProperty.name] = match[1];
+                    newItem.properties.push({
+                        name: addProperty.name,
+                        values: [match[1]]
                     });
                 } else {
                     if ( addProperty.values.length === 0 ) {

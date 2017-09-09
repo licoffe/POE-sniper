@@ -30,43 +30,48 @@ var itemTypes = require( "./itemTypes.json" );
 class Filter {
 
     constructor( obj ) {
-        this.league       = obj.league,
-        this.item         = obj.item,
-        this.title        = obj.title,
-        this.budget       = obj.budget,
-        this.currency     = obj.currency,
-        this.links        = obj.links,
-        this.socketsTotal = obj.socketsTotal,
-        this.socketsRed   = obj.socketsRed,
-        this.socketsGreen = obj.socketsGreen,
-        this.socketsBlue  = obj.socketsBlue,
-        this.socketsWhite = obj.socketsWhite,
-        this.id           = obj.id,
-        this.corrupted    = obj.corrupted,
-        this.crafted      = obj.crafted,
-        this.enchanted    = obj.enchanted,
-        this.identified   = obj.identified,
-        this.level        = obj.level,
-        this.tier         = obj.tier,
-        this.experience   = obj.experience,
-        this.quality      = obj.quality,
-        this.rarity       = obj.rarity,
-        this.armor        = obj.armor,   
-        this.es           = obj.es,      
-        this.evasion      = obj.evasion, 
-        this.dps          = obj.dps,
-        this.pdps         = obj.pdps,
-        this.edps         = obj.edps,
-        this.affixes      = obj.affixes,
-        this.affixesDis   = obj.affixesDis,
-        this.buyout       = obj.buyout,
-        this.clipboard    = obj.clipboard,
-        this.itemType     = obj.itemType,
-        this.title        = obj.title,
-        this.active       = obj.active,
-        this.checked      = obj.active ? "checked" : "",
-        this.convert      = obj.convert,
-        this.displayPrice = obj.displayPrice
+        this.league       = obj.league;
+        this.item         = obj.item;
+        this.title        = obj.title;
+        this.budget       = obj.budget;
+        this.currency     = obj.currency;
+        this.links        = obj.links;
+        this.socketsTotal = obj.socketsTotal;
+        this.socketsRed   = obj.socketsRed;
+        this.socketsGreen = obj.socketsGreen;
+        this.socketsBlue  = obj.socketsBlue;
+        this.socketsWhite = obj.socketsWhite;
+        this.id           = obj.id;
+        this.corrupted    = obj.corrupted;
+        this.crafted      = obj.crafted;
+        this.enchanted    = obj.enchanted;
+        this.identified   = obj.identified;
+        this.level        = obj.level;
+        this.tier         = obj.tier;
+        this.experience   = obj.experience;
+        this.quality      = obj.quality;
+        this.rarity       = obj.rarity;
+        this.armor        = obj.armor;  
+        this.es           = obj.es;   
+        this.evasion      = obj.evasion; 
+        this.dps          = obj.dps;
+        this.pdps         = obj.pdps;
+        this.edps         = obj.edps;
+        this.affixes      = obj.affixes;
+        this.affixesDis   = obj.affixesDis;
+        this.buyout       = obj.buyout;
+        this.clipboard    = obj.clipboard;
+        this.itemType     = obj.itemType;
+        this.title        = obj.title;
+        this.active       = obj.active;
+        this.checked      = obj.active ? "checked" : "";
+        this.convert      = obj.convert;
+        this.displayPrice = obj.displayPrice;
+        this.openPrefixes = obj.openPrefixes === "" ? 0 : obj.openPrefixes;
+        this.openSuffixes = obj.openSuffixes === "" ? 0 : obj.openSuffixes;
+        this.mapQuantity  = obj.mapQuantity;
+        this.mapRarity    = obj.mapRarity;
+        this.mapPackSize  = obj.mapPackSize;
     }
 
     /**
@@ -92,22 +97,13 @@ class Filter {
      * @params Item to compare, callback
      * @return Boolean through callback
      */
-    compareMods( item, parsedMods, callback ) {
+    compareMods( parsedMods, callback ) {
         var passed = 0;
         var keys   = 0;
         // Compare mod values to filter
         for ( var affix in this.affixes ) {
-            // console.log( affix );
-            var cleanedAffix = 
-                affix.replace( /(<span class=\'value\'>[^<>]+<\/span>)/g, "#" )
-                     .replace( "( # - # )", "#" )
-                     .replace( "Unique explicit", "Explicit" )
-                     .replace( "Essence", "Explicit" )
-                     .replace( "Talisman implicit", "Implicit" );
-            // console.log( cleanedAffix );
             if ( this.affixes.hasOwnProperty( affix )) {
                 keys++;
-                // console.log( this.affixes );
                 if ( isNaN( this.affixes[affix][0])) {
                     this.affixes[affix][0] = this.affixes[affix][0].replace( /.*>(.+)<.*/, "$1" );
                 }
@@ -119,33 +115,23 @@ class Filter {
                 // If there is no upper value
                 this.affixes[affix][1] = this.affixes[affix][1] !== "…" ? this.affixes[affix][1] : 1000000;
 
-                // if ( !parsedMods.mods[affix] ) {
-                //     console.log( "Item " + item.name + " does not have affix " + affix );
-                // } else {
-                //     console.log( "Item " + item.name + " has this affix " + affix );
-                //     console.log( parsedMods );
-                // }
-
                 // If mod has one parameter
-                // console.log( parsedMods.mods );
-                if ( parsedMods.mods[cleanedAffix] && parsedMods.mods[cleanedAffix].length === 1 ) {
-                    if ( parsedMods.mods[cleanedAffix] && 
-                        this.affixes[affix][0] <= parsedMods.mods[cleanedAffix][0] &&
-                        this.affixes[affix][1] >= parsedMods.mods[cleanedAffix][0]) {
+                if ( parsedMods.mods[affix] && parsedMods.mods[affix].length === 1 ) {
+                    if ( parsedMods.mods[affix] && 
+                        this.affixes[affix][0] <= parsedMods.mods[affix][0] &&
+                        this.affixes[affix][1] >= parsedMods.mods[affix][0]) {
                         passed++;
-                        // console.log( this.affixes[affix][0] + " <= " + parsedMods.mods[affix][0] + " and " + this.affixes[affix][1] + " >= " + parsedMods.mods[affix][0] );
                     }
                 // If mod has two
-                } else if ( parsedMods.mods[cleanedAffix] && parsedMods.mods[cleanedAffix].length === 2 ) {
-                    var average = ( parsedMods.mods[cleanedAffix][0] + parsedMods.mods[cleanedAffix][1]) / 2;
-                    if ( parsedMods.mods[cleanedAffix] &&
+                } else if ( parsedMods.mods[affix] && parsedMods.mods[affix].length === 2 ) {
+                    var average = ( parsedMods.mods[affix][0] + parsedMods.mods[affix][1]) / 2;
+                    if ( parsedMods.mods[affix] &&
                         this.affixes[affix][0] <= average &&
                         this.affixes[affix][1] >= average ) {
-                        // console.log( this.affixes[affix][0] + " <= " + average + " and " + this.affixes[affix][1] + " >= " + average );
                         passed++;
                     }
                 // Otherwise
-                } else if ( parsedMods.mods[cleanedAffix]) {
+                } else if ( parsedMods.mods[affix]) {
                     // console.log( parsedMods.mods[affix]);
                     passed++;
                 }
@@ -179,6 +165,9 @@ class Filter {
             ( this.dps     === "" || parseFloat( this.dps )   <= parseFloat( parsedProperties.DPS )) &&
             ( this.pdps    === "" || parseFloat( this.pdps )  <= parseFloat( parsedProperties.pDPS )) &&
             ( this.edps    === "" || parseFloat( this.edps )  <= parseFloat( parsedProperties.eDPS )) &&
+            ( this.mapPackSize === "" || parseFloat( this.mapPackSize ) <= parseFloat( parsedProperties["Monster Pack Size"])) &&
+            ( this.mapQuantity === "" || parseFloat( this.mapQuantity ) <= parseFloat( parsedProperties["Item Quantity"])) &&
+            ( this.mapRarity === "" || parseFloat( this.mapRarity ) <= parseFloat( parsedProperties["Item Rarity"])) &&
             ( this.quality   === "" || parsedProperties.Quality !== undefined &&
             parseInt( this.quality ) <= parseInt( parsedProperties.Quality.replace( /[\+\%]/g, "" ))) &&
             ( this.tier   === "" || ( parsedProperties["Map Tier"] !== undefined && (
@@ -286,8 +275,10 @@ class Filter {
                     item.totalMods = keptTotalMods;
                     var keptPseudoMods = [];
                     for ( var mod in parsedMods.pseudoMods ) {
+                        // console.log( self.affixes );
                         if ( parsedMods.pseudoMods.hasOwnProperty( mod )) {
                             if ( self.affixes[mod]) {
+                                // console.log( "Found affix: " + mod );
                                 keptPseudoMods.push( mod.replace( /^\([a-zA-Z ]+\)\s*/, "" ).replace( "#", parsedMods.pseudoMods[mod]));
                             }
                         }
@@ -295,7 +286,7 @@ class Filter {
                     item.pseudoMods = keptPseudoMods;
                     // console.log( item );
                     // Compare mods
-                    self.compareMods( item, parsedMods, function( passed ) {
+                    self.compareMods( parsedMods, function( passed ) {
                         if ( passed ) {
                             Item.parseProperties( item, function( newItem, parsedProperties ) {
                                 // console.log( newItem );
@@ -310,8 +301,12 @@ class Filter {
                                             // Compare properties
                                             self.compareProperties( item, parsedProperties, function( equal ) {
                                                 if ( equal ) {
-                                                    Item.formatItem( item, name, prices, function( newItem ) {
-                                                        callback( newItem );
+                                                    Item.formatItem( item, name, prices, self.openPrefixes, self.openSuffixes, function( newItem ) {
+                                                        if ( newItem.passed ) {
+                                                            callback( newItem );
+                                                        } else {
+                                                            callback( false );
+                                                        }
                                                     });
                                                 // Item does not have the required properties
                                                 } else {
@@ -326,8 +321,12 @@ class Filter {
                                     self.compareProperties( newItem, parsedProperties, function( equal ) {
                                         // console.log( newItem );
                                         if ( equal ) {
-                                            Item.formatItem( newItem, name, prices, function( newItem ) {
-                                                callback( newItem );
+                                            Item.formatItem( newItem, name, prices, self.openPrefixes, self.openSuffixes, function( newItem ) {
+                                                if ( newItem.passed ) {
+                                                    callback( newItem );
+                                                } else {
+                                                    callback( false );
+                                                }
                                             });
                                         // Item does not have the required properties
                                         } else {
