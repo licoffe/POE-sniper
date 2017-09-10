@@ -1933,10 +1933,10 @@ $( document).ready( function() {
                         if ( itemInStash[stash.id] ) {
                             async.each( Object.keys( itemInStash[stash.id].previousItems ), function( previousItem, cbPreviousItem ) {
                                 if ( !itemInStash[stash.id].items[previousItem]) {
-                                    console.log( previousItem + " was sold" );
+                                    // console.log( previousItem + " was sold" );
                                     sold++;
                                     $( "li#" + itemInStash[stash.id].previousItems[previousItem] ).addClass( "sold" );
-                                    console.log( "li#" + itemInStash[stash.id].previousItems[previousItem] );
+                                    // console.log( "li#" + itemInStash[stash.id].previousItems[previousItem] );
                                     delete results[itemInStash[stash.id].previousItems[previousItem]];
                                     delete prices[previousItem];
                                     delete resultsId[previousItem];
@@ -2173,15 +2173,15 @@ $( document).ready( function() {
                 return "Body Armour";
             case "Two-handed sword":
                 return "Two Hand Sword";
-            case "Two-handed-mace":
+            case "Two-handed mace":
                 return "Two Hand Mace";
-            case "Two-handed-axe":
+            case "Two-handed axe":
                 return "Two Hand Axe";
-            case "One-handed-sword":
+            case "One-handed sword":
                 return "One Hand Sword";
-            case "One-handed-mace":
+            case "One-handed mace":
                 return "One Hand Mace";
-            case "One-handed-axe":
+            case "One-handed axe":
                 return "One Hand Axe";
             default:
                 return type;

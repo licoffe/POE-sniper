@@ -119,8 +119,12 @@ li.collection-item {
     background-color: rgba(0, 100, 200, 0.5)!important;
 }
 
-.affix-C {
+.affix-corrupted {
     background-color: rgba(255, 0, 0, 0.5)!important;
+}
+
+.affix-Tora, .affix-Elreon, .affix-Catarina, .affix-Leo, .affix-Vorici, .affix-Haku, .affix-Vagan, .affix-Renegades, .affix-Mutewind, .affix-Brineroot, .affix-Redblade {
+    background-color: rgba(24, 93, 20, 1)!important;
 }
 
 .affix-talisman {

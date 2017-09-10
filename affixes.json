@@ -31,6 +31,13 @@
                 { "name": "Weaponmaster's", "min": 2, "max": 2, "lvl": 63 }
             ],
             "#% increased Elemental Damage with Weapons": [
+                { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4, "legacy": true },
+                { "name": "Infusing", "min": 11, "max": 20, "lvl": 15, "legacy": true },
+                { "name": "Empowering", "min": 21, "max": 30, "lvl": 30, "legacy": true },
+                { "name": "Unleashed", "min": 31, "max": 36, "lvl": 60, "legacy": true },
+                { "name": "Overpowering", "min": 37, "max": 42, "lvl": 81, "legacy": true }
+            ],
+            "#% increased Elemental Damage with Attack Skills": [
                 { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4 },
                 { "name": "Infusing", "min": 11, "max": 20, "lvl": 15 },
                 { "name": "Empowering", "min": 21, "max": 30, "lvl": 30 },
@@ -92,6 +99,20 @@
             ]
         },
         "suffix": {
+            "#% chance to cause Bleeding on Hit": [
+                { "name": "of Bleeding", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Flaying", "min": 15, "max": 15, "lvl": 55 },
+                { "name": "of Hemorrhaging", "min": 20, "max": 20, "lvl": 85 }
+            ],
+            "#% increased Bleed duration": [
+                { "name": "of Agony", "min": 8, "max": 12, "lvl": 30 },
+                { "name": "of Torment", "min": 13, "max": 18, "lvl": 60 }
+            ],
+            "#% increased Damage with Bleeding": [
+                { "name": "of Bloodletting", "min": 21, "max": 25, "lvl": 20 },
+                { "name": "of Haemophilia", "min": 26, "max": 30, "lvl": 40 },
+                { "name": "of Exsanguination", "min": 31, "max": 35, "lvl": 60 }
+            ],
             "+#% to Chaos Resistance": [
                 { "name": "of the Lost", "min": 5, "max": 10, "lvl": 16 },
                 { "name": "of Banishment", "min": 11, "max": 15, "lvl": 30 },
@@ -178,10 +199,17 @@
                 { "name": "of Victory", "min": 7, "max": 10, "lvl": 23 },
                 { "name": "of Triumph", "min": 11, "max": 14, "lvl": 40 }
             ],
-            "Mod": [
-                { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+            "#% increased Light Radius": [
+                { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+            ],
+            "+# to Accuracy Rating": [
+                { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+            ],
+            "#% increased Accuracy Rating": [
+                { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
             ],
             "+#% to Lightning Resistance": [
                 { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
@@ -262,6 +290,13 @@
     },
     "Claw": {
         "prefix": {
+            "#% increased Elemental Damage with Attack Skills": [
+                { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4 },
+                { "name": "Infusing", "min": 11, "max": 20, "lvl": 15 },
+                { "name": "Empowering", "min": 21, "max": 30, "lvl": 30 },
+                { "name": "Unleashed", "min": 31, "max": 37, "lvl": 60 },
+                { "name": "Overpowering", "min": 38, "max": 42, "lvl": 81 }
+            ],
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": 1, "max": 3, "lvl": 2 },
                 { "name": "Chilled", "min": [6,8], "max": [13,15], "lvl": 12 },
@@ -464,10 +499,17 @@
                 { "name": "of Victory", "min": 7, "max": 10, "lvl": 23 },
                 { "name": "of Triumph", "min": 11, "max": 14, "lvl": 40 }
             ],
-            "Mod": [
-                { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+            "#% increased Light Radius": [
+                { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+            ],
+            "+# to Accuracy Rating": [
+                { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+            ],
+            "#% increased Accuracy Rating": [
+                { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
             ],
             "+#% to Lightning Resistance": [
                 { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
@@ -483,10 +525,24 @@
                 { "name": "of the Worthy", "min": 18, "max": 18, "lvl": 36 },
                 { "name": "of the Apt", "min": 32, "max": 32, "lvl": 60 }
             ],
+            "#% chance to Poison on Hit": [
+                { "name": "of Poisoning", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Toxins", "min": 20, "max": 20, "lvl": 55 },
+                { "name": "of Death", "min": 30, "max": 30, "lvl": 85 }
+            ],
             "+# Mana gained on Kill": [
                 { "name": "of Absorption", "min": 1, "max": 1, "lvl": 1 },
                 { "name": "of Osmosis", "min": 2, "max": 3, "lvl": 24 },
                 { "name": "of Consumption", "min": 4, "max": 6, "lvl": 40 }
+            ],
+            "#% increased Damage with Poison": [
+                { "name": "of Poison", "min": 21, "max": 25, "lvl": 20 },
+                { "name": "of Venom", "min": 26, "max": 30, "lvl": 40 },
+                { "name": "of Virulence", "min": 31, "max": 35, "lvl": 60 }
+            ],
+            "#% increased Poison Duration": [
+                { "name": "of Rot", "min": 8, "max": 12, "lvl": 30 },
+                { "name": "of Putrefaction", "min": 13, "max": 18, "lvl": 60 }
             ],
             "#% increased Mana Regeneration Rate": [
                 { "name": "of Excitement", "min": 10, "max": 19, "lvl": 2 },
@@ -541,6 +597,13 @@
     },
     "Dagger": {
         "prefix": {
+            "#% increased Elemental Damage with Attack Skills": [
+                { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4 },
+                { "name": "Infusing", "min": 11, "max": 20, "lvl": 15 },
+                { "name": "Empowering", "min": 21, "max": 30, "lvl": 30 },
+                { "name": "Unleashed", "min": 31, "max": 37, "lvl": 60 },
+                { "name": "Overpowering", "min": 38, "max": 42, "lvl": 81 }
+            ],
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": 1, "max": 3, "lvl": 2 },
                 { "name": "Chilled", "min": [6,8], "max": [13,15], "lvl": 12 },
@@ -566,14 +629,23 @@
             "+# to Level of Socketed Gems": [
                 { "name": "Paragon's", "min": 1, "max": 1, "lvl": 50 }
             ],
-            "Mod": [
-                { "name": "Nihilist's", "min": 1, "max": 1, "lvl": 40 },
+            "+# to Level of Socketed Chaos Gems": [
+                { "name": "Nihilist's", "min": 1, "max": 1, "lvl": 4 },
+                { "name": "Anarchist's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Cold Gems": [
                 { "name": "Frost Weaver's", "min": 1, "max": 1, "lvl": 2 },
-                { "name": "Winterbringer's", "min": 2, "max": 2, "lvl": 55 },
+                { "name": "Winterbringer's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Fire Gems": [
                 { "name": "Flame Spinner's", "min": 1, "max": 1, "lvl": 2 },
-                { "name": "Lava Caller's", "min": 2, "max": 2, "lvl": 55 },
+                { "name": "Lava Caller's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Lightning Gems": [
                 { "name": "Thunder Lord's", "min": 1, "max": 1, "lvl": 2 },
-                { "name": "Tempest King's", "min": 2, "max": 2, "lvl": 55 },
+                { "name": "Tempest King's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Melee Gems": [
                 { "name": "Combatant's", "min": 1, "max": 1, "lvl": 8 },
                 { "name": "Weaponmaster's", "min": 2, "max": 2, "lvl": 63 }
             ],
@@ -705,6 +777,20 @@
             ]
         },
         "suffix": {
+            "#% chance to Poison on Hit": [
+                { "name": "of Poisoning", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Toxins", "min": 20, "max": 20, "lvl": 55 },
+                { "name": "of Death", "min": 30, "max": 30, "lvl": 85 }
+            ],
+            "#% increased Damage with Poison": [
+                { "name": "of Poison", "min": 21, "max": 25, "lvl": 20 },
+                { "name": "of Venom", "min": 26, "max": 30, "lvl": 40 },
+                { "name": "of Virulence", "min": 31, "max": 35, "lvl": 60 }
+            ],
+            "#% increased Poison Duration": [
+                { "name": "of Rot", "min": 8, "max": 12, "lvl": 30 },
+                { "name": "of Putrefaction", "min": 13, "max": 18, "lvl": 60 }
+            ],
             "+#% to Chaos Resistance": [
                 { "name": "of the Lost", "min": 5, "max": 10, "lvl": 16 },
                 { "name": "of Banishment", "min": 11, "max": 15, "lvl": 30 },
@@ -802,10 +888,17 @@
                 { "name": "of Victory", "min": 7, "max": 10, "lvl": 23 },
                 { "name": "of Triumph", "min": 11, "max": 14, "lvl": 40 }
             ],
-            "Mod": [
-                { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+            "#% increased Light Radius": [
+                { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+            ],
+            "+# to Accuracy Rating": [
+                { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+            ],
+            "#% increased Accuracy Rating": [
+                { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
             ],
             "+#% to Lightning Resistance": [
                 { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
@@ -887,6 +980,13 @@
     },
     "One-handed mace": {
         "prefix": {
+            "#% increased Elemental Damage with Attack Skills": [
+                { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4 },
+                { "name": "Infusing", "min": 11, "max": 20, "lvl": 15 },
+                { "name": "Empowering", "min": 21, "max": 30, "lvl": 30 },
+                { "name": "Unleashed", "min": 31, "max": 37, "lvl": 60 },
+                { "name": "Overpowering", "min": 38, "max": 42, "lvl": 81 }
+            ],
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": 1, "max": 3, "lvl": 2 },
                 { "name": "Chilled", "min": [6,8], "max": [13,15], "lvl": 12 },
@@ -978,6 +1078,20 @@
             ]
         },
         "suffix": {
+            "#% increased Bleed duration": [
+                { "name": "of Agony", "min": 8, "max": 12, "lvl": 30 },
+                { "name": "of Torment", "min": 13, "max": 18, "lvl": 60 }
+            ],
+            "#% increased Damage with Bleeding": [
+                { "name": "of Bloodletting", "min": 21, "max": 25, "lvl": 20 },
+                { "name": "of Haemophilia", "min": 26, "max": 30, "lvl": 40 },
+                { "name": "of Exsanguination", "min": 31, "max": 35, "lvl": 60 }
+            ],
+            "#% chance to cause Bleeding on Hit": [
+                { "name": "of Bleeding", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Flaying", "min": 15, "max": 15, "lvl": 55 },
+                { "name": "of Hemorrhaging", "min": 20, "max": 20, "lvl": 85 }
+            ],
             "+#% to Chaos Resistance": [
                 { "name": "of the Lost", "min": 5, "max": 10, "lvl": 16 },
                 { "name": "of Banishment", "min": 11, "max": 15, "lvl": 30 },
@@ -1053,10 +1167,17 @@
                 { "name": "of Victory", "min": 7, "max": 10, "lvl": 23 },
                 { "name": "of Triumph", "min": 11, "max": 14, "lvl": 40 }
             ],
-            "Mod": [
-                { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+            "#% increased Light Radius": [
+                { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+            ],
+            "+# to Accuracy Rating": [
+                { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+            ],
+            "#% increased Accuracy Rating": [
+                { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
             ],
             "+#% to Lightning Resistance": [
                 { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
@@ -1137,6 +1258,13 @@
     },
     "Sceptre": {
         "prefix": {
+            "#% increased Elemental Damage with Attack Skills": [
+                { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4 },
+                { "name": "Infusing", "min": 11, "max": 20, "lvl": 15 },
+                { "name": "Empowering", "min": 21, "max": 30, "lvl": 30 },
+                { "name": "Unleashed", "min": 31, "max": 37, "lvl": 60 },
+                { "name": "Overpowering", "min": 38, "max": 42, "lvl": 81 }
+            ],
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": 1, "max": 3, "lvl": 2 },
                 { "name": "Chilled", "min": [6,8], "max": [13,15], "lvl": 12 },
@@ -1162,13 +1290,19 @@
             "+# to Level of Socketed Gems": [
                 { "name": "Paragon's", "min": 1, "max": 1, "lvl": 50 }
             ],
-            "Mod": [
+            "+# to Level of Socketed Cold Gems": [
                 { "name": "Frost Weaver's", "min": 1, "max": 1, "lvl": 2 },
-                { "name": "Winterbringer's", "min": 2, "max": 2, "lvl": 55 },
+                { "name": "Winterbringer's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Fire Gems": [
                 { "name": "Flame Spinner's", "min": 1, "max": 1, "lvl": 2 },
-                { "name": "Lava Caller's", "min": 2, "max": 2, "lvl": 55 },
+                { "name": "Lava Caller's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Lightning Gems": [
                 { "name": "Thunder Lord's", "min": 1, "max": 1, "lvl": 2 },
-                { "name": "Tempest King's", "min": 2, "max": 2, "lvl": 55 },
+                { "name": "Tempest King's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Melee Gems": [
                 { "name": "Combatant's", "min": 1, "max": 1, "lvl": 8 },
                 { "name": "Weaponmaster's", "min": 2, "max": 2, "lvl": 63 }
             ],
@@ -1300,6 +1434,20 @@
             ]
         },
         "suffix": {
+            "#% increased Burning Damage": [
+                { "name": "of Burning", "min": 16, "max": 20, "lvl": 20 },
+                { "name": "of Combusting", "min": 21, "max": 25, "lvl": 40 },
+                { "name": "of Conflagrating", "min": 26, "max": 30, "lvl": 60 }
+            ],
+            "#% chance to Freeze": [
+                { "name": "of Freezing", "min": 6, "max": 8, "lvl": 15 }
+            ],
+            "#% chance to Ignite": [
+                { "name": "of Ignition", "min": 6, "max": 8, "lvl": 15 }
+            ],
+            "#% chance to Shock": [
+                { "name": "of Shocking", "min": 6, "max": 8, "lvl": 15 }
+            ],
             "+#% to Chaos Resistance": [
                 { "name": "of the Lost", "min": 5, "max": 10, "lvl": 16 },
                 { "name": "of Banishment", "min": 11, "max": 15, "lvl": 30 },
@@ -1411,10 +1559,17 @@
                 { "name": "of Victory", "min": 7, "max": 10, "lvl": 23 },
                 { "name": "of Triumph", "min": 11, "max": 14, "lvl": 40 }
             ],
-            "Mod": [
-                { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+            "#% increased Light Radius": [
+                { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+            ],
+            "+# to Accuracy Rating": [
+                { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+            ],
+            "#% increased Accuracy Rating": [
+                { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
             ],
             "#% increased Lightning Damage": [
                 { "name": "of Sparks", "min": 3, "max": 7, "lvl": 10 },
@@ -1525,6 +1680,13 @@
     },
     "One-handed sword": {
         "prefix": {
+            "#% increased Elemental Damage with Attack Skills": [
+                { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4 },
+                { "name": "Infusing", "min": 11, "max": 20, "lvl": 15 },
+                { "name": "Empowering", "min": 21, "max": 30, "lvl": 30 },
+                { "name": "Unleashed", "min": 31, "max": 37, "lvl": 60 },
+                { "name": "Overpowering", "min": 38, "max": 42, "lvl": 81 }
+            ],
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": 1, "max": 3, "lvl": 2 },
                 { "name": "Chilled", "min": [6,8], "max": [13,15], "lvl": 12 },
@@ -1616,6 +1778,34 @@
             ]
         },
         "suffix": {
+            "#% increased Bleed duration": [
+                { "name": "of Agony", "min": 8, "max": 12, "lvl": 30 },
+                { "name": "of Torment", "min": 13, "max": 18, "lvl": 60 }
+            ],
+            "#% increased Damage with Bleeding": [
+                { "name": "of Bloodletting", "min": 21, "max": 25, "lvl": 20 },
+                { "name": "of Haemophilia", "min": 26, "max": 30, "lvl": 40 },
+                { "name": "of Exsanguination", "min": 31, "max": 35, "lvl": 60 }
+            ],
+            "#% chance to cause Bleeding on Hit": [
+                { "name": "of Bleeding", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Flaying", "min": 15, "max": 15, "lvl": 55 },
+                { "name": "of Hemorrhaging", "min": 20, "max": 20, "lvl": 85 }
+            ],
+            "#% chance to Poison on Hit": [
+                { "name": "of Poisoning", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Toxins", "min": 20, "max": 20, "lvl": 55 },
+                { "name": "of Death", "min": 30, "max": 30, "lvl": 85 }
+            ],
+            "#% increased Damage with Poison": [
+                { "name": "of Poison", "min": 21, "max": 25, "lvl": 20 },
+                { "name": "of Venom", "min": 26, "max": 30, "lvl": 40 },
+                { "name": "of Virulence", "min": 31, "max": 35, "lvl": 60 }
+            ],
+            "#% increased Poison Duration": [
+                { "name": "of Rot", "min": 8, "max": 12, "lvl": 30 },
+                { "name": "of Putrefaction", "min": 13, "max": 18, "lvl": 60 }
+            ],
             "+#% to Chaos Resistance": [
                 { "name": "of the Lost", "min": 5, "max": 10, "lvl": 16 },
                 { "name": "of Banishment", "min": 11, "max": 15, "lvl": 30 },
@@ -1702,10 +1892,17 @@
                 { "name": "of Victory", "min": 7, "max": 10, "lvl": 23 },
                 { "name": "of Triumph", "min": 11, "max": 14, "lvl": 40 }
             ],
-            "Mod": [
-                { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+            "#% increased Light Radius": [
+                { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+            ],
+            "+# to Accuracy Rating": [
+                { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+            ],
+            "#% increased Accuracy Rating": [
+                { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
             ],
             "+#% to Lightning Resistance": [
                 { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
@@ -1814,12 +2011,19 @@
             "+# to Level of Socketed Gems": [
                 { "name": "Paragon's", "min": 1, "max": 1, "lvl": 50 }
             ],
-            "Mod": [
-                { "name": "Nihilist's", "min": 1, "max": 1, "lvl": 40 },
+            "+# to Level of Socketed Chaos Gems": [
+                { "name": "Nihilist's", "min": 1, "max": 1, "lvl": 4 },
+                { "name": "Anarchist's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Cold Gems": [
                 { "name": "Frost Weaver's", "min": 1, "max": 1, "lvl": 2 },
-                { "name": "Winterbringer's", "min": 2, "max": 2, "lvl": 55 },
+                { "name": "Winterbringer's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Fire Gems": [
                 { "name": "Flame Spinner's", "min": 1, "max": 1, "lvl": 2 },
-                { "name": "Lava Caller's", "min": 2, "max": 2, "lvl": 55 },
+                { "name": "Lava Caller's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Lightning Gems": [
                 { "name": "Thunder Lord's", "min": 1, "max": 1, "lvl": 2 },
                 { "name": "Tempest King's", "min": 2, "max": 2, "lvl": 55 }
             ],
@@ -1949,6 +2153,20 @@
             ]
         },
         "suffix": {
+            "#% increased Burning Damage": [
+                { "name": "of Burning", "min": 16, "max": 20, "lvl": 20 },
+                { "name": "of Combusting", "min": 21, "max": 25, "lvl": 40 },
+                { "name": "of Conflagrating", "min": 26, "max": 30, "lvl": 60 }
+            ],
+            "#% chance to Freeze": [
+                { "name": "of Freezing", "min": 6, "max": 8, "lvl": 15 }
+            ],
+            "#% chance to Ignite": [
+                { "name": "of Ignition", "min": 6, "max": 8, "lvl": 15 }
+            ],
+            "#% chance to Shock": [
+                { "name": "of Shocking", "min": 6, "max": 8, "lvl": 15 }
+            ],
             "+#% to Chaos Resistance": [
                 { "name": "of the Lost", "min": 5, "max": 10, "lvl": 16 },
                 { "name": "of Banishment", "min": 11, "max": 15, "lvl": 30 },
@@ -2057,10 +2275,17 @@
                 { "name": "of Victory", "min": 7, "max": 10, "lvl": 23 },
                 { "name": "of Triumph", "min": 11, "max": 14, "lvl": 40 }
             ],
-            "Mod": [
-                { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+            "#% increased Light Radius": [
+                { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+            ],
+            "+# to Accuracy Rating": [
+                { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+            ],
+            "#% increased Accuracy Rating": [
+                { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
             ],
             "#% increased Lightning Damage": [
                 { "name": "of Sparks", "min": 3, "max": 7, "lvl": 10 },
@@ -2154,6 +2379,13 @@
     },
     "Two-handed axe": {
         "prefix": {
+            "#% increased Elemental Damage with Attack Skills": [
+                { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4 },
+                { "name": "Infusing", "min": 11, "max": 20, "lvl": 15 },
+                { "name": "Empowering", "min": 21, "max": 30, "lvl": 30 },
+                { "name": "Unleashed", "min": 31, "max": 37, "lvl": 60 },
+                { "name": "Overpowering", "min": 38, "max": 42, "lvl": 81 }
+            ],
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": [2,3], "max": [4,5], "lvl": 2 },
                 { "name": "Chilled", "min": [10,13], "max": [19,22], "lvl": 12 },
@@ -2245,6 +2477,20 @@
             ]
         },
         "suffix": {
+            "#% increased Bleed duration": [
+                { "name": "of Agony", "min": 8, "max": 12, "lvl": 30 },
+                { "name": "of Torment", "min": 13, "max": 18, "lvl": 60 }
+            ],
+            "#% increased Damage with Bleeding": [
+                { "name": "of Bloodletting", "min": 21, "max": 25, "lvl": 20 },
+                { "name": "of Haemophilia", "min": 26, "max": 30, "lvl": 40 },
+                { "name": "of Exsanguination", "min": 31, "max": 35, "lvl": 60 }
+            ],
+            "#% chance to cause Bleeding on Hit": [
+                { "name": "of Bleeding", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Flaying", "min": 15, "max": 15, "lvl": 55 },
+                { "name": "of Hemorrhaging", "min": 20, "max": 20, "lvl": 85 }
+            ],
             "+#% to Chaos Resistance": [
                 { "name": "of the Lost", "min": 5, "max": 10, "lvl": 16 },
                 { "name": "of Banishment", "min": 11, "max": 15, "lvl": 30 },
@@ -2331,10 +2577,17 @@
                 { "name": "of Victory", "min": 7, "max": 10, "lvl": 23 },
                 { "name": "of Triumph", "min": 11, "max": 14, "lvl": 40 }
             ],
-            "Mod": [
-                { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+            "#% increased Light Radius": [
+                { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+            ],
+            "+# to Accuracy Rating": [
+                { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+            ],
+            "#% increased Accuracy Rating": [
+                { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
             ],
             "+#% to Lightning Resistance": [
                 { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
@@ -2445,6 +2698,13 @@
                 { "name": "Sharpshooter's", "min": 2, "max": 2, "lvl": 64 }
             ],
             "#% increased Elemental Damage with Weapons": [
+                { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4, "legacy": true },
+                { "name": "Infusing", "min": 11, "max": 20, "lvl": 15, "legacy": true },
+                { "name": "Empowering", "min": 21, "max": 30, "lvl": 30, "legacy": true },
+                { "name": "Unleashed", "min": 31, "max": 36, "lvl": 60, "legacy": true },
+                { "name": "Overpowering", "min": 37, "max": 42, "lvl": 81, "legacy": true }
+            ],
+            "#% increased Elemental Damage with Attack Skills": [
                 { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4 },
                 { "name": "Infusing", "min": 11, "max": 20, "lvl": 15 },
                 { "name": "Empowering", "min": 21, "max": 30, "lvl": 30 },
@@ -2596,10 +2856,14 @@
                 { "name": "of Victory", "min": 7, "max": 10, "lvl": 23 },
                 { "name": "of Triumph", "min": 11, "max": 14, "lvl": 40 }
             ],
-            "#% increased Light Radius\n+# to Accuracy Rating": [
-                { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+            "#% increased Light Radius": [
+                { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+            ],
+            "+# to Accuracy Rating": [
+                { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
             ],
             "+#% to Lightning Resistance": [
                 { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
@@ -2735,6 +2999,13 @@
     },
     "Two-handed mace": {
         "prefix": {
+            "#% increased Elemental Damage with Attack Skills": [
+                { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4 },
+                { "name": "Infusing", "min": 11, "max": 20, "lvl": 15 },
+                { "name": "Empowering", "min": 21, "max": 30, "lvl": 30 },
+                { "name": "Unleashed", "min": 31, "max": 37, "lvl": 60 },
+                { "name": "Overpowering", "min": 38, "max": 42, "lvl": 81 }
+            ],
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": [2,3], "max": [4,5], "lvl": 2 },
                 { "name": "Chilled", "min": [10,13], "max": [19,22], "lvl": 12 },
@@ -2826,6 +3097,20 @@
             ]
         },
         "suffix": {
+            "#% increased Bleed duration": [
+                { "name": "of Agony", "min": 8, "max": 12, "lvl": 30 },
+                { "name": "of Torment", "min": 13, "max": 18, "lvl": 60 }
+            ],
+            "#% increased Damage with Bleeding": [
+                { "name": "of Bloodletting", "min": 21, "max": 25, "lvl": 20 },
+                { "name": "of Haemophilia", "min": 26, "max": 30, "lvl": 40 },
+                { "name": "of Exsanguination", "min": 31, "max": 35, "lvl": 60 }
+            ],
+            "#% chance to cause Bleeding on Hit": [
+                { "name": "of Bleeding", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Flaying", "min": 15, "max": 15, "lvl": 55 },
+                { "name": "of Hemorrhaging", "min": 20, "max": 20, "lvl": 85 }
+            ],
             "+#% to Chaos Resistance": [
                 { "name": "of the Lost", "min": 5, "max": 10, "lvl": 16 },
                 { "name": "of Banishment", "min": 11, "max": 15, "lvl": 30 },
@@ -2901,10 +3186,17 @@
                 { "name": "of Victory", "min": 7, "max": 10, "lvl": 23 },
                 { "name": "of Triumph", "min": 11, "max": 14, "lvl": 40 }
             ],
-            "Mod": [
-                { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+            "#% increased Light Radius": [
+                { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+            ],
+            "+# to Accuracy Rating": [
+                { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+            ],
+            "#% increased Accuracy Rating": [
+                { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
             ],
             "+#% to Lightning Resistance": [
                 { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
@@ -2982,6 +3274,13 @@
     },
     "Staff": {
         "prefix": {
+            "#% increased Elemental Damage with Attack Skills": [
+                { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4 },
+                { "name": "Infusing", "min": 11, "max": 20, "lvl": 15 },
+                { "name": "Empowering", "min": 21, "max": 30, "lvl": 30 },
+                { "name": "Unleashed", "min": 31, "max": 37, "lvl": 60 },
+                { "name": "Overpowering", "min": 38, "max": 42, "lvl": 81 }
+            ],
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": [2,3], "max": [4,5], "lvl": 2 },
                 { "name": "Chilled", "min": [10,13], "max": [19,22], "lvl": 12 },
@@ -3007,14 +3306,23 @@
             "+# to Level of Socketed Gems": [
                 { "name": "Paragon's", "min": 1, "max": 1, "lvl": 50 }
             ],
-            "Mod": [
-                { "name": "Nihilist's", "min": 1, "max": 1, "lvl": 40 },
+            "+# to Level of Socketed Chaos Gems": [
+                { "name": "Nihilist's", "min": 1, "max": 1, "lvl": 4 },
+                { "name": "Anarchist's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Cold Gems": [
                 { "name": "Frost Weaver's", "min": 1, "max": 1, "lvl": 2 },
-                { "name": "Winterbringer's", "min": 2, "max": 2, "lvl": 55 },
+                { "name": "Winterbringer's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Fire Gems": [
                 { "name": "Flame Spinner's", "min": 1, "max": 1, "lvl": 2 },
-                { "name": "Lava Caller's", "min": 2, "max": 2, "lvl": 55 },
+                { "name": "Lava Caller's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Lightning Gems": [
                 { "name": "Thunder Lord's", "min": 1, "max": 1, "lvl": 2 },
-                { "name": "Tempest King's", "min": 2, "max": 2, "lvl": 55 },
+                { "name": "Tempest King's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Melee Gems": [
                 { "name": "Combatant's", "min": 1, "max": 1, "lvl": 8 },
                 { "name": "Weaponmaster's", "min": 2, "max": 2, "lvl": 63 }
             ],
@@ -3137,6 +3445,20 @@
             ]
         },
         "suffix": {
+            "#% increased Burning Damage": [
+                { "name": "of Burning", "min": 16, "max": 20, "lvl": 20 },
+                { "name": "of Combusting", "min": 21, "max": 25, "lvl": 40 },
+                { "name": "of Conflagrating", "min": 26, "max": 30, "lvl": 60 }
+            ],
+            "#% chance to Freeze": [
+                { "name": "of Freezing", "min": 6, "max": 8, "lvl": 15 }
+            ],
+            "#% chance to Ignite": [
+                { "name": "of Ignition", "min": 6, "max": 8, "lvl": 15 }
+            ],
+            "#% chance to Shock": [
+                { "name": "of Shocking", "min": 6, "max": 8, "lvl": 15 }
+            ],
             "+#% to Chaos Resistance": [
                 { "name": "of the Lost", "min": 5, "max": 10, "lvl": 16 },
                 { "name": "of Banishment", "min": 11, "max": 15, "lvl": 30 },
@@ -3248,10 +3570,17 @@
                 { "name": "of Victory", "min": 7, "max": 10, "lvl": 23 },
                 { "name": "of Triumph", "min": 11, "max": 14, "lvl": 40 }
             ],
-            "Mod": [
-                { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+            "#% increased Light Radius": [
+                { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+            ],
+            "+# to Accuracy Rating": [
+                { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+            ],
+            "#% increased Accuracy Rating": [
+                { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
             ],
             "#% increased Lightning Damage": [
                 { "name": "of Sparks", "min": 3, "max": 7, "lvl": 10 },
@@ -3359,6 +3688,13 @@
     },
     "Two-handed sword": {
         "prefix": {
+            "#% increased Elemental Damage with Attack Skills": [
+                { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4 },
+                { "name": "Infusing", "min": 11, "max": 20, "lvl": 15 },
+                { "name": "Empowering", "min": 21, "max": 30, "lvl": 30 },
+                { "name": "Unleashed", "min": 31, "max": 37, "lvl": 60 },
+                { "name": "Overpowering", "min": 38, "max": 42, "lvl": 81 }
+            ],
             "Adds # to # Cold Damage": [
                 { "name": "Frosted", "min": [2,3], "max": [4,5], "lvl": 2 },
                 { "name": "Chilled", "min": [10,13], "max": [19,22], "lvl": 12 },
@@ -3383,6 +3719,22 @@
             ],
             "+# to Level of Socketed Gems": [
                 { "name": "Paragon's", "min": 1, "max": 1, "lvl": 50 }
+            ],
+            "+# to Level of Socketed Chaos Gems": [
+                { "name": "Nihilist's", "min": 1, "max": 1, "lvl": 4 },
+                { "name": "Anarchist's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Cold Gems": [
+                { "name": "Frost Weaver's", "min": 1, "max": 1, "lvl": 2 },
+                { "name": "Winterbringer's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Fire Gems": [
+                { "name": "Flame Spinner's", "min": 1, "max": 1, "lvl": 2 },
+                { "name": "Lava Caller's", "min": 2, "max": 2, "lvl": 55 }
+            ],
+            "+# to Level of Socketed Lightning Gems": [
+                { "name": "Thunder Lord's", "min": 1, "max": 1, "lvl": 2 },
+                { "name": "Tempest King's", "min": 2, "max": 2, "lvl": 55 }
             ],
             "+# to Level of Socketed Melee Gems": [
                 { "name": "Combatant's", "min": 1, "max": 1, "lvl": 8 },
@@ -3450,6 +3802,34 @@
             ]
         },
         "suffix": {
+            "#% chance to Poison on Hit": [
+                { "name": "of Poisoning", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Toxins", "min": 20, "max": 20, "lvl": 55 },
+                { "name": "of Death", "min": 30, "max": 30, "lvl": 85 }
+            ],
+            "#% increased Damage with Poison": [
+                { "name": "of Poison", "min": 21, "max": 25, "lvl": 20 },
+                { "name": "of Venom", "min": 26, "max": 30, "lvl": 40 },
+                { "name": "of Virulence", "min": 31, "max": 35, "lvl": 60 }
+            ],
+            "#% increased Poison Duration": [
+                { "name": "of Rot", "min": 8, "max": 12, "lvl": 30 },
+                { "name": "of Putrefaction", "min": 13, "max": 18, "lvl": 60 }
+            ],
+            "#% increased Bleed duration": [
+                { "name": "of Agony", "min": 8, "max": 12, "lvl": 30 },
+                { "name": "of Torment", "min": 13, "max": 18, "lvl": 60 }
+            ],
+            "#% increased Damage with Bleeding": [
+                { "name": "of Bloodletting", "min": 21, "max": 25, "lvl": 20 },
+                { "name": "of Haemophilia", "min": 26, "max": 30, "lvl": 40 },
+                { "name": "of Exsanguination", "min": 31, "max": 35, "lvl": 60 }
+            ],
+            "#% chance to cause Bleeding on Hit": [
+                { "name": "of Bleeding", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Flaying", "min": 15, "max": 15, "lvl": 55 },
+                { "name": "of Hemorrhaging", "min": 20, "max": 20, "lvl": 85 }
+            ],
             "+#% to Chaos Resistance": [
                 { "name": "of the Lost", "min": 5, "max": 10, "lvl": 16 },
                 { "name": "of Banishment", "min": 11, "max": 15, "lvl": 30 },
@@ -3536,10 +3916,17 @@
                 { "name": "of Victory", "min": 7, "max": 10, "lvl": 23 },
                 { "name": "of Triumph", "min": 11, "max": 14, "lvl": 40 }
             ],
-            "Mod": [
-                { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+            "#% increased Light Radius": [
+                { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+            ],
+            "+# to Accuracy Rating": [
+                { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+            ],
+            "#% increased Accuracy Rating": [
+                { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
             ],
             "+#% to Lightning Resistance": [
                 { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
@@ -3668,9 +4055,38 @@
                     { "name": "Fortified", "min": 61, "max": 138, "lvl": 46 },
                     { "name": "Plated", "min": 139, "max": 322, "lvl": 59 },
                     { "name": "Carapaced", "min": 323, "max": 400, "lvl": 73 }
+                ],
+                "#% increased Physical Damage": [
+                    { "name": "Heavy", "min": 8, "max": 12, "lvl": 4 },
+                    { "name": "Serrated", "min": 13, "max": 17, "lvl": 15 },
+                    { "name": "Wicked", "min": 18, "max": 22, "lvl": 30 },
+                    { "name": "Cruel", "min": 23, "max": 28, "lvl": 60 },
+                    { "name": "Merciless", "min": 29, "max": 33, "lvl": 81 }
                 ]
             },
             "suffix": {
+                "+# Life gained when you Block": [
+                    { "name": "of Repairing", "min": 5, "max": 15, "lvl": 11 },
+                    { "name": "of Resurgence", "min": 16, "max": 25, "lvl": 22 },
+                    { "name": "of Renewal", "min": 26, "max": 40, "lvl": 36 },
+                    { "name": "of Revival", "min": 41, "max": 60, "lvl": 48 },
+                    { "name": "of Rebounding", "min": 61, "max": 85, "lvl": 60 },
+                    { "name": "of Revitalization", "min": 86, "max": 100, "lvl": 75 }
+                ],
+                "#% chance to Avoid being Stunned": [
+                    { "name": "of Composure", "min": 11, "max": 13, "lvl": 1 },
+                    { "name": "of Surefootedness", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "of Persistence", "min": 17, "max": 19, "lvl": 1 },
+                    { "name": "of Relentlessness", "min": 20, "max": 22, "lvl": 1 }
+                ],
+                "+#% additional Block Chance against Projectiles": [
+                    { "name": "of Deflection", "min": 1, "max": 2, "lvl": 8 },
+                    { "name": "of Protection", "min": 3, "max": 4, "lvl": 19 },
+                    { "name": "of Cover", "min": 5, "max": 6, "lvl": 30 },
+                    { "name": "of Asylum", "min": 7, "max": 8, "lvl": 55 },
+                    { "name": "of Refuge", "min": 9, "max": 10, "lvl": 70 },
+                    { "name": "of Sanctuary", "min": 11, "max": 12, "lvl": 81 }
+                ],
                 "+#% to all Elemental Resistances": [
                     { "name": "of the Crystal", "min": 3, "max": 5, "lvl": 12 },
                     { "name": "of the Prism", "min": 6, "max": 8, "lvl": 24 },
@@ -3718,6 +4134,12 @@
                     { "name": "of the Troll", "min": 5, "max": 6, "lvl": 59 },
                     { "name": "of the Phoenix", "min": 6, "max": 7, "lvl": 78 }
                 ],
+                "#% of Life Regenerated per second": [
+                    { "name": "of Youthfulness", "min": 0.4, "max": 0.5, "lvl": 18 },
+                    { "name": "of Vitality", "min": 0.6, "max": 0.7, "lvl": 36 },
+                    { "name": "of Longevity", "min": 0.8, "max": 0.9, "lvl": 60 },
+                    { "name": "of Immortality", "min": 1, "max": 1.1, "lvl": 81 }
+                ],
                 "+#% to Lightning Resistance": [
                     { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
                     { "name": "of the Squall", "min": 12, "max": 17, "lvl": 13 },
@@ -3759,9 +4181,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "DeterminationSkillCorrupted", "min": 16, "max": 16, "lvl": 61 },
-                    { "name": "DisciplineSkillCorrupted", "min": 16, "max": 16, "lvl": 61 },
+                "Grants level # Determination Skill": [
+                    { "name": "DeterminationSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
+                ],
+                "Grants level # Discipline Skill": [
+                    { "name": "DisciplineSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
+                ],
+                "Grants level # Grace Skill": [
                     { "name": "GraceSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
                 ],
                 "+# to Level of Socketed Gems": [
@@ -3835,6 +4261,17 @@
                 ]
             },
             "suffix": {
+                "#% increased Attack Speed": [
+                    { "name": "of Skill", "min": 5, "max": 7, "lvl": 1 },
+                    { "name": "of Ease", "min": 8, "max": 10, "lvl": 11 },
+                    { "name": "of Mastery", "min": 11, "max": 13, "lvl": 22 }
+                ],
+                "#% chance to Avoid Elemental Ailments": [
+                    { "name": "of Stoicism", "min": 8, "max": 11, "lvl": 23 },
+                    { "name": "of Resolve", "min": 12, "max": 15, "lvl": 41 },
+                    { "name": "of Fortitude", "min": 16, "max": 19, "lvl": 57 },
+                    { "name": "of Will", "min": 20, "max": 23, "lvl": 73 }
+                ],
                 "+#% to all Elemental Resistances": [
                     { "name": "of the Crystal", "min": 3, "max": 5, "lvl": 12 },
                     { "name": "of the Prism", "min": 6, "max": 8, "lvl": 24 },
@@ -3893,6 +4330,12 @@
                     { "name": "of the Troll", "min": 5, "max": 6, "lvl": 59 },
                     { "name": "of the Phoenix", "min": 6, "max": 7, "lvl": 78 }
                 ],
+                "#% of Life Regenerated per second": [
+                    { "name": "of Youthfulness", "min": 0.4, "max": 0.5, "lvl": 18 },
+                    { "name": "of Vitality", "min": 0.6, "max": 0.7, "lvl": 36 },
+                    { "name": "of Longevity", "min": 0.8, "max": 0.9, "lvl": 60 },
+                    { "name": "of Immortality", "min": 1, "max": 1.1, "lvl": 81 }
+                ],
                 "+#% to Lightning Resistance": [
                     { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
                     { "name": "of the Squall", "min": 12, "max": 17, "lvl": 13 },
@@ -3914,6 +4357,27 @@
                     { "name": "of Steel Skin", "min": 20, "max": 22, "lvl": 42 },
                     { "name": "of Adamantite Skin", "min": 23, "max": 25, "lvl": 56 },
                     { "name": "of Corundum Skin", "min": 26, "max": 28, "lvl": 79 }
+                ],
+                "#% chance to Dodge Attacks": [
+                    { "name": "of Mist", "min": 2, "max": 2, "lvl": 35 },
+                    { "name": "of Haze", "min": 3, "max": 3, "lvl": 62 },
+                    { "name": "of Fog", "min": 4, "max": 4, "lvl": 78 }
+                ],
+                "#% chance to Dodge Spell Damage": [
+                    { "name": "of Prayers", "min": 2, "max": 2, "lvl": 35 },
+                    { "name": "of Invocations", "min": 3, "max": 3, "lvl": 62 },
+                    { "name": "of Incantations", "min": 4, "max": 4, "lvl": 78 }
+                ],
+                "+# to Accuracy Rating": [
+                    { "name": "of Calm", "min": 5, "max": 15, "lvl": 1 },
+                    { "name": "of Steadiness", "min": 16, "max": 60, "lvl": 12 },
+                    { "name": "of Accuracy", "min": 61, "max": 100, "lvl": 20 },
+                    { "name": "of Precision", "min": 101, "max": 130, "lvl": 26 },
+                    { "name": "of the Sniper", "min": 131, "max": 165, "lvl": 33 },
+                    { "name": "of the Marksman", "min": 166, "max": 200, "lvl": 41 },
+                    { "name": "of the Deadeye", "min": 201, "max": 250, "lvl": 50 },
+                    { "name": "of the Ranger", "min": 251, "max": 320, "lvl": 63 },
+                    { "name": "of the Assassin", "min": 321, "max": 400, "lvl": 76 }
                 ]
             },
             "corrupted": {
@@ -3923,9 +4387,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "DeterminationSkillCorrupted", "min": 16, "max": 16, "lvl": 61 },
-                    { "name": "DisciplineSkillCorrupted", "min": 16, "max": 16, "lvl": 61 },
+                "Grants level # Determination Skill": [
+                    { "name": "DeterminationSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
+                ],
+                "Grants level # Discipline Skill": [
+                    { "name": "DisciplineSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
+                ],
+                "Grants level # Grace Skill": [
                     { "name": "GraceSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
                 ],
                 "+# to Level of Socketed Gems": [
@@ -3972,12 +4440,19 @@
                     { "name": "Djinn's", "min": 42, "max": 15, "lvl": 60 },
                     { "name": "Seraphim's", "min": 51, "max": 17, "lvl": 78 }
                 ],
-                "Mod": [
-                    { "name": "Nihilist's", "min": 1, "max": 1, "lvl": 40 },
+                "+# to Level of Socketed Chaos Gems": [
+                    { "name": "Nihilist's", "min": 1, "max": 1, "lvl": 4 },
+                    { "name": "Anarchist's", "min": 2, "max": 2, "lvl": 55 }
+                ],
+                "+# to Level of Socketed Cold Gems": [
                     { "name": "Frost Weaver's", "min": 1, "max": 1, "lvl": 2 },
-                    { "name": "Winterbringer's", "min": 2, "max": 2, "lvl": 55 },
+                    { "name": "Winterbringer's", "min": 2, "max": 2, "lvl": 55 }
+                ],
+                "+# to Level of Socketed Fire Gems": [
                     { "name": "Flame Spinner's", "min": 1, "max": 1, "lvl": 2 },
-                    { "name": "Lava Caller's", "min": 2, "max": 2, "lvl": 55 },
+                    { "name": "Lava Caller's", "min": 2, "max": 2, "lvl": 55 }
+                ],
+                "+# to Level of Socketed Lightning Gems": [
                     { "name": "Thunder Lord's", "min": 1, "max": 1, "lvl": 2 },
                     { "name": "Tempest King's", "min": 2, "max": 2, "lvl": 55 }
                 ],
@@ -4029,9 +4504,53 @@
                     { "name": "Incanter's", "min": 60, "max": 69, "lvl": 58 },
                     { "name": "Glyphic", "min": 70, "max": 74, "lvl": 64 },
                     { "name": "Runic", "min": 75, "max": 79, "lvl": 84 }
+                ],
+                "#% increased Cold Damage": [
+                    { "name": "Bitter", "min": 10, "max": 19, "lvl": 2 },
+                    { "name": "Biting", "min": 20, "max": 29, "lvl": 11 },
+                    { "name": "Alpine", "min": 30, "max": 39, "lvl": 23 },
+                    { "name": "Snowy", "min": 40, "max": 49, "lvl": 35 },
+                    { "name": "Hailing", "min": 50, "max": 59, "lvl": 46 },
+                    { "name": "Crystalline", "min": 60, "max": 69, "lvl": 58 },
+                    { "name": "Cryomancer's", "min": 70, "max": 74, "lvl": 64 },
+                    { "name": "Tul's", "min": 75, "max": 79, "lvl": 84 }
+                ],
+                "#% increased Fire Damage": [
+                    { "name": "Searing", "min": 10, "max": 19, "lvl": 2 },
+                    { "name": "Sizzling", "min": 20, "max": 29, "lvl": 11 },
+                    { "name": "Blistering", "min": 30, "max": 39, "lvl": 23 },
+                    { "name": "Cauterising", "min": 40, "max": 49, "lvl": 35 },
+                    { "name": "Volcanic", "min": 50, "max": 59, "lvl": 46 },
+                    { "name": "Magmatic", "min": 60, "max": 69, "lvl": 58 },
+                    { "name": "Pyroclastic", "min": 70, "max": 74, "lvl": 64 },
+                    { "name": "Xoph's", "min": 75, "max": 79, "lvl": 84 }
+                ],
+                "#% increased Lightning Damage": [
+                    { "name": "Charged", "min": 10, "max": 19, "lvl": 2 },
+                    { "name": "Hissing", "min": 20, "max": 29, "lvl": 11 },
+                    { "name": "Bolting", "min": 30, "max": 39, "lvl": 23 },
+                    { "name": "Coursing", "min": 40, "max": 49, "lvl": 35 },
+                    { "name": "Striking", "min": 50, "max": 59, "lvl": 46 },
+                    { "name": "Smiting", "min": 60, "max": 69, "lvl": 58 },
+                    { "name": "Ionising", "min": 70, "max": 74, "lvl": 64 },
+                    { "name": "Esh's", "min": 75, "max": 79, "lvl": 84 }
                 ]
             },
             "suffix": {
+                "+# Mana gained when you Block": [
+                    { "name": "of Redirection", "min": 4, "max": 12, "lvl": 15 },
+                    { "name": "of Transformation", "min": 13, "max": 21, "lvl": 32 },
+                    { "name": "of Conservation", "min": 22, "max": 30, "lvl": 58 },
+                    { "name": "of Utilisation", "min": 31, "max": 39, "lvl": 75 }
+                ],
+                "#% increased Mana Regeneration Rate": [
+                    { "name": "of Excitement", "min": 10, "max": 19, "lvl": 2 },
+                    { "name": "of Joy", "min": 20, "max": 29, "lvl": 18 },
+                    { "name": "of Elation", "min": 30, "max": 39, "lvl": 29 },
+                    { "name": "of Bliss", "min": 40, "max": 49, "lvl": 42 },
+                    { "name": "of Euphoria", "min": 50, "max": 59, "lvl": 55 },
+                    { "name": "of Nirvana", "min": 60, "max": 69, "lvl": 79 }
+                ],
                 "+#% to all Elemental Resistances": [
                     { "name": "of the Crystal", "min": 3, "max": 5, "lvl": 12 },
                     { "name": "of the Prism", "min": 6, "max": 8, "lvl": 24 },
@@ -4090,6 +4609,12 @@
                     { "name": "of the Troll", "min": 5, "max": 6, "lvl": 59 },
                     { "name": "of the Phoenix", "min": 6, "max": 7, "lvl": 78 }
                 ],
+                "#% of Life Regenerated per second": [
+                    { "name": "of Youthfulness", "min": 0.4, "max": 0.5, "lvl": 18 },
+                    { "name": "of Vitality", "min": 0.6, "max": 0.7, "lvl": 36 },
+                    { "name": "of Longevity", "min": 0.8, "max": 0.9, "lvl": 60 },
+                    { "name": "of Immortality", "min": 1, "max": 1.1, "lvl": 81 }
+                ],
                 "+#% to Lightning Resistance": [
                     { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
                     { "name": "of the Squall", "min": 12, "max": 17, "lvl": 13 },
@@ -4112,6 +4637,10 @@
                     { "name": "of Euphoria", "min": 50, "max": 59, "lvl": 55 },
                     { "name": "of Nirvana", "min": 60, "max": 69, "lvl": 79 }
                 ],
+                "% Chance to Block Spells": [
+                    { "name": "of the Barrier", "min": 1, "max": 3, "lvl": 30 },
+                    { "name": "of the Bulwark", "min": 4, "max": 6, "lvl": 60 }
+                ],
                 "#% increased Critical Strike Chance for Spells": [
                     { "name": "of Menace", "min": 10, "max": 19, "lvl": 11 },
                     { "name": "of Havoc", "min": 20, "max": 39, "lvl": 21 },
@@ -4127,6 +4656,11 @@
                     { "name": "of Steel Skin", "min": 20, "max": 22, "lvl": 42 },
                     { "name": "of Adamantite Skin", "min": 23, "max": 25, "lvl": 56 },
                     { "name": "of Corundum Skin", "min": 26, "max": 28, "lvl": 79 }
+                ],
+                "#% increased Cast Speed": [
+                    { "name": "of Talent", "min": 5, "max": 7, "lvl": 2 },
+                    { "name": "of Nimbleness", "min": 8, "max": 10, "lvl": 15 },
+                    { "name": "of Expertise", "min": 11, "max": 13, "lvl": 30 }
                 ]
             },
             "corrupted": {
@@ -4136,9 +4670,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "DeterminationSkillCorrupted", "min": 16, "max": 16, "lvl": 61 },
-                    { "name": "DisciplineSkillCorrupted", "min": 16, "max": 16, "lvl": 61 },
+                "Grants level # Determination Skill": [
+                    { "name": "DeterminationSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
+                ],
+                "Grants level # Discipline Skill": [
+                    { "name": "DisciplineSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
+                ],
+                "Grants level # Grace Skill": [
                     { "name": "GraceSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
                 ],
                 "+# to Level of Socketed Gems": [
@@ -4165,6 +4703,13 @@
         },
         "AR/EV": {
             "prefix": {
+                "#% increased Elemental Damage": [
+                    { "name": "Augur's", "min": 4, "max": 8, "lvl": 4 },
+                    { "name": "Auspex's", "min": 9, "max": 16, "lvl": 15 },
+                    { "name": "Druid's", "min": 17, "max": 24, "lvl": 30 },
+                    { "name": "Haruspex's", "min": 25, "max": 29, "lvl": 60 },
+                    { "name": "Harbinger's", "min": 30, "max": 34, "lvl": 81 }
+                ],
                 "Reflects # Physical Damage to Melee Attackers": [
                     { "name": "Thorny", "min": 1, "max": 4, "lvl": 1 },
                     { "name": "Spiny", "min": 5, "max": 10, "lvl": 10 },
@@ -4220,9 +4765,62 @@
                     { "name": "Fortified", "min": 61, "max": 138, "lvl": 46 },
                     { "name": "Plated", "min": 139, "max": 322, "lvl": 59 },
                     { "name": "Carapaced", "min": 323, "max": 400, "lvl": 73 }
+                ],
+                "#% increased Physical Damage": [
+                    { "name": "Heavy", "min": 8, "max": 12, "lvl": 4 },
+                    { "name": "Serrated", "min": 13, "max": 17, "lvl": 15 },
+                    { "name": "Wicked", "min": 18, "max": 22, "lvl": 30 },
+                    { "name": "Cruel", "min": 23, "max": 28, "lvl": 60 },
+                    { "name": "Merciless", "min": 29, "max": 33, "lvl": 81 }
                 ]
             },
             "suffix": {
+                "#% increased Attack Speed": [
+                    { "name": "of Skill", "min": 5, "max": 7, "lvl": 1 },
+                    { "name": "of Ease", "min": 8, "max": 10, "lvl": 11 },
+                    { "name": "of Mastery", "min": 11, "max": 13, "lvl": 22 }
+                ],
+                "#% chance to Avoid Elemental Ailments": [
+                    { "name": "of Stoicism", "min": 8, "max": 11, "lvl": 23 },
+                    { "name": "of Resolve", "min": 12, "max": 15, "lvl": 41 },
+                    { "name": "of Fortitude", "min": 16, "max": 19, "lvl": 57 },
+                    { "name": "of Will", "min": 20, "max": 23, "lvl": 73 }
+                ],
+                "+# to Accuracy Rating": [
+                    { "name": "of Calm", "min": 5, "max": 15, "lvl": 1 },
+                    { "name": "of Steadiness", "min": 16, "max": 60, "lvl": 12 },
+                    { "name": "of Accuracy", "min": 61, "max": 100, "lvl": 20 },
+                    { "name": "of Precision", "min": 101, "max": 130, "lvl": 26 },
+                    { "name": "of the Sniper", "min": 131, "max": 165, "lvl": 33 },
+                    { "name": "of the Marksman", "min": 166, "max": 200, "lvl": 41 },
+                    { "name": "of the Deadeye", "min": 201, "max": 250, "lvl": 50 },
+                    { "name": "of the Ranger", "min": 251, "max": 320, "lvl": 63 },
+                    { "name": "of the Assassin", "min": 321, "max": 400, "lvl": 76 }
+                ],
+                "#% chance to Dodge Attacks": [
+                    { "name": "of Mist", "min": 2, "max": 2, "lvl": 35 },
+                    { "name": "of Haze", "min": 3, "max": 3, "lvl": 62 },
+                    { "name": "of Fog", "min": 4, "max": 4, "lvl": 78 }
+                ],
+                "#% chance to Dodge Spell Damage": [
+                    { "name": "of Prayers", "min": 2, "max": 2, "lvl": 35 },
+                    { "name": "of Invocations", "min": 3, "max": 3, "lvl": 62 },
+                    { "name": "of Incantations", "min": 4, "max": 4, "lvl": 78 }
+                ],
+                "#% chance to Avoid being Stunned": [
+                    { "name": "of Composure", "min": 11, "max": 13, "lvl": 1 },
+                    { "name": "of Surefootedness", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "of Persistence", "min": 17, "max": 19, "lvl": 1 },
+                    { "name": "of Relentlessness", "min": 20, "max": 22, "lvl": 1 }
+                ],
+                "+#% additional Block Chance against Projectiles": [
+                    { "name": "of Deflection", "min": 1, "max": 2, "lvl": 8 },
+                    { "name": "of Protection", "min": 3, "max": 4, "lvl": 19 },
+                    { "name": "of Cover", "min": 5, "max": 6, "lvl": 30 },
+                    { "name": "of Asylum", "min": 7, "max": 8, "lvl": 55 },
+                    { "name": "of Refuge", "min": 9, "max": 10, "lvl": 70 },
+                    { "name": "of Sanctuary", "min": 11, "max": 12, "lvl": 81 }
+                ],
                 "+#% to all Elemental Resistances": [
                     { "name": "of the Crystal", "min": 3, "max": 5, "lvl": 12 },
                     { "name": "of the Prism", "min": 6, "max": 8, "lvl": 24 },
@@ -4281,6 +4879,12 @@
                     { "name": "of the Troll", "min": 5, "max": 6, "lvl": 59 },
                     { "name": "of the Phoenix", "min": 6, "max": 7, "lvl": 78 }
                 ],
+                "#% of Life Regenerated per second": [
+                    { "name": "of Youthfulness", "min": 0.4, "max": 0.5, "lvl": 18 },
+                    { "name": "of Vitality", "min": 0.6, "max": 0.7, "lvl": 36 },
+                    { "name": "of Longevity", "min": 0.8, "max": 0.9, "lvl": 60 },
+                    { "name": "of Immortality", "min": 1, "max": 1.1, "lvl": 81 }
+                ],
                 "+#% to Lightning Resistance": [
                     { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
                     { "name": "of the Squall", "min": 12, "max": 17, "lvl": 13 },
@@ -4322,9 +4926,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "DeterminationSkillCorrupted", "min": 16, "max": 16, "lvl": 61 },
-                    { "name": "DisciplineSkillCorrupted", "min": 16, "max": 16, "lvl": 61 },
+                "Grants level # Determination Skill": [
+                    { "name": "DeterminationSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
+                ],
+                "Grants level # Discipline Skill": [
+                    { "name": "DisciplineSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
+                ],
+                "Grants level # Grace Skill": [
                     { "name": "GraceSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
                 ],
                 "+# to Level of Socketed Gems": [
@@ -4348,6 +4956,13 @@
         },
         "AR/ES": {
             "prefix": {
+                "#% increased Elemental Damage": [
+                    { "name": "Augur's", "min": 4, "max": 8, "lvl": 4 },
+                    { "name": "Auspex's", "min": 9, "max": 16, "lvl": 15 },
+                    { "name": "Druid's", "min": 17, "max": 24, "lvl": 30 },
+                    { "name": "Haruspex's", "min": 25, "max": 29, "lvl": 60 },
+                    { "name": "Harbinger's", "min": 30, "max": 34, "lvl": 81 }
+                ],
                 "Reflects # Physical Damage to Melee Attackers": [
                     { "name": "Thorny", "min": 1, "max": 4, "lvl": 1 },
                     { "name": "Spiny", "min": 5, "max": 10, "lvl": 10 },
@@ -4421,9 +5036,58 @@
                     { "name": "Fortified", "min": 61, "max": 138, "lvl": 46 },
                     { "name": "Plated", "min": 139, "max": 322, "lvl": 59 },
                     { "name": "Carapaced", "min": 323, "max": 400, "lvl": 73 }
+                ],
+                "#% increased Physical Damage": [
+                    { "name": "Heavy", "min": 8, "max": 12, "lvl": 4 },
+                    { "name": "Serrated", "min": 13, "max": 17, "lvl": 15 },
+                    { "name": "Wicked", "min": 18, "max": 22, "lvl": 30 },
+                    { "name": "Cruel", "min": 23, "max": 28, "lvl": 60 },
+                    { "name": "Merciless", "min": 29, "max": 33, "lvl": 81 }
                 ]
             },
             "suffix": {
+                "+# Mana gained when you Block": [
+                    { "name": "of Redirection", "min": 4, "max": 12, "lvl": 15 },
+                    { "name": "of Transformation", "min": 13, "max": 21, "lvl": 32 },
+                    { "name": "of Conservation", "min": 22, "max": 30, "lvl": 58 },
+                    { "name": "of Utilisation", "min": 31, "max": 39, "lvl": 75 }
+                ],
+                "#% increased Spell Damage": [
+                    { "name": "Apprentice's", "min": 10, "max": 19, "lvl": 2 },
+                    { "name": "Adept's", "min": 20, "max": 29, "lvl": 11 },
+                    { "name": "Scholar's", "min": 30, "max": 39, "lvl": 23 },
+                    { "name": "Professor's", "min": 40, "max": 49, "lvl": 35 },
+                    { "name": "Occultist's", "min": 50, "max": 59, "lvl": 46 },
+                    { "name": "Incanter's", "min": 60, "max": 69, "lvl": 58 },
+                    { "name": "Glyphic", "min": 70, "max": 74, "lvl": 64 },
+                    { "name": "Runic", "min": 75, "max": 79, "lvl": 84 }
+                ],
+                "#% increased Mana Regeneration Rate": [
+                    { "name": "of Excitement", "min": 10, "max": 19, "lvl": 2 },
+                    { "name": "of Joy", "min": 20, "max": 29, "lvl": 18 },
+                    { "name": "of Elation", "min": 30, "max": 39, "lvl": 29 },
+                    { "name": "of Bliss", "min": 40, "max": 49, "lvl": 42 },
+                    { "name": "of Euphoria", "min": 50, "max": 59, "lvl": 55 },
+                    { "name": "of Nirvana", "min": 60, "max": 69, "lvl": 79 }
+                ],
+                "#% chance to Avoid being Stunned": [
+                    { "name": "of Composure", "min": 11, "max": 13, "lvl": 1 },
+                    { "name": "of Surefootedness", "min": 14, "max": 16, "lvl": 1 },
+                    { "name": "of Persistence", "min": 17, "max": 19, "lvl": 1 },
+                    { "name": "of Relentlessness", "min": 20, "max": 22, "lvl": 1 }
+                ],
+                "+#% additional Block Chance against Projectiles": [
+                    { "name": "of Deflection", "min": 1, "max": 2, "lvl": 8 },
+                    { "name": "of Protection", "min": 3, "max": 4, "lvl": 19 },
+                    { "name": "of Cover", "min": 5, "max": 6, "lvl": 30 },
+                    { "name": "of Asylum", "min": 7, "max": 8, "lvl": 55 },
+                    { "name": "of Refuge", "min": 9, "max": 10, "lvl": 70 },
+                    { "name": "of Sanctuary", "min": 11, "max": 12, "lvl": 81 }
+                ],
+                "% Chance to Block Spells": [
+                    { "name": "of the Barrier", "min": 1, "max": 3, "lvl": 30 },
+                    { "name": "of the Bulwark", "min": 4, "max": 6, "lvl": 60 }
+                ],
                 "+#% to all Elemental Resistances": [
                     { "name": "of the Crystal", "min": 3, "max": 5, "lvl": 12 },
                     { "name": "of the Prism", "min": 6, "max": 8, "lvl": 24 },
@@ -4482,6 +5146,12 @@
                     { "name": "of the Troll", "min": 5, "max": 6, "lvl": 59 },
                     { "name": "of the Phoenix", "min": 6, "max": 7, "lvl": 78 }
                 ],
+                "#% of Life Regenerated per second": [
+                    { "name": "of Youthfulness", "min": 0.4, "max": 0.5, "lvl": 18 },
+                    { "name": "of Vitality", "min": 0.6, "max": 0.7, "lvl": 36 },
+                    { "name": "of Longevity", "min": 0.8, "max": 0.9, "lvl": 60 },
+                    { "name": "of Immortality", "min": 1, "max": 1.1, "lvl": 81 }
+                ],
                 "+#% to Lightning Resistance": [
                     { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
                     { "name": "of the Squall", "min": 12, "max": 17, "lvl": 13 },
@@ -4514,6 +5184,11 @@
                     { "name": "of Steel Skin", "min": 20, "max": 22, "lvl": 42 },
                     { "name": "of Adamantite Skin", "min": 23, "max": 25, "lvl": 56 },
                     { "name": "of Corundum Skin", "min": 26, "max": 28, "lvl": 79 }
+                ],
+                "#% increased Cast Speed": [
+                    { "name": "of Talent", "min": 5, "max": 7, "lvl": 2 },
+                    { "name": "of Nimbleness", "min": 8, "max": 10, "lvl": 15 },
+                    { "name": "of Expertise", "min": 11, "max": 13, "lvl": 30 }
                 ]
             },
             "corrupted": {
@@ -4523,9 +5198,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "DeterminationSkillCorrupted", "min": 16, "max": 16, "lvl": 61 },
-                    { "name": "DisciplineSkillCorrupted", "min": 16, "max": 16, "lvl": 61 },
+                "Grants level # Determination Skill": [
+                    { "name": "DeterminationSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
+                ],
+                "Grants level # Discipline Skill": [
+                    { "name": "DisciplineSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
+                ],
+                "Grants level # Grace Skill": [
                     { "name": "GraceSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
                 ],
                 "+# to Level of Socketed Gems": [
@@ -4625,6 +5304,76 @@
                 ]
             },
             "suffix": {
+                "+# Mana gained when you Block": [
+                    { "name": "of Redirection", "min": 4, "max": 12, "lvl": 15 },
+                    { "name": "of Transformation", "min": 13, "max": 21, "lvl": 32 },
+                    { "name": "of Conservation", "min": 22, "max": 30, "lvl": 58 },
+                    { "name": "of Utilisation", "min": 31, "max": 39, "lvl": 75 }
+                ],
+                "#% increased Spell Damage": [
+                    { "name": "Apprentice's", "min": 10, "max": 19, "lvl": 2 },
+                    { "name": "Adept's", "min": 20, "max": 29, "lvl": 11 },
+                    { "name": "Scholar's", "min": 30, "max": 39, "lvl": 23 },
+                    { "name": "Professor's", "min": 40, "max": 49, "lvl": 35 },
+                    { "name": "Occultist's", "min": 50, "max": 59, "lvl": 46 },
+                    { "name": "Incanter's", "min": 60, "max": 69, "lvl": 58 },
+                    { "name": "Glyphic", "min": 70, "max": 74, "lvl": 64 },
+                    { "name": "Runic", "min": 75, "max": 79, "lvl": 84 }
+                ],
+                "% increased Attack and Cast Speed": [
+                    { "name": "of Zeal", "min": 3, "max": 4, "lvl": 15 },
+                    { "name": "of Fervour", "min": 5, "max": 6, "lvl": 45 },
+                    { "name": "of Haste", "min": 7, "max": 8, "lvl": 70 }
+                ],
+                "#% increased Attack Speed": [
+                    { "name": "of Skill", "min": 5, "max": 7, "lvl": 1 },
+                    { "name": "of Ease", "min": 8, "max": 10, "lvl": 11 },
+                    { "name": "of Mastery", "min": 11, "max": 13, "lvl": 22 }
+                ],
+                "#% increased Cast Speed": [
+                    { "name": "of Talent", "min": 5, "max": 7, "lvl": 2 },
+                    { "name": "of Nimbleness", "min": 8, "max": 10, "lvl": 15 },
+                    { "name": "of Expertise", "min": 11, "max": 13, "lvl": 30 }
+                ],
+                "#% chance to Avoid Elemental Ailments": [
+                    { "name": "of Stoicism", "min": 8, "max": 11, "lvl": 23 },
+                    { "name": "of Resolve", "min": 12, "max": 15, "lvl": 41 },
+                    { "name": "of Fortitude", "min": 16, "max": 19, "lvl": 57 },
+                    { "name": "of Will", "min": 20, "max": 23, "lvl": 73 }
+                ],
+                "#% increased Mana Regeneration Rate": [
+                    { "name": "of Excitement", "min": 10, "max": 19, "lvl": 2 },
+                    { "name": "of Joy", "min": 20, "max": 29, "lvl": 18 },
+                    { "name": "of Elation", "min": 30, "max": 39, "lvl": 29 },
+                    { "name": "of Bliss", "min": 40, "max": 49, "lvl": 42 },
+                    { "name": "of Euphoria", "min": 50, "max": 59, "lvl": 55 },
+                    { "name": "of Nirvana", "min": 60, "max": 69, "lvl": 79 }
+                ],
+                "+# to Accuracy Rating": [
+                    { "name": "of Calm", "min": 5, "max": 15, "lvl": 1 },
+                    { "name": "of Steadiness", "min": 16, "max": 60, "lvl": 12 },
+                    { "name": "of Accuracy", "min": 61, "max": 100, "lvl": 20 },
+                    { "name": "of Precision", "min": 101, "max": 130, "lvl": 26 },
+                    { "name": "of the Sniper", "min": 131, "max": 165, "lvl": 33 },
+                    { "name": "of the Marksman", "min": 166, "max": 200, "lvl": 41 },
+                    { "name": "of the Deadeye", "min": 201, "max": 250, "lvl": 50 },
+                    { "name": "of the Ranger", "min": 251, "max": 320, "lvl": 63 },
+                    { "name": "of the Assassin", "min": 321, "max": 400, "lvl": 76 }
+                ],
+                "#% chance to Dodge Attacks": [
+                    { "name": "of Mist", "min": 2, "max": 2, "lvl": 35 },
+                    { "name": "of Haze", "min": 3, "max": 3, "lvl": 62 },
+                    { "name": "of Fog", "min": 4, "max": 4, "lvl": 78 }
+                ],
+                "#% chance to Dodge Spell Damage": [
+                    { "name": "of Prayers", "min": 2, "max": 2, "lvl": 35 },
+                    { "name": "of Invocations", "min": 3, "max": 3, "lvl": 62 },
+                    { "name": "of Incantations", "min": 4, "max": 4, "lvl": 78 }
+                ],
+                "% Chance to Block Spells": [
+                    { "name": "of the Barrier", "min": 1, "max": 3, "lvl": 30 },
+                    { "name": "of the Bulwark", "min": 4, "max": 6, "lvl": 60 }
+                ],
                 "+#% to all Elemental Resistances": [
                     { "name": "of the Crystal", "min": 3, "max": 5, "lvl": 12 },
                     { "name": "of the Prism", "min": 6, "max": 8, "lvl": 24 },
@@ -4694,6 +5443,12 @@
                     { "name": "of the Troll", "min": 5, "max": 6, "lvl": 59 },
                     { "name": "of the Phoenix", "min": 6, "max": 7, "lvl": 78 }
                 ],
+                "#% of Life Regenerated per second": [
+                    { "name": "of Youthfulness", "min": 0.4, "max": 0.5, "lvl": 18 },
+                    { "name": "of Vitality", "min": 0.6, "max": 0.7, "lvl": 36 },
+                    { "name": "of Longevity", "min": 0.8, "max": 0.9, "lvl": 60 },
+                    { "name": "of Immortality", "min": 1, "max": 1.1, "lvl": 81 }
+                ],
                 "+#% to Lightning Resistance": [
                     { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
                     { "name": "of the Squall", "min": 12, "max": 17, "lvl": 13 },
@@ -4724,9 +5479,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "DeterminationSkillCorrupted", "min": 16, "max": 16, "lvl": 61 },
-                    { "name": "DisciplineSkillCorrupted", "min": 16, "max": 16, "lvl": 61 },
+                "Grants level # Determination Skill": [
+                    { "name": "DeterminationSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
+                ],
+                "Grants level # Discipline Skill": [
+                    { "name": "DisciplineSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
+                ],
+                "Grants level # Grace Skill": [
                     { "name": "GraceSkillCorrupted", "min": 16, "max": 16, "lvl": 61 }
                 ],
                 "+# to Level of Socketed Gems": [
@@ -4866,10 +5625,17 @@
                     { "name": "of the Troll", "min": 5, "max": 6, "lvl": 59 },
                     { "name": "of the Phoenix", "min": 6, "max": 7, "lvl": 78 }
                 ],
-                "Mod": [
-                    { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                    { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                    { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+                "#% increased Light Radius": [
+                    { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                    { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                    { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+                ],
+                "+# to Accuracy Rating": [
+                    { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                    { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+                ],
+                "#% increased Accuracy Rating": [
+                    { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
                 ],
                 "+#% to Lightning Resistance": [
                     { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
@@ -4915,9 +5681,13 @@
                 "Enemies Cannot Leech Life From You": [
                     { "name": "CannotBeLeechedFromCorruption", "min": 0, "max": 0, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "AngerSkillCorrupted", "min": 15, "max": 15, "lvl": 56 },
-                    { "name": "HatredSkillCorrupted", "min": 11, "max": 11, "lvl": 44 },
+                "Grants level # Anger Skill": [
+                    { "name": "AngerSkillCorrupted", "min": 15, "max": 15, "lvl": 56 }
+                ],
+                "Grants level # Hatred Skill": [
+                    { "name": "HatredSkillCorrupted", "min": 11, "max": 11, "lvl": 44 }
+                ],
+                "Grants level # Wrath Skill": [
                     { "name": "WrathSkillCorrupted", "min": 7, "max": 7, "lvl": 28 }
                 ],
                 "+# to Level of Socketed Vaal Gems": [
@@ -4926,8 +5696,10 @@
                 "Minions deal #% increased Damage": [
                     { "name": "MinionDamageCorrupted", "min": 15, "max": 20, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 },
+                "Socketed Gems are supported by level # Cast On Crit": [
+                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 }
+                ],
+                "Socketed Gems are supported by level 12 Cast when Stunned": [
                     { "name": "SupportedByCastOnStunCorruption", "min": 12, "max": 12, "lvl": 35 }
                 ]
             }
@@ -5059,10 +5831,17 @@
                     { "name": "of the Troll", "min": 5, "max": 6, "lvl": 59 },
                     { "name": "of the Phoenix", "min": 6, "max": 7, "lvl": 78 }
                 ],
-                "Mod": [
-                    { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                    { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                    { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+                "#% increased Light Radius": [
+                    { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                    { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                    { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+                ],
+                "+# to Accuracy Rating": [
+                    { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                    { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+                ],
+                "#% increased Accuracy Rating": [
+                    { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
                 ],
                 "+#% to Lightning Resistance": [
                     { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
@@ -5097,9 +5876,13 @@
                 "Enemies Cannot Leech Life From You": [
                     { "name": "CannotBeLeechedFromCorruption", "min": 0, "max": 0, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "AngerSkillCorrupted", "min": 15, "max": 15, "lvl": 56 },
-                    { "name": "HatredSkillCorrupted", "min": 11, "max": 11, "lvl": 44 },
+                "Grants level # Anger Skill": [
+                    { "name": "AngerSkillCorrupted", "min": 15, "max": 15, "lvl": 56 }
+                ],
+                "Grants level # Hatred Skill": [
+                    { "name": "HatredSkillCorrupted", "min": 11, "max": 11, "lvl": 44 }
+                ],
+                "Grants level # Wrath Skill": [
                     { "name": "WrathSkillCorrupted", "min": 7, "max": 7, "lvl": 28 }
                 ],
                 "+# to Level of Socketed Vaal Gems": [
@@ -5108,8 +5891,10 @@
                 "Minions deal #% increased Damage": [
                     { "name": "MinionDamageCorrupted", "min": 15, "max": 20, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 },
+                "Socketed Gems are supported by level # Cast On Crit": [
+                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 }
+                ],
+                "Socketed Gems are supported by level 12 Cast when Stunned": [
                     { "name": "SupportedByCastOnStunCorruption", "min": 12, "max": 12, "lvl": 35 }
                 ]
             }
@@ -5248,10 +6033,17 @@
                     { "name": "of the Troll", "min": 5, "max": 6, "lvl": 59 },
                     { "name": "of the Phoenix", "min": 6, "max": 7, "lvl": 78 }
                 ],
-                "Mod": [
-                    { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                    { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                    { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+                "#% increased Light Radius": [
+                    { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                    { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                    { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+                ],
+                "+# to Accuracy Rating": [
+                    { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                    { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+                ],
+                "#% increased Accuracy Rating": [
+                    { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
                 ],
                 "+#% to Lightning Resistance": [
                     { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
@@ -5286,9 +6078,13 @@
                 "Enemies Cannot Leech Life From You": [
                     { "name": "CannotBeLeechedFromCorruption", "min": 0, "max": 0, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "AngerSkillCorrupted", "min": 15, "max": 15, "lvl": 56 },
-                    { "name": "HatredSkillCorrupted", "min": 11, "max": 11, "lvl": 44 },
+                "Grants level # Anger Skill": [
+                    { "name": "AngerSkillCorrupted", "min": 15, "max": 15, "lvl": 56 }
+                ],
+                "Grants level # Hatred Skill": [
+                    { "name": "HatredSkillCorrupted", "min": 11, "max": 11, "lvl": 44 }
+                ],
+                "Grants level # Wrath Skill": [
                     { "name": "WrathSkillCorrupted", "min": 7, "max": 7, "lvl": 28 }
                 ],
                 "+# to Level of Socketed Vaal Gems": [
@@ -5297,8 +6093,10 @@
                 "Minions deal #% increased Damage": [
                     { "name": "MinionDamageCorrupted", "min": 15, "max": 20, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 },
+                "Socketed Gems are supported by level # Cast On Crit": [
+                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 }
+                ],
+                "Socketed Gems are supported by level 12 Cast when Stunned": [
                     { "name": "SupportedByCastOnStunCorruption", "min": 12, "max": 12, "lvl": 35 }
                 ]
             }
@@ -5436,10 +6234,17 @@
                     { "name": "of the Troll", "min": 5, "max": 6, "lvl": 59 },
                     { "name": "of the Phoenix", "min": 6, "max": 7, "lvl": 78 }
                 ],
-                "Mod": [
-                    { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                    { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                    { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+                "#% increased Light Radius": [
+                    { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                    { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                    { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+                ],
+                "+# to Accuracy Rating": [
+                    { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                    { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+                ],
+                "#% increased Accuracy Rating": [
+                    { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
                 ],
                 "+#% to Lightning Resistance": [
                     { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
@@ -5485,9 +6290,13 @@
                 "Enemies Cannot Leech Life From You": [
                     { "name": "CannotBeLeechedFromCorruption", "min": 0, "max": 0, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "AngerSkillCorrupted", "min": 15, "max": 15, "lvl": 56 },
-                    { "name": "HatredSkillCorrupted", "min": 11, "max": 11, "lvl": 44 },
+                "Grants level # Anger Skill": [
+                    { "name": "AngerSkillCorrupted", "min": 15, "max": 15, "lvl": 56 }
+                ],
+                "Grants level # Hatred Skill": [
+                    { "name": "HatredSkillCorrupted", "min": 11, "max": 11, "lvl": 44 }
+                ],
+                "Grants level # Wrath Skill": [
                     { "name": "WrathSkillCorrupted", "min": 7, "max": 7, "lvl": 28 }
                 ],
                 "+# to Level of Socketed Vaal Gems": [
@@ -5496,8 +6305,10 @@
                 "Minions deal #% increased Damage": [
                     { "name": "MinionDamageCorrupted", "min": 15, "max": 20, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 },
+                "Socketed Gems are supported by level # Cast On Crit": [
+                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 }
+                ],
+                "Socketed Gems are supported by level 12 Cast when Stunned": [
                     { "name": "SupportedByCastOnStunCorruption", "min": 12, "max": 12, "lvl": 35 }
                 ]
             }
@@ -5642,10 +6453,17 @@
                     { "name": "of the Troll", "min": 5, "max": 6, "lvl": 59 },
                     { "name": "of the Phoenix", "min": 6, "max": 7, "lvl": 78 }
                 ],
-                "Mod": [
-                    { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                    { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                    { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+                "#% increased Light Radius": [
+                    { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                    { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                    { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+                ],
+                "+# to Accuracy Rating": [
+                    { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                    { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+                ],
+                "#% increased Accuracy Rating": [
+                    { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
                 ],
                 "+#% to Lightning Resistance": [
                     { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
@@ -5691,9 +6509,13 @@
                 "Enemies Cannot Leech Life From You": [
                     { "name": "CannotBeLeechedFromCorruption", "min": 0, "max": 0, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "AngerSkillCorrupted", "min": 15, "max": 15, "lvl": 56 },
-                    { "name": "HatredSkillCorrupted", "min": 11, "max": 11, "lvl": 44 },
+                "Grants level # Anger Skill": [
+                    { "name": "AngerSkillCorrupted", "min": 15, "max": 15, "lvl": 56 }
+                ],
+                "Grants level # Hatred Skill": [
+                    { "name": "HatredSkillCorrupted", "min": 11, "max": 11, "lvl": 44 }
+                ],
+                "Grants level # Wrath Skill": [
                     { "name": "WrathSkillCorrupted", "min": 7, "max": 7, "lvl": 28 }
                 ],
                 "+# to Level of Socketed Vaal Gems": [
@@ -5702,8 +6524,10 @@
                 "Minions deal #% increased Damage": [
                     { "name": "MinionDamageCorrupted", "min": 15, "max": 20, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 },
+                "Socketed Gems are supported by level # Cast On Crit": [
+                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 }
+                ],
+                "Socketed Gems are supported by level 12 Cast when Stunned": [
                     { "name": "SupportedByCastOnStunCorruption", "min": 12, "max": 12, "lvl": 35 }
                 ]
             }
@@ -5859,10 +6683,17 @@
                     { "name": "of the Troll", "min": 5, "max": 6, "lvl": 59 },
                     { "name": "of the Phoenix", "min": 6, "max": 7, "lvl": 78 }
                 ],
-                "Mod": [
-                    { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                    { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                    { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+                "#% increased Light Radius": [
+                    { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                    { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                    { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+                ],
+                "+# to Accuracy Rating": [
+                    { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                    { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+                ],
+                "#% increased Accuracy Rating": [
+                    { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
                 ],
                 "+#% to Lightning Resistance": [
                     { "name": "of the Cloud", "min": 6, "max": 11, "lvl": 1 },
@@ -5897,9 +6728,13 @@
                 "Enemies Cannot Leech Life From You": [
                     { "name": "CannotBeLeechedFromCorruption", "min": 0, "max": 0, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "AngerSkillCorrupted", "min": 15, "max": 15, "lvl": 56 },
-                    { "name": "HatredSkillCorrupted", "min": 11, "max": 11, "lvl": 44 },
+                "Grants level # Anger Skill": [
+                    { "name": "AngerSkillCorrupted", "min": 15, "max": 15, "lvl": 56 }
+                ],
+                "Grants level # Hatred Skill": [
+                    { "name": "HatredSkillCorrupted", "min": 11, "max": 11, "lvl": 44 }
+                ],
+                "Grants level # Wrath Skill": [
                     { "name": "WrathSkillCorrupted", "min": 7, "max": 7, "lvl": 28 }
                 ],
                 "+# to Level of Socketed Vaal Gems": [
@@ -5908,8 +6743,10 @@
                 "Minions deal #% increased Damage": [
                     { "name": "MinionDamageCorrupted", "min": 15, "max": 20, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 },
+                "Socketed Gems are supported by level # Cast On Crit": [
+                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 }
+                ],
+                "Socketed Gems are supported by level 12 Cast when Stunned": [
                     { "name": "SupportedByCastOnStunCorruption", "min": 12, "max": 12, "lvl": 35 }
                 ]
             }
@@ -6045,8 +6882,10 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "HasteSkillCorrupted", "min": 14, "max": 14, "lvl": 40 },
+                "Grants level # Haste Skill": [
+                    { "name": "HasteSkillCorrupted", "min": 14, "max": 14, "lvl": 40 }
+                ],
+                "Grants level # Temporal Chains Skill": [
                     { "name": "TemporalChainsSkillCorrupted", "min": 14, "max": 14, "lvl": 40 }
                 ],
                 "Cannot be Knocked Back": [
@@ -6195,8 +7034,10 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "HasteSkillCorrupted", "min": 14, "max": 14, "lvl": 40 },
+                "Grants level # Haste Skill": [
+                    { "name": "HasteSkillCorrupted", "min": 14, "max": 14, "lvl": 40 }
+                ],
+                "Grants level # Temporal Chains Skill": [
                     { "name": "TemporalChainsSkillCorrupted", "min": 14, "max": 14, "lvl": 40 }
                 ],
                 "Cannot be Knocked Back": [
@@ -6363,8 +7204,10 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "HasteSkillCorrupted", "min": 14, "max": 14, "lvl": 40 },
+                "Grants level # Haste Skill": [
+                    { "name": "HasteSkillCorrupted", "min": 14, "max": 14, "lvl": 40 }
+                ],
+                "Grants level # Temporal Chains Skill": [
                     { "name": "TemporalChainsSkillCorrupted", "min": 14, "max": 14, "lvl": 40 }
                 ],
                 "Cannot be Knocked Back": [
@@ -6529,8 +7372,10 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "HasteSkillCorrupted", "min": 14, "max": 14, "lvl": 40 },
+                "Grants level # Haste Skill": [
+                    { "name": "HasteSkillCorrupted", "min": 14, "max": 14, "lvl": 40 }
+                ],
+                "Grants level # Temporal Chains Skill": [
                     { "name": "TemporalChainsSkillCorrupted", "min": 14, "max": 14, "lvl": 40 }
                 ],
                 "Cannot be Knocked Back": [
@@ -6713,8 +7558,10 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "HasteSkillCorrupted", "min": 14, "max": 14, "lvl": 40 },
+                "Grants level # Haste Skill": [
+                    { "name": "HasteSkillCorrupted", "min": 14, "max": 14, "lvl": 40 }
+                ],
+                "Grants level # Temporal Chains Skill": [
                     { "name": "TemporalChainsSkillCorrupted", "min": 14, "max": 14, "lvl": 40 }
                 ],
                 "Cannot be Knocked Back": [
@@ -6897,8 +7744,10 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "HasteSkillCorrupted", "min": 14, "max": 14, "lvl": 40 },
+                "Grants level # Haste Skill": [
+                    { "name": "HasteSkillCorrupted", "min": 14, "max": 14, "lvl": 40 }
+                ],
+                "Grants level # Temporal Chains Skill": [
                     { "name": "TemporalChainsSkillCorrupted", "min": 14, "max": 14, "lvl": 40 }
                 ],
                 "Cannot be Knocked Back": [
@@ -7102,9 +7951,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "CurseOnHitElementalWeaknessCorruption", "min": 10, "max": 12, "lvl": 30 },
-                    { "name": "CurseOnHitTemporalChainsCurruption", "min": 10, "max": 12, "lvl": 30 },
+                "Curse Enemies with level # Elemental Weakness on Hit": [
+                    { "name": "CurseOnHitElementalWeaknessCorruption", "min": 10, "max": 12, "lvl": 30 }
+                ],
+                "Curse Enemies with level # Temporal Chains on Hit": [
+                    { "name": "CurseOnHitTemporalChainsCurruption", "min": 10, "max": 12, "lvl": 30 }
+                ],
+                "Curse Enemies with level # Vulnerability on Hit": [
                     { "name": "CurseOnHitVulnerabilityCorruption", "min": 10, "max": 12, "lvl": 30 }
                 ],
                 "Grants level": [
@@ -7119,8 +7972,10 @@
                 "#% increased Cast Speed": [
                     { "name": "IncreasedCastSpeedCorrupted", "min": 4, "max": 6, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 },
+                "Socketed Gems are supported by level # Cast On Crit": [
+                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 }
+                ],
+                "Socketed Gems are supported by level 12 Cast when Stunned": [
                     { "name": "SupportedByCastOnStunCorruption", "min": 12, "max": 12, "lvl": 35 }
                 ]
             }
@@ -7296,9 +8151,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "CurseOnHitElementalWeaknessCorruption", "min": 10, "max": 12, "lvl": 30 },
-                    { "name": "CurseOnHitTemporalChainsCurruption", "min": 10, "max": 12, "lvl": 30 },
+                "Curse Enemies with level # Elemental Weakness on Hit": [
+                    { "name": "CurseOnHitElementalWeaknessCorruption", "min": 10, "max": 12, "lvl": 30 }
+                ],
+                "Curse Enemies with level # Temporal Chains on Hit": [
+                    { "name": "CurseOnHitTemporalChainsCurruption", "min": 10, "max": 12, "lvl": 30 }
+                ],
+                "Curse Enemies with level # Vulnerability on Hit": [
                     { "name": "CurseOnHitVulnerabilityCorruption", "min": 10, "max": 12, "lvl": 30 }
                 ],
                 "Grants level": [
@@ -7313,8 +8172,10 @@
                 "#% increased Cast Speed": [
                     { "name": "IncreasedCastSpeedCorrupted", "min": 4, "max": 6, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 },
+                "Socketed Gems are supported by level # Cast On Crit": [
+                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 }
+                ],
+                "Socketed Gems are supported by level 12 Cast when Stunned": [
                     { "name": "SupportedByCastOnStunCorruption", "min": 12, "max": 12, "lvl": 35 }
                 ]
             }
@@ -7519,9 +8380,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "CurseOnHitElementalWeaknessCorruption", "min": 10, "max": 12, "lvl": 30 },
-                    { "name": "CurseOnHitTemporalChainsCurruption", "min": 10, "max": 12, "lvl": 30 },
+                "Curse Enemies with level # Elemental Weakness on Hit": [
+                    { "name": "CurseOnHitElementalWeaknessCorruption", "min": 10, "max": 12, "lvl": 30 }
+                ],
+                "Curse Enemies with level # Temporal Chains on Hit": [
+                    { "name": "CurseOnHitTemporalChainsCurruption", "min": 10, "max": 12, "lvl": 30 }
+                ],
+                "Curse Enemies with level # Vulnerability on Hit": [
                     { "name": "CurseOnHitVulnerabilityCorruption", "min": 10, "max": 12, "lvl": 30 }
                 ],
                 "Grants level": [
@@ -7536,8 +8401,10 @@
                 "#% increased Cast Speed": [
                     { "name": "IncreasedCastSpeedCorrupted", "min": 4, "max": 6, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 },
+                "Socketed Gems are supported by level # Cast On Crit": [
+                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 }
+                ],
+                "Socketed Gems are supported by level 12 Cast when Stunned": [
                     { "name": "SupportedByCastOnStunCorruption", "min": 12, "max": 12, "lvl": 35 }
                 ]
             }
@@ -7729,9 +8596,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "CurseOnHitElementalWeaknessCorruption", "min": 10, "max": 12, "lvl": 30 },
-                    { "name": "CurseOnHitTemporalChainsCurruption", "min": 10, "max": 12, "lvl": 30 },
+                "Curse Enemies with level # Elemental Weakness on Hit": [
+                    { "name": "CurseOnHitElementalWeaknessCorruption", "min": 10, "max": 12, "lvl": 30 }
+                ],
+                "Curse Enemies with level # Temporal Chains on Hit": [
+                    { "name": "CurseOnHitTemporalChainsCurruption", "min": 10, "max": 12, "lvl": 30 }
+                ],
+                "Curse Enemies with level # Vulnerability on Hit": [
                     { "name": "CurseOnHitVulnerabilityCorruption", "min": 10, "max": 12, "lvl": 30 }
                 ],
                 "Grants level": [
@@ -7746,8 +8617,10 @@
                 "#% increased Cast Speed": [
                     { "name": "IncreasedCastSpeedCorrupted", "min": 4, "max": 6, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 },
+                "Socketed Gems are supported by level # Cast On Crit": [
+                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 }
+                ],
+                "Socketed Gems are supported by level 12 Cast when Stunned": [
                     { "name": "SupportedByCastOnStunCorruption", "min": 12, "max": 12, "lvl": 35 }
                 ]
             }
@@ -7968,9 +8841,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "CurseOnHitElementalWeaknessCorruption", "min": 10, "max": 12, "lvl": 30 },
-                    { "name": "CurseOnHitTemporalChainsCurruption", "min": 10, "max": 12, "lvl": 30 },
+                "Curse Enemies with level # Elemental Weakness on Hit": [
+                    { "name": "CurseOnHitElementalWeaknessCorruption", "min": 10, "max": 12, "lvl": 30 }
+                ],
+                "Curse Enemies with level # Temporal Chains on Hit": [
+                    { "name": "CurseOnHitTemporalChainsCurruption", "min": 10, "max": 12, "lvl": 30 }
+                ],
+                "Curse Enemies with level # Vulnerability on Hit": [
                     { "name": "CurseOnHitVulnerabilityCorruption", "min": 10, "max": 12, "lvl": 30 }
                 ],
                 "Grants level": [
@@ -7985,8 +8862,10 @@
                 "#% increased Cast Speed": [
                     { "name": "IncreasedCastSpeedCorrupted", "min": 4, "max": 6, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 },
+                "Socketed Gems are supported by level # Cast On Crit": [
+                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 }
+                ],
+                "Socketed Gems are supported by level 12 Cast when Stunned": [
                     { "name": "SupportedByCastOnStunCorruption", "min": 12, "max": 12, "lvl": 35 }
                 ]
             }
@@ -8196,9 +9075,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "CurseOnHitElementalWeaknessCorruption", "min": 10, "max": 12, "lvl": 30 },
-                    { "name": "CurseOnHitTemporalChainsCurruption", "min": 10, "max": 12, "lvl": 30 },
+                "Curse Enemies with level # Elemental Weakness on Hit": [
+                    { "name": "CurseOnHitElementalWeaknessCorruption", "min": 10, "max": 12, "lvl": 30 }
+                ],
+                "Curse Enemies with level # Temporal Chains on Hit": [
+                    { "name": "CurseOnHitTemporalChainsCurruption", "min": 10, "max": 12, "lvl": 30 }
+                ],
+                "Curse Enemies with level # Vulnerability on Hit": [
                     { "name": "CurseOnHitVulnerabilityCorruption", "min": 10, "max": 12, "lvl": 30 }
                 ],
                 "Grants level": [
@@ -8213,8 +9096,10 @@
                 "#% increased Cast Speed": [
                     { "name": "IncreasedCastSpeedCorrupted", "min": 4, "max": 6, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 },
+                "Socketed Gems are supported by level # Cast On Crit": [
+                    { "name": "SupportedByCastOnCritCorruption", "min": 12, "max": 12, "lvl": 35 }
+                ],
+                "Socketed Gems are supported by level 12 Cast when Stunned": [
                     { "name": "SupportedByCastOnStunCorruption", "min": 12, "max": 12, "lvl": 35 }
                 ]
             }
@@ -8320,6 +9205,10 @@
                     { "name": "of the Worthy", "min": 18, "max": 18, "lvl": 36 },
                     { "name": "of the Apt", "min": 32, "max": 32, "lvl": 60 }
                 ],
+                "#% additional Physical Damage Reduction": [
+                    { "name": "of Dampening", "min": 2, "max": 2, "lvl": 25 },
+                    { "name": "of Numbing", "min": 3, "max": 4, "lvl": 85 }
+                ],
                 "+# to Strength": [
                     { "name": "of the Brute", "min": 8, "max": 12, "lvl": 1 },
                     { "name": "of the Wrestler", "min": 13, "max": 17, "lvl": 11 },
@@ -8350,9 +9239,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "PurityOfColdSkillCorrupted", "min": 15, "max": 15, "lvl": 45 },
-                    { "name": "PurityOfFireSkillCorrupted_", "min": 15, "max": 15, "lvl": 45 },
+                "Grants level # Purity of Ice Skill": [
+                    { "name": "PurityOfColdSkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
+                ],
+                "Grants level # Purity of Fire Skill": [
+                    { "name": "PurityOfFireSkillCorrupted_", "min": 15, "max": 15, "lvl": 45 }
+                ],
+                "Grants level # Purity of Lightning Skill": [
                     { "name": "PurityOfLightningSkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
                 ],
                 "Cannot be Knocked Back": [
@@ -8504,9 +9397,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "PurityOfColdSkillCorrupted", "min": 15, "max": 15, "lvl": 45 },
-                    { "name": "PurityOfFireSkillCorrupted_", "min": 15, "max": 15, "lvl": 45 },
+                "Grants level # Purity of Ice Skill": [
+                    { "name": "PurityOfColdSkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
+                ],
+                "Grants level # Purity of Fire Skill": [
+                    { "name": "PurityOfFireSkillCorrupted_", "min": 15, "max": 15, "lvl": 45 }
+                ],
+                "Grants level # Purity of Lightning Skill": [
                     { "name": "PurityOfLightningSkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
                 ],
                 "Cannot be Knocked Back": [
@@ -8677,9 +9574,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "PurityOfColdSkillCorrupted", "min": 15, "max": 15, "lvl": 45 },
-                    { "name": "PurityOfFireSkillCorrupted_", "min": 15, "max": 15, "lvl": 45 },
+                "Grants level # Purity of Ice Skill": [
+                    { "name": "PurityOfColdSkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
+                ],
+                "Grants level # Purity of Fire Skill": [
+                    { "name": "PurityOfFireSkillCorrupted_", "min": 15, "max": 15, "lvl": 45 }
+                ],
+                "Grants level # Purity of Lightning Skill": [
                     { "name": "PurityOfLightningSkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
                 ],
                 "Cannot be Knocked Back": [
@@ -8850,9 +9751,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "PurityOfColdSkillCorrupted", "min": 15, "max": 15, "lvl": 45 },
-                    { "name": "PurityOfFireSkillCorrupted_", "min": 15, "max": 15, "lvl": 45 },
+                "Grants level # Purity of Ice Skill": [
+                    { "name": "PurityOfColdSkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
+                ],
+                "Grants level # Purity of Fire Skill": [
+                    { "name": "PurityOfFireSkillCorrupted_", "min": 15, "max": 15, "lvl": 45 }
+                ],
+                "Grants level # Purity of Lightning Skill": [
                     { "name": "PurityOfLightningSkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
                 ],
                 "Cannot be Knocked Back": [
@@ -9042,9 +9947,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "PurityOfColdSkillCorrupted", "min": 15, "max": 15, "lvl": 45 },
-                    { "name": "PurityOfFireSkillCorrupted_", "min": 15, "max": 15, "lvl": 45 },
+                "Grants level # Purity of Ice Skill": [
+                    { "name": "PurityOfColdSkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
+                ],
+                "Grants level # Purity of Fire Skill": [
+                    { "name": "PurityOfFireSkillCorrupted_", "min": 15, "max": 15, "lvl": 45 }
+                ],
+                "Grants level # Purity of Lightning Skill": [
                     { "name": "PurityOfLightningSkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
                 ],
                 "Cannot be Knocked Back": [
@@ -9234,9 +10143,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "PurityOfColdSkillCorrupted", "min": 15, "max": 15, "lvl": 45 },
-                    { "name": "PurityOfFireSkillCorrupted_", "min": 15, "max": 15, "lvl": 45 },
+                "Grants level # Purity of Ice Skill": [
+                    { "name": "PurityOfColdSkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
+                ],
+                "Grants level # Purity of Fire Skill": [
+                    { "name": "PurityOfFireSkillCorrupted_", "min": 15, "max": 15, "lvl": 45 }
+                ],
+                "Grants level # Purity of Lightning Skill": [
                     { "name": "PurityOfLightningSkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
                 ],
                 "Cannot be Knocked Back": [
@@ -9444,9 +10357,13 @@
                 "+#% to Chaos Resistance": [
                     { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "PurityOfColdSkillCorrupted", "min": 15, "max": 15, "lvl": 45 },
-                    { "name": "PurityOfFireSkillCorrupted_", "min": 15, "max": 15, "lvl": 45 },
+                "Grants level # Purity of Ice Skill": [
+                    { "name": "PurityOfColdSkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
+                ],
+                "Grants level # Purity of Fire Skill": [
+                    { "name": "PurityOfFireSkillCorrupted_", "min": 15, "max": 15, "lvl": 45 }
+                ],
+                "Grants level # Purity of Lightning Skill": [
                     { "name": "PurityOfLightningSkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
                 ],
                 "Cannot be Knocked Back": [
@@ -9472,6 +10389,13 @@
     },
     "Amulet": {
         "prefix": {
+            "#% increased Elemental Damage with Attack Skills": [
+                { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4 },
+                { "name": "Infusing", "min": 11, "max": 20, "lvl": 15 },
+                { "name": "Empowering", "min": 21, "max": 30, "lvl": 30 },
+                { "name": "Unleashed", "min": 31, "max": 37, "lvl": 60 },
+                { "name": "Overpowering", "min": 38, "max": 42, "lvl": 81 }
+            ],
             "Adds # to # Cold Damage to Attacks": [
                 { "name": "Frosted", "min": 1, "max": 2, "lvl": 2 },
                 { "name": "Chilled", "min": [3,4], "max": [7,8], "lvl": 13 },
@@ -9808,13 +10732,21 @@
             "#% of Fire Damage Leeched as Life": [
                 { "name": "FireDamageLifeLeechPermyriadCorrupted", "min": 0.2, "max": 0.2, "lvl": 50 }
             ],
-            "Mod": [
+            "Grants level # Clarity Skill": [
                 { "name": "ClaritySkillCorrupted1", "min": 4, "max": 4, "lvl": 19 },
-                { "name": "ClaritySkillCorrupted2", "min": 8, "max": 8, "lvl": 32 },
-                { "name": "PurityOfColdSkillCorrupted", "min": 15, "max": 15, "lvl": 45 },
-                { "name": "PurityOfFireSkillCorrupted_", "min": 15, "max": 15, "lvl": 45 },
-                { "name": "PurityOfLightningSkillCorrupted", "min": 15, "max": 15, "lvl": 45 },
+                { "name": "ClaritySkillCorrupted2", "min": 8, "max": 8, "lvl": 32 }
+            ],
+            "Grants level # Purity of Elements Skill": [
                 { "name": "PuritySkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
+            ],
+            "Grants level # Purity of Ice Skill": [
+                { "name": "PurityOfColdSkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
+            ],
+            "Grants level # Purity of Fire Skill": [
+                { "name": "PurityOfFireSkillCorrupted_", "min": 15, "max": 15, "lvl": 45 }
+            ],
+            "Grants level # Purity of Lightning Skill": [
+                { "name": "PurityOfLightningSkillCorrupted", "min": 15, "max": 15, "lvl": 45 }
             ],
             "#% increased Attack Speed": [
                 { "name": "AttackSpeedCorrupted", "min": 4, "max": 8, "lvl": 1 }
@@ -9852,6 +10784,12 @@
     },
     "Belt": {
         "prefix": {
+            "#% increased Flask Life Recovery rate": [
+                { "name": "Recovering", "min": 10, "max": 20, "lvl": 5 }
+            ],
+            "#% increased Flask Mana Recovery rate": [
+                { "name": "Inspiring", "min": 10, "max": 20, "lvl": 5 }
+            ],
             "Reflects # Physical Damage to Melee Attackers": [
                 { "name": "Thorny", "min": 1, "max": 4, "lvl": 1 },
                 { "name": "Spiny", "min": 5, "max": 10, "lvl": 10 }
@@ -9892,6 +10830,13 @@
                 { "name": "Encased", "min": 401, "max": 460, "lvl": 83 }
             ],
             "#% increased Elemental Damage with Weapons": [
+                { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4, "legacy": true },
+                { "name": "Infusing", "min": 11, "max": 20, "lvl": 15, "legacy": true },
+                { "name": "Empowering", "min": 21, "max": 30, "lvl": 30, "legacy": true },
+                { "name": "Unleashed", "min": 31, "max": 36, "lvl": 60, "legacy": true },
+                { "name": "Overpowering", "min": 37, "max": 42, "lvl": 81, "legacy": true }
+            ],
+            "#% increased Elemental Damage with Attack Skills": [
                 { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4 },
                 { "name": "Infusing", "min": 11, "max": 20, "lvl": 15 },
                 { "name": "Empowering", "min": 21, "max": 30, "lvl": 30 },
@@ -9900,6 +10845,12 @@
             ]
         },
         "suffix": {
+            "#% increased Flask Charges gained": [
+                { "name": "of Refilling", "min": 10, "max": 20, "lvl": 2 }
+            ],
+            "#% reduced Flask Charges used": [
+                { "name": "of Sipping", "min": 10, "max": 20, "lvl": 3 }
+            ],
             "#% increased Flask effect duration": [
                 { "name": "of Savouring", "min": 10, "max": 20, "lvl": 7 }
             ],
@@ -10006,6 +10957,13 @@
     },
     "Quiver": {
         "prefix": {
+            "#% increased Elemental Damage with Attack Skills": [
+                { "name": "Catalysing", "min": 5, "max": 10, "lvl": 4 },
+                { "name": "Infusing", "min": 11, "max": 20, "lvl": 15 },
+                { "name": "Empowering", "min": 21, "max": 30, "lvl": 30 },
+                { "name": "Unleashed", "min": 31, "max": 37, "lvl": 60 },
+                { "name": "Overpowering", "min": 38, "max": 42, "lvl": 81 }
+            ],
             "Adds # to # Cold Damage to Attacks": [
                 { "name": "Frosted", "min": 1, "max": 2, "lvl": 2 },
                 { "name": "Chilled", "min": [3,4], "max": [7,8], "lvl": 13 },
@@ -10057,6 +11015,10 @@
             ]
         },
         "suffix": {
+            "#% increased Attack Speed": [
+                { "name": "of Skill", "min": 5, "max": 7, "lvl": 1 },
+                { "name": "of Ease", "min": 8, "max": 10, "lvl": 11 }
+            ],
             "+#% to Chaos Resistance": [
                 { "name": "of the Lost", "min": 5, "max": 10, "lvl": 16 },
                 { "name": "of Banishment", "min": 11, "max": 15, "lvl": 30 },
@@ -10215,6 +11177,11 @@
                 { "name": "Incinerating", "min": [13,18], "max": [27,31], "lvl": 52 },
                 { "name": "Blasting", "min": [16,22], "max": [32,38], "lvl": 64 },
                 { "name": "Cremating", "min": [19,25], "max": [39,45], "lvl": 76 }
+            ],
+            "+# to Level of Socketed Gems": [
+                { "name": "Exemplary", "min": 1, "max": 1, "lvl": 2 },
+                { "name": "Quintessential", "min": 2, "max": 2, "lvl": 50 },
+                { "name": "Flawless", "min": 3, "max": 3, "lvl": 76 }
             ],
             "+# to maximum Energy Shield": [
                 { "name": "Shining", "min": 1, "max": 3, "lvl": 3 },
@@ -10412,10 +11379,17 @@
                 { "name": "of the Troll", "min": 5, "max": 6, "lvl": 59 },
                 { "name": "of the Phoenix", "min": 6, "max": 7, "lvl": 78 }
             ],
-            "Mod": [
-                { "name": "of Shining", "min": 5, "max": 20, "lvl": 8 },
-                { "name": "of Light", "min": 10, "max": 40, "lvl": 15 },
-                { "name": "of Radiance", "min": 15, "max": 10, "lvl": 30 }
+            "#% increased Light Radius": [
+                { "name": "of Shining", "min": 5, "max": 5, "lvl": 8 },
+                { "name": "of Light", "min": 10, "max": 10, "lvl": 15 },
+                { "name": "of Radiance", "min": 15, "max": 15, "lvl": 30 }
+            ],
+            "+# to Accuracy Rating": [
+                { "name": "of Shining", "min": 10, "max": 20, "lvl": 8 },
+                { "name": "of Light", "min": 21, "max": 40, "lvl": 15 }
+            ],
+            "#% increased Accuracy Rating": [
+                { "name": "of Radiance", "min": 5, "max": 10, "lvl": 30 }
             ],
             "#% increased Lightning Damage": [
                 { "name": "of Sparks", "min": 3, "max": 7, "lvl": 10 },
@@ -10461,16 +11435,20 @@
                 { "name": "ChanceToAvoidFreezeCorruption", "min": 10, "max": 20, "lvl": 1 }
             ],
             "Adds # to # Chaos Damage to Attacks": [
-                { "name": "AddedChaosDamageCorrupted1", "min": 1, "max": 3, "lvl": 1 },
-                { "name": "AddedChaosDamageCorrupted2", "min": 3, "max": 8, "lvl": 20 },
-                { "name": "AddedChaosDamageCorrupted3", "min": 7, "max": 13, "lvl": 40 }
+                { "name": "AddedChaosDamageCorrupted1", "min": [1,2], "max": [2,3], "lvl": 1 },
+                { "name": "AddedChaosDamageCorrupted2", "min": [3,4], "max": [6,8], "lvl": 20 },
+                { "name": "AddedChaosDamageCorrupted3", "min": [7,9], "max": [11,13], "lvl": 40 }
             ],
             "+#% to Chaos Resistance": [
                 { "name": "ChaosResistCorruption", "min": 2, "max": 4, "lvl": 1 }
             ],
-            "Mod": [
-                { "name": "ConductivitySkillCorrupted", "min": 14, "max": 14, "lvl": 46 },
-                { "name": "FlammabilitySkillCorrupted", "min": 14, "max": 14, "lvl": 46 },
+            "Grants level # Conductivity Skill": [
+                { "name": "ConductivitySkillCorrupted", "min": 14, "max": 14, "lvl": 46 }
+            ],
+            "Grants level # Flammability Skill": [
+                { "name": "FlammabilitySkillCorrupted", "min": 14, "max": 14, "lvl": 46 }
+            ],
+            "Grants level # Frostbite Skill": [
                 { "name": "FrostbiteSkillCorrupted", "min": 14, "max": 14, "lvl": 46 }
             ],
             "#% increased Cast Speed": [
@@ -10500,7 +11478,7 @@
                     { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
                 ],
                 "Recharges # Charge when you deal a Critical Strike": [
-                    { "name": "Surgeon's", "min": 1, "max": 1, "lvl": 8 }
+                    { "name": "Surgeon's", "min": 1, "max": 1, "lvl": 8, "legacy": true }
                 ],
                 "#% chance to gain a Flask Charge when you deal a Critical Strike": [
                     { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 }
@@ -10605,7 +11583,7 @@
                     { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
                 ],
                 "Recharges # Charge when you deal a Critical Strike": [
-                    { "name": "Surgeon's", "min": 1, "max": 1, "lvl": 8 }
+                    { "name": "Surgeon's", "min": 1, "max": 1, "lvl": 8, "legacy": true }
                 ],
                 "#% chance to gain a Flask Charge when you deal a Critical Strike": [
                     { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 }
@@ -10615,6 +11593,12 @@
                 ],
                 "#% increased Charge Recovery": [
                     { "name": "Perpetual", "min": 20, "max": 40, "lvl": 3 }
+                ],
+                "#% increased Mana Recovered": [
+                    { "name": "Caustic", "min": 60, "max": 60, "lvl": 3 }
+                ],
+                "Removes #% of Mana Recovered from Life when used": [
+                    { "name": "Caustic", "min": 15, "max": 15, "lvl": 3 }
                 ],
                 "#% increased Amount Recovered": [
                     { "name": "Saturated", "min": 50, "max": 50, "lvl": 1 }
@@ -10701,7 +11685,7 @@
                     { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
                 ],
                 "Recharges # Charge when you deal a Critical Strike": [
-                    { "name": "Surgeon's", "min": 1, "max": 1, "lvl": 8 }
+                    { "name": "Surgeon's", "min": 1, "max": 1, "lvl": 8, "legacy": true }
                 ],
                 "#% chance to gain a Flask Charge when you deal a Critical Strike": [
                     { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 }
@@ -10803,7 +11787,7 @@
                     { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
                 ],
                 "Recharges # Charge when you deal a Critical Strike": [
-                    { "name": "Surgeon's", "min": 1, "max": 1, "lvl": 8 }
+                    { "name": "Surgeon's", "min": 1, "max": 1, "lvl": 8, "legacy": true }
                 ],
                 "#% chance to gain a Flask Charge when you deal a Critical Strike": [
                     { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 }
@@ -10941,12 +11925,12 @@
                     { "name": "Ample", "min": 10, "max": 20, "lvl": 2 }
                 ],
                 "Recharges # Charge when you deal a Critical Strike": [
-                    { "name": "Surgeon's", "min": 1, "max": 1, "lvl": 8 }
+                    { "name": "Surgeon's", "min": 1, "max": 1, "lvl": 8, "legacy": true }
                 ],
                 "#% chance to gain a Flask Charge when you deal a Critical Strike": [
                     { "name": "Surgeon's", "min": 20, "max": 20, "lvl": 8 }
                 ],
-                "Recharges 3 Charges when you take a Critical Strike": [
+                "Recharges # Charges when you take a Critical Strike": [
                     { "name": "Avenger's", "min": 3, "max": 3, "lvl": 12 }
                 ],
                 "#% increased Charge Recovery": [
@@ -11139,6 +12123,15 @@
                 ]
             },
             "suffix": {
+                "#% increased Damage with Poison": [
+                    { "name": "of Venom", "min": 16, "max": 20, "lvl": 1 }
+                ],
+                "#% increased Burning Damage": [
+                    { "name": "of Combusting", "min": 16, "max": 20, "lvl": 1 }
+                ],
+                "#% increased Damage with Bleeding": [
+                    { "name": "of Haemophilia", "min": 16, "max": 20, "lvl": 1 }
+                ],
                 "Attacks have #% chance to cause Bleeding": [
                     { "name": "of Bleeding", "min": 3, "max": 5, "lvl": 1 }
                 ],
@@ -11477,6 +12470,15 @@
                 ]
             },
             "suffix": {
+                "#% increased Damage with Poison": [
+                    { "name": "of Venom", "min": 16, "max": 20, "lvl": 1 }
+                ],
+                "#% increased Burning Damage": [
+                    { "name": "of Combusting", "min": 16, "max": 20, "lvl": 1 }
+                ],
+                "#% increased Damage with Bleeding": [
+                    { "name": "of Haemophilia", "min": 16, "max": 20, "lvl": 1 }
+                ],
                 "Attacks have #% chance to cause Bleeding": [
                     { "name": "of Bleeding", "min": 3, "max": 5, "lvl": 1 }
                 ],
@@ -11741,13 +12743,13 @@
                 "#% increased Critical Strike Chance with Two Handed Melee Weapons": [
                     { "name": "Sundering", "min": 14, "max": 18, "lvl": 1 }
                 ],
-                "#% to Critical Strike Multiplier while Dual Wielding": [
+                "+#% to Critical Strike Multiplier while Dual Wielding": [
                     { "name": "Puncturing", "min": 15, "max": 18, "lvl": 1 }
                 ],
-                "#% to Critical Strike Multiplier with One Handed Melee Weapons": [
+                "+#% to Critical Strike Multiplier with One Handed Melee Weapons": [
                     { "name": "Piercing", "min": 15, "max": 18, "lvl": 1 }
                 ],
-                "#% to Critical Strike Multiplier with Two Handed Melee Weapons": [
+                "+#% to Critical Strike Multiplier with Two Handed Melee Weapons": [
                     { "name": "Rupturing", "min": 15, "max": 18, "lvl": 1 }
                 ],
                 "#% increased Physical Weapon Damage while Dual Wielding": [
@@ -11818,17 +12820,17 @@
                 ]
             },
             "suffix": {
+                "#% increased Damage with Poison": [
+                    { "name": "of Venom", "min": 16, "max": 20, "lvl": 1 }
+                ],
+                "#% increased Burning Damage": [
+                    { "name": "of Combusting", "min": 16, "max": 20, "lvl": 1 }
+                ],
+                "#% increased Damage with Bleeding": [
+                    { "name": "of Haemophilia", "min": 16, "max": 20, "lvl": 1 }
+                ],
                 "#% increased Accuracy": [
                     { "name": "of Deadliness", "min": 6, "max": 10, "lvl": 1 }
-                ],
-                "#% increased Damage": [
-                    { "name": "of Freezing", "min": 2, "max": 16, "lvl": 1 }
-                ],
-                "#% increased Melee Damage": [
-                    { "name": "of Burning", "min": 2, "max": 5, "lvl": 1 }
-                ],
-                "#% increased Projectile Damage": [
-                    { "name": "of Shocking", "min": 2, "max": 16, "lvl": 1 }
                 ],
                 "+# to all Attributes": [
                     { "name": "of Adaption", "min": 6, "max": 8, "lvl": 1 }
@@ -11857,9 +12859,13 @@
                 "+#% to Global Critical Strike Multiplier": [
                     { "name": "of Potency", "min": 9, "max": 12, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "of Wounding", "min": 8, "max": 10, "lvl": 1 },
-                    { "name": "of Combat", "min": 10, "max": 12, "lvl": 1 },
+                "#% increased Damage": [
+                    { "name": "of Wounding", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Melee Damage": [
+                    { "name": "of Combat", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "#% increased Projectile Damage": [
                     { "name": "of Archery", "min": 10, "max": 12, "lvl": 1 }
                 ],
                 "#% increased Damage over Time": [
@@ -12030,12 +13036,16 @@
                 "#% increased Fire Damage": [
                     { "name": "Flaming", "min": 14, "max": 16, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Parrying", "min": 1, "max": 1, "lvl": 1 },
+                "#% additional Block Chance while Dual Wielding": [
+                    { "name": "Parrying", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "+#% Chance to Block with Shields": [
                     { "name": "Shielding", "min": 1, "max": 1, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Dissipating", "min": 1, "max": 1, "lvl": 1 },
+                "#% additional Chance to Block Spells while Dual Wielding": [
+                    { "name": "Dissipating", "min": 1, "max": 1, "lvl": 1 }
+                ],
+                "#% additional Chance to Block Spells with Shields": [
                     { "name": "Thwarting", "min": 1, "max": 1, "lvl": 1 }
                 ],
                 "#% increased Armour": [
@@ -12071,11 +13081,19 @@
                 "#% increased maximum Mana": [
                     { "name": "Enlightened", "min": 6, "max": 8, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Harmonic", "min": 4, "max": 6, "lvl": 1 },
-                    { "name": "Charging", "min": 4, "max": 6, "lvl": 1 },
-                    { "name": "Resonant", "min": 3, "max": 5, "lvl": 1 },
-                    { "name": "Warding", "min": 3, "max": 5, "lvl": 1 },
+                "#% increased Attack Speed while Dual Wielding": [
+                    { "name": "Harmonic", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% increased Attack Speed while holding a Shield": [
+                    { "name": "Charging", "min": 4, "max": 6, "lvl": 1 }
+                ],
+                "#% increased Cast Speed while Dual Wielding": [
+                    { "name": "Resonant", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Cast Speed while holding a Shield": [
+                    { "name": "Warding", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Cast Speed while wielding a Staff": [
                     { "name": "Wright's", "min": 3, "max": 5, "lvl": 1 }
                 ],
                 "Minions have #% increased maximum Life": [
@@ -12084,25 +13102,49 @@
                 "#% increased Physical Damage": [
                     { "name": "Sharpened", "min": 14, "max": 16, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Fierce", "min": 14, "max": 16, "lvl": 1 },
-                    { "name": "Savage", "min": 14, "max": 16, "lvl": 1 },
-                    { "name": "Lethal", "min": 14, "max": 16, "lvl": 1 },
-                    { "name": "Brutal", "min": 14, "max": 16, "lvl": 1 },
-                    { "name": "Judging", "min": 14, "max": 16, "lvl": 1 },
+                "#% increased Physical Damage with Bows": [
+                    { "name": "Fierce", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with Claws": [
+                    { "name": "Savage", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with Daggers": [
+                    { "name": "Lethal", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with Maces": [
+                    { "name": "Brutal", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with Staves": [
+                    { "name": "Judging", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Physical Damage with Wands": [
                     { "name": "Cruel", "min": 14, "max": 16, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Volleying", "min": 6, "max": 8, "lvl": 1 },
-                    { "name": "Ripping", "min": 6, "max": 8, "lvl": 1 },
-                    { "name": "Slicing", "min": 6, "max": 8, "lvl": 1 },
-                    { "name": "Beating", "min": 6, "max": 8, "lvl": 1 },
-                    { "name": "Blunt", "min": 6, "max": 8, "lvl": 1 },
+                "#% increased Attack Speed with Bows": [
+                    { "name": "Volleying", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with Claws": [
+                    { "name": "Ripping", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with Daggers": [
+                    { "name": "Slicing", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with Maces": [
+                    { "name": "Beating", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with Staves": [
+                    { "name": "Blunt", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% increased Attack Speed with Wands": [
                     { "name": "Jinxing", "min": 6, "max": 8, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "Sorcerer's", "min": 14, "max": 16, "lvl": 1 },
-                    { "name": "Battlemage's", "min": 14, "max": 16, "lvl": 1 },
+                "#% increased Spell Damage while Dual Wielding": [
+                    { "name": "Sorcerer's", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Spell Damage while holding a Shield": [
+                    { "name": "Battlemage's", "min": 14, "max": 16, "lvl": 1 }
+                ],
+                "#% increased Spell Damage while wielding a Staff": [
                     { "name": "Wizard's", "min": 14, "max": 16, "lvl": 1 }
                 ],
                 "#% increased Totem Damage": [
@@ -12113,10 +13155,35 @@
                 "#% increased Accuracy": [
                     { "name": "of Deadliness", "min": 6, "max": 10, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "of Freezing", "min": 2, "max": 16, "lvl": 1 },
-                    { "name": "of Burning", "min": 2, "max": 5, "lvl": 1 },
-                    { "name": "of Shocking", "min": 2, "max": 16, "lvl": 1 }
+                "Attacks have #% chance to cause Bleeding": [
+                    { "name": "of Bleeding", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Bleed duration": [
+                    { "name": "of Bleeding", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "#% chance to Freeze": [
+                    { "name": "of Freezing", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Freeze Duration on Enemies": [
+                    { "name": "of Freezing", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "#% chance to Ignite": [
+                    { "name": "of Burning", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Ignite Duration on Enemies": [
+                    { "name": "of Burning", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% chance to Poison on Hit": [
+                    { "name": "of Poisoning", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Poison Duration": [
+                    { "name": "of Poisoning", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% chance to Shock": [
+                    { "name": "of Shocking", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Shock Duration on Enemies": [
+                    { "name": "of Shocking", "min": 12, "max": 16, "lvl": 1 }
                 ],
                 "+# to all Attributes": [
                     { "name": "of Adaption", "min": 6, "max": 8, "lvl": 1 }
@@ -12145,9 +13212,13 @@
                 "+#% to Global Critical Strike Multiplier": [
                     { "name": "of Potency", "min": 9, "max": 12, "lvl": 1 }
                 ],
-                "Mod": [
-                    { "name": "of Wounding", "min": 8, "max": 10, "lvl": 1 },
-                    { "name": "of Archery", "min": 10, "max": 12, "lvl": 1 },
+                "#% increased Damage": [
+                    { "name": "of Wounding", "min": 8, "max": 10, "lvl": 1 }
+                ],
+                "#% increased Projectile Damage": [
+                    { "name": "of Archery", "min": 10, "max": 12, "lvl": 1 }
+                ],
+                "#% increased Spell Damage": [
                     { "name": "of Mysticism", "min": 10, "max": 12, "lvl": 1 }
                 ],
                 "#% increased Damage over Time": [
@@ -12289,5 +13360,46 @@
                 ]
             }
         }
+    },
+    "signature": {
+        "Causes Bleeding on Hit": [
+            { "min": 0, "max": 0, "lvl": 1, "drop": "Tora" }
+        ],
+        "+# to Level of Socketed Support Gems": [
+            { "min": 1, "max": 1, "lvl": 1, "drop": "Catarina" }
+        ],
+        "+#% to Quality of Socketed Support Gems": [
+            { "min": 3, "max": 6, "lvl": 1, "drop": "Haku" }
+        ],
+        "Hits can't be Evaded": [
+            { "min": 0, "max": 0, "lvl": 1, "drop": "Vagan" }
+        ],
+        "#% increased Life Leeched per second": [
+            { "min": 20, "max": 40, "lvl": 1, "drop": "Vorici" }
+        ],
+        "#% increased Damage": [
+            { "min": 5, "max": 15, "lvl": 1, "drop": "Leo" }
+        ],
+        "−# to Mana Cost of Skills": [
+            { "min": 4, "max": 8, "lvl": 1, "drop": "Elreon" }
+        ],
+        "Damage Penetrates #% Fire Resistance": [
+            { "name": "Betrayer's", "min": 6, "max": 10, "lvl": 1, "drop": "Renegades" }
+        ],
+        "Damage Penetrates #% Cold Resistance": [
+            { "name": "Deceiver's", "min": 6, "max": 10, "lvl": 1, "drop": "Renegades" }
+        ],
+        "Damage Penetrates #% Lightning Resistance": [
+            { "name": "Turncoat's", "min": 6, "max": 10, "lvl": 1, "drop": "Renegades" }
+        ],
+        "#% of Physical Damage taken as Fire Damage": [
+            { "name": "", "min": 10, "max": 10, "lvl": 1, "drop": "Redblade" }
+        ],
+        "#% increased Damage while using a Flask": [
+            { "name": "", "min": 20, "max": 25, "lvl": 1, "drop": "Brineroot" }
+        ],
+        "Cannot Be Frozen": [
+            { "name": "", "min": 0, "max": 0, "lvl": 1, "drop": "Mutewind" }
+        ]
     }
 }

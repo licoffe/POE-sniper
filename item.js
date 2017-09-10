@@ -223,6 +223,10 @@ class Item {
         var index;
         var explicit = "";
         var added    = false;
+        // For mods without values
+        if ( values.length === 0 ) {
+            values[0] = 0;
+        }
         async.each( affixes, function( affix, cbAffix ) {
             // console.log( explicitMod + " : " + JSON.stringify( affix.min ) + " : " + affix.min.length );
             if ( affix.min.length ) {
@@ -231,13 +235,21 @@ class Item {
                      affix.min[1] >= values[0] &&
                      affix.max[0] <= values[1] &&
                      affix.max[1] >= values[1]) {
-                   index = iteration;
-                   added = true;
-                //    console.log( "P" + index );
-                   explicit += 
-                       "<span class=\"badge affix-" + affixType + "\" data-badge-caption=\"" + affixType +
-                       index + "\"></span><span class=\"explicit\">" + explicitMod + "</span><br>";
-                //    console.log( explicit );
+                    index = iteration;
+                    added = true;
+                    if ( affixType === "corrupted" ) {
+                        explicit += 
+                        "<span class=\"badge affix-" + affixType + "\" data-badge-caption=\"Implicit" +
+                        "\"></span><span class=\"explicit\">" + explicitMod + "</span><br>";
+                    } else if ( affixType === "signature" ) {
+                        explicit += 
+                        "<span class=\"badge affix-" + affix.drop + "\" data-badge-caption=\"" + affix.drop +
+                        "\"></span><span class=\"explicit\">" + explicitMod + "</span><br>";
+                    } else {
+                        explicit += 
+                        "<span class=\"badge affix-" + affixType + "\" data-badge-caption=\"" + affixType +
+                        index + "\"></span><span class=\"explicit\">" + explicitMod + "</span><br>";
+                    }
                 } else {
                     iteration--;
                 }
@@ -246,13 +258,21 @@ class Item {
                 if ( !added &&
                       affix.min <= values[0] &&
                       affix.max >= values[0]) {
-                   index = iteration;
-                   added = true;
-                //    console.log( "P" + index );
-                   explicit += 
-                       "<span class=\"badge affix-" + affixType + "\" data-badge-caption=\"" + affixType +
-                       index + "\"></span><span class=\"explicit\">" + explicitMod + "</span><br>";
-                //    console.log( explicit );
+                    index = iteration;
+                    added = true;
+                    if ( affixType === "corrupted" ) {
+                        explicit += 
+                        "<span class=\"badge affix-" + affixType + "\" data-badge-caption=\"Implicit" +
+                        "\"></span><span class=\"explicit\">" + explicitMod + "</span><br>";
+                    } else if ( affixType === "signature" ) {
+                        explicit += 
+                        "<span class=\"badge affix-" + affix.drop + "\" data-badge-caption=\"" + affix.drop +
+                        "\"></span><span class=\"explicit\">" + explicitMod + "</span><br>";
+                    } else {
+                        explicit += 
+                        "<span class=\"badge affix-" + affixType + "\" data-badge-caption=\"" + affixType +
+                        index + "\"></span><span class=\"explicit\">" + explicitMod + "</span><br>";
+                    }
                 } else {
                     iteration--;
                 }
@@ -285,16 +305,78 @@ class Item {
         var totalPrefix  = 0;
         var totalSuffix  = 0;
         var totalCrafted = 0;
+        var itemType;
         if ( item.implicitMods ) {
-            implicit += "<span class=\"badge affix-implicit\" data-badge-caption=\"Implicit\"></span><span class=\"implicit\">";
-            implicit += item.implicitMods.join( "</span><br><span class=\"badge affix-implicit\" data-badge-caption=\"Implicit\"></span><span class=\"implicit\">" );
-            implicit += "</span><br>";
+            if ( item.corrupted ) {
+                // If object is magic, we have to guess the type another way
+                if ( item.frameType === 1 ) {
+                    var cleanedTypeLine = item.typeLine.replace( "Shaped ", "" );
+                    var match = magicReg.exec( cleanedTypeLine );
+                    console.log( item.typeLine );
+                    if ( match ) {
+                        itemType = types[match[1]];
+                        console.log( item.typeLine + ", " + match[1] + ", " + itemType );
+                    } else {
+                        console.log( "Could not match " + item.typeLine );
+                    }
+                } else {
+                    itemType = types[item.typeLine];
+                }
+                if ( itemType && ( item.frameType === 1 || item.frameType === 2 )) {
+                    var split = itemType.split( "_" );
+                    // console.log( split );
+                    // console.log( item.typeLine );
+                    var corrupted = [];
+                    var iterationP;
+                    var iterationS;
+                    var iterationC;
+                    if ( split.length > 1 ) {
+                        corrupted = mods[split[0]][split[1]]["corrupted"];
+                    } else {
+                        corrupted = mods[split[0]]["corrupted"];
+                    }
+                    async.each( item.implicitMods, function( implicitMod, cbImplicit ) {
+                        var reg   = /([0-9.]+)/g;
+                        var match = reg.exec( implicitMod );
+                        var values = [];
+                        while ( match !== null ) {
+                            values.push( match[1]);
+                            match = reg.exec( implicitMod );
+                        }
+                        var index = "";
+                        var implicitTitle = implicitMod.replace( reg, "#" );
+    
+                        // If this mod is a corrupted implicit
+                        if ( corrupted[implicitTitle]) {
+                            Item.formatAffixes( corrupted[implicitTitle], values, implicitMod, "corrupted", function( res ) {
+                                // Amethyst ring have chaos implicit which is also a corrupted implicit
+                                if ( res === "" ) {
+                                    implicit += 
+                                    "<span class=\"badge affix-implicit\" data-badge-caption=\"Implicit" +
+                                    "\"></span><span class=\"implicit\">" + implicitMod + "</span><br>";
+                                } else {
+                                    implicit += res;
+                                }
+                                cbImplicit();
+                            });
+                        // Otherwise
+                        } else {
+                            implicit += 
+                                "<span class=\"badge affix-implicit\" data-badge-caption=\"Implicit" +
+                                "\"></span><span class=\"implicit\">" + implicitMod + "</span><br>";
+                            cbImplicit();
+                        }
+                    }, function() {
+                    });
+                }
+            } else {
+                implicit += "<span class=\"badge affix-implicit\" data-badge-caption=\"Implicit\"></span><span class=\"implicit\">";
+                implicit += item.implicitMods.join( "</span><br><span class=\"badge affix-implicit\" data-badge-caption=\"Implicit\"></span><span class=\"implicit\">" );
+                implicit += "</span><br>";
+            }
         }
 
-        if ( item.explicitMods && item.identified ) {
-            // console.log( item.typeLine );
-            // If object is magic, we have to guess the type another way
-            var itemType;
+        if ( !itemType ) {
             if ( item.frameType === 1 ) {
                 var cleanedTypeLine = item.typeLine.replace( "Shaped ", "" );
                 var match = magicReg.exec( cleanedTypeLine );
@@ -308,12 +390,14 @@ class Item {
             } else {
                 itemType = types[item.typeLine];
             }
-            
+        }
+        if ( item.explicitMods && item.identified ) {
+            // console.log( item.typeLine );
             // console.log( itemType );
             if ( itemType && ( item.frameType === 1 || item.frameType === 2 )) {
                 var split = itemType.split( "_" );
-                console.log( split );
-                console.log( item.typeLine );
+                // console.log( split );
+                // console.log( item.typeLine );
                 var prefixes  = [];
                 var suffixes  = [];
                 var corrupted = [];
@@ -340,6 +424,7 @@ class Item {
                     var index = "";
                     var explicitTitle = explicitMod.replace( reg, "#" );
                     // console.log( explicitTitle );
+                    // console.log( mods["signature"][explicitTitle]);
 
                     // If this mod is a prefix
                     if ( prefixes[explicitTitle]) {
@@ -358,6 +443,12 @@ class Item {
                     // If this mod is corrupted
                     } else if ( corrupted[explicitTitle]) {
                         Item.formatAffixes( corrupted[explicitTitle], values, explicitMod, "C", function( res ) {
+                            explicit += res;
+                            cbExplicit();
+                        });
+                    // If this mod is a signature mod
+                    } else if ( mods["signature"][explicitTitle]) {
+                        Item.formatAffixes( mods["signature"][explicitTitle], values, explicitMod, "signature", function( res ) {
                             explicit += res;
                             cbExplicit();
                         });
