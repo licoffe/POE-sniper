@@ -66,12 +66,57 @@ class Filter {
         this.active       = obj.active;
         this.checked      = obj.active ? "checked" : "";
         this.convert      = obj.convert;
-        this.displayPrice = obj.displayPrice;
-        this.openPrefixes = obj.openPrefixes;
-        this.openSuffixes = obj.openSuffixes;
-        this.mapQuantity  = obj.mapQuantity;
-        this.mapRarity    = obj.mapRarity;
-        this.mapPackSize  = obj.mapPackSize;
+        this.displayPrice = obj.displayPrice === undefined ? "" : obj.displayPrice;
+        this.openPrefixes = obj.openPrefixes === undefined ? "" : obj.openPrefixes;
+        this.openSuffixes = obj.openSuffixes === undefined ? "" : obj.openSuffixes;
+        this.mapQuantity  = obj.mapQuantity === undefined ? "" : obj.mapQuantity;
+        this.mapRarity    = obj.mapRarity === undefined ? "" : obj.mapRarity;
+        this.mapPackSize  = obj.mapPackSize === undefined ? "" : obj.mapPackSize;
+        // Convert affixes without type to explicit to ensure compatibility
+        // with older versions
+        var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
+        for ( var affix in this.affixes ) {
+            var match = extractReg.exec( affix );
+            if ( !match ) {
+                if ( this.affixes[affix][0] === 0 || this.affixes[affix][0] === "" ) {
+                    this.affixes[affix][0] = "…";
+                }
+                if ( this.affixes[affix][1] === 1000000 || this.affixes[affix][1] === "" ) {
+                    this.affixes[affix][1] = "…";
+                }
+                this.affixes["(Explicit) " + affix] = this.affixes[affix];
+                delete this.affixes[affix];
+            }
+        }
+        var self = this;
+        var newAffixesDis = [];
+        async.each( this.affixesDis, function( affixDis, cbAffix ) {
+            var match = extractReg.exec( affixDis );
+            if ( !match ) {
+                var bothTerms        = /\( ([0-9.]+) \- ([0-9.]+) \)/;
+                var missingLeftTerm  = /\(  \- ([0-9.]+) \)/;
+                var missingRightTerm = /\( ([0-9.]+) \-  \)/;
+                var matchBoth  = bothTerms.exec( affixDis );
+                var matchLeft  = missingLeftTerm.exec( affixDis );
+                var matchRight = missingRightTerm.exec( affixDis );
+                if ( matchBoth ) {
+                    affixDis = affixDis.replace( bothTerms, "( <span class='value'>$1</span> - <span class='value'>$2</span> )" );
+                    newAffixesDis.push( "(Explicit) " + affixDis );
+                } else if ( matchLeft ) {
+                    affixDis = affixDis.replace( missingLeftTerm, "( <span class='value'>…</span> - <span class='value'>$1</span> )" );
+                    newAffixesDis.push( "(Explicit) " + affixDis );
+                } else if ( matchRight ) {
+                    affixDis = affixDis.replace( missingRightTerm, "( <span class='value'>$1</span> - <span class='value'>…</span> )" );
+                    newAffixesDis.push( "(Explicit) " + affixDis );
+                }
+                cbAffix();
+            } else {
+                newAffixesDis.push( affixDis );
+                cbAffix();
+            }
+        }, function() {
+            self.affixesDis = newAffixesDis;
+        });
     }
 
     /**

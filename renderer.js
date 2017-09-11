@@ -1756,7 +1756,8 @@ $( document).ready( function() {
 
         var begin = Date.now();
 
-        $( "#current-change-id" ).text( chunkID );
+        var split = chunkID.split( "-" );
+        $( "#current-change-id" ).text( split[0]);
 
         var parseData = function( data ) {
             // Store last chunk ID
