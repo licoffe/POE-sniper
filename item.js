@@ -471,6 +471,12 @@ class Item {
                 explicit += "</span><br>";
             }
         }
+
+        // If item is a prophecy
+        if ( item.frameType === 8 ) {
+            explicit += item.prophecyText;
+        }
+
         if ( item.craftedMods ) {
             crafted += "<span class=\"badge affix-crafted\" data-badge-caption=\"Crafted\"></span><span class=\"crafted\">";
             crafted += item.craftedMods.join( "</span><br><span class=\"badge affix-crafted\" data-badge-caption=\"Crafted\"></span><span class=\"crafted\">" );
@@ -539,6 +545,11 @@ class Item {
             var imageDomain = "";
             if ( config.useBeta ) {
                 imageDomain = "http://web.poecdn.com/";
+            }
+
+            // If the item is a divination card
+            if ( item.frameType === 6 ) {
+                item.icon = "http://web.poecdn.com/image/gen/divination_cards/" + item.artFilename + ".png";
             }
             
             var passed = true;
