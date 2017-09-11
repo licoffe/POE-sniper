@@ -539,7 +539,9 @@ input[type=range] {
 .new-update {
     position: fixed;
     left: 30%;
-    top: 30%;
+    top: 10%;
+    max-height: 80%;
+    overflow-y: scroll;
     width: 40%;
     filter: blur(0px);
     z-index: 999;
