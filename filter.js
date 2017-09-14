@@ -30,6 +30,7 @@ var itemTypes = require( "./itemTypes.json" );
 class Filter {
 
     constructor( obj ) {
+        var rangeReg = /([0-9.]+)\s*\-\s*([0-9.]+)/;
         this.league       = obj.league;
         this.item         = obj.item;
         this.title        = obj.title;

@@ -12820,6 +12820,36 @@
                 ]
             },
             "suffix": {
+                "Attacks have #% chance to cause Bleeding": [
+                    { "name": "of Bleeding", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Bleed duration": [
+                    { "name": "of Bleeding", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "#% chance to Freeze": [
+                    { "name": "of Freezing", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Freeze Duration on Enemies": [
+                    { "name": "of Freezing", "min": 12, "max": 16, "lvl": 1 }
+                ],
+                "#% chance to Ignite": [
+                    { "name": "of Burning", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Ignite Duration on Enemies": [
+                    { "name": "of Burning", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% chance to Poison on Hit": [
+                    { "name": "of Poisoning", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Poison Duration": [
+                    { "name": "of Poisoning", "min": 6, "max": 8, "lvl": 1 }
+                ],
+                "#% chance to Shock": [
+                    { "name": "of Shocking", "min": 3, "max": 5, "lvl": 1 }
+                ],
+                "#% increased Shock Duration on Enemies": [
+                    { "name": "of Shocking", "min": 12, "max": 16, "lvl": 1 }
+                ],
                 "#% increased Damage with Poison": [
                     { "name": "of Venom", "min": 16, "max": 20, "lvl": 1 }
                 ],

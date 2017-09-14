@@ -279,6 +279,10 @@ class Item {
                cbAffix();
             }
         }, function() {
+            if ( explicit === "" ) {
+                explicit += "<span class=\"badge affix-explicit\" data-badge-caption=\"?" +
+                            "\"></span><span class=\"explicit\">" + explicitMod + "</span><br>";
+            }
             callback( explicit );
         });
     }
@@ -322,7 +326,7 @@ class Item {
                 } else {
                     itemType = types[item.typeLine];
                 }
-                if ( itemType && ( item.frameType === 1 || item.frameType === 2 )) {
+                if ( itemType ) {
                     var split = itemType.split( "_" );
                     // console.log( split );
                     // console.log( item.typeLine );
