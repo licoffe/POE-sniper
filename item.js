@@ -228,7 +228,7 @@ class Item {
             values[0] = 0;
         }
         async.each( affixes, function( affix, cbAffix ) {
-            // console.log( explicitMod + " : " + JSON.stringify( affix.min ) + " : " + affix.min.length );
+            // console.log( explicitMod + " : " + JSON.stringify( affix.min ) + " : " + affix.min.length + " : " + JSON.stringify( values ) );
             if ( affix.min.length ) {
                 if ( !added &&
                      affix.min[0] <= values[0] &&
