@@ -509,10 +509,19 @@ class Item {
 
         async.each( item.properties, function( property, cbProperty ) {
             // console.log( property );
-            if ( property.values.length > 0 && property.values[0].length > 0 ) {
-                properties += "<span class=\"property\"><span class=\"col s5 property-title\">" + property.name + "</span><span class=\"col s7 property-value\">" + property.values[0][0] + "</span></span><br>";
+            var prop = "<span class=\"property\"><span class=\"col s5 property-title\">" + property.name + "</span><span class=\"col s7 property-value\">";
+            if ( property.values.length > 0 ) {
+                async.each( property.values, function( propertyValue, cbPropertyValue ) {
+                    prop += propertyValue[0] + " ";
+                    cbPropertyValue();
+                }, function() {
+                    prop += "</span></span><br>";
+                    properties += prop;
+                    cbProperty();
+                });
+            } else {
+                cbProperty();
             }
-            cbProperty();
         }, function( err ) {
             if ( err ) {
                 console.log( err );
