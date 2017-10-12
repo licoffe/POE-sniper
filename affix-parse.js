@@ -29,23 +29,23 @@ var urls = {
         "essence-suffix": buildURL( 2, 1, "~*ssence*" ),
         "enchant":        buildURL( 10, null, "!~*ssence*" ),
         "corrupted":      buildURL( 5, 1, "!~*ssence*" ),
-        "unique":         buildURL( 3, 1, "!~*ssence*" )
+        // "unique":         buildURL( 3, 1, "!~*ssence*" )
     },
     "Flask": {
         "prefix":         buildURL( 1, 2, "!~*ssence*" ),
         "suffix":         buildURL( 2, 2, "!~*ssence*" ),
-        "unique":         buildURL( 3, 1, "!~*lask*" )
+        // "unique":         buildURL( 3, 1, "!~*lask*" )
     },
     "Jewel": {
         "prefix":         buildURL( 1, 11, "!~*ssence*" ),
         "suffix":         buildURL( 2, 11, "!~*ssence*" ),
         "corrupted":      buildURL( 5, 11, "!~*ssence*" ),
-        "unique":         buildURL( 3, 11, "!~*ewel*" )
+        // "unique":         buildURL( 3, 11, "!~*ewel*" )
     },
     "Map": {
         "prefix":         buildURL( 1, 5, "!~*ssence*" ),
         "suffix":         buildURL( 2, 5, "!~*ssence*" ),
-        "unique":         buildURL( 3, 5, "!~*ap*" )
+        // "unique":         buildURL( 3, 5, "!~*ap*" )
     }
 };
 
