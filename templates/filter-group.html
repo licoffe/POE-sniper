@@ -1,0 +1,30 @@
+<ul class="filter-group collection-item grey darken-4 filter-entry" id="{{id}}">
+    <div class="row">
+        <div class="col s1">
+            <input type="checkbox" class="filled-in cb" id="enable-filter-group-{{id}}" {{checked}}>
+            <label for="enable-filter-group-{{id}}" style="font-size: 1em!important; left: 20%!important"></label>
+            <i id="fold-group-{{id}}" class="material-icons fold-group" style="left: 30px;">keyboard_arrow_down</i>
+        </div>
+        <div class="col s10 filter-detail-group" id="filter-group-detail-{{id}}">
+            <span class="title">
+                <div class="row">
+                    <input class="item input-field col s11" value="{{name}}" style="color: {{color}}">
+                    <input type="color" class="color-picker col s1">
+                </div>
+                <div class="row">
+                    <div class="performance-info">
+                        Group processing time: <span class="performance-info-time-group">0 ms</span>
+                    </div>
+                </div>
+            </span>
+            <div class="row" style="padding-top: 15px">
+                <ul id="filter-group-content-{{id}}" class="filter-group-content collection" ondrop="drop(event)" ondragover="dragOver(event)" ondragend="dragEnd(event)" ondragleave="dragLeave(event)">
+                </ul>
+            </div>
+        </div>
+        <div class="col s1">
+            <a href="#!" class="secondary-content right"><i class="material-icons red-text remove-group" id="remove-group-{{id}}">remove</i></a>
+            <a href="#!" class="secondary-content right"><i class="material-icons red-text clear-group" id="{{id}}-clear-group">delete_sweep</i></a>
+        </div>
+    </div>
+</ul>

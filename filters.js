@@ -2,7 +2,7 @@
  * Filters class
  *
  * List of Filter representation
- * @params Nothing
+ * @param Nothing
  * @return Filters object
  */
 
@@ -28,19 +28,29 @@ class Filters {
     /**
      * Sort filter list alphabetically
      *
-     * @params Nothing
+     * @param Nothing
      * @return Filters in place
      */
     sort() {
         this.filterList.sort( function( a, b ) {
             var alc = a.item.toLowerCase();
             var blc = b.item.toLowerCase();
-            if ( alc < blc ) {
-                return -1;
-            } else if ( alc > blc ) {
+            // If both filters are not in groups or both filters are in group
+            if ((( !alc.group || alc.group === "" ) && ( !blc.group || blc.group === "" )) ||
+                ( alc.group !== "" && blc.group !== "" )) {
+                if ( alc < blc ) {
+                    return -1;
+                } else if ( alc > blc ) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            // If only filter a has a group, order a first
+            } else if ( alc.group !== "" ) {
                 return 1;
+            // Otherwise if only b has a group, order b first
             } else {
-                return 0;
+                return -1;
             }
         });
     }
@@ -48,7 +58,7 @@ class Filters {
     /**
      * Activate/deactivate filter
      *
-     * @params Filter id, callback
+     * @param Filter id, callback
      * @return Nothing
      */
     toggle( id, callback ) {
@@ -68,35 +78,61 @@ class Filters {
     }
 
     /**
-     * Find the sorted index of a specific filter in the lsit
+     * Find the sorted index of a specific filter in the list
      *
-     * @params Filter to be found
+     * @param Filter to be found
      * @return Index through callback
      */
     findFilterIndex( filter, callback ) {
         var self = this;
         var index = 0;
         var found = false;
-        async.each( this.filterList, function( f, cbFilter ) {
-            if ( !found && JSON.stringify( filter ) === JSON.stringify( f )) {
-                found = true;
-            }
-            if ( !found ) {
-                index++;
-            }
-            cbFilter();
-        }, function( err ) {
-            if ( err ) {
-                console.log( err );
-            }
-            callback({ found: found, index: index });
-        });
+        // If filter is not in a group we have to take into account
+        // grouped filters which are ordered first
+        if ( filter.group === "" ) {
+            // Count all grouped filters
+            async.each( this.filterList, function( f, cbFilter ) {
+                if ( f.group !== "" ) {
+                    index++;
+                }
+                cbFilter();
+            }, function() {
+                // console.log( "counted " + index + " filters in groups" );
+                async.eachLimit( self.filterList, 1, function( f, cbFilter ) {
+                    if ( f.group === "" && !found && JSON.stringify( filter ) === JSON.stringify( f )) {
+                        found = true;
+                    }
+                    if ( !found && f.group === "" ) {
+                        console.log( f.item );
+                        index++;
+                    }
+                    cbFilter();
+                }, function() {
+                    callback({ found: found, index: index });
+                });
+            });
+        } else {
+            async.each( this.filterList, function( f, cbFilter ) {
+                if ( !found && JSON.stringify( filter ) === JSON.stringify( f )) {
+                    found = true;
+                }
+                if ( !found ) {
+                    index++;
+                }
+                cbFilter();
+            }, function( err ) {
+                if ( err ) {
+                    console.log( err );
+                }
+                callback({ found: found, index: index });
+            });
+        }
     }
 
     /**
      * Add a new filter to the filter list
      *
-     * @params Filter object to add
+     * @param Filter object to add
      * @return Nothing
      */
     add( filter ) {
@@ -108,7 +144,7 @@ class Filters {
     /**
      * Remove a filter from the filter list
      *
-     * @params The filter id corresponding to the filter to be removed, callback
+     * @param The filter id corresponding to the filter to be removed, callback
      * @return Nothing
      */
     remove( filterId, callback ) {
@@ -135,7 +171,7 @@ class Filters {
     /**
      * Update filter inside filter list
      *
-     * @params Filter to find and replace
+     * @param Filter to find and replace
      * @return Callback
      */
     update( filterToFind, callback ) {
@@ -162,15 +198,11 @@ class Filters {
     /**
      * Write the filter list to disk
      *
-     * @params Nothing
+     * @param Nothing
      * @return Nothing
      */
     save() {
-        fs.writeFile( app.getPath( "userData" ) + path.sep + "filters.json", JSON.stringify( this.filterList ), function( err ) {
-            if ( err ) {
-                console.log( err );
-            }
-        });
+        fs.writeFileSync( app.getPath( "userData" ) + path.sep + "filters.json", JSON.stringify( this.filterList ));
     }
 }
 

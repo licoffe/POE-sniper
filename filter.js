@@ -13,10 +13,10 @@
 
 var async    = require( "async" );
 var mu       = require( "mu2" );
+mu.root      = __dirname + '/templates';
 var fs       = require( "fs" );
 const {app}  = require( "electron" ).remote;
 const path   = require( "path" );
-mu.root      = __dirname + '/templates';
 var config   = {};
 // Check if config.json exists in app data, otherwise create it from default
 // config file.
@@ -73,6 +73,7 @@ class Filter {
         this.mapQuantity  = obj.mapQuantity === undefined ? "" : obj.mapQuantity;
         this.mapRarity    = obj.mapRarity === undefined ? "" : obj.mapRarity;
         this.mapPackSize  = obj.mapPackSize === undefined ? "" : obj.mapPackSize;
+        this.group        = obj.group;
         // Convert affixes without type to explicit to ensure compatibility
         // with older versions
         var extractReg = /^\(([a-zA-Z ]+)\)\s*/;

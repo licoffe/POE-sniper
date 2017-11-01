@@ -1,4 +1,4 @@
-<li class="collection-item grey darken-4 filter-entry">
+<li draggable="true" ondragstart="drag(event)" class="collection-item filter-entry" id="filter-{{id}}" style="background: rgba(0, 0, 0, 0)">
     <div class="row">
         <div class="col s1">
             <input type="checkbox" class="filled-in cb" id="enable-filter-{{id}}" {{checked}}>
@@ -6,7 +6,7 @@
         </div>
         <div class="col s10 filter-detail valign-wrapper" id="filter-detail-{{id}}">
             <span class="title">
-                <span class="item">{{{title}}}</span> in {{league}} league <= <span class="currency">{{displayPrice}}</span><span class="buyout">&nbsp;(include barter offers)</span><span class="clipboard">&nbsp;(clipboard)</span>
+                <span class="item">{{{title}}}</span> in {{league}} league ≤ <span class="currency">{{displayPrice}}</span><span class="buyout">&nbsp;(include barter offers)</span><span class="clipboard">&nbsp;(clipboard)</span>
                 <div class="row affix-filter-list">
                 </div>
                 <div class="row">

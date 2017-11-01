@@ -14,6 +14,9 @@
         <link rel="stylesheet" href="./font/stylesheet.css">
         <!-- Compiled and minified JavaScript -->
         <script src="./materialize/js/materialize.min.js"></script>
+        <!-- Spectrum.js -->
+        <script src='./spectrum/spectrum.js'></script>
+        <link rel='stylesheet' href='./spectrum/spectrum.css' />
     </head>
 
     <body class="grey darken-4">
@@ -94,6 +97,7 @@
                         <a class="waves-effect waves-light btn col s2 z-depth-1 disabled" id="add-affix" style="font-size: 1.3em!important; top: -8px!important;">Add</a>
                     </div>
                     <div id="affixes-list">
+                        
                     </div>
                 </div>
                 <div class="input-field col s3">
@@ -315,17 +319,10 @@ padding: 0!important;">
                     </span>
                     <input id="filter-filter" class="col s3" type="text" placeholder="Filter filters">
                     <span id="filter-processing-total-time" class="col s3 title">Total processing time: <span id="total-processing-time">0ms</span></span>
+                    <a href="#!" id="add-group" class="waves-effect waves-light btn z-depth-2" style="font-size: 1.2em!important; position: relative; top: -10px!important; "><i class="material-icons" style="position: relative; top: 0">tab</i><span style="position: relative; top: -5px; left: 5px">Add group</span></a>
                 </div>
                 <div class="col s12" id="filters">
-                    <!--<ul class="collection" style="border: none;">
-                        <li class="filter-action grey darken-4">
-                            <div class="row">
-                                <span class="col s1"></span>
-                                <a class="waves-effect waves-light btn col s1 left" id="toggle-all-filters" style="font-size: 1.3em!important; top: -8px!important;">Toggle all filters</a>
-                            </div>
-                        </li>
-                    </ul>-->
-                    <ul class="collection" style="border: none;">
+                    <ul class="collection filter-collection" style="border: none;" ondrop="drop(event)" ondragover="dragOver(event)" ondragend="dragEnd(event)" ondragleave="dragLeave(event)">
                     </ul>
                 </div>
             </form>
