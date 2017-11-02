@@ -1,3 +1,8 @@
+/* jshint node: true */
+/* jshint jquery: true */
+/* jshint esversion: 6 */
+"use strict";
+
 /**
  * Filters class
  *

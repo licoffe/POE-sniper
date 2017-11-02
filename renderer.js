@@ -31,6 +31,7 @@ var Group            = require( "./filter-group.js" );
 var FilterGroups     = require( "./filter-groups.js" );
 var Currency         = require( "./currency.js" );
 var Chunk            = require( "./chunk.js" );
+var BlackList        = require( "./blacklist.js" );
 
 // Current leagues
 var leagues         = config.leagues;
@@ -78,6 +79,8 @@ var editingAffix    = "";
 var interrupt       = false;
 var sold = 0;
 var audio           = new Audio( __dirname + '/' + config.sound );
+var itemBlackList;
+var playerBlackList;
 
 // var writeFilterStats = function( filterStats ) {
 //     fs.appendFile( __dirname + "/stats_filters.csv", filterStats, function( err ) {
@@ -612,6 +615,25 @@ $( document).ready( function() {
                     $( ".autocomplete-content" ).empty();
                 }
             });
+
+            // Setup blacklist reasons completion
+            $( '#blacklist-reason' ).autocomplete({
+                data: {
+                    "Scammer": null,
+                    "Bot": null,
+                    "Price fixing": null,
+                    "Low balling": null,
+                    "Ignoring messages": null,
+                    "No intent to sell": null
+                },
+                limit: 20
+            });
+            // Close on Escape
+            $( '#blacklist-reason' ).keydown( function( e ) {
+                if ( e.which == 27 ) {
+                    $( ".autocomplete-content" ).empty();
+                }
+            });
         });
     };
 
@@ -840,9 +862,29 @@ $( document).ready( function() {
         });
     };
 
+    // Count filters within a group
+    var countItemsInGroup = function( group, callback ) {
+        var counter = 0;
+        async.each( filters.filterList, function( filter, cbFilter ) {
+            if ( filter.group === group.id ) {
+                counter++;
+            }
+            cbFilter();
+        }, function() {
+            callback( counter );
+        });
+    };
+
     var appendAndBind = function( group, callback ) {
         group.render( function( generated ) {
             $( "#filters ul.filter-collection" ).prepend( generated );
+
+            // Count filters in the group and update the counter above the group
+            countItemsInGroup( group, function( counter ) {
+                $( "#filter-group-detail-" + group.id + " .group-amount" ).text( counter + " filters" );
+            });
+
+            // Setup color picker for groups
             var ele = $( "#filter-group-detail-" + group.id + " .color-picker" ).spectrum({
                 color: group.color,
                 move: function( color ) {
@@ -860,10 +902,9 @@ $( document).ready( function() {
                     groups.save();
                 }
             });
-            // ele.attr( "value", group.color );
-            // ele.on( "hide.spectrum", function( e, tinyColor ) {
-                // console.log( tinyColor );
-            // });
+            // Align the color picker to the right
+            $( "#filter-group-detail-" + group.id + " .sp-replacer" ).addClass( "right" );
+
             // Restore saved folded state
             if ( group.folded ) {
                 // Unfold content
@@ -917,6 +958,43 @@ $( document).ready( function() {
         });
     };
 
+    // Load item black-list
+    var loadItemBlackList = function( callback ) {
+        var itemBlackList;
+        if ( !fs.existsSync( app.getPath( "userData" ) + path.sep + "item-blacklist.json" )) {
+            console.log( "Item blacklist file does not exist, creating it" );
+            var readStream  = fs.createReadStream( __dirname + path.sep + "item-blacklist.json" );
+            var writeStream = fs.createWriteStream( app.getPath( "userData" ) + path.sep + "item-blacklist.json" );
+            writeStream.on( "close", function() {
+                itemBlackList = require( app.getPath( "userData" ) + path.sep + "item-blacklist.json" );
+            });
+            readStream.pipe( writeStream );
+        } else {
+            console.log( "Loading item blacklist from " + app.getPath( "userData" ) + path.sep + "item-blacklist.json" );
+            itemBlackList = require( app.getPath( "userData" ) + path.sep + "item-blacklist.json" );
+        }
+        callback( new BlackList( "item-blacklist", itemBlackList.entries ));
+    };
+
+    // Load player black-list
+    var loadPlayerBlackList = function( callback ) {
+        var playerBlackList;
+        if ( !fs.existsSync( app.getPath( "userData" ) + path.sep + "player-blacklist.json" )) {
+            console.log( "Player blacklist file does not exist, creating it" );
+            var readStream  = fs.createReadStream( __dirname + path.sep + "player-blacklist.json" );
+            var writeStream = fs.createWriteStream( app.getPath( "userData" ) + path.sep + "player-blacklist.json" );
+            writeStream.on( "close", function() {
+                playerBlackList = require( app.getPath( "userData" ) + path.sep + "player-blacklist.json" );
+            });
+            readStream.pipe( writeStream );
+        } else {
+            console.log( "Loading player blacklist from " + app.getPath( "userData" ) + path.sep + "player-blacklist.json" );
+            playerBlackList = require( app.getPath( "userData" ) + path.sep + "player-blacklist.json" );
+        }
+        callback( new BlackList( "player-blacklist", playerBlackList.entries ));
+    };
+
+    // Load filter groups
     var loadFilterGroups = function( callback ) {
         var groupData;
         if ( !fs.existsSync( app.getPath( "userData" ) + path.sep + "filter-groups.json" )) {
@@ -981,29 +1059,43 @@ $( document).ready( function() {
             if ( $( event.target ).parents( ".filter-detail-group" ).length > 0 ) {
                 $( event.target ).parents( ".filter-detail-group" ).find( ".filter-group-content" ).append( document.getElementById( data ) );
                 $( event.target ).removeClass( "droppable" );
+                var groupId;
                 async.each( filters.filterList, function( filter, cbFilter ) {
                     if ( filter.id === data.replace( "filter-", "" )) {
                         filter.group = $( event.target ).parents( ".filter-detail-group" ).find( ".filter-group-content" ).attr( "id" ).replace( "filter-group-content-", "" );
+                        groupId = filter.group;
                     }
                     bindGroupToggleState( filter.group );
                     // console.log( filter.id + ":" + data.replace( "filter-", "" ) + ":" + event.target );
                     cbFilter();
                 }, function() {
                     filters.save();
+                    // Count filters in the group and update the counter above the group
+                    countItemsInGroup( { id: groupId }, function( counter ) {
+                        console.log( "Counted " + counter + " filters" );
+                        $( "#filter-group-detail-" + groupId + " .group-amount" ).text( counter + " filters" );
+                    });
                 });
             // If filter was dropped into the main list, remove its group
             // attribute and append it to the main filter list
             } else if ( $( event.target ).parents().find( ".filter-collection" ).length > 0 ) {
                 $( ".filter-collection" ).append( document.getElementById( data ) );
                 $( event.target ).removeClass( "droppable" );
+                var groupId;
                 async.each( filters.filterList, function( filter, cbFilter ) {
                     if ( filter.id === data.replace( "filter-", "" )) {
+                        groupId = filter.group;
                         filter.group = "";
                     }
                     // console.log( filter.id + ":" + data.replace( "filter-", "" ) + ":" + event.target );
                     cbFilter();
                 }, function() {
                     filters.save();
+                    // Count filters in the group and update the counter above the group
+                    countItemsInGroup({ id: groupId }, function( counter ) {
+                        console.log( "Counted " + counter + " filters" );
+                        $( "#filter-group-detail-" + groupId + " .group-amount" ).text( counter + " filters" );
+                    });
                 });
             } else {
                 console.log( $( event.target ).attr( "class" ));
@@ -1838,6 +1930,27 @@ $( document).ready( function() {
         });
     };
 
+    // When clicking on blacklist button
+    var bindBlacklistEntry = function( id ) {
+        $( "#blacklist-action-" + id ).click( function( e ) {
+            e.stopPropagation();
+            console.log( "Clicked blacklist" );
+            $( "#blacklist-modal" ).modal( "open" );
+            $( "#blacklist-reason" ).val( "" );
+            var entry = results[id];
+            $( ".modal-content .blacklist-account" ).text( entry.accountName );
+            $( "#blacklist" ).click( function() {
+                var reason = $( "#blacklist-reason" ).val();
+                playerBlackList.add({
+                    factor: entry.accountName,
+                    reason: reason,
+                    active: true
+                });
+                playerBlackList.save();
+            });
+        });
+    };
+
     // When clicking on 'cancel affix'
     $( "#cancel-affix" ).click( function() {
         $( "#affix-min" ).val( "" );
@@ -1987,92 +2100,98 @@ $( document).ready( function() {
     };
 
     var displayItem = function( item, stash, foundIndex, clipboard, filterId, callback ) {
-        var generated = "";
-        var displayItem = JSON.parse( JSON.stringify( item ));
-        mu.compileAndRender( "entry.html", displayItem )
-        .on( "data", function ( data ) {
-            generated += data.toString();
-        })
-        .on( "end", function () {
-            $( "#results ul" ).prepend( generated );
-            if ( displayItem.fullPrice ) {
-                displayItem.originalPrice += "<span class=\"" + displayItem.confidence + "\"> (" + displayItem.fullPrice + " chaos)</span> " + Math.round(( 1 - displayItem.price / displayItem.fullPrice ) * 100 ) + "% off" ;
-                $( "#" + item.id + " .currency" ).html( displayItem.originalPrice );
-            }
-            updateResultsAmount();
-            item.accountName = stash.lastCharacterName;
-            item.name = item.item;
-            var element = $( "#" + item.id );
-
-            // Tag item with filter id
-            element.data( "tag", filterId );
-            
-            // item.price = price;
-            item.stashName = stash.stash;
-            element.data( "item", item );
-            // Add proper coloring
-            if ( item.frameType === 1 ) {
-                $( "#" + item.id + " .item" ).addClass( "magic" );
-            } else if ( item.frameType === 2 ) {
-                $( "#" + item.id + " .item" ).addClass( "rare" );
-            } else if ( item.frameType === 3 ) {
-                $( "#" + item.id + " .item" ).addClass( "unique" );
-            } else if ( item.frameType === 4 ) {
-                $( "#" + item.id + " .item" ).addClass( "gem" );
-            } else if ( item.frameType === 5 ) {
-                $( "#" + item.id + " .item" ).addClass( "currency" );
-            } else if ( item.frameType === 6 ) {
-                $( "#" + item.id + " .item" ).addClass( "divination" );
-            } else if ( item.frameType === 8 ) {
-                $( "#" + item.id + " .item" ).addClass( "prophecy" );
-            } else if ( item.frameType === 9 ) {
-                $( "#" + item.id + " .item" ).addClass( "legacy" );
-            } 
-            bindClickEntry( item.id );
-            $( "#" + item.id + " .implicit-container" ).html( item.implicit );
-            $( "#" + item.id + " .enchant-container" ).html( item.enchant );
-            $( "#" + item.id + " .explicit-container" ).html( item.explicit );
-            $( "#" + item.id + " .crafted-container" ).html( item.crafted );
-            $( "#" + item.id + " .total-container" ).html( item.total );
-            $( "#" + item.id + " .pseudo-container" ).html( item.pseudo );
-            if ( item.implicit === "" ) {
-                $( "#" + item.id + " .implicit-container" ).hide();
-            }
-            if ( item.enchant === "" ) {
-                $( "#" + item.id + " .enchant-container" ).hide();
-            }
-            if ( item.crafted === "" ) {
-                $( "#" + item.id + " .crafted-container" ).hide();
-            }
-            if ( !item.corrupted ) {
-                $( "#" + item.id + " .corrupted" ).hide();
-            }
-            $( "#" + item.id + " .properties-container" ).html( item.properties );
-
-            item.displayPrice = item.originalPrice;
-            if ( item.displayPrice === "Negotiate price" ) {
-                item.displayPrice = "barter";
-            }
-
-            renderSockets( item );
-
-            // Only notify if the item is new in the list
-            // or if it's been repriced lower
-            if ( foundIndex === -1 || item.originalPrice < prices[item.itemId]) {
-                // Update stored price
-                prices[item.itemId] = item.originalPrice;
-                item.clipboard = clipboard;
-                lastItem       = item;
-                // If delay queue is empty an no notification is being displayed, notify now
-                // Otherwise, put in the queue
-                if ( delayQueue.length === 0 && !displayingNotification ) {
-                    notifyNewItem( item );
-                } else {
-                    delayQueue.push( item );
-                }
-            }
+        if ( item.blacklisted ) {
+            console.log( "Hiding blacklisted player: " + item.blacklisted );
             callback();
-        });
+        } else {
+            var generated = "";
+            var displayItem = JSON.parse( JSON.stringify( item ));
+            mu.compileAndRender( "entry.html", displayItem )
+            .on( "data", function ( data ) {
+                generated += data.toString();
+            })
+            .on( "end", function () {
+                $( "#results ul" ).prepend( generated );
+                if ( displayItem.fullPrice ) {
+                    displayItem.originalPrice += "<span class=\"" + displayItem.confidence + "\"> (" + displayItem.fullPrice + " chaos)</span> " + Math.round(( 1 - displayItem.price / displayItem.fullPrice ) * 100 ) + "% off" ;
+                    $( "#" + item.id + " .currency" ).html( displayItem.originalPrice );
+                }
+                updateResultsAmount();
+                item.accountName = stash.lastCharacterName;
+                item.name = item.item;
+                var element = $( "#" + item.id );
+    
+                // Tag item with filter id
+                element.data( "tag", filterId );
+                
+                // item.price = price;
+                item.stashName = stash.stash;
+                element.data( "item", item );
+                // Add proper coloring
+                if ( item.frameType === 1 ) {
+                    $( "#" + item.id + " .item" ).addClass( "magic" );
+                } else if ( item.frameType === 2 ) {
+                    $( "#" + item.id + " .item" ).addClass( "rare" );
+                } else if ( item.frameType === 3 ) {
+                    $( "#" + item.id + " .item" ).addClass( "unique" );
+                } else if ( item.frameType === 4 ) {
+                    $( "#" + item.id + " .item" ).addClass( "gem" );
+                } else if ( item.frameType === 5 ) {
+                    $( "#" + item.id + " .item" ).addClass( "currency" );
+                } else if ( item.frameType === 6 ) {
+                    $( "#" + item.id + " .item" ).addClass( "divination" );
+                } else if ( item.frameType === 8 ) {
+                    $( "#" + item.id + " .item" ).addClass( "prophecy" );
+                } else if ( item.frameType === 9 ) {
+                    $( "#" + item.id + " .item" ).addClass( "legacy" );
+                } 
+                bindClickEntry( item.id );
+                bindBlacklistEntry( item.id );
+                $( "#" + item.id + " .implicit-container" ).html( item.implicit );
+                $( "#" + item.id + " .enchant-container" ).html( item.enchant );
+                $( "#" + item.id + " .explicit-container" ).html( item.explicit );
+                $( "#" + item.id + " .crafted-container" ).html( item.crafted );
+                $( "#" + item.id + " .total-container" ).html( item.total );
+                $( "#" + item.id + " .pseudo-container" ).html( item.pseudo );
+                if ( item.implicit === "" ) {
+                    $( "#" + item.id + " .implicit-container" ).hide();
+                }
+                if ( item.enchant === "" ) {
+                    $( "#" + item.id + " .enchant-container" ).hide();
+                }
+                if ( item.crafted === "" ) {
+                    $( "#" + item.id + " .crafted-container" ).hide();
+                }
+                if ( !item.corrupted ) {
+                    $( "#" + item.id + " .corrupted" ).hide();
+                }
+                $( "#" + item.id + " .properties-container" ).html( item.properties );
+    
+                item.displayPrice = item.originalPrice;
+                if ( item.displayPrice === "Negotiate price" ) {
+                    item.displayPrice = "barter";
+                }
+    
+                renderSockets( item );
+    
+                // Only notify if the item is new in the list
+                // or if it's been repriced lower
+                if ( foundIndex === -1 || item.originalPrice < prices[item.itemId]) {
+                    // Update stored price
+                    prices[item.itemId] = item.originalPrice;
+                    item.clipboard = clipboard;
+                    lastItem       = item;
+                    // If delay queue is empty an no notification is being displayed, notify now
+                    // Otherwise, put in the queue
+                    if ( delayQueue.length === 0 && !displayingNotification ) {
+                        notifyNewItem( item );
+                    } else {
+                        delayQueue.push( item );
+                    }
+                }
+                callback();
+            });
+        }
     };
 
     /**
@@ -2218,6 +2337,12 @@ $( document).ready( function() {
                                             results[item.id] = item;
                                             // console.log( "Adding " + item.id  + ":" + entryLookup[item.itemId]);
                                         }
+                                        if ( playerBlackList.check( stash.lastCharacterName ) ||
+                                             playerBlackList.check( stash.accountName )) {
+                                            item.blacklisted = stash.accountName;
+                                        } else {
+                                            console.log( stash.accountName + " is not blacklisted" );
+                                        }
                                         displayItem( item, stash, foundIndex, filter.clipboard, filter.id, function() {
                                             callbackItem();
                                         });
@@ -2250,7 +2375,6 @@ $( document).ready( function() {
                                         groupTimes[groupId] = 0;
                                     }
                                     groupTimes[groupId] += time;
-                                    console.log( groupTimes );
                                 }
                                 // Print text in red if above 100ms
                                 if ( time > 100 ) {
@@ -2265,7 +2389,6 @@ $( document).ready( function() {
                 }, function( err ) {
                     async.each( Object.keys( groupTimes ), function( group, cbGroup ) {
                         var time = groupTimes[group];
-                        console.log( "$( \"" + group + " .performance-info-time-group\" )" );
                         $( "#" + group + " .performance-info-time-group" ).text( time + " ms" );
                         cbGroup();
                     });
@@ -3001,4 +3124,14 @@ $( document).ready( function() {
         }
     });
 
+    loadItemBlackList( function( list ) {
+        itemBlackList = list;
+        console.log( itemBlackList );
+        itemBlackList.save();
+    });
+    loadPlayerBlackList( function( list ) {
+        playerBlackList = list;
+        console.log( playerBlackList );
+        playerBlackList.save();
+    });
 });

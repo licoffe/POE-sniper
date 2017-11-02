@@ -61,6 +61,12 @@ form {
     /* padding-bottom: 20px; */
 }
 
+.group-amount {
+    top: 4px;
+    position: relative;
+    color: #909090;
+}
+
 .droppable {
     background-color: rgb(0, 47, 41)!important;
     border: 1px dashed rgba(0,200,100,1)!important;
@@ -425,15 +431,12 @@ input:active {
     opacity: 100;
 }
 
-#preference-pane {
-    width: 80%;
-    height: 80%;
-    position: absolute;
-    top: 10%;
-    left: 10%;
+#settings-modal {
+    width: 97%;
+    max-height: 90%!important;
+    top: 5%!important;
     border-radius: 5px;
-    padding: 20px;
-    z-index: 999;
+    font-size: 0.8em;
 }
 
 .preference-title {
@@ -714,6 +717,13 @@ label.active {
     /*text-shadow: 0 0 5px blue;*/
 }
 
+.modal-content label.active {
+    transform: translateX(110%)!important;
+    text-align: right!important;
+    color: #b9ecb7!important;
+    /*text-shadow: 0 0 5px blue;*/
+}
+
 #settings-modal label {
     color: white;
 }
@@ -819,13 +829,13 @@ input:focus {
     left: 5px;
 }
 
-#settings-modal {
-    font-size: 0.8em;
-}
-
 .modal-content hr {
     border: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.modal-content {
+    font-size: 1em!important;
 }
 
 .modal-footer .btn {
@@ -969,7 +979,7 @@ label:disabled {
     margin-top: 5px;
 }
 
-.value {
+.value, .blacklist-account {
     color: #49bf9b;
     font-weight: bold;
 }
@@ -979,4 +989,26 @@ label:disabled {
     border: solid 1px #323232!important;
     background: #2b2b2b!important;
     color: #ffffff!important;
+}
+
+.blacklist-action {
+    left: 10px;
+    color: #828282;
+    font-size: 15px!important;
+    top: 2px;
+    transition: color 0.2s linear;
+}
+
+.blacklist-action:hover {
+    color: red;
+    transition: color 0.2s linear;
+}
+
+.modal-content .autocomplete-content {
+    font-size: 0.7em;
+}
+
+#blacklist {
+    top: -10px!important;
+    left: -10px;
 }
