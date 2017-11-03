@@ -61,6 +61,7 @@ notifier.on( "click", function () {
 
 var ncp             = require( "copy-paste" );
 var editingFilter   = "";    // Are we editing filters at the moment
+var editingGroup    = "";    // Are we editing a group at the moment
 var downloading     = false; // Is the tool downloading chunks at the moment
 var results         = {};
 var resultsId       = {};
@@ -81,6 +82,20 @@ var sold = 0;
 var audio           = new Audio( __dirname + '/' + config.sound );
 var itemBlackList;
 var playerBlackList;
+// Elements to enable/disable when group editing
+var elementList = {
+    "fields": [
+        "#item", "#item-type", "#armor", "#es", "#evasion", "#affixes",
+        "#affix-min", "#affix-max", "#sockets-total", "#sockets-red",
+        "#sockets-green", "#sockets-blue", "#sockets-white", "#level", "#quality",
+        "#experience", "#tier", "#open-prefixes", "#open-suffixes", "#map-quantity",
+        "#map-rarity", "#map-pack-size", "#dps", "#pdps", "#edps"
+    ],
+    "selects": [
+        "#links", "#corrupted", "#crafted", "#enchanted",
+        "#identified", "#rarity"
+    ]
+};
 
 // var writeFilterStats = function( filterStats ) {
 //     fs.appendFile( __dirname + "/stats_filters.csv", filterStats, function( err ) {
@@ -276,6 +291,9 @@ $( document).ready( function() {
             $( "#add-filter" ).removeClass( "green" );
             editingFilter = "";
         }
+
+        editingGroup = "";
+        enableElements( elementList );
     };
 
     var renderAffixes = function( filter, cb ) {
@@ -325,206 +343,217 @@ $( document).ready( function() {
         appendAndBind( group, function() {});
     };
 
+    var formatFilter = function( formData, callback ) {
+        $( ".affix-item" ).each( function() {
+            var data = $( this ).data( "data-item" );
+            var cleanedAffix = 
+                data.title.replace( /(<span class=\'value\'>[^<>]+<\/span>)/g, "#" )
+                          .replace( "( # - # )", "#" )
+                          .replace( "Unique explicit", "Explicit" )
+                          .replace( "Essence", "Explicit" )
+                          .replace( "Talisman implicit", "Implicit" );
+            formData.affixes[cleanedAffix] = [data.min, data.max];
+            var count = ( data.title.match( /#/g ) || []).length;
+            // console.log( data );
+            // console.log( count );
+            var affix = "";
+            if ( count > 1 ) {
+                affix = data.title.replace( "#", data.min );
+                affix = affix.replace( "#", data.max );
+            } else {
+                affix = data.title.replace( "#", "( " + data.min + " - " + data.max + " )" );
+            }
+            formData.affixesDis.push( affix );
+        });
+    
+        // If filter has a budget, make sure the budget has <= 2 
+        // trailing digits and save it
+        if ( formData.budget ) {
+            formData.budget = Math.round( formData.budget * 100 ) / 100;
+            formData.displayPrice = formData.budget + " " + formData.currency;
+        // Otherwise save "Any price" as the display price
+        } else {
+            formData.displayPrice = "Any price";
+        }
+
+        formData.currency = Currency.shortToLongLookupTable[formData.currency];
+
+        // Format the filter title
+        var title = "";
+        if ( formData.corrupted === "true" ) {
+            title += "<span class=\"filter-corrupted\">Corrupted</span>";
+        }
+        if ( formData.enchanted === "true" ) {
+            title += "<span class=\"filter-enchanted\">Enchanted</span>";
+        }
+        if ( formData.crafted === "true" ) {
+            title += "<span class=\"filter-crafted\">Crafted</span>";
+        }
+        if ( formData.itemType !== "any" && formData.itemType !== "" ) {
+            title += "<span style=\"padding-right: 10px;\">" + formData.item + "(any " + formData.itemType + ")</span>";
+        } else {
+            title += "<span style=\"padding-right: 10px;\">" + formData.item + "</span>";
+        }
+        if ( formData.links !== "0" && formData.links !== "45" && formData.links !== "any" ) {
+            title += "<span class=\"filter-links\">" + formData.links + "L</span>";
+        } else if ( formData.links === "0" ) {
+            title += "<span class=\"filter-links\">< 5L</span>";
+        } else if ( formData.links === "45" ) {
+            title += "<span class=\"filter-links\">< 6L</span>";
+        }
+
+        var total;
+        if ( formData.socketsTotal === "" ) {
+            total = 0;
+        } else {
+            total = formData.socketsTotal;
+        }
+        var string       = "";
+        var detailSocket = "";
+        if ( formData.socketsRed !== "" && formData.socketsRed !== 0 ) {
+            if ( formData.socketsTotal === "" ) {
+                total  += parseInt( formData.socketsRed );
+            }
+            detailSocket += formData.socketsRed + "R ";
+        }
+        if ( formData.socketsGreen !== "" && formData.socketsGreen !== 0 ) {
+            if ( formData.socketsTotal === "" ) {
+                total  += parseInt( formData.socketsGreen );
+            }
+            detailSocket += formData.socketsGreen + "G ";
+        }
+        if ( formData.socketsBlue !== "" && formData.socketsBlue !== 0 ) {
+            if ( formData.socketsTotal === "" ) {
+                total  += parseInt( formData.socketsBlue );
+            }
+            detailSocket += formData.socketsBlue + "B ";
+        }
+        if ( formData.socketsWhite !== "" && formData.socketsWhite !== 0 ) {
+            if ( formData.socketsTotal === "" ) {
+                total  += parseInt( formData.socketsWhite );
+            }
+            detailSocket += formData.socketsWhite + "W ";
+        }
+        if ( detailSocket !== "" ) {
+            string = total + "S ( " + detailSocket + ")";
+        } else {
+            string = total + "S";
+        }
+        if ( total > 0 ) {
+            title += "<span class=\"filter-sockets\">" + string + "</span>";
+        }
+
+        if ( formData.armor !== "" ) {
+            title += "<span class=\"filter-property\">Armor ≥" + formData.armor + "</span>";
+        }
+        if ( formData.es !== "" ) {
+            title += "<span class=\"filter-property\">ES ≥" + formData.es + "</span>";
+        }
+        if ( formData.evasion !== "" ) {
+            title += "<span class=\"filter-property\">Evasion ≥" + formData.evasion + "</span>";
+        }
+        if ( formData.dps !== "" ) {
+            title += "<span class=\"filter-property\">DPS ≥" + formData.dps + "</span>";
+        }
+        if ( formData.pdps !== "" ) {
+            title += "<span class=\"filter-property\">PDPS ≥" + formData.pdps + "</span>";
+        }
+        if ( formData.edps !== "" ) {
+            title += "<span class=\"filter-property\">EDPS ≥" + formData.edps + "</span>";
+        }
+        if ( formData.quality !== "" ) {
+            title += "<span class=\"filter-property\">quality ≥" + formData.quality + "%</span>";
+        }
+        if ( formData.level !== "" ) {
+            title += "<span class=\"filter-property\">level ≥" + formData.level + "</span>";
+        }
+        if ( formData.tier !== "" ) {
+            title += "<span class=\"filter-property\">Tier ≥" + formData.tier + "</span>";
+        }
+        if ( formData.experience !== "" ) {
+            title += "<span class=\"filter-property\">Experience ≥" + formData.experience + "%</span>";
+        }
+        if ( formData.mapPackSize !== "" ) {
+            title += "<span class=\"filter-property\">Pack Size ≥" + formData.mapPackSize + "%</span>";
+        }
+        if ( formData.mapQuantity !== "" ) {
+            title += "<span class=\"filter-property\">Quantity ≥" + formData.mapQuantity + "%</span>";
+        }
+        if ( formData.mapRarity !== "" ) {
+            title += "<span class=\"filter-property\">Rarity ≥" + formData.mapRarity + "%</span>";
+        }
+        if ( formData.openPrefixes !== "" ) {
+            title += "<span class=\"filter-property\">Open Prfx. ≥" + formData.openPrefixes + "</span>";
+        }
+        if ( formData.openSuffixes !== "" ) {
+            title += "<span class=\"filter-property\">Open Sufx. ≥" + formData.openSuffixes + "</span>";
+        }
+
+        // If we're editing an existing filter, keep the current filter id
+        // otherwise generate a new one
+        var filterId = editingFilter !== "" ? editingFilter : Misc.guidGenerator();
+        formData.id = filterId;
+
+        formData.title  = title;
+        formData.active = true;
+        callback( formData );
+    };
+
     // When adding a new filter
     var addFilterAction = function() {
-        // Get all filter data from the form
-        fetchFormData( function( formData ) {
-            console.log( formData );
-            // var re         = /([0-9.]+)/g;
-            $( ".affix-item" ).each( function() {
-                var data = $( this ).data( "data-item" );
-                var cleanedAffix = 
-                    data.title.replace( /(<span class=\'value\'>[^<>]+<\/span>)/g, "#" )
-                              .replace( "( # - # )", "#" )
-                              .replace( "Unique explicit", "Explicit" )
-                              .replace( "Essence", "Explicit" )
-                              .replace( "Talisman implicit", "Implicit" );
-                formData.affixes[cleanedAffix] = [data.min, data.max];
-                var count = ( data.title.match( /#/g ) || []).length;
-                // console.log( data );
-                // console.log( count );
-                var affix = "";
-                if ( count > 1 ) {
-                    affix = data.title.replace( "#", data.min );
-                    affix = affix.replace( "#", data.max );
-                } else {
-                    affix = data.title.replace( "#", "( " + data.min + " - " + data.max + " )" );
-                }
-                formData.affixesDis.push( affix );
-            });
-        
-            // If filter has a budget, make sure the budget has <= 2 
-            // trailing digits and save it
-            if ( formData.budget ) {
-                formData.budget = Math.round( formData.budget * 100 ) / 100;
-                formData.displayPrice = formData.budget + " " + formData.currency;
-            // Otherwise save "Any price" as the display price
-            } else {
-                formData.displayPrice = "Any price";
-            }
 
-            formData.currency = Currency.shortToLongLookupTable[formData.currency];
-
-            // Format the filter title
-            var title = "";
-            if ( formData.corrupted === "true" ) {
-                title += "<span class=\"filter-corrupted\">Corrupted</span>";
-            }
-            if ( formData.enchanted === "true" ) {
-                title += "<span class=\"filter-enchanted\">Enchanted</span>";
-            }
-            if ( formData.crafted === "true" ) {
-                title += "<span class=\"filter-crafted\">Crafted</span>";
-            }
-            if ( formData.itemType !== "any" && formData.itemType !== "" ) {
-                title += "<span style=\"padding-right: 10px;\">" + formData.item + "(any " + formData.itemType + ")</span>";
-            } else {
-                title += "<span style=\"padding-right: 10px;\">" + formData.item + "</span>";
-            }
-            if ( formData.links !== "0" && formData.links !== "45" && formData.links !== "any" ) {
-                title += "<span class=\"filter-links\">" + formData.links + "L</span>";
-            } else if ( formData.links === "0" ) {
-                title += "<span class=\"filter-links\">< 5L</span>";
-            } else if ( formData.links === "45" ) {
-                title += "<span class=\"filter-links\">< 6L</span>";
-            }
-
-            var total;
-            if ( formData.socketsTotal === "" ) {
-                total = 0;
-            } else {
-                total = formData.socketsTotal;
-            }
-            var string       = "";
-            var detailSocket = "";
-            if ( formData.socketsRed !== "" && formData.socketsRed !== 0 ) {
-                if ( formData.socketsTotal === "" ) {
-                    total  += parseInt( formData.socketsRed );
-                }
-                detailSocket += formData.socketsRed + "R ";
-            }
-            if ( formData.socketsGreen !== "" && formData.socketsGreen !== 0 ) {
-                if ( formData.socketsTotal === "" ) {
-                    total  += parseInt( formData.socketsGreen );
-                }
-                detailSocket += formData.socketsGreen + "G ";
-            }
-            if ( formData.socketsBlue !== "" && formData.socketsBlue !== 0 ) {
-                if ( formData.socketsTotal === "" ) {
-                    total  += parseInt( formData.socketsBlue );
-                }
-                detailSocket += formData.socketsBlue + "B ";
-            }
-            if ( formData.socketsWhite !== "" && formData.socketsWhite !== 0 ) {
-                if ( formData.socketsTotal === "" ) {
-                    total  += parseInt( formData.socketsWhite );
-                }
-                detailSocket += formData.socketsWhite + "W ";
-            }
-            if ( detailSocket !== "" ) {
-                string = total + "S ( " + detailSocket + ")";
-            } else {
-                string = total + "S";
-            }
-            if ( total > 0 ) {
-                title += "<span class=\"filter-sockets\">" + string + "</span>";
-            }
-
-            if ( formData.armor !== "" ) {
-                title += "<span class=\"filter-property\">Armor ≥" + formData.armor + "</span>";
-            }
-            if ( formData.es !== "" ) {
-                title += "<span class=\"filter-property\">ES ≥" + formData.es + "</span>";
-            }
-            if ( formData.evasion !== "" ) {
-                title += "<span class=\"filter-property\">Evasion ≥" + formData.evasion + "</span>";
-            }
-            if ( formData.dps !== "" ) {
-                title += "<span class=\"filter-property\">DPS ≥" + formData.dps + "</span>";
-            }
-            if ( formData.pdps !== "" ) {
-                title += "<span class=\"filter-property\">PDPS ≥" + formData.pdps + "</span>";
-            }
-            if ( formData.edps !== "" ) {
-                title += "<span class=\"filter-property\">EDPS ≥" + formData.edps + "</span>";
-            }
-            if ( formData.quality !== "" ) {
-                title += "<span class=\"filter-property\">quality ≥" + formData.quality + "%</span>";
-            }
-            if ( formData.level !== "" ) {
-                title += "<span class=\"filter-property\">level ≥" + formData.level + "</span>";
-            }
-            if ( formData.tier !== "" ) {
-                title += "<span class=\"filter-property\">Tier ≥" + formData.tier + "</span>";
-            }
-            if ( formData.experience !== "" ) {
-                title += "<span class=\"filter-property\">Experience ≥" + formData.experience + "%</span>";
-            }
-            if ( formData.mapPackSize !== "" ) {
-                title += "<span class=\"filter-property\">Pack Size ≥" + formData.mapPackSize + "%</span>";
-            }
-            if ( formData.mapQuantity !== "" ) {
-                title += "<span class=\"filter-property\">Quantity ≥" + formData.mapQuantity + "%</span>";
-            }
-            if ( formData.mapRarity !== "" ) {
-                title += "<span class=\"filter-property\">Rarity ≥" + formData.mapRarity + "%</span>";
-            }
-            if ( formData.openPrefixes !== "" ) {
-                title += "<span class=\"filter-property\">Open Prfx. ≥" + formData.openPrefixes + "</span>";
-            }
-            if ( formData.openSuffixes !== "" ) {
-                title += "<span class=\"filter-property\">Open Sufx. ≥" + formData.openSuffixes + "</span>";
-            }
-
-            // If we're editing an existing filter, keep the current filter id
-            // otherwise generate a new one
-            var filterId = editingFilter !== "" ? editingFilter : Misc.guidGenerator();
-            formData.id = filterId;
-
-            formData.title  = title;
-            formData.active = true;
-            var filter;
-            // If editing the filter, search for its group
-            if ( editingFilter !== "" ) {
-                async.each( filters.filterList, function( filter, cbFilter ) {
-                    if ( filter.id === editingFilter ) {
-                        formData.group = filter.group;
-                    }
-                    cbFilter();
-                }, function() {
-                    filter = new Filter( formData );
-                });
-            // Otherwise, assign an empty group value
-            } else {
-                formData.group = "";
-                filter = new Filter( formData );
-            }
-            // console.log( formData );
-            
-            // Add new filter
-            if ( $( "#add-filter" ).text() === "playlist_addAdd filter" ) {
-                filters.add( filter );
-                console.log( filter );
-                filters.findFilterIndex( filter, function( res ) {
-                    console.log( res );
-                    filters.save();
-                    filter.render( function( generated ) {
-                        postRender( filter, generated, res.index );
-                    });
-                });
-            // Update existing filter
-            } else {
-                filters.update( filter, function() {
-                    console.log( filters );
-                    filter.render( function( generated ) {
-                        filters.findFilterIndex( filter, function( res ) {
-                            postRender( filter, generated, res.index );
+        if ( editingGroup ) {
+            applyGroupEdition( editingGroup );
+        } else {
+            // Get all filter data from the form
+            fetchFormData( function( formData ) {
+                console.log( formData );
+                // var re         = /([0-9.]+)/g;
+                formatFilter( formData, function( formData ) {
+                    var filter;
+                    // If editing the filter, search for its group
+                    if ( editingFilter !== "" ) {
+                        async.each( filters.filterList, function( filter, cbFilter ) {
+                            if ( filter.id === editingFilter ) {
+                                formData.group = filter.group;
+                            }
+                            cbFilter();
+                        }, function() {
+                            filter = new Filter( formData );
                         });
-                    });
+                    // Otherwise, assign an empty group value
+                    } else {
+                        formData.group = "";
+                        filter = new Filter( formData );
+                    }
+                    // console.log( formData );
+                    
+                    // Add new filter
+                    if ( $( "#add-filter" ).text() === "playlist_addAdd filter" ) {
+                        filters.add( filter );
+                        console.log( filter );
+                        filters.findFilterIndex( filter, function( res ) {
+                            console.log( res );
+                            filters.save();
+                            filter.render( function( generated ) {
+                                postRender( filter, generated, res.index );
+                            });
+                        });
+                    // Update existing filter
+                    } else {
+                        filters.update( filter, function() {
+                            console.log( filters );
+                            filter.render( function( generated ) {
+                                filters.findFilterIndex( filter, function( res ) {
+                                    postRender( filter, generated, res.index );
+                                });
+                            });
+                        });
+                        filters.save();
+                    }
                 });
-                filters.save();
-            }
-        });
+            });
+        }
     };
 
     // Helpers
@@ -883,6 +912,9 @@ $( document).ready( function() {
             countItemsInGroup( group, function( counter ) {
                 $( "#filter-group-detail-" + group.id + " .group-amount" ).text( counter + " filters" );
             });
+
+            // Bind group edit
+            bindFilterGroupEdit( group.id );
 
             // Setup color picker for groups
             var ele = $( "#filter-group-detail-" + group.id + " .color-picker" ).spectrum({
@@ -1497,10 +1529,12 @@ $( document).ready( function() {
                         // Find all filters in the group and toggle them
                         async.each( filters.filterList, function( filter, cbFilter ) {
                             if ( filter.group === group.id ) {
-                                console.log( "Toggling filter " + filter.id + " in group " + group.id );
                                 var filterState = $( "#enable-filter-" + filter.id ).prop( "checked" );
                                 if ( filterState !== groupState ) {
-                                    $( "#enable-filter-" + filter.id ).click();
+                                    $( "#enable-filter-" + filter.id ).prop( "checked", groupState );
+                                    filters.toggle( filter.id, function() {
+                                        filters.save();
+                                    });
                                 }
                             } else {
                                 cbFilter();
@@ -1535,8 +1569,124 @@ $( document).ready( function() {
         }
     };
 
+    var enableElements = function( list ) {
+        async.each( list.fields, function( element, cbElement ) {
+            $( element ).attr( "disabled", false );
+            cbElement();
+        });
+        async.each( list.selects, function( element, cbElement ) {
+            $( element ).parent().find( ".select-dropdown" ).attr( "disabled", false );
+            cbElement();
+        });
+    };
+
+    var disableElements = function( list ) {
+        async.each( list.fields, function( element, cbElement ) {
+            $( element ).attr( "disabled", true );
+            cbElement();
+        });
+        async.each( list.selects, function( element, cbElement ) {
+            $( element ).parent().find( ".select-dropdown" ).attr( "disabled", true );
+            cbElement();
+        });
+    };
+
+    // When clicking on a filter group
+    var bindFilterGroupEdit = function( id ) {
+        console.log( "$( \".filter-detail-group#filter-group-detail-" + id + "\" )" );
+        $( ".filter-detail-group#filter-group-detail-" + id ).click( function( e ) {
+            e.stopPropagation();
+            console.log( id );
+            editingGroup = id;
+            resetFilters();
+            disableElements( elementList );
+            $( "#add-filter" ).html( "<i class=\"material-icons\">thumb_up</i><span>Update group</span>" );
+            $( "#cancel-filter" ).html( "<i class=\"material-icons\">thumb_down</i><span>Cancel edit</span>" );
+            $( "#cancel-filter" ).addClass( "red" ).removeClass( "blue-grey" );
+            $( "#add-filter" ).addClass( "green" ).removeClass( "blue-grey" );
+            scrollToTopAction(); // Scroll back to top
+        });
+    };
+
+    var applyGroupEdition = function( id ) {
+        var authorizedColumns = [
+            "budget",
+            "buyout",
+            "clipboard",
+            "convert",
+            "corrupted",
+            "crafted",
+            "currency",
+            "enchanted",
+            "league"
+        ];
+        fetchFormData( function( data ) {
+            // formatFilter( data, function( data ) {
+                // Only retain dimensions with non-default values
+                var newData = {};
+                // delete( data["title"]);
+                async.each( Object.keys( data ), function( key, cbKey ) {
+                    if ( authorizedColumns.indexOf( key ) !== -1 ) {
+                        newData[key] = data[key];
+                    }
+                    cbKey();
+                }, function() {
+                    console.log( newData );
+                    // Empty group content
+                    $( "#filter-group-content-" + id ).empty();
+                    // Search for filter within this group
+                    async.each( filters.filterList, function( filter, cbFilter ) {
+                        if ( filter.group === id ) {
+                            // Replace existing dimension with newData values
+                            async.each( Object.keys( newData ), function( key, cbKey ) {
+                                if ( key === "budget" ) {
+                                    if ( newData.budget ) {
+                                        // If the price is a percentage
+                                        if ( newData.budget.indexOf( "%" ) !== -1 ) {
+                                            var currentBudget = parseFloat( filter.budget );
+                                            var percentage    = parseFloat( newData.budget.replace( "%", "" ));
+                                            filter.budget     = Math.round( currentBudget * percentage ) / 100;
+                                        // Otherwise
+                                        } else {
+                                            filter.budget = Math.round( newData.budget * 100 ) / 100;
+                                        }
+                                        newData.displayPrice = filter.budget + " " + newData.currency;
+                                        filter.displayPrice  = newData.displayPrice;
+                                    }
+                                    console.log( newData[key] );
+                                } else {
+                                    filter[key] = newData[key];
+                                }
+                                cbKey();
+                            }, function() {
+                                filters.update( filter, function() {
+                                    filter.render( function( generated ) {
+                                        filters.findFilterIndex( filter, function( res ) {
+                                            postRender( filter, generated, res.index );
+                                        });
+                                    });
+                                });
+                            });
+                        }
+                        cbFilter();
+                    }, function() {
+                        filters.save();
+                        $( "#add-filter" ).html( "<i class=\"material-icons\">playlist_add</i><span>Add filter</span>" );
+                        $( "#cancel-filter" ).html( "<i class=\"material-icons\">delete</i><span>Clear filter</span>" );
+                        $( "#cancel-filter" ).removeClass( "red" );
+                        $( "#add-filter" ).removeClass( "green" );
+                        editingGroup = "";
+                        enableElements( elementList );
+                    });
+                });
+            // });
+        });
+    };
+
+    // When clicking on a filter
     var bindFilterEdit = function( id ) {
-        $( ".filter-detail#filter-detail-" + id ).click( function() {
+        $( ".filter-detail#filter-detail-" + id ).click( function( e ) {
+            e.stopPropagation();
             scrollToTopAction(); // Scroll back to top
             editingFilter = id;
             // Search for filter with the corresponding id

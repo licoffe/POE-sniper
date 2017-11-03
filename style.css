@@ -61,6 +61,16 @@ form {
     /* padding-bottom: 20px; */
 }
 
+.filter-detail-group {
+    transition: color 0.2s linear;
+}
+
+.filter-detail-group:hover {
+    background-color: rgba( 0, 200, 200, 0.1 )!important;
+    transition: background-color 0.2s linear;
+    cursor: pointer;
+}
+
 .group-amount {
     top: 4px;
     position: relative;
@@ -1011,4 +1021,8 @@ label:disabled {
 #blacklist {
     top: -10px!important;
     left: -10px;
+}
+
+input:not([type]):disabled+label, input:not([type])[readonly="readonly"]+label, input[type=text]:disabled+label, input[type=text][readonly="readonly"]+label, input[type=password]:disabled+label, input[type=password][readonly="readonly"]+label, input[type=email]:disabled+label, input[type=email][readonly="readonly"]+label, input[type=url]:disabled+label, input[type=url][readonly="readonly"]+label, input[type=time]:disabled+label, input[type=time][readonly="readonly"]+label, input[type=date]:disabled+label, input[type=date][readonly="readonly"]+label, input[type=datetime]:disabled+label, input[type=datetime][readonly="readonly"]+label, input[type=datetime-local]:disabled+label, input[type=datetime-local][readonly="readonly"]+label, input[type=tel]:disabled+label, input[type=tel][readonly="readonly"]+label, input[type=number]:disabled+label, input[type=number][readonly="readonly"]+label, input[type=search]:disabled+label, input[type=search][readonly="readonly"]+label, textarea.materialize-textarea:disabled+label, textarea.materialize-textarea[readonly="readonly"]+label {
+    color: rgb(97, 97, 97)!important;
 }
