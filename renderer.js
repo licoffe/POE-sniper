@@ -843,7 +843,8 @@ $( document).ready( function() {
 
     // When clicking on the minus sign, remove filter
     var bindRemoveFilter = function( id ) {
-        $( "#" + id + ".remove-filter" ).click( function() {
+        $( "#" + id + ".remove-filter" ).click( function( e ) {
+            e.stopPropagation();
             // Remove this entry
             $( this ).parent().parent().parent().parent().remove();
             var newFilters = [];
@@ -1511,7 +1512,9 @@ $( document).ready( function() {
     };
 
     var bindFilterToggleState = function( id ) {
-        $( "#enable-filter-" + id ).click( function() {
+        $( "#enable-filter-" + id ).click( function( event ) {
+            console.log( "$( \"#enable-filter-" + id + "\" )" );
+            event.stopImmediatePropagation();
             filters.toggle( id, function() {
                 filters.save();
             });
@@ -1594,9 +1597,9 @@ $( document).ready( function() {
     // When clicking on a filter group
     var bindFilterGroupEdit = function( id ) {
         console.log( "$( \".filter-detail-group#filter-group-detail-" + id + "\" )" );
-        $( ".filter-detail-group#filter-group-detail-" + id ).click( function( e ) {
+        $( "#edit-group-" + id ).click( function( e ) {
             e.stopPropagation();
-            console.log( id );
+            console.log( "group: " + id );
             editingGroup = id;
             resetFilters();
             disableElements( elementList );
@@ -2539,7 +2542,14 @@ $( document).ready( function() {
                 }, function( err ) {
                     async.each( Object.keys( groupTimes ), function( group, cbGroup ) {
                         var time = groupTimes[group];
-                        $( "#" + group + " .performance-info-time-group" ).text( time + " ms" );
+                        var element = $( "#" + group + " .performance-info-time-group" );
+                        element.text( time + " ms" );
+                        // Print text in red if above 100ms
+                        if ( time > 100 ) {
+                            element.addClass( "red-text" );
+                        } else {
+                            element.removeClass( "red-text" );
+                        }
                         cbGroup();
                     });
                     if ( err ) {

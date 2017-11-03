@@ -1014,6 +1014,16 @@ label:disabled {
     transition: color 0.2s linear;
 }
 
+.edit-group {
+    color: white;
+    transition: color 0.2s linear;
+}
+
+.edit-group:hover {
+    color: teal;
+    transition: color 0.2s linear;
+}
+
 .modal-content .autocomplete-content {
     font-size: 0.7em;
 }
