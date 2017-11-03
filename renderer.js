@@ -1000,13 +1000,14 @@ $( document).ready( function() {
             var writeStream = fs.createWriteStream( app.getPath( "userData" ) + path.sep + "item-blacklist.json" );
             writeStream.on( "close", function() {
                 itemBlackList = require( app.getPath( "userData" ) + path.sep + "item-blacklist.json" );
+                callback( new BlackList( "item-blacklist", itemBlackList.entries ));
             });
             readStream.pipe( writeStream );
         } else {
             console.log( "Loading item blacklist from " + app.getPath( "userData" ) + path.sep + "item-blacklist.json" );
             itemBlackList = require( app.getPath( "userData" ) + path.sep + "item-blacklist.json" );
+            callback( new BlackList( "item-blacklist", itemBlackList.entries ));
         }
-        callback( new BlackList( "item-blacklist", itemBlackList.entries ));
     };
 
     // Load player black-list
@@ -1018,13 +1019,14 @@ $( document).ready( function() {
             var writeStream = fs.createWriteStream( app.getPath( "userData" ) + path.sep + "player-blacklist.json" );
             writeStream.on( "close", function() {
                 playerBlackList = require( app.getPath( "userData" ) + path.sep + "player-blacklist.json" );
+                callback( new BlackList( "player-blacklist", playerBlackList.entries ));
             });
             readStream.pipe( writeStream );
         } else {
             console.log( "Loading player blacklist from " + app.getPath( "userData" ) + path.sep + "player-blacklist.json" );
             playerBlackList = require( app.getPath( "userData" ) + path.sep + "player-blacklist.json" );
+            callback( new BlackList( "player-blacklist", playerBlackList.entries ));
         }
-        callback( new BlackList( "player-blacklist", playerBlackList.entries ));
     };
 
     // Load filter groups

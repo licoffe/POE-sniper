@@ -298,10 +298,10 @@ class Filter {
             var prices = Item.computePrice( item, currencyRates );
             
             // Convert filter price to chaos and check if the item is within budget
-            if ( !this.budget || ( this.convert && prices.convertedPrice && 
+            if ( !this.budget || prices.originalAmount > 0 && (( this.convert && prices.convertedPrice && 
                   prices.convertedPriceChaos <= this.budget * currencyRates[league][this.currency]) || 
                 ( !prices.convertedPrice && !this.buyout ) || 
-                ( !this.convert && this.currency === Currency.shortToLongLookupTable[prices.originalCurrency] && prices.originalAmount <= this.budget )) {
+                ( !this.convert && this.currency === Currency.shortToLongLookupTable[prices.originalCurrency] && prices.originalAmount <= this.budget ))) {
 
                 // Parse item mods
                 Item.parseMods( item, function( parsedMods ) {
