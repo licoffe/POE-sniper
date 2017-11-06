@@ -343,6 +343,33 @@ $( document).ready( function() {
         appendAndBind( group, function() {});
     };
 
+    var formatTitle = function( formData, str ) {
+        console.log( formData[str + "Min"] + ". " + formData[str + "Max"]  )
+        var min   = 0;
+        var max   = 9999999;
+        var step  = 0.0001;
+        var title = "";
+        if ( formData[str] !== "" ) {
+            if ( formData[str + "Min"] !== min && formData[str + "Max"] !== max ) {
+                title += "<span class=\"filter-property\">" + str + " [" + formData[str + "Min"] + 
+                         " - " + formData[str + "Max"] + "]</span>";
+            } else if ( formData[str + "Min"] !== min ) {
+                if ( formData[str + "Min"] > Math.floor( formData[str + "Min"])) {
+                    title += "<span class=\"filter-property\">" + str + " >" + Math.floor(formData[str + "Min"]) + "</span>";
+                } else {
+                    title += "<span class=\"filter-property\">" + str + " ≥" + formData[str + "Min"] + "</span>";
+                }
+            } else {
+                if ( formData[str + "Max"] < Math.ceil( formData[str + "Max"] )) {
+                    title += "<span class=\"filter-property\">" + str + " <" + Math.ceil(formData[str + "Max"]) + "</span>";
+                } else {
+                    title += "<span class=\"filter-property\">" + str + " ≤" + formData[str + "Max"] + "</span>";
+                }
+            }
+        }
+        return title;
+    };
+
     var formatFilter = function( formData, callback ) {
         $( ".affix-item" ).each( function() {
             var data = $( this ).data( "data-item" );
@@ -443,51 +470,64 @@ $( document).ready( function() {
             title += "<span class=\"filter-sockets\">" + string + "</span>";
         }
 
-        if ( formData.armor !== "" ) {
-            title += "<span class=\"filter-property\">Armor ≥" + formData.armor + "</span>";
-        }
-        if ( formData.es !== "" ) {
-            title += "<span class=\"filter-property\">ES ≥" + formData.es + "</span>";
-        }
-        if ( formData.evasion !== "" ) {
-            title += "<span class=\"filter-property\">Evasion ≥" + formData.evasion + "</span>";
-        }
-        if ( formData.dps !== "" ) {
-            title += "<span class=\"filter-property\">DPS ≥" + formData.dps + "</span>";
-        }
-        if ( formData.pdps !== "" ) {
-            title += "<span class=\"filter-property\">PDPS ≥" + formData.pdps + "</span>";
-        }
-        if ( formData.edps !== "" ) {
-            title += "<span class=\"filter-property\">EDPS ≥" + formData.edps + "</span>";
-        }
-        if ( formData.quality !== "" ) {
-            title += "<span class=\"filter-property\">quality ≥" + formData.quality + "%</span>";
-        }
-        if ( formData.level !== "" ) {
-            title += "<span class=\"filter-property\">level ≥" + formData.level + "</span>";
-        }
-        if ( formData.tier !== "" ) {
-            title += "<span class=\"filter-property\">Tier ≥" + formData.tier + "</span>";
-        }
-        if ( formData.experience !== "" ) {
-            title += "<span class=\"filter-property\">Experience ≥" + formData.experience + "%</span>";
-        }
-        if ( formData.mapPackSize !== "" ) {
-            title += "<span class=\"filter-property\">Pack Size ≥" + formData.mapPackSize + "%</span>";
-        }
-        if ( formData.mapQuantity !== "" ) {
-            title += "<span class=\"filter-property\">Quantity ≥" + formData.mapQuantity + "%</span>";
-        }
-        if ( formData.mapRarity !== "" ) {
-            title += "<span class=\"filter-property\">Rarity ≥" + formData.mapRarity + "%</span>";
-        }
-        if ( formData.openPrefixes !== "" ) {
-            title += "<span class=\"filter-property\">Open Prfx. ≥" + formData.openPrefixes + "</span>";
-        }
-        if ( formData.openSuffixes !== "" ) {
-            title += "<span class=\"filter-property\">Open Sufx. ≥" + formData.openSuffixes + "</span>";
-        }
+        title += formatTitle( formData, "armor" );
+        title += formatTitle( formData, "es" );
+        title += formatTitle( formData, "evasion" );
+        title += formatTitle( formData, "dps" );
+        title += formatTitle( formData, "pdps" );
+        title += formatTitle( formData, "edps" );
+        title += formatTitle( formData, "quality" );
+        title += formatTitle( formData, "level" );
+        title += formatTitle( formData, "tier" );
+        title += formatTitle( formData, "experience" );
+        title += formatTitle( formData, "mapPackSize" );
+        title += formatTitle( formData, "mapQuantity" );
+        title += formatTitle( formData, "mapRarity" );
+        title += formatTitle( formData, "openPrefixes" );
+        title += formatTitle( formData, "openSuffixes" );
+        
+        // if ( formData.es !== "" ) {
+        //     title += "<span class=\"filter-property\">ES ≥" + formData.es + "</span>";
+        // }
+        // if ( formData.evasion !== "" ) {
+        //     title += "<span class=\"filter-property\">Evasion ≥" + formData.evasion + "</span>";
+        // }
+        // if ( formData.dps !== "" ) {
+        //     title += "<span class=\"filter-property\">DPS ≥" + formData.dps + "</span>";
+        // }
+        // if ( formData.pdps !== "" ) {
+        //     title += "<span class=\"filter-property\">PDPS ≥" + formData.pdps + "</span>";
+        // }
+        // if ( formData.edps !== "" ) {
+        //     title += "<span class=\"filter-property\">EDPS ≥" + formData.edps + "</span>";
+        // }
+        // if ( formData.quality !== "" ) {
+        //     title += "<span class=\"filter-property\">quality ≥" + formData.quality + "%</span>";
+        // }
+        // if ( formData.level !== "" ) {
+        //     title += "<span class=\"filter-property\">level ≥" + formData.level + "</span>";
+        // }
+        // if ( formData.tier !== "" ) {
+        //     title += "<span class=\"filter-property\">Tier ≥" + formData.tier + "</span>";
+        // }
+        // if ( formData.experience !== "" ) {
+        //     title += "<span class=\"filter-property\">Experience ≥" + formData.experience + "%</span>";
+        // }
+        // if ( formData.mapPackSize !== "" ) {
+        //     title += "<span class=\"filter-property\">Pack Size ≥" + formData.mapPackSize + "%</span>";
+        // }
+        // if ( formData.mapQuantity !== "" ) {
+        //     title += "<span class=\"filter-property\">Quantity ≥" + formData.mapQuantity + "%</span>";
+        // }
+        // if ( formData.mapRarity !== "" ) {
+        //     title += "<span class=\"filter-property\">Rarity ≥" + formData.mapRarity + "%</span>";
+        // }
+        // if ( formData.openPrefixes !== "" ) {
+        //     title += "<span class=\"filter-property\">Open Prfx. ≥" + formData.openPrefixes + "</span>";
+        // }
+        // if ( formData.openSuffixes !== "" ) {
+        //     title += "<span class=\"filter-property\">Open Sufx. ≥" + formData.openSuffixes + "</span>";
+        // }
 
         // If we're editing an existing filter, keep the current filter id
         // otherwise generate a new one
@@ -666,6 +706,55 @@ $( document).ready( function() {
         });
     };
 
+    var parseField = function( value, str ) {
+        console.log( value );
+        var data = {};
+        var step = 0.0001;
+        var max  = 9999999;
+        var min  = 0;
+        var symbolReg = /(\<|\<=|\>|\>=)\s*([0-9.]+)/;
+        var rangeReg  = /([0-9.]+)\s*\-\s*([0-9]+)/;
+        var match = symbolReg.exec( value );
+        // If we have an expression with <, <=, > or >=
+        if ( match ) {
+            console.log( "Eq" );
+            switch ( match[1]) {
+                case "<":
+                    data[str + "Min"] = min;
+                    data[str + "Max"] = parseFloat( match[2]) - step;
+                break;
+                case "<=":
+                    data[str + "Min"] = min;
+                    data[str + "Max"] = parseFloat( match[2]);
+                break;
+                case ">":
+                    data[str + "Min"] = parseFloat( match[2]) + step;
+                    data[str + "Max"] = max;
+                break;
+                case ">=":
+                    data[str + "Min"] = parseFloat( match[2]);
+                    data[str + "Max"] = max;
+                break;
+            }
+            return data;
+        } else {
+            // If we have a range, extract min and max values
+            match = rangeReg.exec( value );
+            if ( match ) {
+                console.log( "Range" );
+                data[str + "Min"] = parseFloat( match[1]);
+                data[str + "Max"] = parseFloat( match[2]);
+                return data;
+            // By default, only specify min value
+            } else {
+                console.log( "Default" );
+                data[str + "Min"] = parseFloat( value );
+                data[str + "Max"] = max;
+                return data;
+            }
+        }
+    };
+
     /**
      * Fetch information from filled form data
      *
@@ -689,25 +778,55 @@ $( document).ready( function() {
         data.enchanted    = $( "#enchanted" ).val();
         data.identified   = $( "#identified" ).val();
         data.level        = $( "#level" ).val();
+        var levelData     = parseField( data.level, "level" );
+        Object.assign( data, levelData );
         data.tier         = $( "#tier" ).val();
+        var tierData      = parseField( data.tier, "tier" );
+        Object.assign( data, tierData );
         data.experience   = $( "#experience" ).val();
+        var experienceData= parseField( data.experience, "experience" );
+        Object.assign( data, experienceData );
         data.quality      = $( "#quality" ).val();
+        var qualityData   = parseField( data.quality, "quality" );
+        Object.assign( data, qualityData );
         data.rarity       = $( "#rarity" ).val();
         data.armor        = $( "#armor" ).val();
+        var armorData     = parseField( data.armor, "armor" );
+        Object.assign( data, armorData );
         data.es           = $( "#es" ).val();
+        var esData        = parseField( data.es, "es" );
+        Object.assign( data, esData );
         data.evasion      = $( "#evasion" ).val();
+        var evasionData   = parseField( data.evasion, "evasion" );
+        Object.assign( data, evasionData );
         data.dps          = $( "#dps" ).val();
+        var dpsData       = parseField( data.dps, "dps" );
+        Object.assign( data, dpsData );
         data.pdps         = $( "#pdps" ).val();
+        var pdpsData      = parseField( data.pdps, "pdps" );
+        Object.assign( data, pdpsData );
         data.edps         = $( "#edps" ).val();
+        var edpsData      = parseField( data.edps, "edps" );
+        Object.assign( data, edpsData );
         data.buyout       = $( "#price-bo" ).is(":checked");
         data.clipboard    = $( "#clipboard" ).is(":checked");
         data.convert      = $( "#convert-currency" ).is(":checked");
         data.itemType     = $( "#item-type" ).val();
         data.openPrefixes = $( "#open-prefixes" ).val();
+        var openPrefixesData     = parseField( data.openPrefixes, "openPrefixes" );
+        Object.assign( data, openPrefixesData );
         data.openSuffixes = $( "#open-suffixes" ).val();
+        var openSuffixesData     = parseField( data.openSuffixes, "openSuffixes" );
+        Object.assign( data, openSuffixesData );
         data.mapQuantity  = $( "#map-quantity" ).val();
+        var mapQuantityData     = parseField( data.mapQuantity, "mapQuantity" );
+        Object.assign( data, mapQuantityData );
         data.mapRarity    = $( "#map-rarity" ).val();
+        var mapRarityData     = parseField( data.mapRarity, "mapRarity" );
+        Object.assign( data, mapRarityData );
         data.mapPackSize  = $( "#map-pack-size" ).val();
+        var mapPackSizeData     = parseField( data.mapPackSize, "mapPackSize" );
+        Object.assign( data, mapPackSizeData );
         data.affixesDis   = [];
         data.affixes      = {};
         callback( data );

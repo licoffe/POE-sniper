@@ -48,16 +48,36 @@ class Filter {
         this.enchanted    = obj.enchanted;
         this.identified   = obj.identified;
         this.level        = obj.level;
+        this.levelMin     = obj.levelMin;
+        this.levelMax     = obj.levelMax;
         this.tier         = obj.tier;
+        this.tierMin      = obj.tierMin;
+        this.tierMax      = obj.tierMax;
         this.experience   = obj.experience;
+        this.experienceMin= obj.experienceMin;
+        this.experienceMax= obj.experienceMax;
         this.quality      = obj.quality;
+        this.qualityMin   = obj.qualityMin;
+        this.qualityMax   = obj.qualityMax;
         this.rarity       = obj.rarity;
-        this.armor        = obj.armor;  
-        this.es           = obj.es;   
-        this.evasion      = obj.evasion; 
+        this.armor        = obj.armor;
+        this.armorMin     = obj.armorMin;
+        this.armorMax     = obj.armorMax;
+        this.es           = obj.es;
+        this.esMin        = obj.esMin;
+        this.esMax        = obj.esMax;
+        this.evasion      = obj.evasion;
+        this.evasionMin   = obj.evasionMin;
+        this.evasionMax   = obj.evasionMax;
         this.dps          = obj.dps;
+        this.dpsMin       = obj.dpsMin;
+        this.dpsMax       = obj.dpsMax;
         this.pdps         = obj.pdps;
+        this.pdpsMin      = obj.pdpsMin;
+        this.pdpsMax      = obj.pdpsMax;
         this.edps         = obj.edps;
+        this.edpsMin      = obj.edpsMin;
+        this.edpsMax      = obj.edpsMax;
         this.affixes      = obj.affixes;
         this.affixesDis   = obj.affixesDis;
         this.buyout       = obj.buyout;
@@ -69,10 +89,20 @@ class Filter {
         this.convert      = obj.convert;
         this.displayPrice = obj.displayPrice === undefined ? "" : obj.displayPrice;
         this.openPrefixes = obj.openPrefixes === undefined ? "" : obj.openPrefixes;
+        this.openPrefixesMin     = obj.openPrefixesMin;
+        this.openPrefixesMax     = obj.openPrefixesMax;
         this.openSuffixes = obj.openSuffixes === undefined ? "" : obj.openSuffixes;
+        this.openSuffixesMin     = obj.openSuffixesMin;
+        this.openSuffixesMax     = obj.openSuffixesMax;
         this.mapQuantity  = obj.mapQuantity === undefined ? "" : obj.mapQuantity;
+        this.mapQuantityMin     = obj.mapQuantityMin;
+        this.mapQuantityMax     = obj.mapQuantityMax;
         this.mapRarity    = obj.mapRarity === undefined ? "" : obj.mapRarity;
+        this.mapRarityMin     = obj.mapRarityMin;
+        this.mapRarityMax     = obj.mapRarityMax;
         this.mapPackSize  = obj.mapPackSize === undefined ? "" : obj.mapPackSize;
+        this.mapPackSizeMin     = obj.mapPackSizeMin;
+        this.mapPackSizeMax     = obj.mapPackSizeMax;
         this.group        = obj.group;
         // Convert affixes without type to explicit to ensure compatibility
         // with older versions
@@ -206,24 +236,69 @@ class Filter {
         // ( no tier filter OR ( item tier is a map tier AND both tiers are equal ) 
         //  OR ( item tier is a talisman tier AND both tiers are equal )) AND
         // ( item is not a gem OR no level filter OR ( item is a gem AND filter level <= gem level ))
-        if (( this.evasion === "" || parseInt( this.evasion ) <= parseInt( parsedProperties["Evasion Rating"])) &&
-            ( this.es      === "" || parseInt( this.es )      <= parseInt( parsedProperties["Energy Shield"])) && 
-            ( this.armor   === "" || parseInt( this.armor )   <= parseInt( parsedProperties.Armour )) &&
-            ( this.dps     === "" || parseFloat( this.dps )   <= parseFloat( parsedProperties.DPS )) &&
-            ( this.pdps    === "" || parseFloat( this.pdps )  <= parseFloat( parsedProperties.pDPS )) &&
-            ( this.edps    === "" || parseFloat( this.edps )  <= parseFloat( parsedProperties.eDPS )) &&
-            ( this.mapPackSize === "" || parseFloat( this.mapPackSize ) <= parseFloat( parsedProperties["Monster Pack Size"])) &&
-            ( this.mapQuantity === "" || parseFloat( this.mapQuantity ) <= parseFloat( parsedProperties["Item Quantity"])) &&
-            ( this.mapRarity === "" || parseFloat( this.mapRarity ) <= parseFloat( parsedProperties["Item Rarity"])) &&
-            ( this.quality   === "" || parsedProperties.Quality !== undefined &&
-            parseInt( this.quality ) <= parseInt( parsedProperties.Quality.replace( /[\+\%]/g, "" ))) &&
-            ( this.tier   === "" || ( parsedProperties["Map Tier"] !== undefined && (
-            parseInt( this.tier ) === parseInt( parsedProperties["Map Tier"]) || 
-            parseInt( this.tier ) === item.talismanTier ))) &&
-            ( this.experience === "" || parseFloat( this.experience ) <= parseFloat( parsedProperties.Experience )) &&
+        if (( this.evasion === "" || ( 
+                this.evasionMin <= parseInt( parsedProperties["Evasion Rating"]) && 
+                this.evasionMax >= parseInt( parsedProperties["Evasion Rating"]))
+            ) &&
+            ( this.es === "" || ( 
+                this.esMin <= parseInt( parsedProperties["Energy Shield"]) && 
+                this.esMax >= parseInt( parsedProperties["Energy Shield"]))
+            ) && 
+            ( this.armor === "" || ( 
+                this.armorMin <= parseInt( parsedProperties.Armour ) && 
+                this.armorMax >= parseInt( parsedProperties.Armour ))
+            ) &&
+            ( this.dps === "" || ( 
+                this.dpsMin <= parseFloat( parsedProperties.DPS ) &&
+                this.dpsMax >= parseFloat( parsedProperties.DPS ))
+            ) &&
+            ( this.pdps === "" || ( 
+                this.pdpsMin <= parseFloat( parsedProperties.pDPS ) &&
+                this.pdpsMax >= parseFloat( parsedProperties.pDPS ))
+            ) &&
+            ( this.edps === "" || ( 
+                this.edpsMin <= parseFloat( parsedProperties.eDPS ) && 
+                this.edpsMax >= parseFloat( parsedProperties.eDPS ))
+            ) &&
+            ( this.mapPackSize === "" || ( 
+                this.mapPackSizeMin <= parseFloat( parsedProperties["Monster Pack Size"]) &&
+                this.mapPackSizeMax >= parseFloat( parsedProperties["Monster Pack Size"]))
+            ) &&
+            ( this.mapQuantity === "" || ( 
+                this.mapQuantityMin <= parseFloat( parsedProperties["Item Quantity"]) &&
+                this.mapQuantityMax >= parseFloat( parsedProperties["Item Quantity"]))
+            ) &&
+            ( this.mapRarity === "" || ( 
+                this.mapRarityMin <= parseFloat( parsedProperties["Item Rarity"]) &&
+                this.mapRarityMax <= parseFloat( parsedProperties["Item Rarity"]))
+            ) &&
+            ( this.quality === "" || (
+                parsedProperties.Quality !== undefined &&
+                this.qualityMin <= parseInt( parsedProperties.Quality.replace( /[\+\%]/g, "" )) &&
+                this.qualityMax >= parseInt( parsedProperties.Quality.replace( /[\+\%]/g, "" )))
+            ) &&
+            ( this.tier === "" || ( 
+                parsedProperties["Map Tier"] !== undefined && (
+                    (
+                        this.tierMin <= parseInt( parsedProperties["Map Tier"]) &&
+                        this.tierMax >= parseInt( parsedProperties["Map Tier"])
+                    ) ||
+                    (
+                        this.tierMin <= parseInt( item.talismanTier ) &&
+                        this.tierMax >= parseInt( item.talismanTier )
+                    )
+                 ))
+            ) &&
+            ( this.experience === "" || (
+                this.experienceMin <= parseFloat( parsedProperties.Experience ) &&
+                this.experienceMax >= parseFloat( parsedProperties.Experience ))
+            ) &&
             ( item.frameType !== 4 || this.level  === "" || (
-                item.frameType === 4 && parsedProperties.Level !== undefined &&
-                parseInt( this.level ) <= parseInt( parsedProperties.Level )))) {
+                item.frameType === 4 && parsedProperties.Level !== undefined && (
+                    this.levelMin <= parseInt( parsedProperties.Level ) &&
+                    this.levelMax >= parseInt( parsedProperties.Level )
+                )
+            ))) {
             // Check the amount of links
             Item.getLinksAmountAndColor( item, function( res ) {
                 item.linkAmount = res.linkAmount;
@@ -291,7 +366,9 @@ class Filter {
             ( this.enchanted   === "any" || ( this.enchanted  == 'true' ) === item.enchanted ) &&
             ( this.crafted     === "any" || ( this.crafted    == 'true' ) === item.crafted   ) &&
             ( this.identified  === "any" || ( this.identified == 'true' ) === item.identified ) &&
-            ( this.level === "" || item.frameType === 4 || ( item.frameType !== 4 && this.level <= item.ilvl )) && 
+            ( this.level === "" || item.frameType === 4 || ( 
+                item.frameType !== 4 && this.levelMin <= item.ilvl && this.levelMax >= item.ilvl )
+            ) && 
             ( this.rarity === "any" || this.rarity == item.frameType || ( this.rarity === "not-unique" && item.frameType !== 3 && item.frameType !== 9 ))
             ) {
 
