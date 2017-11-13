@@ -104,17 +104,18 @@ class Filter {
         this.mapPackSizeMin     = obj.mapPackSizeMin;
         this.mapPackSizeMax     = obj.mapPackSizeMax;
         this.group        = obj.group;
+        this.modGroups    = obj.modGroups;
         // Convert affixes without type to explicit to ensure compatibility
         // with older versions
         var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
         for ( var affix in this.affixes ) {
             var match = extractReg.exec( affix );
             if ( !match ) {
-                if ( this.affixes[affix][0] === 0 || this.affixes[affix][0] === "" ) {
-                    this.affixes[affix][0] = "…";
+                if ( this.affixes[affix].min === 0 || this.affixes[affix].min === "" ) {
+                    this.affixes[affix].min = "…";
                 }
-                if ( this.affixes[affix][1] === 1000000 || this.affixes[affix][1] === "" ) {
-                    this.affixes[affix][1] = "…";
+                if ( this.affixes[affix].max === 1000000 || this.affixes[affix].max === "" ) {
+                    this.affixes[affix].max = "…";
                 }
                 this.affixes["(Explicit) " + affix] = this.affixes[affix];
                 delete this.affixes[affix];
@@ -149,6 +150,7 @@ class Filter {
         }, function() {
             self.affixesDis = newAffixesDis;
         });
+        console.log( this );
     }
 
     /**
@@ -168,6 +170,33 @@ class Filter {
         });
     }
 
+    compareValues( affix, parsedMod, callback ) {
+        if ( isNaN( affix.min )) {
+            affix.min = affix.min.replace( /.*>(.+)<.*/, "$1" );
+        }
+        if ( isNaN( affix.max )) {
+            affix.max = affix.max.replace( /.*>(.+)<.*/, "$1" );
+        }
+        // If there is no lower value
+        affix.min = affix.min !== "…" ? affix.min : 0;
+        // If there is no upper value
+        affix.max = affix.max !== "…" ? affix.max : 1000000;
+        // console.log( affix );
+        // console.log( parsedMod );
+
+        // If mod has one parameter
+        if ( parsedMod.length === 1 ) {
+            callback( affix.min <= parsedMod[0] && affix.max >= parsedMod[0] );
+        // If mod has two
+        } else if ( parsedMod.length === 2 ) {
+            var average = ( parsedMod[0] + parsedMod[1] ) / 2;
+            callback( affix.min <= average && affix.max >= average );
+        // Otherwise
+        } else {
+            callback( true );
+        }
+    }
+
     /**
      * Compare mods from item and filter
      *
@@ -175,47 +204,213 @@ class Filter {
      * @return Boolean through callback
      */
     compareMods( parsedMods, callback ) {
-        var passed = 0;
-        var keys   = 0;
-        // Compare mod values to filter
-        for ( var affix in this.affixes ) {
-            if ( this.affixes.hasOwnProperty( affix )) {
-                keys++;
-                if ( isNaN( this.affixes[affix][0])) {
-                    this.affixes[affix][0] = this.affixes[affix][0].replace( /.*>(.+)<.*/, "$1" );
-                }
-                if ( isNaN( this.affixes[affix][1])) {
-                    this.affixes[affix][1] = this.affixes[affix][1].replace( /.*>(.+)<.*/, "$1" );
-                }
-                // If there is no lower value
-                this.affixes[affix][0] = this.affixes[affix][0] !== "…" ? this.affixes[affix][0] : 0;
-                // If there is no upper value
-                this.affixes[affix][1] = this.affixes[affix][1] !== "…" ? this.affixes[affix][1] : 1000000;
+        var self     = this;
+        var passed   = -1;
+        var count    = {};
+        var sum      = {};
+        var weight   = {};
+        var lastType = "";
 
-                // If mod has one parameter
-                if ( parsedMods.mods[affix] && parsedMods.mods[affix].length === 1 ) {
-                    if ( parsedMods.mods[affix] && 
-                        this.affixes[affix][0] <= parsedMods.mods[affix][0] &&
-                        this.affixes[affix][1] >= parsedMods.mods[affix][0]) {
-                        passed++;
+        // console.log( parsedMods );
+
+        async.eachLimit( self.modGroups, 1, function( group, cbGroup ) {
+            async.eachLimit( Object.keys( group.mods ), 1, function( mod, cbMod ) {
+                // console.log( mod );
+                if ( !passed ) {
+                    // console.log( "Skipped" );
+                    cbMod();
+                } else {
+                    // AND
+                    if ( group.type === "AND" ) {
+                        lastType = "and";
+                        // If the object has the same mod
+                        if ( parsedMods.mods[mod]) {
+                            self.compareValues( group.mods[mod], parsedMods.mods[mod], function( res ) {
+                                // If values are not in range, fail the test
+                                if ( !res ) {
+                                    passed = 0;
+                                    // console.log( "Mod present but values not in range: " + group.mods[mod].min + " - " + group.mods[mod].max );
+                                }
+                            });
+                        // Otherwise fail the test
+                        } else {
+                            // console.log( "Item is missing " + mod );
+                            passed = 0;
+                        }
+                        cbMod();
+                    // NOT: If the mod is present, fail the test
+                    } else if ( group.type === "NOT" ) {
+                        lastType = "not";
+                        if ( parsedMods.mods[mod]) {
+                            self.compareValues( group.mods[mod], parsedMods.mods[mod], function( res ) {
+                                // If values are in range, fail the test
+                                if ( res ) {
+                                    passed = 0;
+                                    // console.log( "Item has NOT mod" );
+                                }
+                            });
+                        }
+                        cbMod();
+                    // IF: If the mod is present, it should be within interval
+                    } else if ( group.type === "IF" ) {
+                        lastType = "if";
+                        if ( parsedMods.mods[mod]) {
+                            self.compareValues( group.mods[mod], parsedMods.mods[mod], function( res ) {
+                                if ( !res ) {
+                                    passed = 0;
+                                }
+                                cbMod();
+                            });
+                        } else {
+                            cbMod();
+                        }
+                    // SUM: If the mod is present, sum its value
+                    } else if ( group.type === "SUM" ) {
+                        lastType = "sum";
+                        if ( parsedMods.mods[mod]) {
+                            self.compareValues( group.mods[mod], parsedMods.mods[mod], function( res ) {
+                                if ( res ) {
+                                    if ( !sum.val ) {
+                                        sum.val = 0;
+                                        sum.min = group.min;
+                                        sum.max = group.max;
+                                    }
+                                    if ( parsedMods.mods[mod].length === 2 ) {
+                                        sum.val += ( parsedMods.mods[mod].min + parsedMods.mods[mod].max ) / 2;
+                                    } else if ( parsedMods.mods[mod].length === 1 ) {
+                                        sum.val += parsedMods.mods[mod].min;
+                                    }
+                                }
+                                cbMod();
+                            });
+                        } else {
+                            cbMod();
+                        }
+                    // COUNT: If the mod is present, count 1
+                    } else if ( group.type === "COUNT" ) {
+                        lastType = "count";
+                        if ( parsedMods.mods[mod]) {
+                            self.compareValues( group.mods[mod], parsedMods.mods[mod], function( res ) {
+                                if ( res ) {
+                                    if ( !count.val ) {
+                                        count.val = 0;
+                                        count.min = group.min;
+                                        count.max = group.max;
+                                    }
+                                    count.val++;
+                                }
+                                cbMod();
+                            });
+                        } else {
+                            cbMod();
+                        }
+                    // WEIGHT: If present, return weighted score
+                    } else if ( group.type === "WEIGHT" ) {
+                        lastType = "weight";
+                        if ( parsedMods.mods[mod]) {
+                            self.compareValues( group.mods[mod], parsedMods.mods[mod], function( res ) {
+                                if ( res ) {
+                                    if ( !weight.val ) {
+                                        weight.val = 0;
+                                        weight.min = group.min;
+                                        weight.max = group.max;
+                                    }
+                                    if ( parsedMods.mods[mod].length === 2 ) {
+                                        weight.val += ( parsedMods.mods[mod].min + parsedMods.mods[mod].max ) / 2 * self.modGroups[group].mods[mod].weight;
+                                    } else if ( parsedMods.mods[mod].length === 1 ) {
+                                        weight.val += parsedMods.mods[mod].min * group.mods[mod].weight;
+                                    } else {
+                                        weight.val += group.mods[mod].weight;
+                                    }
+                                }
+                                cbMod();
+                            });
+                        } else {
+                            cbMod();
+                        }
+                    // Anything else
+                    } else {
+                        console.log( "Unknown group type: " + group.type );
+                        cbMod();
                     }
-                // If mod has two
-                } else if ( parsedMods.mods[affix] && parsedMods.mods[affix].length === 2 ) {
-                    var average = ( parsedMods.mods[affix][0] + parsedMods.mods[affix][1]) / 2;
-                    if ( parsedMods.mods[affix] &&
-                        this.affixes[affix][0] <= average &&
-                        this.affixes[affix][1] >= average ) {
-                        passed++;
-                    }
-                // Otherwise
-                } else if ( parsedMods.mods[affix]) {
-                    // console.log( parsedMods.mods[affix]);
-                    passed++;
                 }
-            }
-        }
+            }, function() {
+                // If we're switching from weight to another type
+                if ( lastType === "weight" ) {
+                    // Check if weight is in range, if not fail the test
+                    if ( weight.val < weight.min || weight.val > weight.max || !weight ) {
+                        passed = 0;
+                        // console.log( weight.val + " not in range " + weight.min + " - " + weight.max );
+                    }
+                    // Reset weight
+                    weight = {};
+                }
+                // If we're switching from sum to another type
+                if ( lastType === "sum" ) {
+                    // Check if sum is in range, if not fail the test
+                    if ( sum.val < sum.min || sum.val > sum.max || !sum ) {
+                        passed = 0;
+                        // console.log( sum.val + " not in range " + sum.min + " - " + sum.max );
+                    }
+                    // Reset sum
+                    sum = {};
+                }
+                // If we're switching from count to another type
+                if ( lastType === "count" ) {
+                    // Check if count is in range, if not fail the test
+                    if ( count.val < count.min || count.val > count.max || !count.val ) {
+                        passed = 0;
+                        // console.log( count.val + " not in range " + count.min + " - " + count.max );
+                    }
+                    // Reset count
+                    count = {};
+                }
+                cbGroup();
+            });
+        }, function() {
+            callback( passed !== 0 );
+        });
+
+
+        // Compare mod values to filter
+        // for ( var affix in this.affixes ) {
+        //     if ( this.affixes.hasOwnProperty( affix )) {
+        //         keys++;
+        //         if ( isNaN( this.affixes[affix].min )) {
+        //             this.affixes[affix].min = this.affixes[affix].min.replace( /.*>(.+)<.*/, "$1" );
+        //         }
+        //         if ( isNaN( this.affixes[affix].max )) {
+        //             this.affixes[affix].max = this.affixes[affix].max.replace( /.*>(.+)<.*/, "$1" );
+        //         }
+        //         // If there is no lower value
+        //         this.affixes[affix].min = this.affixes[affix].min !== "…" ? this.affixes[affix].min : 0;
+        //         // If there is no upper value
+        //         this.affixes[affix].max = this.affixes[affix].max !== "…" ? this.affixes[affix].max : 1000000;
+
+        //         // If mod has one parameter
+        //         if ( parsedMods.mods[affix] && parsedMods.mods[affix].length === 1 ) {
+        //             if ( parsedMods.mods[affix] && 
+        //                 this.affixes[affix].min <= parsedMods.mods[affix].min &&
+        //                 this.affixes[affix].max >= parsedMods.mods[affix].min ) {
+        //                 passed++;
+        //             }
+        //         // If mod has two
+        //         } else if ( parsedMods.mods[affix] && parsedMods.mods[affix].length === 2 ) {
+        //             var average = ( parsedMods.mods[affix].min + parsedMods.mods[affix].max ) / 2;
+        //             if ( parsedMods.mods[affix] &&
+        //                 this.affixes[affix].min <= average &&
+        //                 this.affixes[affix].max >= average ) {
+        //                 passed++;
+        //             }
+        //         // Otherwise
+        //         } else if ( parsedMods.mods[affix]) {
+        //             // console.log( parsedMods.mods[affix]);
+        //             passed++;
+        //         }
+        //     }
+        // }
         // console.log( "keys: " + keys + ", passed: " + passed );
-        callback( passed === keys );
+        // callback( passed === keys );
     }
 
     /**

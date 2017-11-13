@@ -1,9 +1,10 @@
 <span>
-    <span class="affix-item col s10" id="{{id}}">
+    <span>
+        <i id="remove-affix-{{id}}" class="material-icons remove-affix" style="cursor: pointer; color: red; position: relative;">remove</i>
+    </span>
+    <span class="affix-item" id="{{id}}">
         {{{affix}}}
     </span>
-    <span>
-        <i class="material-icons col s1 remove-affix" style="cursor: pointer; color: red; position: relative; top: -3px;">remove</i>
-    </span>
+    <span class="affix-weight">{{weight}}</span>
     <br>
 </span>

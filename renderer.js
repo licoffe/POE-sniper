@@ -82,6 +82,8 @@ var sold = 0;
 var audio           = new Audio( __dirname + '/' + config.sound );
 var itemBlackList;
 var playerBlackList;
+var modGroups       = {};
+var modGroupsId     = {};
 // Elements to enable/disable when group editing
 var elementList = {
     "fields": [
@@ -107,6 +109,25 @@ var elementList = {
 // };
 
 $( document).ready( function() {
+
+    // From https://stackoverflow.com/questions/40544394/stoppropagation-in-scroll-method-wont-stop-outer-div-from-scrolling
+    // Prevent parent scrolling while scrolling child
+    $.fn.dontScrollParent = function()
+    {
+        this.bind('mousewheel DOMMouseScroll',function(e)
+        {
+            var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+    
+            if (delta > 0 && $(this).scrollTop() <= 0)
+                return false;
+            if (delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).height())
+                return false;
+    
+            return true;
+        });
+    }
+
+    $( "#conditions" ).dontScrollParent();
 
     // Interface - actions binding
     // ------------------------------------------------------------------------
@@ -260,7 +281,15 @@ $( document).ready( function() {
         $( "#price-bo" ).prop( "checked", true );
         $( "#clipboard" ).prop( "checked", false );
         $( "#convert-currency" ).prop( "checked", true );
-        $( "#affixes-list" ).empty();
+        // $( "#affixes-list" ).empty();
+        $( "#conditions" ).empty();
+        modGroups   = {};
+        modGroupsId = {};
+        $( "#affix-weight" ).val( "" );
+        $( "#mod-group-min" ).val( "" );
+        $( "#mod-group-max" ).val( "" );
+        $( "#condition-selector" ).val( "and" );
+        $( "#condition-selector" ).material_select();
         $( "#item-type" ).val( "" );
         $( "#affix-min" ).val( "" );
         $( "#affix-max" ).val( "" );
@@ -278,6 +307,18 @@ $( document).ready( function() {
         $( "#add-affix" ).text( "Add" );
         $( "#affixes" ).prop( "disabled", false );
     };
+
+    // When selecting mod group type, toggle input fields
+    $( "#condition-selector" ).change( function() {
+        var val = $( this ).val();
+        if ( val.indexOf( "weight" ) !== -1 ) {
+            $( ".affix-weight" ).show();
+            $( ".form-affix-value" ).hide();
+        } else {
+            $( ".affix-weight" ).hide();
+            $( ".form-affix-value" ).show();
+        }
+    });
 
     // When clicking on 'Clear Filter'
     var cancelEditAction = function() {
@@ -297,36 +338,128 @@ $( document).ready( function() {
     };
 
     var renderAffixes = function( filter, cb ) {
+        console.log( "Rendering" );
         // Format mods
-        async.each( filter.affixesDis, function( affix, cbAffix ) {
-            var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
-            var match      = extractReg.exec( affix );
-            var matched;
-            if ( !match ) {
-                matched = "Explicit";
+        var index = 0;
+        async.eachLimit( filter.modGroups, 1, function( group, cbGroup ) {
+            var generatedModGroup = "";
+            var obj = {};
+            if ( group.type === "SUM" || group.type === "COUNT" || group.type === "WEIGHT" ) {
+                index++;
+                var groupMinDisp = group.min !== "" ? group.min : "…";
+                var groupMaxDisp = group.max !== "" ? group.max : "…";
+                var parameter    = "( " + groupMinDisp + " - " + groupMaxDisp + " )";
+                obj = {
+                    "id":        group.id,
+                    "type":      group.type,
+                    "index":     "[" + index + "]",
+                    "parameter": parameter
+                };
             } else {
-                matched = match[1];
+                obj = {
+                    "id":        group.id,
+                    "type":      group.type,
+                    "index":     "",
+                    "parameter": ""
+                };
             }
-            var obj        = {
-                typeLC: matched.toLowerCase(),
-                type:   matched,
-                title:  affix.replace( /^\([a-zA-Z ]+\)\s*/, "" )
-            };
-            var generated = "";
-            mu.compileAndRender( "affix-filter.html", obj )
-            .on( "data", function ( data ) {
-                generated += data.toString();
-            })
-            .on( "end", function () {
-                $( "#filter-detail-" + filter.id + " .affix-filter-list" ).append( generated );
-                cbAffix();
+            
+            $( "#filter-detail-" + filter.id + " .affix-filter-list" ).append( 
+                "<span class=\"badge badge-" + group.type + "\" data-badge-caption=\"" + group.type + "\"></span>" +
+                "<span class=\"condition-parameter\">" + obj.parameter + "</span><br>"
+            );
+            async.eachLimit( Object.keys( group.mods ), 1, function( mod, cbMod ) {
+                var weight = "";
+                if ( group.type === "WEIGHT" ) {
+                    weight = "Weight: " + group.mods[mod].weight;
+                }
+                var generated = "";
+                // Find out the mod type (explicit, implicit, etc.)
+                var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
+                var sharpReg   = /#/;
+                var match      = extractReg.exec( mod );
+                var matched;
+                if ( !match ) {
+                    matched = "Explicit";
+                } else {
+                    matched = match[1];
+                }
+                
+                var displayMin = "<span class='value'>" + group.mods[mod].min + "</span>";
+                var displayMax = "<span class='value'>" + group.mods[mod].max + "</span>";
+                var title = mod;
+                var count = ( title.match( /#/g ) || []).length;
+                if ( count > 1 ) {
+                    title = title.replace( "#", displayMin );
+                    title = title.replace( "#", displayMax );
+                } else {
+                    title = mod.replace( 
+                        "#", "( " + displayMin + " - " + 
+                                    displayMax + " )" );
+                }
+                // title = title.replace( sharpReg, "( " + displayMin + " - " + displayMax + " )" );
+                
+                var obj = {
+                    "title":  title.replace( /^\([a-zA-Z ]+\)\s*/, "" ),
+                    "id":     Misc.guidGenerator(),
+                    "typeLC": matched.toLowerCase(),
+                    "type":   matched,
+                    "weight": weight
+                };
+                mu.compileAndRender( "affix-filter.html", obj )
+                .on( "data", function ( data ) {
+                    generated += data.toString();
+                })
+                .on( "end", function () {
+                    // console.log( "Modified: " + generated );
+                    // $( "#condition-container-" + group.id ).append( generated );
+                    // $( "#" + obj.id ).data( "data-item", obj );
+                    // // When clicking on remove affix
+                    // $( ".remove-affix" ).click( function() {
+                    //     $( this ).parent().parent().remove();
+                    // });
+                    $( "#filter-detail-" + filter.id + " .affix-filter-list" ).append( generated );
+                    cbMod();
+                });
+            }, function() {
+                cbGroup();
             });
         }, function() {
-            if ( filter.affixesDis.length === 0 ) {
+            if ( filter.modGroups.length === 0 ) {
                 $( "#filter-detail-" + filter.id + " .affix-filter-list" ).hide();
             }
             cb();
         });
+
+        // async.each( filter.affixesDis, function( affix, cbAffix ) {
+        //     var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
+        //     var match      = extractReg.exec( affix );
+        //     var matched;
+        //     if ( !match ) {
+        //         matched = "Explicit";
+        //     } else {
+        //         matched = match[1];
+        //     }
+        //     var obj        = {
+        //         typeLC: matched.toLowerCase(),
+        //         type:   matched,
+        //         title:  affix.replace( /^\([a-zA-Z ]+\)\s*/, "" )
+        //     };
+        //     var generated = "";
+        //     mu.compileAndRender( "affix-filter.html", obj )
+        //     .on( "data", function ( data ) {
+        //         generated += data.toString();
+        //     })
+        //     .on( "end", function () {
+        //         $( "#filter-detail-" + filter.id + " .affix-filter-list" ).append( generated );
+        //         cbAffix();
+        //     });
+        // }, function() {
+        //     if ( filter.affixesDis.length === 0 ) {
+        //         $( "#filter-detail-" + filter.id + " .affix-filter-list" ).hide();
+        //     }
+        //     cb();
+        // });
     };
 
     // When adding a new group
@@ -344,7 +477,6 @@ $( document).ready( function() {
     };
 
     var formatTitle = function( formData, str ) {
-        console.log( formData[str + "Min"] + ". " + formData[str + "Max"]  )
         var min   = 0;
         var max   = 9999999;
         var step  = 0.0001;
@@ -371,26 +503,37 @@ $( document).ready( function() {
     };
 
     var formatFilter = function( formData, callback ) {
-        $( ".affix-item" ).each( function() {
-            var data = $( this ).data( "data-item" );
-            var cleanedAffix = 
-                data.title.replace( /(<span class=\'value\'>[^<>]+<\/span>)/g, "#" )
-                          .replace( "( # - # )", "#" )
-                          .replace( "Unique explicit", "Explicit" )
-                          .replace( "Essence", "Explicit" )
-                          .replace( "Talisman implicit", "Implicit" );
-            formData.affixes[cleanedAffix] = [data.min, data.max];
-            var count = ( data.title.match( /#/g ) || []).length;
-            // console.log( data );
-            // console.log( count );
-            var affix = "";
-            if ( count > 1 ) {
-                affix = data.title.replace( "#", data.min );
-                affix = affix.replace( "#", data.max );
-            } else {
-                affix = data.title.replace( "#", "( " + data.min + " - " + data.max + " )" );
-            }
-            formData.affixesDis.push( affix );
+        console.log( modGroups );
+        async.eachLimit( Object.keys( modGroups ), 1, function( group, cbGroup ) {
+            async.eachLimit( Object.keys( modGroups[group].mods ), 1, function( mod, cbMod ) {
+                var cleanedAffix =
+                    mod.replace( /(<span class=\'value\'>[^<>]+<\/span>)/g, "#" )
+                       .replace( "( # - # )", "#" )
+                       .replace( "Unique explicit", "Explicit" )
+                       .replace( "Essence", "Explicit" )
+                       .replace( "Talisman implicit", "Implicit" );
+                    formData.affixes[cleanedAffix] = {
+                        "min": modGroups[group].mods[mod].min, 
+                        "max": modGroups[group].mods[mod].max,
+                        "type": modGroups[group].type
+                    };
+                    var count = ( mod.match( /#/g ) || []).length;
+                    var affix = "";
+                    if ( count > 1 ) {
+                        affix = mod.replace( "#", formData.affixes[cleanedAffix].min );
+                        affix = affix.replace( "#", formData.affixes[cleanedAffix].max );
+                    } else {
+                        affix = mod.replace( 
+                            "#", "( " + formData.affixes[cleanedAffix].min + " - " + 
+                                        formData.affixes[cleanedAffix].max + " )" );
+                    }
+                    // formData.affixesDis.push( affix );
+                cbMod();
+            }, function() {
+                cbGroup();
+            });
+        }, function() {
+            formData.modGroups = modGroups;
         });
     
         // If filter has a budget, make sure the budget has <= 2 
@@ -485,49 +628,6 @@ $( document).ready( function() {
         title += formatTitle( formData, "mapRarity" );
         title += formatTitle( formData, "openPrefixes" );
         title += formatTitle( formData, "openSuffixes" );
-        
-        // if ( formData.es !== "" ) {
-        //     title += "<span class=\"filter-property\">ES ≥" + formData.es + "</span>";
-        // }
-        // if ( formData.evasion !== "" ) {
-        //     title += "<span class=\"filter-property\">Evasion ≥" + formData.evasion + "</span>";
-        // }
-        // if ( formData.dps !== "" ) {
-        //     title += "<span class=\"filter-property\">DPS ≥" + formData.dps + "</span>";
-        // }
-        // if ( formData.pdps !== "" ) {
-        //     title += "<span class=\"filter-property\">PDPS ≥" + formData.pdps + "</span>";
-        // }
-        // if ( formData.edps !== "" ) {
-        //     title += "<span class=\"filter-property\">EDPS ≥" + formData.edps + "</span>";
-        // }
-        // if ( formData.quality !== "" ) {
-        //     title += "<span class=\"filter-property\">quality ≥" + formData.quality + "%</span>";
-        // }
-        // if ( formData.level !== "" ) {
-        //     title += "<span class=\"filter-property\">level ≥" + formData.level + "</span>";
-        // }
-        // if ( formData.tier !== "" ) {
-        //     title += "<span class=\"filter-property\">Tier ≥" + formData.tier + "</span>";
-        // }
-        // if ( formData.experience !== "" ) {
-        //     title += "<span class=\"filter-property\">Experience ≥" + formData.experience + "%</span>";
-        // }
-        // if ( formData.mapPackSize !== "" ) {
-        //     title += "<span class=\"filter-property\">Pack Size ≥" + formData.mapPackSize + "%</span>";
-        // }
-        // if ( formData.mapQuantity !== "" ) {
-        //     title += "<span class=\"filter-property\">Quantity ≥" + formData.mapQuantity + "%</span>";
-        // }
-        // if ( formData.mapRarity !== "" ) {
-        //     title += "<span class=\"filter-property\">Rarity ≥" + formData.mapRarity + "%</span>";
-        // }
-        // if ( formData.openPrefixes !== "" ) {
-        //     title += "<span class=\"filter-property\">Open Prfx. ≥" + formData.openPrefixes + "</span>";
-        // }
-        // if ( formData.openSuffixes !== "" ) {
-        //     title += "<span class=\"filter-property\">Open Sufx. ≥" + formData.openSuffixes + "</span>";
-        // }
 
         // If we're editing an existing filter, keep the current filter id
         // otherwise generate a new one
@@ -646,8 +746,8 @@ $( document).ready( function() {
 
             $( '#affixes' ).keyup( function( e ) {
                 var code = e.which;
-                // If the key is a letter, space or backspace
-                if ( code >= 65 && code <= 90 || code === 32 || code === 8 ) {
+                // If the key is a letter, a number, a space or backspace
+                if ( code >= 65 && code <= 90 || code >= 48 && code <= 57 || code === 32 || code === 8 ) {
                     $( ".autocomplete-content li span:visible" ).each( function() {
                         var text  = $( this ).text();
                         var reg   = /\[(.*)\]/;
@@ -665,7 +765,6 @@ $( document).ready( function() {
                         $( this ).click( function () {
                             var affixType = $( this ).find( ".badge" ).data( "badge-caption" );
                             var affixName = $( this ).text();
-                            console.log( "(" + affixType + ") " + affixName );
                             setTimeout( function() { $( "#affixes" ).val( "(" + affixType + ") " + affixName ); }, 1 );
                         });
                     });
@@ -705,15 +804,18 @@ $( document).ready( function() {
             });
         });
     };
-
+    
+    // Return min and max values for a given filter dimension, depending on the
+    // expression
     var parseField = function( value, str ) {
         console.log( value );
         var data = {};
         var step = 0.0001;
         var max  = 9999999;
         var min  = 0;
+        // Match mathematic operators <, <=, >, >=
         var symbolReg = /(\<|\<=|\>|\>=)\s*([0-9.]+)/;
-        var rangeReg  = /([0-9.]+)\s*\-\s*([0-9]+)/;
+        var rangeReg  = /([0-9.]+)\s*\-\s*([0-9]+)/; // Match ranges
         var match = symbolReg.exec( value );
         // If we have an expression with <, <=, > or >=
         if ( match ) {
@@ -871,6 +973,7 @@ $( document).ready( function() {
         bindRemoveFilter( id );
     };
 
+    // Hide/show filter processing time
     var displayTimes = function() {
         if ( config.showFilterProcessingTime ) {
             $( ".performance-info" ).show();
@@ -879,6 +982,7 @@ $( document).ready( function() {
         }
     };
 
+    // Hide/show search engines (poe.trade, poe-rates, etc.)
     var displaySearchEngines = function() {
         if ( config.showPoeTradeLink ) {
             $( ".search-engines" ).show();
@@ -909,6 +1013,8 @@ $( document).ready( function() {
         }
     };
 
+    // When clicking on the the symbol, remove all items
+    // associated to a given filter
     var clearTaggedItems = function( tag ) {
         $( "#" + tag + "-clear" ).click( function( event ) {
             event.stopPropagation();
@@ -1300,7 +1406,7 @@ $( document).ready( function() {
                         $( "#filters ul.filter-collection" ).append( generated );
                     // Otherwise add it to the group
                     } else {
-                        console.log( "Adding filter " + filter.id + " to group id " + filter.group );
+                        // console.log( "Adding filter " + filter.id + " to group id " + filter.group );
                         $( "#filter-group-content-" + filter.group ).append( generated );
                     }
                     // Format mods
@@ -1315,7 +1421,7 @@ $( document).ready( function() {
                         }
                         colorFilter( filter );
                         bindFilterToggleState( filter.id );
-                        bindFilterEdit( filter.id );
+                        bindFilterEdit( filter.id, function() {});
                         updateFilterAmount( filter.id );
                         cbSorted();
                         addPoeTradeForm( filter );
@@ -1450,7 +1556,7 @@ $( document).ready( function() {
         }
         colorFilter( filter );
         bindFilterToggleState( filter.id );
-        bindFilterEdit( filter.id );
+        bindFilterEdit( filter.id, function() {});
         bindRemoveTaggedItems( filter.id );
         updateFilterAmount( filter.id );
         console.log( "Calling poe.trade stats" );
@@ -1645,7 +1751,6 @@ $( document).ready( function() {
     var bindGroupToggleState = function( id ) {
         if ( !id ) {
             async.each( groups.groupList, function( group, cbGroup ) {
-                console.log( "Binding toggle group" );
                 $( "#enable-filter-group-" + group.id ).click( function() {
                     groups.toggle( group.id, function() {
                         groups.save();
@@ -1717,10 +1822,9 @@ $( document).ready( function() {
 
     // When clicking on a filter group
     var bindFilterGroupEdit = function( id ) {
-        console.log( "$( \".filter-detail-group#filter-group-detail-" + id + "\" )" );
         $( "#edit-group-" + id ).click( function( e ) {
             e.stopPropagation();
-            console.log( "group: " + id );
+            // console.log( "group: " + id );
             editingGroup = id;
             resetFilters();
             disableElements( elementList );
@@ -1807,8 +1911,40 @@ $( document).ready( function() {
         });
     };
 
+    // Remove affix from modGroup
+    var removeAffix = function( id ) {
+        console.log( "Removing " + id );
+        async.eachLimit( Object.keys( modGroups ), 1, function( group, cbGroup ) {
+            async.eachLimit( Object.keys( modGroups[group].mods ), 1, function( mod, cbMod ) {
+                if ( modGroups[group].mods[mod].id === id ) {
+                    console.log( "Found mod" );
+                    delete modGroups[group].mods[mod];
+                } else {
+                    console.log( modGroups[group].mods[mod].id );
+                }
+                cbMod();
+            }, function() {
+                cbGroup();
+            });
+        }, function() {
+            console.log( modGroups );
+        });
+    };
+
+    var resetConditionSelector = function() {
+        $( "#condition-selector" ).html(
+            "<option value=\"and\" selected>AND</option>" + 
+            "<option value=\"if\">IF</option>" + 
+            "<option value=\"sum\">SUM</option>" + 
+            "<option value=\"not\">NOT</option>" + 
+            "<option value=\"count\">COUNT</option>" + 
+            "<option value=\"weight\">WEIGHT</option>"
+        );
+        $( "#condition-selector" ).material_select();
+    };
+
     // When clicking on a filter
-    var bindFilterEdit = function( id ) {
+    var bindFilterEdit = function( id, cb ) {
         $( ".filter-detail#filter-detail-" + id ).click( function( e ) {
             e.stopPropagation();
             scrollToTopAction(); // Scroll back to top
@@ -1881,67 +2017,125 @@ $( document).ready( function() {
                     $( "#cancel-affix" ).addClass( "disabled" );
                     $( "#add-affix" ).text( "Add" );
                     $( "#affixes" ).prop( "disabled", false );
-                    async.each( filter.affixesDis, function( affix, cbAffix ) {
-                        // console.log( affix );
-                        var generated = "";
-                        // Extract title, min and max
-                        var reg = /([0-9\.]+)/g;
-                        var regPar = /\([^()]+\)|\d+/g;
-                        var match = reg.exec( affix );
-                        var matches = [];
-                        while ( match !== null ) {
-                            matches.push( parseFloat( match[1]));
-                            match = reg.exec( affix );
-                        }
-                        if ( !matches[0]) {
-                            matches[0] = "…";
-                        }
-                        if ( !matches[1]) {
-                            matches[1] = "…";
-                        }
-                        var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
-                        var match      = extractReg.exec( affix );
-                        var matched;
-                        if ( !match ) {
-                            matched = "Explicit";
-                        } else {
-                            matched = match[1];
-                        }
-                        var title = affix.replace( regPar, "#" );
-                        
-                        console.log( affix.replace( /^\([a-zA-Z ]+\)\s*/, "" ) );
-                        var obj = {
-                            title: affix,
-                            min:   matches[0],
-                            max:   matches[1],
-                            affix: affix.replace( /^\([a-zA-Z ]+\)\s*/, "<span class='badge affix-" + matched.toLowerCase() +  "' data-badge-caption='" + matched + "'></span>" ),
-                            id:    Misc.guidGenerator(),
-                            typeLC: matched.toLowerCase(),
-                            type:   matched,
-                        };
-                        mu.compileAndRender( "affix.html", obj )
-                        .on( "data", function ( data ) {
-                            generated += data.toString();
-                        })
-                        .on( "end", function () {
-                            // console.log( "Modified: " + generated );
-                            $( "#affixes-list" ).append( generated );
-                            $( "#" + obj.id ).data( "data-item", obj );
-                            // When clicking on remove affix
-                            $( ".remove-affix" ).click( function() {
-                                $( this ).parent().parent().remove();
+
+                    modGroups = filter.modGroups;
+                    modGroupsId = {};
+                    console.log( modGroups );
+                    async.eachLimit( Object.keys( modGroups ), 1, function( group, cbModGroup ) {
+                        modGroupsId[group] = modGroups[group].id;
+                        cbModGroup();
+                    }, function() {
+                        $( "#conditions" ).empty();
+                        var index = 0;
+                        resetConditionSelector();
+                        async.eachLimit( Object.keys( filter.modGroups ), 1, function( group, cbGroup ) {
+                            var generatedModGroup = "";
+                            var obj = {};
+                            if ( filter.modGroups[group].type === "SUM" || 
+                                 filter.modGroups[group].type === "COUNT" || 
+                                 filter.modGroups[group].type === "WEIGHT" ) {
+                                index++;
+                                var parameter = "( " + filter.modGroups[group].min + " - " + filter.modGroups[group].max + " )";
+                                obj = {
+                                    "id":        filter.modGroups[group].id,
+                                    "type":      filter.modGroups[group].type,
+                                    "index":     "[" + index + "]",
+                                    "parameter": parameter
+                                };
+                                var ref = "[" + index + "]";
+                                // Add options to select
+                                $( "#condition-selector" ).append(
+                                    "<option value=\"" + group + "\">" + filter.modGroups[group].type + " " + ref + "</option>"
+                                );
+                                $( "#condition-selector" ).material_select();
+                            } else {
+                                obj = {
+                                    "id":        filter.modGroups[group].id,
+                                    "type":      filter.modGroups[group].type,
+                                    "index":     "",
+                                };
+                            }   
+                            
+                            mu.compileAndRender( "condition.html", obj )
+                            .on( "data", function ( data ) {
+                                generatedModGroup += data.toString();
+                            })
+                            .on( "end", function () {
+                                // console.log( "Modified: " + generated );
+                                $( "#conditions" ).append( generatedModGroup );
                             });
-                            bindAffixEdition( obj.id );
-                            bindAffixHover( obj.id );
+                            async.eachLimit( Object.keys( filter.modGroups[group].mods ), 1, function( mod, cbMod ) {
+                                var weight = "";
+                                if ( filter.modGroups[group].type === "WEIGHT" ) {
+                                    weight = "Weight: " + filter.modGroups[group].mods[mod].weight;
+                                }
+                                var generated = "";
+                                // Find out the mod type (explicit, implicit, etc.)
+                                var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
+                                var sharpReg   = /#/;
+                                var match      = extractReg.exec( mod );
+                                var matched;
+                                if ( !match ) {
+                                    matched = "Explicit";
+                                } else {
+                                    matched = match[1];
+                                }
+                                var displayMin = "<span class='value'>" + filter.modGroups[group].mods[mod].min + "</span>";
+                                var displayMax = "<span class='value'>" + filter.modGroups[group].mods[mod].max + "</span>";
+                                var title = mod;
+                                var count = ( title.match( /#/g ) || []).length;
+                                if ( count > 1 ) {
+                                    title = title.replace( "#", displayMin );
+                                    title = title.replace( "#", displayMax );
+                                } else {
+                                    title = mod.replace( 
+                                        "#", "( " + displayMin + " - " + 
+                                                    displayMax + " )" );
+                                }
+                                
+                                var obj = {
+                                    "title":  mod,
+                                    "min":    displayMin,
+                                    "max":    displayMax,
+                                    "affix":  title.replace( /^\([a-zA-Z ]+\)\s*/, "<span class='badge affix-" + matched.toLowerCase() +  "' data-badge-caption='" + matched + "'></span>" ),
+                                    "id":     filter.modGroups[group].mods[mod].id,
+                                    "typeLC": matched.toLowerCase(),
+                                    "type":   matched,
+                                    "weight": weight
+                                };
+                                mu.compileAndRender( "affix.html", obj )
+                                .on( "data", function ( data ) {
+                                    generated += data.toString();
+                                })
+                                .on( "end", function () {
+                                    // console.log( "Modified: " + generated );
+                                    $( "#condition-container-" + filter.modGroups[group].id ).append( generated );
+                                    $( "#" + obj.id ).data( "data-item", obj );
+                                    // When clicking on remove affix
+                                    $( ".remove-affix" ).click( function() {
+                                        var id = $( this ).attr( "id" ).replace( "remove-affix-", "" );
+                                        $( this ).parent().parent().remove();
+                                        removeAffix( id );
+                                    });
+                                    bindAffixEdition( obj.id );
+                                    bindAffixHover( obj.id );
+                                    cbMod();
+                                });
+                            }, function() {
+                                cbGroup();
+                            });
                         });
-                        cbAffix();
+                    }, function() {
+                        cbFilter();
                     });
+                } else {
+                    cbFilter();
                 }
-                cbFilter();
             }, function( err ) {
                 if ( err ) {
                     console.log( err );
                 }
+                cb();
             });
         });
     };
@@ -2229,83 +2423,206 @@ $( document).ready( function() {
     $( "#cancel-affix" ).click( function() {
         $( "#affix-min" ).val( "" );
         $( "#affix-max" ).val( "" );
+        $( "#affix-weight" ).val( "" );
+        $( "#mod-group-min" ).val( "" );
+        $( "#mod-group-max" ).val( "" );
         $( "#affixes" ).val( "" );
+        $( "#condition-selector" ).val( "and" );
+        $( "#condition-selector" ).material_select();
         Materialize.updateTextFields();
         $( "#add-affix" ).addClass( "disabled" );
         $( "#cancel-affix" ).addClass( "disabled" );
         $( "#add-affix" ).text( "Add" );
         $( "#affixes" ).prop( "disabled", false );
+        loadedAffix = false;
     });
     
     // When clicking on 'add affix'
     $( "#add-affix" ).click( function() {
+        var addAffix = function( operator, operatorRef ) {
+            var affix = $( "#affixes" ).val();
+            console.log( affix );
+            console.log( operator );
+            if ( affix !== "" ) {
+                var min = $( "#affix-min" ).val();
+                min = min === "" ? "…" : min;
+                var minVal = min;
+                min = "<span class='value'>" + min + "</span>";
+                var max = $( "#affix-max" ).val();
+                max = max === "" ? "…" : max;
+                var maxVal = max;
+                max = "<span class='value'>" + max + "</span>";
+                var modId = Misc.guidGenerator();
+                modGroups[operatorRef].mods[affix] = {
+                    "min": minVal,
+                    "max": maxVal,
+                    "id": modId
+                };
+                if ( operator.indexOf( "weight" ) !== -1 ) {
+                    modGroups[operatorRef].mods[affix].weight = $( "#affix-weight" ).val();
+                }
+                console.log( modGroups );
+                console.log( modGroupsId );
+                var count = ( affix.match( /#/g ) || []).length;
+                if ( count > 1 ) {
+                    affix = affix.replace( "#", min );
+                    affix = affix.replace( "#", max );
+                } else {
+                    affix = affix.replace( "#", "( " + min + " - " + max + " )" );
+                }
+                
+                var obj = { 
+                    title: $( "#affixes" ).val(),
+                    affix: affix,
+                    min:   min,
+                    max:   max,
+                    id:    modId
+                };
+    
+                if ( operator.indexOf( "weight" ) !== -1 ) {
+                    obj.weight = "Weight: " + $( "#affix-weight" ).val();
+                }
+    
+                // Editing existing affix
+                if ( $( "#add-affix" ).text() !== "Add" ) {
+                    console.log( "Editing affix " + editingAffix );
+                    obj.id = editingAffix;
+                    editingAffix = "";
+                }
+                var generated = "";
+                mu.compileAndRender( "affix.html", obj )
+                .on( "data", function ( data ) {
+                    generated += data.toString();
+                })
+                .on( "end", function () {
+                    var affixListElement = $( "#conditions #" + obj.id );
+                    if ( affixListElement.length > 0 ) {
+                        affixListElement.parent().replaceWith( generated );
+                    } else {
+                        $( "#condition-container-" + condition.id ).append( generated );
+                    }
+                    var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
+                    var match      = extractReg.exec( obj.affix );
+                    var type;
+                    if ( match ) {
+                        $( "#" + obj.id ).html( obj.affix.replace( /^\([a-zA-Z ]+\)\s*/, "" ));
+                        type = match[1];
+                    } else {
+                        type = "Explicit";
+                    }
+                    $( "#" + obj.id ).prepend( 
+                        "<span class='badge affix-" + type.toLowerCase() + 
+                        "' data-badge-caption='" + type + "'></span>" 
+                    );
+    
+                    $( "#" + obj.id ).data( "data-item", obj );
+                    // When clicking on remove affix
+                    $( ".remove-affix" ).click( function() {
+                        var id = $( this ).attr( "id" ).replace( "remove-affix-", "" );
+                        $( this ).parent().parent().remove();
+                        removeAffix( id );
+                    });
+                    bindAffixEdition( obj.id );
+                    bindAffixHover( obj.id );
+                    $( "#affix-weight" ).val( "" );
+                    $( "#mod-group-min" ).val( "" );
+                    $( "#mod-group-max" ).val( "" );
+                    $( "#condition-selector" ).val( "and" );
+                    $( "#condition-selector" ).material_select();
+                    $( "#affix-min" ).val( "" );
+                    $( "#affix-max" ).val( "" );
+                    $( "#affixes" ).val( "" );
+                    Materialize.updateTextFields();
+                    $( "#add-affix" ).addClass( "disabled" );
+                    $( "#cancel-affix" ).addClass( "disabled" );
+                    $( "#affixes" ).prop( "disabled", false );
+                });
+            }
+        };
+
         loadedAffix = false;
-        var affix = $( "#affixes" ).val();
-        if ( affix !== "" ) {
-            var min = $( "#affix-min" ).val();
-            min = min === "" ? "…" : min;
-            min = "<span class='value'>" + min + "</span>";
-            var max = $( "#affix-max" ).val();
-            max = max === "" ? "…" : max;
-            max = "<span class='value'>" + max + "</span>";
-            var count = ( affix.match( /#/g ) || []).length;
-            if ( count > 1 ) {
-                affix = affix.replace( "#", min );
-                affix = affix.replace( "#", max );
+        var operatorList = [
+            "and", "if", "sum", "not", "count", "weight"
+        ];
+        var operator = $( "#condition-selector" ).val();
+        var operatorRef;
+        var index;
+        var createModGroup = false;
+        
+        // It makes no difference having several "and" or "not" groups
+        if ( operator !== "and" && operator !== "not" && operator !== "if" ) {
+            index = "[" + Object.keys(modGroupsId).length + "]";
+            // There is an existing modgroup
+            operatorRef = operator + ( Object.keys(modGroupsId).length );
+            console.log( modGroupsId );
+            console.log( operator );
+            console.log( operatorRef );
+            if ( modGroupsId[operator]) {
+                console.log( "There is an existing mod-group with id: " + modGroupsId[operator]);
+                operatorRef = operator;
+            } else if ( modGroupsId[operatorRef]) {
+                console.log( "There is an existing mod-group with id: " + modGroupsId[operatorRef]);
             } else {
-                affix = affix.replace( "#", "( " + min + " - " + max + " )" );
+                console.log( "No existing mod-group, creating new one" );
+                createModGroup = true;
+                modGroupsId[operatorRef] = Misc.guidGenerator();
+                // Add option to select
+                $( "#condition-selector" ).append(
+                    "<option value=\"" + operatorRef + "\">" + operator.toUpperCase() + " " + index + "</option>"
+                );
+                $( "#condition-selector" ).material_select();
             }
-            var obj = { 
-                title: $( "#affixes" ).val(),
-                affix: affix,
-                min:   min,
-                max:   max,
-                id:    Misc.guidGenerator()
+        } else {
+            operatorRef = operator;
+            index = "";
+            console.log( "Using generic mod-group" );
+            if ( !modGroupsId[operatorRef]) {
+                createModGroup = true;
+                modGroupsId[operatorRef] = Misc.guidGenerator();
+            }
+        }
+        if ( !modGroups[operatorRef]) {
+            modGroups[operatorRef] = {
+                "id": modGroupsId[operatorRef],
+                "type": operator.toUpperCase(),
+                "mods": {}
             };
-            // Editing existing affix
-            if ( $( "#add-affix" ).text() !== "Add" ) {
-                console.log( "Editing affix " + editingAffix );
-                obj.id = editingAffix;
-                editingAffix = "";
-            }
-            var generated = "";
-            mu.compileAndRender( "affix.html", obj )
+        }
+
+        var parameter = "";
+        if ( operator.indexOf( "sum" ) !== -1 || 
+             operator.indexOf( "count" ) !== -1 || 
+             operator.indexOf( "weight" ) !== -1 ) {
+            modGroups[operatorRef].min = $( "#mod-group-min" ).val();
+            modGroups[operatorRef].max = $( "#mod-group-max" ).val();
+            var groupMinDisp = modGroups[operatorRef].min !== "" ? modGroups[operatorRef].min : "…";
+            var groupMaxDisp = modGroups[operatorRef].max !== "" ? modGroups[operatorRef].max : "…";
+            parameter    = "( " + groupMinDisp + " - " + groupMaxDisp + " )";
+        }
+        
+        console.log( modGroupsId );
+        var condition = {
+            "id":   modGroupsId[operatorRef],
+            "type": operator.toUpperCase(),
+            "index": index,
+            "parameter": parameter
+        };
+        console.log( modGroups );
+        if ( createModGroup ) {
+            console.log( "Creating mod group" );
+            var generatedCond = "";
+            mu.compileAndRender( "condition.html", condition )
             .on( "data", function ( data ) {
-                generated += data.toString();
+                generatedCond += data.toString();
             })
             .on( "end", function () {
-                var affixListElement = $( "#affixes-list #" + obj.id );
-                if ( affixListElement.length > 0 ) {
-                    affixListElement.parent().replaceWith( generated );
-                } else {
-                    $( "#affixes-list" ).append( generated );
-                }
-                var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
-                var match      = extractReg.exec( obj.affix );
-                var type;
-                if ( match ) {
-                    $( "#" + obj.id ).html( obj.affix.replace( /^\([a-zA-Z ]+\)\s*/, "" ));
-                    type = match[1];
-                } else {
-                    type = "Explicit";
-                }
-                $( "#" + obj.id ).prepend( "<span class='badge affix-" + type.toLowerCase() + "' data-badge-caption='" + type + "'></span>" );
-
-                $( "#" + obj.id ).data( "data-item", obj );
-                // When clicking on remove affix
-                $( ".remove-affix" ).click( function() {
-                    $( this ).parent().parent().remove();
-                });
-                bindAffixEdition( obj.id );
-                bindAffixHover( obj.id );
-                $( "#affix-min" ).val( "" );
-                $( "#affix-max" ).val( "" );
-                $( "#affixes" ).val( "" );
-                Materialize.updateTextFields();
-                $( "#add-affix" ).addClass( "disabled" );
-                $( "#cancel-affix" ).addClass( "disabled" );
-                $( "#affixes" ).prop( "disabled", false );
+                $( "#conditions" ).append( generatedCond );
+                addAffix( operator, operatorRef );
             });
+        } else {
+            console.log( "Not creating mod group" );
+            $( "#condition-parameter-" + condition.id ).html( parameter );
+            addAffix( operator, operatorRef );
         }
     });
 
@@ -2614,8 +2931,6 @@ $( document).ready( function() {
                                         if ( playerBlackList.check( stash.lastCharacterName ) ||
                                              playerBlackList.check( stash.accountName )) {
                                             item.blacklisted = stash.accountName;
-                                        } else {
-                                            console.log( stash.accountName + " is not blacklisted" );
                                         }
                                         displayItem( item, stash, foundIndex, filter.clipboard, filter.id, function() {
                                             callbackItem();
@@ -2972,34 +3287,138 @@ $( document).ready( function() {
         $( "#es" ).val( data.shield_min );
         $( "#evasion" ).val( data.evasion_min );
         $( "#evasion" ).val( data.evasion_min );
-        console.log( data.mods );
-        
-        async.each( data.mods, function( mod, cbMod ) {
-            var generated = "";
-            var obj = {
-                title: mod.title,
-                min:   "<span class='value'>" + mod.min + "</span>",
-                max:   "<span class='value'>" + mod.max + "</span>",
-                affix: mod.generated.replace( 
-                    "#", "( <span class='value'>" + mod.min + "</span> - <span class='value'>" + 
-                                mod.max + "</span> )" 
-                ),
-                id:    Misc.guidGenerator()
-            };
-            mu.compileAndRender( "affix.html", obj )
+
+        var index = 0;
+        resetConditionSelector();
+        async.eachLimit( Object.keys( data.modGroups ), 1, function( group, cbGroup ) {
+            var generatedModGroup = "";
+            var obj = {};
+            if ( data.modGroups[group].type === "SUM" || 
+                 data.modGroups[group].type === "COUNT" || 
+                 data.modGroups[group].type === "WEIGHT" ) {
+                index++;
+                var parameter = "( " + data.modGroups[group].min + " - " + data.modGroups[group].max + " )";
+                obj = {
+                    "id":        data.modGroups[group].id,
+                    "type":      data.modGroups[group].type,
+                    "index":     "[" + index + "]",
+                    "parameter": parameter
+                };
+                var ref = "[" + index + "]";
+                // Add options to select
+                $( "#condition-selector" ).append(
+                    "<option value=\"" + group + "\">" + data.modGroups[group].type + " " + ref + "</option>"
+                );
+                $( "#condition-selector" ).material_select();
+            } else {
+                obj = {
+                    "id":        data.modGroups[group].id,
+                    "type":      data.modGroups[group].type,
+                    "index":     "",
+                };
+            }   
+            
+            mu.compileAndRender( "condition.html", obj )
             .on( "data", function ( data ) {
-                generated += data.toString();
+                generatedModGroup += data.toString();
             })
             .on( "end", function () {
-                $( "#affixes-list" ).append( generated );
-                $( "#" + obj.id ).data( "data-item", obj );
-                // When clicking on remove affix
-                $( ".remove-affix" ).click( function() {
-                    $( this ).parent().parent().remove();
+                // console.log( "Modified: " + generated );
+                $( "#conditions" ).append( generatedModGroup );
+                modGroups = data.modGroups;
+                async.eachLimit( Object.keys( data.modGroups[group].mods ), 1, function( mod, cbMod ) {
+                    console.log( data.modGroups[group].mods[mod] );
+                    var weight = "";
+                    if ( data.modGroups[group].type === "WEIGHT" ) {
+                        weight = "Weight: " + data.modGroups[group].mods[mod].weight;
+                    }
+                    var generated = "";
+                    // Find out the mod type (explicit, implicit, etc.)
+                    var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
+                    var sharpReg   = /#/;
+                    var match      = extractReg.exec( mod );
+                    var matched;
+                    if ( !match ) {
+                        matched = "Explicit";
+                    } else {
+                        matched = match[1];
+                    }
+                    var displayMin = "<span class='value'>" + data.modGroups[group].mods[mod].min + "</span>";
+                    var displayMax = "<span class='value'>" + data.modGroups[group].mods[mod].max + "</span>";
+                    var title = mod;
+                    var count = ( title.match( /#/g ) || []).length;
+                    if ( count > 1 ) {
+                        title = title.replace( "#", displayMin );
+                        title = title.replace( "#", displayMax );
+                    } else {
+                        title = mod.replace( 
+                            "#", "( " + displayMin + " - " + 
+                                        displayMax + " )" );
+                    }
+                    
+                    var obj = {
+                        "title":  mod,
+                        "min":    displayMin,
+                        "max":    displayMax,
+                        "affix":  title.replace( /^\([a-zA-Z ]+\)\s*/, "<span class='badge affix-" + matched.toLowerCase() +  "' data-badge-caption='" + matched + "'></span>" ),
+                        "id":     data.modGroups[group].mods[mod].id,
+                        "typeLC": matched.toLowerCase(),
+                        "type":   matched,
+                        "weight": weight
+                    };
+                    mu.compileAndRender( "affix.html", obj )
+                    .on( "data", function ( data ) {
+                        generated += data.toString();
+                    })
+                    .on( "end", function () {
+                        // console.log( "Modified: " + generated );
+                        $( "#condition-container-" + data.modGroups[group].id ).append( generated );
+                        $( "#" + obj.id ).data( "data-item", obj );
+                        // When clicking on remove affix
+                        $( ".remove-affix" ).click( function() {
+                            var id = $( this ).attr( "id" ).replace( "remove-affix-", "" );
+                            $( this ).parent().parent().remove();
+                            removeAffix( id );
+                        });
+                        bindAffixEdition( obj.id );
+                        bindAffixHover( obj.id );
+                        cbMod();
+                    });
+                }, function() {
+                    cbGroup();
                 });
-                cbMod();
             });
-        }, function() {});
+        });
+
+        
+        // async.each( data.mods, function( mod, cbMod ) {
+        //     var generated = "";
+        //     var obj = {
+        //         title: mod.title,
+        //         min:   "<span class='value'>" + mod.min + "</span>",
+        //         max:   "<span class='value'>" + mod.max + "</span>",
+        //         affix: mod.generated.replace( 
+        //             "#", "( <span class='value'>" + mod.min + "</span> - <span class='value'>" + 
+        //                         mod.max + "</span> )" 
+        //         ),
+        //         id:    Misc.guidGenerator()
+        //     };
+        //     mu.compileAndRender( "affix.html", obj )
+        //     .on( "data", function ( data ) {
+        //         generated += data.toString();
+        //     })
+        //     .on( "end", function () {
+        //         $( "#affixes-list" ).append( generated );
+        //         $( "#" + obj.id ).data( "data-item", obj );
+        //         // When clicking on remove affix
+        //         $( ".remove-affix" ).click( function() {
+        //             var id = $( this ).attr( "id" ).replace( "remove-affix-", "" );
+        //             $( this ).parent().parent().remove();
+        //             removeAffix( id );
+        //         });
+        //         cbMod();
+        //     });
+        // }, function() {});
         // Compute total links
         var totalLinks = 0;
         if ( !data.link_min ) {
@@ -3305,45 +3724,91 @@ $( document).ready( function() {
     $('.modal').modal();
 
     var bindAffixHover = function( id ) {
-        var currentTitle = "";
-        var currentMin   = "";
-        var currentMax   = "";
+        var currentTitle     = "";
+        var currentMin       = "";
+        var currentMax       = "";
+        var currentWeight    = "";
+        var currentGroupMin  = "";
+        var currentGroupMax  = "";
+        var currentGroupType = "";
         $( ".affix-item#" + id ).mouseover( function() {
+            currentTitle     = $( "#affixes" ).val();
+            currentMin       = $( "#affix-min" ).val();
+            currentMax       = $( "#affix-max" ).val();
+            currentWeight    = $( "#affix-weight" ).val();
+            currentGroupMin  = $( "#mod-group-min" ).val();
+            currentGroupMax  = $( "#mod-group-max" ).val();
+            currentGroupType = $( "#condition-selector" ).val();
+            console.log( loadedAffix );
             if ( !loadedAffix ) {
-                currentTitle = $( "#affixes" ).val();
-                currentMin   = $( "#affix-min" ).val();
-                currentMax   = $( "#affix-max" ).val();
-                var affix = $( this ).text().trim();
-                var type  = $( this ).parent().find( ".badge" ).data( "badge-caption" );
-                // affix     = "(" + type + ") " + affix;
-                // console.log( affix );
-
-                // Extract title, min and max
-                var reg = /([0-9\.…]+)/g;
-                var regPar = /\([^()]+\)|\d+/g;
-                var match = reg.exec( affix );
-                var matches = [];
-                while ( match !== null ) {
-                    matches.push( parseFloat( match[1]));
-                    match = reg.exec( affix );
-                }
-                if ( !matches[0]) {
-                    matches[0] = "";
-                }
-                if ( !matches[1]) {
-                    matches[1] = "";
-                }
-                var title = affix.replace( regPar, "#" );
-                title     = "(" + type + ") " + title;
-                // Replace affix form with select affix values
-                $( "#affixes" ).val( title.trim());
-                $( "#affixes" ).addClass( "affix-preview" );
-                $( "#affix-min" ).val( matches[0]);
-                $( "#affix-min" ).addClass( "affix-preview" );
-                $( "#affix-max" ).val( matches[1]);
-                $( "#affix-max" ).addClass( "affix-preview" );
-                Materialize.updateTextFields();
-                // console.log( title.trim() + " " + matches[0] + " - " + matches[1]);
+                var self = this;
+                // Find the group type in modGroups
+                var affix;
+                var affixMin;
+                var affixMax;
+                var groupMin = "";
+                var groupMax = "";
+                var weight   = "";
+                var groupType;
+                var groupValue;
+                var foundId = false;
+                async.eachLimit( Object.keys( modGroups ), 1, function( group, cbGroup ) {
+                    async.eachLimit( Object.keys( modGroups[group].mods ), 1, function( mod, cbMod ) {
+                        if ( modGroups[group].mods[mod].id === id ) {
+                            foundId    = true;
+                            affix      = mod;
+                            affixMin   = modGroups[group].mods[mod].min;
+                            affixMax   = modGroups[group].mods[mod].max;
+                            groupType  = modGroups[group].type;
+                            groupValue = group;
+                            if ( groupType !== "IF" && groupType !== "NOT" && groupType !== "AND" ) {
+                                groupMin = modGroups[group].min;
+                                groupMax = modGroups[group].max;
+                                if ( groupType === "WEIGHT" ) {
+                                    weight = modGroups[group].mods[mod].weight;
+                                }
+                            }
+                        }
+                        cbMod();
+                    }, function() {
+                        cbGroup();
+                    });
+                }, function() {
+                    if ( foundId ) {
+                        affix = $( self ).text().trim();
+                        console.log( affix );
+                        var type  = $( self ).parent().find( ".badge" ).data( "badge-caption" );
+                        // Extract title
+                        var regPar = /\([^()]+\)|\d+/g;
+                        var title = affix.replace( regPar, "#" ).trim();
+                        title     = "(" + type + ") " + title;
+                        // Replace affix form with select affix values
+                        $( "#affixes" ).val( title.trim());
+                        $( "#affix-min" ).val( affixMin );
+                        $( "#affix-max" ).val( affixMax );
+                        $( "#affix-weight" ).val( weight );
+                        $( "#mod-group-min" ).val( groupMin );
+                        $( "#mod-group-max" ).val( groupMax );
+                        $( "#condition-selector" ).val( groupValue );
+                        $( "#condition-selector" ).material_select();
+                        Materialize.updateTextFields();
+                        if ( groupType === "WEIGHT" ) {
+                            $( ".form-affix-value" ).hide();
+                            $( ".form-affix-weight" ).show();
+                        } else {
+                            $( ".form-affix-value" ).show();
+                            $( ".form-affix-weight" ).hide();
+                        }
+                        // Replace affix form with select affix values
+                        $( "#affixes" ).addClass( "affix-preview" );
+                        $( "#affix-min" ).addClass( "affix-preview" );
+                        $( "#affix-max" ).addClass( "affix-preview" );
+                        $( "#affix-weight" ).addClass( "affix-preview" );
+                        $( "#mod-group-min" ).addClass( "affix-preview" );
+                        $( "#mod-group-max" ).addClass( "affix-preview" );
+                        // console.log( title.trim() + " " + affixMin + " - " + affixMax );
+                    }
+                });
             }
         });
         $( ".affix-item#" + id ).mouseout( function() {
@@ -3354,45 +3819,101 @@ $( document).ready( function() {
                 $( "#affix-min" ).removeClass( "affix-preview" );
                 $( "#affix-max" ).val( currentMax );
                 $( "#affix-max" ).removeClass( "affix-preview" );
+                $( "#affix-weight" ).val( currentWeight );
+                $( "#mod-group-min" ).val( currentGroupMin );
+                $( "#mod-group-max" ).val( currentGroupMax );
+                $( "#affix-weight" ).removeClass( "affix-preview" );
+                $( "#mod-group-min" ).removeClass( "affix-preview" );
+                $( "#mod-group-max" ).removeClass( "affix-preview" );
                 Materialize.updateTextFields();
+                $( "#condition-selector" ).val( currentGroupType );
+                $( "#condition-selector" ).material_select();
+                $( ".form-affix-value" ).show();
+                $( ".form-affix-weight" ).hide();
             }
-            loadedAffix = false;
+            // loadedAffix = false;
         });
     };
 
+    // When clicking on affix to edit
     var bindAffixEdition = function( id ) {
         $( ".affix-item#" + id ).click( function() {
-            $( "#affixes" ).prop( "disabled", true );
-            loadedAffix = true;
-            editingAffix = id;
-            var affix = $( this ).text();
-            var type  = $( this ).parent().find( ".badge" ).data( "badge-caption" );
-            // Extract title, min and max
-            var reg = /([0-9\.…]+)/g;
-            var regPar = /\([^()]+\)|\d+/g;
-            var match = reg.exec( affix );
-            var matches = [];
-            while ( match !== null ) {
-                matches.push( parseFloat( match[1]));
-                match = reg.exec( affix );
-            }
-            if ( !matches[0]) {
-                matches[0] = "";
-            }
-            if ( !matches[1]) {
-                matches[1] = "";
-            }
-            var title = affix.replace( regPar, "#" ).trim();
-            title     = "(" + type + ") " + title;
-            // Replace affix form with select affix values
-            $( "#affixes" ).val( title.trim());
-            $( "#affix-min" ).val( matches[0]);
-            $( "#affix-max" ).val( matches[1]);
-            Materialize.updateTextFields();
-            $( "#add-affix" ).removeClass( "disabled" );
-            $( "#cancel-affix" ).removeClass( "disabled" );
-            $( "#add-affix" ).text( "Upd." );
-            console.log( title.trim() + " " + matches[0] + " - " + matches[1]);
+            var self = this;
+            // Find the group type in modGroups
+            var affix;
+            var affixMin;
+            var affixMax;
+            var groupMin = "";
+            var groupMax = "";
+            var weight   = "";
+            var groupType;
+            var groupValue;
+            var foundId = false;
+            async.eachLimit( Object.keys( modGroups ), 1, function( group, cbGroup ) {
+                async.eachLimit( Object.keys( modGroups[group].mods ), 1, function( mod, cbMod ) {
+                    if ( modGroups[group].mods[mod].id === id ) {
+                        foundId    = true;
+                        affix      = mod;
+                        affixMin   = modGroups[group].mods[mod].min;
+                        affixMax   = modGroups[group].mods[mod].max;
+                        groupType  = modGroups[group].type;
+                        groupValue = group;
+                        if ( groupType !== "IF" && groupType !== "NOT" && groupType !== "AND" ) {
+                            groupMin = modGroups[group].min;
+                            groupMax = modGroups[group].max;
+                            if ( groupType === "WEIGHT" ) {
+                                weight = modGroups[group].mods[mod].weight;
+                            }
+                            // Enable group min and max fields
+                            $( "#mod-group-min" ).prop( "disabled", false );
+                            $( "#mod-group-max" ).prop( "disabled", false );
+                        } else {
+                            // Disable group min and max fields
+                            $( "#mod-group-min" ).prop( "disabled", true );
+                            $( "#mod-group-max" ).prop( "disabled", true );
+                        }
+                    }
+                    cbMod();
+                }, function() {
+                    cbGroup();
+                });
+            }, function() {
+                if ( foundId ) {
+                    $( "#affixes" ).prop( "disabled", true );
+                    loadedAffix = true;
+                    console.log( loadedAffix );
+                    editingAffix = id;
+                    affix = $( self ).text();
+                    var type  = $( self ).parent().find( ".badge" ).data( "badge-caption" );
+                    // Extract title
+                    var regPar = /\([^()]+\)|\d+/g;
+                    var title = affix.replace( regPar, "#" ).trim();
+                    title     = "(" + type + ") " + title;
+                    // Replace affix form with select affix values
+                    $( "#affixes" ).val( title.trim());
+                    $( "#affix-min" ).val( affixMin );
+                    $( "#affix-max" ).val( affixMax );
+                    $( "#affix-weight" ).val( weight );
+                    $( "#mod-group-min" ).val( groupMin );
+                    $( "#mod-group-max" ).val( groupMax );
+                    $( "#condition-selector" ).val( groupValue );
+                    $( "#condition-selector" ).material_select();
+                    Materialize.updateTextFields();
+                    if ( groupType === "WEIGHT" ) {
+                        $( ".form-affix-value" ).hide();
+                        $( ".form-affix-weight" ).show();
+                    } else {
+                        $( ".form-affix-value" ).show();
+                        $( ".form-affix-weight" ).hide();
+                    }
+                    $( "#add-affix" ).removeClass( "disabled" );
+                    $( "#cancel-affix" ).removeClass( "disabled" );
+                    $( "#add-affix" ).text( "Upd." );
+                    console.log( title.trim() + " " + affixMin + " - " + affixMax );
+                } else {
+                    console.log( "Didn't find id" );
+                }
+            });
         });
     };
 

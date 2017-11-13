@@ -133,6 +133,10 @@ li.collection-item {
     color: rgb(132, 183, 255);
 }
 
+.affix-filter-list .affix-implicit, .affix-filter-list .affix-explicit, .affix-filter-list .affix-crafted, .affix-filter-list .affix-enchant, .affix-filter-list .affix-total, .affix-filter-list .affix-pseudo, .affix-filter-list .affix-unique {
+    margin-left: 20px!important;
+}
+
 .affix-implicit {
     background-color: rgba(132, 183, 255, 0.25)!important;
 }
@@ -222,6 +226,8 @@ ul .row {
     top: 40px;
     width: 95%!important;
     z-index: 1000!important;
+    width: 400px!important;
+    max-width: 400px;
 }
 
 .dropdown-content {
@@ -266,6 +272,11 @@ img.right.circle {
 
 .property-value {
     color: grey;
+}
+
+#affixes {
+    left: -10px!important;
+    position: relative;
 }
 
 #affixes-list {
@@ -754,6 +765,10 @@ label.active {
     transform: translateX(260%)!important;
 }
 
+label.active[for="mod-group-min"], label.active[for="mod-group-max"] {
+    transform: translateX(90%)!important;
+}
+
 label.active[for="sockets-red"], label.active[for="sockets-green"], label.active[for="sockets-blue"], label.active[for="sockets-white"] {
     transform: translateX(120%)!important;
 }
@@ -1035,4 +1050,74 @@ label:disabled {
 
 input:not([type]):disabled+label, input:not([type])[readonly="readonly"]+label, input[type=text]:disabled+label, input[type=text][readonly="readonly"]+label, input[type=password]:disabled+label, input[type=password][readonly="readonly"]+label, input[type=email]:disabled+label, input[type=email][readonly="readonly"]+label, input[type=url]:disabled+label, input[type=url][readonly="readonly"]+label, input[type=time]:disabled+label, input[type=time][readonly="readonly"]+label, input[type=date]:disabled+label, input[type=date][readonly="readonly"]+label, input[type=datetime]:disabled+label, input[type=datetime][readonly="readonly"]+label, input[type=datetime-local]:disabled+label, input[type=datetime-local][readonly="readonly"]+label, input[type=tel]:disabled+label, input[type=tel][readonly="readonly"]+label, input[type=number]:disabled+label, input[type=number][readonly="readonly"]+label, input[type=search]:disabled+label, input[type=search][readonly="readonly"]+label, textarea.materialize-textarea:disabled+label, textarea.materialize-textarea[readonly="readonly"]+label {
     color: rgb(97, 97, 97)!important;
+}
+
+span.condition-type {
+    color: aqua;
+    font-weight: bold;
+}
+
+.condition-container {
+}
+
+span.condition {
+}
+
+#conditions {
+    height: 142px;
+    max-height: 142px;
+    overflow-y: scroll;
+}
+
+.condition-group {
+    margin-bottom: -10px;
+}
+
+.condition-index {
+    color: rgb(245, 151, 27);
+}
+
+.condition-parameter, .affix-weight {
+    color: #f3c200;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+.affix-form .caret {
+    top: -21px!important;
+}
+
+.reason {
+    color: #0cff00;
+    text-shadow: 0 0 5px #27ff00;
+}
+
+.badge-AND {
+    background: rgba(0, 255, 0, 0.15);
+    border: 1px solid green;
+}
+
+.badge-NOT {
+    background: rgba(109, 0, 0, 0.5);
+    border: 1px solid #6d0000;
+}
+
+.badge-IF {
+    background: rgba(109, 91, 0, 0.5);
+    border: 1px solid #6d5b00;
+}
+
+.badge-SUM {
+    background: rgba(128, 0, 111, 0.5);
+    border: 1px solid #80006f;
+}
+
+.badge-WEIGHT {
+    background: rgba(0, 121, 150, 0.5);
+    border: 1px solid rgb(0, 121, 150);
+}
+
+.badge-COUNT {
+    background: rgba(73, 0, 150, 0.5);
+    border: 1px solid #490096;
 }

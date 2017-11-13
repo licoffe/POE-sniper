@@ -160,55 +160,65 @@ class Misc {
                 buyout_currency: $( "#poe-trade-search-output select[name='buyout_currency'] option:selected" ).text(),
                 crafted:         $( "#poe-trade-search-output select[name='crafted'] option:selected" ).text(),
                 enchanted:       $( "#poe-trade-search-output select[name='enchanted'] option:selected" ).text(),
-                mods:            []
+                modGroups:       {}
             };
-            // Extract mods
-            var mods = $( "#poe-trade-search-output select[name='mod_name']" );
-            async.each( mods, function( mod, cbMod ) {
-                var reg = /^\(([a-zA-Z ]+)\)\s*/;
-                var mod_name = $( mod ).find( "option:selected" ).val();
-                if ( mod_name ) {
-                    var mod_min  = $( mod ).parent().parent().find( "input[name='mod_min']" ).val();
-                    var mod_max  = $( mod ).parent().parent().find( "input[name='mod_max']" ).val();
-                    mod_min = mod_min !== "" ? mod_min : "…";
-                    mod_max = mod_max !== "" ? mod_max : "…";
-                    mod_name = mod_name.replace( "(pseudo) (total)", "(Total)" )
-                                       .replace( "(pseudo)", "(Pseudo)" )
-                                       .replace( "(unique explicit)", "(Unique explicit)" )
-                                       .replace( "(enchant)", "(Enchant)" )
-                                       .replace( "(crafted)", "(Crafted)" )
-                                       .replace( "(implicit)", "(Implicit)" )
-                                       .trim();
-                    var fullName = mod_name;
-                    var match = reg.exec( mod_name );
-                    var obj = {};
-                    if ( match ) {
-                        obj = {
-                            typeLC: match[1].toLowerCase(),
-                            type:   match[1],
-                            title:  mod_name.replace( reg, "" )
-                        };
-                    // This is an explicit mod
-                    } else {
-                        fullName = "(Explicit) " + mod_name;
-                        obj      = {
-                            typeLC: "explicit",
-                            type:   "Explicit",
-                            title:  mod_name
-                        };
-                    }
-                    var generated = "";
-                    mu.compileAndRender( "affix-filter.html", obj )
-                    .on( "data", function ( data ) {
-                        generated += data.toString();
-                    })
-                    .on( "end", function () {
-                        data.mods.push({ title: fullName, min: mod_min, max: mod_max, generated: generated });
-                        cbMod();
-                    });
-                } else {
-                    cbMod();
+            // Extract mod-groups and mods
+            var groups = $( "#poe-trade-search-output .explicit-group" );
+            groups.splice( 0, 1 );
+            var index = 0;
+            async.each( groups, function( group, cbGroup ) {
+                var groupType = $( group ).find( "select[name='group_type'] option:selected" ).text().toUpperCase();
+                var key = groupType.toLowerCase();
+                if ( groupType === "SUM" || groupType === "COUNT" || groupType === "WEIGHT" ) {
+                    key = groupType.toLowerCase() + index;   
                 }
+                data.modGroups[key] = {
+                    "type": groupType,
+                    "mods": {},
+                    "id": Misc.guidGenerator()
+                };
+                if ( groupType === "SUM" || groupType === "COUNT" || groupType === "WEIGHT" ) {
+                    data.modGroups[key].min = $( group ).find( "input[name='group_min']" ).val();
+                    data.modGroups[key].max = $( group ).find( "input[name='group_max']" ).val();
+                }
+                index++;
+
+                var mods = $( group ).find( "select[name='mod_name'] option:selected" );
+                async.each( mods, function( mod, cbMod ) {
+                    var reg = /^\(([a-zA-Z ]+)\)\s*/;
+                    var mod_name = $( mod ).text();
+                    if ( mod_name ) {
+                        var mod_min  = $( mod ).parent().parent().parent().parent().find( "input[name='mod_min']" ).val();
+                        var mod_max  = $( mod ).parent().parent().parent().parent().find( "input[name='mod_max']" ).val();
+                        var mod_weight  = $( mod ).parent().parent().parent().parent().find( "input[name='mod_weight']" ).val();
+                        mod_min    = mod_min !== "" ? mod_min : "…";
+                        mod_max    = mod_max !== "" ? mod_max : "…";
+                        mod_weight = mod_weight !== "" ? mod_weight : "…";
+                        mod_name = mod_name.replace( "(pseudo) (total)", "(Total)" )
+                                           .replace( "(pseudo)", "(Pseudo)" )
+                                           .replace( "(unique explicit)", "(Unique explicit)" )
+                                           .replace( "(enchant)", "(Enchant)" )
+                                           .replace( "(crafted)", "(Crafted)" )
+                                           .replace( "(implicit)", "(Implicit)" )
+                                           .trim();
+                        var match = reg.exec( mod_name );
+                        // This is an explicit mod
+                        if ( !match ) {
+                            mod_name = "(Explicit) " + mod_name;
+                        }
+                        data.modGroups[key].mods[mod_name] = {
+                            "min": mod_min,
+                            "max": mod_max,
+                            "weight": mod_weight,
+                            "id": Misc.guidGenerator()
+                        }
+                        cbMod();
+                    } else {
+                        cbMod();
+                    }
+                }, function() {
+                    cbGroup();
+                });
             }, function() {
                 console.log( data );
                 callback( data );

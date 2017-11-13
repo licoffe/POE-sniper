@@ -384,12 +384,12 @@ class Item {
             if ( item.frameType === 1 ) {
                 var cleanedTypeLine = item.typeLine.replace( "Shaped ", "" );
                 var match = magicReg.exec( cleanedTypeLine );
-                console.log( item.typeLine );
+                // console.log( item.typeLine );
                 if ( match ) {
                     itemType = types[match[1]];
-                    console.log( item.typeLine + ", " + match[1] + ", " + itemType );
+                    // console.log( item.typeLine + ", " + match[1] + ", " + itemType );
                 } else {
-                    console.log( "Could not match " + item.typeLine );
+                    // console.log( "Could not match " + item.typeLine );
                 }
             } else {
                 itemType = types[item.typeLine];
@@ -468,7 +468,7 @@ class Item {
                 });
             } else {
                 if ( !itemType ) {
-                    console.log( "Unknown item type " + itemType + " (" + item.typeLine +  ")" );
+                    // console.log( "Unknown item type " + itemType + " (" + item.typeLine +  ")" );
                 }
                 explicit += "<span class=\"badge affix-explicit\" data-badge-caption=\"Explicit\"></span><span class=\"explicit\">";
                 explicit += item.explicitMods.join( "</span><br><span class=\"badge affix-explicit\" data-badge-caption=\"Explicit\"></span></span><span class=\"explicit\">" );

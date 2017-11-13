@@ -81,24 +81,73 @@
                         <label for="evasion">Evasion</label>
                     </div>
                 </div>
-                <div class="input-field col s3">
-                            <input type="text" id="affixes" placeholder="Affixes" class="autocomplete">
+                <div class="input-field col s4" style="top: -10px;">
+                    <div id="conditions" style="font-size: 1.2em;">
+                        <!-- <div class="condition-group">
+                            <span class="condition-type">NOT</span>
+                            <i class="material-icons fold-condition">keyboard_arrow_right</i>
+                            <div class="condition-container"></div>
+                        </div>
+                        <div class="condition-group">
+                            <span class="condition-type">AND <span class="condition-index">[1]</span></span>
+                            <i class="material-icons fold-condition">keyboard_arrow_down</i>
+                            <div class="condition-container">
+                                <span class="" id="5f8b46b5-53e7-c250-0816-a3d4a02f6cc1"><span class="badge affix-explicit" data-badge-caption="Explicit"></span>( <span class="value">10</span> - <span class="value">20</span> )% increased maximum Mana</span><br>
+                                <span class="" id="5f8b46b5-53e7-c250-0816-a3d4a02f6cc1"><span class="badge affix-explicit" data-badge-caption="Explicit"></span>( <span class="value">10</span> - <span class="value">20</span> )% increased maximum Mana</span><br>
+                                <span class="" id="5f8b46b5-53e7-c250-0816-a3d4a02f6cc1"><span class="badge affix-explicit" data-badge-caption="Explicit"></span>( <span class="value">10</span> - <span class="value">20</span> )% increased maximum Mana</span><br>
+                            </div>
+                        </div>
+                        <div class="condition-group">
+                            <span class="condition-type">IF</span>
+                            <i class="material-icons fold-condition">keyboard_arrow_down</i>
+                            <div class="condition-container">
+                                <span class="" id="5f8b46b5-53e7-c250-0816-a3d4a02f6cc1"><span class="badge affix-explicit" data-badge-caption="Explicit"></span>( <span class="value">10</span> - <span class="value">20</span> )% increased maximum Mana</span><br>
+                                <span class="" id="5f8b46b5-53e7-c250-0816-a3d4a02f6cc1"><span class="badge affix-explicit" data-badge-caption="Explicit"></span>( <span class="value">10</span> - <span class="value">20</span> )% increased maximum Mana</span><br>
+                                <span class="" id="5f8b46b5-53e7-c250-0816-a3d4a02f6cc1"><span class="badge affix-explicit" data-badge-caption="Explicit"></span>( <span class="value">10</span> - <span class="value">20</span> )% increased maximum Mana</span><br>
+                            </div>
+                        </div> -->
+                    </div>
                     <div class="row">
-                        <div class="input-field col s3">
-                            <input type="number" id="affix-min" max="100" min="0">
-                            <label for="affix-min">Min</label>
+                        <div class="input-field col s6">
+                            <input type="text" id="affixes" placeholder="Affixes" class="autocomplete">
                         </div>
-                        <div class="input-field col s3">
-                            <input type="number" id="affix-max" max="100" min="0">
-                            <label for="affix-max">Max</label>
+                        <div class="input-field col s3 form-affix-value">
+                            <input type="number" id="affix-min">
+                            <label for="affix-min">Aff. Min</label>
                         </div>
-                        <a class="waves-effect waves-light btn col s3 z-depth-1 disabled" id="cancel-affix" style="font-size: 1.3em!important; top: -8px!important; left: 10px">Cancel</a>
+                        <div class="input-field col s3 form-affix-value">
+                            <input type="number" id="affix-max">
+                            <label for="affix-max">Aff. Max</label>
+                        </div>
+                        <div class="input-field col s6 form-affix-weight" style="display: none">
+                            <input type="number" id="affix-weight">
+                            <label for="affix-weight">Weight</label>
+                        </div>
+                    </div>
+                    <div class="row affix-form">
+                        <div class="input-field col s2">
+                            <input type="number" id="mod-group-min">
+                            <label for="mod-group-min">G. Min</label>
+                        </div>
+                        <div class="input-field col s2">
+                            <input type="number" id="mod-group-max">
+                            <label for="mod-group-max">G. Max</label>
+                        </div>
+                        <select id="condition-selector" class="input-field col s3">
+                            <option value="and" selected>AND</option>
+                            <option value="if">IF</option>
+                            <option value="sum">SUM</option>
+                            <option value="not">NOT</option>
+                            <option value="count">COUNT</option>
+                            <option value="weight">WEIGHT</option>
+                        </select>
+                        <a class="waves-effect waves-light btn col s2 z-depth-1 disabled" id="cancel-affix" style="font-size: 1.3em!important; top: -8px!important; left: 10px">Cancel</a>
                         <span class="col s1"></span>
                         <a class="waves-effect waves-light btn col s2 z-depth-1 disabled" id="add-affix" style="font-size: 1.3em!important; top: -8px!important;">Add</a>
                     </div>
-                    <div id="affixes-list">
+                    <!-- <div id="affixes-list">
                         
-                    </div>
+                    </div> -->
                 </div>
                 <div class="input-field col s3">
                     <!--<i class="material-icons prefix">link</i>-->
@@ -177,7 +226,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="input-field col s2">
+                <div class="input-field col s1">
                     <!--<i class="material-icons prefix">home</i>-->
                     <select id="corrupted">
                         <option value="any" selected>Corrupted</option>
