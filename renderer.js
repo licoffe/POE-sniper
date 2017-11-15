@@ -312,10 +312,10 @@ $( document).ready( function() {
     $( "#condition-selector" ).change( function() {
         var val = $( this ).val();
         if ( val.indexOf( "weight" ) !== -1 ) {
-            $( ".affix-weight" ).show();
+            $( ".form-affix-weight" ).show();
             $( ".form-affix-value" ).hide();
         } else {
-            $( ".affix-weight" ).hide();
+            $( ".form-affix-weight" ).hide();
             $( ".form-affix-value" ).show();
         }
     });
@@ -776,7 +776,6 @@ $( document).ready( function() {
     // Return min and max values for a given filter dimension, depending on the
     // expression
     var parseField = function( value, str ) {
-        console.log( value );
         var data = {};
         var step = 0.0001;
         var max  = 9999999;
@@ -787,7 +786,6 @@ $( document).ready( function() {
         var match = symbolReg.exec( value );
         // If we have an expression with <, <=, > or >=
         if ( match ) {
-            console.log( "Eq" );
             switch ( match[1]) {
                 case "<":
                     data[str + "Min"] = min;
@@ -811,13 +809,11 @@ $( document).ready( function() {
             // If we have a range, extract min and max values
             match = rangeReg.exec( value );
             if ( match ) {
-                console.log( "Range" );
                 data[str + "Min"] = parseFloat( match[1]);
                 data[str + "Max"] = parseFloat( match[2]);
                 return data;
             // By default, only specify min value
             } else {
-                console.log( "Default" );
                 data[str + "Min"] = parseFloat( value );
                 data[str + "Max"] = max;
                 return data;
@@ -1053,7 +1049,7 @@ $( document).ready( function() {
                     console.log( err );
                 }
                 filters = new Filters( newFilters );
-                // console.log( filters );
+                console.log( filters );
                 updateFilterAmount( id );
                 filters.save();
                 // Remove poe.trade form
@@ -1360,6 +1356,7 @@ $( document).ready( function() {
             if ( err ) {
                 console.log( err );
             }
+            console.log( filters );
             async.each( filters.filterList, function( filter, cbSorted ) {
                 filter.render( function( generated ) {
                     // If filter doesn't have a group add it to the main list
@@ -1607,6 +1604,8 @@ $( document).ready( function() {
         } else {
             filter.grade = "any";
         }
+
+        // FIXME:
         renderPoeTradeForm( filter, function( generated ) {
             $( "#" + filter.id + "-poe-trade-form" ).remove();
             $( "#poe-trade-forms" ).append( generated );
@@ -1920,14 +1919,7 @@ $( document).ready( function() {
                     $( "#league").material_select();
                     $( "#item" ).val( filter.item );
                     $( "#price" ).val( filter.budget );
-                    // if ( filter.currency === "Chaos Orb" ) {
-                    //     $( "#currency" ).val( "chaos" );
-                    // } else {
-                    //     $( "#currency" ).val( "exa" );
-                    // }
                     $( "#currency" ).val( Currency.currencyLookupTable[filter.currency]);
-                    // console.log( filter.currency );
-                    // console.log( Currency.currencyLookupTable[filter.currency] );
                     $( "#currency").material_select();
                     $( "#links" ).val( filter.links );
                     $( "#links").material_select();
@@ -1981,112 +1973,110 @@ $( document).ready( function() {
                     $( "#add-affix" ).text( "Add" );
                     $( "#affixes" ).prop( "disabled", false );
 
-                    modGroups = filter.modGroups;
+                    modGroups   = filter.modGroups;
                     modGroupsId = {};
-                    console.log( modGroups );
-                    async.eachLimit( Object.keys( modGroups ), 1, function( group, cbModGroup ) {
-                        modGroupsId[group] = modGroups[group].id;
-                        cbModGroup();
-                    }, function() {
-                        $( "#conditions" ).empty();
-                        var index = 0;
-                        resetConditionSelector();
-                        async.eachLimit( Object.keys( filter.modGroups ), 1, function( group, cbGroup ) {
-                            var generatedModGroup = "";
-                            var obj = {};
-                            if ( filter.modGroups[group].type === "SUM" || 
-                                 filter.modGroups[group].type === "COUNT" || 
-                                 filter.modGroups[group].type === "WEIGHT" ) {
-                                index++;
-                                var parameter = "( " + filter.modGroups[group].min + " - " + filter.modGroups[group].max + " )";
-                                obj = {
-                                    "id":        filter.modGroups[group].id,
-                                    "type":      filter.modGroups[group].type,
-                                    "index":     "[" + index + "]",
-                                    "parameter": parameter
-                                };
-                                var ref = "[" + index + "]";
-                                // Add options to select
-                                $( "#condition-selector" ).append(
-                                    "<option value=\"" + group + "\">" + filter.modGroups[group].type + " " + ref + "</option>"
-                                );
-                                $( "#condition-selector" ).material_select();
+                    $( "#conditions" ).empty();
+                    var index = 0;
+                    resetConditionSelector();
+                    async.eachLimit( Object.keys( filter.modGroups ), 1, function( group, cbGroup ) {
+                        modGroupsId[group] = filter.modGroups[group].id;
+                        var generatedModGroup = "";
+                        var obj = {};
+                        var parameter = "";
+                        if ( filter.modGroups[group].type === "SUM" || 
+                             filter.modGroups[group].type === "COUNT" || 
+                             filter.modGroups[group].type === "WEIGHT" ) {
+                            var groupMinDisp = filter.modGroups[group].min !== "" ? filter.modGroups[group].min : "…";
+                            var groupMaxDisp = filter.modGroups[group].max !== "" ? filter.modGroups[group].max : "…";
+                            parameter    = "( " + groupMinDisp + " - " + groupMaxDisp + " )";
+                            index++;
+                            obj = {
+                                "id":        filter.modGroups[group].id,
+                                "type":      filter.modGroups[group].type,
+                                "index":     "[" + index + "]",
+                                "parameter": parameter
+                            };
+                            var ref = "[" + index + "]";
+                            // Add options to select
+                            $( "#condition-selector" ).append(
+                                "<option value=\"" + group + "\">" + filter.modGroups[group].type + " " + ref + "</option>"
+                            );
+                            $( "#condition-selector" ).material_select();
+                        } else {
+                            obj = {
+                                "id":        filter.modGroups[group].id,
+                                "type":      filter.modGroups[group].type,
+                                "index":     "",
+                            };
+                        }   
+                        
+                        mu.compileAndRender( "condition.html", obj )
+                        .on( "data", function ( data ) {
+                            generatedModGroup += data.toString();
+                        })
+                        .on( "end", function () {
+                            // console.log( "Modified: " + generated );
+                            $( "#conditions" ).append( generatedModGroup );
+                        });
+                        async.eachLimit( Object.keys( filter.modGroups[group].mods ), 1, function( mod, cbMod ) {
+                            var weight = "";
+                            if ( filter.modGroups[group].type === "WEIGHT" ) {
+                                weight = "Weight: " + filter.modGroups[group].mods[mod].weight;
+                            }
+                            var generated = "";
+                            // Find out the mod type (explicit, implicit, etc.)
+                            var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
+                            var sharpReg   = /#/;
+                            var match      = extractReg.exec( mod );
+                            var matched;
+                            if ( !match ) {
+                                matched = "Explicit";
                             } else {
-                                obj = {
-                                    "id":        filter.modGroups[group].id,
-                                    "type":      filter.modGroups[group].type,
-                                    "index":     "",
-                                };
-                            }   
+                                matched = match[1];
+                            }
+                            var displayMin = "<span class='value'>" + filter.modGroups[group].mods[mod].min + "</span>";
+                            var displayMax = "<span class='value'>" + filter.modGroups[group].mods[mod].max + "</span>";
+                            var title = mod;
+                            var count = ( title.match( /#/g ) || []).length;
+                            if ( count > 1 ) {
+                                title = title.replace( "#", displayMin );
+                                title = title.replace( "#", displayMax );
+                            } else {
+                                title = mod.replace( 
+                                    "#", "( " + displayMin + " - " + 
+                                                displayMax + " )" );
+                            }
                             
-                            mu.compileAndRender( "condition.html", obj )
+                            var obj = {
+                                "title":  mod,
+                                "min":    displayMin,
+                                "max":    displayMax,
+                                "affix":  title.replace( /^\([a-zA-Z ]+\)\s*/, "<span class='badge affix-" + matched.toLowerCase() +  "' data-badge-caption='" + matched + "'></span>" ),
+                                "id":     filter.modGroups[group].mods[mod].id,
+                                "typeLC": matched.toLowerCase(),
+                                "type":   matched,
+                                "weight": weight
+                            };
+                            mu.compileAndRender( "affix.html", obj )
                             .on( "data", function ( data ) {
-                                generatedModGroup += data.toString();
+                                generated += data.toString();
                             })
                             .on( "end", function () {
                                 // console.log( "Modified: " + generated );
-                                $( "#conditions" ).append( generatedModGroup );
-                            });
-                            async.eachLimit( Object.keys( filter.modGroups[group].mods ), 1, function( mod, cbMod ) {
-                                var weight = "";
-                                if ( filter.modGroups[group].type === "WEIGHT" ) {
-                                    weight = "Weight: " + filter.modGroups[group].mods[mod].weight;
-                                }
-                                var generated = "";
-                                // Find out the mod type (explicit, implicit, etc.)
-                                var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
-                                var sharpReg   = /#/;
-                                var match      = extractReg.exec( mod );
-                                var matched;
-                                if ( !match ) {
-                                    matched = "Explicit";
-                                } else {
-                                    matched = match[1];
-                                }
-                                var displayMin = "<span class='value'>" + filter.modGroups[group].mods[mod].min + "</span>";
-                                var displayMax = "<span class='value'>" + filter.modGroups[group].mods[mod].max + "</span>";
-                                var title = mod;
-                                var count = ( title.match( /#/g ) || []).length;
-                                if ( count > 1 ) {
-                                    title = title.replace( "#", displayMin );
-                                    title = title.replace( "#", displayMax );
-                                } else {
-                                    title = mod.replace( 
-                                        "#", "( " + displayMin + " - " + 
-                                                    displayMax + " )" );
-                                }
-                                
-                                var obj = {
-                                    "title":  mod,
-                                    "min":    displayMin,
-                                    "max":    displayMax,
-                                    "affix":  title.replace( /^\([a-zA-Z ]+\)\s*/, "<span class='badge affix-" + matched.toLowerCase() +  "' data-badge-caption='" + matched + "'></span>" ),
-                                    "id":     filter.modGroups[group].mods[mod].id,
-                                    "typeLC": matched.toLowerCase(),
-                                    "type":   matched,
-                                    "weight": weight
-                                };
-                                mu.compileAndRender( "affix.html", obj )
-                                .on( "data", function ( data ) {
-                                    generated += data.toString();
-                                })
-                                .on( "end", function () {
-                                    // console.log( "Modified: " + generated );
-                                    $( "#condition-container-" + filter.modGroups[group].id ).append( generated );
-                                    $( "#" + obj.id ).data( "data-item", obj );
-                                    // When clicking on remove affix
-                                    $( ".remove-affix" ).click( function() {
-                                        var id = $( this ).attr( "id" ).replace( "remove-affix-", "" );
-                                        $( this ).parent().parent().remove();
-                                        removeAffix( id );
-                                    });
-                                    bindAffixEdition( obj.id );
-                                    bindAffixHover( obj.id );
-                                    cbMod();
+                                $( "#condition-container-" + filter.modGroups[group].id ).append( generated );
+                                $( "#" + obj.id ).data( "data-item", obj );
+                                // When clicking on remove affix
+                                $( ".remove-affix" ).click( function() {
+                                    var id = $( this ).attr( "id" ).replace( "remove-affix-", "" );
+                                    $( this ).parent().parent().remove();
+                                    removeAffix( id );
                                 });
-                            }, function() {
-                                cbGroup();
+                                bindAffixEdition( obj.id );
+                                bindAffixHover( obj.id );
+                                cbMod();
                             });
+                        }, function() {
+                            cbGroup();
                         });
                     }, function() {
                         cbFilter();
@@ -2190,56 +2180,48 @@ $( document).ready( function() {
             }, true );
             // Add mods
             var reg   = /\(([A-Za-z ]+)\).*<span.*>([0-9.…]+)<\/span>\s*\-\s*<span.*>([0-9.…]+)<\/span>/;
-            async.each( filter.affixesDis, function( affix, cbAffix ) {
-                var match = reg.exec( affix );
-                if ( match ) {
-                    var modType = match[1];
-                    var min     = match[2] === "…" ? "" : match[2];
-                    var max     = match[3] === "…" ? "" : match[3];
-                    var modName = affix.replace( /(<span class=\'value\'>[^<>]+<\/span>)/g, "#" )
-                                       .replace( "( # - # )", "#" )
-                                       .replace( "(Unique explicit)", "" )
-                                       .replace( "(Explicit)", "" )
-                                       .replace( "Implicit", "implicit" )
-                                       .replace( "Enchant", "enchant" )
-                                       .replace( "Crafted", "crafted" )
-                                       .replace( "(Total)", "(pseudo) (total)" )
-                                       .replace( "Pseudo", "pseudo" )
-                                       .replace( "Essence", "Explicit" )
-                                       .replace( "Talisman implicit", "Implicit" );
+            async.eachLimit( filter.modGroups, 1, function( group, cbGroup ) {
+                async.eachLimit( Object.keys( group.mods ), 1, function( mod, cbMod ) {
+                    var modName = mod;
+                    var min = group.mods[mod].min === "…" ? "" : group.mods[mod].min;
+                    var max = group.mods[mod].max === "…" ? "" : group.mods[mod].max;
+                    var weight = "";
+                    if ( group.type === "WEIGHT" ) {
+                        weight = group.mods[mod].weight;
+                    }
+                    modName = modName.replace( /(<span class=\'value\'>[^<>]+<\/span>)/g, "#" )
+                                     .replace( "( # - # )", "#" )
+                                     .replace( "(Unique explicit)", "" )
+                                     .replace( "(Explicit)", "" )
+                                     .replace( "Implicit", "implicit" )
+                                     .replace( "Enchant", "enchant" )
+                                     .replace( "Crafted", "crafted" )
+                                     .replace( "(Total)", "(pseudo) (total)" )
+                                     .replace( "Pseudo", "pseudo" )
+                                     .replace( "Essence", "Explicit" )
+                                     .replace( "Talisman implicit", "Implicit" ).trim();
+                    console.log( modName );
                     data += "&" + $.param({
-                        mod_name: modName,
-                        mod_min:  min,
-                        mod_max:  max
+                        mod_name:   modName,
+                        mod_min:    min,
+                        mod_max:    max,
+                        mod_weight: weight
                     }, true );
-                // If mod has no value
-                } else {
-                    var modName = affix.replace( "(Unique explicit)", "" )
-                                       .replace( "(Explicit)", "" )
-                                       .replace( "Implicit", "implicit" )
-                                       .replace( "Enchant", "enchant" )
-                                       .replace( "Crafted", "crafted" )
-                                       .replace( "(Total)", "(pseudo) (total)" )
-                                       .replace( "Pseudo", "pseudo" )
-                                       .replace( "Essence", "Explicit" )
-                                       .replace( "Talisman implicit", "Implicit" );
+                    cbMod();
+                }, function() {
+                    var groupMin = group.min === "…" ? "" : group.min;
+                    var groupMax = group.max === "…" ? "" : group.max;
+                    var type = group.type.toLowerCase();
+                    type = type.charAt(0).toUpperCase() + type.slice(1);
                     data += "&" + $.param({
-                        mod_name: modName,
-                        mod_min:  "",
-                        mod_max:  ""
+                        group_type:  type,
+                        group_min:   groupMin,
+                        group_max:   groupMax,
+                        group_count: Object.keys( group.mods ).length,
                     }, true );
-                    // console.log( affix );
-                }
-                cbAffix();
+                    cbGroup();
+                });
             }, function() {
-                if ( filter.affixesDis.length > 0 ) {
-                    data += "&" + $.param({
-                        group_type: "And",
-                        group_min: "",
-                        group_max: "",
-                        group_count: filter.affixesDis.length,
-                    }, true );
-                }
                 data += "&" + $.param({
                     online:     "x",
                     has_buyout: "1"
@@ -2282,9 +2264,6 @@ $( document).ready( function() {
                     $( "#filter-detail-" + filter.id + " .item-stats" ).html(
                         str
                     );
-                    // console.log( "Stats over " + prices.length + " items" );
-                    // console.log( "Most popular price: " + mostPopularPrice + " with " + mostPopularCount );
-                    // console.log( "Median price: " + prices[parseInt( prices.length/2)]);
                     cbFilter();
                 });
             });
@@ -3702,7 +3681,6 @@ $( document).ready( function() {
             currentGroupMin  = $( "#mod-group-min" ).val();
             currentGroupMax  = $( "#mod-group-max" ).val();
             currentGroupType = $( "#condition-selector" ).val();
-            console.log( loadedAffix );
             if ( !loadedAffix ) {
                 var self = this;
                 // Find the group type in modGroups
@@ -3742,9 +3720,15 @@ $( document).ready( function() {
                         console.log( affix );
                         var type  = $( self ).parent().find( ".badge" ).data( "badge-caption" );
                         // Extract title
-                        var regPar = /\([^()]+\)|\d+/g;
-                        var title = affix.replace( regPar, "#" ).trim();
-                        title     = "(" + type + ") " + title;
+                        var regPar = /\([^()]+\)/g;
+                        var regNum = /([0-9…]+)/g;
+                        var match = regPar.exec( affix );
+                        var title;
+                        if ( match ) {
+                            title = "(" + type + ") " + affix.replace( regPar, "#" ).trim();
+                        } else {
+                            title = "(" + type + ") " + affix.replace( regNum, "#" ).trim();
+                        }
                         // Replace affix form with select affix values
                         $( "#affixes" ).val( title.trim());
                         $( "#affix-min" ).val( affixMin );
@@ -3849,9 +3833,15 @@ $( document).ready( function() {
                     affix = $( self ).text();
                     var type  = $( self ).parent().find( ".badge" ).data( "badge-caption" );
                     // Extract title
-                    var regPar = /\([^()]+\)|\d+/g;
-                    var title = affix.replace( regPar, "#" ).trim();
-                    title     = "(" + type + ") " + title;
+                    var regPar = /\([^()]+\)/g;
+                    var regNum = /([0-9…]+)/g;
+                    var match = regPar.exec( affix );
+                    var title;
+                    if ( match ) {
+                        title = "(" + type + ") " + affix.replace( regPar, "#" ).trim();
+                    } else {
+                        title = "(" + type + ") " + affix.replace( regNum, "#" ).trim();
+                    }
                     // Replace affix form with select affix values
                     $( "#affixes" ).val( title.trim());
                     $( "#affix-min" ).val( affixMin );

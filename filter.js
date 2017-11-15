@@ -130,7 +130,7 @@ class Filter {
                     newAffix = affix;
                 }
                 self.modGroups.and.mods[newAffix] = {};
-                if ( typeof obj.affixes[affix] === "object" ) {
+                if ( !Array.isArray( obj.affixes[affix])) {
                     if ( obj.affixes[affix].min ) {
                         obj.affixes[affix].min = obj.affixes[affix].min.replace( /\<span.*\>(.*)\<\/span.*\>/, "$1" );
                     }
@@ -149,11 +149,11 @@ class Filter {
                         self.modGroups.and.mods[newAffix].max = obj.affixes[affix].max;
                     }
                     cbAffix();
-                } else if ( typeof obj.affixes[affix] === "array" ) {
-                    if ( obj.affixes[affix].length > 1 ) {
+                } else {
+                    if ( typeof obj.affixes[affix][0] === "string" && obj.affixes[affix].length > 1 ) {
                         obj.affixes[affix][0] = obj.affixes[affix][0].replace( /\<span.*\>(.*)\<\/span.*\>/, "$1" );
                     }
-                    if ( obj.affixes[affix].length > 2 ) {
+                    if ( typeof obj.affixes[affix][1] === "string" && obj.affixes[affix].length > 2 ) {
                         obj.affixes[affix][1] = obj.affixes[affix][1].replace( /\<span.*\>(.*)\<\/span.*\>/, "$1" );
                     }
                     if ( obj.affixes[affix][0] === 0 || obj.affixes[affix][0] === "" ) {

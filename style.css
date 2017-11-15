@@ -1053,7 +1053,6 @@ input:not([type]):disabled+label, input:not([type])[readonly="readonly"]+label, 
 }
 
 span.condition-type {
-    color: aqua;
     font-weight: bold;
 }
 
