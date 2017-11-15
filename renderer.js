@@ -1605,63 +1605,55 @@ $( document).ready( function() {
             filter.grade = "any";
         }
 
-        // FIXME:
         renderPoeTradeForm( filter, function( generated ) {
             $( "#" + filter.id + "-poe-trade-form" ).remove();
             $( "#poe-trade-forms" ).append( generated );
             // Generate form to query poe.trade with mods
             var reg   = /\(([A-Za-z ]+)\).*<span.*>([0-9.…]+)<\/span>\s*\-\s*<span.*>([0-9.…]+)<\/span>/;
-            async.each( filter.affixesDis, function( affix, cbAffix ) {
-                var match = reg.exec( affix );
-                if ( match ) {
-                    var modType = match[1];
-                    var min     = match[2] === "…" ? "" : match[2];
-                    var max     = match[3] === "…" ? "" : match[3];
-                    var modName = affix.replace( /(<span class=\'value\'>[^<>]+<\/span>)/g, "#" )
-                                       .replace( "( # - # )", "#" )
-                                       .replace( "(Unique explicit)", "" )
-                                       .replace( "(Explicit)", "" )
-                                       .replace( "Implicit", "implicit" )
-                                       .replace( "Enchant", "enchant" )
-                                       .replace( "Crafted", "crafted" )
-                                       .replace( "(Total)", "(pseudo) (total)" )
-                                       .replace( "Pseudo", "pseudo" )
-                                       .replace( "Essence", "Explicit" )
-                                       .replace( "Talisman implicit", "Implicit" );
+
+            async.eachLimit( filter.modGroups, 1, function( group, cbGroup ) {
+                async.eachLimit( Object.keys( group.mods ), 1, function( mod, cbMod ) {
+                    var modName = mod;
+                    var min = group.mods[mod].min === "…" ? "" : group.mods[mod].min;
+                    var max = group.mods[mod].max === "…" ? "" : group.mods[mod].max;
+                    var weight = "";
+                    if ( group.type === "WEIGHT" ) {
+                        weight = group.mods[mod].weight;
+                    }
+                    modName = modName.replace( /(<span class=\'value\'>[^<>]+<\/span>)/g, "#" )
+                                     .replace( "( # - # )", "#" )
+                                     .replace( "(Unique explicit)", "" )
+                                     .replace( "(Explicit)", "" )
+                                     .replace( "Implicit", "implicit" )
+                                     .replace( "Enchant", "enchant" )
+                                     .replace( "Crafted", "crafted" )
+                                     .replace( "(Total)", "(pseudo) (total)" )
+                                     .replace( "Pseudo", "pseudo" )
+                                     .replace( "Essence", "Explicit" )
+                                     .replace( "Talisman implicit", "Implicit" ).trim();
                     $( "#" + filter.id + "-poe-trade-form" ).append(
                         "<select name=\"mod_name\"><option>" + 
                         modName + "</option></select>" +
                         "<input type=\"text\" name=\"mod_min\" value=\"" + min + "\">" +
-                        "<input type=\"text\" name=\"mod_max\" value=\"" + max + "\">"
+                        "<input type=\"text\" name=\"mod_max\" value=\"" + max + "\">" +
+                        "<input type=\"text\" name=\"mod_weight\" value=\"" + weight + "\">"
                     );
-                    // console.log( modName + ": " + min + ", " + max );
-                // If mod has no values
-                } else {
-                    var modName = affix.replace( "(Unique explicit)", "" )
-                                       .replace( "(Explicit)", "" )
-                                       .replace( "Implicit", "implicit" )
-                                       .replace( "Enchant", "enchant" )
-                                       .replace( "Crafted", "crafted" )
-                                       .replace( "(Total)", "(pseudo) (total)" )
-                                       .replace( "Pseudo", "pseudo" )
-                                       .replace( "Essence", "Explicit" )
-                                       .replace( "Talisman implicit", "Implicit" );
+                    
+                    cbMod();
+                }, function() {
+                    var groupMin = group.min === "…" ? "" : group.min;
+                    var groupMax = group.max === "…" ? "" : group.max;
+                    var type = group.type.toLowerCase();
+                    type = type.charAt(0).toUpperCase() + type.slice(1);
                     $( "#" + filter.id + "-poe-trade-form" ).append(
-                        "<select name=\"mod_name\"><option>" + modName + "</option></select>" +
-                        "<input type=\"text\" name=\"mod_min\" value=\"\">" +
-                        "<input type=\"text\" name=\"mod_max\" value=\"\">"
+                        "<input type=\"text\" name=\"group_min\" value=\"" + groupMin + "\">" +
+                        "<input type=\"text\" name=\"group_max\" value=\"" + groupMax + "\">" +
+                        "<input type=\"text\" name=\"group_count\" value=\"" + Object.keys( group.mods ).length + "\">" +
+                        "<select name=\"group_type\"><option>" + type + "</option></select>"
                     );
-                    // console.log( modName );
-                }
-                cbAffix();
+                    cbGroup();
+                });
             }, function() {
-                // FIXME
-                // $( "#" + filter.id + "-poe-trade-form" ).append(
-                //     "<input type=\"text\" name=\"group_min\" value=\"\">" +
-                //     "<input type=\"text\" name=\"group_max\" value=\"\">" +
-                //     "<input type=\"text\" name=\"group_count\" value=\"" + filter.affixesDis.length + "\">" +
-                //     "<select name=\"group_type\"><option>And</option></select>"
-                // );
                 // Add corrupted, enchanted ... states
                 var option = "<option value=\"\">Either</option>";
                 if ( filter.corrupted === "true" ) {
