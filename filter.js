@@ -25,12 +25,14 @@ config = require( app.getPath( "userData" ) + path.sep + "config.json" );
 
 var Item      = require( "./item.js" );
 var Currency  = require( "./currency.js" );
+var Misc      = require( "./misc.js" );
 var itemTypes = require( "./itemTypes.json" );
 
 class Filter {
 
     constructor( obj ) {
-        var rangeReg = /([0-9.]+)\s*\-\s*([0-9.]+)/;
+        var self          = this;
+        var rangeReg      = /([0-9.]+)\s*\-\s*([0-9.]+)/;
         this.league       = obj.league;
         this.item         = obj.item;
         this.title        = obj.title;
@@ -78,8 +80,6 @@ class Filter {
         this.edps         = obj.edps;
         this.edpsMin      = obj.edpsMin;
         this.edpsMax      = obj.edpsMax;
-        this.affixes      = obj.affixes;
-        this.affixesDis   = obj.affixesDis;
         this.buyout       = obj.buyout;
         this.clipboard    = obj.clipboard;
         this.itemType     = obj.itemType;
@@ -89,68 +89,89 @@ class Filter {
         this.convert      = obj.convert;
         this.displayPrice = obj.displayPrice === undefined ? "" : obj.displayPrice;
         this.openPrefixes = obj.openPrefixes === undefined ? "" : obj.openPrefixes;
-        this.openPrefixesMin     = obj.openPrefixesMin;
-        this.openPrefixesMax     = obj.openPrefixesMax;
-        this.openSuffixes = obj.openSuffixes === undefined ? "" : obj.openSuffixes;
-        this.openSuffixesMin     = obj.openSuffixesMin;
-        this.openSuffixesMax     = obj.openSuffixesMax;
-        this.mapQuantity  = obj.mapQuantity === undefined ? "" : obj.mapQuantity;
-        this.mapQuantityMin     = obj.mapQuantityMin;
-        this.mapQuantityMax     = obj.mapQuantityMax;
-        this.mapRarity    = obj.mapRarity === undefined ? "" : obj.mapRarity;
-        this.mapRarityMin     = obj.mapRarityMin;
-        this.mapRarityMax     = obj.mapRarityMax;
-        this.mapPackSize  = obj.mapPackSize === undefined ? "" : obj.mapPackSize;
-        this.mapPackSizeMin     = obj.mapPackSizeMin;
-        this.mapPackSizeMax     = obj.mapPackSizeMax;
-        this.group        = obj.group;
-        this.modGroups    = obj.modGroups;
+        this.openPrefixesMin = obj.openPrefixesMin;
+        this.openPrefixesMax = obj.openPrefixesMax;
+        this.openSuffixes    = obj.openSuffixes === undefined ? "" : obj.openSuffixes;
+        this.openSuffixesMin = obj.openSuffixesMin;
+        this.openSuffixesMax = obj.openSuffixesMax;
+        this.mapQuantity     = obj.mapQuantity === undefined ? "" : obj.mapQuantity;
+        this.mapQuantityMin  = obj.mapQuantityMin;
+        this.mapQuantityMax  = obj.mapQuantityMax;
+        this.mapRarity       = obj.mapRarity === undefined ? "" : obj.mapRarity;
+        this.mapRarityMin    = obj.mapRarityMin;
+        this.mapRarityMax    = obj.mapRarityMax;
+        this.mapPackSize     = obj.mapPackSize === undefined ? "" : obj.mapPackSize;
+        this.mapPackSizeMin  = obj.mapPackSizeMin;
+        this.mapPackSizeMax  = obj.mapPackSizeMax;
+        this.group           = obj.group;
+        this.affixes         = obj.affixes;
+        if ( obj.modGroups ) {
+            this.modGroups = obj.modGroups;
+        } else {
+            this.modGroups = {};
+        }
         // Convert affixes without type to explicit to ensure compatibility
         // with older versions
         var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
-        for ( var affix in this.affixes ) {
-            var match = extractReg.exec( affix );
-            if ( !match ) {
-                if ( this.affixes[affix].min === 0 || this.affixes[affix].min === "" ) {
-                    this.affixes[affix].min = "…";
+        if ( obj.affixes && Object.keys( this.modGroups ).length === 0 ) {
+            self.modGroups.and = {
+                "type": "AND",
+                "mods": {},
+                "id":   Misc.guidGenerator()
+            };
+            async.each( Object.keys( obj.affixes ), function( affix, cbAffix ) {
+                var match = extractReg.exec( affix );
+                var newAffix;
+                // If mod doesn't start by (Explicit) or (Implicit), etc.
+                if ( !match ) {
+                    newAffix = "(Explicit) " + affix;
+                // Otherwise
+                } else {
+                    newAffix = affix;
                 }
-                if ( this.affixes[affix].max === 1000000 || this.affixes[affix].max === "" ) {
-                    this.affixes[affix].max = "…";
+                self.modGroups.and.mods[newAffix] = {};
+                if ( typeof obj.affixes[affix] === "object" ) {
+                    if ( obj.affixes[affix].min ) {
+                        obj.affixes[affix].min = obj.affixes[affix].min.replace( /\<span.*\>(.*)\<\/span.*\>/, "$1" );
+                    }
+                    if ( obj.affixes[affix].max ) {
+                        obj.affixes[affix].max = obj.affixes[affix].max.replace( /\<span.*\>(.*)\<\/span.*\>/, "$1" );
+                    }
+                    
+                    if ( obj.affixes[affix].min === 0 || obj.affixes[affix].min === "" ) {
+                        self.modGroups.and.mods[newAffix].min = "…";
+                    } else {
+                        self.modGroups.and.mods[newAffix].min = obj.affixes[affix].min;
+                    }
+                    if ( obj.affixes[affix].max === 1000000 || obj.affixes[affix].max === "" ) {
+                        self.modGroups.and.mods[newAffix].max = "…";
+                    } else {
+                        self.modGroups.and.mods[newAffix].max = obj.affixes[affix].max;
+                    }
+                    cbAffix();
+                } else if ( typeof obj.affixes[affix] === "array" ) {
+                    if ( obj.affixes[affix].length > 1 ) {
+                        obj.affixes[affix][0] = obj.affixes[affix][0].replace( /\<span.*\>(.*)\<\/span.*\>/, "$1" );
+                    }
+                    if ( obj.affixes[affix].length > 2 ) {
+                        obj.affixes[affix][1] = obj.affixes[affix][1].replace( /\<span.*\>(.*)\<\/span.*\>/, "$1" );
+                    }
+                    if ( obj.affixes[affix][0] === 0 || obj.affixes[affix][0] === "" ) {
+                        self.modGroups.and.mods[newAffix].min = "…";
+                    } else {
+                        self.modGroups.and.mods[newAffix].min = obj.affixes[affix][0];
+                    }
+                    if ( obj.affixes[affix][1] === 1000000 || obj.affixes[affix][1] === "" ) {
+                        self.modGroups.and.mods[newAffix].max = "…";
+                    } else {
+                        self.modGroups.and.mods[newAffix].max = obj.affixes[affix][1];
+                    }
+                    cbAffix();
                 }
-                this.affixes["(Explicit) " + affix] = this.affixes[affix];
-                delete this.affixes[affix];
-            }
+            }, function() {
+                console.log( self );
+            });
         }
-        var self = this;
-        var newAffixesDis = [];
-        async.each( this.affixesDis, function( affixDis, cbAffix ) {
-            var match = extractReg.exec( affixDis );
-            if ( !match ) {
-                var bothTerms        = /\( ([0-9.]+) \- ([0-9.]+) \)/;
-                var missingLeftTerm  = /\(  \- ([0-9.]+) \)/;
-                var missingRightTerm = /\( ([0-9.]+) \-  \)/;
-                var matchBoth  = bothTerms.exec( affixDis );
-                var matchLeft  = missingLeftTerm.exec( affixDis );
-                var matchRight = missingRightTerm.exec( affixDis );
-                if ( matchBoth ) {
-                    affixDis = affixDis.replace( bothTerms, "( <span class='value'>$1</span> - <span class='value'>$2</span> )" );
-                    newAffixesDis.push( "(Explicit) " + affixDis );
-                } else if ( matchLeft ) {
-                    affixDis = affixDis.replace( missingLeftTerm, "( <span class='value'>…</span> - <span class='value'>$1</span> )" );
-                    newAffixesDis.push( "(Explicit) " + affixDis );
-                } else if ( matchRight ) {
-                    affixDis = affixDis.replace( missingRightTerm, "( <span class='value'>$1</span> - <span class='value'>…</span> )" );
-                    newAffixesDis.push( "(Explicit) " + affixDis );
-                }
-                cbAffix();
-            } else {
-                newAffixesDis.push( affixDis );
-                cbAffix();
-            }
-        }, function() {
-            self.affixesDis = newAffixesDis;
-        });
-        console.log( this );
     }
 
     /**
@@ -178,19 +199,19 @@ class Filter {
             affix.max = affix.max.replace( /.*>(.+)<.*/, "$1" );
         }
         // If there is no lower value
-        affix.min = affix.min !== "…" ? affix.min : 0;
+        var affixMin = affix.min !== "…" ? affix.min : 0;
         // If there is no upper value
-        affix.max = affix.max !== "…" ? affix.max : 1000000;
+        var affixMax = affix.max !== "…" ? affix.max : 1000000;
         // console.log( affix );
         // console.log( parsedMod );
 
         // If mod has one parameter
         if ( parsedMod.length === 1 ) {
-            callback( affix.min <= parsedMod[0] && affix.max >= parsedMod[0] );
+            callback( affixMin <= parsedMod[0] && affixMax >= parsedMod[0] );
         // If mod has two
         } else if ( parsedMod.length === 2 ) {
             var average = ( parsedMod[0] + parsedMod[1] ) / 2;
-            callback( affix.min <= average && affix.max >= average );
+            callback( affixMin <= average && affixMax >= average );
         // Otherwise
         } else {
             callback( true );
@@ -214,12 +235,14 @@ class Filter {
         // console.log( parsedMods );
 
         async.eachLimit( self.modGroups, 1, function( group, cbGroup ) {
+            // console.log( "-------------------" );
+            // console.log( group.type );
             async.eachLimit( Object.keys( group.mods ), 1, function( mod, cbMod ) {
-                // console.log( mod );
                 if ( !passed ) {
                     // console.log( "Skipped" );
                     cbMod();
                 } else {
+                    // console.log( mod );
                     // AND
                     if ( group.type === "AND" ) {
                         lastType = "and";
@@ -229,12 +252,15 @@ class Filter {
                                 // If values are not in range, fail the test
                                 if ( !res ) {
                                     passed = 0;
-                                    // console.log( "Mod present but values not in range: " + group.mods[mod].min + " - " + group.mods[mod].max );
+                                    // console.log( "[AND]: Mod present but values not in range: " + group.mods[mod].min + " - " + group.mods[mod].max );
+                                } else {
+                                    // console.log( "[AND]: passed" );
                                 }
                             });
                         // Otherwise fail the test
                         } else {
-                            // console.log( "Item is missing " + mod );
+                            // console.log( "[AND]: Item is missing " + mod );
+                            // console.log( parsedMods );
                             passed = 0;
                         }
                         cbMod();
@@ -246,7 +272,7 @@ class Filter {
                                 // If values are in range, fail the test
                                 if ( res ) {
                                     passed = 0;
-                                    // console.log( "Item has NOT mod" );
+                                    // console.log( "[NOT]: Item has NOT mod" );
                                 }
                             });
                         }
@@ -258,6 +284,7 @@ class Filter {
                             self.compareValues( group.mods[mod], parsedMods.mods[mod], function( res ) {
                                 if ( !res ) {
                                     passed = 0;
+                                    // console.log( "[IF]: Mod present but values not in range: " + group.mods[mod].min + " - " + group.mods[mod].max );
                                 }
                                 cbMod();
                             });
@@ -299,9 +326,11 @@ class Filter {
                                     }
                                     count.val++;
                                 }
+                                // console.log( parsedMods );
                                 cbMod();
                             });
                         } else {
+                            // console.log( parsedMods );
                             cbMod();
                         }
                     // WEIGHT: If present, return weighted score
@@ -335,12 +364,14 @@ class Filter {
                     }
                 }
             }, function() {
+                // console.log( lastType );
+                // console.log( "weight:" +  weight.val + ", sum: " + sum.val + ", count: " + count.val );
                 // If we're switching from weight to another type
                 if ( lastType === "weight" ) {
                     // Check if weight is in range, if not fail the test
                     if ( weight.val < weight.min || weight.val > weight.max || !weight ) {
                         passed = 0;
-                        // console.log( weight.val + " not in range " + weight.min + " - " + weight.max );
+                        // console.log( "[WEIGHT]: " + weight.val + " not in range " + weight.min + " - " + weight.max );
                     }
                     // Reset weight
                     weight = {};
@@ -350,7 +381,7 @@ class Filter {
                     // Check if sum is in range, if not fail the test
                     if ( sum.val < sum.min || sum.val > sum.max || !sum ) {
                         passed = 0;
-                        // console.log( sum.val + " not in range " + sum.min + " - " + sum.max );
+                        // console.log( "[SUM]: " + sum.val + " not in range " + sum.min + " - " + sum.max );
                     }
                     // Reset sum
                     sum = {};
@@ -358,9 +389,11 @@ class Filter {
                 // If we're switching from count to another type
                 if ( lastType === "count" ) {
                     // Check if count is in range, if not fail the test
-                    if ( count.val < count.min || count.val > count.max || !count.val ) {
+                    if (( count.min && count.val < count.min ) || ( count.max && count.val > count.max ) || !count.val ) {
                         passed = 0;
-                        // console.log( count.val + " not in range " + count.min + " - " + count.max );
+                        // console.log( "[COUNT]: " + count.val + " not in range " + count.min + " - " + count.max );
+                    } else {
+                        // console.log( "Passed count: " + count.val + " in " + count.min + " - " + count.max );
                     }
                     // Reset count
                     count = {};
@@ -370,47 +403,6 @@ class Filter {
         }, function() {
             callback( passed !== 0 );
         });
-
-
-        // Compare mod values to filter
-        // for ( var affix in this.affixes ) {
-        //     if ( this.affixes.hasOwnProperty( affix )) {
-        //         keys++;
-        //         if ( isNaN( this.affixes[affix].min )) {
-        //             this.affixes[affix].min = this.affixes[affix].min.replace( /.*>(.+)<.*/, "$1" );
-        //         }
-        //         if ( isNaN( this.affixes[affix].max )) {
-        //             this.affixes[affix].max = this.affixes[affix].max.replace( /.*>(.+)<.*/, "$1" );
-        //         }
-        //         // If there is no lower value
-        //         this.affixes[affix].min = this.affixes[affix].min !== "…" ? this.affixes[affix].min : 0;
-        //         // If there is no upper value
-        //         this.affixes[affix].max = this.affixes[affix].max !== "…" ? this.affixes[affix].max : 1000000;
-
-        //         // If mod has one parameter
-        //         if ( parsedMods.mods[affix] && parsedMods.mods[affix].length === 1 ) {
-        //             if ( parsedMods.mods[affix] && 
-        //                 this.affixes[affix].min <= parsedMods.mods[affix].min &&
-        //                 this.affixes[affix].max >= parsedMods.mods[affix].min ) {
-        //                 passed++;
-        //             }
-        //         // If mod has two
-        //         } else if ( parsedMods.mods[affix] && parsedMods.mods[affix].length === 2 ) {
-        //             var average = ( parsedMods.mods[affix].min + parsedMods.mods[affix].max ) / 2;
-        //             if ( parsedMods.mods[affix] &&
-        //                 this.affixes[affix].min <= average &&
-        //                 this.affixes[affix].max >= average ) {
-        //                 passed++;
-        //             }
-        //         // Otherwise
-        //         } else if ( parsedMods.mods[affix]) {
-        //             // console.log( parsedMods.mods[affix]);
-        //             passed++;
-        //         }
-        //     }
-        // }
-        // console.log( "keys: " + keys + ", passed: " + passed );
-        // callback( passed === keys );
     }
 
     /**
@@ -577,12 +569,6 @@ class Filter {
 
                 // Parse item mods
                 Item.parseMods( item, function( parsedMods ) {
-                    // if ( Object.keys( parsedMods["mods"] ). length > 0 ) {
-                    //     console.log( JSON.stringify( parsedMods ));
-                    // }
-
-                    // item.totalMods = parsedMods.totalMods;
-                    // console.log( parsedMods.totalMods );
                     var keptTotalMods = [];
                     for ( var mod in parsedMods.totalMods ) {
                         if ( parsedMods.totalMods.hasOwnProperty( mod )) {
@@ -594,21 +580,17 @@ class Filter {
                     item.totalMods = keptTotalMods;
                     var keptPseudoMods = [];
                     for ( var mod in parsedMods.pseudoMods ) {
-                        // console.log( self.affixes );
                         if ( parsedMods.pseudoMods.hasOwnProperty( mod )) {
                             if ( self.affixes[mod]) {
-                                // console.log( "Found affix: " + mod );
                                 keptPseudoMods.push( mod.replace( /^\([a-zA-Z ]+\)\s*/, "" ).replace( "#", parsedMods.pseudoMods[mod]));
                             }
                         }
                     }
                     item.pseudoMods = keptPseudoMods;
-                    // console.log( item );
                     // Compare mods
                     self.compareMods( parsedMods, function( passed ) {
                         if ( passed ) {
                             Item.parseProperties( item, function( newItem, parsedProperties ) {
-                                // console.log( newItem );
                                 // If we have an attack per second property, compute DPS
                                 if ( parsedProperties["Attacks per Second"]) {
                                     Item.computeDPS( parsedProperties, function( dps ) {
@@ -616,7 +598,6 @@ class Filter {
                                         parsedProperties.pDPS = dps.pDPS;
                                         parsedProperties.eDPS = dps.eDPS;
                                         Item.insertDPSValues( newItem, dps, function( item ) {
-                                            // console.log( "Inserted DPS value for item " + name );
                                             // Compare properties
                                             self.compareProperties( item, parsedProperties, function( equal ) {
                                                 if ( equal ) {
@@ -629,7 +610,6 @@ class Filter {
                                                     });
                                                 // Item does not have the required properties
                                                 } else {
-                                                    // fs.appendFileSync( __dirname + "/log.txt", name + " (" + typeLine + "): Not the right properties\n" );
                                                     callback( false );
                                                 }
                                             });
@@ -638,7 +618,6 @@ class Filter {
                                 } else {
                                     // Compare properties
                                     self.compareProperties( newItem, parsedProperties, function( equal ) {
-                                        // console.log( newItem );
                                         if ( equal ) {
                                             Item.formatItem( newItem, name, prices, self.openPrefixes, self.openSuffixes, function( newItem ) {
                                                 if ( newItem.passed ) {
@@ -649,7 +628,6 @@ class Filter {
                                             });
                                         // Item does not have the required properties
                                         } else {
-                                            // fs.appendFileSync( __dirname + "/log.txt", name + " (" + typeLine + "): Not the right properties\n" );
                                             callback( false );
                                         }
                                     });
@@ -657,22 +635,16 @@ class Filter {
                             });
                         // Item does not have the required mods
                         } else {
-                            // fs.appendFileSync( __dirname + "/log.txt", name + " (" + typeLine + "): Not the right mods\n" );
-                            // console.log( "Item didn't have sufficient mods" );
                             callback( false );
                         }
                     });
                 });
             // Item is not within the budget
             } else {
-                // fs.appendFileSync( __dirname + "/log.txt", name + " (" + typeLine + "): Not within budget\n" );
-                // console.log( currencyRates[league] );
-                // console.log( prices.convertedPriceChaos + " > " + this.budget + " * " + currencyRates[league][this.currency] + ", " + league + ", " + this.currency );
                 callback( false );
             }
         // Item does not match the first tests
         } else {
-            // fs.appendFileSync( __dirname + "/log.txt", name + " (" + typeLine + "): Failed first tests\n" );
             callback( false );
         }
     }

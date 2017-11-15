@@ -338,7 +338,6 @@ $( document).ready( function() {
     };
 
     var renderAffixes = function( filter, cb ) {
-        console.log( "Rendering" );
         // Format mods
         var index = 0;
         async.eachLimit( filter.modGroups, 1, function( group, cbGroup ) {
@@ -430,36 +429,6 @@ $( document).ready( function() {
             }
             cb();
         });
-
-        // async.each( filter.affixesDis, function( affix, cbAffix ) {
-        //     var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
-        //     var match      = extractReg.exec( affix );
-        //     var matched;
-        //     if ( !match ) {
-        //         matched = "Explicit";
-        //     } else {
-        //         matched = match[1];
-        //     }
-        //     var obj        = {
-        //         typeLC: matched.toLowerCase(),
-        //         type:   matched,
-        //         title:  affix.replace( /^\([a-zA-Z ]+\)\s*/, "" )
-        //     };
-        //     var generated = "";
-        //     mu.compileAndRender( "affix-filter.html", obj )
-        //     .on( "data", function ( data ) {
-        //         generated += data.toString();
-        //     })
-        //     .on( "end", function () {
-        //         $( "#filter-detail-" + filter.id + " .affix-filter-list" ).append( generated );
-        //         cbAffix();
-        //     });
-        // }, function() {
-        //     if ( filter.affixesDis.length === 0 ) {
-        //         $( "#filter-detail-" + filter.id + " .affix-filter-list" ).hide();
-        //     }
-        //     cb();
-        // });
     };
 
     // When adding a new group
@@ -527,7 +496,6 @@ $( document).ready( function() {
                             "#", "( " + formData.affixes[cleanedAffix].min + " - " + 
                                         formData.affixes[cleanedAffix].max + " )" );
                     }
-                    // formData.affixesDis.push( affix );
                 cbMod();
             }, function() {
                 cbGroup();
@@ -1384,13 +1352,7 @@ $( document).ready( function() {
             } else if ( !filter.displayPrice && ( !filter.budget || filter.budget === 0 )) {
                 filter.displayPrice = "Any price";
             }
-            // Fix for change of currency from long to short form
-            // if ( filter.currency === "Chaos Orb" ) {
-            //     filter.currency = "chaos";
-            // } else if ( filter.currency === "Exalted Orb" ) {
-            //     filter.currency = "exa";
-            // }
-            // filter.currency = Currency.currencyLookupTable[filter.currency];
+
             filter = new Filter( filter );
             filters.add( filter );
             cbFilter();
@@ -1694,12 +1656,13 @@ $( document).ready( function() {
                 }
                 cbAffix();
             }, function() {
-                $( "#" + filter.id + "-poe-trade-form" ).append(
-                    "<input type=\"text\" name=\"group_min\" value=\"\">" +
-                    "<input type=\"text\" name=\"group_max\" value=\"\">" +
-                    "<input type=\"text\" name=\"group_count\" value=\"" + filter.affixesDis.length + "\">" +
-                    "<select name=\"group_type\"><option>And</option></select>"
-                );
+                // FIXME
+                // $( "#" + filter.id + "-poe-trade-form" ).append(
+                //     "<input type=\"text\" name=\"group_min\" value=\"\">" +
+                //     "<input type=\"text\" name=\"group_max\" value=\"\">" +
+                //     "<input type=\"text\" name=\"group_count\" value=\"" + filter.affixesDis.length + "\">" +
+                //     "<select name=\"group_type\"><option>And</option></select>"
+                // );
                 // Add corrupted, enchanted ... states
                 var option = "<option value=\"\">Either</option>";
                 if ( filter.corrupted === "true" ) {
