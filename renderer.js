@@ -311,6 +311,18 @@ $( document).ready( function() {
     // When selecting mod group type, toggle input fields
     $( "#condition-selector" ).change( function() {
         var val = $( this ).val();
+        // Empty group min/max fields
+        $( "#mod-group-min" ).val( "" );
+        $( "#mod-group-max" ).val( "" );
+        Materialize.updateTextFields();
+        // Enable/disable group min/max fields
+        if ( val.indexOf( "not" ) !== -1 || val.indexOf( "if" ) !== -1 || val.indexOf( "and" ) !== -1 ) {
+            $( "#mod-group-min" ).attr( "disabled", true );
+            $( "#mod-group-max" ).attr( "disabled", true );
+        } else {
+            $( "#mod-group-min" ).attr( "disabled", false );
+            $( "#mod-group-max" ).attr( "disabled", false );
+        }
         if ( val.indexOf( "weight" ) !== -1 ) {
             $( ".form-affix-weight" ).show();
             $( ".form-affix-value" ).hide();
@@ -318,6 +330,17 @@ $( document).ready( function() {
             $( ".form-affix-weight" ).hide();
             $( ".form-affix-value" ).show();
         }
+        // Fill the group min max using values from modGroups
+        // Find the mod with the right id in modGroups
+        async.eachLimit( Object.keys( modGroups ), 1, function( group, cbGroup ) {
+            if ( group === val ) {
+                console.log( modGroups[group].min );
+                $( "#mod-group-min" ).val( modGroups[group].min );
+                $( "#mod-group-max" ).val( modGroups[group].max );
+                Materialize.updateTextFields();
+            }
+            cbGroup();
+        });
     });
 
     // When clicking on 'Clear Filter'
@@ -3665,6 +3688,7 @@ $( document).ready( function() {
                 var groupType;
                 var groupValue;
                 var foundId = false;
+                // Find the mod with the right id in modGroups
                 async.eachLimit( Object.keys( modGroups ), 1, function( group, cbGroup ) {
                     async.eachLimit( Object.keys( modGroups[group].mods ), 1, function( mod, cbMod ) {
                         if ( modGroups[group].mods[mod].id === id ) {
