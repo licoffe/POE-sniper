@@ -341,88 +341,93 @@ $( document).ready( function() {
         // Format mods
         var index = 0;
         async.eachLimit( filter.modGroups, 1, function( group, cbGroup ) {
-            var generatedModGroup = "";
-            var obj = {};
-            if ( group.type === "SUM" || group.type === "COUNT" || group.type === "WEIGHT" ) {
-                index++;
-                var groupMinDisp = group.min !== "" ? group.min : "…";
-                var groupMaxDisp = group.max !== "" ? group.max : "…";
-                var parameter    = "( " + groupMinDisp + " - " + groupMaxDisp + " )";
-                obj = {
-                    "id":        group.id,
-                    "type":      group.type,
-                    "index":     "[" + index + "]",
-                    "parameter": parameter
-                };
-            } else {
-                obj = {
-                    "id":        group.id,
-                    "type":      group.type,
-                    "index":     "",
-                    "parameter": ""
-                };
-            }
-            
-            $( "#filter-detail-" + filter.id + " .affix-filter-list" ).append( 
-                "<span class=\"badge badge-" + group.type + "\" data-badge-caption=\"" + group.type + "\"></span>" +
-                "<span class=\"condition-parameter\">" + obj.parameter + "</span><br>"
-            );
-            async.eachLimit( Object.keys( group.mods ), 1, function( mod, cbMod ) {
-                var weight = "";
-                if ( group.type === "WEIGHT" ) {
-                    weight = "Weight: " + group.mods[mod].weight;
-                }
-                var generated = "";
-                // Find out the mod type (explicit, implicit, etc.)
-                var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
-                var sharpReg   = /#/;
-                var match      = extractReg.exec( mod );
-                var matched;
-                if ( !match ) {
-                    matched = "Explicit";
+            // Only display non empty groups
+            if ( Object.keys( group.mods ).length > 0 ) {
+                var generatedModGroup = "";
+                var obj = {};
+                if ( group.type === "SUM" || group.type === "COUNT" || group.type === "WEIGHT" ) {
+                    index++;
+                    var groupMinDisp = group.min !== "" ? group.min : "…";
+                    var groupMaxDisp = group.max !== "" ? group.max : "…";
+                    var parameter    = "( " + groupMinDisp + " - " + groupMaxDisp + " )";
+                    obj = {
+                        "id":        group.id,
+                        "type":      group.type,
+                        "index":     "[" + index + "]",
+                        "parameter": parameter
+                    };
                 } else {
-                    matched = match[1];
+                    obj = {
+                        "id":        group.id,
+                        "type":      group.type,
+                        "index":     "",
+                        "parameter": ""
+                    };
                 }
                 
-                var displayMin = "<span class='value'>" + group.mods[mod].min + "</span>";
-                var displayMax = "<span class='value'>" + group.mods[mod].max + "</span>";
-                var title = mod;
-                var count = ( title.match( /#/g ) || []).length;
-                if ( count > 1 ) {
-                    title = title.replace( "#", displayMin );
-                    title = title.replace( "#", displayMax );
-                } else {
-                    title = mod.replace( 
-                        "#", "( " + displayMin + " - " + 
-                                    displayMax + " )" );
-                }
-                // title = title.replace( sharpReg, "( " + displayMin + " - " + displayMax + " )" );
-                
-                var obj = {
-                    "title":  title.replace( /^\([a-zA-Z ]+\)\s*/, "" ),
-                    "id":     Misc.guidGenerator(),
-                    "typeLC": matched.toLowerCase(),
-                    "type":   matched,
-                    "weight": weight
-                };
-                mu.compileAndRender( "affix-filter.html", obj )
-                .on( "data", function ( data ) {
-                    generated += data.toString();
-                })
-                .on( "end", function () {
-                    // console.log( "Modified: " + generated );
-                    // $( "#condition-container-" + group.id ).append( generated );
-                    // $( "#" + obj.id ).data( "data-item", obj );
-                    // // When clicking on remove affix
-                    // $( ".remove-affix" ).click( function() {
-                    //     $( this ).parent().parent().remove();
-                    // });
-                    $( "#filter-detail-" + filter.id + " .affix-filter-list" ).append( generated );
-                    cbMod();
+                $( "#filter-detail-" + filter.id + " .affix-filter-list" ).append( 
+                    "<span class=\"badge badge-" + group.type + "\" data-badge-caption=\"" + group.type + "\"></span>" +
+                    "<span class=\"condition-parameter\">" + obj.parameter + "</span><br>"
+                );
+                async.eachLimit( Object.keys( group.mods ), 1, function( mod, cbMod ) {
+                    var weight = "";
+                    if ( group.type === "WEIGHT" ) {
+                        weight = "Weight: " + group.mods[mod].weight;
+                    }
+                    var generated = "";
+                    // Find out the mod type (explicit, implicit, etc.)
+                    var extractReg = /^\(([a-zA-Z ]+)\)\s*/;
+                    var sharpReg   = /#/;
+                    var match      = extractReg.exec( mod );
+                    var matched;
+                    if ( !match ) {
+                        matched = "Explicit";
+                    } else {
+                        matched = match[1];
+                    }
+                    
+                    var displayMin = "<span class='value'>" + group.mods[mod].min + "</span>";
+                    var displayMax = "<span class='value'>" + group.mods[mod].max + "</span>";
+                    var title = mod;
+                    var count = ( title.match( /#/g ) || []).length;
+                    if ( count > 1 ) {
+                        title = title.replace( "#", displayMin );
+                        title = title.replace( "#", displayMax );
+                    } else {
+                        title = mod.replace( 
+                            "#", "( " + displayMin + " - " + 
+                                        displayMax + " )" );
+                    }
+                    // title = title.replace( sharpReg, "( " + displayMin + " - " + displayMax + " )" );
+                    
+                    var obj = {
+                        "title":  title.replace( /^\([a-zA-Z ]+\)\s*/, "" ),
+                        "id":     Misc.guidGenerator(),
+                        "typeLC": matched.toLowerCase(),
+                        "type":   matched,
+                        "weight": weight
+                    };
+                    mu.compileAndRender( "affix-filter.html", obj )
+                    .on( "data", function ( data ) {
+                        generated += data.toString();
+                    })
+                    .on( "end", function () {
+                        // console.log( "Modified: " + generated );
+                        // $( "#condition-container-" + group.id ).append( generated );
+                        // $( "#" + obj.id ).data( "data-item", obj );
+                        // // When clicking on remove affix
+                        // $( ".remove-affix" ).click( function() {
+                        //     $( this ).parent().parent().remove();
+                        // });
+                        $( "#filter-detail-" + filter.id + " .affix-filter-list" ).append( generated );
+                        cbMod();
+                    });
+                }, function() {
+                    cbGroup();
                 });
-            }, function() {
+            } else {
                 cbGroup();
-            });
+            }
         }, function() {
             if ( filter.modGroups.length === 0 ) {
                 $( "#filter-detail-" + filter.id + " .affix-filter-list" ).hide();
@@ -1359,33 +1364,36 @@ $( document).ready( function() {
             console.log( filters );
             async.each( filters.filterList, function( filter, cbSorted ) {
                 filter.render( function( generated ) {
-                    // If filter doesn't have a group add it to the main list
-                    if ( !filter.group || filter.group === "" ) {
-                        console.log( "Adding filter to main list" );
-                        $( "#filters ul.filter-collection" ).append( generated );
-                    // Otherwise add it to the group
-                    } else {
-                        // console.log( "Adding filter " + filter.id + " to group id " + filter.group );
-                        $( "#filter-group-content-" + filter.group ).append( generated );
-                    }
-                    // Format mods
-                    renderAffixes( filter, function() {
-                        // Color item name depending on rarity
-                        colorRarity( filter );
-                        if ( filter.buyout ) {
-                            $( "#filter-detail-" + filter.id + " .buyout" ).hide();
+                    groups.find( filter.group, function( groupExist ) {
+                        // If filter doesn't have a group or the group doesn't exist 
+                        // add it to the main list
+                        if ( !filter.group || filter.group === "" || !groupExist ) {
+                            console.log( "Adding filter to main list" );
+                            $( "#filters ul.filter-collection" ).append( generated );
+                        // Otherwise add it to the group
+                        } else {
+                            // console.log( "Adding filter " + filter.id + " to group id " + filter.group );
+                            $( "#filter-group-content-" + filter.group ).append( generated );
                         }
-                        if ( !filter.clipboard ) {
-                            $( "#filter-detail-" + filter.id + " .clipboard" ).hide();
-                        }
-                        colorFilter( filter );
-                        bindFilterToggleState( filter.id );
-                        bindFilterEdit( filter.id, function() {});
-                        updateFilterAmount( filter.id );
-                        cbSorted();
-                        addPoeTradeForm( filter );
-                        bindRemoveTaggedItems( filter.id );
-                        // console.log( filter );
+                        // Format mods
+                        renderAffixes( filter, function() {
+                            // Color item name depending on rarity
+                            colorRarity( filter );
+                            if ( filter.buyout ) {
+                                $( "#filter-detail-" + filter.id + " .buyout" ).hide();
+                            }
+                            if ( !filter.clipboard ) {
+                                $( "#filter-detail-" + filter.id + " .clipboard" ).hide();
+                            }
+                            colorFilter( filter );
+                            bindFilterToggleState( filter.id );
+                            bindFilterEdit( filter.id, function() {});
+                            updateFilterAmount( filter.id );
+                            cbSorted();
+                            addPoeTradeForm( filter );
+                            bindRemoveTaggedItems( filter.id );
+                            // console.log( filter );
+                        });
                     });
                 });
             }, function( err ) {
@@ -2192,7 +2200,6 @@ $( document).ready( function() {
                                      .replace( "Pseudo", "pseudo" )
                                      .replace( "Essence", "Explicit" )
                                      .replace( "Talisman implicit", "Implicit" ).trim();
-                    console.log( modName );
                     data += "&" + $.param({
                         mod_name:   modName,
                         mod_min:    min,
@@ -3193,6 +3200,7 @@ $( document).ready( function() {
 
     // Fill in the filter form from the extracted poe.trade search
     var fillInFormWithPOETradeData = function( data ) {
+        // console.log( data );
         if ( data.league === "Beta Standard" ) {
             data.league = "beta-Standard";
         } else if ( data.league === "Beta Hardcore" ) {
@@ -3216,7 +3224,9 @@ $( document).ready( function() {
                 }
             });
         }
-        $( "#item-type" ).val( matchTypeWithPoeTrade( data.type ));
+        if ( data.type !== "any" ) {
+            $( "#item-type" ).val( matchTypeWithPoeTrade( data.type ));
+        }
         $( "#armor" ).val( data.armour_min );
         $( "#es" ).val( data.shield_min );
         $( "#evasion" ).val( data.evasion_min );
@@ -3323,36 +3333,6 @@ $( document).ready( function() {
                 });
             });
         });
-
-        
-        // async.each( data.mods, function( mod, cbMod ) {
-        //     var generated = "";
-        //     var obj = {
-        //         title: mod.title,
-        //         min:   "<span class='value'>" + mod.min + "</span>",
-        //         max:   "<span class='value'>" + mod.max + "</span>",
-        //         affix: mod.generated.replace( 
-        //             "#", "( <span class='value'>" + mod.min + "</span> - <span class='value'>" + 
-        //                         mod.max + "</span> )" 
-        //         ),
-        //         id:    Misc.guidGenerator()
-        //     };
-        //     mu.compileAndRender( "affix.html", obj )
-        //     .on( "data", function ( data ) {
-        //         generated += data.toString();
-        //     })
-        //     .on( "end", function () {
-        //         $( "#affixes-list" ).append( generated );
-        //         $( "#" + obj.id ).data( "data-item", obj );
-        //         // When clicking on remove affix
-        //         $( ".remove-affix" ).click( function() {
-        //             var id = $( this ).attr( "id" ).replace( "remove-affix-", "" );
-        //             $( this ).parent().parent().remove();
-        //             removeAffix( id );
-        //         });
-        //         cbMod();
-        //     });
-        // }, function() {});
         // Compute total links
         var totalLinks = 0;
         if ( !data.link_min ) {
