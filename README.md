@@ -37,8 +37,8 @@ Here is the set of features currently supported:
 - Notification support (both visual and sound)
 - Contact sellers by clicking on an item entry or toggle automatic copy to the clipboard.
 - Item price recommendation based on poe.trade
-- Blacklist support (see [url=https://www.youtube.com/watch?v=ubZFsvfDSmE]video[/url])
-- Filter categories (see [url=https://www.youtube.com/watch?v=dPCcINACwrU]video[/url])
+- Blacklist support (see [video](https://www.youtube.com/watch?v=ubZFsvfDSmE))
+- Filter categories (see [video](https://www.youtube.com/watch?v=dPCcINACwrU))
 - Mod group support (NOT, IF, SUM, COUNT, WEIGHT, AND)
 
 ### Technologies
