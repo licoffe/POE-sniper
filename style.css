@@ -212,7 +212,8 @@ div.title {
 }
 
 .details {
-    border-top: 1px dotted grey;
+    /* border-top: 1px dotted grey; */
+    border-top: 1px solid #284358;
     font-size: 1.3em;
     padding-top: 10px;
 }
@@ -689,7 +690,7 @@ input.item {
 .filter-detail:hover, .entry:hover {
     /* background-color: rgba( 0, 200, 200, 0.1 )!important; */
     /* transition: background-color 0.2s linear; */
-    background-color: rgba(121, 121, 121, 0.1)!important;
+    background-color: rgba(206, 206, 206, 0.1)!important;
     transition: background-color 0.2s linear;
     border: 1px solid #3e3e3e!important;
 }
