@@ -1827,10 +1827,7 @@ $( document).ready( function() {
             "buyout",
             "clipboard",
             "convert",
-            "corrupted",
-            "crafted",
             "currency",
-            "enchanted",
             "league"
         ];
         fetchFormData( function( data ) {
