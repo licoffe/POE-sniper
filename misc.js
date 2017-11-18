@@ -98,7 +98,7 @@ class Misc {
             data = {
                 league:          $( "#poe-trade-search-output select[name='league'] option:selected" ).first().text(),
                 type:            $( "#poe-trade-search-output select[name='type'] option:selected" ).text().trim(),
-                base:            $( "#poe-trade-search-output select[name='base'] option:selected" ).text(),
+                base:            $( "#poe-trade-search-output select[name='base'] option:selected" ).text().trim(),
                 name:            $( "#poe-trade-search-output input#name" ).val(),
                 dmg_min:         $( "#poe-trade-search-output #prop-dmg input[name='dmg_min']" ).val(),
                 dmg_max:         $( "#poe-trade-search-output #prop-dmg input[name='dmg_max']" ).val(),

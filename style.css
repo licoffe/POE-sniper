@@ -62,11 +62,11 @@ form {
 }
 
 .filter-detail-group {
-    transition: color 0.2s linear;
+    transition: background-color 0.2s linear;
 }
 
 .filter-detail-group:hover {
-    background-color: rgba( 0, 200, 200, 0.1 )!important;
+    background-color: rgba( 121, 121, 121, 0.1 )!important;
     transition: background-color 0.2s linear;
     cursor: pointer;
 }
@@ -663,7 +663,8 @@ input.item {
 }
 
 .filter-detail, .entry {
-    border: none!important;
+    border: 1px solid rgba(0, 0, 0, 0)!important;
+    /* border: none!important; */
     background-color: rgba( 0, 0, 0, 0 )!important;
     transition: background-color 0.2s linear;
     border-radius: 3px;
@@ -686,8 +687,11 @@ input.item {
 }
 
 .filter-detail:hover, .entry:hover {
-    background-color: rgba( 0, 200, 200, 0.1 )!important;
+    /* background-color: rgba( 0, 200, 200, 0.1 )!important; */
+    /* transition: background-color 0.2s linear; */
+    background-color: rgba(121, 121, 121, 0.1)!important;
     transition: background-color 0.2s linear;
+    border: 1px solid #3e3e3e!important;
 }
 
 .filter-detail .title, .filter-detail-group .title {
@@ -1069,7 +1073,7 @@ span.condition {
 }
 
 .condition-group {
-    margin-bottom: -10px;
+    /* margin-bottom: -10px; */
 }
 
 .condition-index {
@@ -1119,4 +1123,8 @@ span.condition {
 .badge-COUNT {
     background: rgba(73, 0, 150, 0.5);
     border: 1px solid #490096;
+}
+
+.dark-form {
+    background-color: #171717 !important;
 }
