@@ -2401,6 +2401,9 @@ $( document).ready( function() {
         $( "#cancel-affix" ).addClass( "disabled" );
         $( "#add-affix" ).text( "Add" );
         $( "#affixes" ).prop( "disabled", false );
+        // Disable group min and max fields
+        $( "#mod-group-min" ).prop( "disabled", true );
+        $( "#mod-group-max" ).prop( "disabled", true );
         loadedAffix = false;
     });
 

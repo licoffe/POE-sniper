@@ -37,6 +37,9 @@ Here is the set of features currently supported:
 - Notification support (both visual and sound)
 - Contact sellers by clicking on an item entry or toggle automatic copy to the clipboard.
 - Item price recommendation based on poe.trade
+- Blacklist support (see [url=https://www.youtube.com/watch?v=ubZFsvfDSmE]video[/url])
+- Filter categories (see [url=https://www.youtube.com/watch?v=dPCcINACwrU]video[/url])
+- Mod group support (NOT, IF, SUM, COUNT, WEIGHT, AND)
 
 ### Technologies
 The app is written in [Node.js](https://nodejs.org/en/) and packaged as a native application using the [Electron](https://electron.atom.io/) framework.
