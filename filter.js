@@ -533,111 +533,152 @@ class Filter {
         }
         var itemLC = this.item.toLowerCase();
 
+        // GGG no longer displays corrupted field if the item is not corrupted
+        if ( !item.corrupted ) {
+            item.corrupted = false;
+        }
+
         // If: 
         // ( no names filter OR names are the same OR the typeLines are the same ) AND
         // ( no leagues filter OR leagues are the same ) AND
         // ( no socket amount filter OR socket amounts are the same ) AND
         // ( both are corrupted OR no corrupted state filter ) AND
-        // ... enchanted ...
-        // ... crafted ...
         // ... identified ...
         // ( no level filter OR item is a gem OR ( item is not a gem AND filter level <= item level )) AND
         // ( no rarity filter OR rarities are the same ) AND
         // ( no item type filter OR item types are the same )
         if (( this.league  === "any" || item.league === this.league ) &&
-            ( this.item    === ""    || itemName.toLowerCase() === itemLC || 
-              typeLine.toLowerCase() === itemLC ) &&
-            ( this.itemType === "any" || this.itemType === "" || itemTypes[this.itemType].types.indexOf( item.typeLine ) !== -1 ) &&
-            ( this.socketsTotal === ""    || this.socketsTotal <= item.sockets.length ) && 
-            ( this.corrupted   === "any" || ( this.corrupted  == 'true' ) === item.corrupted ) &&
-            ( this.enchanted   === "any" || ( this.enchanted  == 'true' ) === item.enchanted ) &&
-            ( this.crafted     === "any" || ( this.crafted    == 'true' ) === item.crafted   ) &&
-            ( this.identified  === "any" || ( this.identified == 'true' ) === item.identified ) &&
-            ( this.level === "" || item.frameType === 4 || ( 
-                item.frameType !== 4 && this.levelMin <= item.ilvl && this.levelMax >= item.ilvl )
+            ( 
+                this.item    === ""    || 
+                itemName.toLowerCase() === itemLC || 
+                typeLine.toLowerCase() === itemLC 
+            ) &&
+            ( 
+                this.itemType === "any" || 
+                this.itemType === "" || 
+                itemTypes[this.itemType].types.indexOf( item.typeLine ) !== -1 
+            ) &&
+            ( 
+                this.socketsTotal === "" ||
+                this.socketsTotal <= item.sockets.length 
             ) && 
-            ( this.rarity === "any" || this.rarity == item.frameType || ( this.rarity === "not-unique" && item.frameType !== 3 && item.frameType !== 9 ))
+            ( 
+                this.corrupted   === "any" || 
+                ( this.corrupted  == 'true' ) === item.corrupted ) &&
+            ( 
+                this.identified  === "any" || 
+                ( this.identified == 'true' ) === item.identified ) &&
+            ( 
+                this.level === "" || 
+                item.frameType === 4 || (
+                    item.frameType !== 4 && 
+                    this.levelMin <= item.ilvl && 
+                    this.levelMax >= item.ilvl 
+                )
+            ) && 
+            ( 
+                this.rarity === "any" || 
+                this.rarity == item.frameType || ( 
+                    this.rarity === "not-unique" && 
+                    item.frameType !== 3 && 
+                    item.frameType !== 9 
+                ))
             ) {
 
             var prices = Item.computePrice( item, currencyRates );
             
             // Convert filter price to chaos and check if the item is within budget
-            if ( !this.budget || prices.originalAmount > 0 && (( this.convert && prices.convertedPrice && 
-                  prices.convertedPriceChaos <= this.budget * currencyRates[league][this.currency]) || 
-                ( !prices.convertedPrice && !this.buyout ) || 
-                ( !this.convert && this.currency === Currency.shortToLongLookupTable[prices.originalCurrency] && prices.originalAmount <= this.budget ))) {
+            if ( 
+                !this.budget || 
+                prices.originalAmount > 0 && 
+                (( 
+                    this.convert && prices.convertedPrice && 
+                    prices.convertedPriceChaos <= this.budget * currencyRates[league][this.currency]
+                ) || ( !prices.convertedPrice && !this.buyout ) || 
+                ( 
+                    !this.convert && 
+                    this.currency === Currency.shortToLongLookupTable[prices.originalCurrency] && 
+                    prices.originalAmount <= this.budget 
+                ))) {
 
                 // Parse item mods
                 Item.parseMods( item, function( parsedMods ) {
-                    var keptTotalMods = [];
-                    for ( var mod in parsedMods.totalMods ) {
-                        if ( parsedMods.totalMods.hasOwnProperty( mod )) {
-                            if ( self.affixes[mod]) {
-                                keptTotalMods.push( mod.replace( /^\([a-zA-Z ]+\)\s*/, "" ).replace( "#", parsedMods.totalMods[mod]));
+                    // If both filter and item are enchanted OR no enchanted state filter
+                    // ... crafted ...
+                    if (( self.enchanted === "any" || ( self.enchanted  == 'true' ) === parsedMods.enchanted ) &&
+                        ( self.crafted   === "any" || ( self.crafted    == 'true' ) === parsedMods.crafted   )) {
+                        var keptTotalMods = [];
+                        for ( var mod in parsedMods.totalMods ) {
+                            if ( parsedMods.totalMods.hasOwnProperty( mod )) {
+                                if ( self.affixes[mod]) {
+                                    keptTotalMods.push( mod.replace( /^\([a-zA-Z ]+\)\s*/, "" ).replace( "#", parsedMods.totalMods[mod]));
+                                }
                             }
                         }
-                    }
-                    item.totalMods = keptTotalMods;
-                    var keptPseudoMods = [];
-                    for ( var mod in parsedMods.pseudoMods ) {
-                        if ( parsedMods.pseudoMods.hasOwnProperty( mod )) {
-                            if ( self.affixes[mod]) {
-                                keptPseudoMods.push( mod.replace( /^\([a-zA-Z ]+\)\s*/, "" ).replace( "#", parsedMods.pseudoMods[mod]));
+                        item.totalMods = keptTotalMods;
+                        var keptPseudoMods = [];
+                        for ( var mod in parsedMods.pseudoMods ) {
+                            if ( parsedMods.pseudoMods.hasOwnProperty( mod )) {
+                                if ( self.affixes[mod]) {
+                                    keptPseudoMods.push( mod.replace( /^\([a-zA-Z ]+\)\s*/, "" ).replace( "#", parsedMods.pseudoMods[mod]));
+                                }
                             }
                         }
-                    }
-                    item.pseudoMods = keptPseudoMods;
-                    // Compare mods
-                    self.compareMods( parsedMods, function( passed ) {
-                        if ( passed ) {
-                            Item.parseProperties( item, function( newItem, parsedProperties ) {
-                                // If we have an attack per second property, compute DPS
-                                if ( parsedProperties["Attacks per Second"]) {
-                                    Item.computeDPS( parsedProperties, function( dps ) {
-                                        parsedProperties.DPS  = dps.DPS;
-                                        parsedProperties.pDPS = dps.pDPS;
-                                        parsedProperties.eDPS = dps.eDPS;
-                                        Item.insertDPSValues( newItem, dps, function( item ) {
-                                            // Compare properties
-                                            self.compareProperties( item, parsedProperties, function( equal ) {
-                                                if ( equal ) {
-                                                    Item.formatItem( item, name, prices, self.openPrefixes, self.openSuffixes, function( newItem ) {
-                                                        if ( newItem.passed ) {
-                                                            callback( newItem );
-                                                        } else {
-                                                            callback( false );
-                                                        }
-                                                    });
-                                                // Item does not have the required properties
-                                                } else {
-                                                    callback( false );
-                                                }
+                        item.pseudoMods = keptPseudoMods;
+                        // Compare mods
+                        self.compareMods( parsedMods, function( passed ) {
+                            if ( passed ) {
+                                Item.parseProperties( item, function( newItem, parsedProperties ) {
+                                    // If we have an attack per second property, compute DPS
+                                    if ( parsedProperties["Attacks per Second"]) {
+                                        Item.computeDPS( parsedProperties, function( dps ) {
+                                            parsedProperties.DPS  = dps.DPS;
+                                            parsedProperties.pDPS = dps.pDPS;
+                                            parsedProperties.eDPS = dps.eDPS;
+                                            Item.insertDPSValues( newItem, dps, function( item ) {
+                                                // Compare properties
+                                                self.compareProperties( item, parsedProperties, function( equal ) {
+                                                    if ( equal ) {
+                                                        Item.formatItem( item, name, prices, self.openPrefixes, self.openSuffixes, function( newItem ) {
+                                                            if ( newItem.passed ) {
+                                                                callback( newItem );
+                                                            } else {
+                                                                callback( false );
+                                                            }
+                                                        });
+                                                    // Item does not have the required properties
+                                                    } else {
+                                                        callback( false );
+                                                    }
+                                                });
                                             });
                                         });
-                                    });
-                                } else {
-                                    // Compare properties
-                                    self.compareProperties( newItem, parsedProperties, function( equal ) {
-                                        if ( equal ) {
-                                            Item.formatItem( newItem, name, prices, self.openPrefixes, self.openSuffixes, function( newItem ) {
-                                                if ( newItem.passed ) {
-                                                    callback( newItem );
-                                                } else {
-                                                    callback( false );
-                                                }
-                                            });
-                                        // Item does not have the required properties
-                                        } else {
-                                            callback( false );
-                                        }
-                                    });
-                                }
-                            });
-                        // Item does not have the required mods
-                        } else {
-                            callback( false );
-                        }
-                    });
+                                    } else {
+                                        // Compare properties
+                                        self.compareProperties( newItem, parsedProperties, function( equal ) {
+                                            if ( equal ) {
+                                                Item.formatItem( newItem, name, prices, self.openPrefixes, self.openSuffixes, function( newItem ) {
+                                                    if ( newItem.passed ) {
+                                                        callback( newItem );
+                                                    } else {
+                                                        callback( false );
+                                                    }
+                                                });
+                                            // Item does not have the required properties
+                                            } else {
+                                                callback( false );
+                                            }
+                                        });
+                                    }
+                                });
+                            // Item does not have the required mods
+                            } else {
+                                callback( false );
+                            }
+                        });
+                    } else {
+                        callback( false );
+                    }
                 });
             // Item is not within the budget
             } else {

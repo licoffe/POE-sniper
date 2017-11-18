@@ -951,7 +951,7 @@ input:focus {
 }
 
 #poe-trade-forms {
-    /* display: none; */
+    display: none;
 }
 
 .search-engines {
