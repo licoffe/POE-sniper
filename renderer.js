@@ -40,6 +40,7 @@ var filters         = new Filters([]);
 
 var mu              = require( 'mu2' );
 mu.root             = __dirname + '/templates';
+
 const notifier      = require('node-notifier');
 notifier.on( "timeout", function () {
     // displayingNotification = false;
@@ -100,6 +101,7 @@ var elementList = {
 };
 var editedGroupId;
 var editedGroupType;
+var originalQueueInterval = config.NOTIFICATION_QUEUE_INTERVAL;
 
 $( document).ready( function() {
 
@@ -3252,25 +3254,6 @@ $( document).ready( function() {
         }
     }, config.NOTIFICATION_QUEUE_INTERVAL );
 
-    // var toggleAllFiltersAction = function() {
-    //     // Get all visible filters
-    //     var toggleOn = false;
-    //     $( ".filter-detail:visible" ).parent().find( ".cb" ).each( function() {
-    //         if ( !$( this ).prop( "checked" )) {
-    //             toggleOn = true;
-    //         }
-    //     });
-    //     $( ".filter-detail:visible" ).parent().find( ".cb" ).each( function() {
-    //         if ( toggleOn ) {
-    //             $( this ).prop( "checked", true );
-    //         } else {
-    //             $( this ).prop( "checked", false );
-    //         }
-    //     });
-    // };
-
-    // $( "#toggle-all-filters" ).click( toggleAllFiltersAction )
-
     // Map internal types to poe.trade ones
     var matchTypeWithPoeTrade = function( type ) {
         switch ( type ) {
@@ -3747,7 +3730,7 @@ $( document).ready( function() {
             $( "#import-poe-trade" ).removeClass( "disabled" );
             $( ".progress" ).css( "top", "230px" );
             config.checkUnderpriced = false;
-            config.NOTIFICATION_QUEUE_INTERVAL = 5000;
+            config.NOTIFICATION_QUEUE_INTERVAL = originalQueueInterval;
             saveConfig();
         }
     };

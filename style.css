@@ -422,6 +422,15 @@ input {
     position: relative;
 }
 
+.poe-trade-link a, .poe-ninja-link a, .poe-rates-link a, .poe-wiki-link a {
+    color: white;
+}
+
+.badge-link {
+    background: #353535!important;
+    border: 1px solid #4c4c4c;
+}
+
 .filter-detail a {
     transition: color 0.2s linear;
 }
