@@ -93,7 +93,7 @@ class Misc {
         $.get( poeTradeSearchURL, {}, function( data ) {
             var wrapper = document.getElementById( "poe-trade-search-output" );
             wrapper.innerHTML = data;
-            $( "#poe-trade-search-output script" ).remove();
+            $( "#poe-trade-search-output head script" ).remove();
             $( "#poe-trade-search-output link" ).remove();
             data = {
                 league:          $( "#poe-trade-search-output select[name='league'] option:selected" ).first().text(),
@@ -183,14 +183,19 @@ class Misc {
                 }
                 index++;
 
-                var mods = $( group ).find( "select[name='mod_name'] option:selected" );
+                // var mods = $( group ).find( "select[name='mod_name'] option:selected" );
+                var mods = $( group ).find( "script" );
                 async.each( mods, function( mod, cbMod ) {
                     var reg = /^\(([a-zA-Z ]+)\)\s*/;
-                    var mod_name = $( mod ).text();
+                    var mod_name = $( mod ).text().split( "\n" )[1].replace( /[,"]/g, "" ).trim();
                     if ( mod_name ) {
-                        var mod_min  = $( mod ).parent().parent().parent().parent().find( "input[name='mod_min']" ).val();
-                        var mod_max  = $( mod ).parent().parent().parent().parent().find( "input[name='mod_max']" ).val();
-                        var mod_weight  = $( mod ).parent().parent().parent().parent().find( "input[name='mod_weight']" ).val();
+                        var mod_min = "";
+                        var mod_max = "";
+                        if ( groupType !== "WEIGHT" ) {
+                            mod_min  = $( mod ).text().split( "\n" )[2].replace( /[,"]/g, "" ).trim();
+                            mod_max  = $( mod ).text().split( "\n" )[3].replace( /[,"]/g, "" ).trim();
+                        }
+                        var mod_weight  = $( mod ).text().split( "\n" )[4].replace( /[,"]/g, "" ).trim();
                         mod_min    = mod_min !== "" ? mod_min : "…";
                         mod_max    = mod_max !== "" ? mod_max : "…";
                         mod_weight = mod_weight !== "" ? mod_weight : "…";
