@@ -89,7 +89,7 @@ form {
 
 .progress {
     position: absolute!important;
-    top: 235px;
+    top: 240px;
 }
 
 span.title {
@@ -819,6 +819,11 @@ input[type="number"]:focus, input[type="text"]:focus {
 
 input:hover:enabled {
     background-color: rgba( 0, 0, 0, 0.2 )!important;
+    transition: background-color 0.2s linear;
+}
+
+.filter-form input:hover:enabled {
+    background-color: rgba(51, 51, 51, 0.59)!important;
     transition: background-color 0.2s linear;
 }
 
