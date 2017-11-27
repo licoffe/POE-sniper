@@ -48,6 +48,8 @@ class Chunk {
      * @return Next change ID through callback
      */
     static getLastChangeId( callback ) {
+        var poeRatesChangeId = 0;
+        var poeNinjaChangeId = 0;
         request({ "url": "http://poe-rates.com/actions/getLastChangeId.php", "gzip": true },
             function( error, response, body ) {
                 if ( error ) {
@@ -55,7 +57,7 @@ class Chunk {
                     setTimeout( Chunk.getLastChangeId, 1000, callback );
                 } else {
                     var data = JSON.parse( body, 'utf8' );
-                    var poeRatesChangeId = data.changeId;
+                    poeRatesChangeId = data.changeId;
                     request({ "url": "http://api.poe.ninja/api/Data/GetStats", "gzip": true },
                         function( error, response, body ) {
                             if ( error ) {
@@ -63,7 +65,7 @@ class Chunk {
                                 setTimeout( Chunk.getLastChangeId, 1000, callback );
                             } else {
                                 var data = JSON.parse( body, 'utf8' );
-                                var poeNinjaChangeId = data.nextChangeId;
+                                poeNinjaChangeId = data.next_change_id;
                                 if ( poeNinjaChangeId > poeRatesChangeId ) {
                                     callback( poeNinjaChangeId );
                                 } else {
