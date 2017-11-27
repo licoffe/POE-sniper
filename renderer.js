@@ -729,7 +729,7 @@ $( document).ready( function() {
             // console.log( affixCompletion );
             $( '#affixes' ).autocomplete({
                 data: affixCompletion,
-                limit: 20
+                limit: 100
             });
             // Close on Escape
             $( '#affixes' ).keydown( function( e ) {
@@ -3165,35 +3165,42 @@ $( document).ready( function() {
 
     // Fetch active leagues and save them to the config file
     Misc.getLeagues( function( leagues ) {
-        console.log( leagues );
-        config.leagues = leagues;
-        saveConfig();
-        // Fetch new rates now and setup to be fetched every 10 seconds
-        Currency.getLastRates( function( rates ) {
-            for ( var league in rates ) {
-                if ( rates.hasOwnProperty( league )) {
-                    currencyRates[league] = rates[league];
+        $( "#league" ).empty();
+        async.each( leagues, function( league, cbLeague ) {
+            $( "#league" ).append( "<option value=\"" + league + "\">" + league + "</option>" );
+            cbLeague();
+        }, function() {
+            $( "#league" ).material_select();
+            console.log( leagues );
+            config.leagues = leagues;
+            saveConfig();
+            // Fetch new rates now and setup to be fetched every 10 seconds
+            Currency.getLastRates( function( rates ) {
+                for ( var league in rates ) {
+                    if ( rates.hasOwnProperty( league )) {
+                        currencyRates[league] = rates[league];
+                    }
                 }
-            }
-            console.log( currencyRates );
-        });
-        setInterval( Currency.getLastRates, config.RATES_REFRESH_INTERVAL, function( rates ) {
-            for ( var league in rates ) {
-                if ( rates.hasOwnProperty( league )) {
-                    currencyRates[league] = rates[league];
+                console.log( currencyRates );
+            });
+            setInterval( Currency.getLastRates, config.RATES_REFRESH_INTERVAL, function( rates ) {
+                for ( var league in rates ) {
+                    if ( rates.hasOwnProperty( league )) {
+                        currencyRates[league] = rates[league];
+                    }
                 }
-            }
-            // console.log( currencyRates );
-        });
-
-        // Fetch new item rates and setup to be fetched every 30 min
-        Item.getLastRates( function( rates ) {
-            itemRates = rates;
-            // console.log( itemRates );
-        });
-        setInterval( Item.getLastRates, 30 * 60 * 1000, function( rates ) {
-            // console.log( rates );
-            currencyRates = rates;
+                // console.log( currencyRates );
+            });
+    
+            // Fetch new item rates and setup to be fetched every 30 min
+            Item.getLastRates( function( rates ) {
+                itemRates = rates;
+                // console.log( itemRates );
+            });
+            setInterval( Item.getLastRates, 30 * 60 * 1000, function( rates ) {
+                // console.log( rates );
+                currencyRates = rates;
+            });
         });
     });
 
@@ -3728,7 +3735,7 @@ $( document).ready( function() {
             $( "#cancel-filter" ).removeClass( "disabled" );
             $( "#add-filter" ).removeClass( "disabled" );
             $( "#import-poe-trade" ).removeClass( "disabled" );
-            $( ".progress" ).css( "top", "230px" );
+            $( ".progress" ).css( "top", "240px" );
             config.checkUnderpriced = false;
             config.NOTIFICATION_QUEUE_INTERVAL = originalQueueInterval;
             saveConfig();
