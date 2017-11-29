@@ -172,6 +172,14 @@ class Filter {
                 console.log( self );
             });
         }
+        // Check if we can find an icon for this filter
+        var data = require( "./autocomplete.json" );
+        async.each( data, function( item, cbItem ) {
+            if (( obj.item !== "" && item.name === obj.item ) || item.typeLine === obj.item || item.typeLine === obj.itemType ) {
+                self.icon = item.icon;
+            }
+            cbItem();
+        });
     }
 
     /**
