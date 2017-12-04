@@ -22,6 +22,11 @@ if ( Object.keys( config ).length === 0 ) {
     config = require( __dirname + "/config.json" );
 }
 
+// Connect to server
+var io     = require( "socket.io-client" )
+var socket;
+const pako = require('pako');
+
 var itemTypes        = require( "./itemTypes.json" );
 var Item             = require( "./item.js" );
 var Misc             = require( "./misc.js" );
@@ -102,6 +107,8 @@ var elementList = {
 var editedGroupId;
 var editedGroupType;
 var originalQueueInterval = config.NOTIFICATION_QUEUE_INTERVAL;
+const CURRENCY_RATES_REFRESH_INTERVAL = 30 * 60 * 1000;
+const ITEM_RATES_REFRESH_INTERVAL     = 60 * 60 * 1000;
 
 $( document).ready( function() {
 
@@ -2312,15 +2319,14 @@ $( document).ready( function() {
             interrupt   = false;
             $( ".progress" ).fadeIn();
             $( "#snipe" ).html( "<i class=\"material-icons\">pause</i><span>Stop</span>" );
-            Chunk.getLastChangeId( function( entry ) {
-                downloadChunk( entry, downloadChunk );
-            });
+            downloadChunk();
         } else {
             downloading = false;
             interrupt   = true;
             delayQueue  = [];
             $( ".progress" ).fadeOut();
             $( "#snipe" ).html( "<i class=\"material-icons\">play_arrow</i><span>Snipe</span>" );
+            socket.disconnect();
         }
     });
 
@@ -2862,12 +2868,22 @@ $( document).ready( function() {
      * @param chunk ID to download
      * @return next chunk ID to download
      */
-    var downloadChunk = function( chunkID, callback ) {
+    var downloadChunk = function() {
 
-        var begin = Date.now();
+        socket = io.connect( "http://poe-rates.com:3000", {reconnect: true});
 
-        var split = chunkID.split( "-" );
-        $( "#current-change-id" ).text( split[0]);
+        // Add a connect listener
+        socket.on( "connect", function( socket ) {
+            console.log( "Connected!" );
+        });
+
+        socket.on( "chunk", function( data ) {
+            const restored = JSON.parse( pako.inflate( data, { to: 'string' }));
+            console.log( "Received chunk " + restored.id );
+            const split = restored.id.split( "-" );
+            $( "#current-change-id" ).text( split[0]);
+            Chunk.loadJSON( restored.content, restored.id, parseData );
+        });
 
         var parseData = function( data ) {
             // Store last chunk ID
@@ -3099,7 +3115,7 @@ $( document).ready( function() {
             }
         };
 
-        Chunk.download( chunkID, parseData );
+        // Chunk.download( chunkID, parseData );
 
         var done = function( data ) {
 
@@ -3111,21 +3127,11 @@ $( document).ready( function() {
 
             removeEntriesAboveLimit( config.maxEntryAmount );
             filterResultListAction();
-            var nextID = data.next_change_id;
-            var end = Date.now();
-            var waitInterval = config.CHUNK_DOWNLOAD_INTERVAL - ( end - begin );
-            waitInterval     = waitInterval < 0 ? 0 : waitInterval;
-            console.log( "Waiting " + waitInterval + " ms" );
 
             if ( interrupt ) {
                 console.log( "Stopped sniper" );
                 // Stop notifications when not sniping
                 delayQueue  = [];
-            } else {
-                if ( !interrupt ) {
-                    setTimeout( callback, waitInterval, nextID, callback );
-                    // callback( nextID, callback );
-                }
             }
         };
     };
@@ -3183,7 +3189,7 @@ $( document).ready( function() {
                 }
                 console.log( currencyRates );
             });
-            setInterval( Currency.getLastRates, config.RATES_REFRESH_INTERVAL, function( rates ) {
+            setInterval( Currency.getLastRates, CURRENCY_RATES_REFRESH_INTERVAL, function( rates ) {
                 for ( var league in rates ) {
                     if ( rates.hasOwnProperty( league )) {
                         currencyRates[league] = rates[league];
@@ -3197,7 +3203,7 @@ $( document).ready( function() {
                 itemRates = rates;
                 // console.log( itemRates );
             });
-            setInterval( Item.getLastRates, 30 * 60 * 1000, function( rates ) {
+            setInterval( Item.getLastRates, ITEM_RATES_REFRESH_INTERVAL, function( rates ) {
                 // console.log( rates );
                 currencyRates = rates;
             });
