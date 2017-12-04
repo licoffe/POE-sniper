@@ -590,6 +590,14 @@ class Filter {
                     this.rarity === "not-unique" && 
                     item.frameType !== 3 && 
                     item.frameType !== 9 
+                ) || (
+                    this.rarity === "shaper" &&
+                    item.frameType === 2 &&
+                    item.shaper
+                ) || (
+                    this.rarity === "elder" &&
+                    item.frameType === 2 &&
+                    item.elder
                 ))
             ) {
 
