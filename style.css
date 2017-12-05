@@ -145,6 +145,10 @@ li.collection-item {
     background-color: rgba(132, 183, 255, 0.5)!important;
 }
 
+.affix-legacy {
+    background-color: rgba(255, 232, 132, 0.5)!important;
+}
+
 .affix-P {
     background-color: rgba(200, 0, 100, 0.5)!important;
 }

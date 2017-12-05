@@ -218,7 +218,7 @@ class Item {
         return hour + " : " + min + " : " + sec;
     }
 
-    static formatAffixes( affixes, values, explicitMod, affixType, callback ) {
+    static formatAffixes( affixes, values, explicitMod, affixType, maxValue, callback ) {
         var iteration = affixes.length;
         var index;
         var explicit = "";
@@ -228,8 +228,9 @@ class Item {
             values[0] = 0;
         }
         async.each( affixes, function( affix, cbAffix ) {
+            // console.log( affix );
             // console.log( explicitMod + " : " + JSON.stringify( affix.min ) + " : " + affix.min.length + " : " + JSON.stringify( values ) );
-            if ( affix.min.length ) {
+            if ( affix.min && affix.min.length > 1 ) {
                 if ( !added &&
                      affix.min[0] <= values[0] &&
                      affix.min[1] >= values[0] &&
@@ -255,9 +256,9 @@ class Item {
                 }
                 cbAffix();
             } else {
-                if ( !added &&
-                      affix.min <= values[0] &&
-                      affix.max >= values[0]) {
+                if ( !added && affix.min &&
+                      affix.min[0] <= values[0] &&
+                      affix.max[0] >= values[0]) {
                     index = iteration;
                     added = true;
                     if ( affixType === "corrupted" ) {
@@ -279,9 +280,12 @@ class Item {
                cbAffix();
             }
         }, function() {
-            if ( explicit === "" ) {
-                explicit += "<span class=\"badge affix-explicit\" data-badge-caption=\"?" +
+            if ( explicit === "" && values[0] > maxValue ) {
+                explicit += "<span class=\"badge affix-legacy\" data-badge-caption=\"Legacy" +
                             "\"></span><span class=\"explicit\">" + explicitMod + "</span><br>";
+            } else if ( explicit === "" ) {
+                explicit += "<span class=\"badge affix-explicit\" data-badge-caption=\"?" +
+                "\"></span><span class=\"explicit\">" + explicitMod + "</span><br>";
             }
             callback( explicit );
         });
@@ -331,13 +335,16 @@ class Item {
                     // console.log( split );
                     // console.log( item.typeLine );
                     var corrupted = [];
+                    var maxValues = [];
                     var iterationP;
                     var iterationS;
                     var iterationC;
                     if ( split.length > 1 ) {
                         corrupted = mods[split[0]][split[1]]["corrupted"];
+                        maxValues = mods[split[0]][split[1]]["maxValues"];
                     } else {
                         corrupted = mods[split[0]]["corrupted"];
+                        maxValues = mods[split[0]]["maxValues"];
                     }
                     async.each( item.implicitMods, function( implicitMod, cbImplicit ) {
                         var reg   = /([0-9.]+)/g;
@@ -352,7 +359,7 @@ class Item {
     
                         // If this mod is a corrupted implicit
                         if ( corrupted[implicitTitle]) {
-                            Item.formatAffixes( corrupted[implicitTitle], values, implicitMod, "corrupted", function( res ) {
+                            Item.formatAffixes( corrupted[implicitTitle], values, implicitMod, "corrupted", maxValues[implicitTitle], function( res ) {
                                 // Amethyst ring have chaos implicit which is also a corrupted implicit
                                 if ( res === "" ) {
                                     implicit += 
@@ -405,6 +412,7 @@ class Item {
                 var prefixes  = [];
                 var suffixes  = [];
                 var corrupted = [];
+                var maxValues = [];
                 var iterationP;
                 var iterationS;
                 var iterationC;
@@ -412,10 +420,12 @@ class Item {
                     prefixes  = mods[split[0]][split[1]]["prefix"];
                     suffixes  = mods[split[0]][split[1]]["suffix"];
                     corrupted = mods[split[0]][split[1]]["corrupted"];
+                    maxValues = mods[split[0]][split[1]]["maxValues"];
                 } else {
                     prefixes  = mods[split[0]]["prefix"];
                     suffixes  = mods[split[0]]["suffix"];
                     corrupted = mods[split[0]]["corrupted"];
+                    maxValues = mods[split[0]]["maxValues"];
                 }
                 async.each( item.explicitMods, function( explicitMod, cbExplicit ) {
                     var reg   = /([0-9.]+)/g;
@@ -432,27 +442,27 @@ class Item {
 
                     // If this mod is a prefix
                     if ( prefixes[explicitTitle]) {
-                        Item.formatAffixes( prefixes[explicitTitle], values, explicitMod, "P", function( res ) {
+                        Item.formatAffixes( prefixes[explicitTitle], values, explicitMod, "P", maxValues[explicitTitle], function( res ) {
                             explicit += res;
                             totalPrefix++;
                             cbExplicit();
                         });
                     // If this mod is a suffix
                     } else if ( suffixes[explicitTitle]) {
-                        Item.formatAffixes( suffixes[explicitTitle], values, explicitMod, "S", function( res ) {
+                        Item.formatAffixes( suffixes[explicitTitle], values, explicitMod, "S", maxValues[explicitTitle], function( res ) {
                             explicit += res;
                             totalSuffix++;
                             cbExplicit();
                         });
                     // If this mod is corrupted
                     } else if ( corrupted[explicitTitle]) {
-                        Item.formatAffixes( corrupted[explicitTitle], values, explicitMod, "C", function( res ) {
+                        Item.formatAffixes( corrupted[explicitTitle], values, explicitMod, "C", maxValues[explicitTitle], function( res ) {
                             explicit += res;
                             cbExplicit();
                         });
                     // If this mod is a signature mod
                     } else if ( mods["signature"][explicitTitle]) {
-                        Item.formatAffixes( mods["signature"][explicitTitle], values, explicitMod, "signature", function( res ) {
+                        Item.formatAffixes( mods["signature"][explicitTitle], values, explicitMod, "signature", maxValues[explicitTitle], function( res ) {
                             explicit += res;
                             cbExplicit();
                         });
