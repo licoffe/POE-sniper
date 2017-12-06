@@ -62,7 +62,11 @@ function createWindow() {
     // mainWindow.setPosition( config.x, config.y );
 
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools()
+
+    mainWindow.onbeforeunload = function (e) {
+        mainWindow.webContents.send( 'close-notifications' );
+    }
 
     // Emitted when the window is closed.
     mainWindow.on( 'closed', function () {
@@ -70,6 +74,7 @@ function createWindow() {
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         mainWindow = null
+        app.quit()
     } )
 
     mainWindow.on( "resize", function () {

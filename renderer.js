@@ -15,6 +15,7 @@ var marked           = require( "marked" );
 var open             = require( "open" );
 const {app}          = require( "electron" ).remote;
 const path           = require( "path" );
+var ipcRenderer      = require('electron').ipcRenderer;
 
 var config = require( app.getPath( "userData" ) + path.sep + "config.json" );
 if ( Object.keys( config ).length === 0 ) {
@@ -46,23 +47,26 @@ var filters         = new Filters([]);
 var mu              = require( 'mu2' );
 mu.root             = __dirname + '/templates';
 
-const notifier      = require('node-notifier');
-notifier.on( "timeout", function () {
-    // displayingNotification = false;
+const eNotify       = require('electron-notify');
+eNotify.setConfig({
+    // appIcon: path.join(__dirname, 'logo.png'),
+    defaultStyleText: {
+        color: 'grey',
+        // fontWeight: 'bold',
+    },
+    defaultStyleContainer: {
+        color: 'white',
+        overflow: 'hidden',
+        padding: 8,
+        fontFamily: 'Arial',
+        fontSize: 12,
+        position: 'relative',
+        lineHeight: '15px'
+      },
 });
-
-notifier.on( "click", function () {
-    // displayingNotification = false;
-    Misc.formatMessage( lastItem, function( str ) {
-        ncp.copy( str, function() {
-            if ( config.visualNotification ) {
-                notifier.notify({
-                    'title': 'Message copied to clipboard',
-                    'message': str,
-                });
-            }
-        });
-    });
+// Get signal to close all notifications from main
+ipcRenderer.on( 'close-notifications', function () {
+    eNotify.closeAll();
 });
 
 var ncp             = require( "copy-paste" );
@@ -2363,9 +2367,9 @@ $( document).ready( function() {
                 ncp.copy( str, function() {
                     console.log( data );
                     if ( config.visualNotification ) {
-                        notifier.notify({
-                            'title': 'Message copied to clipboard',
-                            'message': str,
+                        eNotify.notify({
+                            title: 'Message copied to clipboard',
+                            text: str
                         });
                     }
                 });
@@ -2720,15 +2724,17 @@ $( document).ready( function() {
                 displayName += " (" + item.typeLine + ")";
             }
 
-            notifier.notify({
-                title:   displayName,
-                message: "Price: " + item.displayPrice,
-                wait:    true
-            }, function ( err ) {
-                if ( err ) {
-                    // console.log( err );
-                }
-                displayingNotification = false;
+            function handleClick(event) {
+                alert( "event" );
+                console.log('User clicked notification ' + event.id + '. Closing it immediately.');
+                event.closeNotification();
+            }
+
+            eNotify.notify({ 
+                title: displayName,
+                text: "Price: " + item.displayPrice,
+                image: item.icon,
+                onClickFunc: handleClick
             });
         }
 
@@ -3171,12 +3177,13 @@ $( document).ready( function() {
 
     // Fetch active leagues and save them to the config file
     Misc.getLeagues( function( leagues ) {
-        $( "#league" ).empty();
         async.each( leagues, function( league, cbLeague ) {
             $( "#league" ).append( "<option value=\"" + league + "\">" + league + "</option>" );
+            $( "#underpriced-league" ).append( "<option value=\"" + league + "\">" + league + "</option>" );
             cbLeague();
         }, function() {
             $( "#league" ).material_select();
+            $( "#underpriced-league" ).material_select();
             console.log( leagues );
             config.leagues = leagues;
             saveConfig();
