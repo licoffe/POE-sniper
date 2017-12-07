@@ -246,6 +246,7 @@ class Filter {
             // console.log( "-------------------" );
             // console.log( group.type );
             async.eachLimit( Object.keys( group.mods ), 1, function( mod, cbMod ) {
+                var cleanMod = mod.replace( "Unique explicit", "Explicit" );
                 if ( !passed ) {
                     // console.log( "Skipped" );
                     cbMod();
@@ -255,8 +256,8 @@ class Filter {
                     if ( group.type === "AND" ) {
                         lastType = "and";
                         // If the object has the same mod
-                        if ( parsedMods.mods[mod]) {
-                            self.compareValues( group.mods[mod], parsedMods.mods[mod], function( res ) {
+                        if ( parsedMods.mods[cleanMod]) {
+                            self.compareValues( group.mods[mod], parsedMods.mods[cleanMod], function( res ) {
                                 // If values are not in range, fail the test
                                 if ( !res ) {
                                     passed = 0;
@@ -275,8 +276,8 @@ class Filter {
                     // NOT: If the mod is present, fail the test
                     } else if ( group.type === "NOT" ) {
                         lastType = "not";
-                        if ( parsedMods.mods[mod]) {
-                            self.compareValues( group.mods[mod], parsedMods.mods[mod], function( res ) {
+                        if ( parsedMods.mods[cleanMod]) {
+                            self.compareValues( group.mods[mod], parsedMods.mods[cleanMod], function( res ) {
                                 // If values are in range, fail the test
                                 if ( res ) {
                                     passed = 0;
@@ -288,8 +289,8 @@ class Filter {
                     // IF: If the mod is present, it should be within interval
                     } else if ( group.type === "IF" ) {
                         lastType = "if";
-                        if ( parsedMods.mods[mod]) {
-                            self.compareValues( group.mods[mod], parsedMods.mods[mod], function( res ) {
+                        if ( parsedMods.mods[cleanMod]) {
+                            self.compareValues( group.mods[mod], parsedMods.mods[cleanMod], function( res ) {
                                 if ( !res ) {
                                     passed = 0;
                                     // console.log( "[IF]: Mod present but values not in range: " + group.mods[mod].min + " - " + group.mods[mod].max );
@@ -302,8 +303,8 @@ class Filter {
                     // SUM: If the mod is present, sum its value
                     } else if ( group.type === "SUM" ) {
                         lastType = "sum";
-                        if ( parsedMods.mods[mod]) {
-                            self.compareValues( group.mods[mod], parsedMods.mods[mod], function( res ) {
+                        if ( parsedMods.mods[cleanMod]) {
+                            self.compareValues( group.mods[mod], parsedMods.mods[cleanMod], function( res ) {
                                 if ( res ) {
                                     if ( !sum.val ) {
                                         sum.val = 0;
@@ -324,8 +325,8 @@ class Filter {
                     // COUNT: If the mod is present, count 1
                     } else if ( group.type === "COUNT" ) {
                         lastType = "count";
-                        if ( parsedMods.mods[mod]) {
-                            self.compareValues( group.mods[mod], parsedMods.mods[mod], function( res ) {
+                        if ( parsedMods.mods[cleanMod]) {
+                            self.compareValues( group.mods[mod], parsedMods.mods[cleanMod], function( res ) {
                                 if ( res ) {
                                     if ( !count.val ) {
                                         count.val = 0;
@@ -344,8 +345,8 @@ class Filter {
                     // WEIGHT: If present, return weighted score
                     } else if ( group.type === "WEIGHT" ) {
                         lastType = "weight";
-                        if ( parsedMods.mods[mod]) {
-                            self.compareValues( group.mods[mod], parsedMods.mods[mod], function( res ) {
+                        if ( parsedMods.mods[cleanMod]) {
+                            self.compareValues( group.mods[mod], parsedMods.mods[cleanMod], function( res ) {
                                 if ( res ) {
                                     if ( !weight.val ) {
                                         weight.val = 0;
