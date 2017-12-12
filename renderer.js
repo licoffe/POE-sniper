@@ -67,6 +67,7 @@ eNotify.setConfig({
 // Get signal to close all notifications from main
 ipcRenderer.on( 'close-notifications', function () {
     eNotify.closeAll();
+    socket.disconnect();
 });
 
 var ncp             = require( "copy-paste" );
@@ -2752,7 +2753,8 @@ $( document).ready( function() {
             "D": "./media/socket_dex.png",
             "S": "./media/socket_str.png",
             "I": "./media/socket_int.png",
-            "G": "./media/socket_white.png"
+            "G": "./media/socket_white.png",
+            "A": "./media/socket_a.png"
         };
         var currentGroup = -1;
         var lastGroup    = -1;

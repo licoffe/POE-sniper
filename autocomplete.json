@@ -8064,6 +8064,286 @@
     "icon": "http://web.poecdn.com/gen/image/YTo1OntzOjEwOiJsZWFn/dWVOYW1lIjtzOjg6IlN0/YW5kYXJkIjtzOjk6ImFj/Y291bnRJZCI7TzoxODoi/R3JpbmRiXERhdGFiYXNl/XElkIjoxOntzOjI6Imlk/IjtpOjA7fWk6MjthOjM6/e3M6MToiZiI7czozNjoi/QXJ0LzJESXRlbXMvRmxh/c2tzL1plcnBoaXNMYXN0/QnJlYXRoIjtzOjI6InNw/IjtkOjAuNjA4NTE5MjY5/Nzc2ODc2MzE0ODE0NzI4/NjMwMTUzNjk1MTIxNDA3/NTA4ODUwMDk3NjU2MjU7/czo1OiJsZXZlbCI7aTow/O31pOjE7aTo0O2k6MDtp/Ojk7fQ,,/842b5f8fd0/Item.png",
     "typeLine": "Grand Mana Flask"
   },
+  {
+    "name": "Lightpoacher",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/Helmets/AbyssHelmet.png?scale=1&scaleIndex=0&w=2&h=2&v=c7383e609399bafe70ad70944133931b3",
+    "typeLine": "Great Crown"
+  },
+  {
+    "name": "Shroud of the Lightless",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/BodyArmours/AbyssBody.png?scale=1&scaleIndex=0&w=2&h=3&v=afdff1636fccec8bc1fcaa10c63a7c5b3",
+    "typeLine": "Carnal Armour"
+  },
+  {
+    "name": "Darkness Enthroned",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Belts/DarknessEnthroned.png?scale=1&scaleIndex=0&w=2&h=1&v=da21305836a0b67861183f9b9c040a933",
+    "typeLine": "Stygian Vise"
+  },
+  {
+    "name": "The Golden Rule",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Jewels/TheGoldenRule.png?scale=1&scaleIndex=0&w=1&h=1&v=e7fda82ad3c50e5d822c7a72215bf4a13",
+    "typeLine": "Viridian Jewel"
+  },
+  {
+    "name": "Arborix",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Weapons/TwoHandWeapons/Bows/VerdantGuardianBow.png?scale=1&scaleIndex=0&w=2&h=4&v=feb90c971dafb9ec8076a9e2740aebf83",
+    "typeLine": "Assassin Bow"
+  },
+  {
+    "name": "Balefire",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Weapons/OneHandWeapons/Scepters/Baelfire.png?scale=1&scaleIndex=0&w=2&h=3&v=4ec753326dcd7e46da44838cba49fcb93",
+    "typeLine": "Opal Sceptre"
+  },
+  {
+    "name": "Bloodbond",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/BodyArmours/CommunalFlesh.png?scale=1&scaleIndex=0&w=2&h=3&v=135825c478278fb3c7d32ba776b2df6e3",
+    "typeLine": "Bone Armour"
+  },
+  {
+    "name": "Bubonic Trail",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/Boots/AbyssBoots.png?scale=1&scaleIndex=0&w=2&h=2&v=3d49e231e8af87c4996f61808a19b0e33",
+    "typeLine": "Murder Boots"
+  },
+  {
+    "name": "Cane of Unravelling",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Weapons/TwoHandWeapons/Staves/CaneOfUnravelling.png?scale=1&scaleIndex=0&w=2&h=4&v=b5bed0db237ff80843caf979eed033c83",
+    "typeLine": "Ezomyte Staff"
+  },
+  {
+    "name": "Coralito's Signature",
+    "icon": "http://web.poecdn.com/gen/image/YTo2OntzOjEwOiJsZWFn/dWVOYW1lIjtzOjU6IkFi/eXNzIjtzOjk6ImFjY291/bnRJZCI7TzoxODoiR3Jp/bmRiXERhdGFiYXNlXElk/IjoxOntzOjI6ImlkIjtp/OjA7fXM6MTA6InNpbXBs/aWZpZWQiO2I6MTtpOjI7/YTozOntzOjE6ImYiO3M6/MzE6IkFydC8yREl0ZW1z/L0ZsYXNrcy9Hb3Jnb25z/Rmxhc2siO3M6Mjoic3Ai/O2Q6MC42MDg1MTkyNjk3/NzY4NzYzO3M6NToibGV2/ZWwiO2k6MDt9aToxO2k6/NDtpOjA7aTo5O30,/aeaa2d7e7d/Item.png",
+    "typeLine": "Diamond Flask"
+  },
+  {
+    "name": "Coralito's Signature",
+    "icon": "http://web.poecdn.com/gen/image/YTo2OntzOjEwOiJsZWFn/dWVOYW1lIjtzOjg6IlN0/YW5kYXJkIjtzOjk6ImFj/Y291bnRJZCI7TzoxODoi/R3JpbmRiXERhdGFiYXNl/XElkIjoxOntzOjI6Imlk/IjtpOjA7fXM6MTA6InNp/bXBsaWZpZWQiO2I6MTtp/OjI7YTozOntzOjE6ImYi/O3M6MzE6IkFydC8yREl0/ZW1zL0ZsYXNrcy9Hb3Jn/b25zRmxhc2siO3M6Mjoi/c3AiO2Q6MC42MDg1MTky/Njk3NzY4NzYzO3M6NToi/bGV2ZWwiO2k6MDt9aTox/O2k6NDtpOjA7aTo5O30,/ae432f49f9/Item.png",
+    "typeLine": "Diamond Flask"
+  },
+  {
+    "name": "Coralito's Signature",
+    "icon": "http://web.poecdn.com/gen/image/YTo2OntzOjEwOiJsZWFn/dWVOYW1lIjtzOjE0OiJI/YXJkY29yZSBBYnlzcyI7/czo5OiJhY2NvdW50SWQi/O086MTg6IkdyaW5kYlxE/YXRhYmFzZVxJZCI6MTp7/czoyOiJpZCI7aTowO31z/OjEwOiJzaW1wbGlmaWVk/IjtiOjE7aToyO2E6Mzp7/czoxOiJmIjtzOjMxOiJB/cnQvMkRJdGVtcy9GbGFz/a3MvR29yZ29uc0ZsYXNr/IjtzOjI6InNwIjtkOjAu/NjA4NTE5MjY5Nzc2ODc2/MztzOjU6ImxldmVsIjtp/OjA7fWk6MTtpOjQ7aTow/O2k6OTt9/8faa106411/Item.png",
+    "typeLine": "Diamond Flask"
+  },
+  {
+    "name": "Cyclopean Coil",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Belts/ElderBelt.png?scale=1&scaleIndex=0&w=2&h=1&v=b439f5d5a827ffca6ec0eef67bcdc0453",
+    "typeLine": "Leather Belt"
+  },
+  {
+    "name": "Doedre's Skin",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/BodyArmours/DoedresSkin.png?scale=1&scaleIndex=0&w=2&h=3&v=00bc4e5e0ee68ed963d6445d16c477fd3",
+    "typeLine": "Widowsilk Robe"
+  },
+  {
+    "name": "Giantsbane",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/Gloves/Deathforge.png?scale=1&scaleIndex=0&w=2&h=2&v=a3453118e3a899ec821bd192eb839edd3",
+    "typeLine": "Bronze Gauntlets"
+  },
+  {
+    "name": "Gloomfang",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Amulets/ShadowRay.png?scale=1&scaleIndex=0&w=1&h=1&v=398652c43fc1dc66cc560d022fa1ff683",
+    "typeLine": "Blue Pearl Amulet"
+  },
+  {
+    "name": "Hopeshredder",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Weapons/TwoHandWeapons/Bows/ElderBow.png?scale=1&scaleIndex=0&w=2&h=4&v=bfaad2b116a244c7787835a89bbd717c3",
+    "typeLine": "Ranger Bow"
+  },
+  {
+    "name": "Impresence",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Amulets/ElderFire.png?scale=1&scaleIndex=0&w=1&h=1&v=aedbfbc41b4745989b736f5ba692267a3",
+    "typeLine": "Onyx Amulet"
+  },
+  {
+    "name": "Inpulsa's Broken Heart",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/BodyArmours/OnShocked.png?scale=1&scaleIndex=0&w=2&h=3&v=f16c402c57e80eb5ff5d8247722610ba3",
+    "typeLine": "Sadist Garb"
+  },
+  {
+    "name": "Invictus Solaris",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/Shields/Invictus.png?scale=1&scaleIndex=0&w=2&h=3&v=8921ffe47a8b925426981a36812fae843",
+    "typeLine": "Archon Kite Shield"
+  },
+  {
+    "name": "Iron Heart",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/BodyArmours/IronHeart Final.png?scale=1&scaleIndex=0&w=2&h=3&v=a5f85d2171bd3bbe6d72dfd522a8fe393",
+    "typeLine": "Crusader Plate"
+  },
+  {
+    "name": "Kalisa's Grace",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/Gloves/KalisasGrace.png?scale=1&scaleIndex=0&w=2&h=2&v=366ba8639f276b33e9bb4ead16e418e13",
+    "typeLine": "Samite Gloves"
+  },
+  {
+    "name": "Leper's Alms",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/Shields/LepersAlms.png?scale=1&scaleIndex=0&w=2&h=2&v=1615478e2ffc443e659486f8eebc96c43",
+    "typeLine": "Mirrored Spiked Shield"
+  },
+  {
+    "name": "Memory Vault",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/Helmets/ElderGuardian.png?scale=1&scaleIndex=0&w=2&h=2&v=95dec2c1b5147bfa8b6bcc4001dbec9f3",
+    "typeLine": "Praetor Crown"
+  },
+  {
+    "name": "Nebuloch",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Weapons/OneHandWeapons/OneHandMaces/ElderMace.png?scale=1&scaleIndex=0&w=2&h=3&v=96f7c2b4586f468221d72d7a4568f1523",
+    "typeLine": "Nightmare Mace"
+  },
+  {
+    "name": "Oskarm",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/Gloves/ZenoGloves.png?scale=1&scaleIndex=0&w=2&h=2&v=1d673bc3cd51dca00b5ed6638dc959ee3",
+    "typeLine": "Nubuck Gloves"
+  },
+  {
+    "name": "Pillars of Arun",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/PillarsOfVastiri.png?scale=1&scaleIndex=0&w=1&h=1&v=3a642d411f88a8efa6e1f4904bb19aa03",
+    "typeLine": "Dunes Map"
+  },
+  {
+    "name": "Pure Talent",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Jewels/PureTalent.png?scale=1&scaleIndex=0&w=1&h=1&v=52127de995a86e049a4611dd1d1dd6df3",
+    "typeLine": "Viridian Jewel"
+  },
+  {
+    "name": "Ralakesh's Impatience",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/Boots/RalakeshsImpatience.png?scale=1&scaleIndex=0&w=2&h=2&v=edba74f550e6fc82764f42364b91e1f13",
+    "typeLine": "Riveted Boots"
+  },
+  {
+    "name": "Stormcharger",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/Boots/Stormcharger.png?scale=1&scaleIndex=0&w=2&h=2&v=62fe6ee8cb11965ed4d088e8bf25df033",
+    "typeLine": "Plated Greaves"
+  },
+  {
+    "name": "The Hungry Loop",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Rings/TheHungryLoop.png?scale=1&scaleIndex=0&w=1&h=1&v=6d9fe4b99f828300e64fe57e95db0a563",
+    "typeLine": "Unset Ring"
+  },
+  {
+    "name": "The Long Winter",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Jewels/GlacialCascadeThreshold.png?scale=1&scaleIndex=0&w=1&h=1&v=c8d33b8f239651a7cae714394ec74ded3",
+    "typeLine": "Cobalt Jewel"
+  },
+  {
+    "name": "The Poet's Pen",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Weapons/OneHandWeapons/Wands/PoetsPen.png?scale=1&scaleIndex=0&w=1&h=3&v=bbffb76abb1e9b2b9fb6f6dcddc3b18f3",
+    "typeLine": "Carved Wand"
+  },
+  {
+    "name": "The Twilight Temple",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Celestial.png?scale=1&scaleIndex=0&w=1&h=1&v=6a7aef3fae9a8e41c224e740782eff223",
+    "typeLine": "Moon Temple Map"
+  },
+  {
+    "name": "Tombfist",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/Gloves/AbyssGloves.png?scale=1&scaleIndex=0&w=2&h=2&v=752cb15c222d082b9c8ec4cacf4444223",
+    "typeLine": "Steelscale Gauntlets"
+  },
+  {
+    "name": "Vix Lunaris",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/Shields/ShieldStrDexUnique4.png?scale=1&scaleIndex=0&w=2&h=3&v=89f2f8cf27862dc6099c90217dbf959e3",
+    "typeLine": "Cardinal Round Shield"
+  },
+  {
+    "name": "Watcher's Eye",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Jewels/ElderJewel.png?scale=1&scaleIndex=0&w=1&h=1&v=db0288d4c78a01e2e067b8a36c0bf1ee3",
+    "typeLine": "Prismatic Jewel"
+  },
+  {
+    "name": "White Wind",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Weapons/OneHandWeapons/Daggers/WhiteWind.png?scale=1&scaleIndex=0&w=1&h=3&v=34c68b2018520645b85866185d4fb9bb3",
+    "typeLine": "Imperial Skean"
+  },
+  {
+    "name": "Wraithlord",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/Helmets/Wraithlord.png?scale=1&scaleIndex=0&w=2&h=2&v=ed91434e37479116a789ec17311351fd3",
+    "typeLine": "Bone Circlet"
+  },
+  {
+    "name": "Yoke of Suffering",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Amulets/YokeOfSuffering.png?scale=1&scaleIndex=0&w=1&h=1&v=0f2155997c06236440a30d674864a9123",
+    "typeLine": "Onyx Amulet"
+  },
+  {
+    "name": "Magna Eclipsis",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Armours/Shields/MagnisEclipsis.png?scale=1&scaleIndex=0&w=2&h=4&v=0f03036c42d2fe9c7007b733f74fa2393",
+    "typeLine": "Pinnacle Tower Shield"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Gems/Support/MirageStrike.png?scale=1&scaleIndex=0&w=1&h=1&v=76899513ac2b577914654a8531c99aac3",
+    "typeLine": "Ancestral Call Support"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Gems/CorpseWarp.png?scale=1&scaleIndex=0&w=1&h=1&v=8e65900fb6c8dc9909fbf0a132f4e6a63",
+    "typeLine": "Bodyswap"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Gems/CorpseEruption.png?scale=1&scaleIndex=0&w=1&h=1&v=bc51d0d55e254a74f59fef0875b5bcbb3",
+    "typeLine": "Cremation"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Gems/Support/MirageArcher.png?scale=1&scaleIndex=0&w=1&h=1&v=2f1445ca7222c25f1cb7287e259e2a423",
+    "typeLine": "Mirage Archer Support"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Gems/Support/SpellCascade.png?scale=1&scaleIndex=0&w=1&h=1&v=2c5b2951131e61ed847f7466e5efa3613",
+    "typeLine": "Spell Cascade Support"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Gems/Support/StormBarrier.png?scale=1&scaleIndex=0&w=1&h=1&v=f95996a64a14463a1589eecb7196d4d73",
+    "typeLine": "Storm Barrier Support"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Gems/BoneLance.png?scale=1&scaleIndex=0&w=1&h=1&v=5a0656772623e42e635f28211e3850173",
+    "typeLine": "Unearth"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Gems/VolatileDead.png?scale=1&scaleIndex=0&w=1&h=1&v=271a7442e53636b10a6e8048eb2104113",
+    "typeLine": "Volatile Dead"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Gems/Support/ParallelProjectile.png?scale=1&scaleIndex=0&w=1&h=1&v=f09b62defdde7f0452e9169b1362198c3",
+    "typeLine": "Volley Support"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Divination/InventoryIcon.png?scale=1&scaleIndex=0&&w=1&h=1&v=a8ae131b97fad3c64de0e6d9f250d7433",
+    "typeLine": "Left to Fate"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Divination/InventoryIcon.png?scale=1&scaleIndex=0&&w=1&h=1&v=a8ae131b97fad3c64de0e6d9f250d7433",
+    "typeLine": "No Traces"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Divination/InventoryIcon.png?scale=1&scaleIndex=0&&w=1&h=1&v=a8ae131b97fad3c64de0e6d9f250d7433",
+    "typeLine": "The Blazing Fire"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Divination/InventoryIcon.png?scale=1&scaleIndex=0&&w=1&h=1&v=a8ae131b97fad3c64de0e6d9f250d7433",
+    "typeLine": "The Eye of the Dragon"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Divination/InventoryIcon.png?scale=1&scaleIndex=0&&w=1&h=1&v=a8ae131b97fad3c64de0e6d9f250d7433",
+    "typeLine": "The Realm"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Divination/InventoryIcon.png?scale=1&scaleIndex=0&&w=1&h=1&v=a8ae131b97fad3c64de0e6d9f250d7433",
+    "typeLine": "The Ruthless Ceinture"
+  },
 
 
   { "typeLine": "Bow", "icon": "http://web.poecdn.com/image/Art/2DItems/Weapons/TwoHandWeapons/Bows/Bow8.png?scale=1&scaleIndex=0&w=2&h=4&v=6c31d15f02f212101bb0bcdb0bbe5c863", "name": "" },
@@ -8704,6 +8984,7 @@
   { "typeLine": "Golden Obi", "icon": "http://web.poecdn.com/image/Art/2DItems/Belts/Demibelt1.png?scale=1&scaleIndex=0&duplicated=1&w=2&h=1&v=c04048bece238e0a7bdf42745853a9ad3", "name": "" },
   { "typeLine": "Vanguard Belt", "icon": "http://web.poecdn.com/image/Art/2DItems/Belts/Belt7.png?scale=1&scaleIndex=0&w=2&h=1&v=3648e36de0a3f7056aca48d65e5e69d63", "name": "" },
   { "typeLine": "Crystal Belt", "icon": "http://web.poecdn.com/image/Art/2DItems/Belts/CrystalBelt.png?scale=1&scaleIndex=0&w=2&h=1&v=63156732e8bfa8dc4f84a814124d19d53", "name": "" },
+  { "typeLine": "Stygian Vise", "icon": "http://web.poecdn.com/image/Art/2DItems/Belts/AbyssBelt.png?scale=1&scaleIndex=0&w=2&h=1&v=cd7c25de181e6a77812020eb6e8679713", "name": "" },
   
   { "typeLine": "Flask", "icon": "http://web.poecdn.com/gen/image/YTo2OntzOjEwOiJsZWFn/dWVOYW1lIjtzOjg6IlN0/YW5kYXJkIjtzOjk6ImFj/Y291bnRJZCI7TzoxODoi/R3JpbmRiXERhdGFiYXNl/XElkIjoxOntzOjI6Imlk/IjtpOjA7fXM6MTA6InNp/bXBsaWZpZWQiO2I6MTtp/OjI7YTozOntzOjE6ImYi/O3M6Mjc6IkFydC8yREl0/ZW1zL0ZsYXNrcy9BbWV0/aHlzdCI7czoyOiJzcCI7/ZDowLjYwODUxOTI2OTc3/Njg3NjM7czo1OiJsZXZl/bCI7aTowO31pOjE7aTo0/O2k6MDtpOjk7fQ,,/a7122345b9/Item.png", "name": "" },
   { "typeLine": "Jade Flask", "icon": "http://web.poecdn.com/gen/image/YTo2OntzOjEwOiJsZWFn/dWVOYW1lIjtzOjg6IlN0/YW5kYXJkIjtzOjk6ImFj/Y291bnRJZCI7TzoxODoi/R3JpbmRiXERhdGFiYXNl/XElkIjoxOntzOjI6Imlk/IjtpOjA7fXM6MTA6InNp/bXBsaWZpZWQiO2I6MTtp/OjI7YTozOntzOjE6ImYi/O3M6MzM6IkFydC8yREl0/ZW1zL0ZsYXNrcy9ldmFz/aW9uZmxhc2swMSI7czoy/OiJzcCI7ZDowLjYwODUx/OTI2OTc3Njg3NjM7czo1/OiJsZXZlbCI7aTowO31p/OjE7aTo0O2k6MDtpOjk7/fQ,,/d0f0e2254d/Item.png", "name": "" },
@@ -8757,151 +9038,937 @@
   { "typeLine": "Cobalt Jewel", "icon": "http:\/\/web.poecdn.com\/image\/Art\/2DItems\/Jewels\/basicint.png?scale=1&scaleIndex=0&w=1&h=1&v=cd579ea22c05f1c6ad2fd015d7a710bd3", "name": "" },
   { "typeLine": "Viridian Jewel", "icon": "http://web.poecdn.com/image/Art/2DItems/Jewels/basicdex.png?scale=1&scaleIndex=0&w=1&h=1&v=7375b3bb90a9809870b31d1aa4aa68b93", "name": "" },
   { "typeLine": "Prismatic Jewel", "icon": "http://web.poecdn.com/image/Art/2DItems/Jewels/Mastery.png?scale=1&scaleIndex=0&w=1&h=1&v=3ceaf280b553f6378ee8247d8818a74c3", "name": "" },
+  { "typeLine": "Searching Eye Jewel", "icon": "http://web.poecdn.com/image/Art/2DItems/Jewels/SearchingEye.png?scale=1&scaleIndex=0&w=1&h=1&v=1594a76f6cdc4a09e38ca58035d0ce873", "name": "" },
+  { "typeLine": "Murderous Eye Jewel", "icon": "http://web.poecdn.com/image/Art/2DItems/Jewels/MurderousEye.png?scale=1&scaleIndex=0&w=1&h=1&v=6679365e95eb89fd626cf59fa2b57c993", "name": "" },
+  { "typeLine": "Hypnotic Eye Jewel", "icon": "http://web.poecdn.com/image/Art/2DItems/Jewels/RivetedEye.png?scale=1&scaleIndex=0&w=1&h=1&v=a0904494de195adde172f2d6dd329b053", "name": "" },
+  { "typeLine": "Ghastly Eye Jewel", "icon": "http://web.poecdn.com/image/Art/2DItems/Jewels/GhastlyEye.png?scale=1&scaleIndex=0&w=1&h=1&v=118803f4aa870b0d556958d6a0634cee3", "name": "" },
 
   { "typeLine": "Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Necropolis3.png?scale=1&scaleIndex=0&w=1&h=1&v=29a68e688942329ef683d220f15ecf1f3", "name": "" },
-  { "typeLine": "Museum Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Museum2.png?scale=1&scaleIndex=0&w=1&h=1&v=64da9d9055a7f58de5fe12e35cb3960c3", "name": "" },
-  { "typeLine": "Arena Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Arena2.png?scale=1&scaleIndex=0&w=1&h=1&v=f19c81119592f5239fdc6caf2e2d991b3", "name": "" },
-  { "typeLine": "Tropical Island Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/TropicalIsland2.png?scale=1&scaleIndex=0&w=1&h=1&v=547435bae04b09e3929bc8965c3ef2d13", "name": "" },
-  { "typeLine": "Crypt Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Crypt2.png?scale=1&scaleIndex=0&w=1&h=1&v=d18452b9a025d43500c24d3b5083999b3", "name": "" },
-  { "typeLine": "Promenade Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Promenade2.png?scale=1&scaleIndex=0&w=1&h=1&v=00729aa3e86f0a056e092fb39c302c633", "name": "" },
-  { "typeLine": "Vaal Pyramid Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/VaalPyramid1.png?scale=1&scaleIndex=0&w=1&h=1&v=1bcf90bc8244d243de0f8d7f4f7bf90d3", "name": "" },
-  { "typeLine": "Thicket Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Thicket2.png?scale=1&scaleIndex=0&w=1&h=1&v=5fd4315a73d26ede201484e0584a19b93", "name": "" },
-  { "typeLine": "Arachnid Nest Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/ArachnidNest2.png?scale=1&scaleIndex=0&w=1&h=1&v=84cdaaef93e3ba1322ee921af31151343", "name": "" },
-  { "typeLine": "Spider Lair Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/SpiderLair1.png?scale=1&scaleIndex=0&w=1&h=1&v=17901400bd20fda48d7b12e0d27eca1d3", "name": "" },
-  { "typeLine": "Villa Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Villa1.png?scale=1&scaleIndex=0&w=1&h=1&v=f8f12a7207f89126b2a36e46dbac05a03", "name": "" },
-  { "typeLine": "Underground Sea Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/UndergroundSea3.png?scale=1&scaleIndex=0&w=1&h=1&v=bc8ab186917a01d7cc2c37d97cac0c2e3", "name": "" },
-  { "typeLine": "Underground River Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/UndergroundRiver2.png?scale=1&scaleIndex=0&w=1&h=1&v=b28a9715d2035065ffc24deffc8552693", "name": "" },
-  { "typeLine": "Crystal Ore Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/CrystalOre1.png?scale=1&scaleIndex=0&w=1&h=1&v=5a06237ef326236d93e3461b26ea63f23", "name": "" },
-  { "typeLine": "Reef Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Reef2.png?scale=1&scaleIndex=0&w=1&h=1&v=3ab06f53c683fa71645e56587c4957bd3", "name": "" },
-  { "typeLine": "Peninsula Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/DryPeninsula1.png?scale=1&scaleIndex=0&w=1&h=1&v=18600a9921fe243057327839be9e21fa3", "name": "" },
-  { "typeLine": "Colonnade Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Colonnade2.png?scale=1&scaleIndex=0&w=1&h=1&v=fc32e10bce122e68a133852db775249b3", "name": "" },
-  { "typeLine": "Temple Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Temple2.png?scale=1&scaleIndex=0&w=1&h=1&v=1655be2680e46408cbed5a6f0bce3fb63", "name": "" },
-  { "typeLine": "Strand Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Strand2.png?scale=1&scaleIndex=0&w=1&h=1&v=64bf7bd568a8cac43b9266ddc30ba8d33", "name": "" },
-  { "typeLine": "Pier Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Pier2.png?scale=1&scaleIndex=0&w=1&h=1&v=5496f2496ebc28f9134795aedf2458b23", "name": "" },
-  { "typeLine": "Graveyard Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Graveyard1.png?scale=1&scaleIndex=0&w=1&h=1&v=0fdf89c4b4bcd1a01495e547a45d820d3", "name": "" },
-  { "typeLine": "Ashen Wood Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/DryWoods2.png?scale=1&scaleIndex=0&w=1&h=1&v=85fef8f5455a53d878193a979771a2093", "name": "" },
-  { "typeLine": "Dark Forest Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/DarkForest3.png?scale=1&scaleIndex=0&w=1&h=1&v=eb9a4553ba6d9522d4c8caf5d11c2b163", "name": "" },
-  { "typeLine": "Ghetto Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Ghetto1.png?scale=1&scaleIndex=0&w=1&h=1&v=d10e9927be6e64352cae0c4a2690bdfe3", "name": "" },
-  { "typeLine": "Cavern Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Cavern1.png?scale=1&scaleIndex=0&w=1&h=1&v=3c78898ba319dd7f91e5362a1e24fdfa3", "name": "" },
-  { "typeLine": "Wharf Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Wharf2.png?scale=1&scaleIndex=0&w=1&h=1&v=2fda6ead729e98b4fafab176785162263", "name": "" },
-  { "typeLine": "Dungeon Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Dungeon1.png?scale=1&scaleIndex=0&w=1&h=1&v=6f33e509834393233cf337bfcf013a7e3", "name": "" },
-  { "typeLine": "Coves Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Coves2.png?scale=1&scaleIndex=0&w=1&h=1&v=4e713dfce6590c44c7ca33b2d67c2b8f3", "name": "" },
-  { "typeLine": "Sewer Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Sewer1.png?scale=1&scaleIndex=0&w=1&h=1&v=3b6f4c028663cc670eb4e0c2e7bd11e93", "name": "" },
-  { "typeLine": "Arsenal Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Arsenal2.png?scale=1&scaleIndex=0&w=1&h=1&v=af9c1a0a8aacdaab4d877eeba46fa55e3", "name": "" },
-  { "typeLine": "Mud Geyser Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/MudGeyser2.png?scale=1&scaleIndex=0&w=1&h=1&v=8c40c13bbf2416ad4e6f42e59d46d4e63", "name": "" },
-  { "typeLine": "Cemetery Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Cemetery2.png?scale=1&scaleIndex=0&w=1&h=1&v=0e123ff2ea520a943138e8c8d793ec6f3", "name": "" },
-  { "typeLine": "Arid Lake Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/AridLake1.png?scale=1&scaleIndex=0&w=1&h=1&v=1a6f512c443b8e7add6c7bcbdbd42dd73", "name": "" },
-  { "typeLine": "Springs Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Springs3.png?scale=1&scaleIndex=0&w=1&h=1&v=2aa76f85946dce90a6c55829229ce9a63", "name": "" },
-  { "typeLine": "Catacombs Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Catacomb2.png?scale=1&scaleIndex=0&w=1&h=1&v=462f39acd8966d56ea327ac642c1a45e3", "name": "" },
-  { "typeLine": "Cells Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Cells2.png?scale=1&scaleIndex=0&w=1&h=1&v=b3559be1729231402aaac4c9306829a63", "name": "" },
-  { "typeLine": "Terrace Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Terrace2.png?scale=1&scaleIndex=0&w=1&h=1&v=a75c873776e0549f8a2a139e5c9405ca3", "name": "" },
-  { "typeLine": "Overgrown Shrine Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/OvergrownShrine2.png?scale=1&scaleIndex=0&w=1&h=1&v=9c3213191f140d1d68a3fc49560d97e23", "name": "" },
-  { "typeLine": "Atoll Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Atoll2.png?scale=1&scaleIndex=0&w=1&h=1&v=2fbe2c1d8ecd42adf6af31c8984db85b3", "name": "" },
-  { "typeLine": "Overgrown Ruin Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/OvergrownRuin3.png?scale=1&scaleIndex=0&w=1&h=1&v=35e59dba799719fcf5316af8e02801343", "name": "" },
-  { "typeLine": "Bog Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Bog2.png?scale=1&scaleIndex=0&w=1&h=1&v=d45b89884e858e565ac14ad7356577e13", "name": "" },
-  { "typeLine": "Shore Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Shore2.png?scale=1&scaleIndex=0&w=1&h=1&v=ecaea75a28eaa01a871f88f4493c348d3", "name": "" },
-  { "typeLine": "Crematorium Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Crematorium3.png?scale=1&scaleIndex=0&w=1&h=1&v=fb5e541e85b53b101df6812d5aee6feb3", "name": "" },
-  { "typeLine": "Desert Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Desert1.png?scale=1&scaleIndex=0&w=1&h=1&v=a11965506546265273adad9b605422d13", "name": "" },
-  { "typeLine": "Quarry Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Quarry2.png?scale=1&scaleIndex=0&w=1&h=1&v=5c396388423612c4fcf59d12824ea8f03", "name": "" },
-  { "typeLine": "Arcade Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Arcade1.png?scale=1&scaleIndex=0&w=1&h=1&v=ac186eaef86afbe8a0a78728814cff103", "name": "" },
-  { "typeLine": "Pit Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Pit1.png?scale=1&scaleIndex=0&w=1&h=1&v=cb38e57c5923e24fbfaf4839b281ffd93", "name": "" },
-  { "typeLine": "Grotto Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Grotto1.png?scale=1&scaleIndex=0&w=1&h=1&v=7fde2eef2065b574c406a3560735955d3", "name": "" },
-  { "typeLine": "Channel Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Channel1.png?scale=1&scaleIndex=0&w=1&h=1&v=d08c67d09e84c51f45951b1a98b794173", "name": "" },
-  { "typeLine": "Spider Forest Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/SpiderForest2.png?scale=1&scaleIndex=0&w=1&h=1&v=a25d02ca49cebf07b33b73150c57791f3", "name": "" },
-  { "typeLine": "Shaped Spider Forest Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/SpiderForest3.png?scale=1&scaleIndex=0&w=1&h=1&v=ffb28fbf701a545a260f11e106651b2a3", "name": "" },
-  { "typeLine": "Torture Chamber Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/TortureChamber3.png?scale=1&scaleIndex=0&w=1&h=1&v=3d92583d78c8c8343678cdcc849a195f3", "name": "" },
-  { "typeLine": "Waste Pool Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/WastePool1.png?scale=1&scaleIndex=0&w=1&h=1&v=8ea37ac6d2aa1ef611b66cbdc9ffe0e53", "name": "" },
-  { "typeLine": "Orchard Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Orchard2.png?scale=1&scaleIndex=0&w=1&h=1&v=cf7ee600a464b10d08e479bc1e3fa3a43", "name": "" },
-  { "typeLine": "Residence Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Residence3.png?scale=1&scaleIndex=0&w=1&h=1&v=f79842e173b2457f81f2a685acb6e6063", "name": "" },
-  { "typeLine": "Jungle Valley Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/JungleValley1.png?scale=1&scaleIndex=0&w=1&h=1&v=e0dca08770f2444ca46bbd222a26329e3", "name": "" },
-  { "typeLine": "Phantasmagoria Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Phantasmagoria1.png?scale=1&scaleIndex=0&w=1&h=1&v=d6c562ed68d068a7129539ad038ab0803", "name": "" },
-  { "typeLine": "Dunes Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Dunes1.png?scale=1&scaleIndex=0&w=1&h=1&v=3dcec4ba9675ab0726ae256eb25286bc3", "name": "" },
-  { "typeLine": "Volcano Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Volcano3.png?scale=1&scaleIndex=0&w=1&h=1&v=39862551d3d736a8dbd83ce3a5816b5c3", "name": "" },
-  { "typeLine": "Academy Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Academy1.png?scale=1&scaleIndex=0&w=1&h=1&v=9c919b843125e5f90edc210e67f27e1d3", "name": "" },
-  { "typeLine": "Precinct Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Precinct3.png?scale=1&scaleIndex=0&w=1&h=1&v=b2fd6090af79e78eb8142d5c65f66de83", "name": "" },
-  { "typeLine": "Necropolis Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Necropolis3.png?scale=1&scaleIndex=0&w=1&h=1&v=29a68e688942329ef683d220f15ecf1f3", "name": "" },
-  { "typeLine": "Bazaar Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Bazaar3.png?scale=1&scaleIndex=0&w=1&h=1&v=8ff01b8415b1feec4ca8296f907b552a3", "name": "" },
-  { "typeLine": "Plateau Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Plateau3.png?scale=1&scaleIndex=0&w=1&h=1&v=f2f5ebe7d2aecad5f69e8b398746b4173", "name": "" },
-  { "typeLine": "Malformation Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Malformation2.png?scale=1&scaleIndex=0&w=1&h=1&v=84768661fc6adc1e0d1dbe0b2ab0e4ff3", "name": "" },
-  { "typeLine": "Canyon Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Canyon2.png?scale=1&scaleIndex=0&w=1&h=1&v=ab30d069c1968c70a8421308aea8e8b83", "name": "" },
-  { "typeLine": "Gorge Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Gorge3.png?scale=1&scaleIndex=0&w=1&h=1&v=1eed7d70c7ced0df6e03e1ff589cb2083", "name": "" },
-  { "typeLine": "Maze Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Maze3.png?scale=1&scaleIndex=0&w=1&h=1&v=37062285663e4e6295399900c6ae92273", "name": "" },
-  { "typeLine": "Courtyard Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Courtyard2.png?scale=1&scaleIndex=0&w=1&h=1&v=e9e8901e28f976aea904e60caf9277103", "name": "" },
-  { "typeLine": "Shrine Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Shrine3.png?scale=1&scaleIndex=0&w=1&h=1&v=d08e981dc904a48962e2ec8d4f5177c43", "name": "" },
-  { "typeLine": "Abyss Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Abyss3.png?scale=1&scaleIndex=0&w=1&h=1&v=39f0c96ac6d39a584b66587b25250a9d3", "name": "" },
-  { "typeLine": "Colosseum Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Colosseum3.png?scale=1&scaleIndex=0&w=1&h=1&v=da82661d6e8a0b8b10621db3aa5f0aa93", "name": "" },
-  { "typeLine": "Shipyard Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Shipyard3.png?scale=1&scaleIndex=0&w=1&h=1&v=61c223158c0abbcc008a196ba35b971c3", "name": "" },
-  { "typeLine": "Castle Ruin Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/CastleRuins2.png?scale=1&scaleIndex=0&w=1&h=1&v=7e75e5df4f542808292a009cc5436b363", "name": "" },
-  { "typeLine": "Palace Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Palace3.png?scale=1&scaleIndex=0&w=1&h=1&v=a06677422829082aa9ad50aedc75f5483", "name": "" },
-  { "typeLine": "Core Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Core3.png?scale=1&scaleIndex=0&w=1&h=1&v=81e5692c59b3e15bb92b448fd4a675113", "name": "" },
-  { "typeLine": "Vaal Temple Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/VaalTemple3.png?scale=1&scaleIndex=0&w=1&h=1&v=b87cbedaeca9fd028389223289d01dd03", "name": "" },
-  { "typeLine": "Wasteland Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Wasteland3.png?scale=1&scaleIndex=0&w=1&h=1&v=3399663ec5b54fba58d613276a2b64293", "name": "" },
-  { "typeLine": "Excavation Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Excavation3.png?scale=1&scaleIndex=0&w=1&h=1&v=5b6372d6f17eddf012fa4a10896e82f13", "name": "" },
-  { "typeLine": "Chateau Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Chateau3.png?scale=1&scaleIndex=0&w=1&h=1&v=f589882ed820e13e552f1b5e6ac8155c3", "name": "" },
-  { "typeLine": "Waterways Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Waterways3.png?scale=1&scaleIndex=0&w=1&h=1&v=1fc6f4cf5e0c91797ffb7fa2892baf3a3", "name": "" },
-  { "typeLine": "Plaza Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Plaza3.png?scale=1&scaleIndex=0&w=1&h=1&v=8d5312ca067d515f3bcadceb90023ae33", "name": "" },
-  { "typeLine": "Ivory Temple Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/IvoryTemple3.png?scale=1&scaleIndex=0&w=1&h=1&v=a9162c048d4a92e6856e3655f36babf53", "name": "" },
-  { "typeLine": "Castle Ruins Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/CastleRuins2.png?scale=1&scaleIndex=0&w=1&h=1&v=7e75e5df4f542808292a009cc5436b363", "name": "" },
-  { "typeLine": "Arachnid Tomb Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/ArachnidTomb2.png?scale=1&scaleIndex=0&w=1&h=1&v=852a0bd2f995d2cabfbed3a9ae60f2cd3", "name": "" },
-  { "typeLine": "Primordial Pool Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/PrimordialPool1.png?scale=1&scaleIndex=0&w=1&h=1&v=bdaa9bfd4696a1c01ad47a0446c6180b3", "name": "" },
-  { "typeLine": "Mesa Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Mesa1.png?scale=1&scaleIndex=0&w=1&h=1&v=b7ccc9f2a7d4d3be5cf891c028449d0a3", "name": "" },
-  { "typeLine": "Factory Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Factory1.png?scale=1&scaleIndex=0&w=1&h=1&v=1b8f5d109ede8682f16322085d3b06023", "name": "" },
-  { "typeLine": "Oasis Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Oasis1.png?scale=1&scaleIndex=0&w=1&h=1&v=9bf1b37030ccf7c99c000352c34700183", "name": "" },
-  { "typeLine": "Beach Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Beach1.png?scale=1&scaleIndex=0&w=1&h=1&v=0d1102a89802153c18de5757a42d8cde3", "name": "" },
-  { "typeLine": "Racecourse Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Racecourse2.png?scale=1&scaleIndex=0&w=1&h=1&v=16f83914df5740cbf08c64ae46b070de3", "name": "" },
-  { "typeLine": "Marshes Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Marshes1.png?scale=1&scaleIndex=0&w=1&h=1&v=0327fc3ce97603e3399f1edca242dd743", "name": "" },
-  { "typeLine": "Vaal City Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/VaalCity2.png?scale=1&scaleIndex=0&w=1&h=1&v=98d7c89c22c09bb696ab8d69de88ea9f3", "name": "" },
-  { "typeLine": "Acid Lakes Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/AcidLakes1.png?scale=1&scaleIndex=0&w=1&h=1&v=b5d8d96c3cc5df4d5218a9752cb0b03b3", "name": "" },
-  { "typeLine": "Tower Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Tower1.png?scale=1&scaleIndex=0&w=1&h=1&v=c1bc5db0fd6fdfec77bd028a27bfa75b3", "name": "" },
-  { "typeLine": "Shaped Desert Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Desert2.png?scale=1&scaleIndex=0&w=1&h=1&v=35992be1e075647f1c9c44738cbc90623", "name": "" },
-  { "typeLine": "Port Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Quay2.png?scale=1&scaleIndex=0&w=1&h=1&v=21c3e08e9f0debbf9467b520ea61e4153", "name": "" },
-  { "typeLine": "Shaped Port Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Quay3.png?scale=1&scaleIndex=0&w=1&h=1&v=8b4b4a4c3771d17d06b14f9f56f484583", "name": "" },
-  { "typeLine": "Shaped Phantasmagoria Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Phantasmagoria2.png?scale=1&scaleIndex=0&w=1&h=1&v=b478b5d5707a386c8715a3235c30c7833", "name": "" },
-  { "typeLine": "Estuary Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Estuary3.png?scale=1&scaleIndex=0&w=1&h=1&v=7b827e9cbe37ab0143c2f562a989b4993", "name": "" },
-  { "typeLine": "Burial Chambers Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/BurialChambers1.png?scale=1&scaleIndex=0&w=1&h=1&v=287c4d9da56384a879b57a9435c5c8063", "name": "" },
-  { "typeLine": "Shaped Arid Lake Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/AridLake2.png?scale=1&scaleIndex=0&w=1&h=1&v=6dea8247ac697f740dd87cd2062d74bb3", "name": "" },
-  { "typeLine": "Ramparts Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Ramparts2.png?scale=1&scaleIndex=0&w=1&h=1&v=3de792354f33205eac84e1c35f9bd3043", "name": "" },
-  { "typeLine": "High Gardens Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/HighGardens3.png?scale=1&scaleIndex=0&w=1&h=1&v=4833f50e46b132bc9dbe65528d4736823", "name": "" },
-  { "typeLine": "Sulphur Wastes Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/SulphurWastes3.png?scale=1&scaleIndex=0&w=1&h=1&v=48802019c4a2e88af038d75ec1e4b31e3", "name": "" },
-  { "typeLine": "Lair Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Lair3.png?scale=1&scaleIndex=0&w=1&h=1&v=33ccbe9a854ad1f856e48108c885e0333", "name": "" },
-  { "typeLine": "Scriptorium Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Scriptorium3.png?scale=1&scaleIndex=0&w=1&h=1&v=e7a366ddd306157f62faaabb415a90443", "name": "" },
-  { "typeLine": "Barrows Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Barrows2.png?scale=1&scaleIndex=0&w=1&h=1&v=352ec32c7514f488f553819dbd3a54f13", "name": "" },
-  { "typeLine": "Shaped Jungle Valley Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/JungleValley2.png?scale=1&scaleIndex=0&w=1&h=1&v=ea5ba5f7dc1ff1f4ff24c5143bb427b53", "name": "" },
-  { "typeLine": "Armoury Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Armory2.png?scale=1&scaleIndex=0&w=1&h=1&v=72b05031c56098e01c2d69e7e5a88fc73", "name": "" },
-  { "typeLine": "Shaped Channel Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Channel2.png?scale=1&scaleIndex=0&w=1&h=1&v=8c9a1e1de9b98b6e97c4718e75c6696d3", "name": "" },
-  { "typeLine": "Shaped Oasis Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Oasis2.png?scale=1&scaleIndex=0&w=1&h=1&v=a9870e012b4db0784687163a899fd8b63", "name": "" },
-  { "typeLine": "Shaped Strand Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Strand3.png?scale=1&scaleIndex=0&w=1&h=1&v=8285f6a7fc15d8b2a294bc31e1d78d063", "name": "" },
-  { "typeLine": "Shaped Acid Lakes Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/AcidLakes2.png?scale=1&scaleIndex=0&w=1&h=1&v=86010907844d2b009a824de71b04a9eb3", "name": "" },
-  { "typeLine": "Vault Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Vault3.png?scale=1&scaleIndex=0&w=1&h=1&v=39e643e758fe708c8f8f4ef60e9f89973", "name": "" },
-  { "typeLine": "Shaped Beach Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Beach2.png?scale=1&scaleIndex=0&w=1&h=1&v=502b712baed1eca77f130331f3640d7c3", "name": "" },
-  { "typeLine": "Shaped Factory Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Factory2.png?scale=1&scaleIndex=0&w=1&h=1&v=133a6ccbfb1f7fa1521982d0c3746f123", "name": "" },
-  { "typeLine": "Shaped Crystal Ore Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/CrystalOre2.png?scale=1&scaleIndex=0&w=1&h=1&v=fb03d8e8f84b97aed59e794b4d4be7373", "name": "" },
-  { "typeLine": "Shaped Primordial Pool Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/PrimordialPool2.png?scale=1&scaleIndex=0&w=1&h=1&v=9007ad8de37bc1203b8fdebb123962633", "name": "" },
-  { "typeLine": "Shaped Arcade Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Arcade2.png?scale=1&scaleIndex=0&w=1&h=1&v=31b951c58e34b387a9c747d07a5dcca43", "name": "" },
-  { "typeLine": "Shaped Marshes Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Marshes2.png?scale=1&scaleIndex=0&w=1&h=1&v=003257936ba0344f3b4278c7652c81c93", "name": "" },
-  { "typeLine": "Lair of the Hydra Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Hydra.png?scale=1&scaleIndex=0&w=1&h=1&v=049d8ae89a6d260b64a3ff4143a785053", "name": "" },
-  { "typeLine": "Shaped Academy Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Academy2.png?scale=1&scaleIndex=0&w=1&h=1&v=7e3c79997c3b2a589d75de44704f590f3", "name": "" },
-  { "typeLine": "Pit of the Chimera Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Chimera.png?scale=1&scaleIndex=0&w=1&h=1&v=ca98f4afb37aca573966daad957ac82e3", "name": "" },
-  { "typeLine": "Shaped Waste Pool Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/WastePool2.png?scale=1&scaleIndex=0&w=1&h=1&v=fb9de7ee3518fdbc62129abd068332ab3", "name": "" },
-  { "typeLine": "Shaped Ghetto Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Ghetto2.png?scale=1&scaleIndex=0&w=1&h=1&v=c237e187f04d18bebf744fc4c82797573", "name": "" },
-  { "typeLine": "Shaped Dunes Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Dunes2.png?scale=1&scaleIndex=0&w=1&h=1&v=5329bf8eb0167e98f120920980426d1a3", "name": "" },
-  { "typeLine": "Shaped Graveyard Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Graveyard2.png?scale=1&scaleIndex=0&w=1&h=1&v=56c462069dfbfd5ddf4d9f901de094cf3", "name": "" },
-  { "typeLine": "Maze of the Minotaur Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Minotaur.png?scale=1&scaleIndex=0&w=1&h=1&v=66d1222b8e2229636638901d5ed1e9c43", "name": "" },
-  { "typeLine": "Shaped Cavern Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Cavern2.png?scale=1&scaleIndex=0&w=1&h=1&v=370a374a92e694ba49e582b8bd48a1cd3", "name": "" },
-  { "typeLine": "Shaped Mesa Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Mesa2.png?scale=1&scaleIndex=0&w=1&h=1&v=bb3c3919a22b8f26ed06dfdd92c394153", "name": "" },
-  { "typeLine": "Shaped Tower Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Tower2.png?scale=1&scaleIndex=0&w=1&h=1&v=f0ccfe8835f1c4be665f2bd4d778ddbd3", "name": "" },
-  { "typeLine": "Forge of the Phoenix Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Phoenix.png?scale=1&scaleIndex=0&w=1&h=1&v=6b9bea45de6a302a395aaa1e684ae17b3", "name": "" },
-  { "typeLine": "Shaped Promenade Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Promenade3.png?scale=1&scaleIndex=0&w=1&h=1&v=b97ef2759945b597d6defb9a5468fe4f3", "name": "" },
-  { "typeLine": "Shaped Peninsula Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/DryPeninsula2.png?scale=1&scaleIndex=0&w=1&h=1&v=c63ed8be7ff3dfa0101028ae682027f03", "name": "" },
-  { "typeLine": "Shaped Vaal Pyramid Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/VaalPyramid2.png?scale=1&scaleIndex=0&w=1&h=1&v=1e8de5422f0a2cdea04a781dbed86a763", "name": "" },
-  { "typeLine": "Mineral Pools Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/MineralPools3.png?scale=1&scaleIndex=0&w=1&h=1&v=806830b25d8fac1684e731075dc8c1a83", "name": "" },
-  { "typeLine": "Beacon Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Beacon3.png?scale=1&scaleIndex=0&w=1&h=1&v=1a7548b5a23c937358cddee98e47695d3", "name": "" },
-  { "typeLine": "Shaped Arachnid Tomb Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/ArachnidTomb3.png?scale=1&scaleIndex=0&w=1&h=1&v=098b73d78041932f74c735a34f5fc1b73", "name": "" },
-  { "typeLine": "Shaped Wharf Map", "icon": null, "name": "" },
-  { "typeLine": "Shaped Atoll Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Atoll3.png?scale=1&scaleIndex=0&w=1&h=1&v=a27442770e7865d6bcb7681b1cadfe843", "name": "" },
-  { "typeLine": "Shaped Armoury Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Armory3.png?scale=1&scaleIndex=0&w=1&h=1&v=10b337b277646a95670bb4f7059850f73", "name": "" },
-  { "typeLine": "Shaped Castle Ruins Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/CastleRuins3.png?scale=1&scaleIndex=0&w=1&h=1&v=2548aef6b6a7a60fd6097829ba947ee33", "name": "" },
-  { "typeLine": "Shaped Villa Map", "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Villa2.png?scale=1&scaleIndex=0&w=1&h=1&v=aa80c969563c72fbb05f1bd6fc8b95723", "name": "" },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Academy.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=6&v=58a6b3b4c6676531465aa1ac306c71a43",
+    "typeLine": "Academy Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/AcidLakes.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=14&v=4fac90ec598c4ea4a52b84adbfabf32a3",
+    "typeLine": "Acid Lakes Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Alleyways.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=2&v=03a6e03f8da743331b2f57a9229d748b3",
+    "typeLine": "Alleyways Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/VaalCity.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=5&v=063b43c2e61e11d2f58f6169bcde19473",
+    "typeLine": "Ancient City Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/ArachnidNest.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=7&v=c1c4fc631a6a1ca5959c6aca97df5d6e3",
+    "typeLine": "Arachnid Nest Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Arachnid.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=10&v=42f60166948d1a0d7d0eabeaa7536a523",
+    "typeLine": "Arachnid Tomb Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Arcade.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=3&v=8fe0a84965d9058be869e897a58f54993",
+    "typeLine": "Arcade Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Arena.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=9&v=4aa6bbd33601d906989b55aa641375ba3",
+    "typeLine": "Arena Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/AridLake.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=2&v=9f9ef8b0126d5ed98825962195cc4e863",
+    "typeLine": "Arid Lake Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Arsenal.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=13&v=07aae23d9c7fa518864ce0466977a7723",
+    "typeLine": "Arsenal Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/DryWoods.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=6&v=131f82a66fb4bc6f7de721715b06300f3",
+    "typeLine": "Ashen Wood Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Atoll.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=6&v=bb3bfa33945adb33cf28559d26e700ae3",
+    "typeLine": "Atoll Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Barrows.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=5&v=d33fdd2ee8d5227f4e9c14ed20ec1af53",
+    "typeLine": "Barrows Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Basilica.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=15&v=c519e958375f626b4ecc2845c40c4d1b3",
+    "typeLine": "Basilica Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Bazaar.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=7&v=e147549b5862df17acec3bfe5e399ff33",
+    "typeLine": "Bazaar Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Beach.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=1&v=a5d168c6abf32cc89bd9742a953c01f13",
+    "typeLine": "Beach Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Belfry.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=10&v=09d904a6b1096da9b6b3781779e10ed63",
+    "typeLine": "Belfry Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Bog.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=10&v=c3b3d71873b36602a4e063b61ab0e8193",
+    "typeLine": "Bog Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Catacomb.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=7&v=32fe2c54f99bad8d4ef1f907d2fa62e33",
+    "typeLine": "Bone Crypt Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/BurialChambers.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=3&v=51fb154b1afc8fa2cc2b54b64d16a0a03",
+    "typeLine": "Burial Chambers Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Cage.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=3&v=997216b56385c3993385fe2b9b1ce65f3",
+    "typeLine": "Cage Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Abyss.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=13&v=c1249bdb9315092d5ae30dcd609fee913",
+    "typeLine": "Caldera Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Canyon.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=4&v=a25f408bbb820d874ee10222248191c93",
+    "typeLine": "Canyon Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Carcass.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=15&v=2530cc4c365f7416e3b540ed90b400463",
+    "typeLine": "Carcass Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/CastleRuins.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=12&v=ee491c1089f00756f47334698cee53f93",
+    "typeLine": "Castle Ruins Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Cells.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=3&v=281ca135d0ed2192cab5a225dd9753ff3",
+    "typeLine": "Cells Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Cemetery.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=6&v=196e670c0c83c7340a58bf77658141993",
+    "typeLine": "Cemetery Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Channel.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=5&v=0194483fad3e502e2fe87563cf0fd3e43",
+    "typeLine": "Channel Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Chateau.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=4&v=d56ba4d4937d1b71d376d6e76bdefbe83",
+    "typeLine": "Chateau Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/CitySquare.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=4&v=b032c119d6a09a8f44b1c057fa086aeb3",
+    "typeLine": "City Square Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Colonnade.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=11&v=6e6947eb641694f21d2df423e30364483",
+    "typeLine": "Colonnade Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Colosseum.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=14&v=46b37eef482f0b5e25b4ff1b18ceb1cd3",
+    "typeLine": "Colosseum Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Baths.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=5&v=5b20ebefec2985d4c79bcfd9a6c6741a3",
+    "typeLine": "Conservatory Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/CorpseTrench.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=7&v=73ae98e0e67f535b257bf9117151e8493",
+    "typeLine": "Coral Ruins Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Core.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=13&v=afdc938c90d58cc73e40d0b196ae311f3",
+    "typeLine": "Core Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Courthouse.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=4&v=f8d06189bde4f0b6923d3fc12c90a48a3",
+    "typeLine": "Courthouse Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Courtyard.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=8&v=698a4a6437292d5ae9ff3c30e019cfba3",
+    "typeLine": "Courtyard Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Coves.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=11&v=9740d37ee947949d268d36cb9c64176d3",
+    "typeLine": "Coves Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Sanctuary.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=14&v=a8b37461f02d25abe68916fa1b12501c3",
+    "typeLine": "Crimson Temple Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/CrystalOre.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=12&v=f22bab30a217d1a1aaa2c2f2dd46cd153",
+    "typeLine": "Crystal Ore Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Crypt.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=10&v=2b05e74a8841707f1c3de9d922121a3f3",
+    "typeLine": "Cursed Crypt Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/DarkForest.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=14&v=f31d7d5b2673324fb06ed67ee6a403de3",
+    "typeLine": "Dark Forest Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/DefiledCathedral.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=12&v=cea70fa96da89b005d316b63511941e33",
+    "typeLine": "Defiled Cathedral Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Desert.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=2&v=9d3cd4f63f746af76128812cd24e55af3",
+    "typeLine": "Desert Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Oasis.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=13&v=5a6d013c5c75cf067c7e9108bcf9a2bd3",
+    "typeLine": "Desert Spring Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Dig.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=14&v=b902a9b866d5218a130e007fb74a341c3",
+    "typeLine": "Dig Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Dunes.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=7&v=694d14f9b03cdbcb5d8cfb85ed65c0d03",
+    "typeLine": "Dunes Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Dungeon.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=1&v=577753cfdeaa5599711f3fce352516333",
+    "typeLine": "Dungeon Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Estuary.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=9&v=29081f208ecf57cf0dee4ed35231d2e93",
+    "typeLine": "Estuary Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Excavation.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=3&v=0865662d02ed16444ca01e8752c31c493",
+    "typeLine": "Excavation Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Factory.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=11&v=925e2c5ec3f5cfe8036a8661dd8e198b3",
+    "typeLine": "Factory Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Fields.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=6&v=b0b1c5fc45266879b18db4e2b9a093873",
+    "typeLine": "Fields Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Cavern1.png?scale=1&scaleIndex=0&w=1&h=1&v=3c78898ba319dd7f91e5362a1e24fdfa3",
+    "typeLine": "Flooded Mine Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/Phoenix.png?scale=1&scaleIndex=0&w=1&h=1&v=4838b6e3ea38d26aac12a5b4520adee33",
+    "typeLine": "Forge of the Phoenix Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Terrace.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=7&v=97230392e2717ef9eea9bb5da31eb6f83",
+    "typeLine": "Gardens Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Quarry.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=8&v=c4f85971281e9fe73c3496e37ed2afdf3",
+    "typeLine": "Geode Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Ghetto.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=13&v=563a280f8f779cd5a1e25c4c833245a43",
+    "typeLine": "Ghetto Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Gorge.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=4&v=b1cbee9bf107d8a6541be717383753af3",
+    "typeLine": "Gorge Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Graveyard.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=1&v=826e3828c489f10c05baaffd716379533",
+    "typeLine": "Graveyard Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Grotto.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=4&v=b4a021e0b97f473c7c4bf525d3112c1b3",
+    "typeLine": "Grotto Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Chambers.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=5&v=e624f0a9b302d79c5513b4c320374fdc3",
+    "typeLine": "Haunted Mansion Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Iceberg.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=3&v=9b76473ba37f8083301bff97e689e4b93",
+    "typeLine": "Iceberg Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Infestation.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=8&v=afb5acd20ec19f260765bd08b12de4d73",
+    "typeLine": "Infested Valley Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/IvoryTemple.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=5&v=dc8aa329f320dba5d3e823263c28c2583",
+    "typeLine": "Ivory Temple Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/JungleValley.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=6&v=246d274bc5dcf0c630aa80c295b6677a3",
+    "typeLine": "Jungle Valley Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Laboratory.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=8&v=740177484c1ccc3c0f4e2222c6cbaba33",
+    "typeLine": "Laboratory Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Lair.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=11&v=e9c7f9bb82d13c344a97694f350b06e13",
+    "typeLine": "Lair Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/Hydra.png?scale=1&scaleIndex=0&w=1&h=1&v=d2fb63c26d64f0523fbf387933cddb923",
+    "typeLine": "Lair of the Hydra Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Crematorium.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=7&v=7668e7b4e18a525b428abecd3ee32be33",
+    "typeLine": "Lava Chamber Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Corpse.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=15&v=ba6e9af72f482d4ccd59a06d753264db3",
+    "typeLine": "Lava Lake Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/SulphurWastes.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=3&v=f5a023e5406b723bcd376372129d8dfc3",
+    "typeLine": "Leyline Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Beacon.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=4&v=67b287bd2fb6f9af01cd46490da13f223",
+    "typeLine": "Lighthouse Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Lookout.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=1&v=58c4e5558f3d3b6566d5bf1bf29a267a3",
+    "typeLine": "Lookout Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Malformation.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=13&v=a10c2626f7ce54489c63e64d95b953073",
+    "typeLine": "Malformation Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Marshes.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=2&v=d9b444ff3ef3d7ff10c526115ab603bb3",
+    "typeLine": "Marshes Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Mausoleum.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=6&v=1e038628422d0c7f34e76d3a2d03e4d73",
+    "typeLine": "Mausoleum Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Maze.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=5&v=a4a4c54344de7d031fda40a045c3477b3",
+    "typeLine": "Maze Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/Minotaur.png?scale=1&scaleIndex=0&w=1&h=1&v=2232e9886737b4af62e3d681a95e24b33",
+    "typeLine": "Maze of the Minotaur Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Mesa.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=11&v=754d5940836ed0c153b16f434d044ad73",
+    "typeLine": "Mesa Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/MineralPools.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=8&v=c6d2496e58a7b62053cd64b6b796a0a83",
+    "typeLine": "Mineral Pools Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/LunarisTemple.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=9&v=b3480754ad4cb157a2275b3d48ab26c83",
+    "typeLine": "Moon Temple Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/MudGeyser.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=8&v=d278c08ef3132917ef92210c1207532c3",
+    "typeLine": "Mud Geyser Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Museum.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=9&v=64986d32a7f7696fba088b3a2e4bcaa53",
+    "typeLine": "Museum Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Necropolis.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=12&v=e9cd594ba53cfef4626b0183417c85923",
+    "typeLine": "Necropolis Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Orchard.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=10&v=aa0fed0450ed4d02150ab9bc1f622bf33",
+    "typeLine": "Orchard Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/OvergrownRuin.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=8&v=83c3868e461fbb6d821a6a9368fa63e83",
+    "typeLine": "Overgrown Ruin Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/OvergrownShrine.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=12&v=24c88c586cb6a5e71375afbbb1b1c62a3",
+    "typeLine": "Overgrown Shrine Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Palace.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=14&v=e32d570548554f453f7b4c371cfd19b33",
+    "typeLine": "Palace Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Park.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=13&v=fbc7d6826430becf2ec16c0731ee0cf63",
+    "typeLine": "Park Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Pen.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=2&v=8fa1f6fc7a74598f89cdea20e18d8d343",
+    "typeLine": "Pen Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/DryPeninsula.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=3&v=913c7bcae2772d747bffaf1e9084a3aa3",
+    "typeLine": "Peninsula Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Phantasmagoria.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=6&v=7c3e70f497cf35e4e9db7c542b58375c3",
+    "typeLine": "Phantasmagoria Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Pier.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=10&v=cf0a872985a4a2542db221a2bcfb25853",
+    "typeLine": "Pier Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Pit1.png?scale=1&scaleIndex=0&w=1&h=1&v=cb38e57c5923e24fbfaf4839b281ffd93",
+    "typeLine": "Pit Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Chimera.png?scale=1&scaleIndex=0&w=1&h=1&v=ca98f4afb37aca573966daad957ac82e3",
+    "typeLine": "Pit of the Chimera Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Plateau.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=9&v=892f39286ffbba9bb32bc6daf438c2d03",
+    "typeLine": "Plateau Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Plaza.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=14&v=9f06fb7975b9f77fb338e1c710f771533",
+    "typeLine": "Plaza Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Precinct3.png?scale=1&scaleIndex=0&w=1&h=1&v=b2fd6090af79e78eb8142d5c65f66de83",
+    "typeLine": "Precinct Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/PrimordialPool.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=11&v=3fee13efd2ec6ca911507122bc74cc9f3",
+    "typeLine": "Primordial Pool Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Promenade.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=11&v=195286dbf834711f1b919ec7995030d83",
+    "typeLine": "Promenade Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Racecourse2.png?scale=1&scaleIndex=0&w=1&h=1&v=16f83914df5740cbf08c64ae46b070de3",
+    "typeLine": "Racecourse Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Ramparts.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=7&v=2d528b0e091879d9106eb96ebe2730c43",
+    "typeLine": "Ramparts Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Reef.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=15&v=4da790e111e8f7ce60a2320476b95d843",
+    "typeLine": "Reef Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Antiquary.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=4&v=d1999dc1ae6c9f6237fb1918eadfdbb93",
+    "typeLine": "Relic Chambers Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Residence.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=7&v=2c71504bfe2dac5661b739b41afe3da93",
+    "typeLine": "Residence Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Scriptorium.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=9&v=46212669dc20e4ffa2b37d3b9a60d3263",
+    "typeLine": "Scriptorium Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Sepulchre.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=9&v=e24e54b37418aca33d712b190a033ed53",
+    "typeLine": "Sepulchre Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Alleyways.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=7&v=03a6e03f8da743331b2f57a9229d748b3",
+    "typeLine": "Shaped Alleyways Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/ArachnidNest3.png?scale=1&scaleIndex=0&w=1&h=1&v=dfda4c7c07a67d2f1296f1f1c28f96103",
+    "typeLine": "Shaped Arachnid Nest Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Arcade2.png?scale=1&scaleIndex=0&w=1&h=1&v=31b951c58e34b387a9c747d07a5dcca43",
+    "typeLine": "Shaped Arcade Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Arena3.png?scale=1&scaleIndex=0&w=1&h=1&v=348f6303508de9bec4180f66ca9c7c563",
+    "typeLine": "Shaped Arena Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/AridLake.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=7&v=9f9ef8b0126d5ed98825962195cc4e863",
+    "typeLine": "Shaped Arid Lake Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/DryWoods.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=11&v=131f82a66fb4bc6f7de721715b06300f3",
+    "typeLine": "Shaped Ashen Wood Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Atoll3.png?scale=1&scaleIndex=0&w=1&h=1&v=a27442770e7865d6bcb7681b1cadfe843",
+    "typeLine": "Shaped Atoll Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Beach.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=6&v=a5d168c6abf32cc89bd9742a953c01f13",
+    "typeLine": "Shaped Beach Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Catacomb3.png?scale=1&scaleIndex=0&w=1&h=1&v=462bd2ff7feeb153c4e0f4d3241cf5513",
+    "typeLine": "Shaped Bone Crypt Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/BurialChambers.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=8&v=51fb154b1afc8fa2cc2b54b64d16a0a03",
+    "typeLine": "Shaped Burial Chambers Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Cage.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=8&v=997216b56385c3993385fe2b9b1ce65f3",
+    "typeLine": "Shaped Cage Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Canyon.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=9&v=a25f408bbb820d874ee10222248191c93",
+    "typeLine": "Shaped Canyon Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Cells.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=8&v=281ca135d0ed2192cab5a225dd9753ff3",
+    "typeLine": "Shaped Cells Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Cemetery3.png?scale=1&scaleIndex=0&w=1&h=1&v=279db19bf13fbab0f3fd593cd954d3603",
+    "typeLine": "Shaped Cemetery Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Channel.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=10&v=0194483fad3e502e2fe87563cf0fd3e43",
+    "typeLine": "Shaped Channel Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/CitySquare.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=9&v=b032c119d6a09a8f44b1c057fa086aeb3",
+    "typeLine": "Shaped City Square Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Courthouse.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=9&v=f8d06189bde4f0b6923d3fc12c90a48a3",
+    "typeLine": "Shaped Courthouse Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Courtyard.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=13&v=698a4a6437292d5ae9ff3c30e019cfba3",
+    "typeLine": "Shaped Courtyard Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Crypt3.png?scale=1&scaleIndex=0&w=1&h=1&v=7f6abad816438e9f4ad7923eb55df2343",
+    "typeLine": "Shaped Cursed Crypt Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Desert.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=7&v=9d3cd4f63f746af76128812cd24e55af3",
+    "typeLine": "Shaped Desert Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Dunes.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=12&v=694d14f9b03cdbcb5d8cfb85ed65c0d03",
+    "typeLine": "Shaped Dunes Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Dungeon.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=6&v=577753cfdeaa5599711f3fce352516333",
+    "typeLine": "Shaped Dungeon Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Cavern.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=7&v=a7aba9ac2cf171c2d328c5eda37394463",
+    "typeLine": "Shaped Flooded Mine Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Ghetto2.png?scale=1&scaleIndex=0&w=1&h=1&v=c237e187f04d18bebf744fc4c82797573",
+    "typeLine": "Shaped Ghetto Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Gorge.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=9&v=b1cbee9bf107d8a6541be717383753af3",
+    "typeLine": "Shaped Gorge Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Graveyard.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=6&v=826e3828c489f10c05baaffd716379533",
+    "typeLine": "Shaped Graveyard Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Iceberg.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=8&v=9b76473ba37f8083301bff97e689e4b93",
+    "typeLine": "Shaped Iceberg Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/JungleValley.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=11&v=246d274bc5dcf0c630aa80c295b6677a3",
+    "typeLine": "Shaped Jungle Valley Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/SulphurWastes.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=8&v=f5a023e5406b723bcd376372129d8dfc3",
+    "typeLine": "Shaped Leyline Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Lookout.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=6&v=58c4e5558f3d3b6566d5bf1bf29a267a3",
+    "typeLine": "Shaped Lookout Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Marshes.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=7&v=d9b444ff3ef3d7ff10c526115ab603bb3",
+    "typeLine": "Shaped Marshes Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Mausoleum.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=11&v=1e038628422d0c7f34e76d3a2d03e4d73",
+    "typeLine": "Shaped Mausoleum Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Maze.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=10&v=a4a4c54344de7d031fda40a045c3477b3",
+    "typeLine": "Shaped Maze Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Mesa2.png?scale=1&scaleIndex=0&w=1&h=1&v=bb3c3919a22b8f26ed06dfdd92c394153",
+    "typeLine": "Shaped Mesa Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Museum3.png?scale=1&scaleIndex=0&w=1&h=1&v=18fbe7b896f2366a225ca515c91cbac33",
+    "typeLine": "Shaped Museum Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Pen.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=7&v=8fa1f6fc7a74598f89cdea20e18d8d343",
+    "typeLine": "Shaped Pen Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/DryPeninsula.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=8&v=913c7bcae2772d747bffaf1e9084a3aa3",
+    "typeLine": "Shaped Peninsula Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Quay3.png?scale=1&scaleIndex=0&w=1&h=1&v=8b4b4a4c3771d17d06b14f9f56f484583",
+    "typeLine": "Shaped Port Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Promenade3.png?scale=1&scaleIndex=0&w=1&h=1&v=b97ef2759945b597d6defb9a5468fe4f3",
+    "typeLine": "Shaped Promenade Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Shore3.png?scale=1&scaleIndex=0&w=1&h=1&v=3203adc9ed1b4163594ee7e676bbd26f3",
+    "typeLine": "Shaped Shore Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/SpiderLair.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=10&v=3fdf59f25deb7ae9170356c02424e2973",
+    "typeLine": "Shaped Spider Lair Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Springs.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=8&v=24c5995d8f829cc109ce4d09b8cb05913",
+    "typeLine": "Shaped Springs Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Strand3.png?scale=1&scaleIndex=0&w=1&h=1&v=8285f6a7fc15d8b2a294bc31e1d78d063",
+    "typeLine": "Shaped Strand Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Corrosion.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=10&v=6d9011a0bfeb0afc090b23fa9ff676183",
+    "typeLine": "Shaped Sulphur Vents Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Temple3.png?scale=1&scaleIndex=0&w=1&h=1&v=4c7d713709e912ab10116d13412dd5d13",
+    "typeLine": "Shaped Temple Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Sewer.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=10&v=f2a5bee4e068ef7fd6422c3e211b68103",
+    "typeLine": "Shaped Toxic Sewer Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/TropicalIsland.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=13&v=a6cda07645e5963bc8fa850f808695f53",
+    "typeLine": "Shaped Tropical Island Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Vault.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=14&v=4814cf9291fb5242eafd89a618e603dd3",
+    "typeLine": "Shaped Vault Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Volcano.png?scale=1&scaleIndex=0&w=1&h=1&mr=1&mn=1&mt=9&v=0e08945f9db196b90071f81dd82329193",
+    "typeLine": "Shaped Volcano Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Shipyard.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=10&v=959573f37a1da8a3ba282d322bb58d6b3",
+    "typeLine": "Shipyard Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Shore.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=8&v=1f7378b50c59019f4172d8725eb952863",
+    "typeLine": "Shore Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Shrine.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=13&v=01927d66a54e429c8b3575cbefedfc833",
+    "typeLine": "Shrine Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Boulevard.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=10&v=9f066e4c5fcac20fab577c8d49eadfca3",
+    "typeLine": "Siege Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/SpiderForest.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=11&v=e584bd305617d7296df7dab3a3bd760b3",
+    "typeLine": "Spider Forest Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/SpiderLair.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=5&v=3fdf59f25deb7ae9170356c02424e2973",
+    "typeLine": "Spider Lair Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Springs.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=3&v=24c5995d8f829cc109ce4d09b8cb05913",
+    "typeLine": "Springs Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Strand.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=4&v=9762a3d69debf5c039cb13c693061f0c3",
+    "typeLine": "Strand Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Corrosion.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=5&v=6d9011a0bfeb0afc090b23fa9ff676183",
+    "typeLine": "Sulphur Vents Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Summit.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=12&v=05c8cc7180861c64e20112f330e0181c3",
+    "typeLine": "Summit Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/SunkenCity.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=15&v=da5c60832e40b287dc576c7f806448ce3",
+    "typeLine": "Sunken City Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Temple.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=9&v=7bbdb7af4435cc5936ac3761429b0c893",
+    "typeLine": "Temple Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/HighGardens.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=13&v=6e00b609117b71f2983d3317c589822b3",
+    "typeLine": "Terrace Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Thicket.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=6&v=3fa8574afcfe3969cae7bc639119c5493",
+    "typeLine": "Thicket Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/TortureChamber.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=12&v=016aa4fd856e7c6150c1c4179ef4cdea3",
+    "typeLine": "Torture Chamber Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Tower.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=9&v=4aca9a73e5bc55801959d3f39ebda1673",
+    "typeLine": "Tower Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Sewer.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=5&v=f2a5bee4e068ef7fd6422c3e211b68103",
+    "typeLine": "Toxic Sewer Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Tribunal.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=7&v=3156b4e9700e3cf317e811c04eaf04d03",
+    "typeLine": "Tribunal Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/TropicalIsland.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=8&v=a6cda07645e5963bc8fa850f808695f53",
+    "typeLine": "Tropical Island Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/UndergroundRiver.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=7&v=eba93f0719682fa7729829f2bcfa26993",
+    "typeLine": "Underground River Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/UndergroundSea.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=6&v=05381bba62ec9a55c09f79afc830b5dc3",
+    "typeLine": "Underground Sea Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/VaalPyramid.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=8&v=12ea2eeca573de962cbaa0f165f688e63",
+    "typeLine": "Vaal Pyramid Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Vault.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=9&v=4814cf9291fb5242eafd89a618e603dd3",
+    "typeLine": "Vault Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/AtlasMaps/Villa1.png?scale=1&scaleIndex=0&w=1&h=1&v=f8f12a7207f89126b2a36e46dbac05a03",
+    "typeLine": "Villa Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Volcano.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=4&v=0e08945f9db196b90071f81dd82329193",
+    "typeLine": "Volcano Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/WastePool.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=9&v=5b5554678e80503ab89c653f29e02dde3",
+    "typeLine": "Waste Pool Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Wasteland.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=10&v=5d1affdc3acdf45ca6ae0ec004c441a03",
+    "typeLine": "Wasteland Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Waterways.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=11&v=a02c2074b3c3285c8e7a4a5880cdbb353",
+    "typeLine": "Waterways Map"
+  },
+  {
+    "name": "",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Wharf.png?scale=1&scaleIndex=0&w=1&h=1&mn=1&mt=6&v=cf8b88d5afe87ddac3213f4ba8a4e4243",
+    "typeLine": "Wharf Map"
+  },
 
   { "typeLine": "Quiver", "icon": "http://web.poecdn.com/image/Art/2DItems/Quivers/QuiverSpike-Point.png?scale=1&scaleIndex=0&w=2&h=3&v=1bd153027f337b59c30957890e2239743", "name": "" },
   { "typeLine": "Spike-Point Arrow Quiver", "icon": "http://web.poecdn.com/image/Art/2DItems/Quivers/QuiverSpike-Point.png?scale=1&scaleIndex=0&w=2&h=3&v=1bd153027f337b59c30957890e2239743", "name": "" },

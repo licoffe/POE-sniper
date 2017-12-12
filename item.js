@@ -165,6 +165,9 @@ class Item {
         var colorCount  = {};
         // For each sockets in the item
         async.each( item.sockets, function( socket, cb ) {
+            if ( !socket.attr ) {
+                socket.attr = "A";
+            }
             // If we have a new socket group
             if ( !groups[socket.group] ) {
                 groups[socket.group] = 1;
