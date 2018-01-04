@@ -564,12 +564,14 @@ class Filter {
             ) &&
             ( 
                 this.itemType === "any" || 
-                this.itemType === "" || 
-                itemTypes[this.itemType].types.indexOf( item.typeLine ) !== -1 
+                this.itemType === "" ||
+                ( this.itemType && 
+                itemTypes[this.itemType].types.indexOf( item.typeLine ) !== -1 )
             ) &&
             ( 
                 this.socketsTotal === "" ||
-                this.socketsTotal <= item.sockets.length 
+                ( item.sockets && 
+                this.socketsTotal <= item.sockets.length )
             ) && 
             ( 
                 this.corrupted   === "any" || 
