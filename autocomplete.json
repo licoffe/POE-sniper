@@ -7340,6 +7340,11 @@
     "typeLine": "Eternal Sword"
   },
   {
+    "name": "Oni-Goroshi",
+    "icon": "http://web.poecdn.com/image/Art/2DItems/Weapons/OneHandWeapons/OneHandSwords/TheGoddessUnleashed.png?scale=1&scaleIndex=0&w=2&h=3&v=1c303f15c0986f1c158b1a90f43ca98a3",
+    "typeLine": "Charan's Sword"
+  },
+  {
     "name": "The Green Dream",
     "icon": "http://web.poecdn.com/image/Art/2DItems/Jewels/TheGreenDream.png?scale=1&w=1&h=1&v=f886af3c4da12769f1894643d90638973",
     "typeLine": "Viridian Jewel"
@@ -8108,16 +8113,6 @@
     "name": "Cane of Unravelling",
     "icon": "http://web.poecdn.com/image/Art/2DItems/Weapons/TwoHandWeapons/Staves/CaneOfUnravelling.png?scale=1&scaleIndex=0&w=2&h=4&v=b5bed0db237ff80843caf979eed033c83",
     "typeLine": "Ezomyte Staff"
-  },
-  {
-    "name": "Coralito's Signature",
-    "icon": "http://web.poecdn.com/gen/image/YTo2OntzOjEwOiJsZWFn/dWVOYW1lIjtzOjU6IkFi/eXNzIjtzOjk6ImFjY291/bnRJZCI7TzoxODoiR3Jp/bmRiXERhdGFiYXNlXElk/IjoxOntzOjI6ImlkIjtp/OjA7fXM6MTA6InNpbXBs/aWZpZWQiO2I6MTtpOjI7/YTozOntzOjE6ImYiO3M6/MzE6IkFydC8yREl0ZW1z/L0ZsYXNrcy9Hb3Jnb25z/Rmxhc2siO3M6Mjoic3Ai/O2Q6MC42MDg1MTkyNjk3/NzY4NzYzO3M6NToibGV2/ZWwiO2k6MDt9aToxO2k6/NDtpOjA7aTo5O30,/aeaa2d7e7d/Item.png",
-    "typeLine": "Diamond Flask"
-  },
-  {
-    "name": "Coralito's Signature",
-    "icon": "http://web.poecdn.com/gen/image/YTo2OntzOjEwOiJsZWFn/dWVOYW1lIjtzOjg6IlN0/YW5kYXJkIjtzOjk6ImFj/Y291bnRJZCI7TzoxODoi/R3JpbmRiXERhdGFiYXNl/XElkIjoxOntzOjI6Imlk/IjtpOjA7fXM6MTA6InNp/bXBsaWZpZWQiO2I6MTtp/OjI7YTozOntzOjE6ImYi/O3M6MzE6IkFydC8yREl0/ZW1zL0ZsYXNrcy9Hb3Jn/b25zRmxhc2siO3M6Mjoi/c3AiO2Q6MC42MDg1MTky/Njk3NzY4NzYzO3M6NToi/bGV2ZWwiO2k6MDt9aTox/O2k6NDtpOjA7aTo5O30,/ae432f49f9/Item.png",
-    "typeLine": "Diamond Flask"
   },
   {
     "name": "Coralito's Signature",
