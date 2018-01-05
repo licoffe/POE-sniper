@@ -3722,11 +3722,7 @@ $( document).ready( function() {
     });
 
     var saveConfig = function() {
-        fs.writeFile( app.getPath( "userData" ) + path.sep + "config.json", JSON.stringify( config ), function( err ) {
-            if ( err ) {
-                console.log( err );
-            }
-        });
+        fs.writeFileSync( app.getPath( "userData" ) + path.sep + "config.json", JSON.stringify( config ));
     };
 
     var toggleMode = function() {
