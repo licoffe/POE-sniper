@@ -1,5 +1,8 @@
 ### Releases
-You can grab the latest release [here](https://github.com/licoffe/POE-sniper/releases).
+
+__NEW!__ Try the online version of the tool with up to 20 filters: [http://poe-rates.com/live/](http://poe-rates.com/live/)
+
+or you can grab the latest release of the desktop version [here](https://github.com/licoffe/POE-sniper/releases).
 
 __Note for Linux users__: Make sure to install the [_xclip_](https://linux.die.net/man/1/xclip) clipboard manager to be able to copy whisper messages to the clipboard.
 
