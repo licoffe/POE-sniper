@@ -1,15 +1,13 @@
 ### Releases
 
-__NEW!__ Try the online version of the tool with up to 20 filters: [http://poe-rates.com/live/](http://poe-rates.com/live/)
-
-or you can grab the latest release of the desktop version [here](https://github.com/licoffe/POE-sniper/releases).
-
-__Note for Linux users__: Make sure to install the [_xclip_](https://linux.die.net/man/1/xclip) clipboard manager to be able to copy whisper messages to the clipboard.
+__NEW!__ Use the online version of the tool at [http://poe-rates.com/live/](http://poe-rates.com/live/)
 
 ![alt text](./sniper.png "Tool preview")
 
 ### Introduction
 This tool lets you run live searches by parsing the latest item data from the Path of Exile API. The main benefit of this tool compared to poe.trade live search is the ability to centralize and save searches within a single window.
+
+__Note for Linux users__: Make sure to install the [_xclip_](https://linux.die.net/man/1/xclip) clipboard manager to be able to copy whisper messages to the clipboard.
 
 ### Video
 [Here](https://youtu.be/-R8lXIVEd-k) is a short 5 min video showcasing some of the features of the tool :)
