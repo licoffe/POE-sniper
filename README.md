@@ -1,6 +1,8 @@
 ### Releases
 
-__NEW!__ Use the online version of the tool at [http://poe-rates.com/live/](http://poe-rates.com/live/)
+__IMPORTANT!__ poe-rates.com has been added to the whitelisted domains, I therefore have to stop serving whole API chunks through websockets since this goes against the whitelisting idea. Since this is the current way Poe-sniper is working, this also means that I have to retire poe-sniper, at least temporarly, until I use the same serving method used on poe-rates :: live. In the mean time, please use [https://poe-rates.com/live/](https://poe-rates.com/live/) instead.
+
+__NEW!__ Use the online version of the tool at [https://poe-rates.com/live/](https://poe-rates.com/live/)
 
 ![alt text](./sniper.png "Tool preview")
 
